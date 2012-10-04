@@ -1532,6 +1532,35 @@ def _fill_corpusTextNgramInfo_popup(driver, ss_path, parent_id):
     save_and_close(driver, parent_id)
 
 
+def _fill_corpusLanguageDescriptionGeneralInfo_popup(driver, ss_path, parent_id):
+    """
+    fills the language description general info popup with all required
+    information and returns to the parent window
+    """
+    driver.switch_to_window("edit_id_langdescInfo")
+    Select(driver.find_element_by_id("id_languageDescriptionType")).select_by_visible_text(
+      "Grammar")
+
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time())) 
+    save_and_close(driver, parent_id)
+
+
+def _fill_corpusLanguageDescriptionTextInfo_popup(driver, ss_path, parent_id):
+    """
+    fills the language description info text popup with all required
+    information and returns to the parent window
+    """
+    driver.switch_to_window("id_languageDescriptionTextInfo")
+    Select(driver.find_element_by_id("id_form-2-0-lingualityType")).select_by_visible_text(
+      "Monolingual")
+    # language description info text / language
+    _fill_language_form(driver, ss_path, "languageinfotype_model_set-0-")
+
+    # save and close language description info text popup
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
 def _fill_linguality_form(driver, ss_path, id_infix):
     """
     fills the linguality with required, recommended and optional information
