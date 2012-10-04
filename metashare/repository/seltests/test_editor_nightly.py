@@ -12,7 +12,7 @@ from metashare.repository.seltests.test_editor import _delete, _publish, \
     _fill_affiliation_popup, _fill_language_form, _fill_textSize_form, \
     _fill_audioSize_form, _add_new_resource, _fill_administrativeInformation_forms, \
     _fill_corpusTextInfo_popup, _fill_corpusAudioInfo_popup, _fill_corpusVideoInfo_popup, \
-    _fill_corpusImageInfo_popup
+    _fill_corpusImageInfo_popup, _fill_corpusTextNumericalInfo_popup
 from metashare.repository.seltests.test_utils import login_user, mouse_over, \
     setup_screenshots_folder, click_menu_item, save_and_close, \
     cancel_and_close, cancel_and_continue
@@ -140,11 +140,11 @@ class NightlyEditorTests(SeleniumTestCase):
         root_id = driver.current_window_handle
         # administrative information
         _fill_administrativeInformation_forms(driver, ss_path, root_id)
-        
+
         # corpus audio info popup
         driver.find_element_by_id("add_id_corpusAudioInfo").click()
         _fill_corpusAudioInfo_popup(driver, ss_path, root_id)
-        
+
         # save audio corpus
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         driver.find_element_by_name("_save").click()
@@ -181,7 +181,7 @@ class NightlyEditorTests(SeleniumTestCase):
         self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
 
-        
+
     def test_LR_creation_corpus_video(self):
         driver = self.driver
         driver.get(self.base_url)
@@ -244,7 +244,7 @@ class NightlyEditorTests(SeleniumTestCase):
         self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
 
-        
+
     def test_LR_creation_corpus_image(self):
         driver = self.driver
         driver.get(self.base_url)
@@ -270,7 +270,7 @@ class NightlyEditorTests(SeleniumTestCase):
         # corpus image info popup
         driver.find_element_by_id("add_id_corpusImageInfo").click()
         _fill_corpusImageInfo_popup(driver, ss_path, root_id)
-        
+
         # save image corpus
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         driver.find_element_by_name("_save").click()
@@ -307,7 +307,7 @@ class NightlyEditorTests(SeleniumTestCase):
         self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
 
-        
+
     def test_LR_creation_corpus_text_numerical(self):
         driver = self.driver
         driver.get(self.base_url)
@@ -321,47 +321,19 @@ class NightlyEditorTests(SeleniumTestCase):
         self.assertEqual("Logout", 
           driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Manage Resources -> Manage all resources
-        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Add resource
-        driver.find_element_by_link_text("Add Resource").click()
-        # create audio corpus
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
-        driver.find_element_by_id("id_corpusTextNumericalInfo").click()
-        driver.find_element_by_id("id_submit").click()
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # new resource with specific resource type and media types
+        _add_new_resource(driver, ss_path, "Corpus", ["id_corpusTextNumericalInfo"])
         self.assertEqual("Add Resource", 
           driver.find_element_by_css_selector("#content > h1").text)
         # remember root window id
         root_id = driver.current_window_handle
-        # add required fields
-        driver.find_element_by_name("key_form-0-resourceName_0").clear()
-        driver.find_element_by_name("key_form-0-resourceName_0").send_keys("en")
-        driver.find_element_by_name("val_form-0-resourceName_0").clear()
-        driver.find_element_by_name("val_form-0-resourceName_0").send_keys("Test Text Numerical Corpus")
-        driver.find_element_by_name("key_form-0-description_0").clear()
-        driver.find_element_by_name("key_form-0-description_0").send_keys("en")
-        driver.find_element_by_name("val_form-0-description_0").clear()
-        driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # distribution popup
-        driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
-        _fill_distribution_popup(driver, ss_path, root_id)
-        # contact person popup
-        driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        _fill_contactPerson_popup(driver, ss_path, root_id)
-        
+        # administrative information
+        _fill_administrativeInformation_forms(driver, ss_path, root_id)
+
         # TODO check if this behaviour is normal
         # corpus text numerical info popup
         driver.find_element_by_id("add_id_corpusTextNumericalInfo").click()
-        driver.switch_to_window("id_corpusTextNumericalInfo")
-        # save and close corpus text numerical info popup
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        save_and_close(driver, root_id)
+        _fill_corpusTextNumericalInfo_popup(driver, ss_path, root_id)
 
         # save text numerical corpus
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -369,7 +341,7 @@ class NightlyEditorTests(SeleniumTestCase):
         # TODO remove this workaround when Selenium starts working again as intended
         time.sleep(1)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        self.assertEqual("The Resource \"Test Text Numerical Corpus\" was added successfully.", 
+        self.assertEqual("The Resource \"Resource Name\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
 
         # check the editor group of the resource is the default editor group of the user
@@ -399,7 +371,7 @@ class NightlyEditorTests(SeleniumTestCase):
         self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
 
-        
+
     def test_LR_creation_corpus_ngram(self):
         driver = self.driver
         driver.get(self.base_url)
@@ -446,7 +418,7 @@ class NightlyEditorTests(SeleniumTestCase):
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
         _fill_contactPerson_popup(driver, ss_path, root_id)
-        
+
         # corpus ngram info popup
         driver.find_element_by_id("add_id_corpusTextNgramInfo").click()
         driver.switch_to_window("id_corpusTextNgramInfo")
@@ -469,7 +441,7 @@ class NightlyEditorTests(SeleniumTestCase):
         # save and close corpus ngram info popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         save_and_close(driver, root_id)
-        
+
         # save ngram corpus
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         driver.find_element_by_name("_save").click()
@@ -506,7 +478,7 @@ class NightlyEditorTests(SeleniumTestCase):
         self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
 
-        
+
     def test_LR_creation_lang_descr_text(self):
         driver = self.driver
         driver.get(self.base_url)
@@ -553,7 +525,7 @@ class NightlyEditorTests(SeleniumTestCase):
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
         _fill_contactPerson_popup(driver, ss_path, root_id)
-        
+
         # language description general info popup
         driver.find_element_by_id("edit_id_langdescInfo").click()
         driver.switch_to_window("edit_id_langdescInfo")
@@ -561,7 +533,7 @@ class NightlyEditorTests(SeleniumTestCase):
           "Grammar")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time())) 
         save_and_close(driver, root_id)
-          
+
         # language description info text popup
         driver.find_element_by_id("add_id_languageDescriptionTextInfo").click()
         driver.switch_to_window("id_languageDescriptionTextInfo")
@@ -582,7 +554,7 @@ class NightlyEditorTests(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         self.assertEqual("The Resource \"Test Text Language Description\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
-        
+
         # check the editor group of the resource is the default editor group of the user
         self.assertEqual(self.test_editor_group.name, 
           driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
@@ -609,7 +581,7 @@ class NightlyEditorTests(SeleniumTestCase):
         _delete(driver)
         self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
-        
+
 
     def test_LR_creation_lang_descr_video(self):
         driver = self.driver
@@ -658,7 +630,7 @@ class NightlyEditorTests(SeleniumTestCase):
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
         _fill_contactPerson_popup(driver, ss_path, root_id)
-        
+
         # language description general info popup
         driver.find_element_by_id("edit_id_langdescInfo").click()
         driver.switch_to_window("edit_id_langdescInfo")
@@ -666,7 +638,7 @@ class NightlyEditorTests(SeleniumTestCase):
           "Grammar")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time())) 
         save_and_close(driver, root_id)
-          
+  
         # language description info text popup
         driver.find_element_by_id("add_id_languageDescriptionTextInfo").click()
         driver.switch_to_window("id_languageDescriptionTextInfo")
@@ -695,7 +667,7 @@ class NightlyEditorTests(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         self.assertEqual("The Resource \"Test Video Language Description\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
-        
+
         # check the editor group of the resource is the default editor group of the user
         self.assertEqual(self.test_editor_group.name, 
           driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
@@ -722,7 +694,7 @@ class NightlyEditorTests(SeleniumTestCase):
         _delete(driver)
         self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
-        
+
 
     def test_LR_creation_lang_descr_image(self):
         driver = self.driver
@@ -771,7 +743,7 @@ class NightlyEditorTests(SeleniumTestCase):
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
         _fill_contactPerson_popup(driver, ss_path, root_id)
-        
+
         # language description general info popup
         driver.find_element_by_id("edit_id_langdescInfo").click()
         driver.switch_to_window("edit_id_langdescInfo")
@@ -779,7 +751,7 @@ class NightlyEditorTests(SeleniumTestCase):
           "Grammar")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time())) 
         save_and_close(driver, root_id)
-          
+  
         # language description info text popup
         driver.find_element_by_id("add_id_languageDescriptionTextInfo").click()
         driver.switch_to_window("id_languageDescriptionTextInfo")
@@ -808,7 +780,7 @@ class NightlyEditorTests(SeleniumTestCase):
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         self.assertEqual("The Resource \"Test Image Language Description\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
-        
+
         # check the editor group of the resource is the default editor group of the user
         self.assertEqual(self.test_editor_group.name, 
           driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
@@ -835,7 +807,7 @@ class NightlyEditorTests(SeleniumTestCase):
         _delete(driver)
         self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
-        
+
 
     def test_LR_creation_lex_resource_text(self):
         driver = self.driver
@@ -883,7 +855,7 @@ class NightlyEditorTests(SeleniumTestCase):
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
         _fill_contactPerson_popup(driver, ss_path, root_id)
-        
+
         # lexical resource general info popup
         driver.find_element_by_id("edit_id_lexiconInfo").click()
         driver.switch_to_window("edit_id_lexiconInfo")
@@ -891,7 +863,7 @@ class NightlyEditorTests(SeleniumTestCase):
           "Word List")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time())) 
         save_and_close(driver, root_id)
-          
+  
         # lexical resource text info popup
         driver.find_element_by_id("add_id_lexicalConceptualResourceTextInfo").click()
         driver.switch_to_window("id_lexicalConceptualResourceTextInfo")
@@ -940,8 +912,8 @@ class NightlyEditorTests(SeleniumTestCase):
         _delete(driver)
         self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
-        
-        
+
+
     def test_LR_creation_lex_resource_audio(self):
         driver = self.driver
         driver.get(self.base_url)
@@ -989,7 +961,7 @@ class NightlyEditorTests(SeleniumTestCase):
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
         _fill_contactPerson_popup(driver, ss_path, root_id)
-        
+
         # lexical resource general info popup
         driver.find_element_by_id("edit_id_lexiconInfo").click()
         driver.switch_to_window("edit_id_lexiconInfo")
@@ -997,7 +969,7 @@ class NightlyEditorTests(SeleniumTestCase):
           "Word List")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time())) 
         save_and_close(driver, root_id)
-          
+  
         # lexical resource text info popup
         driver.find_element_by_id("add_id_lexicalConceptualResourceTextInfo").click()
         driver.switch_to_window("id_lexicalConceptualResourceTextInfo")
@@ -1053,8 +1025,8 @@ class NightlyEditorTests(SeleniumTestCase):
         _delete(driver)
         self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
-        
-        
+
+
     def test_LR_creation_lex_resource_video(self):
         driver = self.driver
         driver.get(self.base_url)
@@ -1102,7 +1074,7 @@ class NightlyEditorTests(SeleniumTestCase):
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
         _fill_contactPerson_popup(driver, ss_path, root_id)
-        
+
         # lexical resource general info popup
         driver.find_element_by_id("edit_id_lexiconInfo").click()
         driver.switch_to_window("edit_id_lexiconInfo")
@@ -1110,7 +1082,7 @@ class NightlyEditorTests(SeleniumTestCase):
           "Word List")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time())) 
         save_and_close(driver, root_id)
-          
+  
         # lexical resource text info popup
         driver.find_element_by_id("add_id_lexicalConceptualResourceTextInfo").click()
         driver.switch_to_window("id_lexicalConceptualResourceTextInfo")
@@ -1167,8 +1139,8 @@ class NightlyEditorTests(SeleniumTestCase):
         _delete(driver)
         self.assertEqual("Successfully deleted 1 resource.", 
          driver.find_element_by_css_selector("ul.messagelist>li").text)
-        
-        
+
+
     def test_LR_creation_lex_resource_image(self):
         driver = self.driver
         driver.get(self.base_url)
@@ -1216,7 +1188,7 @@ class NightlyEditorTests(SeleniumTestCase):
         # contact person popup
         driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
         _fill_contactPerson_popup(driver, ss_path, root_id)
-        
+
         # lexical resource general info popup
         driver.find_element_by_id("edit_id_lexiconInfo").click()
         driver.switch_to_window("edit_id_lexiconInfo")
@@ -1224,7 +1196,7 @@ class NightlyEditorTests(SeleniumTestCase):
           "Word List")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time())) 
         save_and_close(driver, root_id)
-          
+  
         # lexical resource text info popup
         driver.find_element_by_id("add_id_lexicalConceptualResourceTextInfo").click()
         driver.switch_to_window("id_lexicalConceptualResourceTextInfo")
