@@ -954,7 +954,7 @@ def check_resource_view(queryset, test_case):
             # strip "http://" or "https://" from urls
             for _sp in stripped_paths:        
                 if path.endswith(_sp):
-                    text = unicode(urlizetrunc(text, '17')).encode("utf-8")
+                    text = unicode(urlizetrunc(text.strip(), '17')).encode("utf-8")
 
             # apply date transformation if required
             for _dp in date_paths:
@@ -970,8 +970,8 @@ def check_resource_view(queryset, test_case):
             if real_count == 0 and beauty_real_count == 0:
                 LOGGER.error(u"missing {}: {}".format(path, _ele.text))
                 error_atts.append(path)
-            # TODO activate when single resource view is complete
-            #test_case.assertContains(response, xml_utils.html_escape(_ele.text))
+
+            test_case.assertContains(response, text)
 
     if LOGGER.isEnabledFor(logging.WARN):
         LOGGER.warn("missing paths:")
