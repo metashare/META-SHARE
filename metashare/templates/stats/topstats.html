@@ -117,47 +117,47 @@ function addStatus(filter){
 </div>
 
 <div class="content_tab"> 
-	<div style="margin-left: 20px; padding-top: 15px; padding-bottom: 10px">
+	<div style="margin-left: 20px; padding-top: 10px;">
 	    <form class="form_helper" name="topform" id="topform" action="{% url metashare.views.frontpage %}stats/top/" method="get">
             <h4>Show the <select style="color: #000; background: #eee" name='view' onchange="topform.submit();">
             
-            <option value='topviewed' style="background-image: url({{ MEDIA_URL }}stats/img/view_icon.gif); background-repeat: no-repeat;"
-            > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Most Viewed Resources
+            <option value='topviewed' style="background-image: url({{ MEDIA_URL }}stats/img/view_icon.gif); background-repeat: no-repeat; padding-left: 20px;"
+            > Most Viewed Resources
             
-            <option value='topqueries' style="background-image: url({{ MEDIA_URL }}stats/img/retrieve_icon.gif); background-repeat: no-repeat;"
+            <option value='topqueries' style="background-image: url({{ MEDIA_URL }}stats/img/retrieve_icon.gif); background-repeat: no-repeat; padding-left: 20px;"
             {% ifequal view "topqueries" %}
                     selected
             {% endifequal %}
-            > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Top Queries
+            > Top Queries
             
-            <option value='latestqueries' style="background-image: url({{ MEDIA_URL }}stats/img/retrieve_icon.gif); background-repeat: no-repeat;"
+            <option value='latestqueries' style="background-image: url({{ MEDIA_URL }}stats/img/retrieve_icon.gif); background-repeat: no-repeat; padding-left: 20px;"
             {% ifequal view "latestqueries" %} 
                 selected
             {% endifequal %}
-            > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Latest Queries
+            > Latest Queries
             
-            <option value='topdownloaded' style="background-image: url({{ MEDIA_URL }}stats/img/download_icon.gif); background-repeat: no-repeat;"
+            <option value='topdownloaded' style="background-image: url({{ MEDIA_URL }}stats/img/download_icon.gif); background-repeat: no-repeat; padding-left: 20px;"
             {% ifequal view "topdownloaded" %}
                     selected
             {% endifequal %}
-            > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Top Downloaded Resources
+            > Top Downloaded Resources
             
-            <option value='latestupdated' style="background-image: url({{ MEDIA_URL }}stats/img/update_icon.gif); background-repeat: no-repeat;"
+            <option value='latestupdated' style="background-image: url({{ MEDIA_URL }}stats/img/update_icon.gif); background-repeat: no-repeat; padding-left: 20px;"
             {% ifequal view "latestupdated" %}
                     selected
             {% endifequal %}
-            > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Latest Updated Resources
+            > Latest Updated Resources
             </select>
             </h4>
-	</form>
-        
-     </div>
+	</form>       
+    </div>
 
+   <div id=content>
    {% if topdata|length <= 0 and countrycode == '' and last == '' %}
-       <div class="content_box">No data found</div>
+       <ul class=errorlist>No data found</ul>
    {% else %}
-    {% if not "late" in view or geovisits|length > 0 %}
-     <div class="left_box">
+     {% if not "late" in view or geovisits|length > 0 %}
+      <div class="left_box">
 	  <div class="filters">
 	  <h4>Filter by:</h4>
 	  <div id="searchFilters">
@@ -198,17 +198,19 @@ function addStatus(filter){
             <div id="googlemap" style="margin-left: -20px"></div>
             <div style="font-size:7pt;text-align:left">* This product includes GeoLite data created by MaxMind, available from http://maxmind.com/ and a Google Maps chart.</div>
         {% endif %}  
-      </div>{# end searchFilters #}
+       </div>{# end searchFilters #}
       </div>{# end filters #}
      </div>{# end left_box #}
+     
      {% if topdata|length <= 0 %}
-        <center><strong>No data matched</strong></center>
+        <ul class=errorlist>No data matched</ul>
      {% endif %}
     {% endif %}
    	
-    <div class="content_box">  
-    <p>
+    <div class="content_box">  	     
+    <div class="results"> 
     {% if offset != 0 or has_next %}
+        <p>
 	     {% if offset != 0 %}
 	         <a href="?view={{ view }}&offset={{ offset|add:-10 }}&last={{ last }}&country={{ countrycode }}">&laquo;&nbsp;Previous</a>
 	     {% else %}
@@ -220,9 +222,9 @@ function addStatus(filter){
 	     {% else %}
 	         Next&nbsp;&raquo;
 	     {% endif %}
+	    </p>
 	{% endif %}
-	     
-    <div class="results">     
+    
     {% spaceless %}
 {% load resource_languages %}
 {% load resource_media_types %}
@@ -231,9 +233,15 @@ function addStatus(filter){
 {% load get_icon %}
 
 {% for object in topdata %}
-    <div class="itemcounter">{{ forloop.counter|add:offset }}.&nbsp;</div><div class="resourceName">
+    <div>
+    <div class="itemcounter">{{ forloop.counter|add:offset }}.</div>
     {% if "quer" in view %}
-        <a href="{% url metashare.views.frontpage %}repository/search/?{{ object.4 }}"><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/zoom.png"> {{ object.0 }}</a>
+         {% ifnotequal object.2 "" %}  
+             <div class=lasttime>{{ object.2 }}</div>
+         {% endifnotequal %}           
+ 
+         <div class="resourceName">
+         <a href="{% url metashare.views.frontpage %}repository/search/?{{ object.4 }}"><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/zoom.png"> {{ object.0 }}</a>
             {% ifnotequal object.1 "" %}  
                 &nbsp;&nbsp;filter by: <div style="display: inline; font-size: 8pt; color: #000">{{ object.1 }}</div>
             {% endifnotequal %}
@@ -246,12 +254,14 @@ function addStatus(filter){
                     time{{object.3|pluralize}}
                 {% endifequal %}
             </div>
-            {% ifnotequal object.2 "" %}  
-                <div style="display: inline; font-size:8pt;text-align:left; float: right; padding-right: 20px">{{ object.2 }}</div>
-            {% endifnotequal %}
         </div>
-            
+     
     {% else %}   
+        {% ifnotequal object.1 "" %}
+            <div class=lasttime>{{ object.1 }}</div>
+        {% endifnotequal %}
+        
+        <div class="resourceName">
         {% get_icon object.0.resourceComponentType.as_subclass.resourceType %}
         &nbsp;<a href="{{ object.0.get_absolute_url }}"{% ifnotequal object.0.identificationInfo.get_default_description "METASHARE_NULL" %} title="{{ object.0.identificationInfo.get_default_description|escape }}"{% endifnotequal %}>{{ object.0 }}</a>
         
@@ -264,20 +274,19 @@ function addStatus(filter){
         <ul>
           {% resource_languages object.0.resourceComponentType.as_subclass %}  
         </ul>
-        {% ifnotequal object.1 "" %}
-            <div style="display: inline; font-size:8pt;text-align:left; float: right; padding-right: 20px">{{ object.1 }}</div>
-        {% endifnotequal %}
         </div>
+     
      {% endif %}  
-     <br> 
+     </div>
 {% endfor %}
 {% endspaceless %}
 
-</div>
+    </div> {# end results #}
+  </div>{# end content_box #}
+</div>{# end id=content #}
 </div>
 
-{% endif %}
-  
+{% endif %} 
 {% endblock %}
 
   
