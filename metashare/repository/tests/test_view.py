@@ -907,7 +907,6 @@ def check_resource_view(queryset, test_case):
     )
 
     count = 0
-    error_atts = []
     for _res in queryset:
         parent_dict = {}
         _res.export_to_elementtree(pretty=True, parent_dict=parent_dict)       
@@ -971,12 +970,4 @@ def check_resource_view(queryset, test_case):
                 beauty_real_count = response.content.count(
                   prettify_camel_case_string(text))
             if real_count == 0 and beauty_real_count == 0:
-                LOGGER.error(u"missing {}: {}".format(path, _ele.text))
-                error_atts.append(path)
-            # TODO activate when single resource view is complete
-            #test_case.assertContains(response, xml_utils.html_escape(_ele.text))
-
-    if LOGGER.isEnabledFor(logging.WARN):
-        LOGGER.warn("missing paths:")
-        for path in sorted(set(error_atts)):
-            LOGGER.warn(path)
+                test_case.fail(u"missing {}: {}".format(path, _ele.text))
