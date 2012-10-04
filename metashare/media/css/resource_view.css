@@ -137,7 +137,7 @@ label.component{
 	box-shadow:0 3px 10px #CCCCCC, 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
 	font-size: 14px;
 	font-weight: bold;
-	margin-right: 1px;	
+	margin-right: 1px;
 	padding-top: 1px;
 	padding-bottom: 1px;
 	padding-left: 5px;
@@ -148,17 +148,18 @@ label.component{
 .subfields ul li{	
 	float:left;
 	background-color:#FFDDAA;
-	border-bottom-left-radius: 5px;
-	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 	font-size: 14px;
 	font-weight: bold;
-	margin: 3px;
+	margin-right: 1px;
 	padding-left: 5px;
 	padding-right: 5px;
 	padding-top:3px;
-	padding-bottom:3px;
+	padding-top:3px;
+	height:20px;
 }
 
 .fields ul li.active{
@@ -170,6 +171,7 @@ label.component{
 	background: -moz-linear-gradient(top, #FF6633, #FFCC00);
 	background: -webkit-gradient(linear, left top, left bottom, from(#FF6633), to(#FFCC00));	
 	filter:progid:DXImageTransform.Microsoft.Gradient(endColorstr='#FF6633', startColorstr='#FFCC00', gradientType='0');
+	height:22px;
 }
 
 .subfields ul li a{
