@@ -506,6 +506,27 @@ def view(request, resource_name=None, object_id=None):
     for item in relation_info_tuples:
         relation_dicts.append(tuple2dict([item]))
 
+    # Count individual media resource components
+    media_counts = {'text': 0, 'video': 0}
+    if resource_type == "corpus":
+        for key, value in resource_component_dict['Resource_component']['Corpus_media'].items():
+            if "Corpus_text" in key:
+                media_counts['text'] += 1
+            elif "Corpus_video" in key:
+                media_counts['video'] += 1
+    elif resource_type == "languageDescription":
+        for key, value in resource_component_dict['Resource_component']['Language_description_media'].items():
+            if "Language_description_text" in key:
+                media_counts['text'] += 1
+            elif "Language_description_video" in key:
+                media_counts['video'] += 1
+    elif resource_type == "lexicalConceptualResource":
+        for key, value in resource_component_dict['Resource_component']['Lexical_conceptual_resource_media'].items():
+            if "Lexical_conceptual_resource_text" in key:
+                media_counts['text'] += 1
+            elif "Lexical_conceptual_resource_video" in key:
+                media_counts['video'] += 1
+
 	# Create a list of resource components dictionaries
     if resource_type == "corpus":
         for media_type in media_types:
@@ -533,6 +554,7 @@ def view(request, resource_name=None, object_id=None):
                 resource_component_dicts['textNumerical'] = \
                   resource_component_dict['Resource_component'] \
                      ['Corpus_media']['Corpus_textNumerical']
+          
     elif resource_type == "languageDescription":
         for media_type in media_types:
             if media_type == "text":
@@ -547,6 +569,8 @@ def view(request, resource_name=None, object_id=None):
                 resource_component_dicts['video'] = \
                   resource_component_dict['Resource_component'] \
                     ['Language_description_media']['Language_description_video']
+      
+            
     elif resource_type == "lexicalConceptualResource":
         for media_type in media_types:
             if media_type == "text":
@@ -569,10 +593,10 @@ def view(request, resource_name=None, object_id=None):
                   resource_component_dict['Resource_component'] \
                   ['Lexical_conceptual_resource_media'] \
                   ['Lexical_conceptual_resource_image']
+
     elif resource_type == "toolService":
         resource_component_dicts['toolService'] = \
           resource_component_dict['Resource_component']
-
     
     # Define context for template rendering.
     context = {
@@ -600,6 +624,7 @@ def view(request, resource_name=None, object_id=None):
                 'usage_dict': usage_dict,
                 'validation_dicts': validation_dicts,                
                 'version_dict': version_dict,
+                'media_counts': media_counts,
 
                 }
     template = 'repository/resource_view/lr_view.html'
