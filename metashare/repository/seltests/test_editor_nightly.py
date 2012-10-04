@@ -1092,7 +1092,7 @@ class NightlyEditorTests(SeleniumTestCase):
         # lexical resource text info / language
         _fill_language_form(driver, ss_path, "languageinfotype_model_set-0-")
         # lexical resource text info / size
-        _fill_textsize_form(driver, ss_path, "sizeinfotype_model_set-0-")
+        _fill_textSize_form(driver, ss_path, "sizeinfotype_model_set-0-")
         # save and close lexical resource text info popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         save_and_close(driver, root_id)
