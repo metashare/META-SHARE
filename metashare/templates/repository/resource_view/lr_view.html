@@ -46,6 +46,19 @@
 				return false;
 	  		});
 	  		
+			$(".subtab").hide();
+			$(".subfields li:first-child").addClass("active");
+			var selected_tab = $(".subfields li.active").find("a").attr("href");
+			$(selected_tab).fadeIn();
+			$(".subfields li").click(function() {
+				$(".subfields li").removeClass("active");
+				$(this).addClass("active");
+				$(".subtab").hide();
+				var selected_tab = $(this).find("a").attr("href");
+				$(selected_tab).fadeIn();
+				return false;
+	  		});
+	  		
 	  		
 			$(".dataline.optional").hide();
 				$(".expandable").addClass("collapsed");
@@ -167,7 +180,6 @@
 	</div>
 	
 	<div class="white_box column corner">
-
 		{% include "repository/resource_view/distribution.html" with distribution=distribution_dict %}
 
 		{% if contact_person_dicts %}
