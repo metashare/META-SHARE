@@ -418,43 +418,12 @@ class BasicEditorTests(SeleniumTestCase):
           driver.find_element_by_css_selector("#content > h1").text)
         # remember root window id
         root_id = driver.current_window_handle
-        # identification fields
-        _fill_identification_form(driver, ss_path, "form-0-")
-        # distribution popup
-        driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
-        _fill_distribution_popup(driver, ss_path, root_id)
-        # contact person popup
-        driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        _fill_contactPerson_popup(driver, ss_path, root_id)
-        # metadata fields
-        _fill_metadata_form(driver, ss_path, "form-2-0-")
-
-        # recommended page
-        driver.find_element_by_css_selector("a[href=\"#field-2\"]").click()
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # version fields
-        _fill_version_form(driver, ss_path, "form-3-0-")
-        # validations fields
-        driver.find_element_by_id("fieldsetcollapser0").click()
-        _fill_validations_form(driver, ss_path, "validationinfotype_model_set-0-")
-        # usage popup
-        driver.find_element_by_xpath("//a[@id='add_id_usageInfo']/img").click()  
-        _fill_usage_popup(driver, ss_path, root_id)
-        # resource documentation fields 
-        _fill_resourceDocumentation_form(driver, ss_path, "form-4-0-")
-        # resource creation fields 
-        _fill_resourceCreation_form(driver, ss_path, "form-5-0-")
-        # relations fields
-        driver.find_element_by_id("fieldsetcollapser1").click()
-        _fill_relations_form(driver, ss_path, "relationinfotype_model_set-0-")
-
+        # administrative information
+        _fill_administrativeInformation_forms(driver, ss_path, root_id)
 
         # corpus text info popup
         driver.find_element_by_id("add_id_corpusTextInfo-0").click()
         _fill_corpusTextInfo_popup(driver, ss_path, root_id)
-        # save and close corpus text info popup
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        save_and_close(driver, root_id)
 
         # save text corpus
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -511,6 +480,42 @@ def _add_new_resource(driver, ss_path, resource_type, media_types):
         driver.find_element_by_id(media_type).click()
     driver.find_element_by_id("id_submit").click()
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+
+
+def _fill_administrativeInformation_forms(driver, ss_path, root_id):
+    """
+    fills the different administrative information forms with required,
+    recommended and optional information
+    """
+    # identification fields
+    _fill_identification_form(driver, ss_path, "form-0-")
+    # distribution popup
+    driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
+    _fill_distribution_popup(driver, ss_path, root_id)
+    # contact person popup
+    driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
+    _fill_contactPerson_popup(driver, ss_path, root_id)
+    # metadata fields
+    _fill_metadata_form(driver, ss_path, "form-2-0-")
+
+    # recommended page
+    driver.find_element_by_css_selector("a[href=\"#field-2\"]").click()
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    # version fields
+    _fill_version_form(driver, ss_path, "form-3-0-")
+    # validations fields
+    driver.find_element_by_id("fieldsetcollapser0").click()
+    _fill_validations_form(driver, ss_path, "validationinfotype_model_set-0-")
+    # usage popup
+    driver.find_element_by_xpath("//a[@id='add_id_usageInfo']/img").click()  
+    _fill_usage_popup(driver, ss_path, root_id)
+    # resource documentation fields 
+    _fill_resourceDocumentation_form(driver, ss_path, "form-4-0-")
+    # resource creation fields 
+    _fill_resourceCreation_form(driver, ss_path, "form-5-0-")
+    # relations fields
+    driver.find_element_by_id("fieldsetcollapser1").click()
+    _fill_relations_form(driver, ss_path, "relationinfotype_model_set-0-")
 
 
 def _fill_identification_form(driver, ss_path, id_infix):
@@ -1241,6 +1246,9 @@ def _fill_corpusTextInfo_popup(driver, ss_path, parent_id):
     _fill_textFormats_form(driver, ss_path, "textformatinfotype_model_set-0-")
     # corpus text info / character encodings
     _fill_characterEncodings_form(driver, ss_path, "characterencodinginfotype_model_set-0-")
+    # save and close corpus text info popup
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
 
 
 def _fill_linguality_form(driver, ss_path, id_infix):
