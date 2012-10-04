@@ -1442,6 +1442,25 @@ def _fill_corpusTextInfo_popup(driver, ss_path, parent_id):
     save_and_close(driver, parent_id)
 
 
+def _fill_corpusAudioInfo_popup(driver, ss_path, parent_id):
+    """
+    fills the corpus audio info popup with all required
+    information and returns to the parent window
+    """
+    driver.switch_to_window("id_corpusAudioInfo")
+    Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
+      "Monolingual")
+    # corpus audio info / language
+    _fill_language_form(driver, ss_path, "languageinfotype_model_set-0-")
+    # corpus audio info / size popup
+    driver.find_element_by_css_selector("#add_id_audioSizeInfo > img[alt=\"Add Another\"]").click()
+    _fill_audioSize_form(driver, ss_path, "id_corpusAudioInfo")
+
+    # save and close corpus audio info popup
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
 def _fill_linguality_form(driver, ss_path, id_infix):
     """
     fills the linguality with required, recommended and optional information
