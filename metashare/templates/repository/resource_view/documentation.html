@@ -24,12 +24,13 @@
 		{% if documentation.Author %}
 			{{ documentation.Author }}, 			
 		{% endif %}
+		<strong><i>{{ documentation.Title }}</i></strong>, 
 		{% if documentation.Url %}
-			<a href="{{documentation.Url}}" target='_blank'>
-		{% endif %}
-		<strong><i>{{ documentation.Title }}</i></strong>
-		{% if documentation.Url %}
-			</a>
+			{% for key, value in documentation.items %}
+				{% if "Url" in key %}
+					{{ value|urlizetrunc:17 }}
+				{% endif %}
+			{% endfor %}
 		{% endif %}
 		{% if documentation.Journal %}
 			. In: {{ documentation.Journal }}

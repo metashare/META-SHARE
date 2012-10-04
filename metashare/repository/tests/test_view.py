@@ -18,6 +18,7 @@ from metashare.repository.supermodel import OBJECT_XML_CACHE
 from metashare.repository.models import resourceInfoType_model
 from django.utils.encoding import smart_str
 from django.contrib.humanize.templatetags import humanize
+from django.template.defaultfilters import urlizetrunc
 from metashare.utils import prettify_camel_case_string
 from django.utils.formats import date_format
 from datetime import datetime
@@ -874,6 +875,15 @@ def check_resource_view(queryset, test_case):
       'metaShareId',
     )
     
+    # paths with a url, which should be stripped off "http://" and "https://"
+    stripped_paths = (
+        'url',
+        'downloadLocation',
+        'executionLocation',
+        'samplesLocation',
+        'targetResourceNameURI',
+    )
+    
     # path suffixes where to apply a number transformation on the value
     number_paths = (
       '/size',
@@ -919,7 +929,7 @@ def check_resource_view(queryset, test_case):
             text = smart_str(xml_utils.html_escape(_ele.text), response._charset)
 
             # skip boolean values, as they cannot reasonably be verified
-            if text == "true" or text == "false":
+            if text == "true" or text == "false" or text == "True" or text == "False":
                 continue 
                             
             # check if path should be skipped
@@ -940,14 +950,18 @@ def check_resource_view(queryset, test_case):
                     break
             if skip:
                 continue
-                
+
+            # strip "http://" or "https://" from urls
+            for _sp in stripped_paths:        
+                if path.endswith(_sp):
+                    text = unicode(urlizetrunc(text.strip(), '17')).encode("utf-8")
+
             # apply date transformation if required
             for _dp in date_paths:
                 if path.endswith(_dp):
                     date_object = datetime.strptime(text, '%Y-%m-%d')
                     text = unicode(
                       date_format(date_object, format='SHORT_DATE_FORMAT', use_l10n=True)).encode("utf-8")
-
             real_count = response.content.count(text)
             if real_count == 0:
                 # try with beautified string
@@ -956,8 +970,8 @@ def check_resource_view(queryset, test_case):
             if real_count == 0 and beauty_real_count == 0:
                 LOGGER.error(u"missing {}: {}".format(path, _ele.text))
                 error_atts.append(path)
-            # TODO activate when single resource view is complete
-            #test_case.assertContains(response, xml_utils.html_escape(_ele.text))
+
+            test_case.assertContains(response, text)
 
     if LOGGER.isEnabledFor(logging.WARN):
         LOGGER.warn("missing paths:")
