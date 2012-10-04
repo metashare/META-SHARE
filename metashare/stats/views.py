@@ -133,7 +133,6 @@ def usagestats (request):
     mod = import_module("metashare.repository.models")
     _fields = {}
     _classes = {}
-    errors = None
     for _model in _models:
         # get info about classes
         dbfields = getattr(mod, _model).__schema_classes__
@@ -202,10 +201,10 @@ def usagestats (request):
     # update usage stats according with the published resources
     lr_usage = UsageStats.objects.values('lrid').distinct('lrid').count()
     if (lr_count != lr_usage):
-        usagethread = updateUsageStats(lrset, True)
-        if usagethread != None:
-            errors = "Usage statistics updating is in progress... "+ str(usagethread.getProgress()) +"% completed"
-
+        for resource in lrset:
+            if not UsageStats.objects.filter(lrid=resource.storage_object.identifier).exists():
+                update_usage_stats(resource.storage_object.identifier, resource.export_to_elementtree())
+            
     return render_to_response('stats/usagestats.html',
         {'usage_fields': sorted(usage_fields.iteritems()),
         'usage_filter': usage_filter,
@@ -217,7 +216,6 @@ def usagestats (request):
         'selected_field': selected_field,
         'expand_all': expand_all,
         'textvalues': textvalues,
-        'errors': errors,
         'myres': isOwner(request.user.username)},
         context_instance=RequestContext(request))
 
