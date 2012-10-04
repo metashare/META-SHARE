@@ -1461,6 +1461,24 @@ def _fill_corpusAudioInfo_popup(driver, ss_path, parent_id):
     save_and_close(driver, parent_id)
 
 
+def _fill_corpusVideoInfo_popup(driver, ss_path, parent_id):
+    """
+    fills the corpus video info popup with all required
+    information and returns to the parent window
+    """
+    driver.find_element_by_id("add_id_corpusVideoInfo-0").click()
+    driver.switch_to_window("id_corpusVideoInfo__dash__0")
+    # corpus video info / size popup
+    driver.find_element_by_name("sizeinfotype_model_set-0-size").clear()
+    driver.find_element_by_name("sizeinfotype_model_set-0-size").send_keys("100")
+    driver.find_element_by_name("sizeinfotype_model_set-0-sizeUnit").send_keys("Gb")
+
+    # save and close corpus video info popup
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+        
+
+
 def _fill_linguality_form(driver, ss_path, id_infix):
     """
     fills the linguality with required, recommended and optional information
