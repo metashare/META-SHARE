@@ -1,28 +1,18 @@
 import shutil
 import logging
-from datetime import datetime
 
-from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.humanize.templatetags import humanize
+from django.contrib.auth.models import Permission
 from django.core.urlresolvers import reverse
-from django.template.defaultfilters import urlizetrunc
 from django.test import TestCase
 from django.test.client import Client
-from django.utils.encoding import smart_str
-from django.utils.formats import date_format
 
-from metashare import test_utils, settings, xml_utils
+from metashare import test_utils, settings
 from metashare.accounts.models import UserProfile, EditorGroup, \
     EditorGroupManagers, Organization
 from metashare.repository import views
-from metashare.repository.models import resourceInfoType_model
-from metashare.repository.supermodel import OBJECT_XML_CACHE
-from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER, \
-    TEST_MODE_NAME
+from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER
 from metashare.test_utils import create_user
-from metashare.utils import prettify_camel_case_string
-
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -207,7 +197,7 @@ class ViewTest(TestCase):
         client.login(username='editoruser', password='secret')
         url = self.resource.get_absolute_url()
         response = client.get(url, follow = True)
-        self.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
+        self.assertTemplateUsed(response, 'repository/lr_view.html')
         self.assertContains(response, 'middle_button">Edit Resource<')
         self.assertNotContains(response, 'middle_gray_button">Edit Resource<')
 
@@ -219,7 +209,7 @@ class ViewTest(TestCase):
         client.login(username='normaluser', password='secret')
         url = self.resource.get_absolute_url()
         response = client.get(url, follow = True)
-        self.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
+        self.assertTemplateUsed(response, 'repository/lr_view.html')
         self.assertNotContains(response, 'middle_button">Edit Resource<')
         self.assertContains(response, 'middle_gray_button">Edit Resource<')
 
@@ -230,7 +220,7 @@ class ViewTest(TestCase):
         client = Client()
         url = self.resource.get_absolute_url()
         response = client.get(url, follow = True)
-        self.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
+        self.assertTemplateUsed(response, 'repository/lr_view.html')
         self.assertNotContains(response, 'middle_button">Edit Resource<')
         self.assertContains(response, 'middle_gray_button">Edit Resource<')
 
@@ -242,7 +232,7 @@ class ViewTest(TestCase):
         client = Client()
         url = self.resource.get_absolute_url()
         response = client.get(url, follow = True)
-        self.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
+        self.assertTemplateUsed(response, 'repository/lr_view.html')
         self.assertContains(response, '<title>Italian TTS Speech Corpus ' \
                             '(Appen) &ndash; META-SHARE</title>')
 
@@ -253,7 +243,7 @@ class ViewTest(TestCase):
         client = Client()
         url = self.resource.get_absolute_url()
         response = client.get(url, follow = True)
-        self.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
+        self.assertTemplateUsed(response, 'repository/lr_view.html')
         self.assertContains(response, '<h2>Italian TTS Speech Corpus (Appen)')
 
     def test_owner_can_edit_resource(self):
@@ -265,7 +255,7 @@ class ViewTest(TestCase):
         self.resource.owners.add(ViewTest.test_editor)
         self.resource.save()
         response = client.get(self.resource.get_absolute_url())
-        self.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
+        self.assertTemplateUsed(response, 'repository/lr_view.html')
         self.assertContains(response,
             "repository/resourceinfotype_model/{0}/".format(self.resource.id))
 
@@ -276,7 +266,7 @@ class ViewTest(TestCase):
         client = Client()
         client.login(username='normaluser', password='secret')
         response = client.get(self.resource.get_absolute_url())
-        self.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
+        self.assertTemplateUsed(response, 'repository/lr_view.html')
         self.assertNotContains(response,
             "repository/resourceinfotype_model/{0}/".format(self.resource.id))
 
@@ -302,7 +292,7 @@ class DownloadViewTest(TestCase):
         """
         test_utils.setup_test_storage()
         # set up different test resources
-        self.non_downloadable_resource = _import_resource('ILSP10.xml')
+        self.non_downloadable_resource = _import_resource('testfixture.xml')
         self.downloadable_resource_1 = \
             _import_resource('downloadable_1_license.xml')
         self.downloadable_resource_3 = \
@@ -363,16 +353,14 @@ class DownloadViewTest(TestCase):
         response = client.get(reverse(views.download, args=
                 (self.non_downloadable_resource.storage_object.identifier,)),
             follow = True)
-        self.assertContains(response, 'license terms for the download of the '
-                'selected resource are not available')
+        self.assertTemplateUsed(response, 'repository/lr_not_downloadable.html')
         # make sure a normal user gets the information page, too:
         client = Client()
         client.login(username='normaluser', password='secret')
         response = client.get(reverse(views.download, args=
                 (self.non_downloadable_resource.storage_object.identifier,)),
             follow = True)
-        self.assertContains(response, 'license terms for the download of the '
-                'selected resource are not available')
+        self.assertTemplateUsed(response, 'repository/lr_not_downloadable.html')
 
     def test_downloadable_resource_with_one_license(self):
         """
@@ -401,7 +389,7 @@ class DownloadViewTest(TestCase):
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
-        self.assertContains(response, 'licences/CC-BYNCSAv3.0.htm',
+        self.assertContains(response, 'licences/CC-BYNCSAv2.5.htm',
                             msg_prefix="the correct license appears to not " \
                                 "be shown in an iframe")
         # make sure the license agreement page is shown again if the license was
@@ -409,18 +397,18 @@ class DownloadViewTest(TestCase):
         response = client.post(reverse(views.download,
                 args=(self.downloadable_resource_1.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'False',
-              'licence': 'CC-BY-NC-SA' },
+              'licence': 'CC_BY-NC-SA' },
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
-        self.assertContains(response, 'licences/CC-BYNCSAv3.0.htm',
+        self.assertContains(response, 'licences/CC-BYNCSAv2.5.htm',
                             msg_prefix="the correct license appears to not " \
                                 "be shown in an iframe")
         # make sure the download was started after accepting the license:
         response = client.post(reverse(views.download,
                 args=(self.downloadable_resource_1.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
-              'licence': 'CC-BY-NC-SA' },
+              'licence': 'CC_BY-NC-SA' },
             follow = True)
         self.assertTemplateNotUsed(response, 'repository/licence_agreement.html',
                             msg_prefix="a download should have been started")
@@ -456,13 +444,13 @@ class DownloadViewTest(TestCase):
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_selection.html',
                                 "license selection page expected")
-        self.assertContains(response, 'CC-BY-NC-SA',
+        self.assertContains(response, 'CC_BY-NC-SA',
                             msg_prefix="an expected license appears to not " \
                                 "be shown")
         self.assertContains(response, 'GPL',
                             msg_prefix="an expected license appears to not " \
                                 "be shown")
-        self.assertContains(response, 'CC-BY-SA',
+        self.assertContains(response, 'CC_BY-SA_3.0',
                             msg_prefix="an expected license appears to not " \
                                 "be shown")
         # make sure the license selection page is shown again if no license is selected
@@ -472,13 +460,13 @@ class DownloadViewTest(TestCase):
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_selection.html',
                                 "license selection page expected")
-        self.assertContains(response, 'CC-BY-NC-SA',
+        self.assertContains(response, 'CC_BY-NC-SA',
                             msg_prefix="an expected license appears to not " \
                                 "be shown")
         self.assertContains(response, 'GPL',
                             msg_prefix="an expected license appears to not " \
                                 "be shown")
-        self.assertContains(response, 'CC-BY-SA',
+        self.assertContains(response, 'CC_BY-SA_3.0',
                             msg_prefix="an expected license appears to not " \
                                 "be shown")
         # make sure the license page is shown after selecting a license
@@ -542,7 +530,7 @@ class DownloadViewTest(TestCase):
         response = client.post(reverse(views.download, args=
                 (self.downloadable_resource_1.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
-              'licence': 'CC-BY-NC-SA' },
+              'licence': 'CC_BY-NC-SA' },
             follow = True)
         self.assertIn(("http://www.example.org/dl1", 302),
                       response.redirect_chain,
@@ -554,22 +542,22 @@ class DownloadViewTest(TestCase):
         """
         # neither via GET ...
         response = Client().get(reverse(views.download, args=
-                (self.downloadable_resource_3.storage_object.identifier,)),
+                (self.non_downloadable_resource.storage_object.identifier,)),
             follow = True)
         self.assertTemplateUsed(response, 'login.html')
         # ... nor via POST with no data ...
         response = Client().post(reverse(views.download, args=
-                (self.downloadable_resource_3.storage_object.identifier,)),
+                (self.non_downloadable_resource.storage_object.identifier,)),
             follow = True)
         self.assertTemplateUsed(response, 'login.html')
         # ... nor via POST with a selected license ...
         response = Client().post(reverse(views.download, args=
-                (self.downloadable_resource_3.storage_object.identifier,)),
+                (self.non_downloadable_resource.storage_object.identifier,)),
             { 'licence': 'GPL' },
             follow = True)
         # ... nor via POST with an agreement to some license:
         response = Client().post(reverse(views.download, args=
-                (self.downloadable_resource_3.storage_object.identifier,)),
+                (self.non_downloadable_resource.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
               'licence': 'GPL' },
             follow = True)
@@ -583,7 +571,7 @@ class DownloadViewTest(TestCase):
         client.login(username='staffuser', password='secret')
         url = self.downloadable_resource_1.get_absolute_url()
         response = client.get(url, follow = True)
-        self.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
+        self.assertTemplateUsed(response, 'repository/lr_view.html')
         self.assertContains(response, "repository/download/{0}".format(
                         self.downloadable_resource_1.storage_object.identifier))
 
@@ -616,7 +604,7 @@ class DownloadViewTest(TestCase):
         # LR must not be downloadable via POST with just a selected license ...
         response = client.post(reverse(views.download,
                     args=(self.ms_commons_resource.storage_object.identifier,)),
-            { 'licence': 'MSCommons-BY-NC-SA' },
+            { 'licence': 'MSCommons_BY-NC-SA' },
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
@@ -628,7 +616,7 @@ class DownloadViewTest(TestCase):
         response = client.post(reverse(views.download,
                     args=(self.ms_commons_resource.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
-              'licence': 'MSCommons-BY-NC-SA' },
+              'licence': 'MSCommons_BY-NC-SA' },
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
@@ -659,7 +647,7 @@ class DownloadViewTest(TestCase):
         response = client.post(reverse(views.download,
                     args=(self.ms_commons_resource.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'False',
-              'licence': 'MSCommons-BY-NC-SA' },
+              'licence': 'MSCommons_BY-NC-SA' },
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
@@ -671,7 +659,7 @@ class DownloadViewTest(TestCase):
         response = client.post(reverse(views.download,
                     args=(self.ms_commons_resource.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
-              'licence': 'MSCommons-BY-NC-SA' },
+              'licence': 'MSCommons_BY-NC-SA' },
             follow = True)
         self.assertTemplateNotUsed(response, 'repository/licence_agreement.html',
                             msg_prefix="a download should have been started")
@@ -721,7 +709,7 @@ class DownloadViewTest(TestCase):
             reverse(views.download,
                     args=(self.ms_commons_resource.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
-              'licence': 'MSCommons-BY-NC-SA' },
+              'licence': 'MSCommons_BY-NC-SA' },
             follow = True)
         self.assertTemplateNotUsed(response,
             'repository/licence_agreement.html',
@@ -759,228 +747,7 @@ class DownloadViewTest(TestCase):
             reverse(views.download,
                     args=(self.ms_commons_resource.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
-              'licence': 'MSCommons-BY-NC-SA' },
+              'licence': 'MSCommons_BY-NC-SA' },
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
             msg_prefix="a download should not have been started")
-
-
-class FullViewTest(TestCase):
-    """
-    Defines a number of tests for the details of the single resource view
-    """
-    
-    @classmethod
-    def setUpClass(cls):
-        """
-        Set up the test
-        """
-        LOGGER.info("running '{}' tests...".format(cls.__name__))
-        
-        # disable indexing during import
-        test_utils.set_index_active(False)
-        
-        # import resources
-        test_utils.setup_test_storage()
-        OBJECT_XML_CACHE.clear()
-        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
-                "partial-corpus.xml".format(ROOT_PATH))
-        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
-                "full-lang-description.xml".format(ROOT_PATH))
-        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
-                "full-lex-conceptual.xml".format(ROOT_PATH))
-        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
-                "full-corpus-text.xml".format(ROOT_PATH))
-        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
-                "full-corpus-image.xml".format(ROOT_PATH))
-        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
-                "full-corpus-audio.xml".format(ROOT_PATH))
-        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
-                "full-corpus-video.xml".format(ROOT_PATH))
-        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
-                "full-corpus-textngram.xml".format(ROOT_PATH))
-        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
-                "full-corpus-textnumerical.xml".format(ROOT_PATH))
-        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
-                "full-tool-service.xml".format(ROOT_PATH))
-                
-        # enable indexing 
-        test_utils.set_index_active(True)
-    
-        # update index
-        from django.core.management import call_command
-        call_command('rebuild_index', interactive=False, using=TEST_MODE_NAME)
-        
-    
-    @classmethod
-    def tearDownClass(cls):
-        """
-        Clean up the test
-        """
-        LOGGER.info("finished '{}' tests".format(cls.__name__))
-        
-        # disable indexing during import
-        test_utils.set_index_active(False)
-        
-        test_utils.clean_resources_db()
-        test_utils.clean_storage()
-        OBJECT_XML_CACHE.clear()
-        
-        # enable indexing 
-        test_utils.set_index_active(True)
-    
-        # update index
-        from django.core.management import call_command
-        call_command('rebuild_index', interactive=False, using=TEST_MODE_NAME)
-        
-    
-    def testSingleResourceView(self):
-        """
-        Checks that each resource's single view is displayed correctly.
-        """
-        
-        # disable indexing; we don't need stat updates for this test
-        test_utils.set_index_active(False)
-        
-        queryset = resourceInfoType_model.objects.all()
-        check_resource_view(queryset, self)
-
-        # enable indexing 
-        test_utils.set_index_active(True)
-
-
-def path_to_root(element, parent_dict):
-    """
-    Returns the path to the given element using the given parent dictionary.
-    """
-    current = element
-    ele_path = []
-    ele_path.append(element.tag)
-    while current in parent_dict:
-        parent = parent_dict[current] 
-        ele_path.append(parent.tag)
-        current = parent
-    ele_path.reverse()
-    path = ""
-    for ele in ele_path:
-        path += ele
-        path += "/"
-    return path[:-1]
-    
-
-def check_resource_view(queryset, test_case):
-    
-    # paths elemenets for which the path is skipped
-    skip_path_elements = (
-      'email',
-      'metaShareId',
-    )
-
-    # path suffixes where to apply a URL transformation on the value
-    url_paths = (
-        '/url',
-        '/downloadLocation',
-        '/executionLocation',
-        '/samplesLocation',
-        '/targetResourceNameURI',
-    )
-
-    # path suffixes where to apply a number transformation on the value
-    number_paths = (
-      '/size',
-      '/fee',
-    )
-
-    # path suffixes where to apply data transformation on the value
-    date_paths = (
-      '/metadataCreationDate',
-      '/annotationStartDate',
-      '/annotationEndDate',
-      '/availabilityStartDate',
-      '/availabilityEndDate',
-      '/creationStartDate',
-      '/creationEndDate',
-      '/projectStartDate',
-      '/projectEndDate',
-      '/lastDateUpdated',
-      '/metadataLastDateUpdated',
-    )
-
-    count = 0
-    for _res in queryset:
-        parent_dict = {}
-        _res.export_to_elementtree(pretty=True, parent_dict=parent_dict)       
-
-        count += 1
-        LOGGER.info("calling {}. resource at {}".format(
-          count, _res.get_absolute_url()))
-        # always create a new client to force a new session
-        client = Client()
-        response = client.get(_res.get_absolute_url(), follow = True)
-        test_case.assertEquals(200, response.status_code)
-        test_case.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
-        
-        for _ele in parent_dict:
-        
-            if not _ele.text:
-                continue
-        
-            path = path_to_root(_ele, parent_dict)
-            text = smart_str(xml_utils.html_escape(_ele.text.strip()),
-                response._charset)
-
-            # skip boolean values, as they cannot reasonably be verified
-            if text.lower() in ("true", "false"):
-                continue
-
-            # check if path should be skipped
-            skip = False
-            for path_ele in skip_path_elements:
-                if path_ele in path:
-                    skip = True
-                    break
-            if skip:
-                continue    
-
-            # apply number transformation if required
-            for _np in number_paths:        
-                if path.endswith(_np):
-                    text = unicode(humanize.intcomma(text)).encode("utf-8")
-                    if text == '0':
-                        skip = True
-                    break
-            if skip:
-                continue
-
-            # apply URL transformation if required
-            for _up in url_paths:
-                if path.endswith(_up):
-                    text = unicode(urlizetrunc(text, 17)).encode("utf-8")
-            # strip "http://" or "https://" from urls
-            for _sp in stripped_paths:        
-                if path.endswith(_sp):
-                    text = unicode(urlizetrunc(text.strip(), '17')).encode("utf-8")
-
-            # apply date transformation if required
-            for _dp in date_paths:
-                if path.endswith(_dp):
-                    date_object = datetime.strptime(text, '%Y-%m-%d')
-                    text = unicode(
-                      date_format(date_object, format='SHORT_DATE_FORMAT', use_l10n=True)).encode("utf-8")
-
-            real_count = response.content.count(text)
-            if real_count == 0:
-                # try with beautified string
-                beauty_real_count = response.content.count(
-                  prettify_camel_case_string(text))
-            if real_count == 0 and beauty_real_count == 0:
-                test_case.fail(u"missing {}: {}".format(path, _ele.text))
-                LOGGER.error(u"missing {}: {}".format(path, _ele.text))
-                error_atts.append(path)
-
-            test_case.assertContains(response, text)
-
-    if LOGGER.isEnabledFor(logging.WARN):
-        LOGGER.warn("missing paths:")
-        for path in sorted(set(error_atts)):
-            LOGGER.warn(path)
