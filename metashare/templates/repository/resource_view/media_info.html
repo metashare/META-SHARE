@@ -1,3 +1,5 @@
+{% load get_icon %}
+
 {% spaceless %}
 
 {% with media_info=resource_component_dict.Resource_component %}
@@ -8,11 +10,10 @@
 				<div class="subfields">
 					<ul>
 						{% for text in text_counts %}
-							<li><a href="#sub{{forloop.counter}}">Text {{forloop.counter}}</a></li>
+							<li><a href="#sub{{forloop.counter}}">{% get_icon "text" %} {{forloop.counter}}</a></li>
 						{% endfor %}
 					</ul>
 				</div>
-				<div class="underline"></div>
 				<div id="subcontainer">
 					{% for text in text_counts %}
 							<div id="sub{{forloop.counter}}" class="subtab">
@@ -41,7 +42,7 @@
 							<div class="subfields">
 								<ul>
 									{% for text in text_counts %}
-										<li><a href="#sub{{forloop.counter}}">Video {{forloop.counter}}</a></li>
+										<li><a href="#sub{{forloop.counter}}">{% get_icon "video" %} {{forloop.counter}}</a></li>
 									{% endfor %}
 								</ul>
 							</div>
