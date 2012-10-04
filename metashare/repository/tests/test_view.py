@@ -956,6 +956,10 @@ def check_resource_view(queryset, test_case):
             for _up in url_paths:
                 if path.endswith(_up):
                     text = unicode(urlizetrunc(text, 17)).encode("utf-8")
+            # strip "http://" or "https://" from urls
+            for _sp in stripped_paths:        
+                if path.endswith(_sp):
+                    text = unicode(urlizetrunc(text.strip(), '17')).encode("utf-8")
 
             # apply date transformation if required
             for _dp in date_paths:
@@ -971,3 +975,12 @@ def check_resource_view(queryset, test_case):
                   prettify_camel_case_string(text))
             if real_count == 0 and beauty_real_count == 0:
                 test_case.fail(u"missing {}: {}".format(path, _ele.text))
+                LOGGER.error(u"missing {}: {}".format(path, _ele.text))
+                error_atts.append(path)
+
+            test_case.assertContains(response, text)
+
+    if LOGGER.isEnabledFor(logging.WARN):
+        LOGGER.warn("missing paths:")
+        for path in sorted(set(error_atts)):
+            LOGGER.warn(path)
