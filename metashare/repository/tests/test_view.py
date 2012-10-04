@@ -875,22 +875,22 @@ def check_resource_view(queryset, test_case):
       'email',
       'metaShareId',
     )
-    
-    # paths with a url, which should be stripped off "http://" and "https://"
-    stripped_paths = (
-        'url',
-        'downloadLocation',
-        'executionLocation',
-        'samplesLocation',
-        'targetResourceNameURI',
+
+    # path suffixes where to apply a URL transformation on the value
+    url_paths = (
+        '/url',
+        '/downloadLocation',
+        '/executionLocation',
+        '/samplesLocation',
+        '/targetResourceNameURI',
     )
-    
+
     # path suffixes where to apply a number transformation on the value
     number_paths = (
       '/size',
       '/fee',
     )
-    
+
     # path suffixes where to apply data transformation on the value
     date_paths = (
       '/metadataCreationDate',
@@ -905,7 +905,7 @@ def check_resource_view(queryset, test_case):
       '/lastDateUpdated',
       '/metadataLastDateUpdated',
     )
-    
+
     count = 0
     error_atts = []
     for _res in queryset:
@@ -930,9 +930,9 @@ def check_resource_view(queryset, test_case):
             text = smart_str(xml_utils.html_escape(_ele.text), response._charset)
 
             # skip boolean values, as they cannot reasonably be verified
-            if text == "true" or text == "false" or text == "True" or text == "False":
-                continue 
-                            
+            if text.lower() in ("true", "false"):
+                continue
+
             # check if path should be skipped
             skip = False
             for path_ele in skip_path_elements:
@@ -952,10 +952,10 @@ def check_resource_view(queryset, test_case):
             if skip:
                 continue
 
-            # strip "http://" or "https://" from urls
-            for _sp in stripped_paths:        
-                if path.endswith(_sp):
-                    text = unicode(urlizetrunc(text, '17')).encode("utf-8")
+            # apply URL transformation if required
+            for _up in url_paths:
+                if path.endswith(_up):
+                    text = unicode(urlizetrunc(text, 17)).encode("utf-8")
 
             # apply date transformation if required
             for _dp in date_paths:
@@ -963,6 +963,7 @@ def check_resource_view(queryset, test_case):
                     date_object = datetime.strptime(text, '%Y-%m-%d')
                     text = unicode(
                       date_format(date_object, format='SHORT_DATE_FORMAT', use_l10n=True)).encode("utf-8")
+
             real_count = response.content.count(text)
             if real_count == 0:
                 # try with beautified string
@@ -978,4 +979,3 @@ def check_resource_view(queryset, test_case):
         LOGGER.warn("missing paths:")
         for path in sorted(set(error_atts)):
             LOGGER.warn(path)
-    
