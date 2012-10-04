@@ -1493,6 +1493,19 @@ def _fill_corpusImageInfo_popup(driver, ss_path, parent_id):
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
     save_and_close(driver, parent_id)
 
+
+def _fill_corpusTextNumericalInfo_popup(driver, ss_path, parent_id):
+    """
+    fills the corpus text numerical info popup with all required
+    information and returns to the parent window
+    """
+    driver.switch_to_window("id_corpusTextNumericalInfo")
+
+    # save and close corpus text numerical info popup
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
 def _fill_linguality_form(driver, ss_path, id_infix):
     """
     fills the linguality with required, recommended and optional information
