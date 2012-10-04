@@ -461,6 +461,7 @@ def cleanupName(oldName):
 def getVerboseName(verbose_name):
     verbose_name = re.sub(r'(Type|Info)?(Type)?(_model)?',r'', verbose_name)
     verbose_name = re.sub(r'([a-z])([A-Z])',r'\1 \2', verbose_name)
+    verbose_name = verbose_name.replace('_', ' ')
     verbose_name = verbose_name[0].upper() + verbose_name[1:].lower()
     return verbose_name
 

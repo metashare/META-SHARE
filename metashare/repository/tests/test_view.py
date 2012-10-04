@@ -952,11 +952,11 @@ def check_resource_view(queryset, test_case):
             if skip:
                 continue
 
-
             # apply URL transformation if required
             for _up in url_paths:
                 if path.endswith(_up):
                     text = unicode(urlizetrunc(text.strip(), 17)).encode("utf-8")
+
 
             # apply date transformation if required
             for _dp in date_paths:
