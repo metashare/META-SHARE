@@ -1,0 +1,107 @@
+{% load replace %}
+
+{% spaceless %}
+
+<label class='component'>{% if type == "lexicalConceptualResource" %}Lexical Conceptual Resource{% else %}Language Description{% endif %} General Information</label>
+
+{# Lexical Conceptual Resource #}
+{% if type == "lexicalConceptualResource" %}
+	<div class='dataline'><label><strong><i>{{resource_component_dict.Resource_component.Lexical_conceptual_resource_type}}</i></strong></label></div>
+{% else %}
+	<div class='dataline'><label><strong><i>{{resource_component_dict.Resource_component.Language_description_type}}</i></strong></label></div>
+{% endif %}
+	
+	{% for key, value in resource_component_dict.Resource_component.items %}
+		{% if "encoding" in key %}
+			<label class='title'>Encoding</label>
+			{% for key1, value1 in value.items %}
+					<div class="dataline indented">
+						<label>
+							<strong>{{ key1|rep }}:</strong> {{ value1 }}
+						</label>
+					</div>
+			{% endfor %}
+		{% endif %}
+		
+		{% if "Creation" in key %}
+				{% include "repository/resource_view/creation.html" with creation=value %}
+		{% endif %}
+					
+		{% if "performance" in key %}
+			<label class='title'>Performance</label>
+			{% for key1, value1 in value.items %}
+					<div class="dataline indented">
+						<label>
+							<strong>{{ key1|rep }}:</strong> {{ value1 }}
+						</label>
+					</div>
+			{% endfor %}
+		{% endif %}
+		
+		{% if "operation" in key %}
+			<label class='title'>Operation</label>
+			{% for key1, value1 in value.items %}
+				{% if "environment" in key1 %}
+					{% if "Required_software" in value1 %}
+					 	<label class='subtitle'>Required Software</label>
+					 	<div class="dataline indented">			 		
+					 		<ul>					 	
+								 {% for key2, value2 in value1.items %}
+								 	{% if "Required_software" in key2 %}
+								 		{% include "repository/resource_view/target_resource.html" with target=value2 title="Required Software" level="list" %}
+								 	{% endif %}
+								 {% endfor %}
+							 </ul>
+						</div>
+					{% endif %}			
+					
+					{% if "Required_hardware" in value1 %}
+						 <div class="dataline indented">
+							<label>
+								<strong>Required hardware: </strong>{{ value1.Required_hardware }}
+							</label>
+						</div>
+					{% endif %}
+					
+					
+					
+				 	{% if "Required_lrs" in value1 %}
+					 	<label class='subtitle'>Required LRs</label>
+					 	<div class="dataline indented">			 		
+					 		<ul>					 	
+								 {% for key2, value2 in value1.items %}
+								 	{% if "Required_lrs" in key2 %}
+								 		{% include "repository/resource_view/target_resource.html" with target=value2 title="Required LRs" level="list" %}
+								 	{% endif %}
+								 {% endfor %}
+							 </ul>
+						</div>
+					{% endif %}
+										
+					{% if "Running_environment_details" in value1 %}
+						 <div class="dataline indented">
+							<label>
+								<strong>Running environment details: </strong>{{ value1.Running_environment_details }}
+							</label>
+						</div>
+					{% endif %}
+				{% else %}
+					<label class='subtitle'>Related Lexicon</label>
+					{% for key2, value2 in value1.items %}
+						<div class="dataline indented">
+							<label>
+								<strong>{{ key2|rep }}:</strong> {{ value2 }}
+							</label>
+						</div>
+					{% endfor %}
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+	{% endfor %}
+		
+
+
+{# Language Description #}
+
+
+{% endspaceless %}
