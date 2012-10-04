@@ -930,7 +930,7 @@ def check_resource_view(queryset, test_case):
                 response._charset)
 
             # skip boolean values, as they cannot reasonably be verified
-            if text.lower() in ("true", "false") or text == "True" or text == "False":
+            if text.lower() in ("true", "false"):
                 continue
 
             # check if path should be skipped
@@ -952,10 +952,10 @@ def check_resource_view(queryset, test_case):
             if skip:
                 continue
 
-            # strip "http://" or "https://" from urls
-            for _sp in stripped_paths:        
-                if path.endswith(_sp):
-                    text = unicode(urlizetrunc(text.strip(), '17')).encode("utf-8")
+            # apply URL transformation if required
+            for _up in url_paths:
+                if path.endswith(_up):
+                    text = unicode(urlizetrunc(text, 17)).encode("utf-8")
 
             # apply date transformation if required
             for _dp in date_paths:
