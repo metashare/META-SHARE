@@ -4320,7 +4320,7 @@ class audioClassificationInfoType_model(SchemaModel):
       )
 
     subject_topic = XmlCharField(
-      verbose_name='Subject_topic', 
+      verbose_name='Subject topic', 
       help_text='For corpora that have already been using subject classi' \
       'fication',
       blank=True, max_length=500, )
@@ -4547,7 +4547,7 @@ class textClassificationInfoType_model(SchemaModel):
       blank=True, max_length=500, )
 
     subject_topic = XmlCharField(
-      verbose_name='Subject_topic', 
+      verbose_name='Subject topic', 
       help_text='For corpora that have already been using subject classi' \
       'fication',
       blank=True, max_length=500, )
@@ -4896,7 +4896,7 @@ class videoClassificationInfoType_model(SchemaModel):
       blank=True, max_length=1000, )
 
     subject_topic = XmlCharField(
-      verbose_name='Subject_topic', 
+      verbose_name='Subject topic', 
       help_text='For corpora that have already been using subject classi' \
       'fication',
       blank=True, max_length=1000, )
@@ -5238,7 +5238,7 @@ class imageClassificationInfoType_model(SchemaModel):
       blank=True, max_length=1000, )
 
     subject_topic = XmlCharField(
-      verbose_name='Subject_topic', 
+      verbose_name='Subject topic', 
       help_text='For corpora that have already been using subject classi' \
       'fication',
       blank=True, max_length=1000, )
