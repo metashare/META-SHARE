@@ -399,69 +399,6 @@ class BasicEditorTests(SeleniumTestCase):
           "//select[@id='id_licenceinfotype_model_set-0-licence_from']/option[39]").text)
 
 
-    def test_full_LR_creation_corpus_text(self):
-        driver = self.driver
-        driver.get(self.base_url)
-        ss_path = setup_screenshots_folder(
-          "PNG-metashare.repository.seltests.test_editor.EditorTest",
-          "LR_creation_corpus_text")
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))  
-        # login user
-        login_user(driver, "manageruser", "secret")
-        # make sure login was successful
-        self.assertEqual("Logout", 
-          driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # new resource with specific resource type and media types
-        _add_new_resource(driver, ss_path, "Corpus", ["id_corpusTextInfo"])
-        self.assertEqual("Add Resource", 
-          driver.find_element_by_css_selector("#content > h1").text)
-        # remember root window id
-        root_id = driver.current_window_handle
-        # administrative information
-        _fill_administrativeInformation_forms(driver, ss_path, root_id)
-
-        # corpus text info popup
-        driver.find_element_by_id("add_id_corpusTextInfo-0").click()
-        _fill_corpusTextInfo_popup(driver, ss_path, root_id)
-
-        # save text corpus
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        driver.find_element_by_name("_save").click()
-        # TODO remove this workaround when Selenium starts working again as intended
-        time.sleep(1)
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        self.assertEqual("The Resource \"Resource Name\" was added successfully.", 
-          driver.find_element_by_css_selector("li.info").text)
-
-        # check the editor group of the resource is the default editor group of the user
-        self.assertEqual(self.test_editor_group.name, 
-          driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[5]").text)
-
-        # make sure an internal resource cannot be published
-        _publish(driver)
-        self.assertEqual("internal",
-         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
-        self.assertEqual("Only ingested resources can be published.", 
-         driver.find_element_by_css_selector("ul.messagelist>li.error").text)
-        # ingest resource
-        _ingest(driver)
-        self.assertEqual("ingested",
-         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
-        self.assertEqual("Successfully ingested 1 internal resource.", 
-         driver.find_element_by_css_selector("ul.messagelist>li").text)
-        # publish resource
-        _publish(driver)
-        self.assertEqual("published",
-         driver.find_element_by_xpath("//table[@id='result_list']/tbody/tr[1]/td[3]").text)
-        self.assertEqual("Successfully published 1 ingested resource.", 
-         driver.find_element_by_css_selector("ul.messagelist>li").text)
-        # delete resource
-        _delete(driver)
-        self.assertEqual("Successfully deleted 1 resource.", 
-         driver.find_element_by_css_selector("ul.messagelist>li").text)
-
-
 def _add_new_resource(driver, ss_path, resource_type, media_types):
     """
     adds a new resource with specific resource type and media types
@@ -1605,6 +1542,7 @@ def _fill_size_form(driver, ss_path, id_infix):
     driver.find_element_by_id("id_{}size".format(id_infix)).send_keys("12")
     Select(driver.find_element_by_xpath("//div[@class='form-row sizeUnit']/div/select")) \
       .select_by_visible_text("Gb")
+
 
 def _fill_languageVariety_popup(driver, ss_path, parent_id):
     """
