@@ -12,7 +12,8 @@ from metashare.repository.seltests.test_editor import _delete, _publish, \
     _fill_affiliation_popup, _fill_language_form, _fill_textSize_form, \
     _fill_audioSize_form, _add_new_resource, _fill_administrativeInformation_forms, \
     _fill_corpusTextInfo_popup, _fill_corpusAudioInfo_popup, _fill_corpusVideoInfo_popup, \
-    _fill_corpusImageInfo_popup, _fill_corpusTextNumericalInfo_popup
+    _fill_corpusImageInfo_popup, _fill_corpusTextNumericalInfo_popup, \
+    _fill_corpusTextNgramInfo_popup
 from metashare.repository.seltests.test_utils import login_user, mouse_over, \
     setup_screenshots_folder, click_menu_item, save_and_close, \
     cancel_and_close, cancel_and_continue
@@ -372,7 +373,7 @@ class NightlyEditorTests(SeleniumTestCase):
          driver.find_element_by_css_selector("ul.messagelist>li").text)
 
 
-    def test_LR_creation_corpus_ngram(self):
+    def test_LR_creation_corpus_text_ngram(self):
         driver = self.driver
         driver.get(self.base_url)
         ss_path = setup_screenshots_folder(
@@ -385,62 +386,18 @@ class NightlyEditorTests(SeleniumTestCase):
         self.assertEqual("Logout", 
           driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Manage Resources -> Manage all resources
-        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Add resource
-        driver.find_element_by_link_text("Add Resource").click()
-        # create audio corpus
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
-        driver.find_element_by_id("id_corpusTextNgramInfo").click()
-        driver.find_element_by_id("id_submit").click()
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # new resource with specific resource type and media types
+        _add_new_resource(driver, ss_path, "Corpus", ["id_corpusTextNgramInfo"])
         self.assertEqual("Add Resource", 
           driver.find_element_by_css_selector("#content > h1").text)
         # remember root window id
         root_id = driver.current_window_handle
-        # add required fields
-        driver.find_element_by_name("key_form-0-resourceName_0").clear()
-        driver.find_element_by_name("key_form-0-resourceName_0").send_keys("en")
-        driver.find_element_by_name("val_form-0-resourceName_0").clear()
-        driver.find_element_by_name("val_form-0-resourceName_0").send_keys("Test Ngram Corpus")
-        driver.find_element_by_name("key_form-0-description_0").clear()
-        driver.find_element_by_name("key_form-0-description_0").send_keys("en")
-        driver.find_element_by_name("val_form-0-description_0").clear()
-        driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # distribution popup
-        driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
-        _fill_distribution_popup(driver, ss_path, root_id)
-        # contact person popup
-        driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        _fill_contactPerson_popup(driver, ss_path, root_id)
+        # administrative information
+        _fill_administrativeInformation_forms(driver, ss_path, root_id)
 
-        # corpus ngram info popup
+        # corpus text ngram info popup
         driver.find_element_by_id("add_id_corpusTextNgramInfo").click()
-        driver.switch_to_window("id_corpusTextNgramInfo")
-        # corpus ngram info / base item
-        #driver.find_element_by_name("form-0-baseItem_old").send_keys("Other")
-        Select(driver.find_element_by_name("form-0-baseItem_old")).select_by_visible_text("Other")
-        driver.find_element_by_xpath("//a[@class='selector-add']").click()
-        # corpus ngram info / order
-        driver.find_element_by_name("form-0-order").clear()
-        driver.find_element_by_name("form-0-order").send_keys("5")
-        # corpus ngram info / linguality type
-        Select(driver.find_element_by_id("id_form-2-0-lingualityType")).select_by_visible_text(
-          "Monolingual")
-        # corpus ngram info / language
-        _fill_language_form(driver, ss_path, "languageinfotype_model_set-0-")
-        # corpus ngram info / size popup
-        driver.find_element_by_name("sizeinfotype_model_set-0-size").clear()
-        driver.find_element_by_name("sizeinfotype_model_set-0-size").send_keys("100")
-        driver.find_element_by_name("sizeinfotype_model_set-0-sizeUnit").send_keys("Gb")
-        # save and close corpus ngram info popup
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        save_and_close(driver, root_id)
+        _fill_corpusTextNgramInfo_popup(driver, ss_path, root_id)
 
         # save ngram corpus
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -448,7 +405,7 @@ class NightlyEditorTests(SeleniumTestCase):
         # TODO remove this workaround when Selenium starts working again as intended
         time.sleep(1)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        self.assertEqual("The Resource \"Test Ngram Corpus\" was added successfully.", 
+        self.assertEqual("The Resource \"Resource Name\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
 
         # check the editor group of the resource is the default editor group of the user
