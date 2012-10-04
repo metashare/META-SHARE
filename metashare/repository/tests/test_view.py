@@ -930,7 +930,7 @@ def check_resource_view(queryset, test_case):
                 response._charset)
 
             # skip boolean values, as they cannot reasonably be verified
-            if text.lower() in ("true", "false") or text == "True" or text == "False":
+            if text.lower() in ("true", "false"):
                 continue
 
             # check if path should be skipped
