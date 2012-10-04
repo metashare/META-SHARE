@@ -123,15 +123,15 @@
 				<div style="clear:both"></div>
 			{% endif %}
 			
-			{% if url|length > 1 %}
-		 		<h3 style="font-size:14px;">
+			{% if url %}
+				<h3 style="font-size:14px;">
 		 			<label>
 			 			{% for address in url %}
 					 		{{address|urlizetrunc:17}}{% if not forloop.last %},{% endif %}
 					 	{% endfor %}
 			 		</label>
 			 	</h3>
-		 	{% endif %}
+			{% endif %}
 			
 			{% if not 'NOT_DEFINED' in metaShareId %}<h4 class="identifier">{{ metaShareId }}</h4>{% endif %}
 			{% if identifier %}

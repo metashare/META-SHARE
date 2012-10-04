@@ -1,27 +1,28 @@
 import shutil
 import logging
+from datetime import datetime
 
-from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import Permission
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.humanize.templatetags import humanize
 from django.core.urlresolvers import reverse
+from django.template.defaultfilters import urlizetrunc
 from django.test import TestCase
 from django.test.client import Client
+from django.utils.encoding import smart_str
+from django.utils.formats import date_format
 
 from metashare import test_utils, settings, xml_utils
 from metashare.accounts.models import UserProfile, EditorGroup, \
     EditorGroupManagers, Organization
 from metashare.repository import views
+from metashare.repository.models import resourceInfoType_model
+from metashare.repository.supermodel import OBJECT_XML_CACHE
 from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER, \
     TEST_MODE_NAME
 from metashare.test_utils import create_user
-from metashare.repository.supermodel import OBJECT_XML_CACHE
-from metashare.repository.models import resourceInfoType_model
-from django.utils.encoding import smart_str
-from django.contrib.humanize.templatetags import humanize
-from django.template.defaultfilters import urlizetrunc
 from metashare.utils import prettify_camel_case_string
-from django.utils.formats import date_format
-from datetime import datetime
+
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -874,22 +875,22 @@ def check_resource_view(queryset, test_case):
       'email',
       'metaShareId',
     )
-    
-    # paths with a url, which should be stripped off "http://" and "https://"
-    stripped_paths = (
-        'url',
-        'downloadLocation',
-        'executionLocation',
-        'samplesLocation',
-        'targetResourceNameURI',
+
+    # path suffixes where to apply a URL transformation on the value
+    url_paths = (
+        '/url',
+        '/downloadLocation',
+        '/executionLocation',
+        '/samplesLocation',
+        '/targetResourceNameURI',
     )
-    
+
     # path suffixes where to apply a number transformation on the value
     number_paths = (
       '/size',
       '/fee',
     )
-    
+
     # path suffixes where to apply data transformation on the value
     date_paths = (
       '/metadataCreationDate',
@@ -904,9 +905,8 @@ def check_resource_view(queryset, test_case):
       '/lastDateUpdated',
       '/metadataLastDateUpdated',
     )
-    
+
     count = 0
-    error_atts = []
     for _res in queryset:
         parent_dict = {}
         _res.export_to_elementtree(pretty=True, parent_dict=parent_dict)       
@@ -926,12 +926,13 @@ def check_resource_view(queryset, test_case):
                 continue
         
             path = path_to_root(_ele, parent_dict)
-            text = smart_str(xml_utils.html_escape(_ele.text), response._charset)
+            text = smart_str(xml_utils.html_escape(_ele.text.strip()),
+                response._charset)
 
             # skip boolean values, as they cannot reasonably be verified
-            if text == "true" or text == "false" or text == "True" or text == "False":
-                continue 
-                            
+            if text.lower() in ("true", "false"):
+                continue
+
             # check if path should be skipped
             skip = False
             for path_ele in skip_path_elements:
@@ -951,10 +952,17 @@ def check_resource_view(queryset, test_case):
             if skip:
                 continue
 
+<<<<<<< HEAD
             # strip "http://" or "https://" from urls
             for _sp in stripped_paths:        
                 if path.endswith(_sp):
                     text = unicode(urlizetrunc(text.strip(), '17')).encode("utf-8")
+=======
+            # apply URL transformation if required
+            for _up in url_paths:
+                if path.endswith(_up):
+                    text = unicode(urlizetrunc(text, 17)).encode("utf-8")
+>>>>>>> 96d28329ef79a4f3dcfb8886be0a6241de8ada3c
 
             # apply date transformation if required
             for _dp in date_paths:
@@ -962,12 +970,14 @@ def check_resource_view(queryset, test_case):
                     date_object = datetime.strptime(text, '%Y-%m-%d')
                     text = unicode(
                       date_format(date_object, format='SHORT_DATE_FORMAT', use_l10n=True)).encode("utf-8")
+
             real_count = response.content.count(text)
             if real_count == 0:
                 # try with beautified string
                 beauty_real_count = response.content.count(
                   prettify_camel_case_string(text))
             if real_count == 0 and beauty_real_count == 0:
+<<<<<<< HEAD
                 LOGGER.error(u"missing {}: {}".format(path, _ele.text))
                 error_atts.append(path)
 
@@ -978,3 +988,6 @@ def check_resource_view(queryset, test_case):
         for path in sorted(set(error_atts)):
             LOGGER.warn(path)
     
+=======
+                test_case.fail(u"missing {}: {}".format(path, _ele.text))
+>>>>>>> 96d28329ef79a4f3dcfb8886be0a6241de8ada3c
