@@ -1,9 +1,11 @@
 import logging
 import json
 import itertools 
+import threading
+import re
 from django.db.models import Count, Sum
 from django.contrib.auth.models import User
-import re
+from math import trunc
 from metashare.stats.models import LRStats, QueryStats, UsageStats
 from metashare.stats.geoip import getcountry_code, getcountry_name
 from metashare.storage.models import PUBLISHED
@@ -243,49 +245,6 @@ def statDays():
     days = itertools.chain(LRStats.objects.dates('lasttime', 'day'), QueryStats.objects.dates('lasttime', 'day'))
     return reduce(lambda x, y: x if y in x else x + [y], days, [])
 
-def update_usage_stats(lrid, element_tree):
-    if len(element_tree.getchildren()):
-        for child in element_tree.getchildren():
-            item = update_usage_stats(lrid, child)
-            if (item == None or item[0] == None):
-                lrset = UsageStats.objects.filter(lrid=lrid, elparent=element_tree.tag, elname=child.tag)
-                if (lrset.count() > 1):
-                    LOGGER.debug('ERROR! Saving usage stats in {}, {}'.format(element_tree.tag, child.tag))
-                    continue
-                if (lrset.count() > 0):
-                    record = lrset[0]
-                    record.count = record.count+1
-                    record.save(force_update=True)
-                else:
-                    record = UsageStats()
-                    record.lrid = lrid
-                    record.elname = child.tag
-                    record.elparent = element_tree.tag
-                    record.save(force_insert=True)
-                continue
-            if not isinstance(item[0], basestring):
-                elname = item[0][0].encode("utf-8") if item[0][0] != None else ""
-                text = item[0][1].encode("utf-8") if item[0][1] != None else ""
-                lrset = UsageStats.objects.filter(lrid=lrid, elparent=element_tree.tag, elname=elname, text=text)
-                if (lrset.count() > 1):
-                    LOGGER.debug('ERROR! Saving usage stats in {}, {}'.format(element_tree.tag, elname))
-                    continue
-                if (lrset.count() > 0):
-                    record = lrset[0]
-                    record.count = record.count+1
-                    record.save(force_update=True)
-                else:
-                    record = UsageStats()
-                    record.lrid = lrid
-                    record.elname = elname
-                    record.elparent = element_tree.tag
-                    record.text = text
-                    record.save(force_insert=True)
-        return None
-    # Otherwise, we return a tuple containg (key, value), i.e., (tag, text).
-    else:
-        return ((element_tree.tag, element_tree.text),)
-    
 def getCountryActions(action):
     result = []
     sets = None
@@ -340,4 +299,96 @@ def _get_ipaddress(request):
         else:
             return ip_address
     return ''
+
+
+def update_usage_stats(lrid, element_tree):
+    element_children = element_tree.getchildren()
+    if len(element_children):
+        for child in element_children:
+            item = update_usage_stats(lrid, child)
+            if (item == None or item[0] == None):
+                lrset = UsageStats.objects.filter(lrid=lrid, elparent=element_tree.tag, elname=child.tag)
+                if (lrset.count() > 0):
+                    LOGGER.debug('ERROR! Saving usage stats in {}, {}'.format(element_tree.tag, child.tag))
+                    continue
+                if (lrset.count() > 0):
+                    record = lrset[0]
+                    record.count = record.count+1
+                    record.save(force_update=True)
+                else:
+                    record = UsageStats()
+                    record.lrid = lrid
+                    record.elname = child.tag
+                    record.elparent = element_tree.tag
+                    record.save(force_insert=True)
+                continue
+            if not isinstance(item[0], basestring):
+                elname = item[0][0].encode("utf-8") if item[0][0] != None else ""
+                text = item[0][1].encode("utf-8") if item[0][1] != None else ""
+                lrset = UsageStats.objects.filter(lrid=lrid, elparent=element_tree.tag, elname=elname, text=text)
+                if (lrset.count() > 1):
+                    LOGGER.debug('ERROR! Saving usage stats in {}, {}'.format(element_tree.tag, elname))
+                    continue
+                if (lrset.count() > 0):
+                    record = lrset[0]
+                    record.count = record.count+1
+                    record.save(force_update=True)
+                else:
+                    record = UsageStats()
+                    record.lrid = lrid
+                    record.elname = elname
+                    record.elparent = element_tree.tag
+                    record.text = text
+                    record.save(force_insert=True)
+        return None
+    # Otherwise, we return a tuple containg (key, value), i.e., (tag, text).
+    else:
+        return ((element_tree.tag, element_tree.text),)
+    
+
+def updateUsageStats(resources):   
+    #check if it is already running an UsageThread process
+    for current_thread in threading.enumerate():
+        if current_thread.getName() == USAGETHREADNAME:
+            return current_thread
+
+    usagethread = UsageThread(USAGETHREADNAME, resources)
+    usagethread.setName(USAGETHREADNAME)
+    usagethread.start()
+    return usagethread    
+    
+
+class UsageThread(threading.Thread):
+    """
+    Thread for updating usage statistics.
+    """
+    resources = None
+    done = 0
+
+    def __init__(self, threadname, resources):
+        """
+        Constructor.
+
+        @param thread name
+        @param resources to check
+        """
+        threading.Thread.__init__(self)
+        self.resources = resources
+
+    def getProgress(self):
+        if self.resources != None and len(self.resources) > 0:
+            return trunc(self.done * 100 / len(self.resources))
+        return 0
+        
+    def run(self):       
+        self.done = 0
+        for resource in self.resources:
+            try:
+                if not UsageStats.objects.filter(lrid=resource.storage_object.identifier).exists():
+                    update_usage_stats(resource.storage_object.identifier, resource.export_to_elementtree())
+                self.done += 1
+            # pylint: disable-msg=W0703
+            except Exception, e:
+                print "UsageThread " + str(e)
+                LOGGER.debug('ERROR! Usage statistics updating failed on resource {}: {}'.format(resource.id, e))
 
