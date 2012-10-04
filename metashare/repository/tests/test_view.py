@@ -751,3 +751,211 @@ class DownloadViewTest(TestCase):
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
             msg_prefix="a download should not have been started")
+
+
+class FullViewTest(TestCase):
+    """
+    Defines a number of tests for the details of the single resource view
+    """
+    
+    @classmethod
+    def setUpClass(cls):
+        """
+        Set up the test
+        """
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
+        
+        # disable indexing during import
+        test_utils.set_index_active(False)
+        
+        # import resources
+        test_utils.setup_test_storage()
+        OBJECT_XML_CACHE.clear()
+        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
+                "partial-corpus.xml".format(ROOT_PATH))
+        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
+                "full-lang-description.xml".format(ROOT_PATH))
+        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
+                "full-lex-conceptual.xml".format(ROOT_PATH))
+        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
+                "full-corpus-text.xml".format(ROOT_PATH))
+        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
+                "full-corpus-image.xml".format(ROOT_PATH))
+        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
+                "full-corpus-audio.xml".format(ROOT_PATH))
+        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
+                "full-corpus-video.xml".format(ROOT_PATH))
+        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
+                "full-corpus-textngram.xml".format(ROOT_PATH))
+        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
+                "full-corpus-textnumerical.xml".format(ROOT_PATH))
+        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
+                "full-tool-service.xml".format(ROOT_PATH))
+                
+        # enable indexing 
+        test_utils.set_index_active(True)
+    
+        # update index
+        from django.core.management import call_command
+        call_command('rebuild_index', interactive=False, using=TEST_MODE_NAME)
+        
+    
+    @classmethod
+    def tearDownClass(cls):
+        """
+        Clean up the test
+        """
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
+        
+        # disable indexing during import
+        test_utils.set_index_active(False)
+        
+        test_utils.clean_resources_db()
+        test_utils.clean_storage()
+        OBJECT_XML_CACHE.clear()
+        
+        # enable indexing 
+        test_utils.set_index_active(True)
+    
+        # update index
+        from django.core.management import call_command
+        call_command('rebuild_index', interactive=False, using=TEST_MODE_NAME)
+        
+    
+    def testSingleResourceView(self):
+        """
+        Checks that each resource's single view is displayed correctly.
+        """
+        
+        # disable indexing; we don't need stat updates for this test
+        test_utils.set_index_active(False)
+        
+        queryset = resourceInfoType_model.objects.all()
+        check_resource_view(queryset, self)
+
+        # enable indexing 
+        test_utils.set_index_active(True)
+
+
+def path_to_root(element, parent_dict):
+    """
+    Returns the path to the given element using the given parent dictionary.
+    """
+    current = element
+    ele_path = []
+    ele_path.append(element.tag)
+    while current in parent_dict:
+        parent = parent_dict[current] 
+        ele_path.append(parent.tag)
+        current = parent
+    ele_path.reverse()
+    path = ""
+    for ele in ele_path:
+        path += ele
+        path += "/"
+    return path[:-1]
+    
+
+def check_resource_view(queryset, test_case):
+    
+    # paths elemenets for which the path is skipped
+    skip_path_elements = (
+      'email',
+      'metaShareId',
+    )
+
+    # path suffixes where to apply a URL transformation on the value
+    url_paths = (
+        '/url',
+        '/downloadLocation',
+        '/executionLocation',
+        '/samplesLocation',
+        '/targetResourceNameURI',
+    )
+
+    # path suffixes where to apply a number transformation on the value
+    number_paths = (
+      '/size',
+      '/fee',
+    )
+
+    # path suffixes where to apply data transformation on the value
+    date_paths = (
+      '/metadataCreationDate',
+      '/annotationStartDate',
+      '/annotationEndDate',
+      '/availabilityStartDate',
+      '/availabilityEndDate',
+      '/creationStartDate',
+      '/creationEndDate',
+      '/projectStartDate',
+      '/projectEndDate',
+      '/lastDateUpdated',
+      '/metadataLastDateUpdated',
+    )
+
+    count = 0
+    for _res in queryset:
+        parent_dict = {}
+        _res.export_to_elementtree(pretty=True, parent_dict=parent_dict)       
+
+        count += 1
+        LOGGER.info("calling {}. resource at {}".format(
+          count, _res.get_absolute_url()))
+        # always create a new client to force a new session
+        client = Client()
+        response = client.get(_res.get_absolute_url(), follow = True)
+        test_case.assertEquals(200, response.status_code)
+        test_case.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
+        
+        for _ele in parent_dict:
+        
+            if not _ele.text:
+                continue
+        
+            path = path_to_root(_ele, parent_dict)
+            text = smart_str(xml_utils.html_escape(_ele.text.strip()),
+                response._charset)
+
+            # skip boolean values, as they cannot reasonably be verified
+            if text.lower() in ("true", "false"):
+                continue
+
+            # check if path should be skipped
+            skip = False
+            for path_ele in skip_path_elements:
+                if path_ele in path:
+                    skip = True
+                    break
+            if skip:
+                continue    
+
+            # apply number transformation if required
+            for _np in number_paths:        
+                if path.endswith(_np):
+                    text = unicode(humanize.intcomma(text)).encode("utf-8")
+                    if text == '0':
+                        skip = True
+                    break
+            if skip:
+                continue
+
+            # strip "http://" or "https://" from urls
+            for _sp in stripped_paths:        
+                if path.endswith(_sp):
+                    text = unicode(urlizetrunc(text.strip(), '17')).encode("utf-8")
+
+            # apply date transformation if required
+            for _dp in date_paths:
+                if path.endswith(_dp):
+                    date_object = datetime.strptime(text, '%Y-%m-%d')
+                    text = unicode(
+                      date_format(date_object, format='SHORT_DATE_FORMAT', use_l10n=True)).encode("utf-8")
+
+            real_count = response.content.count(text)
+            if real_count == 0:
+                # try with beautified string
+                beauty_real_count = response.content.count(
+                  prettify_camel_case_string(text))
+            if real_count == 0 and beauty_real_count == 0:
+                test_case.fail(u"missing {}: {}".format(path, _ele.text))
