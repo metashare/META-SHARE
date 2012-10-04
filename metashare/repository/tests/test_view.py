@@ -1,27 +1,28 @@
 import shutil
 import logging
+from datetime import datetime
 
-from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import Permission
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.humanize.templatetags import humanize
 from django.core.urlresolvers import reverse
+from django.template.defaultfilters import urlizetrunc
 from django.test import TestCase
 from django.test.client import Client
+from django.utils.encoding import smart_str
+from django.utils.formats import date_format
 
 from metashare import test_utils, settings, xml_utils
 from metashare.accounts.models import UserProfile, EditorGroup, \
     EditorGroupManagers, Organization
 from metashare.repository import views
+from metashare.repository.models import resourceInfoType_model
+from metashare.repository.supermodel import OBJECT_XML_CACHE
 from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER, \
     TEST_MODE_NAME
 from metashare.test_utils import create_user
-from metashare.repository.supermodel import OBJECT_XML_CACHE
-from metashare.repository.models import resourceInfoType_model
-from django.utils.encoding import smart_str
-from django.contrib.humanize.templatetags import humanize
-from django.template.defaultfilters import urlizetrunc
 from metashare.utils import prettify_camel_case_string
-from django.utils.formats import date_format
-from datetime import datetime
+
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
