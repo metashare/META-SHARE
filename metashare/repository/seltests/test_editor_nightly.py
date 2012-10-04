@@ -11,7 +11,7 @@ from metashare.repository.seltests.test_editor import _delete, _publish, \
     _ingest, _fill_distribution_popup, _fill_contactPerson_popup, \
     _fill_affiliation_popup, _fill_language_form, _fill_textSize_form, \
     _fill_audioSize_form, _add_new_resource, _fill_administrativeInformation_forms, \
-    _fill_corpusTextInfo_popup
+    _fill_corpusTextInfo_popup, _fill_corpusAudioInfo_popup
 from metashare.repository.seltests.test_utils import login_user, mouse_over, \
     setup_screenshots_folder, click_menu_item, save_and_close, \
     cancel_and_close, cancel_and_continue
@@ -131,53 +131,18 @@ class NightlyEditorTests(SeleniumTestCase):
         self.assertEqual("Logout", 
           driver.find_element_by_xpath("//div[@id='inner']/div[2]/a/div").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Manage Resources -> Manage all resources
-        mouse_over(driver, driver.find_element_by_link_text("Manage Resources"))
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        click_menu_item(driver, driver.find_element_by_link_text("Manage all resources"))
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # Add resource
-        driver.find_element_by_link_text("Add Resource").click()
-        # create audio corpus
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        Select(driver.find_element_by_id("id_resourceType")).select_by_visible_text("Corpus")
-        driver.find_element_by_id("id_corpusAudioInfo").click()
-        driver.find_element_by_id("id_submit").click()
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+        # new resource with specific resource type and media types
+        _add_new_resource(driver, ss_path, "Corpus", ["id_corpusAudioInfo"])
         self.assertEqual("Add Resource", 
           driver.find_element_by_css_selector("#content > h1").text)
         # remember root window id
         root_id = driver.current_window_handle
-        # add required fields
-        driver.find_element_by_name("key_form-0-resourceName_0").clear()
-        driver.find_element_by_name("key_form-0-resourceName_0").send_keys("en")
-        driver.find_element_by_name("val_form-0-resourceName_0").clear()
-        driver.find_element_by_name("val_form-0-resourceName_0").send_keys("Test Audio Corpus")
-        driver.find_element_by_name("key_form-0-description_0").clear()
-        driver.find_element_by_name("key_form-0-description_0").send_keys("en")
-        driver.find_element_by_name("val_form-0-description_0").clear()
-        driver.find_element_by_name("val_form-0-description_0").send_keys("Test Description")
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        # distribution popup
-        driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
-        _fill_distribution_popup(driver, ss_path, root_id)
-        # contact person popup
-        driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
-        _fill_contactPerson_popup(driver, ss_path, root_id)
+        # administrative information
+        _fill_administrativeInformation_forms(driver, ss_path, root_id)
         
         # corpus audio info popup
         driver.find_element_by_id("add_id_corpusAudioInfo").click()
-        driver.switch_to_window("id_corpusAudioInfo")
-        Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
-          "Monolingual")
-        # corpus audio info / language
-        _fill_language_form(driver, ss_path, "languageinfotype_model_set-0-")
-        # corpus audio info / size popup
-        driver.find_element_by_css_selector("#add_id_audioSizeInfo > img[alt=\"Add Another\"]").click()
-        _fill_audioSize_form(driver, ss_path, "id_corpusAudioInfo")
-        # save and close corpus audio info popup
-        driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        save_and_close(driver, root_id)
+        _fill_corpusAudioInfo_popup(driver, ss_path, root_id)
         
         # save audio corpus
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -185,7 +150,7 @@ class NightlyEditorTests(SeleniumTestCase):
         # TODO remove this workaround when Selenium starts working again as intended
         time.sleep(1)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
-        self.assertEqual("The Resource \"Test Audio Corpus\" was added successfully.", 
+        self.assertEqual("The Resource \"Resource Name\" was added successfully.", 
           driver.find_element_by_css_selector("li.info").text)
 
         # check the editor group of the resource is the default editor group of the user
