@@ -273,7 +273,7 @@ def _update_resource(res, res_obj, storage_obj):
     
     # transfer attributes from old storage object; skip attributes that were not
     # available in 2.9-beta
-    skip_fields = ('source_node',)
+    skip_fields = ('source_node', 'id')
     for field in storage_obj._meta.local_fields:
         if field.attname in skip_fields:
             continue
