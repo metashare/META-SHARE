@@ -771,7 +771,6 @@ class NightlyEditorTests(SeleniumTestCase):
         Select(driver.find_element_by_id("id_form-2-0-lingualityType")).select_by_visible_text(
           "Monolingual")
         # language description info text / language
-        driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
         _fill_language_form(driver, ss_path, "languageinfotype_model_set-0-")
         # save and close language description info text popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -885,7 +884,6 @@ class NightlyEditorTests(SeleniumTestCase):
         Select(driver.find_element_by_id("id_form-2-0-lingualityType")).select_by_visible_text(
           "Monolingual")
         # language description info text / language
-        driver.find_element_by_css_selector("img[alt=\"Add Another\"]").click()
         _fill_language_form(driver, ss_path, "languageinfotype_model_set-0-")
         # save and close language description info text popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
