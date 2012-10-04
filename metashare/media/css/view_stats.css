@@ -107,7 +107,7 @@ div.warning {
     padding: 5px;
     margin-top: -15px;
     margin-left: 10px;
-    margin-right: 10px;    
+    margin-right: 10px;
     text-align:justify;
     height:auto;
 }
@@ -155,7 +155,7 @@ a.deleteFilter:before {
 
 a.addFilter:before {
     content: " " url("sexybuttons/images/icons/silk/accept.png");
-    vertical-align: top;   
+    vertical-align: top; 
 }
 
 #colsubtab {
@@ -194,6 +194,16 @@ div.itemcounter {
     text-decoration: none;
     width: auto;
     position: absolute;
+}
+
+div.lasttime {
+    display: inline; 
+    font-size:8pt; 
+    text-align:left; 
+    float: right;
+    margin-left: 10px;
+    margin-bottom: -14px;
+    padding-right: 20px;
 }
 
 td.resourceName{

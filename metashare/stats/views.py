@@ -133,7 +133,6 @@ def usagestats (request):
     mod = import_module("metashare.repository.models")
     _fields = {}
     _classes = {}
-    errors = None
     for _model in _models:
         # get info about classes
         dbfields = getattr(mod, _model).__schema_classes__
@@ -217,7 +216,6 @@ def usagestats (request):
         'selected_field': selected_field,
         'expand_all': expand_all,
         'textvalues': textvalues,
-        'errors': errors,
         'myres': isOwner(request.user.username)},
         context_instance=RequestContext(request))
 

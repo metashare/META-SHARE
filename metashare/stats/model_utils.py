@@ -170,7 +170,7 @@ def getLRTop(action, limit, geoinfo=None, since=None, offset=0):
             else:
                 action_list = LRStats.objects.values('lrid') \
                     .filter(ignored=False, action=action) \
-                    .annotate(sum_count=Sum('count')).order_by('-sum_count')
+                    .annotate(sum_count=Sum('count')).order_by('-sum_count')[offset:offset+limit]
     return action_list
 
 def getLRLast(action, limit, geoinfo=None, offset=0):
