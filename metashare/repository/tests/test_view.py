@@ -927,7 +927,8 @@ def check_resource_view(queryset, test_case):
                 continue
         
             path = path_to_root(_ele, parent_dict)
-            text = smart_str(xml_utils.html_escape(_ele.text), response._charset)
+            text = smart_str(xml_utils.html_escape(_ele.text.strip()),
+                response._charset)
 
             # skip boolean values, as they cannot reasonably be verified
             if text.lower() in ("true", "false"):
