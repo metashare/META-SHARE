@@ -1,18 +1,28 @@
 import shutil
 import logging
+from datetime import datetime
 
-from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import Permission
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.humanize.templatetags import humanize
 from django.core.urlresolvers import reverse
+from django.template.defaultfilters import urlizetrunc
 from django.test import TestCase
 from django.test.client import Client
+from django.utils.encoding import smart_str
+from django.utils.formats import date_format
 
-from metashare import test_utils, settings
+from metashare import test_utils, settings, xml_utils
 from metashare.accounts.models import UserProfile, EditorGroup, \
     EditorGroupManagers, Organization
 from metashare.repository import views
-from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER
+from metashare.repository.models import resourceInfoType_model
+from metashare.repository.supermodel import OBJECT_XML_CACHE
+from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER, \
+    TEST_MODE_NAME
 from metashare.test_utils import create_user
+from metashare.utils import prettify_camel_case_string
+
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -197,7 +207,7 @@ class ViewTest(TestCase):
         client.login(username='editoruser', password='secret')
         url = self.resource.get_absolute_url()
         response = client.get(url, follow = True)
-        self.assertTemplateUsed(response, 'repository/lr_view.html')
+        self.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
         self.assertContains(response, 'middle_button">Edit Resource<')
         self.assertNotContains(response, 'middle_gray_button">Edit Resource<')
 
@@ -209,7 +219,7 @@ class ViewTest(TestCase):
         client.login(username='normaluser', password='secret')
         url = self.resource.get_absolute_url()
         response = client.get(url, follow = True)
-        self.assertTemplateUsed(response, 'repository/lr_view.html')
+        self.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
         self.assertNotContains(response, 'middle_button">Edit Resource<')
         self.assertContains(response, 'middle_gray_button">Edit Resource<')
 
@@ -220,7 +230,7 @@ class ViewTest(TestCase):
         client = Client()
         url = self.resource.get_absolute_url()
         response = client.get(url, follow = True)
-        self.assertTemplateUsed(response, 'repository/lr_view.html')
+        self.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
         self.assertNotContains(response, 'middle_button">Edit Resource<')
         self.assertContains(response, 'middle_gray_button">Edit Resource<')
 
@@ -232,7 +242,7 @@ class ViewTest(TestCase):
         client = Client()
         url = self.resource.get_absolute_url()
         response = client.get(url, follow = True)
-        self.assertTemplateUsed(response, 'repository/lr_view.html')
+        self.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
         self.assertContains(response, '<title>Italian TTS Speech Corpus ' \
                             '(Appen) &ndash; META-SHARE</title>')
 
@@ -243,7 +253,7 @@ class ViewTest(TestCase):
         client = Client()
         url = self.resource.get_absolute_url()
         response = client.get(url, follow = True)
-        self.assertTemplateUsed(response, 'repository/lr_view.html')
+        self.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
         self.assertContains(response, '<h2>Italian TTS Speech Corpus (Appen)')
 
     def test_owner_can_edit_resource(self):
@@ -255,7 +265,7 @@ class ViewTest(TestCase):
         self.resource.owners.add(ViewTest.test_editor)
         self.resource.save()
         response = client.get(self.resource.get_absolute_url())
-        self.assertTemplateUsed(response, 'repository/lr_view.html')
+        self.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
         self.assertContains(response,
             "repository/resourceinfotype_model/{0}/".format(self.resource.id))
 
@@ -266,7 +276,7 @@ class ViewTest(TestCase):
         client = Client()
         client.login(username='normaluser', password='secret')
         response = client.get(self.resource.get_absolute_url())
-        self.assertTemplateUsed(response, 'repository/lr_view.html')
+        self.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
         self.assertNotContains(response,
             "repository/resourceinfotype_model/{0}/".format(self.resource.id))
 
@@ -292,7 +302,7 @@ class DownloadViewTest(TestCase):
         """
         test_utils.setup_test_storage()
         # set up different test resources
-        self.non_downloadable_resource = _import_resource('testfixture.xml')
+        self.non_downloadable_resource = _import_resource('ILSP10.xml')
         self.downloadable_resource_1 = \
             _import_resource('downloadable_1_license.xml')
         self.downloadable_resource_3 = \
@@ -353,14 +363,16 @@ class DownloadViewTest(TestCase):
         response = client.get(reverse(views.download, args=
                 (self.non_downloadable_resource.storage_object.identifier,)),
             follow = True)
-        self.assertTemplateUsed(response, 'repository/lr_not_downloadable.html')
+        self.assertContains(response, 'license terms for the download of the '
+                'selected resource are not available')
         # make sure a normal user gets the information page, too:
         client = Client()
         client.login(username='normaluser', password='secret')
         response = client.get(reverse(views.download, args=
                 (self.non_downloadable_resource.storage_object.identifier,)),
             follow = True)
-        self.assertTemplateUsed(response, 'repository/lr_not_downloadable.html')
+        self.assertContains(response, 'license terms for the download of the '
+                'selected resource are not available')
 
     def test_downloadable_resource_with_one_license(self):
         """
@@ -389,7 +401,7 @@ class DownloadViewTest(TestCase):
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
-        self.assertContains(response, 'licences/CC-BYNCSAv2.5.htm',
+        self.assertContains(response, 'licences/CC-BYNCSAv3.0.htm',
                             msg_prefix="the correct license appears to not " \
                                 "be shown in an iframe")
         # make sure the license agreement page is shown again if the license was
@@ -397,18 +409,18 @@ class DownloadViewTest(TestCase):
         response = client.post(reverse(views.download,
                 args=(self.downloadable_resource_1.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'False',
-              'licence': 'CC_BY-NC-SA' },
+              'licence': 'CC-BY-NC-SA' },
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
-        self.assertContains(response, 'licences/CC-BYNCSAv2.5.htm',
+        self.assertContains(response, 'licences/CC-BYNCSAv3.0.htm',
                             msg_prefix="the correct license appears to not " \
                                 "be shown in an iframe")
         # make sure the download was started after accepting the license:
         response = client.post(reverse(views.download,
                 args=(self.downloadable_resource_1.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
-              'licence': 'CC_BY-NC-SA' },
+              'licence': 'CC-BY-NC-SA' },
             follow = True)
         self.assertTemplateNotUsed(response, 'repository/licence_agreement.html',
                             msg_prefix="a download should have been started")
@@ -444,13 +456,13 @@ class DownloadViewTest(TestCase):
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_selection.html',
                                 "license selection page expected")
-        self.assertContains(response, 'CC_BY-NC-SA',
+        self.assertContains(response, 'CC-BY-NC-SA',
                             msg_prefix="an expected license appears to not " \
                                 "be shown")
         self.assertContains(response, 'GPL',
                             msg_prefix="an expected license appears to not " \
                                 "be shown")
-        self.assertContains(response, 'CC_BY-SA_3.0',
+        self.assertContains(response, 'CC-BY-SA',
                             msg_prefix="an expected license appears to not " \
                                 "be shown")
         # make sure the license selection page is shown again if no license is selected
@@ -460,13 +472,13 @@ class DownloadViewTest(TestCase):
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_selection.html',
                                 "license selection page expected")
-        self.assertContains(response, 'CC_BY-NC-SA',
+        self.assertContains(response, 'CC-BY-NC-SA',
                             msg_prefix="an expected license appears to not " \
                                 "be shown")
         self.assertContains(response, 'GPL',
                             msg_prefix="an expected license appears to not " \
                                 "be shown")
-        self.assertContains(response, 'CC_BY-SA_3.0',
+        self.assertContains(response, 'CC-BY-SA',
                             msg_prefix="an expected license appears to not " \
                                 "be shown")
         # make sure the license page is shown after selecting a license
@@ -530,7 +542,7 @@ class DownloadViewTest(TestCase):
         response = client.post(reverse(views.download, args=
                 (self.downloadable_resource_1.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
-              'licence': 'CC_BY-NC-SA' },
+              'licence': 'CC-BY-NC-SA' },
             follow = True)
         self.assertIn(("http://www.example.org/dl1", 302),
                       response.redirect_chain,
@@ -542,22 +554,22 @@ class DownloadViewTest(TestCase):
         """
         # neither via GET ...
         response = Client().get(reverse(views.download, args=
-                (self.non_downloadable_resource.storage_object.identifier,)),
+                (self.downloadable_resource_3.storage_object.identifier,)),
             follow = True)
         self.assertTemplateUsed(response, 'login.html')
         # ... nor via POST with no data ...
         response = Client().post(reverse(views.download, args=
-                (self.non_downloadable_resource.storage_object.identifier,)),
+                (self.downloadable_resource_3.storage_object.identifier,)),
             follow = True)
         self.assertTemplateUsed(response, 'login.html')
         # ... nor via POST with a selected license ...
         response = Client().post(reverse(views.download, args=
-                (self.non_downloadable_resource.storage_object.identifier,)),
+                (self.downloadable_resource_3.storage_object.identifier,)),
             { 'licence': 'GPL' },
             follow = True)
         # ... nor via POST with an agreement to some license:
         response = Client().post(reverse(views.download, args=
-                (self.non_downloadable_resource.storage_object.identifier,)),
+                (self.downloadable_resource_3.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
               'licence': 'GPL' },
             follow = True)
@@ -571,7 +583,7 @@ class DownloadViewTest(TestCase):
         client.login(username='staffuser', password='secret')
         url = self.downloadable_resource_1.get_absolute_url()
         response = client.get(url, follow = True)
-        self.assertTemplateUsed(response, 'repository/lr_view.html')
+        self.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
         self.assertContains(response, "repository/download/{0}".format(
                         self.downloadable_resource_1.storage_object.identifier))
 
@@ -604,7 +616,7 @@ class DownloadViewTest(TestCase):
         # LR must not be downloadable via POST with just a selected license ...
         response = client.post(reverse(views.download,
                     args=(self.ms_commons_resource.storage_object.identifier,)),
-            { 'licence': 'MSCommons_BY-NC-SA' },
+            { 'licence': 'MSCommons-BY-NC-SA' },
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
@@ -616,7 +628,7 @@ class DownloadViewTest(TestCase):
         response = client.post(reverse(views.download,
                     args=(self.ms_commons_resource.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
-              'licence': 'MSCommons_BY-NC-SA' },
+              'licence': 'MSCommons-BY-NC-SA' },
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
@@ -647,7 +659,7 @@ class DownloadViewTest(TestCase):
         response = client.post(reverse(views.download,
                     args=(self.ms_commons_resource.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'False',
-              'licence': 'MSCommons_BY-NC-SA' },
+              'licence': 'MSCommons-BY-NC-SA' },
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
@@ -659,7 +671,7 @@ class DownloadViewTest(TestCase):
         response = client.post(reverse(views.download,
                     args=(self.ms_commons_resource.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
-              'licence': 'MSCommons_BY-NC-SA' },
+              'licence': 'MSCommons-BY-NC-SA' },
             follow = True)
         self.assertTemplateNotUsed(response, 'repository/licence_agreement.html',
                             msg_prefix="a download should have been started")
@@ -709,7 +721,7 @@ class DownloadViewTest(TestCase):
             reverse(views.download,
                     args=(self.ms_commons_resource.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
-              'licence': 'MSCommons_BY-NC-SA' },
+              'licence': 'MSCommons-BY-NC-SA' },
             follow = True)
         self.assertTemplateNotUsed(response,
             'repository/licence_agreement.html',
@@ -747,7 +759,7 @@ class DownloadViewTest(TestCase):
             reverse(views.download,
                     args=(self.ms_commons_resource.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
-              'licence': 'MSCommons_BY-NC-SA' },
+              'licence': 'MSCommons-BY-NC-SA' },
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
             msg_prefix="a download should not have been started")
@@ -940,10 +952,10 @@ def check_resource_view(queryset, test_case):
             if skip:
                 continue
 
-            # strip "http://" or "https://" from urls
-            for _sp in stripped_paths:        
-                if path.endswith(_sp):
-                    text = unicode(urlizetrunc(text.strip(), '17')).encode("utf-8")
+            # apply URL transformation if required
+            for _up in url_paths:
+                if path.endswith(_up):
+                    text = unicode(urlizetrunc(text, 17)).encode("utf-8")
 
             # apply date transformation if required
             for _dp in date_paths:
