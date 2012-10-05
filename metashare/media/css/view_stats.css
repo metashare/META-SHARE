@@ -65,7 +65,9 @@
 
 /* usage metadata */
 div.coverage { 
-    display: inline; 
+    display: inline;
+    padding-left: 4px;
+    padding-right: 6px;
     margin-left: 2px; 
     margin-right: 2px; 
     border-bottom-right-radius: 10px;
@@ -77,9 +79,15 @@ div.coverage {
     width: auto;
 }
 
-div.required { background-color: lightgreen }
-div.optional { background-color: yellow }
-div.recommended { background-color: orange }
+div.required { 
+    background-color: lightgreen;
+}
+div.optional { 
+    background-color: yellow;
+}
+div.recommended { 
+    background-color: orange;
+}
 div.fieldvalues {background: #E6E6FA; 
     border: 1px solid #000; 
     float: right;
@@ -97,6 +105,11 @@ div.warning {
     background: lightyellow; 
     border: 1px solid #FFA500; 
     padding: 5px;
+    margin-top: -15px;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align:justify;
+    height:auto;
 }
     
 label.title {background-color: #fda;
@@ -113,11 +126,14 @@ label.title {background-color: #fda;
         padding-left: 2px;
 }
 
-label.pointer {padding: 0px;
+label.pointer {
+    padding: 0px;
     cursor: pointer;
 }
 
-label.indent {margin-left: 19px;
+label.indent {
+    margin-left: 19px;
+    padding-left: 3px;
 }
 
 label.component{
@@ -139,7 +155,7 @@ a.deleteFilter:before {
 
 a.addFilter:before {
     content: " " url("sexybuttons/images/icons/silk/accept.png");
-    vertical-align: top;   
+    vertical-align: top; 
 }
 
 #colsubtab {
@@ -153,16 +169,10 @@ a.addFilter:before {
     vertical-align: top;
 }
 
-#subtab div {
-   margin-left:3px;
-}
 
 #subtab{
-    width: 100%;
     padding: 10px;
     margin-bottom: 0px;
-    white-space:nowrap;
-    position:relative;
     display:block;
 }
 
@@ -172,18 +182,6 @@ a.addFilter:before {
     -moz-border-radius: 5px 5px 5px 5px; 
     -webkit-border-radius: 5px 5px 5px 5px;
     -khtml-border-radius: 5px 5px 5px 5px;
-}
-
-#morebutton {
-    background: #eee; 
-    border: solid 1px #ccc; 
-    -moz-border-radius: 5px 5px 5px 5px; 
-    -webkit-border-radius: 5px 5px 5px 5px; 
-    -khtml-border-radius: 5px 5px 5px 5px;
-    padding: 0px; margin: 0px;
-    float: left; 
-    display: inline;
-    margin-left: 8px;
 }
 
 div.itemcounter {
@@ -196,6 +194,16 @@ div.itemcounter {
     text-decoration: none;
     width: auto;
     position: absolute;
+}
+
+div.lasttime {
+    display: inline; 
+    font-size:8pt; 
+    text-align:left; 
+    float: right;
+    margin-left: 10px;
+    margin-bottom: -14px;
+    padding-right: 20px;
 }
 
 td.resourceName{

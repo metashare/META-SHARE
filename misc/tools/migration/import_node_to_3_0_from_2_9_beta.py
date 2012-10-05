@@ -238,6 +238,10 @@ def import_resources(import_folder):
                         break
                 imported_resources.append(res)
             except Exception as problem:
+                from django import db
+                if isinstance(problem, db.utils.DatabaseError):
+                    # reset database connection (required for PostgreSQL)
+                    db.close_connection()
                 erroneous_descriptors.append((folder_name, problem))
 
     print "Done.  Successfully imported {0} resources into the database, " \
@@ -273,7 +277,7 @@ def _update_resource(res, res_obj, storage_obj):
     
     # transfer attributes from old storage object; skip attributes that were not
     # available in 2.9-beta
-    skip_fields = ('source_node',)
+    skip_fields = ('source_node', 'id')
     for field in storage_obj._meta.local_fields:
         if field.attname in skip_fields:
             continue

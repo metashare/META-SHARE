@@ -1,6 +1,5 @@
 from django.db import models
 from datetime import datetime
-
         
 class LRStats(models.Model):
     # the storage object identifier of the language resource,
@@ -13,7 +12,7 @@ class LRStats(models.Model):
     lasttime = models.DateTimeField(blank=False)
     action = models.CharField(blank=False, max_length=1)
     count = models.IntegerField(blank=False, default=1)
-    ignored = models.BooleanField(default=False)
+    ignored = models.BooleanField(blank=False, default=False)
 
     def save(self, **kwargs):
         # automatically set the `lasttime` value if it is not given; we are not
