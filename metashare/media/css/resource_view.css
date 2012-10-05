@@ -93,6 +93,8 @@ label.component{
 	background: -moz-linear-gradient(top, #FFCC00, #FF6633);
 	background: -webkit-gradient(linear, left top, left bottom, from(#FFCC00), to(#FF6633));	
 	filter:progid:DXImageTransform.Microsoft.Gradient(endColorstr='#FFCC00', startColorstr='#FF6633', gradientType='0');
+	z-index:1;
+	position:relative;
 }
 
 
@@ -111,9 +113,21 @@ label.component{
     vertical-align: top;
 }
 
-.fields ul{
-   list-style: none;
+.fields ul, .subfields ul{
+   list-style-type: none;
    padding:0px;
+}
+
+
+
+.subfields ul{
+	margin:0px !important; 
+	z-index:0;
+}
+
+.underline{
+	clear:both;
+	border-bottom:solid 2px #333;
 }
 
 .fields ul li{
@@ -126,20 +140,70 @@ label.component{
 	box-shadow:0 3px 10px #CCCCCC, 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
 	font-size: 14px;
 	font-weight: bold;
-	margin-right: 1px;	
+	margin-right: 1px;
 	padding-top: 1px;
 	padding-bottom: 1px;
 	padding-left: 5px;
 	padding-right: 5px;
-	height:18px;
+	height:20px;
 }
+
+.subfields ul li{	
+	float:left;
+	background-color:#eee !important;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	box-shadow: 1px 0px 5px #555 !important;
+	font-size: 14px !important;
+	font-weight: bold !important;
+	margin-right: 1px !important;
+	margin-left: 1px !important;
+	margin-top: 2px !important;
+	padding-left: 5px !important;
+	padding-right: 5px !important;
+	padding-top:3px !important;
+	height:18px;
+	width: 30px;
+}
+
 
 .fields ul li.active{
-   height:20px;
+   height:22px;
 }
 
-.tab_content{
+.subfields ul li.active{	
+	background: #ccc;/*
+	background: -moz-linear-gradient(top, #FF6633, #FFCC00);
+	background: -webkit-gradient(linear, left top, left bottom, from(#FF6633), to(#FFCC00));	
+	filter:progid:DXImageTransform.Microsoft.Gradient(endColorstr='#FF6633', startColorstr='#FFCC00', gradientType='0');*/
+	height:20px;
+}
+
+.subfields ul li a{
+	color:#333;
+}
+
+.tab_content, .subtab{
    clear:both;
+}
+
+#tabs_content_container{
+	margin:0;
+	padding:0;
+}
+
+img{
+	margin:0px;
+	padding:0px;
+}
+
+.subscript{
+	margin:0px;
+	padding:0px;
+	font-size:12px; 
+	text-decoration:none;
 }
 
 .middle_box{
@@ -152,7 +216,7 @@ label.component{
    padding-right:20px;
 }
 .corner{
-   margin-top:45px;   
+   margin-top:47px;   
 }
 
 /*CSS for tooltip*/

@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	
+	<title>HoverScroll Test Page</title>
+	
+	<link href="jquery.hoverscroll.css" type="text/css" rel="stylesheet" />
+	
+	<style type="text/css">
+	.hoverscroll {
+		border: #000 solid 1px;
+	}
+	#my-list li {
+		width: 67px;
+		height: 52px;
+		background: #fff;
+		border: #000 solid 1px;
+	}
+	</style>
+	
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="jquery.hoverscroll.js"></script>
+	
+	<script type="text/javascript">
+	
+	$(document).ready(function() {
+        // Creating hoverscroll with fixed arrows
+		$('#my-list').hoverscroll({
+            fixedArrows: true,
+            rtl: true
+        });
+        // Starting the movement automatically at loading
+        // @param direction: right/bottom = 1, left/top = -1
+        // @param speed: Speed of the animation (scrollPosition += direction * speed)
+        var direction = -1,
+            speed = 3;
+        $("#my-list")[0].startMoving(direction, speed);
+	});
+	
+	</script>
+	
+</head>
+<body>
+	<h1>HoverScroll Test Page</h1>
+	
+	<ul id="my-list">
+		<li>test1</li>
+		<li>test2</li>
+		<li>test3</li>
+		<li>test4</li>
+		<li>test5</li>
+		<li>test6</li>
+		<li>test7</li>
+		<li>test8</li>
+		<li>test9</li>
+		<li>test10</li>
+	</ul>
+	
+</body>
+</html>
