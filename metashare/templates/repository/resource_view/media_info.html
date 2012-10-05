@@ -12,14 +12,9 @@
 						{% for text in text_counts %}
 							<li><a href="#sub{{forloop.counter}}">{% get_icon "text" %}<a class="subscript">{{forloop.counter}}</a></a></li>
 						{% endfor %}
-						<li><a href="#sub5">{% get_icon "text" %}<a class="subscript">asdf</a></a></li>
-						<li><a href="#sub6">{% get_icon "text" %}<a class="subscript">1</a></a></li>
-						<li><a href="#sub7">{% get_icon "text" %}<a class="subscript">1</a></a></li>
-						<li><a href="#sub8">{% get_icon "text" %}<a class="subscript">1</a></a></li>
-						<li><a href="#sub9">{% get_icon "text" %}<a class="subscript">1</a></a></li>
 					</ul>
 				</div>
-				<div id="subcontainer">
+				<div class="subcontainer" id="text-container">
 					{% for text in text_counts %}
 						<div id="sub{{forloop.counter}}" class="subtab">
 							{% include "repository/resource_view/detailed_media_info.html" with resource_component=text %}
@@ -45,15 +40,15 @@
 					{% if "media" in key %}
 						{% if "Corpus" in key and video_counts|length > 1 %}
 							<div class="subfields">
-								<ul>
+								<ul class="my-list">
 									{% for video in video_counts %}
-										<li><a href="#sub{{forloop.counter}}">{% get_icon "video" %}{{forloop.counter}}</a></li>
+										<li><a href="#subvideo{{forloop.counter}}">{% get_icon "video" %}<a class="subscript">{{forloop.counter}}</a></a></li>
 									{% endfor %}
 								</ul>
 							</div>
-							<div id="subcontainer">
+							<div class="subcontainer" id="text-container">
 								{% for video in video_counts %}
-									<div id="sub{{forloop.counter}}" class="subtab">
+									<div id="subvideo{{forloop.counter}}" class="subtab">
 										{% include "repository/resource_view/detailed_media_info.html" with resource_component=video %}
 									</div>
 								{% endfor %}
