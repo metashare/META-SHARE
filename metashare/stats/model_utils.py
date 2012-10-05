@@ -308,7 +308,7 @@ def update_usage_stats(lrid, element_tree):
             item = update_usage_stats(lrid, child)
             if (item == None or item[0] == None):
                 lrset = UsageStats.objects.filter(lrid=lrid, elparent=element_tree.tag, elname=child.tag)
-                if (lrset.count() > 0):
+                if (lrset.count() > 1):
                     LOGGER.debug('ERROR! Saving usage stats in {}, {}'.format(element_tree.tag, child.tag))
                     continue
                 if (lrset.count() > 0):
@@ -386,9 +386,8 @@ class UsageThread(threading.Thread):
             try:
                 if not UsageStats.objects.filter(lrid=resource.storage_object.identifier).exists():
                     update_usage_stats(resource.storage_object.identifier, resource.export_to_elementtree())
-                self.done += 1
             # pylint: disable-msg=W0703
             except Exception, e:
-                print "UsageThread " + str(e)
                 LOGGER.debug('ERROR! Usage statistics updating failed on resource {}: {}'.format(resource.id, e))
-
+            self.done += 1
+            

@@ -119,7 +119,6 @@ def usagestats (request):
     lrset = resourceInfoType_model.objects.filter(
         storage_object__publication_status=PUBLISHED,
         storage_object__deleted=False)
-    lr_count = len(lrset)
 
     usage_filter = {"required": 0, "optional": 0, "recommended": 0, "never used": 0, "at least one": 0}
     usage_fields = {}
@@ -197,11 +196,11 @@ def usagestats (request):
                     usagedata.get(metaname.replace("Type_model","").replace("String_model",""), None), \
                     selected_filters, usage_filter)       
          
-    fields_count = usage_filter["required"] + usage_filter["optional"]+ usage_filter["recommended"]
+    fields_count = usage_filter["required"] + usage_filter["optional"] + usage_filter["recommended"]
              
     # update usage stats according with the published resources
     lr_usage = UsageStats.objects.values('lrid').distinct('lrid').count()
-    if (lr_count != lr_usage):
+    if (len(lrset) != lr_usage):
         usagethread = updateUsageStats(lrset)
         if usagethread != None:
             errors = "Usage statistics updating is in progress... "+ str(usagethread.getProgress()) +"% completed"
