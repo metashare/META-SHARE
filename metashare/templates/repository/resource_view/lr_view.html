@@ -15,6 +15,7 @@
 
 {% block content %}
 {% spaceless %}
+	<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.hoverscroll-0.2.4/jquery.hoverscroll.js"></script>
 	<script type="text/javascript" src="http://plugins.learningjquery.com/expander/jquery.expander.js"></script>
 	<script type="text/javascript">
 		$(function () {
@@ -31,8 +32,16 @@
                 } 
 			});
 		});
-
+	
 		$(document).ready(function(){  
+		
+			$('.my-list').hoverscroll({
+	            fixedArrows: true,
+	            rtl: true,
+	            width: 100,
+				height: 20,
+        	});	
+		
 			$(".tab_content").hide();
 			$(".fields li:first-child").addClass("active");
 			var selected_tab = $(".fields li.active").find("a").attr("href");
