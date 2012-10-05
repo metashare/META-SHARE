@@ -7,6 +7,7 @@
 
 {% block links %}
 <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/resource_view.css" />
+<link type="text/css" rel="stylesheet" href="{{ MEDIA_URL }}js/jquery.hoverscroll-0.2.4/jquery.hoverscroll.css" />
 {% endblock %}
 
 {% block description %}{{ description|truncatewords:30 }}{% endblock %}
@@ -15,6 +16,7 @@
 
 {% block content %}
 {% spaceless %}
+	<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.hoverscroll-0.2.4/jquery.hoverscroll.js"></script>
 	<script type="text/javascript" src="http://plugins.learningjquery.com/expander/jquery.expander.js"></script>
 	<script type="text/javascript">
 		$(function () {
@@ -31,8 +33,17 @@
                 } 
 			});
 		});
-
+	
 		$(document).ready(function(){  
+		
+			$('.my-list').hoverscroll({
+				vertical: false,
+	            fixedArrows: false,
+	            arrowsOpacity: 0.8,
+	            width: 273,
+	            height:24,
+        	});	
+		
 			$(".tab_content").hide();
 			$(".fields li:first-child").addClass("active");
 			var selected_tab = $(".fields li.active").find("a").attr("href");
@@ -41,6 +52,32 @@
 				$(".fields li").removeClass("active");
 				$(this).addClass("active");
 				$(".tab_content").hide();
+				var selected_tab = $(this).find("a").attr("href");
+				$(selected_tab).fadeIn();
+				return false;
+	  		});
+	  		
+			$(".textsubtab").hide();
+			$(".textsubfields li:first-child").addClass("active");
+			var selected_tab = $(".textsubfields li.active").find("a").attr("href");
+			$(selected_tab).fadeIn();
+			$(".textsubfields li").click(function() {
+				$(".textsubfields li").removeClass("active");
+				$(this).addClass("active");
+				$(".textsubtab").hide();
+				var selected_tab = $(this).find("a").attr("href");
+				$(selected_tab).fadeIn();
+				return false;
+	  		});
+	  		
+			$(".videosubtab").hide();
+			$(".videosubfields li:first-child").addClass("active");
+			var selected_tab = $(".videosubfields li.active").find("a").attr("href");
+			$(selected_tab).fadeIn();
+			$(".videosubfields li").click(function() {
+				$(".videosubfields li").removeClass("active");
+				$(this).addClass("active");
+				$(".videosubtab").hide();
 				var selected_tab = $(this).find("a").attr("href");
 				$(selected_tab).fadeIn();
 				return false;
@@ -167,7 +204,6 @@
 	</div>
 	
 	<div class="white_box column corner">
-
 		{% include "repository/resource_view/distribution.html" with distribution=distribution_dict %}
 
 		{% if contact_person_dicts %}
