@@ -180,6 +180,12 @@ function addStatus(filter){
   </form>  
  
       <h3>Found {{ fields_count }} metadata</h3>
+      {% if errors != None %}
+       <ul class=errorlist>
+            &nbsp; <img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/error.png"> &nbsp; {{ errors }} &nbsp;
+       </ul>
+      {% endif %}
+
       (the following lines are the metadata components and elements included in the <a href="http://www.meta-share.org/portal/knowledgebase/DetailedPresentationOfTheModel" target="metamodel">META-SHARE model</a> grouped by different roles and alphabetically sorted)       
          
 <div style="float: right; padding: 5px; margin: 0px">[ <a href="javascript:expandAll();">Expand all</a>
