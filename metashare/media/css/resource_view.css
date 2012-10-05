@@ -159,6 +159,8 @@ label.component{
 	font-size: 14px !important;
 	font-weight: bold !important;
 	margin-right: 1px !important;
+	margin-left: 1px !important;
+	margin-top: 2px !important;
 	padding-left: 5px !important;
 	padding-right: 5px !important;
 	padding-top:3px !important;
@@ -201,7 +203,6 @@ img{
 	margin:0px;
 	padding:0px;
 	font-size:12px; 
-	vertical-align:bottom;
 	text-decoration:none;
 }
 
