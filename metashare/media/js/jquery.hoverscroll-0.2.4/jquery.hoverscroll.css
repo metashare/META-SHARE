@@ -9,12 +9,15 @@
 /* Main container */
 div.hoverscroll {
 	position:relative;
+	
+	clear:both;
 }
 
 
 /* List container */
 div.hoverscroll div.listcontainer {
 	overflow:hidden;
+	height: 24px;
 }
 div.hoverscroll div.fixed-listcontainer {
     overflow: hidden;
