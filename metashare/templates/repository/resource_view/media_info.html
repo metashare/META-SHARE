@@ -7,16 +7,16 @@
 		{% for key, value in resource_component_dict.Resource_component.items %}
 			{% if "media" in key %}
 				{% if "Corpus" in key and text_counts|length > 1 %}
-				<div class="subfields">
+				<div class="textsubfields subfields">
 					<ul class="my-list">
 						{% for text in text_counts %}
-							<li><a href="#sub{{forloop.counter}}">{% get_icon "text" %}<a class="subscript">{{forloop.counter}}</a></a></li>
+							<li><a href="#textsub{{forloop.counter}}">{% get_icon "text" %}<a class="subscript">{{forloop.counter}}</a></a></li>
 						{% endfor %}
 					</ul>
 				</div>
 				<div class="subcontainer" id="text-container">
 					{% for text in text_counts %}
-						<div id="sub{{forloop.counter}}" class="subtab">
+						<div id="textsub{{forloop.counter}}" class="textsubtab">
 							{% include "repository/resource_view/detailed_media_info.html" with resource_component=text %}
 						</div>
 					{% endfor %}
@@ -39,16 +39,16 @@
 				{% for key, value in resource_component_dict.Resource_component.items %}
 					{% if "media" in key %}
 						{% if "Corpus" in key and video_counts|length > 1 %}
-							<div class="subfields">
+							<div class="videosubfields subfields">
 								<ul class="my-list">
 									{% for video in video_counts %}
-										<li><a href="#subvideo{{forloop.counter}}">{% get_icon "video" %}<a class="subscript">{{forloop.counter}}</a></a></li>
+										<li><a href="#videosub{{forloop.counter}}">{% get_icon "video" %}<a class="subscript">{{forloop.counter}}</a></a></li>
 									{% endfor %}
 								</ul>
 							</div>
 							<div class="subcontainer" id="text-container">
 								{% for video in video_counts %}
-									<div id="subvideo{{forloop.counter}}" class="subtab">
+									<div id="videosub{{forloop.counter}}" class="videosubtab">
 										{% include "repository/resource_view/detailed_media_info.html" with resource_component=video %}
 									</div>
 								{% endfor %}

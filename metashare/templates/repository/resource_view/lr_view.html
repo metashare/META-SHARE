@@ -7,6 +7,7 @@
 
 {% block links %}
 <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/resource_view.css" />
+<link type="text/css" rel="stylesheet" href="{{ MEDIA_URL }}js/jquery.hoverscroll-0.2.4/jquery.hoverscroll.css" />
 {% endblock %}
 
 {% block description %}{{ description|truncatewords:30 }}{% endblock %}
@@ -36,10 +37,11 @@
 		$(document).ready(function(){  
 		
 			$('.my-list').hoverscroll({
-	            fixedArrows: true,
-	            rtl: true,
-	            width: 100,
-				height: 20,
+				vertical: false,
+	            fixedArrows: false,
+	            arrowsOpacity: 0.1,
+	            width: 273,
+	            height:22,
         	});	
 		
 			$(".tab_content").hide();
@@ -55,14 +57,27 @@
 				return false;
 	  		});
 	  		
-			$(".subtab").hide();
-			$(".subfields li:first-child").addClass("active");
-			var selected_tab = $(".subfields li.active").find("a").attr("href");
+			$(".textsubtab").hide();
+			$(".textsubfields li:first-child").addClass("active");
+			var selected_tab = $(".textsubfields li.active").find("a").attr("href");
 			$(selected_tab).fadeIn();
-			$(".subfields li").click(function() {
-				$(".subfields li").removeClass("active");
+			$(".textsubfields li").click(function() {
+				$(".textsubfields li").removeClass("active");
 				$(this).addClass("active");
-				$(".subtab").hide();
+				$(".textsubtab").hide();
+				var selected_tab = $(this).find("a").attr("href");
+				$(selected_tab).fadeIn();
+				return false;
+	  		});
+	  		
+			$(".videosubtab").hide();
+			$(".videosubfields li:first-child").addClass("active");
+			var selected_tab = $(".videosubfields li.active").find("a").attr("href");
+			$(selected_tab).fadeIn();
+			$(".videosubfields li").click(function() {
+				$(".videosubfields li").removeClass("active");
+				$(this).addClass("active");
+				$(".videosubtab").hide();
 				var selected_tab = $(this).find("a").attr("href");
 				$(selected_tab).fadeIn();
 				return false;

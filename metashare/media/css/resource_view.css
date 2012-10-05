@@ -121,7 +121,7 @@ label.component{
 
 
 .subfields ul{
-	margin:0px; 
+	margin:0px !important; 
 	z-index:0;
 }
 
@@ -150,19 +150,18 @@ label.component{
 
 .subfields ul li{	
 	float:left;
-	background-color:#eee;
+	background-color:#eee !important;
 	border-bottom-left-radius: 0;
 	border-bottom-right-radius: 0;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
-	box-shadow: 1px 0px 5px #555;
-	font-size: 14px;
-	font-weight: bold;
-	margin-right: 1px;
-	padding-left: 5px;
-	padding-right: 5px;
-	padding-top:3px;
-	padding-top:3px;
+	box-shadow: 1px 0px 5px #555 !important;
+	font-size: 14px !important;
+	font-weight: bold !important;
+	margin-right: 1px !important;
+	padding-left: 5px !important;
+	padding-right: 5px !important;
+	padding-top:3px !important;
 	height:18px;
 	width: 30px;
 }
@@ -191,11 +190,6 @@ label.component{
 #tabs_content_container{
 	margin:0;
 	padding:0;
-}
-
-.ui-widget-content.hoverscroll.rtl.horizontal{
-	height:18px!important;
-	width: 100px!important;
 }
 
 img{
