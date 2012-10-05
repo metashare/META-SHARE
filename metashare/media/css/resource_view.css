@@ -164,7 +164,9 @@ label.component{
 	padding-top:3px;
 	padding-top:3px;
 	height:18px;
+	width: 30px;
 }
+
 
 .fields ul li.active{
    height:22px;
@@ -189,6 +191,24 @@ label.component{
 #tabs_content_container{
 	margin:0;
 	padding:0;
+}
+
+.ui-widget-content.hoverscroll.rtl.horizontal{
+	height:18px!important;
+	width: 100px!important;
+}
+
+img{
+	margin:0px;
+	padding:0px;
+}
+
+.subscript{
+	margin:0px;
+	padding:0px;
+	font-size:12px; 
+	vertical-align:bottom;
+	text-decoration:none;
 }
 
 .middle_box{
