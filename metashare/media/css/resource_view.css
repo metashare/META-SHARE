@@ -93,7 +93,6 @@ label.component{
 	background: -moz-linear-gradient(top, #FFCC00, #FF6633);
 	background: -webkit-gradient(linear, left top, left bottom, from(#FFCC00), to(#FF6633));	
 	filter:progid:DXImageTransform.Microsoft.Gradient(endColorstr='#FFCC00', startColorstr='#FF6633', gradientType='0');
-	z-index:1;
 	position:relative;
 }
 
