@@ -75,14 +75,21 @@ label.title{
 	border-bottom:solid 1px #ccc;
 	border-left:solid 1px #ccc;
 	padding-left:2px;
-	color:#000;	
+	color:#000;
 }
 
 label.title, label.component {
 	font-weight:bold;
-	margin: 5px 0 0.3em 0;	
+	margin: 5px 0 0.3em 0;
 	display:block;
 }
+
+label.tab_content, label.component {
+	font-weight:bold;
+	margin: 0px 0 0.3em 0;
+	display:block;
+}
+
 
 label.component{
 	/*background-color: #fda;*/
@@ -91,7 +98,7 @@ label.component{
 	padding:3px;
 	background: #FF6633;
 	background: -moz-linear-gradient(top, #FFCC00, #FF6633);
-	background: -webkit-gradient(linear, left top, left bottom, from(#FFCC00), to(#FF6633));	
+	background: -webkit-gradient(linear, left top, left bottom, from(#FFCC00), to(#FF6633));
 	filter:progid:DXImageTransform.Microsoft.Gradient(endColorstr='#FFCC00', startColorstr='#FF6633', gradientType='0');
 	z-index:1;
 	position:relative;
@@ -99,7 +106,7 @@ label.component{
 
 
 .expandable{
-	cursor: pointer; 
+	cursor: pointer;
 	background:#eee !important;
 }
 
@@ -121,7 +128,7 @@ label.component{
 
 
 .subfields ul{
-	margin:0px !important; 
+	margin:0px !important;
 	z-index:0;
 }
 
@@ -148,7 +155,7 @@ label.component{
 	height:20px;
 }
 
-.subfields ul li{	
+.subfields ul li{
 	float:left;
 	background-color:#eee !important;
 	border-bottom-left-radius: 0;
@@ -173,10 +180,10 @@ label.component{
    height:22px;
 }
 
-.subfields ul li.active{	
+.subfields ul li.active{
 	background: #ccc;/*
 	background: -moz-linear-gradient(top, #FF6633, #FFCC00);
-	background: -webkit-gradient(linear, left top, left bottom, from(#FF6633), to(#FFCC00));	
+	background: -webkit-gradient(linear, left top, left bottom, from(#FF6633), to(#FFCC00));
 	filter:progid:DXImageTransform.Microsoft.Gradient(endColorstr='#FF6633', startColorstr='#FFCC00', gradientType='0');*/
 	height:20px;
 }
@@ -202,7 +209,7 @@ img{
 .subscript{
 	margin:0px;
 	padding:0px;
-	font-size:12px; 
+	font-size:12px;
 	text-decoration:none;
 }
 
@@ -216,7 +223,7 @@ img{
    padding-right:20px;
 }
 .corner{
-   margin-top:47px;   
+   margin-top:47px;
 }
 
 /*CSS for tooltip*/
@@ -225,7 +232,7 @@ a span{
 	display:none;
 }
 
-a.tip {    
+a.tip {
     text-decoration: none;
     float:left;
 }
@@ -250,8 +257,8 @@ a.tip:hover span {
     text-decoration: none;
     text-align:justify;
     left:0px;
-    
-}   
+
+}
 
 a.tip:hover span.download {
 	top:40px;
@@ -290,7 +297,7 @@ a.info:hover span{ /*the span will display just on :hover state*/
 /*End CSS for tooltip*/
 
 .bottom-box{
-   clear: both;	
+   clear: both;
    margin-top:10px;
 }
 
@@ -337,7 +344,7 @@ label span a{
 .subtitle{
 	background-color: #d1d1d1;
 	padding-left:3px;
-	padding-right:3px;	
+	padding-right:3px;
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 	border-top-left-radius: 5px;
@@ -349,7 +356,7 @@ label span a{
 	margin-top:8px;
 	font-size:14px;
 	font-weight:bold !important;
-	display:block !important;	
+	display:block !important;
 }
 
 .otherLang {
@@ -425,10 +432,10 @@ img.line{
 	border: 0;
 	height: 1px;
 	background: #333;
-	background-image: -webkit-linear-gradient(left, #eee, #aaa, #eee); 
-	background-image:    -moz-linear-gradient(left, #eee, #aaa, #eee); 
-	background-image:     -ms-linear-gradient(left, #eee, #aaa, #eee); 
-	background-image:      -o-linear-gradient(left, #eee, #aaa, #eee); 
+	background-image: -webkit-linear-gradient(left, #eee, #aaa, #eee);
+	background-image:    -moz-linear-gradient(left, #eee, #aaa, #eee);
+	background-image:     -ms-linear-gradient(left, #eee, #aaa, #eee);
+	background-image:      -o-linear-gradient(left, #eee, #aaa, #eee);
 }
 
 .contact{
@@ -440,7 +447,7 @@ img.line{
 .contact .dataline{
 	font-weight:bold;
 	font-size:12px;
-	display:block;	
+	display:block;
 }
 
 .indented{
