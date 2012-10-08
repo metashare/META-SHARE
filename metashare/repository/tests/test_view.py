@@ -874,6 +874,8 @@ def check_resource_view(queryset, test_case):
     skip_path_elements = (
       'email',
       'metaShareId',
+      'downloadLocation',
+      'executionLocation',
     )
 
     # path suffixes where to apply a URL transformation on the value

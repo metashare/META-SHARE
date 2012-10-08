@@ -1440,6 +1440,125 @@ def _fill_corpusTextInfo_popup(driver, ss_path, parent_id):
     save_and_close(driver, parent_id)
 
 
+def _fill_corpusAudioInfo_popup(driver, ss_path, parent_id):
+    """
+    fills the corpus audio info popup with all required
+    information and returns to the parent window
+    """
+    driver.switch_to_window("id_corpusAudioInfo")
+    Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
+      "Monolingual")
+    # corpus audio info / language
+    _fill_language_form(driver, ss_path, "languageinfotype_model_set-0-")
+    # corpus audio info / size popup
+    driver.find_element_by_css_selector("#add_id_audioSizeInfo > img[alt=\"Add Another\"]").click()
+    _fill_audioSize_form(driver, ss_path, "id_corpusAudioInfo")
+
+    # save and close corpus audio info popup
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_corpusVideoInfo_popup(driver, ss_path, parent_id):
+    """
+    fills the corpus video info popup with all required
+    information and returns to the parent window
+    """
+    driver.find_element_by_id("add_id_corpusVideoInfo-0").click()
+    driver.switch_to_window("id_corpusVideoInfo__dash__0")
+    # corpus video info / size popup
+    driver.find_element_by_name("sizeinfotype_model_set-0-size").clear()
+    driver.find_element_by_name("sizeinfotype_model_set-0-size").send_keys("100")
+    driver.find_element_by_name("sizeinfotype_model_set-0-sizeUnit").send_keys("Gb")
+
+    # save and close corpus video info popup
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+        
+
+def _fill_corpusImageInfo_popup(driver, ss_path, parent_id):
+    """
+    fills the corpus image info popup with all required
+    information and returns to the parent window
+    """
+    driver.switch_to_window("id_corpusImageInfo")
+    # corpus image info / size popup
+    driver.find_element_by_name("sizeinfotype_model_set-0-size").clear()
+    driver.find_element_by_name("sizeinfotype_model_set-0-size").send_keys("100")
+    driver.find_element_by_name("sizeinfotype_model_set-0-sizeUnit").send_keys("Gb")
+
+    # save and close corpus image info popup
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_corpusTextNumericalInfo_popup(driver, ss_path, parent_id):
+    """
+    fills the corpus text numerical info popup with all required
+    information and returns to the parent window
+    """
+    driver.switch_to_window("id_corpusTextNumericalInfo")
+
+    # save and close corpus text numerical info popup
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_corpusTextNgramInfo_popup(driver, ss_path, parent_id):
+    """
+    fills the corpus text ngram info popup with all required
+    information and returns to the parent window
+    """
+    driver.switch_to_window("id_corpusTextNgramInfo")
+    # corpus ngram info / base item
+    Select(driver.find_element_by_name("form-0-baseItem_old")).select_by_visible_text("Other")
+    driver.find_element_by_xpath("//a[@class='selector-add']").click()
+    # corpus ngram info / order
+    driver.find_element_by_name("form-0-order").clear()
+    driver.find_element_by_name("form-0-order").send_keys("5")
+    # corpus ngram info / linguality type
+    Select(driver.find_element_by_id("id_form-2-0-lingualityType")).select_by_visible_text(
+      "Monolingual")
+    # corpus ngram info / language
+    _fill_language_form(driver, ss_path, "languageinfotype_model_set-0-")
+    # corpus ngram info / size popup
+    driver.find_element_by_name("sizeinfotype_model_set-0-size").clear()
+    driver.find_element_by_name("sizeinfotype_model_set-0-size").send_keys("100")
+    driver.find_element_by_name("sizeinfotype_model_set-0-sizeUnit").send_keys("Gb")
+    # save and close corpus ngram info popup
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
+def _fill_corpusLanguageDescriptionGeneralInfo_popup(driver, ss_path, parent_id):
+    """
+    fills the language description general info popup with all required
+    information and returns to the parent window
+    """
+    driver.switch_to_window("edit_id_langdescInfo")
+    Select(driver.find_element_by_id("id_languageDescriptionType")).select_by_visible_text(
+      "Grammar")
+
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time())) 
+    save_and_close(driver, parent_id)
+
+
+def _fill_corpusLanguageDescriptionTextInfo_popup(driver, ss_path, parent_id):
+    """
+    fills the language description info text popup with all required
+    information and returns to the parent window
+    """
+    driver.switch_to_window("id_languageDescriptionTextInfo")
+    Select(driver.find_element_by_id("id_form-2-0-lingualityType")).select_by_visible_text(
+      "Monolingual")
+    # language description info text / language
+    _fill_language_form(driver, ss_path, "languageinfotype_model_set-0-")
+
+    # save and close language description info text popup
+    driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
+    save_and_close(driver, parent_id)
+
+
 def _fill_linguality_form(driver, ss_path, id_infix):
     """
     fills the linguality with required, recommended and optional information
