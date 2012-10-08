@@ -4,7 +4,7 @@ Management utility to trigger synchronization.
 
 import sys
 import logging
-import traceback
+
 from metashare import settings
 from metashare.sync.sync_utils import login, get_inventory, get_full_metadata, \
     remove_resource
