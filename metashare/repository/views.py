@@ -119,9 +119,9 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
         'NoRedistribution_NoDerivatives_For-a-fee-v1.0.htm', MEMBER_TYPES.GOD),
   'MS-C-NoReD-ND': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
         'NoRedistribution_NoDerivatives-v1.0.htm', MEMBER_TYPES.GOD),
-  'MS-NC-NoReD-ND-FF': (MEDIA_URL + 'licences/META-SHARE_' \
+  'MS-NC-NoReD-ND-FF': (MEDIA_URL + 'licences/META-SHARE_NonCommercial' \
         '_NoRedistribution_NoDerivatives_For-a-fee-v1.0.htm', MEMBER_TYPES.GOD),
-  'MS-NC-NoReD-ND': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
+  'MS-NC-NoReD-ND': (MEDIA_URL + 'licences/META-SHARE_NonCommercial_' \
         'NoRedistribution_NoDerivatives-v1.0.htm', MEMBER_TYPES.GOD),
   'MS-NC-NoReD-FF': (MEDIA_URL + 'licences/META-SHARE_NonCommercial' \
         '_NoRedistribution_For-a-Fee-v1.0.htm', MEMBER_TYPES.GOD),
@@ -142,7 +142,8 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
   'GFDL': (MEDIA_URL + 'licences/GNU_fdl-1.3.htm', MEMBER_TYPES.NON),
   'ApacheLicence_2.0': (MEDIA_URL + 'licences/Apache-2.0.htm',
                         MEMBER_TYPES.NON),
-  'BSD-style': (MEDIA_URL + 'licences/BSD_licence.htm', MEMBER_TYPES.NON),
+  'BSD': (MEDIA_URL + 'licences/BSD_licence.htm', MEMBER_TYPES.NON),
+  'BSD-style': ('', MEMBER_TYPES.NON),
   'underNegotiation': ('', MEMBER_TYPES.GOD),
   'other': ('', MEMBER_TYPES.GOD)
 }
