@@ -123,13 +123,20 @@ def _process_special_query(query):
     """
     query_type, resource_id = query.split(":")
     # get resource
-    res = resourceInfoType_model.objects.get(storage_object__identifier=resource_id)
+    try:
+        res = resourceInfoType_model.objects.get(
+            storage_object__identifier=resource_id)
+    except resourceInfoType_model.DoesNotExist:
+        LOGGER.info('Ignoring unknown storage identifier "%s" in "%s" query.',
+            resource_id, query_type)
+        return []
     # get related resources
     if query_type == MORE_FROM_SAME_CREATORS:
         rel_res = get_more_from_same_creators(res)
     elif query_type == MORE_FROM_SAME_PROJECTS:
         rel_res = get_more_from_same_projects(res)
     else:
+        LOGGER.info('Ignoring unknown special query type "%s".', query_type)
         return []
     # return internal ids from related resources
     return [x.id for x in rel_res]
