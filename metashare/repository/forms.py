@@ -130,6 +130,7 @@ def _process_special_query(query):
     elif query_type == MORE_FROM_SAME_PROJECTS:
         rel_res = get_more_from_same_projects(res)
     else:
+        LOGGER.info('Ignoring unknown special query type "%s".', query_type)
         return []
     # return internal ids from related resources
     return [x.id for x in rel_res]
