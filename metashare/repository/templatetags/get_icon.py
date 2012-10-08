@@ -26,15 +26,15 @@ class GetIcon(template.Node):
         image_tag = ""
         if result == "text":
             image_tag = ' <img title="text" src="{}css/sexybuttons/images/icons/silk/page' \
-              '_white_text_media_type.png" /> &nbsp;' \
+              '_white_text_media_type.png" />' \
               .format(MEDIA_URL)
         if result == "audio":
             image_tag = image_tag + ' <img title="audio" src="{}css/sexybuttons/images/' \
-              'icons/silk/sound_none.png" /> &nbsp; ' \
+              'icons/silk/sound_none.png" />' \
               .format(MEDIA_URL)
         if result == "image":
             image_tag = image_tag + ' <img title="image" src="{}css/sexybuttons/images/' \
-              'icons/silk/picture.png" /> &nbsp; ' \
+              'icons/silk/picture.png" />' \
               .format(MEDIA_URL)
         if result == "video":
             image_tag = image_tag + ' <img title="video" src="{}css/sexybuttons/images/' \
