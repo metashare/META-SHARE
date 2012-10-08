@@ -174,17 +174,15 @@ label.component{
 }
 
 .fields ul li.active{
-	background: -moz-linear-gradient(top, #FFFFFF, #FFFF00);
-	background: -webkit-gradient(linear, left top, left bottom, to(#FFFFFF), from(#FFFF00));
-	filter:progid:DXImageTransform.Microsoft.Gradient(endColorstr='#FFFFFF', startColorstr='#FFFF00', gradientType='0');
-   height:22px;
+	background: #FFFFFF;
+	height:22px;
 }
 
 .subfields ul li.active{
 	background: #ccc;
-	background: -moz-linear-gradient(top, #FFCC00, #FFFF33,);
-	background: -webkit-gradient(linear, left top, left bottom, to(#FFCC00), from(#FFFF33));
-	filter:progid:DXImageTransform.Microsoft.Gradient(endColorstr='#FFCC00', startColorstr='#FFFF33', gradientType='0');
+	background: -moz-linear-gradient(bottom, #FFCC00, #FFFFAA);
+	background: -webkit-gradient(linear, left top, left bottom, to(#FFCC00), from(#FFFFAA));
+	filter:progid:DXImageTransform.Microsoft.Gradient(endColorstr='#FFCC00', startColorstr='#FFFFAA', gradientType='0');
 	height:20px;
 }
 
@@ -194,6 +192,10 @@ label.component{
 
 .subfields ul li a{
 	color:#333;
+}
+
+.fields ul li{
+	background:#C8C8C8;
 }
 
 .tab_content, .subtab{
