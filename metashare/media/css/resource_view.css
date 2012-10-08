@@ -23,7 +23,7 @@ div#stats{
 	background-color: #EEEEEE;
 	float: right;
 	border-radius:7px;
-    	box-shadow:0 3px 10px #CCCCCC, 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
+    box-shadow:0 3px 10px #CCCCCC, 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
 }
 
 div#stats a{
@@ -173,7 +173,6 @@ label.component{
 	width: 28px;
 }
 
-
 .fields ul li.active{
 	background: -moz-linear-gradient(top, #FFFFFF, #FFFF00);
 	background: -webkit-gradient(linear, left top, left bottom, to(#FFFFFF), from(#FFFF00));
@@ -262,7 +261,6 @@ a.tip:hover span {
     text-decoration: none;
     text-align:justify;
     left:0px;
-
 }
 
 a.tip:hover span.download {
