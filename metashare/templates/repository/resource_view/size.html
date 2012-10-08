@@ -12,16 +12,16 @@
 
 {% if type == "sub" %}
 	{% if size.Size != "0" %}
-		({{ size.Size|intcomma }} {{ size.Size_unit }})
+		({{ size.Size|intcomma }} {% if value.Size != "not available" and value.Size_unit != "Other" %}{{ value.Size_unit }}{% endif %}
 	{% endif %}
 {% else %}
 	{% if type == "component" %}
 		{% for key, value in size.items %}
 			{% for key1, value1 in value.items %}
 				{% if key1 == "Size_unit" %}
-					<label class='dataline indented'>
+					<label class='dataline indented'">
 						{% if value.Size != "0" %}
-							{{ value.Size|intcomma }} {{ value.Size_unit }}
+							{{ value.Size|intcomma }} {% if value.Size != "not available" and value.Size_unit != "Other" %}{{ value.Size_unit }}{% endif %}
 						{% endif %}
 					</label>
 				{% endif %}
@@ -35,7 +35,7 @@
 				<div>
 					<label class='dataline indented'>
 						{% if value.Size != "0" %}
-							{{ value.Size|intcomma }} {{ value.Size_unit }}
+							{{ value.Size|intcomma }} {% if value.Size != "not available" and value.Size_unit != "Other" %}{{ value.Size_unit }}{% endif %}
 						{% endif %}
 					</label>
 				</div>
@@ -52,7 +52,7 @@
 		{% if "Duration_of_effective_speech" in key %}
 			<div class='dataline indented'>
 				<label>
-					{{ value.Size|intcomma }} {{ value.Duration_unit }}
+					{{ value.Size|intcomma }} {% if value.Size != "not available" and value.Duration_unit != "Other" %}{{ value.Duration_unit }}{% endif %}
 				</label>
 			</div>
 		{% endif %}
@@ -65,7 +65,7 @@
 		{% if "Duration_of_audio" in key %}
 			<div class='dataline indented'>
 				<label>
-					{{ value.Size|intcomma }} {{ value.Duration_unit }}
+					{{ value.Size|intcomma }} {% if value.Size != "not available" and value.Duration_unit != "Other" %}{{ value.Duration_unit }}{% endif %}
 				</label>
 			</div>
 		{% endif %}
