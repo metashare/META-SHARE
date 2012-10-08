@@ -236,7 +236,7 @@ def download(request, object_id):
             else:
                 return render_to_response('repository/licence_agreement.html',
                     { 'form': la_form, 'resource': resource,
-                      'licence_path': \
+                      'licence_name': licence_choice, 'licence_path': \
                       LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
                       'download_available': licences[licence_choice][1] },
                     context_instance=RequestContext(request))
@@ -250,7 +250,7 @@ def download(request, object_id):
     if licence_choice:
         return render_to_response('repository/licence_agreement.html',
             { 'form': LicenseAgreementForm(licence_choice),
-              'resource': resource,
+              'resource': resource, 'licence_name': licence_choice, 
               'licence_path': \
                 LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
               'download_available': licences[licence_choice][1] },
@@ -456,7 +456,6 @@ def view(request, resource_name=None, object_id=None):
     resource_creation_info_tuple = None
     relation_info_tuples = []
     resource_component_tuple = None
-    languages_tuple = []
     for _tuple in lr_content[1]:
         if _tuple[0] == "Distribution":
             distribution_info_tuple = _tuple
@@ -481,18 +480,12 @@ def view(request, resource_name=None, object_id=None):
     
     # Convert resource_component_tuple to nested dictionaries
     resource_component_dicts = {}
-    resource_creation_dict = {}
-    metadata_dict = {}
-    usage_dict = {}
-    version_dict = {}
-    documentation_dict = {}
     validation_dicts = []
     relation_dicts = []    
     
     # Convert several tuples to dictionaries to facilitate rendering
     # the templates.
     contact_person_dicts = []
-    resource_component_dict = {}
     for item in contact_person_tuples:
         contact_person_dicts.append(tuple2dict([item]))
     distribution_dict = tuple2dict([distribution_info_tuple])
@@ -517,8 +510,7 @@ def view(request, resource_name=None, object_id=None):
             elif "Corpus_video" in key:
                 video_counts.append(value)
               
-
-	# Create a list of resource components dictionaries
+    # Create a list of resource components dictionaries
     if resource_type == "corpus":
         for media_type in media_types:
             if media_type == "text":
