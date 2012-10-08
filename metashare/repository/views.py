@@ -456,7 +456,6 @@ def view(request, resource_name=None, object_id=None):
     resource_creation_info_tuple = None
     relation_info_tuples = []
     resource_component_tuple = None
-    languages_tuple = []
     for _tuple in lr_content[1]:
         if _tuple[0] == "Distribution":
             distribution_info_tuple = _tuple
@@ -481,18 +480,12 @@ def view(request, resource_name=None, object_id=None):
     
     # Convert resource_component_tuple to nested dictionaries
     resource_component_dicts = {}
-    resource_creation_dict = {}
-    metadata_dict = {}
-    usage_dict = {}
-    version_dict = {}
-    documentation_dict = {}
     validation_dicts = []
     relation_dicts = []    
     
     # Convert several tuples to dictionaries to facilitate rendering
     # the templates.
     contact_person_dicts = []
-    resource_component_dict = {}
     for item in contact_person_tuples:
         contact_person_dicts.append(tuple2dict([item]))
     distribution_dict = tuple2dict([distribution_info_tuple])
@@ -517,8 +510,7 @@ def view(request, resource_name=None, object_id=None):
             elif "Corpus_video" in key:
                 video_counts.append(value)
               
-
-	# Create a list of resource components dictionaries
+    # Create a list of resource components dictionaries
     if resource_type == "corpus":
         for media_type in media_types:
             if media_type == "text":
