@@ -236,7 +236,7 @@ def download(request, object_id):
             else:
                 return render_to_response('repository/licence_agreement.html',
                     { 'form': la_form, 'resource': resource,
-                      'licence_path': \
+                      'licence_name': licence_choice, 'licence_path': \
                       LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
                       'download_available': licences[licence_choice][1] },
                     context_instance=RequestContext(request))
@@ -250,7 +250,7 @@ def download(request, object_id):
     if licence_choice:
         return render_to_response('repository/licence_agreement.html',
             { 'form': LicenseAgreementForm(licence_choice),
-              'resource': resource,
+              'resource': resource, 'licence_name': licence_choice, 
               'licence_path': \
                 LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
               'download_available': licences[licence_choice][1] },
