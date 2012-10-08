@@ -61,11 +61,18 @@ def get_inventory(opener, inventory_url):
     """
     try:
         with contextlib.closing(opener.open(inventory_url)) as response:
+            if not 'sync-protocol' in response.headers:
+                raise ConnectionException('The remote server at "{}" did not '
+                    'send any sync protocol version along with its metadata '
+                    'inventory. This indicates an incompatible pre-v3.0 node.'
+                    .format(inventory_url))
             data = response.read()
             with ZipFile(StringIO(data), 'r') as inzip:
                 json_inventory = json.load(inzip.open('inventory.json'))
                 # TODO: add error handling and verification of json structure
                 return json_inventory
+    except ConnectionException:
+        raise
     except:
         raise ConnectionException("Problem getting inventory from {0}: {1}".format(inventory_url, format_exc()))
 
