@@ -4,7 +4,7 @@ Management utility to trigger synchronization.
 
 import sys
 import logging
-import traceback
+
 from metashare import settings
 from metashare.sync.sync_utils import login, get_inventory, get_full_metadata, \
     remove_resource
@@ -91,7 +91,8 @@ class Command(BaseCommand):
                 Command.sync_with_single_node(
                   node_id, node, is_proxy, id_file=id_file)
             except:
-                LOGGER.error(traceback.format_exc())
+                LOGGER.error('There was an error while trying to sync with '
+                    'node "%s":', node_id, exc_info=True)
 
     @staticmethod
     def sync_with_single_node(node_id, node, is_proxy, id_file=None):
