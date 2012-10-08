@@ -23,7 +23,7 @@ div#stats{
 	background-color: #EEEEEE;
 	float: right;
 	border-radius:7px;
-    	box-shadow:0 3px 10px #CCCCCC, 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
+    box-shadow:0 3px 10px #CCCCCC, 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
 }
 
 div#stats a{
@@ -173,19 +173,16 @@ label.component{
 	width: 28px;
 }
 
-
 .fields ul li.active{
-	background: -moz-linear-gradient(top, #FFFFFF, #FFFF00);
-	background: -webkit-gradient(linear, left top, left bottom, to(#FFFFFF), from(#FFFF00));
-	filter:progid:DXImageTransform.Microsoft.Gradient(endColorstr='#FFFFFF', startColorstr='#FFFF00', gradientType='0');
-   height:22px;
+	background: #FFFFFF;
+	height:22px;
 }
 
 .subfields ul li.active{
 	background: #ccc;
-	background: -moz-linear-gradient(top, #FFCC00, #FFFF33,);
-	background: -webkit-gradient(linear, left top, left bottom, to(#FFCC00), from(#FFFF33));
-	filter:progid:DXImageTransform.Microsoft.Gradient(endColorstr='#FFCC00', startColorstr='#FFFF33', gradientType='0');
+	background: -moz-linear-gradient(bottom, #FFCC00, #FFFFAA);
+	background: -webkit-gradient(linear, left top, left bottom, to(#FFCC00), from(#FFFFAA));
+	filter:progid:DXImageTransform.Microsoft.Gradient(endColorstr='#FFCC00', startColorstr='#FFFFAA', gradientType='0');
 	height:20px;
 }
 
@@ -195,6 +192,10 @@ label.component{
 
 .subfields ul li a{
 	color:#333;
+}
+
+.fields ul li{
+	background:#C8C8C8;
 }
 
 .tab_content, .subtab{
@@ -262,7 +263,6 @@ a.tip:hover span {
     text-decoration: none;
     text-align:justify;
     left:0px;
-
 }
 
 a.tip:hover span.download {
