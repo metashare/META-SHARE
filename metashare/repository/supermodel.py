@@ -5,6 +5,7 @@ from Queue import Queue
 from traceback import format_exc
 from xml.etree.ElementTree import Element, fromstring, tostring
 
+from django import db
 from django.core.cache import cache
 from django.core.exceptions import ValidationError, ObjectDoesNotExist, \
     ImproperlyConfigured
@@ -804,6 +805,9 @@ class SchemaModel(models.Model):
                         _object.save()
 
                     except IntegrityError as _exc:
+                        # reset database connection (required for PostgreSQL)
+                        db.close_connection()
+
                         # pylint: disable-msg=E1101
                         _msg = u'Could not save {} object! ({})'.format(
                           _object.__class__, _exc)
@@ -979,6 +983,9 @@ class SchemaModel(models.Model):
                     _object.save()
 
                 except IntegrityError as _exc:
+                    # reset database connection (required for PostgreSQL)
+                    db.close_connection()
+
                     # pylint: disable-msg=E1101
                     _msg = u'Could not save {} object! ({})'.format(
                       _object.__class__, _exc)
@@ -1104,6 +1111,10 @@ class SchemaModel(models.Model):
                 _created.append((_object, 'C'))
 
         except (IntegrityError, ValidationError) as _exc:
+            if isinstance(_exc, IntegrityError): 
+                # reset database connection (required for PostgreSQL)
+                db.close_connection()
+
             detail = u''
             if hasattr(_exc, 'message_dict'):
                 for key in _exc.message_dict:

@@ -507,25 +507,15 @@ def view(request, resource_name=None, object_id=None):
         relation_dicts.append(tuple2dict([item]))
 
     # Count individual media resource components
-    media_counts = {'text': 0, 'video': 0}
+    text_counts = []
+    video_counts = []
     if resource_type == "corpus":
         for key, value in resource_component_dict['Resource_component']['Corpus_media'].items():
-            if "Corpus_text" in key:
-                media_counts['text'] += 1
+            if "Corpus_text" in key and not "numerical" in key and not "ngram" in key:
+                text_counts.append(value)
             elif "Corpus_video" in key:
-                media_counts['video'] += 1
-    elif resource_type == "languageDescription":
-        for key, value in resource_component_dict['Resource_component']['Language_description_media'].items():
-            if "Language_description_text" in key:
-                media_counts['text'] += 1
-            elif "Language_description_video" in key:
-                media_counts['video'] += 1
-    elif resource_type == "lexicalConceptualResource":
-        for key, value in resource_component_dict['Resource_component']['Lexical_conceptual_resource_media'].items():
-            if "Lexical_conceptual_resource_text" in key:
-                media_counts['text'] += 1
-            elif "Lexical_conceptual_resource_video" in key:
-                media_counts['video'] += 1
+                video_counts.append(value)
+              
 
 	# Create a list of resource components dictionaries
     if resource_type == "corpus":
@@ -624,7 +614,8 @@ def view(request, resource_name=None, object_id=None):
                 'usage_dict': usage_dict,
                 'validation_dicts': validation_dicts,                
                 'version_dict': version_dict,
-                'media_counts': media_counts,
+                'text_counts': text_counts,
+                'video_counts': video_counts,
 
                 }
     template = 'repository/resource_view/lr_view.html'

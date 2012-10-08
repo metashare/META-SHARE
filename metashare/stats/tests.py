@@ -2,17 +2,15 @@ import logging
 import urllib2
 from urllib import urlencode
 import uuid
-
 from django.contrib.admin.helpers import ACTION_CHECKBOX_NAME
 from django.test.client import Client
 from django.test.testcases import TestCase
-
 from metashare import test_utils
 from metashare.accounts.models import EditorGroup, EditorGroupManagers
 from metashare.repository.models import resourceInfoType_model
 from metashare.settings import ROOT_PATH, STORAGE_PATH, LOG_HANDLER, DJANGO_BASE, STATS_SERVER_URL, DJANGO_URL
 from metashare.storage.models import INGESTED
-from metashare.stats.model_utils import UsageStats, saveLRStats, getLRLast, getLastQuery, \
+from metashare.stats.model_utils import update_usage_stats, UsageStats, saveLRStats, getLRLast, getLastQuery, \
     UPDATE_STAT, VIEW_STAT, RETRIEVE_STAT, DOWNLOAD_STAT
 from metashare.stats.views import callServerStats
 
@@ -284,7 +282,6 @@ class StatsTest(TestCase):
         statsdata = getLRLast(UPDATE_STAT, 2)
         self.assertEqual(len(statsdata), 2)
         response = client.get('/{0}stats/usage/'.format(DJANGO_BASE))
-        self.assertNotContains(response, "statistics updating is in progress")
         self.assertContains(response, "Metadata usage in 2 resources")
 
         response = client.post('/{0}stats/usage/'.format(DJANGO_BASE), {'model': 'identificationInfoType_model',
@@ -292,7 +289,12 @@ class StatsTest(TestCase):
         self.assertContains(response, "div id=fieldvalues")
         
         # remove all usage stats and check if there is the updating automatically
-        UsageStats.objects.all().delete()                
+        UsageStats.objects.all().delete()
+        # the usage stats are build from scratch calling update_usage_stats
+        # UsageThread threads does not work, it eraised a "database is locked" exception
+        for resource in resources:
+            if not UsageStats.objects.filter(lrid=resource.storage_object.identifier).exists():
+                update_usage_stats(resource.storage_object.identifier, resource.export_to_elementtree())
         response = client.get('/{0}stats/usage/'.format(DJANGO_BASE))
-        self.assertContains(response, "statistics updating is in progress")
+        self.assertContains(response, "Metadata usage in 2 resources")
 

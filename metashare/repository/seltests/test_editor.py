@@ -712,8 +712,6 @@ def _fill_linkToOtherMedias_form(driver, ss_path, id_infix):
     """
     fills the link to other medias form with required, recommended and optional information
     """
-    # remember current window id
-    current_id = driver.current_window_handle
     driver.find_element_by_id("fieldsetcollapser2").click()
     Select(driver.find_element_by_name(
       "{}otherMedia".format(id_infix))).select_by_visible_text("Audio")
@@ -1004,7 +1002,7 @@ def _fill_usage_popup(driver, ss_path, parent_id):
     # access tool popup
     driver.find_element_by_xpath("//a[@id='add_id_accessTool']/img").click()  
     _fill_accessTool_popup(driver, ss_path, current_id)
-     # resource associated with popup
+    # resource associated with popup
     driver.find_element_by_xpath("//a[@id='add_id_resourceAssociatedWith']/img").click()  
     _fill_resourceAssociatedWith_popup(driver, ss_path, current_id)
     # foreseen use
