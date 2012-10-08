@@ -90,7 +90,6 @@ label.tab_content, label.component {
 	display:block;
 }
 
-
 label.component{
 	/*background-color: #fda;*/
 	color: #fff;
@@ -100,7 +99,6 @@ label.component{
 	background: -moz-linear-gradient(top, #FFCC00, #FF6633);
 	background: -webkit-gradient(linear, left top, left bottom, from(#FFCC00), to(#FF6633));
 	filter:progid:DXImageTransform.Microsoft.Gradient(endColorstr='#FFCC00', startColorstr='#FF6633', gradientType='0');
-	z-index:1;
 	position:relative;
 }
 
@@ -177,15 +175,22 @@ label.component{
 
 
 .fields ul li.active{
+	background: -moz-linear-gradient(top, #FFFFFF, #FFFF00);
+	background: -webkit-gradient(linear, left top, left bottom, to(#FFFFFF), from(#FFFF00));
+	filter:progid:DXImageTransform.Microsoft.Gradient(endColorstr='#FFFFFF', startColorstr='#FFFF00', gradientType='0');
    height:22px;
 }
 
 .subfields ul li.active{
-	background: #ccc;/*
-	background: -moz-linear-gradient(top, #FF6633, #FFCC00);
-	background: -webkit-gradient(linear, left top, left bottom, from(#FF6633), to(#FFCC00));
-	filter:progid:DXImageTransform.Microsoft.Gradient(endColorstr='#FF6633', startColorstr='#FFCC00', gradientType='0');*/
+	background: #ccc;
+	background: -moz-linear-gradient(top, #FFCC00, #FFFF33,);
+	background: -webkit-gradient(linear, left top, left bottom, to(#FFCC00), from(#FFFF33));
+	filter:progid:DXImageTransform.Microsoft.Gradient(endColorstr='#FFCC00', startColorstr='#FFFF33', gradientType='0');
 	height:20px;
+}
+
+.fields ul li a{
+	color:#444;
 }
 
 .subfields ul li a{
