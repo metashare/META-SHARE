@@ -191,9 +191,8 @@
 		
 		<div style="clear: both;">
 			<a href="javascript:history.back();"><button class="span-12 button middle_button">&laquo; Back</button></a>
-		    <a {% if LR_DOWNLOAD %} href="{% url metashare.repository.views.download resource.storage_object.identifier %}" {% else %} href="#" class="tip" {% endif %}>
-		  		<span class="download">You don&rsquo;t have the permission to download this resource. Please log in.</span>
-		       	<button class="span-4 button {% if LR_DOWNLOAD %}middle_button{% else %}middle_gray_button{% endif %}">Download</button>
+		    <a href="{% url metashare.repository.views.download resource.storage_object.identifier %}">
+		       	<button class="span-4 button middle_button">Download</button>
 		    </a>
 		  	<a {% if LR_EDIT %} href="{{ LR_EDIT }}" {% else %} href="#" class="tip" {% endif %}>
 				<span class="edit">You don&rsquo;t have the permission to edit this resource.</span>
