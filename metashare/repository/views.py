@@ -7,7 +7,7 @@ from mimetypes import guess_type
 
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse, HttpResponseForbidden
+from django.http import HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
 from django.contrib import messages
@@ -112,7 +112,7 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
   'MSCommons-BY-SA': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYSA_v1.0.htm',
                       MEMBER_TYPES.FULL),
   'MS-C-NoReD-FF': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
-        'NoRedistribution_For-a-Fee_v0.7.htm', MEMBER_TYPES.GOD),
+        'NoRedistribution_For-a-Fee_v1.0.htm', MEMBER_TYPES.GOD),
   'MS-C-NoReD': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
         'NoRedistribution_v1.0.htm', MEMBER_TYPES.GOD),
   'MS-C-NoReD-ND-FF': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
@@ -197,14 +197,11 @@ def _get_licences(resource, user_membership):
     return result
 
 
-@login_required
 def download(request, object_id):
     """
     Renders the resource download/purchase view including license selection,
     etc.
     """
-    if not request.user.is_active:
-        return HttpResponseForbidden()
     user_membership = _get_user_membership(request.user)
 
     # here we are only interested in licenses (or their names) of the specified
@@ -620,9 +617,6 @@ def view(request, resource_name=None, object_id=None):
         context['LR_EDIT'] = reverse(
             'admin:repository_resourceinfotype_model_change', \
               args=(resource.id,))
-
-    # in general, only logged in users may download/purchase any resources
-    context['LR_DOWNLOAD'] = request.user.is_active
 
     # Update statistics:
     if saveLRStats(resource, VIEW_STAT, request):
