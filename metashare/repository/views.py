@@ -114,7 +114,7 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
   'MS-C-NoReD-FF': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
         'NoRedistribution_For-a-Fee_v0.7.htm', MEMBER_TYPES.GOD),
   'MS-C-NoReD': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
-        'NoRedistribution_v0.7.htm', MEMBER_TYPES.GOD),
+        'NoRedistribution_v1.0.htm', MEMBER_TYPES.GOD),
   'MS-C-NoReD-ND-FF': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
         'NoRedistribution_NoDerivatives_For-a-fee-v1.0.htm', MEMBER_TYPES.GOD),
   'MS-C-NoReD-ND': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
