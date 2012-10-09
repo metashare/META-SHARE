@@ -180,12 +180,12 @@
 		 		</div>
 	 		{% endif %}
 	 		
-		<h4 style="text-align:justify" class="readmore desc">{{ description }}</h4>
+		<h4 style="text-align:justify" class="readmore desc">{{ description|linebreaksbr }}</h4>
 		
 		{% ifnotequal other_descriptions|length 0 %}
 			<div class='more'>View resource description in all available languages</div>
 			<div class='otherlang'>
-			{% for desc in other_descriptions %}<h4 style="text-align:justify" class="readmore">{{ desc }}</h4>{% endfor %} 
+			{% for desc in other_descriptions %}<h4 style="text-align:justify" class="readmore">{{ desc|linebreaksbr }}</h4>{% endfor %} 
 			</div> 
 		{% endifnotequal %}
 		
