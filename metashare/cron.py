@@ -26,7 +26,7 @@ def run_session_cleanup():
 def run_account_registration_request_cleanup():
     LOGGER.info("Will now clean up the account registration request database.")
     RegistrationRequest.objects.filter(
-        created_lt=(datetime.now() - timedelta(days=3))).delete()
+        created__lt=(datetime.now() - timedelta(days=3))).delete()
 
 
 # periodically run the synchronization on META-SHARE Managing Nodes
