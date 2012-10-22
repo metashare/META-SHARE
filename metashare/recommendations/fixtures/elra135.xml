@@ -121,11 +121,20 @@
       corpus peut être effectuée en ligne: http://cintil.ul.pt/
     </description>
     <resourceShortName/>
+    <url>http://catalog.elra.info/product_info.php?products_id=1102</url>
     <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
-    <url>http://catalog.elra.info/product_info.php?products_id=1102
-    </url>
     <identifier>ELRA-W0050</identifier>
   </identificationInfo>
+  <distributionInfo>
+    <availability>available-unrestrictedUse</availability>
+    <licenceInfo>
+      <licence>AGPL</licence>
+    </licenceInfo>
+  </distributionInfo>
+  <contactPerson>
+    <surname>Test</surname>
+    <communicationInfo><email>test@example.org</email></communicationInfo>
+  </contactPerson>
   <metadataInfo>
     <metadataCreationDate>2005-05-12</metadataCreationDate>
     <metadataCreator>
@@ -135,7 +144,7 @@
         <email>mapelli@elda.org</email>
         <url>http://www.elda.org</url>
         <address>55-57 rue Brillat-Savarin</address>
-        <zipcode>75013</zipcode>
+        <zipCode>75013</zipCode>
         <city>Paris</city>
         <country>France</country>
         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
@@ -147,12 +156,6 @@
     <version>1.0</version>
     <lastDateUpdated>2009-06-09</lastDateUpdated>
   </versionInfo>
-  <distributionInfo>
-    <availability>available-unrestrictedUse</availability>
-    <licenceInfo>
-      <licence>AGPL</licence>
-    </licenceInfo>
-  </distributionInfo>
   <resourceComponentType>
     <corpusInfo>
       <resourceType>corpus</resourceType>
@@ -166,6 +169,10 @@
             <languageId>por</languageId>
             <languageName>Portuguese</languageName>
           </languageInfo>
+          <sizeInfo>
+            <size>123</size>
+            <sizeUnit>elements</sizeUnit>
+          </sizeInfo>
           <textFormatInfo>
             <mimeType>Plain text</mimeType>
           </textFormatInfo>
