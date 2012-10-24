@@ -106,6 +106,14 @@ class RelatedAdminMixin(object):
             # Custom default widgets for certain relation fields:
             if db_field.rel.to in self.custom_m2m_widget_overrides:
                 kwargs = dict({'widget':self.custom_m2m_widget_overrides[db_field.rel.to]}, **kwargs)
+                if isinstance(self.custom_m2m_widget_overrides[db_field.rel.to], AutoCompleteSelectMultipleEditWidget):
+                    # For AutoComplete widgets remove the 'Hold down ...'
+                    # message from the field description 
+                    help_text = unicode(db_field.help_text)
+                    text_index = help_text.find('Hold down "Control",')
+                    if text_index > 0:
+                        help_text = help_text[0:text_index]
+                        db_field.help_text = help_text
             formfield = self.formfield_for_manytomany(db_field, request, **kwargs)
 
         # For non-raw_id fields, wrap the widget with a wrapper that adds
