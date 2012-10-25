@@ -26,8 +26,7 @@
   <ul id="jsddm">
     <li title="Browse the resources of the META-SHARE catalogue"><a href="{% url metashare.views.frontpage %}repository/search/">Browse Resources</a></li>
 
-	{% if user.is_staff %}
-	    {% if user.get_profile.has_editor_permission or user.username|is_owner %}
+	    {% if user.get_profile.has_editor_permission %}
 	    <li title="Create/edit resource metadata or upload resource data"><a>Manage Resources</a>
 	      <ul>
 	        <li title="Create/edit your own resource metadata or upload resource data"><a href="{% url editor:repository_resourceinfotype_model_myresources %}">Manage your own resources</a></li>
@@ -40,7 +39,6 @@
 	      </ul>
 	    </li>
 	    {% endif %}
-    {% endif %}
     {% if user.is_superuser or user.get_profile.has_organization_manager_permission or user.get_profile.has_manager_permission %}
     <li title="Manage groups and users"><a>Administration</a>
       <ul>
