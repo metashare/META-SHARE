@@ -73,13 +73,9 @@ def _convert_to_template_tuples(element_tree):
     # information about whether a field is required or not, to correctly
     # render the single resource view.
     else:
-        # cfedermann: use proper getattr access to prevent an AttributeError
-        # being thrown for cases, like /repository/browse/1222/, where some
-        # required attributes seem to be missing.
-        required = getattr(element_tree, 'required', 0)
         # use pretty print name of element instead of tag; requires that 
         # element_tree is created using export_to_elementtree(pretty=True)
-        return ((element_tree.attrib["pretty"], element_tree.text, required),)
+        return ((element_tree.attrib["pretty"], element_tree.text),)
 
 
 # a type providing an enumeration of META-SHARE member types
