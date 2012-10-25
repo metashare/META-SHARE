@@ -281,14 +281,14 @@
 			{% for key, value in documentation_dict.items %}
 				{% for key1, value1 in value.items %}		
 					{% if "Samples_location" in key1 %}
-						 <div class="dataline">
+						 <div class="dataline indented">
 							<label>
 								<strong>Samples Location: </strong>{{ value1|urlizetrunc:23 }}
 							</label>
 						</div>
 					{% endif %}
 					{% if "Tool_documentation" in key1 %}
-						 <div class="dataline">
+						 <div class="dataline indented">
 							<label>
 								<strong>Tool Documentation: </strong>{{value1}}
 							</label>
@@ -304,7 +304,7 @@
 							{% else %}
 								<div class="dataline indented">
 									<label>
-										{{value2}}
+										{{value2|urlizetrunc:23}}
 									</label>
 								</div>
 							{% endif %}
