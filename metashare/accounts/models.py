@@ -228,21 +228,17 @@ class UserProfile(models.Model):
 
     def has_editor_permission(self):
         """
-        Return whether the user profile belongs to any editor_group or not.
+        Returns `True` if there are any resources that the user behind this
+        profile can edit or create; `False` otherwise.
         """
         if self.user.is_superuser:
             return True      
-        
-        if self.user.is_staff:
-            return EditorGroup.objects.filter(name__in=
-                self.user.groups.values_list('name', flat=True)).count() != 0 or \
-                repository.models.resourceInfoType_model.objects.\
-                filter(owners__username=self.user.username).count() != 0
 
-        else:
-            return False
-            
-        
+        return self.user.is_staff and \
+            (EditorGroup.objects.filter(name__in=
+                self.user.groups.values_list('name', flat=True)).exists()
+             or repository.models.resourceInfoType_model.objects \
+                .filter(owners__username=self.user.username).exists())
 
     def has_manager_permission(self, editor_group=None):
         """
