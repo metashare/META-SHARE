@@ -577,6 +577,9 @@ def view(request, resource_name=None, object_id=None):
     elif resource_type == "toolService":
         resource_component_dicts['toolService'] = \
           resource_component_dict['Resource_component']
+
+    print resource_component_tuple    
+    print resource_component_dict
     
     # Define context for template rendering.
     context = {
@@ -606,8 +609,7 @@ def view(request, resource_name=None, object_id=None):
                 'version_dict': version_dict,
                 'text_counts': text_counts,
                 'video_counts': video_counts,
-
-                }
+              }
     template = 'repository/resource_view/lr_view.html'
 
     # For users who have edit permission for this resource, we have to add 
