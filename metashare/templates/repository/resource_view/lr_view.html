@@ -281,14 +281,14 @@
 			{% for key, value in documentation_dict.items %}
 				{% for key1, value1 in value.items %}		
 					{% if "Samples_location" in key1 %}
-						 <div class="dataline indented">
+						 <div class="dataline">
 							<label>
 								<strong>Samples Location: </strong>{{ value1|urlizetrunc:23 }}
 							</label>
 						</div>
 					{% endif %}
 					{% if "Tool_documentation" in key1 %}
-						 <div class="dataline indented">
+						 <div class="dataline">
 							<label>
 								<strong>Tool Documentation: </strong>{{value1}}
 							</label>
@@ -302,7 +302,7 @@
 							{% if value2.Title %}
 								{% include "repository/resource_view/documentation.html" with documentation=value2 type="Documentation" %}
 							{% else %}
-								<div class="dataline indented">
+								<div class="dataline">
 									<label>
 										{{value2|urlizetrunc:23}}
 									</label>
