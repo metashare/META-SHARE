@@ -19,37 +19,37 @@
 		</div>
 	{% endif %}
 		
-	<div class="dataline">
+	<div class="dataline indented">
 		<label>
-		{% if documentation.Author %}
-			{{ documentation.Author }}, 			
-		{% endif %}
-		<strong><i>{{ documentation.Title }}</i></strong>, 
-		{% if documentation.Url %}
-			{% for key, value in documentation.items %}
-				{% if "Url" in key %}
-					{{ value|urlizetrunc:17 }}
-				{% endif %}
-			{% endfor %}
-		{% endif %}
-		{% if documentation.Journal %}
-			. In: {{ documentation.Journal }}
-		{% endif %}
-		{% if documentation.Volume %}
-			{{ documentation.Volume }}
-		{% endif %}
-		{% if documentation.Pages %}
-			, pp. {{ documentation.Pages }}
-		{% endif %}
-		
-		{% if documentation.Conference %}
-			, {{ documentation.Conference }}
-		{% endif %}
-		
-		{% if documentation.Year %}
-			, {{ documentation.Year }}
-		{% endif %}		
-		
+			{% if documentation.Author %}
+				{{ documentation.Author }}, 			
+			{% endif %}
+			<strong><i>{{ documentation.Title }}</i></strong>, 
+			{% if documentation.Url %}
+				{% for key, value in documentation.items %}
+					{% if "Url" in key %}
+						{{ value|urlizetrunc:23 }}
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+			{% if documentation.Journal %}
+				. In: {{ documentation.Journal }}
+			{% endif %}
+			{% if documentation.Volume %}
+				{{ documentation.Volume }}
+			{% endif %}
+			{% if documentation.Pages %}
+				, pp. {{ documentation.Pages }}
+			{% endif %}
+			
+			{% if documentation.Conference %}
+				, {{ documentation.Conference }}
+			{% endif %}
+			
+			{% if documentation.Year %}
+				, {{ documentation.Year }}
+			{% endif %}		
+			
 		</label>
 	</div>
 	
@@ -97,7 +97,7 @@
 	{% if documentation.Doi %}
 		 <div class="dataline">
 			<label>
-				<strong>Digital Object Identifier - DOI:</strong> {{ documentation.Doi }}
+				<strong>Digital Object Identifier - DOI:</strong> {{ documentation.Doi|urlizetrunc:23 }}
 			</label>
 		</div>
 	{% endif %}

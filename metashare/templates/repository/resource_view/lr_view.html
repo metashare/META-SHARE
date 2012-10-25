@@ -161,13 +161,13 @@
 			{% endif %}
 			
 			{% if url %}
-				<h3 style="font-size:14px;">
-		 			<label>
-			 			{% for address in url %}
-					 		{{address|urlizetrunc:17}}{% if not forloop.last %},{% endif %}
-					 	{% endfor %}
-			 		</label>
-			 	</h3>
+			 	{% for address in url %}
+					<h3 style="font-size:14px;">
+						<label>
+							{{ address|urlize }}{% if not forloop.last %},{% endif %}
+						</label>
+					</h3>
+				{% endfor %}
 			{% endif %}
 			
 			{% if not 'NOT_DEFINED' in metaShareId %}<h4 class="identifier">{{ metaShareId }}</h4>{% endif %}
@@ -283,7 +283,7 @@
 					{% if "Samples_location" in key1 %}
 						 <div class="dataline">
 							<label>
-								<strong>Samples Location: </strong>{{value1|urlizetrunc:17}}
+								<strong>Samples Location: </strong>{{ value1|urlizetrunc:23 }}
 							</label>
 						</div>
 					{% endif %}
@@ -302,9 +302,9 @@
 							{% if value2.Title %}
 								{% include "repository/resource_view/documentation.html" with documentation=value2 type="Documentation" %}
 							{% else %}
-								<div class="dataline indented">
+								<div class="dataline">
 									<label>
-										{{value2}}
+										{{value2|urlizetrunc:23}}
 									</label>
 								</div>
 							{% endif %}

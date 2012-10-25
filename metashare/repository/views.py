@@ -73,13 +73,9 @@ def _convert_to_template_tuples(element_tree):
     # information about whether a field is required or not, to correctly
     # render the single resource view.
     else:
-        # cfedermann: use proper getattr access to prevent an AttributeError
-        # being thrown for cases, like /repository/browse/1222/, where some
-        # required attributes seem to be missing.
-        required = getattr(element_tree, 'required', 0)
         # use pretty print name of element instead of tag; requires that 
         # element_tree is created using export_to_elementtree(pretty=True)
-        return ((element_tree.attrib["pretty"], element_tree.text, required),)
+        return ((element_tree.attrib["pretty"], element_tree.text),)
 
 
 # a type providing an enumeration of META-SHARE member types
@@ -577,7 +573,7 @@ def view(request, resource_name=None, object_id=None):
     elif resource_type == "toolService":
         resource_component_dicts['toolService'] = \
           resource_component_dict['Resource_component']
-    
+   
     # Define context for template rendering.
     context = {
                 'contact_person_dicts': contact_person_dicts,
@@ -606,8 +602,7 @@ def view(request, resource_name=None, object_id=None):
                 'version_dict': version_dict,
                 'text_counts': text_counts,
                 'video_counts': video_counts,
-
-                }
+              }
     template = 'repository/resource_view/lr_view.html'
 
     # For users who have edit permission for this resource, we have to add 
