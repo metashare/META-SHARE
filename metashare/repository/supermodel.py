@@ -118,7 +118,6 @@ class SchemaModel(models.Model):
         """
         abstract = True
 
-
     @classmethod
     def get_many_to_many_fields(cls):
         """
@@ -763,7 +762,7 @@ class SchemaModel(models.Model):
 
         _fields_before_sets.sort(cmp=lambda x, y: -y[1].endswith('_set'))
 
-        for xsd_field, _model_field in _fields_before_sets:
+        for xsd_field, _model_field, _required in _fields_before_sets:
             # We want to collect all values for the current model field.  This
             # may be several, e.g., for multiple contactPerson elements.
             # Language tags currently only exist for DictFields. If the language
