@@ -28,7 +28,7 @@
 		{% if documentation.Url %}
 			{% for key, value in documentation.items %}
 				{% if "Url" in key %}
-					{{ value|urlizetrunc:17 }}
+					{{ value|urlizetrunc:23 }}
 				{% endif %}
 			{% endfor %}
 		{% endif %}
