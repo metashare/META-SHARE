@@ -161,13 +161,13 @@
 			{% endif %}
 			
 			{% if url %}
-				<h3 style="font-size:14px;">
-		 			<label>
-			 			{% for address in url %}
-					 		{{address|urlizetrunc:17}}{% if not forloop.last %},{% endif %}
-					 	{% endfor %}
-			 		</label>
-			 	</h3>
+			 	{% for address in url %}
+					<h3 style="font-size:14px;">
+						<label>
+							{{ address|urlize }}{% if not forloop.last %},{% endif %}
+						</label>
+					</h3>
+				{% endfor %}
 			{% endif %}
 			
 			{% if not 'NOT_DEFINED' in metaShareId %}<h4 class="identifier">{{ metaShareId }}</h4>{% endif %}
