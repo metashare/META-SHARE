@@ -573,10 +573,7 @@ def view(request, resource_name=None, object_id=None):
     elif resource_type == "toolService":
         resource_component_dicts['toolService'] = \
           resource_component_dict['Resource_component']
-
-    print resource_component_tuple    
-    print resource_component_dict
-    
+   
     # Define context for template rendering.
     context = {
                 'contact_person_dicts': contact_person_dicts,
