@@ -8,7 +8,7 @@ from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
 from metashare.settings import LOG_HANDLER
-
+from metashare import repository
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -224,16 +224,21 @@ class UserProfile(models.Model):
         """
         if not self.user:
             super(UserProfile, self).delete(*args, **kwargs)
+                
 
     def has_editor_permission(self):
         """
-        Return whether the user profile belongs to any editor_group or not.
+        Returns `True` if there are any resources that the user behind this
+        profile can edit or create; `False` otherwise.
         """
         if self.user.is_superuser:
             return True      
-                
-        return EditorGroup.objects.filter(name__in=
-            self.user.groups.values_list('name', flat=True)).count() != 0
+
+        return self.user.is_staff and \
+            (EditorGroup.objects.filter(name__in=
+                self.user.groups.values_list('name', flat=True)).exists()
+             or repository.models.resourceInfoType_model.objects \
+                .filter(owners__username=self.user.username).exists())
 
     def has_manager_permission(self, editor_group=None):
         """
