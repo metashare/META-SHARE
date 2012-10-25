@@ -118,14 +118,6 @@ class SchemaModel(models.Model):
         """
         abstract = True
 
-    @classmethod
-    def is_required_field(cls, name):
-        """
-        Checks whether the field with the given name is a required field.
-        """
-        # pylint: disable-msg=E1101
-        _fields = cls.get_fields()
-        return name in _fields['required']
 
     @classmethod
     def get_many_to_many_fields(cls):
@@ -477,22 +469,9 @@ class SchemaModel(models.Model):
                             _element.set('lang', _sub_value[0])
                             _element_text = SchemaModel._python_to_xml(
                                                                 _sub_value[1])                            
-                            if self.is_required_field(_model_field):
-                                # If the element is "required" in the model,
-                                # turn the "required" value of the element
-                                # tree to "1" (true), otherwise "0" (false).
-                                _element.required = self.is_required_field(
-                                                                _model_field)
-                            else:
-                                _element.required = False
                         else:
                             _element_text = SchemaModel._python_to_xml(
                                                                 _sub_value)                            
-                            if self.is_required_field(_model_field):
-                                _element.required = self.is_required_field(
-                                                                _model_field)
-                            else:
-                                _element.required = False
                         if pretty:
                             if self.is_choice(_model_field):
                                 _element_text = prettify_camel_case_string(_element_text)
@@ -784,7 +763,7 @@ class SchemaModel(models.Model):
 
         _fields_before_sets.sort(cmp=lambda x, y: -y[1].endswith('_set'))
 
-        for xsd_field, _model_field, _required in _fields_before_sets:
+        for xsd_field, _model_field in _fields_before_sets:
             # We want to collect all values for the current model field.  This
             # may be several, e.g., for multiple contactPerson elements.
             # Language tags currently only exist for DictFields. If the language
