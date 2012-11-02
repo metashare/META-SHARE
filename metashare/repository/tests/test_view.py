@@ -860,6 +860,7 @@ def check_resource_view(queryset, test_case):
         '/executionLocation',
         '/samplesLocation',
         '/targetResourceNameURI',
+        '/documentation',
     )
 
     # path suffixes where to apply a number transformation on the value
@@ -931,8 +932,8 @@ def check_resource_view(queryset, test_case):
 
             # apply URL transformation if required
             for _up in url_paths:
-                if path.endswith(_up):
-                    text = unicode(urlizetrunc(text, 17)).encode("utf-8")
+                if path.endswith(_up) and not path.endswith('identificationInfo/url'):
+                    text = unicode(urlizetrunc(text, 23)).encode("utf-8")
 
             # apply date transformation if required
             for _dp in date_paths:
