@@ -48,8 +48,18 @@ class RegistrationRequest(models.Model):
         Deletes the related `User` object of the given deleted
         `RegistrationRequest` instance, if the former is not active, yet.
         """
-        if not instance.user.is_active:
-            instance.user.delete()
+        try:
+            _related_user = instance.user
+        except User.DoesNotExist:
+            # in case the user account is deleted before the registration
+            # request is deleted (e.g., by a superuser), then we do not have to
+            # do anything here
+            pass
+        else:
+            # only delete the corresponding user account, if it is not active,
+            # yet (it may have been activated manually by a superuser)
+            if not _related_user.is_active:
+                _related_user.delete()
 
     def __unicode__(self):
         """
