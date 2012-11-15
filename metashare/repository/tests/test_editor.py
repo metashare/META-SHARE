@@ -1060,7 +1060,7 @@ class DataUploadTests(TestCase):
         # add resource data first which can be updated later:
         shutil.copy(DATA_UPLOAD_ZIP, u'{}/archive.zip'.format(
                 DataUploadTests.testfixture3.storage_object._storage_folder()))
-        DataUploadTests.testfixture3.storage_object._compute_checksum()
+        DataUploadTests.testfixture3.storage_object.compute_checksum()
         DataUploadTests.testfixture3.storage_object.save()
         # make sure that there is really resource data stored now:
         _so = StorageObject.objects.get(

@@ -50,7 +50,7 @@ def checksum(object_id):
     else:
         storage_object = storage_object[0]
 
-    storage_object._compute_checksum()
+    storage_object.compute_checksum()
     storage_object.save()
     print "Checksum: {0}".format(storage_object.checksum)
 

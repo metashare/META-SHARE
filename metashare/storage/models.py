@@ -218,7 +218,7 @@ class StorageObject(models.Model):
         """
         return '{0}/{1}'.format(settings.STORAGE_PATH, self.identifier)
     
-    def _compute_checksum(self):
+    def compute_checksum(self):
         """
         Computes the MD5 hash checksum for the binary archive which may be
         attached to this storage object instance and sets it in `self.checksum`.
