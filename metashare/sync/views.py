@@ -4,7 +4,9 @@ from zipfile import ZipFile
 from metashare import settings
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
-from metashare.storage.models import StorageObject, MASTER, PROXY, INTERNAL
+from metashare.storage.models import StorageObject, MASTER, PROXY, INTERNAL, \
+    REMOTE
+
 
 def inventory(request):
     if settings.SYNC_NEEDS_AUTHENTICATION and not request.user.has_perm('storage.can_sync'):
@@ -58,6 +60,9 @@ def full_metadata(request, resource_uuid):
     storage_object = get_object_or_404(StorageObject, identifier=resource_uuid)
     if storage_object.publication_status == INTERNAL:
         return HttpResponse("Forbidden: the given resource is internal at this time.", status=403)
+    if storage_object.copy_status == REMOTE:
+        return HttpResponse("Forbidden: the specified resource is a `REMOTE` " \
+            "resource and cannot be distributed by this node.", status=403)
     response = HttpResponse(status=200, content_type='application/zip')
     response['Metashare-Version'] = settings.METASHARE_VERSION
     response['Content-Disposition'] = 'attachment; filename="full-metadata.zip"'
