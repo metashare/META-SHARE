@@ -218,7 +218,7 @@ class StorageObject(models.Model):
         """
         return '{0}/{1}'.format(settings.STORAGE_PATH, self.identifier)
     
-    def _compute_checksum(self):
+    def compute_checksum(self):
         """
         Computes the MD5 hash checksum for the binary archive which may be
         attached to this storage object instance and sets it in `self.checksum`.
@@ -232,36 +232,10 @@ class StorageObject(models.Model):
         self.checksum = compute_checksum(self.get_download())
         return _old_checksum != self.checksum
 
-
-    def has_local_download_copy(self):
-        """
-        Checks if this instance has a local copy of the downloadable data.
-        """
-        if not self.has_download():
-            return False
-        
-        # Check if there is a local file inside the storage folder.
-        _binary_data = self.get_download()        
-        if not _binary_data:
-            return False
-        
-        # If this is the master copy, we don't know that the checksum is OK.
-        if self.master_copy:
-            return True
-        
-        # Otherwise, we compute the MD5 hash from chunks of the local data.
-        # And check if the local checksum matches the master copy's checksum.
-        return self.checksum == compute_checksum(_binary_data)
-    
-    def has_download(self):
-        """
-        Checks if this storage object instance contains downloadable data.
-        """
-        return self.checksum != None
-    
     def get_download(self):
         """
-        Returns the local path to the downloadable data.
+        Returns the local path to the downloadable data or None if there is no
+        download data.
         """
         _path = '{0}/archive'.format(self._storage_folder())
         for _ext in ALLOWED_ARCHIVE_EXTENSIONS:
@@ -295,20 +269,17 @@ class StorageObject(models.Model):
             # If not, create the storage folder.
             mkdir(self._storage_folder())
 
-        if self.master_copy:
-            # update the checksum, if a downloadable file exists
-            checksum_or_url_updated = self._compute_checksum()
-            # make sure that any changes to the DJANGO_URL are also reflected
-            # in the `source_url` field of master copies
-            if self.source_url != settings.DJANGO_URL:
-                self.source_url = settings.DJANGO_URL
-                checksum_or_url_updated = True
+        # make sure that any changes to the DJANGO_URL are also reflected in the
+        # `source_url` field of master copies
+        if self.master_copy and self.source_url != settings.DJANGO_URL:
+            self.source_url = settings.DJANGO_URL
+            source_url_updated = True
         else:
-            checksum_or_url_updated = False
+            source_url_updated = False
 
         # for internal resources, no serialization is done
         if self.publication_status == INTERNAL:
-            if checksum_or_url_updated:
+            if source_url_updated:
                 self.save()
             return
 
@@ -330,7 +301,7 @@ class StorageObject(models.Model):
         # save storage object if required; this should always happen since
         # at least self.digest_last_checked in the local storage object 
         # has changed
-        if checksum_or_url_updated or metadata_updated or global_updated \
+        if source_url_updated or metadata_updated or global_updated \
                 or local_updated:
             self.save()
 
