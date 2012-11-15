@@ -113,7 +113,7 @@ class StorageObjectTestCase(unittest.TestCase):
         self.assertFalse(storage_object.deleted)
         
         # The new storage object should not have a download attached yet.
-        self.assertFalse(storage_object.has_download())
+        self.assertFalse(storage_object.get_download())
         
         # The new object's metadata should be identical to _minimal_xml.
         self.assertEqual(storage_object.metadata, self._minimal_xml)
