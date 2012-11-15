@@ -232,36 +232,10 @@ class StorageObject(models.Model):
         self.checksum = compute_checksum(self.get_download())
         return _old_checksum != self.checksum
 
-
-    def has_local_download_copy(self):
-        """
-        Checks if this instance has a local copy of the downloadable data.
-        """
-        if not self.has_download():
-            return False
-        
-        # Check if there is a local file inside the storage folder.
-        _binary_data = self.get_download()        
-        if not _binary_data:
-            return False
-        
-        # If this is the master copy, we don't know that the checksum is OK.
-        if self.master_copy:
-            return True
-        
-        # Otherwise, we compute the MD5 hash from chunks of the local data.
-        # And check if the local checksum matches the master copy's checksum.
-        return self.checksum == compute_checksum(_binary_data)
-    
-    def has_download(self):
-        """
-        Checks if this storage object instance contains downloadable data.
-        """
-        return self.checksum != None
-    
     def get_download(self):
         """
-        Returns the local path to the downloadable data.
+        Returns the local path to the downloadable data or None if there is no
+        download data.
         """
         _path = '{0}/archive'.format(self._storage_folder())
         for _ext in ALLOWED_ARCHIVE_EXTENSIONS:

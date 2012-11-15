@@ -987,7 +987,7 @@ class DataUploadTests(TestCase):
             DataUploadTests.superuser_login)
         for res in (DataUploadTests.testfixture, DataUploadTests.testfixture2,
                     DataUploadTests.testfixture3, DataUploadTests.testfixture4):
-            self.assertFalse(res.storage_object.has_local_download_copy(),
+            self.assertFalse(res.storage_object.get_download(),
                 "the test LR must not have a local download before the test")
             _data_upload_url = "{}repository/resourceinfotype_model/{}/" \
                 "upload-data/".format(ADMINROOT, res.id)
@@ -1001,7 +1001,7 @@ class DataUploadTests(TestCase):
             # refetch the storage object from the data base to make sure we have
             # the latest version
             _so = StorageObject.objects.get(pk=res.storage_object.pk)
-            self.assertTrue(_so.has_local_download_copy(),
+            self.assertTrue(_so.get_download(),
                 "uploaded LR data must be available as a local download")
 
     def test_editor_can_upload_data(self):
@@ -1013,7 +1013,7 @@ class DataUploadTests(TestCase):
             DataUploadTests.editor_login)
         # make sure data can be uploaded to owned resources:
         self.assertFalse(DataUploadTests.testfixture3.storage_object \
-                .has_local_download_copy(),
+                .get_download(),
             "the test LR must not have a local download before the test")
         _data_upload_url = "{}repository/resourceinfotype_model/{}/" \
             "upload-data/".format(ADMINROOT, DataUploadTests.testfixture3.id)
@@ -1028,12 +1028,11 @@ class DataUploadTests(TestCase):
         # the latest version
         _so = StorageObject.objects.get(
             pk=DataUploadTests.testfixture3.storage_object.pk)
-        self.assertTrue(_so.has_local_download_copy(),
+        self.assertTrue(_so.get_download(),
             "expected that uploaded LR data is available as a local download")
         # make sure data can be uploaded to editable resources:
         self.assertFalse(
-            DataUploadTests.testfixture.storage_object \
-                .has_local_download_copy(),
+            DataUploadTests.testfixture.storage_object.get_download(),
             "the test LR must not have a local download before the test")
         _data_upload_url = "{}repository/resourceinfotype_model/{}/" \
             "upload-data/".format(ADMINROOT, DataUploadTests.testfixture.id)
@@ -1048,7 +1047,7 @@ class DataUploadTests(TestCase):
         # the latest version
         _so = StorageObject.objects.get(
             pk=DataUploadTests.testfixture.storage_object.pk)
-        self.assertTrue(_so.has_local_download_copy(),
+        self.assertTrue(_so.get_download(),
             "expected that uploaded LR data is available as a local download")
 
     def test_editor_can_update_own_upload_data(self):

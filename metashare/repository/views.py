@@ -182,7 +182,7 @@ def _get_licences(resource, user_membership):
             del all_licenses[name]
         elif user_membership >= access[1] \
                 and (info.downloadLocation \
-                     or resource.storage_object.has_local_download_copy()):
+                     or resource.storage_object.get_download()):
             # the resource can be downloaded somewhere under the current license
             # terms and the user's membership allows her to immediately download
             # the resource
@@ -263,9 +263,9 @@ def _provide_download(request, resource, download_urls):
     """
     Returns an HTTP response with a download of the given resource.
     """
-    if resource.storage_object.has_local_download_copy():
+    dl_path = resource.storage_object.get_download()
+    if dl_path:
         try:
-            dl_path = resource.storage_object.get_download()
             def dl_stream_generator():
                 with open(dl_path, 'rb') as _local_data:
                     _chunk = _local_data.read(MAXIMUM_READ_BLOCK_SIZE)
