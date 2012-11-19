@@ -563,6 +563,14 @@ def add_or_update_resource(storage_json, resource_xml_string, storage_digest,
             path = os.path.join(folder, _file)
             if os.path.exists(path):
                 os.remove(path)
+        if copy_status == PROXY:
+            # for proxy copies it is sufficient to only store the latest
+            # revision of metadata.xml file; in order to be robust against
+            # remote changes without revision number updates, we always recreate
+            # this latest metadata.xml copy
+            for _path in glob.glob(os.path.join(folder, 'metadata-*.xml')):
+                if os.path.exists(_path):
+                    os.remove(_path)
 
     def remove_database_entries(storage_id):
         storage_object = StorageObject.objects.get(identifier=storage_id)
