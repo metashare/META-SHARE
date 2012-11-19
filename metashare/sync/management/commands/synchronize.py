@@ -54,20 +54,16 @@ class Command(BaseCommand):
             Command.sync_with_nodes(getattr(settings, 'PROXIED_NODES', {}), True, id_file)
         else:
             # Synchronize only with the given node
-            node_list = {}
             core_nodes = getattr(settings, 'CORE_NODES', {})
             for key, value in core_nodes.items():
                 if value['NAME'] == node_name:
-                    node_list.update({key, value})
-                    Command.sync_with_nodes(node_list, False, id_file)
+                    Command.sync_with_nodes({key: value}, False, id_file)
                     break
 
-            node_list = {}
             proxied_nodes = getattr(settings, 'PROXIED_NODES', {})
             for key, value in proxied_nodes.items():
                 if value['NAME'] == node_name:
-                    node_list.update({key, value})
-                    Command.sync_with_nodes(node_list, True, id_file)
+                    Command.sync_with_nodes({key: value}, True, id_file)
                     break
 
         # Close id file if used
