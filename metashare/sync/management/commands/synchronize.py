@@ -12,6 +12,8 @@ from django.core.management.base import BaseCommand
 from optparse import make_option
 from metashare.storage.models import StorageObject, PROXY, REMOTE, add_or_update_resource
 from django.core.exceptions import ObjectDoesNotExist
+from metashare.utils import Lock
+
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -84,11 +86,18 @@ class Command(BaseCommand):
             LOGGER.info("syncing with node {} at {} ...".format(
               node_id, node['URL']))
             try:
+                # before starting the actual synchronization, make sure to lock
+                # the storage so that any other processes with heavy/frequent
+                # operations on the storage don't get in our way
+                lock = Lock('storage')
+                lock.acquire()
                 Command.sync_with_single_node(
                   node_id, node, is_proxy, id_file=id_file)
             except:
                 LOGGER.error('There was an error while trying to sync with '
                     'node "%s":', node_id, exc_info=True)
+            finally:
+                lock.release()
 
     @staticmethod
     def sync_with_single_node(node_id, node, is_proxy, id_file=None):
