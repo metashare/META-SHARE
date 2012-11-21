@@ -1,6 +1,7 @@
 import datetime
 import logging
 import re
+import urllib
 from Queue import Queue
 from traceback import format_exc
 from xml.etree.ElementTree import Element, fromstring, tostring
@@ -14,6 +15,7 @@ from django.db.models.fields import related
 from django.db.models.fields.related import ForeignRelatedObjectsDescriptor, \
     OneToOneField
 
+import metashare.repository.models
 from metashare.repository.fields import MultiSelectField, MultiTextField, \
     MetaBooleanField, DictField
 from metashare.settings import LOG_HANDLER, \
@@ -44,6 +46,7 @@ SCHEMA_URL = 'http://metashare.ilsp.gr/META-XMLSchema/v{0}/' \
 
 METASHARE_ID_REGEXP = re.compile('<metashareId>.+</metashareId>',
   re.I|re.S|re.U)
+URL_ESCPAPED_CHAR_PATTERN = re.compile(r'%(?![\dA-F]{2})', re.I)
 
 OBJECT_XML_CACHE = {}
 
@@ -289,6 +292,14 @@ class SchemaModel(models.Model):
           or isinstance(field, MultiTextField):
             if value is None:
                 result = ''
+
+        # If we have an xs:anyURI value, then it must be a URI according to RFC
+        # 2396 or it must result in such a URI after applying the algorithm from
+        # <http://www.w3.org/TR/2001/REC-xlink-20010627/#link-locators>.
+        if metashare.repository.models.HTTPURI_VALIDATOR in field.validators \
+                and result is not None:
+            result = URL_ESCPAPED_CHAR_PATTERN.sub('%25', result)
+            result = urllib.quote(result, r'''~!?$&'()*+,;=:@/#%''')
 
         return result
 
