@@ -148,7 +148,7 @@ MODEL_HEADER="""\
 import logging
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from django.core.validators import RegexValidator
+from django.core.validators import RegexValidator, URLValidator
 from django.db import models
 from django.template.defaultfilters import slugify
 
@@ -176,15 +176,19 @@ LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 
 # Note: we have to use the '^' and '$' anchors in the following regular
-# expressions as for some reason the RegexValidator does not try to match the
+# expression as for some reason the RegexValidator does not try to match the
 # whole string against the regex but it just searches for a matching substring;
 # in addition we have to use the negative lookahead assertion at the end of the
 # regular expressions as Python's regex engine otherwise always ignores a single
 # trailing newline
 EMAILADDRESS_VALIDATOR = RegexValidator(r'^[^@]+@[^\.]+\..+(?!\\r?\\n)$',
   'Not a valid emailAddress value.', ValidationError)
-HTTPURI_VALIDATOR = RegexValidator(r'^(https?://.*|ftp://.*|www.*)(?!\\r?\\n)$',
-  'Not a valid httpURI value.', ValidationError)
+# Using a `URLValidator` here is probably the best trade-off between a fully
+# correct URI validator (plus our XML Schema constraints) and
+# simplicity/maintainability. In addition, the `URLValidator` probably comes
+# closer to the "intended" validation requirements of the XML Schema authors
+# than a standards compliant URI validator.
+HTTPURI_VALIDATOR = URLValidator()
 
 # namespace of the META-SHARE metadata XML Schema
 SCHEMA_NAMESPACE = '{1}'
