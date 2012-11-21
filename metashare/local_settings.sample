@@ -22,6 +22,9 @@ LANGUAGE_CODE = 'en-us'
 # Path to the local storage layer path used for persistent object storage.
 STORAGE_PATH = '/path/to/storage/path'
 
+# Directory in which lock files will temporarily be created.
+LOCK_DIR = join(tempfile.gettempdir(), 'metashare-locks')
+
 # Debug settings, setting DEBUG=True will give exception stacktraces.
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
