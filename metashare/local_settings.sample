@@ -138,9 +138,9 @@ CORE_NODES = {
 #    'node_id_1': {
 #        'NAME': 'AUNI',                       # The short name of the node.
 #        'DESCRIPTION': 'xxx',                 # A short descpription of the node.
-#        'URL': 'metashare.example.com:8000',  # The URL of the other META-SHARE
-#                                              # Managing Node (also include the
-#                                              # port if needed).
+#        'URL': 'http://metashare.example.com:8000', # The URL of the other
+#                                              # META-SHARE Managing Node (also
+#                                              # include the port if needed).
 #        'USERNAME': 'sync-user-1',            # The name of a sync user on 
 #                                              # the META-SHARE Managing Nodes.
 #        'PASSWORD': 'sync-user-pass',         # Sync user's password.
@@ -148,7 +148,7 @@ CORE_NODES = {
 #    'node_id_2': {
 #        'NAME': 'BUNI',                     
 #        'DESCRIPTION': 'xxx',               
-#        'URL': 'metashare.test.com',
+#        'URL': 'http://example.com/pub/metashare',
 #        'USERNAME': 'sync-user-2',
 #        'PASSWORD': 'sync-user-pass-2',
 #    },
@@ -175,7 +175,7 @@ PROXIED_NODES = {
 #    'proxied_node_id_1': {
 #        'NAME': 'Proxied Node 1',
 #        'DESCRIPTION': 'xxx',
-#        'URL': 'metashare.example.org',
+#        'URL': 'http://metashare.example.org',
 #        'USERNAME': 'sync-user-3',
 #        'PASSWORD': 'sync-user-pass-3',
 #    },
