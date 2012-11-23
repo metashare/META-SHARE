@@ -188,17 +188,17 @@ class Command(BaseCommand):
             LOGGER.info("There are no resources marked for updating!")
         else:
             # if there are resources to add or update
-            LOGGER.info("\n" + BOLD + \
+            sys.stdout.write("\n" + BOLD + \
               ("No" if resources_to_add_count == 0 \
               else str(resources_to_add_count)) + \
               " new resource" + ("" if resources_to_add_count == 1 else "s") \
               + RESET + " will be added to your repository.")
-            LOGGER.info("\n" + BOLD + \
+            sys.stdout.write("\n" + BOLD + \
               ("No" if resources_to_update_count == 0 \
               else str(resources_to_update_count)) + \
               " resource" + ("" if resources_to_update_count == 1 else "s") \
               + RESET + " will be updated in your repository.")
-            LOGGER.info("Importing and Indexing...\n")
+            sys.stdout.write("Importing and Indexing...\n")
         
         if is_proxy:
             _copy_status = PROXY
