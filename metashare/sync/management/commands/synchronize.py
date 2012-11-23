@@ -205,6 +205,11 @@ class Command(BaseCommand):
         else:
             _copy_status = REMOTE
         
+        # lists of resources that failed to synchronize
+        failures_add = []
+        failures_update = []
+        failures_delete = []        
+        
         # add resources from remote inventory
         for res_id in resources_to_add:
             try:
@@ -215,6 +220,7 @@ class Command(BaseCommand):
                     id_file.write("--->RESOURCE_ID:{0};STORAGE_IDENTIFIER:{1}\n"\
                         .format(res_obj.id, res_obj.storage_object.identifier))
             except:
+                failures_add.append(res_id)
                 LOGGER.error("Error while adding resource {}".format(res_id))
                 sys.stdout.write("Error while adding resource {}".format(res_id))
         
@@ -230,6 +236,7 @@ class Command(BaseCommand):
                     if remote_inventory[res_id] != res_obj.storage_object.digest_checksum:
                         id_file.write("Different digests!\n")
             except:
+                failures_update.append(res_id)
                 LOGGER.error("Error while updating resource {}".format(res_id))
                 sys.stdout.write("Error while updating resource {}\n".format(res_id))
 
@@ -247,10 +254,22 @@ class Command(BaseCommand):
                 _so_to_remove = StorageObject.objects.get(identifier=res_id)
                 remove_resource(_so_to_remove) 
             except:
+                failures_delete.append(res_id)
                 LOGGER.error("Error while removing resource {}".format(res_id))
                 sys.stdout.write("Error while removing resource {}\n".format(res_id))
                 
-        sys.stdout.write("\n{} resources removed\n\n\n".format(removed_count))
+        sys.stdout.write("\n{} resources added\n".format(add_count))
+        sys.stdout.write("{} resources updated\n".format(update_count))
+        sys.stdout.write("{} resources removed\n\n".format(removed_count))
+        
+        if len(failures_add) <> 0:
+            sys.stdout.write("{} resources failed to be added \n".format(len(failures_add)))
+            
+        if len(failures_update) <> 0:
+            sys.stdout.write("{} resources failed to be updated \n".format(len(failures_update)))
+        
+        if len(failures_delete) <> 0:
+            sys.stdout.write("{} resources failed to be deleted \n".format(len(failures_delete)))
             
 
     @staticmethod
