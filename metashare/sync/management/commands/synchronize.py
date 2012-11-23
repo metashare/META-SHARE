@@ -211,11 +211,13 @@ class Command(BaseCommand):
         failures_delete = []        
         
         # add resources from remote inventory
+        added_count = 0
         for res_id in resources_to_add:
             try:
                 res_obj = Command._get_remote_resource(
                   res_id, remote_inventory[res_id], node_id, node, opener, _copy_status)
                 LOGGER.info("adding resource {}".format(res_obj.storage_object.identifier))
+                added_count += 1
                 if not id_file is None:
                     id_file.write("--->RESOURCE_ID:{0};STORAGE_IDENTIFIER:{1}\n"\
                         .format(res_obj.id, res_obj.storage_object.identifier))
@@ -225,11 +227,13 @@ class Command(BaseCommand):
                 sys.stdout.write("Error while adding resource {}".format(res_id))
         
         # update resources from remote inventory
+        updated_count = 0
         for res_id in resources_to_update:
             try:
                 res_obj = Command._get_remote_resource(
                   res_id, remote_inventory[res_id], node_id, node, opener, _copy_status)
                 LOGGER.info("updating resource {}".format(res_obj.storage_object.identifier))
+                updated_count += 1
                 if not id_file is None:
                     id_file.write("--->RESOURCE_ID:{0};STORAGE_IDENTIFIER:{1}\n"\
                         .format(res_obj.id, res_obj.storage_object.identifier))
@@ -258,8 +262,8 @@ class Command(BaseCommand):
                 LOGGER.error("Error while removing resource {}".format(res_id))
                 sys.stdout.write("Error while removing resource {}\n".format(res_id))
                 
-        sys.stdout.write("\n{} resources added\n".format(add_count))
-        sys.stdout.write("{} resources updated\n".format(update_count))
+        sys.stdout.write("\n{} resources added\n".format(added_count))
+        sys.stdout.write("{} resources updated\n".format(updated_count))
         sys.stdout.write("{} resources removed\n\n".format(removed_count))
         
         if len(failures_add) <> 0:
