@@ -122,7 +122,7 @@ class Command(BaseCommand):
         remote_inventory = get_inventory(opener, inv_url)
         remote_inventory_count = len(remote_inventory)
         sys.stdout.write("\nRemote node " + BOLD + url + RESET + " contains " \
-          + BOLD + str(remote_inventory_count) + " resources.\n" + RESET)
+          + BOLD + str(remote_inventory_count) + " resources." + RESET + "\n")
         LOGGER.info("Remote node {} contains {} resources".format(
           node_id, remote_inventory_count))
         
@@ -134,7 +134,7 @@ class Command(BaseCommand):
             local_inventory[item.identifier] = item.digest_checksum
         local_inventory_count = len(local_inventory)
         sys.stdout.write("\nLocal node contains " + BOLD + str(local_inventory_count) \
-          + " resources.\n" + RESET)
+          + " resources." + RESET + "\n")
         LOGGER.info("Local node contains {} resources stemming from remote node {}".format(
           local_inventory_count, node_id))
         
