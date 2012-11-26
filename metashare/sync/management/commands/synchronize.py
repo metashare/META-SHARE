@@ -273,13 +273,13 @@ class Command(BaseCommand):
         sys.stdout.write("{} resources updated\n".format(updated_count))
         sys.stdout.write("{} resources removed\n\n".format(removed_count))
         
-        if len(failures_add) <> 0:
+        if len(failures_add) != 0:
             sys.stdout.write("{} resources failed to be added \n".format(len(failures_add)))
             
-        if len(failures_update) <> 0:
+        if len(failures_update) != 0:
             sys.stdout.write("{} resources failed to be updated \n".format(len(failures_update)))
         
-        if len(failures_delete) <> 0:
+        if len(failures_delete) != 0:
             sys.stdout.write("{} resources failed to be deleted \n".format(len(failures_delete)))
             
         sys.stdout.write("\n")
