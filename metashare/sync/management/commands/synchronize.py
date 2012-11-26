@@ -23,8 +23,6 @@ LOGGER.addHandler(settings.LOG_HANDLER)
 BOLD = "\033[1m"
 RESET = "\033[0;0m"
 
-# Maximum time to wait for a node to respond (in seconds)
-MAX_WAITING_TIME = 30
 
 class Command(BaseCommand):
     
@@ -131,7 +129,6 @@ class Command(BaseCommand):
                 inv_url = inv_url + "&"
         
         # get the inventory list 
-        
         remote_inventory = get_inventory(opener, inv_url)
         remote_inventory_count = len(remote_inventory)
         sys.stdout.write("\nRemote node " + BOLD + url + RESET + " contains " \
