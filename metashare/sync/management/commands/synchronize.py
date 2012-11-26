@@ -233,7 +233,6 @@ class Command(BaseCommand):
             except:
                 failures_add.append(res_id)
                 LOGGER.error("Error while adding resource {}".format(res_id))
-                sys.stdout.write("Error while adding resource {}".format(res_id))
         
         # update resources from remote inventory
         updated_count = 0
@@ -251,7 +250,6 @@ class Command(BaseCommand):
             except:
                 failures_update.append(res_id)
                 LOGGER.error("Error while updating resource {}".format(res_id))
-                sys.stdout.write("Error while updating resource {}\n".format(res_id))
 
         # delete resources from remote inventory
         resources_to_delete_count = len(resources_to_delete)
@@ -269,7 +267,6 @@ class Command(BaseCommand):
             except:
                 failures_delete.append(res_id)
                 LOGGER.error("Error while removing resource {}".format(res_id))
-                sys.stdout.write("Error while removing resource {}\n".format(res_id))
                 
         sys.stdout.write("\n{} resources added\n".format(added_count))
         sys.stdout.write("{} resources updated\n".format(updated_count))
@@ -283,6 +280,8 @@ class Command(BaseCommand):
         
         if len(failures_delete) <> 0:
             sys.stdout.write("{} resources failed to be deleted \n".format(len(failures_delete)))
+            
+        sys.stdout.write("\n")
             
 
     @staticmethod
