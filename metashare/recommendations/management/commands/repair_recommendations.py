@@ -4,6 +4,8 @@ to invalid documents.
 """
 from django.core.management.base import BaseCommand
 from metashare.recommendations.recommendations import repair_recommendations
+from metashare.utils import Lock
+
 
 class Command(BaseCommand):
     
@@ -13,4 +15,13 @@ class Command(BaseCommand):
         """
         Repair recommendations.
         """
-        repair_recommendations()
+        try:
+            # before starting, make sure to lock the storage so that any other
+            # processes with heavy/frequent operations on the storage don't get
+            # in our way
+            lock = Lock('storage')
+            lock.acquire()
+
+            repair_recommendations()
+        finally:
+            lock.release()
