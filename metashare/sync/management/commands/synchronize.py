@@ -221,13 +221,11 @@ class Command(BaseCommand):
         failures_delete = []        
         
         # add resources from remote inventory
-        added_count = 0
         for res_id in resources_to_add:
             try:
                 res_obj = Command._get_remote_resource(
                   res_id, remote_inventory[res_id], node_id, node, opener, _copy_status)
                 LOGGER.info("adding resource {}".format(res_obj.storage_object.identifier))
-                added_count += 1
                 if not id_file is None:
                     id_file.write("--->RESOURCE_ID:{0};STORAGE_IDENTIFIER:{1}\n"\
                         .format(res_obj.id, res_obj.storage_object.identifier))
@@ -236,13 +234,11 @@ class Command(BaseCommand):
                 LOGGER.error("Error while adding resource {}".format(res_id))
         
         # update resources from remote inventory
-        updated_count = 0
         for res_id in resources_to_update:
             try:
                 res_obj = Command._get_remote_resource(
                   res_id, remote_inventory[res_id], node_id, node, opener, _copy_status)
                 LOGGER.info("updating resource {}".format(res_obj.storage_object.identifier))
-                updated_count += 1
                 if not id_file is None:
                     id_file.write("--->RESOURCE_ID:{0};STORAGE_IDENTIFIER:{1}\n"\
                         .format(res_obj.id, res_obj.storage_object.identifier))
@@ -256,23 +252,24 @@ class Command(BaseCommand):
         resources_to_delete_count = len(resources_to_delete)
         LOGGER.info("\nRemote node " + BOLD + url + RESET + " lists " \
           + BOLD + str(resources_to_delete_count) + " resources " + RESET + "as removed." )
-        
-        removed_count = 0
+
         for res_id in resources_to_delete:
             try:
                 sys.stdout.write("\nRemoving id {}...\n".format(res_id))
                 LOGGER.info("removing resource {}".format(res_id))
-                removed_count += 1
                 _so_to_remove = StorageObject.objects.get(identifier=res_id)
                 remove_resource(_so_to_remove) 
             except:
                 failures_delete.append(res_id)
                 LOGGER.error("Error while removing resource {}".format(res_id))
-                
-        sys.stdout.write("\n{} resources added\n".format(added_count))
-        sys.stdout.write("{} resources updated\n".format(updated_count))
-        sys.stdout.write("{} resources removed\n\n".format(removed_count))
-        
+
+        sys.stdout.write("\n{} resources added\n" \
+          .format(resources_to_add_count - len(failures_add)))
+        sys.stdout.write("{} resources updated\n" \
+          .format(resources_to_update_count - len(failures_update)))
+        sys.stdout.write("{} resources removed\n\n" \
+          .format(resources_to_delete_count - len(failures_delete)))
+
         if len(failures_add) != 0:
             sys.stdout.write("{} resources failed to be added \n".format(len(failures_add)))
             
