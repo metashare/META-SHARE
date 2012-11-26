@@ -23,6 +23,7 @@ import base64
 
 from command import Command
 from selenium.common.exceptions import WebDriverException 
+from selenium.common.exceptions import InvalidSelectorException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
@@ -138,9 +139,15 @@ class WebElement(object):
 
     def send_keys(self, *value):
         """Simulates typing into the element."""
-        local_file = LocalFileDetector.is_local_file(*value)
-        if local_file is not None:
-            value = self._upload(local_file)
+         # transfer file to another machine only if remote driver is used
+         # the same behaviour as for java binding
+        parent_class = self.parent.__class__
+        fqcn = parent_class.__module__ + "." + parent_class.__name__
+        is_remote = fqcn == "selenium.webdriver.remote.webdriver.WebDriver"
+        if is_remote:
+            local_file = LocalFileDetector.is_local_file(*value)
+            if local_file is not None:
+                value = self._upload(local_file)
 
         typing = []
         for val in value:
@@ -159,6 +166,15 @@ class WebElement(object):
     def is_displayed(self):
         """Whether the element would be visible to a user"""
         return self._execute(Command.IS_ELEMENT_DISPLAYED)['value']
+
+    @property
+    def location_once_scrolled_into_view(self):
+        """CONSIDERED LIABLE TO CHANGE WITHOUT WARNING. Use this to discover where on the screen an
+        element is so that we can click it. This method should cause the element to be scrolled
+        into view.
+
+        Returns the top lefthand corner location on the screen, or None if the element is not visible"""
+        return self._execute(Command.GET_ELEMENT_LOCATION_ONCE_SCROLLED_INTO_VIEW)['value']
 
     @property
     def size(self):
@@ -187,6 +203,9 @@ class WebElement(object):
     def id(self):
         return self._id
 
+    def __eq__(self, element):
+        return self._id == element.id
+
     # Private Methods
     def _execute(self, command, params=None):
         """Executes a command against the underlying HTML element.
@@ -204,10 +223,16 @@ class WebElement(object):
         return self._parent.execute(command, params)
 
     def find_element(self, by=By.ID, value=None):
+        if isinstance(by, tuple) or isinstance(value, int) or value==None:
+            raise InvalidSelectorException("Invalid locator values passed in")
+        
         return self._execute(Command.FIND_CHILD_ELEMENT,
                              {"using": by, "value": value})['value']
 
     def find_elements(self, by=By.ID, value=None):
+        if isinstance(by, tuple) or isinstance(value, int) or value==None:
+            raise InvalidSelectorException("Invalid locator values passed in")
+        
         return self._execute(Command.FIND_CHILD_ELEMENTS,
                              {"using": by, "value": value})['value']
 
@@ -250,7 +275,10 @@ class LocalFileDetector(object):
         if file_path is '':
             return None
 
-        if os.path.exists(file_path):
-            return file_path
-        else:
-            return None
+        try:
+          if os.path.exists(file_path):
+              return file_path
+        except:
+          pass
+        return None
+

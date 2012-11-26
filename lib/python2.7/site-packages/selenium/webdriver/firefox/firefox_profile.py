@@ -37,7 +37,6 @@ class FirefoxProfile(object):
     DEFAULT_PREFERENCES = {
         "app.update.auto": "false",
         "app.update.enabled": "false",
-        "browser.startup.page" : "0",
         "browser.download.manager.showWhenStarting": "false",
         "browser.EULA.override": "true",
         "browser.EULA.3.accepted": "true",
@@ -46,6 +45,7 @@ class FirefoxProfile(object):
         "browser.offline": "false",
         "browser.safebrowsing.enabled": "false",
         "browser.search.update": "false",
+        "extensions.blocklist.enabled": "false",
         "browser.sessionstore.resume_from_crash": "false",
         "browser.shell.checkDefaultBrowser": "false",
         "browser.tabs.warnOnClose": "false",
@@ -67,7 +67,6 @@ class FirefoxProfile(object):
         "security.fileuri.origin_policy": "3",
         "security.fileuri.strict_origin_policy": "false",
         "security.warn_entering_secure": "false",
-        "security.warn_submit_insecure": "false",
         "security.warn_entering_secure.show_once": "false",
         "security.warn_entering_weak": "false",
         "security.warn_entering_weak.show_once": "false",
@@ -213,6 +212,9 @@ class FirefoxProfile(object):
         return base64.encodestring(fp.getvalue())
 
     def set_proxy(self, proxy):
+        import warnings
+        warnings.warn("This method has been deprecated. Please pass in the proxy object to the Driver Object",
+                    DeprecationWarning)
         if proxy is None:
             raise ValueError("proxy can not be None")
 
