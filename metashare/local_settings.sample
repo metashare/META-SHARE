@@ -181,7 +181,9 @@ PROXIED_NODES = {
 #    },
 }
 
-# Analytics application sample settings. More analytics services are available. 
-# For more options, check http://packages.python.org/django-analytical/
-#GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-XXXXXXXX-X'
-#GOOGLE_ANALYTICS_SITE_SPEED = True
+# You cann add custom web analytics application settings here through the Django
+# Analytical framework which is integrated in META-SHARE. By default, all
+# META-SHARE services are monitored with a common Google Analytics tracking
+# code; see the Installation Manual for more information on this.
+# For the integration of other web analytics services' options, see
+# <http://packages.python.org/django-analytical/>.
