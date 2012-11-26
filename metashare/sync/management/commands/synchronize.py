@@ -23,6 +23,9 @@ LOGGER.addHandler(settings.LOG_HANDLER)
 BOLD = "\033[1m"
 RESET = "\033[0;0m"
 
+# Maximum time to wait for a node to respond (in seconds)
+MAX_WAITING_TIME = 30
+
 class Command(BaseCommand):
     
     option_list = BaseCommand.option_list + (
@@ -128,6 +131,7 @@ class Command(BaseCommand):
                 inv_url = inv_url + "&"
         
         # get the inventory list 
+        
         remote_inventory = get_inventory(opener, inv_url)
         remote_inventory_count = len(remote_inventory)
         sys.stdout.write("\nRemote node " + BOLD + url + RESET + " contains " \
@@ -207,7 +211,7 @@ class Command(BaseCommand):
               else str(resources_to_update_count)) + \
               " resource" + ("" if resources_to_update_count == 1 else "s") \
               + RESET + " will be updated in your repository.")
-            sys.stdout.write("Importing and Indexing...\n")
+            sys.stdout.write("\nImporting and Indexing...\n")
         
         if is_proxy:
             _copy_status = PROXY
