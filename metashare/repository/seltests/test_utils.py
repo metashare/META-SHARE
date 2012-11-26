@@ -5,7 +5,7 @@ from metashare.settings import ROOT_PATH, TEST_MODE_NAME
 import os
 from metashare import test_utils
 import time
-from selenium.common.exceptions import NoSuchWindowException
+from selenium.common.exceptions import TimeoutException
 
 
 def login_user(driver, user_name, user_passwd):
@@ -47,14 +47,23 @@ def save_and_close(driver, target_id):
     """
     current_id = driver.current_window_handle
     driver.find_element_by_name("_save").click()
-    try:
-        while driver.switch_to_window(current_id):
-            time.sleep(1)
-    except NoSuchWindowException:
-        pass
-    # TODO remove this workaround when Selenium starts working again as intended
-    time.sleep(1)
+    wait_till_closed_and_switch(driver, current_id, target_id)
+
+
+def wait_till_closed_and_switch(driver, closing_id, target_id):
+    """
+    Waits ~10 seconds until the window with the given `closing_id` is closed or
+    throws a `TimeoutException`. If closing was successful, the driver switches
+    to the window with the given `target_id`.
+    """
+    max_wait = 10
+    while closing_id in driver.window_handles and max_wait:
+        time.sleep(1)
+        max_wait -= 1
+    if not max_wait:
+        raise TimeoutException('Window was not closed in time.')
     driver.switch_to_window(target_id)
+
 
 def cancel_and_close(driver, target_id):
     """
@@ -66,15 +75,8 @@ def cancel_and_close(driver, target_id):
     driver.find_element_by_name("_cancel").click()
     alert = driver.switch_to_alert()
     alert.accept()
-    
-    try:
-        while driver.switch_to_window(current_id):
-            time.sleep(1)
-    except NoSuchWindowException:
-        pass
-    # TODO remove this workaround when Selenium starts working again as intended
-    time.sleep(1)
-    driver.switch_to_window(target_id)
+    wait_till_closed_and_switch(driver, current_id, target_id)
+
 
 def cancel_and_continue(driver, target_id):
     """

@@ -9,7 +9,7 @@ from metashare import settings, test_utils
 from metashare.accounts.models import EditorGroup, EditorGroupManagers
 from metashare.repository.models import resourceInfoType_model
 from metashare.repository.seltests.test_utils import login_user, mouse_over, \
-    setup_screenshots_folder, click_menu_item, save_and_close
+    setup_screenshots_folder, click_menu_item, save_and_close, cancel_and_close
 from metashare.settings import DJANGO_BASE, ROOT_PATH
 
 
@@ -307,7 +307,7 @@ class BasicEditorTests(SeleniumTestCase):
           "//select[@id='id_availability']/option[4]").text)
         self.assertEqual("Under Negotiation", driver.find_element_by_xpath(
           "//select[@id='id_availability']/option[5]").text)
-        save_and_close(driver, root_id)
+        cancel_and_close(driver, root_id)
         # corpus info text popup
         driver.find_element_by_id("add_id_corpusTextInfo-0").click()
         driver.switch_to_window("id_corpusTextInfo__dash__0")
