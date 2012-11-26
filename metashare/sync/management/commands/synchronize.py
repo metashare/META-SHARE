@@ -1,8 +1,6 @@
 """
 Management utility to trigger synchronization.
 """
-
-import sys
 import logging
 
 from metashare import settings
@@ -19,9 +17,6 @@ from metashare.utils import Lock
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(settings.LOG_HANDLER)
 
-# Constants to show bold-face fonts in standard output
-BOLD = "\033[1m"
-RESET = "\033[0;0m"
 
 class Command(BaseCommand):
     
@@ -130,8 +125,6 @@ class Command(BaseCommand):
         # get the inventory list 
         remote_inventory = get_inventory(opener, inv_url)
         remote_inventory_count = len(remote_inventory)
-        sys.stdout.write("\nRemote node " + BOLD + url + RESET + " contains " \
-          + BOLD + str(remote_inventory_count) + " resources.\n" + RESET)
         LOGGER.info("Remote node {} contains {} resources".format(
           node_id, remote_inventory_count))
         
@@ -142,8 +135,6 @@ class Command(BaseCommand):
         for item in remote_storage_objects:
             local_inventory[item.identifier] = item.digest_checksum
         local_inventory_count = len(local_inventory)
-        sys.stdout.write("\nLocal node contains " + BOLD + str(local_inventory_count) \
-          + " resources.\n" + RESET)
         LOGGER.info("Local node contains {} resources stemming from remote node {}".format(
           local_inventory_count, node_id))
         
@@ -193,65 +184,63 @@ class Command(BaseCommand):
         LOGGER.info("{} resources will be added".format(resources_to_add_count))
         LOGGER.info("{} resources will be updated".format(resources_to_update_count))          
         LOGGER.info("{} resources will be deleted".format(resources_to_delete_count))          
-        if ((resources_to_add_count == 0) and (resources_to_update_count == 0)):
-            sys.stdout.write("\nThere are no resources marked" +\
-              " for updating!\n")
-        else:
-            # if there are resources to add or update
-            sys.stdout.write("\n" + BOLD + \
-              ("No" if resources_to_add_count == 0 \
-              else str(resources_to_add_count)) + \
-              " new resource" + ("" if resources_to_add_count == 1 else "s") \
-              + RESET + " will be added to your repository.\n")
-            sys.stdout.write("\n" + BOLD + \
-              ("No" if resources_to_update_count == 0 \
-              else str(resources_to_update_count)) + \
-              " resource" + ("" if resources_to_update_count == 1 else "s") \
-              + RESET + " will be updated in your repository.\n")
-            sys.stdout.write("\nImporting and Indexing...\n")
-        
+
         if is_proxy:
             _copy_status = PROXY
         else:
             _copy_status = REMOTE
-        
-        # add resources from remote inventory
-        for res_id in resources_to_add:
-            res_obj = Command._get_remote_resource(
-              res_id, remote_inventory[res_id], node_id, node, opener, _copy_status)
-            LOGGER.info("adding resource {}".format(res_obj.storage_object.identifier))
-            if not id_file is None:
-                id_file.write("--->RESOURCE_ID:{0};STORAGE_IDENTIFIER:{1}\n"\
-                    .format(res_obj.id, res_obj.storage_object.identifier))
-        
-        # update resources
-        for res_id in resources_to_update:
-            res_obj = Command._get_remote_resource(
-              res_id, remote_inventory[res_id], node_id, node, opener, _copy_status)
-            LOGGER.info("updating resource {}".format(res_obj.storage_object.identifier))
-            if not id_file is None:
-                id_file.write("--->RESOURCE_ID:{0};STORAGE_IDENTIFIER:{1}\n"\
-                    .format(res_obj.id, res_obj.storage_object.identifier))
-                if remote_inventory[res_id] != res_obj.storage_object.digest_checksum:
-                    id_file.write("Different digests!\n")
-        
-        sys.stdout.write("\n\n")
 
-        # delete resources        
-        resources_to_delete_count = len(resources_to_delete)
-        sys.stdout.write("\nRemote node " + BOLD + url + RESET + " lists " \
-          + BOLD + str(resources_to_delete_count) + " resources as removed.\n" + RESET)
-        
-        removed_count = 0
+        # add resources from remote inventory
+        num_added = 0
+        for res_id in resources_to_add:
+            try:
+                LOGGER.info("adding resource {}".format(res_id))
+                res_obj = Command._get_remote_resource(
+                  res_id, remote_inventory[res_id], node_id, node, opener, _copy_status)
+                if not id_file is None:
+                    id_file.write("--->RESOURCE_ID:{0};STORAGE_IDENTIFIER:{1}\n"\
+                        .format(res_obj.id, res_obj.storage_object.identifier))
+                num_added += 1
+            except:
+                LOGGER.error("Error while adding resource {}".format(res_id),
+                    exc_info=True)
+
+        # update resources from remote inventory
+        num_updated = 0
+        for res_id in resources_to_update:
+            try:
+                LOGGER.info("updating resource {}".format(res_id))
+                res_obj = Command._get_remote_resource(
+                  res_id, remote_inventory[res_id], node_id, node, opener, _copy_status)
+                if not id_file is None:
+                    id_file.write("--->RESOURCE_ID:{0};STORAGE_IDENTIFIER:{1}\n"\
+                        .format(res_obj.id, res_obj.storage_object.identifier))
+                    if remote_inventory[res_id] != res_obj.storage_object.digest_checksum:
+                        id_file.write("Different digests!\n")
+                num_updated += 1
+            except:
+                LOGGER.error("Error while updating resource {}".format(res_id),
+                    exc_info=True)
+
+        # delete resources from remote inventory
+        num_deleted = 0
         for res_id in resources_to_delete:
-            sys.stdout.write("\nRemoving id {}...\n".format(res_id))
-            LOGGER.info("removing resource {}".format(res_id))
-            removed_count += 1
-            _so_to_remove = StorageObject.objects.get(identifier=res_id)
-            remove_resource(_so_to_remove) 
-            
-        sys.stdout.write("\n{} resources removed\n".format(removed_count))
-            
+            try:
+                LOGGER.info("removing resource {}".format(res_id))
+                _so_to_remove = StorageObject.objects.get(identifier=res_id)
+                remove_resource(_so_to_remove)
+                num_deleted += 1
+            except:
+                LOGGER.error("Error while removing resource {}".format(res_id),
+                    exc_info=True)
+
+        LOGGER.info("{} of {} resources successfully added." \
+            .format(num_added, resources_to_add_count))
+        LOGGER.info("{} of {} resources successfully updated." \
+            .format(num_updated, resources_to_update_count))
+        LOGGER.info("{} of {} resources successfully removed." \
+            .format(num_deleted, resources_to_delete_count))
+
 
     @staticmethod
     def _get_remote_resource(resource_id, resource_digest, node_id, node, opener, copy_status):
@@ -267,4 +256,3 @@ class Command(BaseCommand):
         res_obj = add_or_update_resource(storage_json, resource_xml_string,
                         resource_digest, copy_status, source_node=node_id)
         return res_obj
-        
