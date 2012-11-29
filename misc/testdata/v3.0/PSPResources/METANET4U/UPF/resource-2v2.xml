@@ -4,7 +4,6 @@
       <resourceName>Basque-Spanish LMF Apertium Bilingual dictionary</resourceName>
       <description>This is the LMF version of the Apertium bilingual dictionary for Basque and Spanish languages.       Bilingual LMF dictionaries were generated from Apertium bilingual dix files. For each Apertium bilingual correspondence,       the corresponding source and target monolingual entries (LexicalEntry) were generated in addition to the bilingual        correspondence (SenseAxis) element. Apertium is a free/open-source machine translation platform, initially aimed at       related-language pairs but recently expanded to deal with more divergent language pairs (such as English-Catalan).       The platform provides: a language-independent machine translation engine; tools to manage the linguistic data necessary       to build a machine translation system for a given language pair and linguistic data for a growing number of language pairs.</description>
       <resourceShortName>LMF Apertium Eu-Es</resourceShortName>
-      <url>http://.es</url>
       <metaShareId>
 				NOT_DEFINED_FOR_V2
 	  		</metaShareId>
@@ -16,7 +15,6 @@
          <licence>GPL</licence>
          <restrictionsOfUse>other</restrictionsOfUse>
          <distributionAccessMedium>downloadable</distributionAccessMedium>
-         <downloadLocation>http://www..com/</downloadLocation>
          <distributionRightsHolder>
               <organizationInfo>
                 <organizationName>Institut Universitari Lingüística Aplicada - UPF</organizationName>

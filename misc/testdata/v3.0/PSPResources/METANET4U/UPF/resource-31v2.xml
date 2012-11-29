@@ -4,7 +4,6 @@
       <resourceName>Basic Vocabulary of Human Genome</resourceName>
       <description>This is the LMF version of the Basic Vocabulary of Human Genome from the IULA UPF located at http://www.iula.upf.edu/rec/vbgenoma/esp/index.html             The project Vocabulary of the Human Genome (Biotechnology 2), approved in the 2003 plenary meeting of       REALITER, incorporates the basic terminology most used in texts about genomics. The vocabulary presents       selected entries in English and their equivalents in peninsular and Latin American Spanish, French, Italian,       Galician, Portuguese and Catalan. A long with the information on equivalents, the users can find grammatical       information and synonyms documented as variants in each of the languages.</description>
       <resourceShortName>Basic Vocabulary of Human Genome</resourceShortName>
-      <url>http://.es</url>
       <metaShareId>
 				NOT_DEFINED_FOR_V2
 	  		</metaShareId>
@@ -16,7 +15,6 @@
          <licence>AGPL</licence>
          <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
          <distributionAccessMedium>downloadable</distributionAccessMedium>
-         <downloadLocation>http://www..com/</downloadLocation>
          <distributionRightsHolder>
               <organizationInfo>
                 <organizationName>Institut Universitari Lingüística Aplicada - UPF</organizationName>
