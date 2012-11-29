@@ -194,7 +194,7 @@ class Command(BaseCommand):
         num_added = 0
         for res_id in resources_to_add:
             try:
-                LOGGER.info("adding resource {}".format(res_id))
+                LOGGER.info("adding resource {0} from node {1}".format(res_id, node_id))
                 res_obj = Command._get_remote_resource(
                   res_id, remote_inventory[res_id], node_id, node, opener, _copy_status)
                 if not id_file is None:
@@ -209,7 +209,7 @@ class Command(BaseCommand):
         num_updated = 0
         for res_id in resources_to_update:
             try:
-                LOGGER.info("updating resource {}".format(res_id))
+                LOGGER.info("updating resource {0} from node {1}".format(res_id, node_id))
                 res_obj = Command._get_remote_resource(
                   res_id, remote_inventory[res_id], node_id, node, opener, _copy_status)
                 if not id_file is None:
@@ -226,7 +226,7 @@ class Command(BaseCommand):
         num_deleted = 0
         for res_id in resources_to_delete:
             try:
-                LOGGER.info("removing resource {}".format(res_id))
+                LOGGER.info("removing resource {0} from node {1}".format(res_id, node_id))
                 _so_to_remove = StorageObject.objects.get(identifier=res_id)
                 remove_resource(_so_to_remove)
                 num_deleted += 1
