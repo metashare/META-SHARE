@@ -46,7 +46,6 @@ SCHEMA_URL = 'http://metashare.ilsp.gr/META-XMLSchema/v{0}/' \
 
 METASHARE_ID_REGEXP = re.compile('<metashareId>.+</metashareId>',
   re.I|re.S|re.U)
-URL_ESCPAPED_CHAR_PATTERN = re.compile(r'%(?![\dA-F]{2})', re.I)
 
 OBJECT_XML_CACHE = {}
 
@@ -229,9 +228,9 @@ class SchemaModel(models.Model):
             return False
 
     @staticmethod
-    def _python_to_xml(value):
+    def _python_to_xml(value, field=None):
         """
-        Converts the given Python value to its XML representation.
+        Converts the given Python field value to its XML representation.
         """
         # Boolean values need to be rendered as 'true' or 'false' Strings.
         if isinstance(value, bool):
@@ -242,6 +241,13 @@ class SchemaModel(models.Model):
 
         # String instances are converted to Unicode instances.
         elif isinstance(value, basestring):
+
+            # xs:anyURI values are internally stored as valid URIs which may
+            # contain escaped characters; unescape them again for the export
+            if field and metashare.repository.models.HTTPURI_VALIDATOR in \
+                    field.validators and value:
+                value = urllib.unquote(value).decode('utf8')
+
             return unicode(value)
 
         # All other values are encoded as Strings.
@@ -298,8 +304,8 @@ class SchemaModel(models.Model):
         # <http://www.w3.org/TR/2001/REC-xlink-20010627/#link-locators>.
         if metashare.repository.models.HTTPURI_VALIDATOR in field.validators \
                 and result is not None:
-            result = URL_ESCPAPED_CHAR_PATTERN.sub('%25', result)
-            result = urllib.quote(result, r'''~!?$&'()*+,;=:@/#%''')
+            result = urllib.quote(result.encode('utf8'),
+                r'''!#$%&'()*+,/:;=?@[]~''')
 
         return result
 
@@ -442,7 +448,8 @@ class SchemaModel(models.Model):
                     if isinstance(_sub_value, SchemaModel):
                         if _sub_value.__schema_name__ == "STRINGMODEL":
                             _element = Element(_xsd_name)
-                            _element_text = SchemaModel._python_to_xml(_sub_value.value)
+                            _element_text = SchemaModel._python_to_xml(
+                                _sub_value.value, _field)
                             if pretty:
                                 _element.attrib["pretty"] = self.get_verbose_name(_model_field)
                                 if self.is_choice(_model_field):
@@ -478,10 +485,10 @@ class SchemaModel(models.Model):
                             # language code key
                             _element.set('lang', _sub_value[0])
                             _element_text = SchemaModel._python_to_xml(
-                                                                _sub_value[1])                            
+                                _sub_value[1], _field)
                         else:
                             _element_text = SchemaModel._python_to_xml(
-                                                                _sub_value)                            
+                                _sub_value, _field)
                         if pretty:
                             if self.is_choice(_model_field):
                                 _element_text = prettify_camel_case_string(_element_text)
