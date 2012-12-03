@@ -176,19 +176,20 @@ LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 
 # Note: we have to use the '^' and '$' anchors in the following regular
-# expression as for some reason the RegexValidator does not try to match the
+# expressions as for some reason the RegexValidator does not try to match the
 # whole string against the regex but it just searches for a matching substring;
 # in addition we have to use the negative lookahead assertion at the end of the
 # regular expressions as Python's regex engine otherwise always ignores a single
 # trailing newline
 EMAILADDRESS_VALIDATOR = RegexValidator(r'^[^@]+@[^\.]+\..+(?!\\r?\\n)$',
   'Not a valid emailAddress value.', ValidationError)
-# Using a `URLValidator` here is probably the best trade-off between a fully
-# correct URI validator (plus our XML Schema constraints) and
-# simplicity/maintainability. In addition, the `URLValidator` probably comes
-# closer to the "intended" validation requirements of the XML Schema authors
-# than a standards compliant URI validator.
-HTTPURI_VALIDATOR = URLValidator()
+HTTPURI_VALIDATOR = RegexValidator(r"^(?i)((http|ftp)s?):\\/\\/"
+        r"(([a-z0-9.-]|%[0-9A-F]{{2}}){{3,}})(:(\\d+))?"
+        r"((\\/([a-z0-9-._~!$&'()*+,;=:@]|%[0-9A-F]{{2}})*)*)"
+        r"(\\?(([a-z0-9-._~!$&'()*+,;=:\\/?@]|%[0-9A-F]{{2}})*))?"
+        r"(#(([a-z0-9-._~!$&'()*+,;=:\\/?@]|%[0-9A-F]{{2}})*))?(?!\\r?\\n)$",
+    "Not a valid URL value (must not contain non-ASCII characters, for example;"
+        " see also RFC 2396).", ValidationError)
 
 # namespace of the META-SHARE metadata XML Schema
 SCHEMA_NAMESPACE = '{1}'
