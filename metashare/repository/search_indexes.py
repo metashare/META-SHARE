@@ -899,6 +899,11 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
                 for annotation_info in media_type.corpusTextNumericalInfo.annotationinfotype_model_set.all():
                     result.extend(annotation_info.get_conformanceToStandardsBestPractices_display_list())
 
+        elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
+            if corpus_media.lexicalConceptualResourceEncodingInfo:
+                result.extend(corpus_media.lexicalConceptualResourceEncodingInfo \
+                  .get_conformanceToStandardsBestPractices_display_list())
+
         elif isinstance(corpus_media, languageDescriptionInfoType_model):
             if corpus_media.languageDescriptionEncodingInfo:
                 result.extend(corpus_media.languageDescriptionEncodingInfo \
