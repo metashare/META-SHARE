@@ -252,7 +252,7 @@ class SchemaModel(models.Model):
 
         # All other values are encoded as Strings.
         else:
-            return str(value)
+            return str(value).encode('utf8')
 
     @staticmethod
     def _xml_to_python(value, field):
