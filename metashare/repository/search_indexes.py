@@ -452,8 +452,6 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         """
         Collect the data to sort the Resource Types
         """
-        import re
-
         # get the list of Resource Types
         resourceTypeSort = self.prepare_resourceTypeFilter(obj)
         # render unique list of Resource Types
@@ -473,8 +471,6 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         """
         Collect the data to sort the Media Types
         """
-        import re
-
         # get the list of Media Types
         mediaTypeSort = self.prepare_mediaTypeFilter(obj)
         # render unique list of Media Types
@@ -494,8 +490,6 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         """
         Collect the data to sort the Language Names
         """
-        import re
-
         # get the list of languages
         languageNameSort = self.prepare_languageNameFilter(obj)
         # render unique list of languages
