@@ -1,5 +1,6 @@
 import logging
 import os
+import re
 
 from haystack.indexes import CharField, IntegerField, RealTimeSearchIndex
 from haystack import indexes, connections as haystack_connections, \
@@ -7,6 +8,7 @@ from haystack import indexes, connections as haystack_connections, \
 
 from django.db.models import signals
 from django.utils.translation import ugettext as _
+from unidecode import unidecode
 
 from metashare.repository import model_utils
 from metashare.repository.models import resourceInfoType_model, \
@@ -436,10 +438,9 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         """
         Collect the data to sort the Resource Names
         """
-        import re
-
         # get the Resource Name
         resourceNameSort = obj.identificationInfo.get_default_resourceName()
+        resourceNameSort = unidecode(resourceNameSort)
         # keep alphanumeric characters only
         resourceNameSort = re.sub('[\W_]', '', resourceNameSort)
         # set Resource Name to lower case
