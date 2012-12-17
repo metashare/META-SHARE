@@ -119,8 +119,8 @@ SYNC_INTERVALS = {
 # The update intervals should roughly be half of the MAX_DIGEST_AGE as
 # defined below
 UPDATE_INTERVALS = {
-    'MINUTE' : '*',      # 0-59 - Default is *
-    'HOUR' : '*/12',         # 0-23 - Default is */12
+    'MINUTE' : '59',      # 0-59 - Default is 59
+    'HOUR' : '*/12',      # 0-23 - Default is */12
     'DAY_OF_MONTH' : '*', # 1-31 - Default is *
     'MONTH' : '*',        # 1-12 - Default is *
     'DAY_OF_WEEK' : '*',  # 0-6 (0 is Sunday) - Default is *
