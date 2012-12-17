@@ -8,6 +8,7 @@ from haystack import indexes, connections as haystack_connections, \
 
 from django.db.models import signals
 from django.utils.translation import ugettext as _
+from unidecode import unidecode
 
 from metashare.repository import model_utils
 from metashare.repository.models import resourceInfoType_model, \
@@ -85,9 +86,6 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
     # in the text field we list all resource model field that shall be searched
     # search fields are defined in templates/search/indexes/repository/resourceinfotype_model_text.txt 
     text = CharField(document=True, use_template=True, stored=False)
-
-    # regular expression used to sort the resource names
-    regexResourceNameSort = re.compile(u'[\W_]', re.U)
 
     # view and download counts of the resource
     dl_count = IntegerField(stored=False)
@@ -442,8 +440,9 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         """
         # get the Resource Name
         resourceNameSort = obj.identificationInfo.get_default_resourceName()
+        resourceNameSort = unidecode(resourceNameSort)
         # keep alphanumeric characters only
-        resourceNameSort = self.regexResourceNameSort.sub(u'', resourceNameSort)
+        resourceNameSort = re.sub('[\W_]', '', resourceNameSort)
         # set Resource Name to lower case
         resourceNameSort = resourceNameSort.lower()
 
