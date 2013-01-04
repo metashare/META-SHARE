@@ -23,7 +23,9 @@ class SessionResourcesTracker:
     """
     Keeps track of resources the user has viewed/downloaded within a session.
     """
-    
+    # a lock used for the thread-safe updating of TogetherManager with new pairs 
+    lock = threading.RLock()
+
     @staticmethod
     def getTracker(request):
         """
@@ -100,10 +102,9 @@ class SessionResourcesTracker:
         either Resource.VIEW or Resource.DOWNLOAD.
         """  
         if not res in res_set:
-            # update TogetherManager with new pairs
-            lock = threading.RLock()
-            # make sure that only one thread updates the TogetherManager at a time 
-            with lock:
+            # update TogetherManager with new pairs but make sure that only one
+            # thread updates the TogetherManager at a time 
+            with SessionResourcesTracker.lock:
                 man = TogetherManager.getManager(res_type)
                 for _res in res_set:
                     man.addResourcePair(_res, res)
