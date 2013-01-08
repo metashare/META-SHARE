@@ -2,6 +2,7 @@
 Management utility to trigger synchronization.
 """
 import logging
+import socket
 
 from metashare import settings
 from metashare.sync.sync_utils import login, get_inventory, get_full_metadata, \
@@ -44,7 +45,11 @@ class Command(BaseCommand):
                 except:
                     print "Impossible to open file {0}".format(id_filename)
                     print "  IDs will not be printed"
-      
+
+        # set a graceful default socket timeout of 30 seconds so that none of
+        # our connections blocks forever
+        socket.setdefaulttimeout(30.0)
+
         node_name = options.get('node', None)
         if node_name is None:
             Command.sync_with_nodes(getattr(settings, 'CORE_NODES', {}), False, id_file)
