@@ -276,7 +276,7 @@ def topstats (request):
         countryname = getcountry_name(countrycode)
     if view == "topviewed":
         geovisits = getCountryActions(VIEW_STAT)
-        visitstitle = "viewing resources"
+        visitstitle = "resource visits"
         data = getLRTop(VIEW_STAT, limit+1, countrycode, since, offset)
         for item in data:
             try:
@@ -286,7 +286,7 @@ def topstats (request):
                 LOGGER.debug("Warning! The object "+item['lrid']+ " has not been found.")               
     elif (view == "latestupdated"):
         geovisits = getCountryActions(UPDATE_STAT)
-        visitstitle = "updating resources"
+        visitstitle = "resource updates"
         data = getLRLast(UPDATE_STAT, limit+1, countrycode, offset)
         for item in data:
             try:
@@ -296,7 +296,7 @@ def topstats (request):
                 LOGGER.debug("Warning! The object "+item['lrid']+ " has not been found.")
     elif (view == "topdownloaded"):
         geovisits = getCountryActions(DOWNLOAD_STAT)
-        visitstitle = "downloading resources"
+        visitstitle = "download requests"
         data = getLRTop(DOWNLOAD_STAT, limit+1, countrycode, since, offset)
         for item in data:
             try:
