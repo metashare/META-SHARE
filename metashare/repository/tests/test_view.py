@@ -435,6 +435,8 @@ class DownloadViewTest(TestCase):
         amongst various other distribution licenses) can be downloaded
         appropriately.
         """
+        # test as anonymous user:
+        self._test_downloadable_resource_with_multiple_licenses(Client())
         # test as staff user:
         client = Client()
         client.login(username='staffuser', password='secret')
@@ -547,33 +549,6 @@ class DownloadViewTest(TestCase):
         self.assertIn(("http://www.example.org/dl1", 302),
                       response.redirect_chain,
                       msg="There should be a redirect to example.org.")
-
-    def test_resource_download_as_anonymous_user(self):
-        """
-        Verifies that the anonymous user cannot download any resources.
-        """
-        # neither via GET ...
-        response = Client().get(reverse(views.download, args=
-                (self.downloadable_resource_3.storage_object.identifier,)),
-            follow = True)
-        self.assertTemplateUsed(response, 'login.html')
-        # ... nor via POST with no data ...
-        response = Client().post(reverse(views.download, args=
-                (self.downloadable_resource_3.storage_object.identifier,)),
-            follow = True)
-        self.assertTemplateUsed(response, 'login.html')
-        # ... nor via POST with a selected license ...
-        response = Client().post(reverse(views.download, args=
-                (self.downloadable_resource_3.storage_object.identifier,)),
-            { 'licence': 'GPL' },
-            follow = True)
-        # ... nor via POST with an agreement to some license:
-        response = Client().post(reverse(views.download, args=
-                (self.downloadable_resource_3.storage_object.identifier,)),
-            { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
-              'licence': 'GPL' },
-            follow = True)
-        self.assertTemplateUsed(response, 'login.html')
 
     def test_download_button_is_correct_with_staff_user(self):
         """
@@ -874,6 +849,8 @@ def check_resource_view(queryset, test_case):
     skip_path_elements = (
       'email',
       'metaShareId',
+      'downloadLocation',
+      'executionLocation',
     )
 
     # path suffixes where to apply a URL transformation on the value
@@ -883,6 +860,7 @@ def check_resource_view(queryset, test_case):
         '/executionLocation',
         '/samplesLocation',
         '/targetResourceNameURI',
+        '/documentation',
     )
 
     # path suffixes where to apply a number transformation on the value
@@ -954,8 +932,8 @@ def check_resource_view(queryset, test_case):
 
             # apply URL transformation if required
             for _up in url_paths:
-                if path.endswith(_up):
-                    text = unicode(urlizetrunc(text, 17)).encode("utf-8")
+                if path.endswith(_up) and not path.endswith('identificationInfo/url'):
+                    text = unicode(urlizetrunc(text, 23)).encode("utf-8")
 
             # apply date transformation if required
             for _dp in date_paths:

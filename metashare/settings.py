@@ -52,15 +52,16 @@ STATS_SERVER_URL = "http://metastats.fbk.eu/"
 GEOIP_DATA_URL = "http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz" 
 
 
-# If STORAGE_PATH does not exist, try to create it and halt if not possible.
-from os.path import exists
-if not exists(STORAGE_PATH):
-    try:
-        from os import mkdir
-        mkdir(STORAGE_PATH)
-    
-    except:
-        raise OSError, "STORAGE_PATH must exist and be writable!"
+# If STORAGE_PATH or LOCK_DIR does not exist, try to create it and halt if not
+# possible.
+try:
+    if not os.path.isdir(STORAGE_PATH):
+        os.makedirs(STORAGE_PATH)
+    if not os.path.isdir(LOCK_DIR):
+        os.makedirs(LOCK_DIR)
+except:
+    raise OSError, "STORAGE_PATH and LOCK_DIR must exist and be writable!"
+
 
 # If XDIFF_LOCATION was not set in local_settings, set a default here:
 try:
@@ -89,7 +90,7 @@ MANAGERS = ADMINS
 
 SITE_ID = 1
 
-METASHARE_VERSION = '3.0-SNAPSHOT'
+METASHARE_VERSION = '3.0'
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -114,11 +115,11 @@ ADMIN_MEDIA_PREFIX = '{0}/site_media/admin/'.format(DJANGO_URL)
 
 #ADMIN_MEDIA_ROOT = '{0}/media/admin/'.format(ROOT_PATH)
 
-# List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.load_template_source',
-    'django.template.loaders.app_directories.load_template_source',
-# 'django.template.loaders.eggs.load_template_source',
+    ('django.template.loaders.cached.Loader', (
+        'django.template.loaders.filesystem.Loader',
+        'django.template.loaders.app_directories.Loader',
+    )),
 )
 
 MIDDLEWARE_CLASSES = (

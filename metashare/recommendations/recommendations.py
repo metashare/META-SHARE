@@ -1,8 +1,16 @@
-import datetime
-import threading
 from metashare import settings
-from metashare.recommendations.models import TogetherManager
+from metashare.recommendations.models import TogetherManager, ResourceCountDict, \
+    ResourceCountPair
 from metashare.repository.models import resourceInfoType_model
+from metashare.settings import LOG_HANDLER
+from metashare.storage.models import StorageObject
+import datetime
+import logging
+import threading
+
+# Setup logging support.
+LOGGER = logging.getLogger(__name__)
+LOGGER.addHandler(LOG_HANDLER)
 
 
 # viewed and downloaded resources are tracked
@@ -15,7 +23,9 @@ class SessionResourcesTracker:
     """
     Keeps track of resources the user has viewed/downloaded within a session.
     """
-    
+    # a lock used for the thread-safe updating of TogetherManager with new pairs 
+    lock = threading.RLock()
+
     @staticmethod
     def getTracker(request):
         """
@@ -92,10 +102,9 @@ class SessionResourcesTracker:
         either Resource.VIEW or Resource.DOWNLOAD.
         """  
         if not res in res_set:
-            # update TogetherManager with new pairs
-            lock = threading.RLock()
-            # make sure that only one thread updates the TogetherManager at a time 
-            with lock:
+            # update TogetherManager with new pairs but make sure that only one
+            # thread updates the TogetherManager at a time 
+            with SessionResourcesTracker.lock:
                 man = TogetherManager.getManager(res_type)
                 for _res in res_set:
                     man.addResourcePair(_res, res)
@@ -104,7 +113,7 @@ class SessionResourcesTracker:
             
     def _get_expiration_date(self, seconds, time):
         """
-        Returns the expiration date for the given maximm age in seconds based
+        Returns the expiration date for the given maximum age in seconds based
         on the given time.
         """
         if not time:
@@ -184,3 +193,24 @@ def get_more_from_same_projects_qs(resource):
                                 creation_info.fundingProject.all()) \
                     .distinct()
     return resourceInfoType_model.objects.none()
+    
+
+def repair_recommendations():
+    """
+    Checks if the recommendations contain links to documents no longer
+    available. Removes those links when found.
+    """
+    for _dict in ResourceCountDict.objects.all():
+        try:
+            StorageObject.objects.get(identifier=_dict.lrid)
+        except StorageObject.DoesNotExist:
+            # remove recommendation
+            LOGGER.info("removing recommendations dictionary for {}".format(_dict.lrid))
+            _dict.delete()
+    for _pair in ResourceCountPair.objects.all():
+        try:
+            StorageObject.objects.get(identifier=_pair.lrid)
+        except StorageObject.DoesNotExist:
+            # remove recommendation
+            LOGGER.info("removing recommendations entry for {}".format(_pair.lrid))
+            _pair.delete()

@@ -12,12 +12,14 @@ from metashare.recommendations.recommendations import Resource, \
     get_more_from_same_projects
 from metashare.repository import views
 from metashare.settings import ROOT_PATH, LOG_HANDLER
-from metashare.storage.models import PUBLISHED, INGESTED
+from metashare.storage.models import PUBLISHED, INGESTED, StorageObject
 from metashare.test_utils import create_user
 from metashare.stats.models import LRStats, UsageStats
 from metashare.sync.sync_utils import remove_resource
 from metashare.stats.model_utils import saveLRStats, UPDATE_STAT
 from django.db.utils import IntegrityError
+from django.core.management import call_command
+from metashare.repository.models import resourceInfoType_model
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -142,10 +144,19 @@ class SimpleTogetherManagerTest(django.test.TestCase):
         self.assertEquals(1, man.getTogetherCount(self.res_1, self.res_2))
         self.assertEquals(2, len(ResourceCountPair.objects.all()))
         self.assertEquals(2, len(ResourceCountDict.objects.all()))
+        self.assertEquals(3, len(resourceInfoType_model.objects.all())) 
+        self.assertEquals(3, len(StorageObject.objects.all())) 
+        self.res_1.storage_object.delete()
         self.res_1.delete_deep(keep_stats=True)
+        self.assertEquals(2, len(resourceInfoType_model.objects.all()))
+        self.assertEquals(2, len(StorageObject.objects.all())) 
         # recommendations stay the same
         self.assertEquals(2, len(ResourceCountPair.objects.all()))
         self.assertEquals(2, len(ResourceCountDict.objects.all()))
+        # recommendations are deleted after repairing them
+        call_command('repair_recommendations', interactive=False)
+        self.assertEquals(0, len(ResourceCountPair.objects.all()))
+        self.assertEquals(1, len(ResourceCountDict.objects.all()))
         
     def test_unique_together_constraint(self):
         man = TogetherManager.getManager(Resource.VIEW)
@@ -502,10 +513,10 @@ class SessionTest(django.test.TestCase):
         saveLRStats(self.res_3, UPDATE_STAT)
         saveLRStats(self.res_4, UPDATE_STAT)
         self.assertEquals(9, len(LRStats.objects.all()))
-        self.assertEquals(186, len(UsageStats.objects.all()))
+        self.assertEquals(219, len(UsageStats.objects.all()))
         remove_resource(self.res_1.storage_object)
         self.assertEquals(7, len(LRStats.objects.all()))
-        self.assertEquals(139, len(UsageStats.objects.all()))
+        self.assertEquals(163, len(UsageStats.objects.all()))
         
     def test_downloads(self):
         # client 1 downloads all 4 resources

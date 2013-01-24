@@ -30,13 +30,13 @@
     img.order_by_asc { width:15px; vertical-align:top; border:0px; padding:0px; margin:0px; }
     img.order_by_desc { width:15px; vertical-align:top; border:0px; padding:0px; margin:0px; margin-top:-1px; }
     
-    table.mirrors { margin-left:auto;margin-right:auto; }
-    table.mirrors td { width:110px; vertical-align:top; font-size:0.7em; color:#696969; }
-    img.mirror { width:100px; vertical-align:top; padding:5px; border:0px; background-color:#ffffff; border:1px solid #cdcdcd; height:100px; margin-bottom:2px;}
+    table.mirrors { margin-left:auto;margin-right:auto; align:center;}
+    table.mirrors td { width:120px; height:120px; vertical-align:top; font-size:0.9em; color:#696969; text-align:center; align:center;}
+    img.mirror { width:110px; height:110px; vertical-align:middle; padding:5px; border:0px; background-color:#ffffff; border:1px solid #cdcdcd; margin-bottom:2px; height: auto;}
     img.mirror:hover { border:1px solid #696969; }
     
     p.metanet { width:100%; text-align:center; }
-    img.metanet { width:300px; vertical-align:top; padding:5px; border:0px; background-color:#ffffff; border:1px solid #cdcdcd; margin-bottom:2px; margin-left:auto;margin-right:auto;}
+    img.metanet { width:300px; padding:5px; border:0px; background-color:#ffffff; border:1px solid #cdcdcd; margin-bottom:2px; margin-left:auto;margin-right:auto;}
     img.metanet:hover { border:1px solid #696969; }
     
     #results h2 { text-align:center; }
@@ -80,7 +80,13 @@
     ul.errorlist { background:#ffcb00; border:1px solid #ffaa00; padding:2px; list-style-type:none; margin:0em; }
     ul.errorlist li { padding:0px; }
   </style>
-  
+  <script type="text/javascript">
+    var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-36199711-1']); _gaq.push(['_gat._anonymizeIp']);
+    _gaq.push(['_setDomainName', 'none']); _gaq.push(['_setAllowLinker', true]); _gaq.push(['_trackPageview']);
+    (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })();
+  </script>
 </head>
 
 <body>
@@ -109,22 +115,43 @@
   <h3>META-SHARE Managing Nodes</h3>
   <table class="mirrors">
     <tr>
-      <td><a href="http://langtech1.ilc.cnr.it:8000/"><img class="mirror" src="cnr-logo.png" /></a><br/>CNR &mdash; National Research Council of Italy</td>
-      <td><a href="http://metashare.dfki.de/"><img class="mirror" src="dfki-logo.png" /></a><br/>DFKI &mdash; Deutsches Forschungszentrum f&uuml;r k&uuml;nstliche Intelligenz</td>
-      <td><a href="http://metashare.elda.org/"><img class="mirror" src="elda-logo.png" /></a><br/>ELDA &mdash; Evaluations and Language resources Distribution Agency</td>
-      <td><a href="http://metashare.fbk.eu/"><img class="mirror" src="fbk-logo.png" /></a><br/>FBK &mdash; Fondazione Bruno Kessler</td>
-      <td><a href="http://metashare.ilsp.gr:8080/"><img class="mirror" src="ilsp-logo.png" /></a><br/>ILSP &mdash; Institute for Language and Speech Processing</td>
+      <td><a href="http://langtech1.ilc.cnr.it:8000/" onclick="_gaq.push(['_link', 'http://langtech1.ilc.cnr.it:8000/']); return false;"><img class="mirror" src="cnr-logo.png" /></a><br/>CNR &mdash; National Research Council of Italy</td>
+      <td><a href="http://metashare.dfki.de/" onclick="_gaq.push(['_link', 'http://metashare.dfki.de/']); return false;"><img class="mirror" src="dfki-logo.png" /></a><br/>DFKI &mdash; Deutsches Forschungszentrum f&uuml;r k&uuml;nstliche Intelligenz</td>
+      <td><a href="http://metashare.elda.org/" onclick="_gaq.push(['_link', 'http://metashare.elda.org/']); return false;"><img class="mirror" src="elda-logo.png" /></a><br/>ELDA &mdash; Evaluations and Language resources Distribution Agency</td>
+      <td><a href="http://metashare.fbk.eu/" onclick="_gaq.push(['_link', 'http://metashare.fbk.eu/']); return false;"><img class="mirror" src="fbk-logo.png" /></a><br/>FBK &mdash; Fondazione Bruno Kessler</td>
+      <td><a href="http://metashare.ilsp.gr:8080/" onclick="_gaq.push(['_link', 'http://metashare.ilsp.gr:8080/']); return false;"><img class="mirror" src="ilsp-logo.png" /></a><br/>ILSP &mdash; Institute for Language and Speech Processing</td>
+      <td><a href="http://metashare.tilde.com/" onclick="_gaq.push(['_link', 'http://metashare.tilde.com/']); return false;"><img class="mirror" src="tilde-meta-nord-logo.png" /></a><br/>Tilde</td>
     </tr>
   </table>
 
   <h3>Other META-SHARE Nodes</h3>
   <table class="mirrors">
     <tr>
-      <td><a href="http://nlp.ipipan.waw.pl/metashare"><img class="mirror" src="cesar-logo.png" /></a><br/>CESAR &mdash; Central and South-East European Resources</td>
-      <td><a href="http://metashare.tilde.lv/"><img class="mirror" src="meta-nord-logo.png" /></a><br/>META-NORD &mdash; Baltic and Nordic Parts of the European Open Linguistic Infrastructure</td>
+      <td><a href="http://metashare.ibl.bas.bg/" onclick="_gaq.push(['_link', 'http://metashare.ibl.bas.bg/']); return false;"><img class="mirror" src="cesar_ms_IBL-logo.png" /></a><br/>Institute for Bulgarian Language, Bulgarian Academy of Sciences</td>
+      <td><a href="http://nlp.ipipan.waw.pl/metashare" onclick="_gaq.push(['_link', 'http://nlp.ipipan.waw.pl/metashare']); return false;"><img class="mirror" src="cesar_ms_IPIPAN-logo.png" /></a><br/>Institute of Computer Science, Polish Academy of Sciences</td>
+      <td><a href="http://metashare.korpus.sk/" onclick="_gaq.push(['_link', 'http://metashare.korpus.sk/']); return false;"><img class="mirror" src="cesar_ms_LSIL-logo.png" /></a><br/>Ľ. Štúr Institute of Linguistics, Slovak Academy of Sciences</td>
+      <td><a href="http://meta-share.lki.lt/" onclick="_gaq.push(['_link', 'http://meta-share.lki.lt/']); return false;"><img class="mirror" src="lithuania-meta-nord-logo.png" /></a><br/>Lithuanian Language Institute</td>
+      <td><a href="http://www.nb.no/clarin/" onclick="_gaq.push(['_link', 'http://www.nb.no/clarin/']); return false;"><img class="mirror" src="norway-meta-nord-logo.png" /></a><br/>National Library of Norway</td>
     </tr>
   </table>
-
+  <table class="mirrors">
+    <tr align="center">
+      <td><a href="http://metashare.nytud.hu/" onclick="_gaq.push(['_link', 'http://metashare.nytud.hu/']); return false;"><img class="mirror" src="cesar_ms_HASRIL-logo.png" /></a><br/>Research Institute for Linguistics, Hungarian Academy of Sciences</td>
+      <td><a href="http://ws.racai.ro:9191" onclick="_gaq.push(['_link', 'http://ws.racai.ro:9191']); return false;"><img class="mirror" src="racai-logo.png" /></a><br/>Romanian Academy Center for Artificial Intelligence</td>
+      <td><a href="http://metashare.cst.dk/" onclick="_gaq.push(['_link', 'http://metashare.cst.dk/']); return false;"><img class="mirror" src="copenhagen-meta-nord-logo.png" /></a><br/>University of Copenhagen</td>
+      <td><a href="http://spraakbanken.gu.se/metashare/" onclick="_gaq.push(['_link', 'http://spraakbanken.gu.se/metashare/']); return false;"><img class="mirror" src="gothenburg-meta-nord-logo.png" /></a><br/>University of Gothenburg</td>
+      <td><a href="http://metashare.csc.fi/" onclick="_gaq.push(['_link', 'http://metashare.csc.fi/']); return false;"><img class="mirror" src="helsinki-meta-nord-logo.png" /></a><br/>University of Helsinki</td>
+    </tr>
+  </table>
+  <table class="mirrors">
+    <tr align="center">
+      <td><a href="http://metashare.metanet4u.eu/" onclick="_gaq.push(['_link', 'http://metashare.metanet4u.eu/']); return false;"><img class="mirror" src="university-lisbon-logo.gif" /></a><br/>University of Lisbon</td>
+      <td><a href="http://metashare.ia.uni.lodz.pl" onclick="_gaq.push(['_link', 'http://metashare.ia.uni.lodz.pl']); return false;"><img class="mirror" src="cesar_ms_ULODZ-logo.png" /></a><br/>University of Lodz</td>
+      <td><a href="http://metashare.ut.ee/" onclick="_gaq.push(['_link', 'http://metashare.ut.ee/']); return false;"><img class="mirror" src="tartu-meta-nord-logo.png" /></a><br/>University of Tartu</td>
+      <td><a href="http://metashare.talp.cat/" onclick="_gaq.push(['_link', 'http://metashare.talp.cat/']); return false;"><img class="mirror" src="upc-logo.png" /></a><br/>Universitat Politècnica de Catalunya</td>
+      <td><a href="http://metashare.upf.edu/" onclick="_gaq.push(['_link', 'http://metashare.upf.edu/']); return false;"><img class="mirror" src="upf-logo.png" /></a><br/>Universitat Pompeu Fabra</td>
+    </tr>
+  </table>
   </div>
   <div id="options">
   
@@ -133,7 +160,7 @@
     <table>
       <tr>
         <td><img src="fp7-logo.png" /></td>
-        <td>This is the first prototype version of META-SHARE. &copy; META-NET 2010, some rights reserved.<br/>
+        <td>META-SHARE. &copy; META-NET 2010–2012, some rights reserved.<br/>
 Except where noted otherwise, this website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.<br/>Co-funded by the 7th Framework Programme of the European Commission through the grant agreement no. 249119.</td>
       </tr>
     </table>

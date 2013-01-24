@@ -22,6 +22,9 @@ LANGUAGE_CODE = 'en-us'
 # Path to the local storage layer path used for persistent object storage.
 STORAGE_PATH = '/path/to/storage/path'
 
+# Directory in which lock files will temporarily be created.
+LOCK_DIR = join(tempfile.gettempdir(), 'metashare-locks')
+
 # Debug settings, setting DEBUG=True will give exception stacktraces.
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
@@ -116,8 +119,8 @@ SYNC_INTERVALS = {
 # The update intervals should roughly be half of the MAX_DIGEST_AGE as
 # defined below
 UPDATE_INTERVALS = {
-    'MINUTE' : '*',      # 0-59 - Default is *
-    'HOUR' : '*/12',         # 0-23 - Default is */12
+    'MINUTE' : '59',      # 0-59 - Default is 59
+    'HOUR' : '*/12',      # 0-23 - Default is */12
     'DAY_OF_MONTH' : '*', # 1-31 - Default is *
     'MONTH' : '*',        # 1-12 - Default is *
     'DAY_OF_WEEK' : '*',  # 0-6 (0 is Sunday) - Default is *
@@ -135,9 +138,9 @@ CORE_NODES = {
 #    'node_id_1': {
 #        'NAME': 'AUNI',                       # The short name of the node.
 #        'DESCRIPTION': 'xxx',                 # A short descpription of the node.
-#        'URL': 'metashare.example.com:8000',  # The URL of the other META-SHARE
-#                                              # Managing Node (also include the
-#                                              # port if needed).
+#        'URL': 'http://metashare.example.com:8000', # The URL of the other
+#                                              # META-SHARE Managing Node (also
+#                                              # include the port if needed).
 #        'USERNAME': 'sync-user-1',            # The name of a sync user on 
 #                                              # the META-SHARE Managing Nodes.
 #        'PASSWORD': 'sync-user-pass',         # Sync user's password.
@@ -145,7 +148,7 @@ CORE_NODES = {
 #    'node_id_2': {
 #        'NAME': 'BUNI',                     
 #        'DESCRIPTION': 'xxx',               
-#        'URL': 'metashare.test.com',
+#        'URL': 'http://example.com/pub/metashare',
 #        'USERNAME': 'sync-user-2',
 #        'PASSWORD': 'sync-user-pass-2',
 #    },
@@ -172,13 +175,15 @@ PROXIED_NODES = {
 #    'proxied_node_id_1': {
 #        'NAME': 'Proxied Node 1',
 #        'DESCRIPTION': 'xxx',
-#        'URL': 'metashare.example.org',
+#        'URL': 'http://metashare.example.org',
 #        'USERNAME': 'sync-user-3',
 #        'PASSWORD': 'sync-user-pass-3',
 #    },
 }
 
-# Analytics application sample settings. More analytics services are available. 
-# For more options, check http://packages.python.org/django-analytical/
-#GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-XXXXXXXX-X'
-#GOOGLE_ANALYTICS_SITE_SPEED = True
+# You cann add custom web analytics application settings here through the Django
+# Analytical framework which is integrated in META-SHARE. By default, all
+# META-SHARE services are monitored with a common Google Analytics tracking
+# code; see the Installation Manual for more information on this.
+# For the integration of other web analytics services' options, see
+# <http://packages.python.org/django-analytical/>.

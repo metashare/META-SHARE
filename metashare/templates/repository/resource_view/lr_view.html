@@ -7,6 +7,7 @@
 
 {% block links %}
 <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/resource_view.css" />
+<link type="text/css" rel="stylesheet" href="{{ MEDIA_URL }}js/jquery.hoverscroll-0.2.4/jquery.hoverscroll.css" />
 {% endblock %}
 
 {% block description %}{{ description|truncatewords:30 }}{% endblock %}
@@ -15,6 +16,7 @@
 
 {% block content %}
 {% spaceless %}
+	<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.hoverscroll-0.2.4/jquery.hoverscroll.js"></script>
 	<script type="text/javascript" src="http://plugins.learningjquery.com/expander/jquery.expander.js"></script>
 	<script type="text/javascript">
 		$(function () {
@@ -31,8 +33,17 @@
                 } 
 			});
 		});
-
+	
 		$(document).ready(function(){  
+		
+			$('.my-list').hoverscroll({
+				vertical: false,
+	            fixedArrows: false,
+	            arrowsOpacity: 0.8,
+	            width: 273,
+	            height:24,
+        	});	
+		
 			$(".tab_content").hide();
 			$(".fields li:first-child").addClass("active");
 			var selected_tab = $(".fields li.active").find("a").attr("href");
@@ -41,6 +52,32 @@
 				$(".fields li").removeClass("active");
 				$(this).addClass("active");
 				$(".tab_content").hide();
+				var selected_tab = $(this).find("a").attr("href");
+				$(selected_tab).fadeIn();
+				return false;
+	  		});
+	  		
+			$(".textsubtab").hide();
+			$(".textsubfields li:first-child").addClass("active");
+			var selected_tab = $(".textsubfields li.active").find("a").attr("href");
+			$(selected_tab).fadeIn();
+			$(".textsubfields li").click(function() {
+				$(".textsubfields li").removeClass("active");
+				$(this).addClass("active");
+				$(".textsubtab").hide();
+				var selected_tab = $(this).find("a").attr("href");
+				$(selected_tab).fadeIn();
+				return false;
+	  		});
+	  		
+			$(".videosubtab").hide();
+			$(".videosubfields li:first-child").addClass("active");
+			var selected_tab = $(".videosubfields li.active").find("a").attr("href");
+			$(selected_tab).fadeIn();
+			$(".videosubfields li").click(function() {
+				$(".videosubfields li").removeClass("active");
+				$(this).addClass("active");
+				$(".videosubtab").hide();
 				var selected_tab = $(this).find("a").attr("href");
 				$(selected_tab).fadeIn();
 				return false;
@@ -124,13 +161,13 @@
 			{% endif %}
 			
 			{% if url %}
-				<h3 style="font-size:14px;">
-		 			<label>
-			 			{% for address in url %}
-					 		{{address|urlizetrunc:17}}{% if not forloop.last %},{% endif %}
-					 	{% endfor %}
-			 		</label>
-			 	</h3>
+			 	{% for address in url %}
+					<h3 style="font-size:14px;">
+						<label>
+							{{ address|urlize }}{% if not forloop.last %},{% endif %}
+						</label>
+					</h3>
+				{% endfor %}
 			{% endif %}
 			
 			{% if not 'NOT_DEFINED' in metaShareId %}<h4 class="identifier">{{ metaShareId }}</h4>{% endif %}
@@ -143,20 +180,19 @@
 		 		</div>
 	 		{% endif %}
 	 		
-		<h4 style="text-align:justify" class="readmore desc">{{ description }}</h4>
+		<h4 style="text-align:justify" class="readmore desc">{{ description|linebreaksbr }}</h4>
 		
 		{% ifnotequal other_descriptions|length 0 %}
 			<div class='more'>View resource description in all available languages</div>
 			<div class='otherlang'>
-			{% for desc in other_descriptions %}<h4 style="text-align:justify" class="readmore">{{ desc }}</h4>{% endfor %} 
+			{% for desc in other_descriptions %}<h4 style="text-align:justify" class="readmore">{{ desc|linebreaksbr }}</h4>{% endfor %} 
 			</div> 
 		{% endifnotequal %}
 		
 		<div style="clear: both;">
 			<a href="javascript:history.back();"><button class="span-12 button middle_button">&laquo; Back</button></a>
-		    <a {% if LR_DOWNLOAD %} href="{% url metashare.repository.views.download resource.storage_object.identifier %}" {% else %} href="#" class="tip" {% endif %}>
-		  		<span class="download">You don&rsquo;t have the permission to download this resource. Please log in.</span>
-		       	<button class="span-4 button {% if LR_DOWNLOAD %}middle_button{% else %}middle_gray_button{% endif %}">Download</button>
+		    <a href="{% url metashare.repository.views.download resource.storage_object.identifier %}">
+		       	<button class="span-4 button middle_button">Download</button>
 		    </a>
 		  	<a {% if LR_EDIT %} href="{{ LR_EDIT }}" {% else %} href="#" class="tip" {% endif %}>
 				<span class="edit">You don&rsquo;t have the permission to edit this resource.</span>
@@ -167,7 +203,6 @@
 	</div>
 	
 	<div class="white_box column corner">
-
 		{% include "repository/resource_view/distribution.html" with distribution=distribution_dict %}
 
 		{% if contact_person_dicts %}
@@ -248,7 +283,7 @@
 					{% if "Samples_location" in key1 %}
 						 <div class="dataline">
 							<label>
-								<strong>Samples Location: </strong>{{value1|urlizetrunc:17}}
+								<strong>Samples Location: </strong>{{ value1|urlizetrunc:23 }}
 							</label>
 						</div>
 					{% endif %}
@@ -267,9 +302,9 @@
 							{% if value2.Title %}
 								{% include "repository/resource_view/documentation.html" with documentation=value2 type="Documentation" %}
 							{% else %}
-								<div class="dataline indented">
+								<div class="dataline">
 									<label>
-										{{value2}}
+										{{value2|urlizetrunc:23}}
 									</label>
 								</div>
 							{% endif %}

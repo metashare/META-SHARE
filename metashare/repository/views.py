@@ -7,7 +7,7 @@ from mimetypes import guess_type
 
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse, HttpResponseForbidden
+from django.http import HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
 from django.contrib import messages
@@ -73,13 +73,9 @@ def _convert_to_template_tuples(element_tree):
     # information about whether a field is required or not, to correctly
     # render the single resource view.
     else:
-        # cfedermann: use proper getattr access to prevent an AttributeError
-        # being thrown for cases, like /repository/browse/1222/, where some
-        # required attributes seem to be missing.
-        required = getattr(element_tree, 'required', 0)
         # use pretty print name of element instead of tag; requires that 
         # element_tree is created using export_to_elementtree(pretty=True)
-        return ((element_tree.attrib["pretty"], element_tree.text, required),)
+        return ((element_tree.attrib["pretty"], element_tree.text),)
 
 
 # a type providing an enumeration of META-SHARE member types
@@ -112,16 +108,16 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
   'MSCommons-BY-SA': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYSA_v1.0.htm',
                       MEMBER_TYPES.FULL),
   'MS-C-NoReD-FF': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
-        'NoRedistribution_For-a-Fee_v0.7.htm', MEMBER_TYPES.GOD),
+        'NoRedistribution_For-a-Fee_v1.0.htm', MEMBER_TYPES.GOD),
   'MS-C-NoReD': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
-        'NoRedistribution_v0.7.htm', MEMBER_TYPES.GOD),
+        'NoRedistribution_v1.0.htm', MEMBER_TYPES.GOD),
   'MS-C-NoReD-ND-FF': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
         'NoRedistribution_NoDerivatives_For-a-fee-v1.0.htm', MEMBER_TYPES.GOD),
   'MS-C-NoReD-ND': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
         'NoRedistribution_NoDerivatives-v1.0.htm', MEMBER_TYPES.GOD),
-  'MS-NC-NoReD-ND-FF': (MEDIA_URL + 'licences/META-SHARE_' \
+  'MS-NC-NoReD-ND-FF': (MEDIA_URL + 'licences/META-SHARE_NonCommercial' \
         '_NoRedistribution_NoDerivatives_For-a-fee-v1.0.htm', MEMBER_TYPES.GOD),
-  'MS-NC-NoReD-ND': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
+  'MS-NC-NoReD-ND': (MEDIA_URL + 'licences/META-SHARE_NonCommercial_' \
         'NoRedistribution_NoDerivatives-v1.0.htm', MEMBER_TYPES.GOD),
   'MS-NC-NoReD-FF': (MEDIA_URL + 'licences/META-SHARE_NonCommercial' \
         '_NoRedistribution_For-a-Fee-v1.0.htm', MEMBER_TYPES.GOD),
@@ -132,17 +128,18 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
   'ELRA_END_USER': (MEDIA_URL + 'licences/ENDUSER-v3_2007.htm',
                     MEMBER_TYPES.GOD),
   'proprietary': ('', MEMBER_TYPES.GOD),
-  'CLARIN_PUB': ('', MEMBER_TYPES.GOD),
-  'CLARIN_ACA-NC': ('', MEMBER_TYPES.GOD),
-  'CLARIN_ACA': ('', MEMBER_TYPES.GOD),
-  'CLARIN_RES': ('', MEMBER_TYPES.GOD),
+  'CLARIN_PUB': (MEDIA_URL + 'licences/CLARIN_PUB.html', MEMBER_TYPES.GOD),
+  'CLARIN_ACA-NC': (MEDIA_URL + 'licences/CLARIN_ACA.html', MEMBER_TYPES.GOD),
+  'CLARIN_ACA': (MEDIA_URL + 'licences/CLARIN_ACA.html', MEMBER_TYPES.GOD),
+  'CLARIN_RES': (MEDIA_URL + 'licences/CLARIN_RES.html', MEMBER_TYPES.GOD),
   'Princeton_Wordnet': (MEDIA_URL + 'licences/WordNet-3.0.txt',
                         MEMBER_TYPES.NON),
   'GPL': (MEDIA_URL + 'licences/GNU_gpl-3.0.htm', MEMBER_TYPES.NON),
   'GFDL': (MEDIA_URL + 'licences/GNU_fdl-1.3.htm', MEMBER_TYPES.NON),
   'ApacheLicence_2.0': (MEDIA_URL + 'licences/Apache-2.0.htm',
                         MEMBER_TYPES.NON),
-  'BSD-style': (MEDIA_URL + 'licences/BSD_licence.htm', MEMBER_TYPES.NON),
+  'BSD': (MEDIA_URL + 'licences/BSD_licence.htm', MEMBER_TYPES.NON),
+  'BSD-style': ('', MEMBER_TYPES.NON),
   'underNegotiation': ('', MEMBER_TYPES.GOD),
   'other': ('', MEMBER_TYPES.GOD)
 }
@@ -185,7 +182,7 @@ def _get_licences(resource, user_membership):
             del all_licenses[name]
         elif user_membership >= access[1] \
                 and (info.downloadLocation \
-                     or resource.storage_object.has_local_download_copy()):
+                     or resource.storage_object.get_download()):
             # the resource can be downloaded somewhere under the current license
             # terms and the user's membership allows her to immediately download
             # the resource
@@ -196,14 +193,11 @@ def _get_licences(resource, user_membership):
     return result
 
 
-@login_required
 def download(request, object_id):
     """
     Renders the resource download/purchase view including license selection,
     etc.
     """
-    if not request.user.is_active:
-        return HttpResponseForbidden()
     user_membership = _get_user_membership(request.user)
 
     # here we are only interested in licenses (or their names) of the specified
@@ -235,7 +229,7 @@ def download(request, object_id):
             else:
                 return render_to_response('repository/licence_agreement.html',
                     { 'form': la_form, 'resource': resource,
-                      'licence_path': \
+                      'licence_name': licence_choice, 'licence_path': \
                       LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
                       'download_available': licences[licence_choice][1] },
                     context_instance=RequestContext(request))
@@ -249,7 +243,7 @@ def download(request, object_id):
     if licence_choice:
         return render_to_response('repository/licence_agreement.html',
             { 'form': LicenseAgreementForm(licence_choice),
-              'resource': resource,
+              'resource': resource, 'licence_name': licence_choice, 
               'licence_path': \
                 LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
               'download_available': licences[licence_choice][1] },
@@ -269,9 +263,9 @@ def _provide_download(request, resource, download_urls):
     """
     Returns an HTTP response with a download of the given resource.
     """
-    if resource.storage_object.has_local_download_copy():
+    dl_path = resource.storage_object.get_download()
+    if dl_path:
         try:
-            dl_path = resource.storage_object.get_download()
             def dl_stream_generator():
                 with open(dl_path, 'rb') as _local_data:
                     _chunk = _local_data.read(MAXIMUM_READ_BLOCK_SIZE)
@@ -455,7 +449,6 @@ def view(request, resource_name=None, object_id=None):
     resource_creation_info_tuple = None
     relation_info_tuples = []
     resource_component_tuple = None
-    languages_tuple = []
     for _tuple in lr_content[1]:
         if _tuple[0] == "Distribution":
             distribution_info_tuple = _tuple
@@ -480,18 +473,12 @@ def view(request, resource_name=None, object_id=None):
     
     # Convert resource_component_tuple to nested dictionaries
     resource_component_dicts = {}
-    resource_creation_dict = {}
-    metadata_dict = {}
-    usage_dict = {}
-    version_dict = {}
-    documentation_dict = {}
     validation_dicts = []
     relation_dicts = []    
     
     # Convert several tuples to dictionaries to facilitate rendering
     # the templates.
     contact_person_dicts = []
-    resource_component_dict = {}
     for item in contact_person_tuples:
         contact_person_dicts.append(tuple2dict([item]))
     distribution_dict = tuple2dict([distribution_info_tuple])
@@ -507,27 +494,16 @@ def view(request, resource_name=None, object_id=None):
         relation_dicts.append(tuple2dict([item]))
 
     # Count individual media resource components
-    media_counts = {'text': 0, 'video': 0}
+    text_counts = []
+    video_counts = []
     if resource_type == "corpus":
         for key, value in resource_component_dict['Resource_component']['Corpus_media'].items():
-            if "Corpus_text" in key:
-                media_counts['text'] += 1
+            if "Corpus_text" in key and not "numerical" in key and not "ngram" in key:
+                text_counts.append(value)
             elif "Corpus_video" in key:
-                media_counts['video'] += 1
-    elif resource_type == "languageDescription":
-        for key, value in resource_component_dict['Resource_component']['Language_description_media'].items():
-            if "Language_description_text" in key:
-                media_counts['text'] += 1
-            elif "Language_description_video" in key:
-                media_counts['video'] += 1
-    elif resource_type == "lexicalConceptualResource":
-        for key, value in resource_component_dict['Resource_component']['Lexical_conceptual_resource_media'].items():
-            if "Lexical_conceptual_resource_text" in key:
-                media_counts['text'] += 1
-            elif "Lexical_conceptual_resource_video" in key:
-                media_counts['video'] += 1
-
-	# Create a list of resource components dictionaries
+                video_counts.append(value)
+              
+    # Create a list of resource components dictionaries
     if resource_type == "corpus":
         for media_type in media_types:
             if media_type == "text":
@@ -597,7 +573,7 @@ def view(request, resource_name=None, object_id=None):
     elif resource_type == "toolService":
         resource_component_dicts['toolService'] = \
           resource_component_dict['Resource_component']
-    
+   
     # Define context for template rendering.
     context = {
                 'contact_person_dicts': contact_person_dicts,
@@ -624,9 +600,9 @@ def view(request, resource_name=None, object_id=None):
                 'usage_dict': usage_dict,
                 'validation_dicts': validation_dicts,                
                 'version_dict': version_dict,
-                'media_counts': media_counts,
-
-                }
+                'text_counts': text_counts,
+                'video_counts': video_counts,
+              }
     template = 'repository/resource_view/lr_view.html'
 
     # For users who have edit permission for this resource, we have to add 
@@ -636,9 +612,6 @@ def view(request, resource_name=None, object_id=None):
         context['LR_EDIT'] = reverse(
             'admin:repository_resourceinfotype_model_change', \
               args=(resource.id,))
-
-    # in general, only logged in users may download/purchase any resources
-    context['LR_DOWNLOAD'] = request.user.is_active
 
     # Update statistics:
     if saveLRStats(resource, VIEW_STAT, request):

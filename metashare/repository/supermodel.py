@@ -1,10 +1,12 @@
 import datetime
 import logging
 import re
+import urllib
 from Queue import Queue
 from traceback import format_exc
 from xml.etree.ElementTree import Element, fromstring, tostring
 
+from django import db
 from django.core.cache import cache
 from django.core.exceptions import ValidationError, ObjectDoesNotExist, \
     ImproperlyConfigured
@@ -13,6 +15,7 @@ from django.db.models.fields import related
 from django.db.models.fields.related import ForeignRelatedObjectsDescriptor, \
     OneToOneField
 
+import metashare.repository.models
 from metashare.repository.fields import MultiSelectField, MultiTextField, \
     MetaBooleanField, DictField
 from metashare.settings import LOG_HANDLER, \
@@ -116,15 +119,6 @@ class SchemaModel(models.Model):
         This is an abstract super class for all schema models.
         """
         abstract = True
-
-    @classmethod
-    def is_required_field(cls, name):
-        """
-        Checks whether the field with the given name is a required field.
-        """
-        # pylint: disable-msg=E1101
-        _fields = cls.get_fields()
-        return name in _fields['required']
 
     @classmethod
     def get_many_to_many_fields(cls):
@@ -234,9 +228,9 @@ class SchemaModel(models.Model):
             return False
 
     @staticmethod
-    def _python_to_xml(value):
+    def _python_to_xml(value, field=None):
         """
-        Converts the given Python value to its XML representation.
+        Converts the given Python field value to its XML representation.
         """
         # Boolean values need to be rendered as 'true' or 'false' Strings.
         if isinstance(value, bool):
@@ -247,6 +241,13 @@ class SchemaModel(models.Model):
 
         # String instances are converted to Unicode instances.
         elif isinstance(value, basestring):
+
+            # xs:anyURI values are internally stored as valid URIs which may
+            # contain escaped characters; unescape them again for the export
+            if field and metashare.repository.models.HTTPURI_VALIDATOR in \
+                    field.validators and value:
+                value = urllib.unquote(str(value)).decode('utf8')
+
             return unicode(value)
 
         # All other values are encoded as Strings.
@@ -297,6 +298,14 @@ class SchemaModel(models.Model):
           or isinstance(field, MultiTextField):
             if value is None:
                 result = ''
+
+        # If we have an xs:anyURI value, then it must be a URI according to RFC
+        # 2396 or it must result in such a URI after applying the algorithm from
+        # <http://www.w3.org/TR/2001/REC-xlink-20010627/#link-locators>.
+        if metashare.repository.models.HTTPURI_VALIDATOR in field.validators \
+                and result is not None:
+            result = urllib.quote(result.encode('utf8'),
+                r'''!#$%&'()*+,/:;=?@[]~''')
 
         return result
 
@@ -439,7 +448,8 @@ class SchemaModel(models.Model):
                     if isinstance(_sub_value, SchemaModel):
                         if _sub_value.__schema_name__ == "STRINGMODEL":
                             _element = Element(_xsd_name)
-                            _element_text = SchemaModel._python_to_xml(_sub_value.value)
+                            _element_text = SchemaModel._python_to_xml(
+                                _sub_value.value, _field)
                             if pretty:
                                 _element.attrib["pretty"] = self.get_verbose_name(_model_field)
                                 if self.is_choice(_model_field):
@@ -475,23 +485,10 @@ class SchemaModel(models.Model):
                             # language code key
                             _element.set('lang', _sub_value[0])
                             _element_text = SchemaModel._python_to_xml(
-                                                                _sub_value[1])                            
-                            if self.is_required_field(_model_field):
-                                # If the element is "required" in the model,
-                                # turn the "required" value of the element
-                                # tree to "1" (true), otherwise "0" (false).
-                                _element.required = self.is_required_field(
-                                                                _model_field)
-                            else:
-                                _element.required = False
+                                _sub_value[1], _field)
                         else:
                             _element_text = SchemaModel._python_to_xml(
-                                                                _sub_value)                            
-                            if self.is_required_field(_model_field):
-                                _element.required = self.is_required_field(
-                                                                _model_field)
-                            else:
-                                _element.required = False
+                                _sub_value, _field)
                         if pretty:
                             if self.is_choice(_model_field):
                                 _element_text = prettify_camel_case_string(_element_text)
@@ -804,6 +801,9 @@ class SchemaModel(models.Model):
                         _object.save()
 
                     except IntegrityError as _exc:
+                        # reset database connection (required for PostgreSQL)
+                        db.close_connection()
+
                         # pylint: disable-msg=E1101
                         _msg = u'Could not save {} object! ({})'.format(
                           _object.__class__, _exc)
@@ -979,6 +979,9 @@ class SchemaModel(models.Model):
                     _object.save()
 
                 except IntegrityError as _exc:
+                    # reset database connection (required for PostgreSQL)
+                    db.close_connection()
+
                     # pylint: disable-msg=E1101
                     _msg = u'Could not save {} object! ({})'.format(
                       _object.__class__, _exc)
@@ -1104,6 +1107,10 @@ class SchemaModel(models.Model):
                 _created.append((_object, 'C'))
 
         except (IntegrityError, ValidationError) as _exc:
+            if isinstance(_exc, IntegrityError): 
+                # reset database connection (required for PostgreSQL)
+                db.close_connection()
+
             detail = u''
             if hasattr(_exc, 'message_dict'):
                 for key in _exc.message_dict:

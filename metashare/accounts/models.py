@@ -8,7 +8,7 @@ from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
 from metashare.settings import LOG_HANDLER
-
+from metashare import repository
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -48,8 +48,18 @@ class RegistrationRequest(models.Model):
         Deletes the related `User` object of the given deleted
         `RegistrationRequest` instance, if the former is not active, yet.
         """
-        if not instance.user.is_active:
-            instance.user.delete()
+        try:
+            _related_user = instance.user
+        except User.DoesNotExist:
+            # in case the user account is deleted before the registration
+            # request is deleted (e.g., by a superuser), then we do not have to
+            # do anything here
+            pass
+        else:
+            # only delete the corresponding user account, if it is not active,
+            # yet (it may have been activated manually by a superuser)
+            if not _related_user.is_active:
+                _related_user.delete()
 
     def __unicode__(self):
         """
@@ -224,16 +234,21 @@ class UserProfile(models.Model):
         """
         if not self.user:
             super(UserProfile, self).delete(*args, **kwargs)
+                
 
     def has_editor_permission(self):
         """
-        Return whether the user profile belongs to any editor_group or not.
+        Returns `True` if there are any resources that the user behind this
+        profile can edit or create; `False` otherwise.
         """
         if self.user.is_superuser:
             return True      
-                
-        return EditorGroup.objects.filter(name__in=
-            self.user.groups.values_list('name', flat=True)).count() != 0
+
+        return self.user.is_staff and \
+            (EditorGroup.objects.filter(name__in=
+                self.user.groups.values_list('name', flat=True)).exists()
+             or repository.models.resourceInfoType_model.objects \
+                .filter(owners__username=self.user.username).exists())
 
     def has_manager_permission(self, editor_group=None):
         """

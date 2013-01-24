@@ -403,35 +403,35 @@ class FilterTest(SeleniumTestCase):
           # first option is selected by default
           "//select[@name='ordering']/option[1]").text)
         self.assertEqual("AURORA-5", driver.find_element_by_xpath(
-          "//div[@class='results']/div/a").text)
+          "//div[@class='results']/div[1]/a[1]").text)
         # now sort by Resource name descending
         Select(driver.find_element_by_name("ordering")).select_by_visible_text("Resource Name Z-A")
         self.assertEqual("VERBA Polytechnic and Plurilingual Terminological Database - S-AA Anatomy", driver.find_element_by_xpath(
-          "//div[@class='results']/div/a").text)
+          "//div[@class='results']/div[1]/a[1]").text)
         # now sort by resource type ascending
         Select(driver.find_element_by_name("ordering")).select_by_visible_text("Resource Type A-Z")
         self.assertEqual("Corpus", driver.find_element_by_xpath(
-          "//div[@class='results']/div/img").get_attribute("title"))
+          "//div[@class='results']/div[1]/img[1]").get_attribute("title"))
         # now sort by resource type descending
         Select(driver.find_element_by_name("ordering")).select_by_visible_text("Resource Type Z-A")
         self.assertEqual("Tool/Service", driver.find_element_by_xpath(
-          "//div[@class='results']/div/img").get_attribute("title"))
+          "//div[@class='results']/div[1]/img[1]").get_attribute("title"))
         # now sort by media type ascending
         Select(driver.find_element_by_name("ordering")).select_by_visible_text("Media Type A-Z")
         self.assertEqual("audio", driver.find_element_by_xpath(
-          "//div[@class='results']/div/img[2]").get_attribute("title"))
+          "//div[@class='results']/div[1]/img[2]").get_attribute("title"))
         # now sort by media type descending
         Select(driver.find_element_by_name("ordering")).select_by_visible_text("Media Type Z-A")
         self.assertEqual("text", driver.find_element_by_xpath(
-          "//div[@class='results']/div/img[2]").get_attribute("title"))
+          "//div[@class='results']/div[1]/img[2]").get_attribute("title"))
         # now sort by language ascending
         Select(driver.find_element_by_name("ordering")).select_by_visible_text("Language Name A-Z")
         self.assertEqual("Aleut", driver.find_element_by_xpath(
-          "//div[@class='results']/div/ul").text)
+          "//div[@class='results']/div[1]/ul/li[1]").text)
         # now sort by language descending
         Select(driver.find_element_by_name("ordering")).select_by_visible_text("Language Name Z-A")
         self.assertEqual("Turkish", driver.find_element_by_xpath(
-          "//div[@class='results']/div/ul").text)
+          "//div[@class='results']/div[1]/ul/li[1]").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
 
         # test filter application:

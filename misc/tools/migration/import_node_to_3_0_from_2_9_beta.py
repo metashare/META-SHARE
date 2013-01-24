@@ -238,6 +238,10 @@ def import_resources(import_folder):
                         break
                 imported_resources.append(res)
             except Exception as problem:
+                from django import db
+                if isinstance(problem, db.utils.DatabaseError):
+                    # reset database connection (required for PostgreSQL)
+                    db.close_connection()
                 erroneous_descriptors.append((folder_name, problem))
 
     print "Done.  Successfully imported {0} resources into the database, " \

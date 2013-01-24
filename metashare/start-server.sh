@@ -1,7 +1,7 @@
 #!/bin/bash
 # META-SHARE Django website
 
-PROJECT_ROOT=$(dirname "$0")
+PROJECT_ROOT=`cd $(dirname "$0"); pwd`
 DJANGO_PID="$PROJECT_ROOT/django.pid"
 LIGHTTPD_PID="$PROJECT_ROOT/lighttpd.pid"
 
