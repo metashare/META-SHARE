@@ -292,6 +292,10 @@ def _get_ipaddress(request):
     """    
     if request != None:
         ip_address = request.META.get('HTTP_X_FORWARDED_FOR', '') or request.META.get('REMOTE_ADDR') or ''
+        # the X-Forwarded-For header may contain multiple IP addresses; use only
+        # the first one (i.e., the original client's address)
+        if ',' in ip_address:
+            ip_address = ip_address.partition(',')[0]
         user_agent = request.META.get('HTTP_USER_AGENT') or ''
         if user_agent != '':
             if not BOT_AGENT_RE.match(user_agent):
