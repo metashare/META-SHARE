@@ -58,7 +58,7 @@
     {% endif %}
     <li title="Mailing lists, wiki, and more"><a target="_blank" href="http://metashare.ilsp.gr/forum">Community</a></li>
     {# <li title="Workflow, Schema specifications"><a href="{% url editor:documentation %}">Documentation</a></li> #}
-   
+    {# <li><a href="{% url editor:about %}">About</a></li> #}
     <li title="View various statistics"><a href="{% url metashare.views.frontpage %}stats/top/">Statistics</a></li>
     {% if user.is_active %}
     <li title="Profile settings and actions"><a>Your Profile, {% filter force_escape %}{% firstof user.first_name user.username %}{% endfilter %}</a>
@@ -85,7 +85,6 @@
       	<li><a href="{% url info %}#Data_Protection">Data Protection</a></li>
       	<li><a href="{% url info %}#Data_Protection_Statement">Data Protection Statement</a></li>
       	<li><a href="{{ MEDIA_URL }}documentation.pdf" title="Download the META-SHARE user's manual">Documentation</a></li>
-            
       </ul>
     </li>
   </ul>
