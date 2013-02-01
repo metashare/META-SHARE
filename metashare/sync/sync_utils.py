@@ -44,13 +44,15 @@ def login(login_url, username, password):
         'csrfmiddlewaretoken':csrftoken,
     })
 
+    response = None
     try:
         response = opener.open(login_url, post_data)
         html = response.read()
         if not 'Logout' in html:
             raise Exception("Expected html page with a Logout button but got:\n{0}".format(html))
     finally:
-        response.close()
+        if response is not None:
+            response.close()
     return opener
 
 
