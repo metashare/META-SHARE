@@ -57,11 +57,23 @@
     </li>
     {% endif %}
     <li title="Mailing lists, wiki, and more"><a target="_blank" href="http://metashare.ilsp.gr/forum">Community</a></li>
-    {# <li title="Workflow, Schema specifications"><a href="{% url editor:documentation %}">Documentation</a></li> #}
-    {# <li><a href="{% url editor:about %}">About</a></li> #}
-    <li title="View various statistics"><a href="{% url metashare.views.frontpage %}stats/top/">Statistics</a></li>
+    <li title="View various statistics for this META-SHARE Node"><a href="{% url metashare.views.frontpage %}stats/top/">Statistics</a></li>
+    <li><a href="{{ MEDIA_URL }}documentation.pdf" title="Download the META-SHARE user&rsquo;s manual">Help</a></li>
+    <li><a href="{% url info %}">About</a>
+      <ul>        
+        <li><a href="{% url info %}#META-SHARE_Members">META-SHARE Members</a></li>
+        <li><a href="{% url info %}#META-SHARE_Repositories">META-SHARE Repositories</a></li>
+        <li><a href="{% url info %}#META-SHARE_Managing_Nodes">META-SHARE Managing Nodes</a></li>
+        <li><a href="{% url info %}#LR_Sharing_within_the_META-SHARE_Network">LR Sharing</a></li>
+        <li><a href="{% url info %}#Licensing_LRs_through_META-SHARE">Licensing LRs</a></li>
+        <li><a href="{% url info %}#Notice_and_Take_Down_Policy">Notice and Takedown Policy</a></li>
+        <li><a href="{% url info %}#Privacy">Privacy</a></li>
+        <li><a href="{% url info %}#Data_Protection">Data Protection</a></li>
+        <li><a href="{% url info %}#Data_Protection_Statement">Data Protection Statement</a></li>
+      </ul>
+    </li>
     {% if user.is_active %}
-    <li title="Profile settings and actions"><a>Your Profile, {% filter force_escape %}{% firstof user.first_name user.username %}{% endfilter %}</a>
+    <li title="Profile settings and actions"><a href="{% url metashare.accounts.views.edit_profile %}">Your Profile, {% filter force_escape %}{% firstof user.first_name user.username %}{% endfilter %}</a>
       <ul>
         {% if user.is_staff %}<li><a href="{% url editor:index %}">View your recent actions</a></li>{% endif %}
         <li><a href="{% url metashare.accounts.views.edit_profile %}" title='View or edit your personal details'>Edit your profile</a></li>
@@ -72,21 +84,6 @@
       </ul>
     </li>
     {% endif %}
-    
-    <li><a href="{% url info %}">About META-SHARE</a>
-      <ul>        
-        <li><a href="{% url info %}#META-SHARE_Members">META-SHARE Members</a></li>
-        <li><a href="{% url info %}#META-SHARE_Repositories">META-SHARE Repositories</a></li>
-        <li><a href="{% url info %}#META-SHARE_Managing_Nodes">META-SHARE Managing Nodes</a></li>
-        <li><a href="{% url info %}#LR_Sharing_within_the_META-SHARE_Network">LR Sharing</a></li>
-        <li><a href="{% url info %}#Licensing_LRs_through_META-SHARE">Licensing LRs</a></li>
-      	<li><a href="{% url info %}#Notice_and_Take_Down_Policy">Notice and Takedown Policy</a></li>
-      	<li><a href="{% url info %}#Privacy">Privacy</a></li>
-      	<li><a href="{% url info %}#Data_Protection">Data Protection</a></li>
-      	<li><a href="{% url info %}#Data_Protection_Statement">Data Protection Statement</a></li>
-      	<li><a href="{{ MEDIA_URL }}documentation.pdf" title="Download the META-SHARE user's manual">Documentation</a></li>
-      </ul>
-    </li>
   </ul>
 
 </div>
