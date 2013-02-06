@@ -654,9 +654,9 @@ def repair_storage_folder():
                 _so.local_storage = None
                 _so.update_storage()
         except IndexError:
-             LOGGER.debug(u'ERROR: Storage id {0} could not be repaired due to "IndexError"'.format(_so.id))
-
-
+             LOGGER.debug(u'ERROR: Storage id {0} could not be repaired'.format(_so.identifier))
+             
+             
 def compute_checksum(infile):
     """
     Compute the MD5 checksum of infile, and return it as a hexadecimal string.
