@@ -24,6 +24,10 @@
   {# drop-down menu created with http://javascript-array.com/scripts/jquery_simple_drop_down_menu/ #}
   <ul id="jsddm">
     <li title="Browse the resources of the META-SHARE catalogue"><a href="{% url metashare.views.frontpage %}repository/search/">Browse Resources</a></li>
+    {% if user.is_staff and user.get_profile.has_editor_permission %}
+        <li title="Import resources using OAI-PMH"><a href="{% url metashare.views.frontpage %}repository/oai-pmh-import/">Import OAI-PMH</a></li>
+        <li title="Export resources using OAI-PMH"><a href="{% url metashare.views.frontpage %}repository/oai-pmh-export/">Export OAI-PMH</a></li>
+    {% endif %}
     {% if user.get_profile.has_editor_permission %}
     <li title="Create/edit resource metadata or upload resource data"><a>Manage Resources</a>
       <ul>

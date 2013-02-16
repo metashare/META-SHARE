@@ -14,6 +14,7 @@ from django.contrib import messages
 from django.template.loader import render_to_string
 from django.core.mail import send_mail
 from django.utils.translation import ugettext as _
+from django.utils.safestring import mark_safe
 
 from haystack.views import FacetedSearchView
 
@@ -33,6 +34,10 @@ from metashare.storage.models import PUBLISHED
 from metashare.recommendations.recommendations import SessionResourcesTracker, \
     get_download_recommendations, get_view_recommendations, \
     get_more_from_same_creators_qs, get_more_from_same_projects_qs
+
+from metashare.repository.forms import OaiPmhForm
+from metashare import oai_pmh
+from oai_pmh import time_it, smart_extend
 
 
 MAXIMUM_READ_BLOCK_SIZE = 4096
@@ -959,3 +964,172 @@ class MetashareFacetedSearchView(FacetedSearchView):
                                'addable': addable})
 
         return results
+
+
+
+# PAI-PMH import
+#
+@login_required
+def oai_pmh_import(request):
+    """
+        Handle the OAI-PMH importing.
+
+        There are 2 features *not* out of the box ready when you use an arbitrary
+        digital library supporting OAI-PMH:
+        1) the MetaShare metadata format (according to the v3.0 schema)
+        2) ORE must give a hint to local paths (because of our specific and strict
+            licensing on the other point)
+
+        Please, consult UFAL, Charles University for more detail. We use it
+        for DSpace <-> Metashare synchronisation.
+    """
+
+    def _mark_obj_as_html_ok( data_dict ):
+        """ We return html strings, ouch """
+        if isinstance(data_dict, dict):
+            for k, v in data_dict.iteritems():
+                if isinstance(v, basestring):
+                    data_dict[k] = mark_safe(v)
+
+    def _get_what_to_do_from_fast_buttons( form ):
+        """
+            Simplification for the user if another button was clicked than
+            the Process button.
+        """
+        verb = form.cleaned_data['verb']
+        for key in form.data.keys():
+            if key.startswith("verb_"):
+                verb = key.replace("verb_", "")
+                break
+        return verb
+
+    def _remove_all_items():
+        from metashare.storage.models import StorageObject
+        from metashare.sync.sync_utils import remove_resource
+
+        d = {}
+        all_sos = StorageObject.objects.all()
+        # somehow it is not always working (could be known windows delete problem)
+        for so in all_sos:
+            d[so.id] = "Removed"
+            try:
+                remove_resource(so)
+            except:
+                pass
+            try:
+                so.delete()
+            except:
+                pass
+        return d
+
+
+    form = OaiPmhForm()
+    # the user posted something so do what he wanted
+    if "POST" == request.method:
+
+        data_info = {}
+        form = OaiPmhForm(request.POST)
+        if form.is_valid():
+            # find out what to do and then do it
+            what_to_do = _get_what_to_do_from_fast_buttons(form)
+
+            try:
+
+                if what_to_do in oai_pmh.supported_commands:
+
+                    # call the function associated with the task
+                    #
+                    ftor = oai_pmh.supported_commands[what_to_do]
+                    data_dict_title = what_to_do
+                    tm, data_dict = time_it(ftor, smart_extend(locals(), form.cleaned_data))
+                    data_info = {
+                        "Item size": len(data_dict),
+                        "Time taken": tm,
+                    }
+                    _mark_obj_as_html_ok(data_dict)
+
+                    # ok so use javascript if needed
+                    #
+                    if oai_pmh.key_list_ids_for_import == what_to_do:
+                        javascript_for_id = 1
+                        import_verb = oai_pmh.key_import
+                    elif oai_pmh.key_list_metadata_format == what_to_do:
+                        javascript_for_id = 2
+
+                # special case
+                elif "removeall" == what_to_do:
+                    tm, data_dict = time_it(_remove_all_items)
+                    data_info = {
+                        "Item size": len(data_dict),
+                        "Time taken": tm,
+                    }
+
+                else:
+                    error_str = u"Invalid command [%s]" % what_to_do
+
+            except Exception, e:
+                error_str = repr(e)
+
+
+    # give it all params together with form params
+    params = smart_extend(
+        {
+            'showform': "1",
+            'form_input': form,
+        },
+        locals(),
+        getattr(form, 'cleaned_data', {}),
+    )
+
+    # and show it
+    return render_to_response(
+        'repository/oai_pmh_import.html',
+        params,
+        context_instance=RequestContext(request))
+
+
+# PAI-PMH export
+#
+oai_url = DJANGO_URL.rstrip("/") + "/repository/oai"
+
+from oai_pmh import MetashareOaiServer
+from oai_pmh.oaipmh.server import Server
+from metashare.settings import ADMINS, METASHARE_VERSION
+
+__env_dict = {
+    "name": u"Metashare " + METASHARE_VERSION,
+    "url": oai_url,
+    "adminEmails": [x[1] for x in ADMINS],
+}
+oai_server_inst = Server(server=MetashareOaiServer(__env_dict))
+
+
+@login_required
+def oai_pmh_export(request):
+    """
+        Simple OAI-PMH page with testing and settings information.
+    """
+    params = {
+        "oai_url": oai_url,
+    }
+    return render_to_response(
+        'repository/oai_pmh_export.html',
+        params,
+        context_instance=RequestContext(request))
+
+
+def oai_server(request):
+    """
+        Handle the OAI-PMH exporting.
+    """
+    if not "verb" in request.GET:
+        invalid_html = oai_server_inst.handleRequest({})
+        return HttpResponse(content=invalid_html,
+                            status=400,
+                            content_type="text/xml")
+
+    verb = request.GET.get("verb")
+    content = oai_server_inst.handleVerb(verb, {})
+    return HttpResponse(content=content,
+                        status=200,
+                        content_type="text/xml")
