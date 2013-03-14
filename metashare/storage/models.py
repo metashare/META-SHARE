@@ -636,22 +636,27 @@ def repair_storage_folder():
     Superfluous files are deleted."
     """
     for _so in StorageObject.objects.all():
-        if _so.publication_status == INTERNAL:
-            # if storage folder is found, delete all files except a possible
-            # binary
-            folder = os.path.join(settings.STORAGE_PATH, _so.identifier)
-            for _file in ('storage-local.json', 'storage-global.json', 
-              'resource.zip', 'metadata.xml', 'metadata-*.xml'):
-                path = os.path.join(folder, _file)
-                for _path in glob.glob(path):
-                    if os.path.exists(_path):
-                        os.remove(_path)
-        else:
-            _so.metadata = None
-            _so.global_storage = None
-            _so.local_storage = None
-            _so.update_storage()
 
+        try:
+            if _so.publication_status == INTERNAL:
+                # if storage folder is found, delete all files except a possible
+                # binary
+                folder = os.path.join(settings.STORAGE_PATH, _so.identifier)
+                for _file in ('storage-local.json', 'storage-global.json',
+                  'resource.zip', 'metadata.xml', 'metadata-*.xml'):
+                    path = os.path.join(folder, _file)
+                    for _path in glob.glob(path):
+                        if os.path.exists(_path):
+                            os.remove(_path)
+            else:
+                _so.metadata = None
+                _so.global_storage = None
+                _so.local_storage = None
+                _so.update_storage()
+        except IndexError:
+             LOGGER.debug(u'ERROR: Storage id {0} could not be repaired'.format(_so.identifier))
+             
+             
 def compute_checksum(infile):
     """
     Compute the MD5 checksum of infile, and return it as a hexadecimal string.
