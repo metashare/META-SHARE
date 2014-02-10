@@ -546,7 +546,7 @@ class DownloadViewTest(TestCase):
             { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
               'licence': 'CC-BY-NC-SA' },
             follow = True)
-        self.assertIn(("http://www.example.org/dl1", 302),
+        self.assertIn(("http://www.example.org", 302),
                       response.redirect_chain,
                       msg="There should be a redirect to example.org.")
 
