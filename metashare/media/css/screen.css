@@ -790,4 +790,22 @@ table.result_table tr.odd{
 	padding-top:20px;
 }
 
+.metashare-info h3 {
+	margin:1.5em 0 1em 0;
+}
+
+.metashare-info p {
+	margin:0px!important;
+}
+
+.metashare-info p + p {
+	margin-top:1.7em!important;
+}
+
+.metashare-info ul, .metashare-info ol{
+	color: #666666;
+    font-family: 'TitilliumText',"Helvetica Neue","Helvetica",Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+}
 
