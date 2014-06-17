@@ -200,6 +200,16 @@ def repair_recommendations():
     Checks if the recommendations contain links to documents no longer
     available. Removes those links when found.
     """
+    from django.contrib.sessions.models import Session
+    from django.contrib.sessions.backends.db import SessionStore
+    for session in Session.objects.all():
+        session_dict = session.get_decoded()
+        if 'tracker' in session_dict:
+            LOGGER.info("removing tracker for session '{}'"
+                .format(session.session_key))
+            del session_dict['tracker']
+            session.session_data = SessionStore().encode(session_dict)
+            session.save()
     for _dict in ResourceCountDict.objects.all():
         try:
             StorageObject.objects.get(identifier=_dict.lrid)

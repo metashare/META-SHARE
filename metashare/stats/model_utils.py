@@ -292,6 +292,10 @@ def _get_ipaddress(request):
     """    
     if request != None:
         ip_address = request.META.get('HTTP_X_FORWARDED_FOR', '') or request.META.get('REMOTE_ADDR') or ''
+        # the X-Forwarded-For header may contain multiple IP addresses; use only
+        # the first one (i.e., the original client's address)
+        if ',' in ip_address:
+            ip_address = ip_address.partition(',')[0]
         user_agent = request.META.get('HTTP_USER_AGENT') or ''
         if user_agent != '':
             if not BOT_AGENT_RE.match(user_agent):
@@ -382,12 +386,24 @@ class UsageThread(threading.Thread):
         
     def run(self):       
         self.done = 0
+        usagelrids = UsageStats.objects.values_list('lrid', flat=True).distinct()
+        available_lrids = []
         for resource in self.resources:
             try:
-                if not UsageStats.objects.filter(lrid=resource.storage_object.identifier).exists():
+                # add statistics for new resources
+                if not resource.storage_object.identifier in usagelrids:
                     update_usage_stats(resource.storage_object.identifier, resource.export_to_elementtree())
+                else: 
+                    available_lrids.append(resource.storage_object.identifier)
             # pylint: disable-msg=W0703
             except Exception, e:
                 LOGGER.debug('ERROR! Usage statistics updating failed on resource {}: {}'.format(resource.id, e))
             self.done += 1
+        #remove statistics for no longer available resources
+        if (len(usagelrids) != len(available_lrids)):
+            self.done = self.done - 1
+            for lrid in usagelrids:
+                if not lrid in available_lrids:
+                    UsageStats.objects.filter(lrid=str(lrid)).delete()
+                    LRStats.objects.filter(lrid=str(lrid)).delete()
             
