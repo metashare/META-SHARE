@@ -5,6 +5,7 @@ import sys
 
 # Magic python path, based on http://djangosnippets.org/snippets/281/
 from os.path import abspath, dirname, join
+from json import loads
 parentdir = dirname(dirname(abspath(__file__)))
 # Insert our dependencies:
 sys.path.insert(0, join(parentdir, 'lib', 'python2.7', 'site-packages'))
@@ -55,7 +56,23 @@ if __name__ == "__main__":
                 continue
             try:
                 print 'restoring from folder: "{0}"'.format(folder_name)
-                resource = restore_from_folder(folder_name)
+                # only restore resources with global- and local-storage.json
+                _storage_global_path = '{0}/storage-global.json'.format(folder_path)
+                if not os.path.isfile(_storage_global_path):
+                    print 'missing global json, skipping "{}"'.format(folder_name)
+                    continue
+                _storage_local_path = '{0}/storage-local.json'.format(folder_path)
+                if not os.path.isfile(_storage_local_path):
+                    print 'missing local json, skipping "{}"'.format(folder_name)
+                    continue
+                # get copy status from storage-local.json
+                _copy_status = 'm'
+                with open(_storage_local_path, 'rb') as _in:
+                    json_string = _in.read()
+                    _dict = loads(json_string)
+                    if _dict['copy_status']:
+                        _copy_status = _dict['copy_status']
+                resource = restore_from_folder(folder_name, copy_status=_copy_status)
                 successful_restored += [resource]
             # pylint: disable-msg=W0703
             except Exception as problem:
