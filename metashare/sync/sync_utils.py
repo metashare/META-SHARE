@@ -9,12 +9,17 @@ import contextlib
 import json
 import os
 import shutil
+import logging
 from zipfile import ZipFile
 from StringIO import StringIO
 from traceback import format_exc
 from metashare import settings
 from metashare.storage.models import compute_digest_checksum
+from metashare.settings import LOG_HANDLER
 
+# Setup logging support.
+LOGGER = logging.getLogger(__name__)
+LOGGER.addHandler(LOG_HANDLER)
 
 # Idea taken from 
 # http://stackoverflow.com/questions/5082128/how-do-i-authenticate-a-urllib2-script-in-order-to-access-https-web-services-fro
@@ -112,7 +117,13 @@ def remove_resource(storage_object, keep_stats=False):
     Also includes deletion of statistics and recommendations; use keep_stats
     optional parameter to suppress deletion of statistics and recommendations.
     """
-    resource = storage_object.resourceinfotype_model_set.all()[0]
+    try:
+        resource = storage_object.resourceinfotype_model_set.all()[0]
+    except:
+        # pylint: disable-msg=E1101
+        LOGGER.error('PROBLEMATIC: %s - count: %s', storage_object.identifier, 
+          storage_object.resourceinfotype_model_set.count(), exc_info=True)
+        raise
 
     folder = os.path.join(settings.STORAGE_PATH, storage_object.identifier)
     shutil.rmtree(folder)
