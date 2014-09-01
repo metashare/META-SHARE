@@ -664,6 +664,17 @@ def repair_storage_folder():
             _so.local_storage = None
             _so.update_storage()
 
+
+def repair_storage_objects():
+    """
+    Removes storage objects for which no resourceinfotype_model is set.
+    """
+    for _so in StorageObject.objects.all():
+        if _so.resourceinfotype_model_set.count() == 0:
+            LOGGER.info('remove storage object {}'.format(_so.identifier))
+            _so.delete() 
+
+
 def compute_checksum(infile):
     """
     Compute the MD5 checksum of infile, and return it as a hexadecimal string.
