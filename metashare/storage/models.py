@@ -321,11 +321,17 @@ class StorageObject(models.Model):
         
         # create current version of metadata XML
         from metashare.xml_utils import to_xml_string
-        _metadata = to_xml_string(
-          # pylint: disable-msg=E1101
-          self.resourceinfotype_model_set.all()[0].export_to_elementtree(),
-          # use ASCII encoding to convert non-ASCII chars to entities
-          encoding="ASCII")
+        try:
+            _metadata = to_xml_string(
+              # pylint: disable-msg=E1101
+              self.resourceinfotype_model_set.all()[0].export_to_elementtree(),
+              # use ASCII encoding to convert non-ASCII chars to entities
+              encoding="ASCII")
+        except:
+            # pylint: disable-msg=E1101
+            LOGGER.error('PROBLEMATIC: %s - count: %s', self.identifier, 
+              self.resourceinfotype_model_set.count(), exc_info=True)
+            raise
         
         if self.metadata != _metadata:
             self.metadata = _metadata
@@ -574,7 +580,13 @@ def add_or_update_resource(storage_json, resource_xml_string, storage_digest,
 
     def remove_database_entries(storage_id):
         storage_object = StorageObject.objects.get(identifier=storage_id)
-        resource = storage_object.resourceinfotype_model_set.all()[0]
+        try:
+            resource = storage_object.resourceinfotype_model_set.all()[0]
+        except:
+            # pylint: disable-msg=E1101
+            LOGGER.error('PROBLEMATIC: %s - count: %s', storage_object.identifier, 
+              storage_object.resourceinfotype_model_set.count(), exc_info=True)
+            raise
         # we have to keep the statistics and recommendations for this resource
         # since it is only updated
         resource.delete_deep(keep_stats=True)
