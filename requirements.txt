@@ -1,0 +1,16 @@
+metashare
+django==1.3.3
+setuptools==0.6c11
+httplib2==0.7.1
+pygeoip=0.2.2
+DjangoKronos==0.3
+DjangoAnalytical==0.12.1
+python-dateutil==1.5
+Unidecode==0.04.10
+django-jenkins==0.12.0
+django-selenium==0.8
+Haystak==2.0.0-beta
+pycountry==0.14.2
+django-selectable=0.4.1
+selenium==2.23
+
