@@ -1,0 +1,3618 @@
+[
+  {
+    "pk": 31, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_editorgroup", 
+      "name": "Can add editor group", 
+      "content_type": 11
+    }
+  }, 
+  {
+    "pk": 32, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_editorgroup", 
+      "name": "Can change editor group", 
+      "content_type": 11
+    }
+  }, 
+  {
+    "pk": 33, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_editorgroup", 
+      "name": "Can delete editor group", 
+      "content_type": 11
+    }
+  }, 
+  {
+    "pk": 34, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_editorgroupapplication", 
+      "name": "Can add editor group application", 
+      "content_type": 12
+    }
+  }, 
+  {
+    "pk": 35, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_editorgroupapplication", 
+      "name": "Can change editor group application", 
+      "content_type": 12
+    }
+  }, 
+  {
+    "pk": 36, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_editorgroupapplication", 
+      "name": "Can delete editor group application", 
+      "content_type": 12
+    }
+  }, 
+  {
+    "pk": 37, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_editorgroupmanagers", 
+      "name": "Can add editor group managers group", 
+      "content_type": 13
+    }
+  }, 
+  {
+    "pk": 38, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_editorgroupmanagers", 
+      "name": "Can change editor group managers group", 
+      "content_type": 13
+    }
+  }, 
+  {
+    "pk": 39, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_editorgroupmanagers", 
+      "name": "Can delete editor group managers group", 
+      "content_type": 13
+    }
+  }, 
+  {
+    "pk": 40, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_organization", 
+      "name": "Can add organization", 
+      "content_type": 14
+    }
+  }, 
+  {
+    "pk": 41, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_organization", 
+      "name": "Can change organization", 
+      "content_type": 14
+    }
+  }, 
+  {
+    "pk": 42, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_organization", 
+      "name": "Can delete organization", 
+      "content_type": 14
+    }
+  }, 
+  {
+    "pk": 43, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_organizationapplication", 
+      "name": "Can add organization application", 
+      "content_type": 15
+    }
+  }, 
+  {
+    "pk": 44, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_organizationapplication", 
+      "name": "Can change organization application", 
+      "content_type": 15
+    }
+  }, 
+  {
+    "pk": 45, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_organizationapplication", 
+      "name": "Can delete organization application", 
+      "content_type": 15
+    }
+  }, 
+  {
+    "pk": 46, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_organizationmanagers", 
+      "name": "Can add organization managers group", 
+      "content_type": 16
+    }
+  }, 
+  {
+    "pk": 47, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_organizationmanagers", 
+      "name": "Can change organization managers group", 
+      "content_type": 16
+    }
+  }, 
+  {
+    "pk": 48, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_organizationmanagers", 
+      "name": "Can delete organization managers group", 
+      "content_type": 16
+    }
+  }, 
+  {
+    "pk": 25, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_registrationrequest", 
+      "name": "Can add registration request", 
+      "content_type": 9
+    }
+  }, 
+  {
+    "pk": 26, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_registrationrequest", 
+      "name": "Can change registration request", 
+      "content_type": 9
+    }
+  }, 
+  {
+    "pk": 27, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_registrationrequest", 
+      "name": "Can delete registration request", 
+      "content_type": 9
+    }
+  }, 
+  {
+    "pk": 28, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_resetrequest", 
+      "name": "Can add reset request", 
+      "content_type": 10
+    }
+  }, 
+  {
+    "pk": 29, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_resetrequest", 
+      "name": "Can change reset request", 
+      "content_type": 10
+    }
+  }, 
+  {
+    "pk": 30, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_resetrequest", 
+      "name": "Can delete reset request", 
+      "content_type": 10
+    }
+  }, 
+  {
+    "pk": 49, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_userprofile", 
+      "name": "Can add user profile", 
+      "content_type": 17
+    }
+  }, 
+  {
+    "pk": 50, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_userprofile", 
+      "name": "Can change user profile", 
+      "content_type": 17
+    }
+  }, 
+  {
+    "pk": 51, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_userprofile", 
+      "name": "Can delete user profile", 
+      "content_type": 17
+    }
+  }, 
+  {
+    "pk": 52, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "ms_associate_member", 
+      "name": "Is a META-SHARE associate member.", 
+      "content_type": 17
+    }
+  }, 
+  {
+    "pk": 53, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "ms_full_member", 
+      "name": "Is a META-SHARE full member.", 
+      "content_type": 17
+    }
+  }, 
+  {
+    "pk": 22, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_logentry", 
+      "name": "Can add log entry", 
+      "content_type": 8
+    }
+  }, 
+  {
+    "pk": 23, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_logentry", 
+      "name": "Can change log entry", 
+      "content_type": 8
+    }
+  }, 
+  {
+    "pk": 24, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_logentry", 
+      "name": "Can delete log entry", 
+      "content_type": 8
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_group", 
+      "name": "Can add group", 
+      "content_type": 2
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_group", 
+      "name": "Can change group", 
+      "content_type": 2
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_group", 
+      "name": "Can delete group", 
+      "content_type": 2
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_message", 
+      "name": "Can add message", 
+      "content_type": 4
+    }
+  }, 
+  {
+    "pk": 11, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_message", 
+      "name": "Can change message", 
+      "content_type": 4
+    }
+  }, 
+  {
+    "pk": 12, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_message", 
+      "name": "Can delete message", 
+      "content_type": 4
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_permission", 
+      "name": "Can add permission", 
+      "content_type": 1
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_permission", 
+      "name": "Can change permission", 
+      "content_type": 1
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_permission", 
+      "name": "Can delete permission", 
+      "content_type": 1
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_user", 
+      "name": "Can add user", 
+      "content_type": 3
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_user", 
+      "name": "Can change user", 
+      "content_type": 3
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_user", 
+      "name": "Can delete user", 
+      "content_type": 3
+    }
+  }, 
+  {
+    "pk": 13, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_contenttype", 
+      "name": "Can add content type", 
+      "content_type": 5
+    }
+  }, 
+  {
+    "pk": 14, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_contenttype", 
+      "name": "Can change content type", 
+      "content_type": 5
+    }
+  }, 
+  {
+    "pk": 15, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_contenttype", 
+      "name": "Can delete content type", 
+      "content_type": 5
+    }
+  }, 
+  {
+    "pk": 70, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_resourcecountdict", 
+      "name": "Can add resource count dict", 
+      "content_type": 23
+    }
+  }, 
+  {
+    "pk": 71, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_resourcecountdict", 
+      "name": "Can change resource count dict", 
+      "content_type": 23
+    }
+  }, 
+  {
+    "pk": 72, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_resourcecountdict", 
+      "name": "Can delete resource count dict", 
+      "content_type": 23
+    }
+  }, 
+  {
+    "pk": 73, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_resourcecountpair", 
+      "name": "Can add resource count pair", 
+      "content_type": 24
+    }
+  }, 
+  {
+    "pk": 74, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_resourcecountpair", 
+      "name": "Can change resource count pair", 
+      "content_type": 24
+    }
+  }, 
+  {
+    "pk": 75, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_resourcecountpair", 
+      "name": "Can delete resource count pair", 
+      "content_type": 24
+    }
+  }, 
+  {
+    "pk": 67, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_togethermanager", 
+      "name": "Can add together manager", 
+      "content_type": 22
+    }
+  }, 
+  {
+    "pk": 68, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_togethermanager", 
+      "name": "Can change together manager", 
+      "content_type": 22
+    }
+  }, 
+  {
+    "pk": 69, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_togethermanager", 
+      "name": "Can delete together manager", 
+      "content_type": 22
+    }
+  }, 
+  {
+    "pk": 166, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_actorinfotype_model", 
+      "name": "Can add Actor", 
+      "content_type": 55
+    }
+  }, 
+  {
+    "pk": 167, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_actorinfotype_model", 
+      "name": "Can change Actor", 
+      "content_type": 55
+    }
+  }, 
+  {
+    "pk": 168, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_actorinfotype_model", 
+      "name": "Can delete Actor", 
+      "content_type": 55
+    }
+  }, 
+  {
+    "pk": 211, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_actualuseinfotype_model", 
+      "name": "Can add Actual use", 
+      "content_type": 70
+    }
+  }, 
+  {
+    "pk": 212, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_actualuseinfotype_model", 
+      "name": "Can change Actual use", 
+      "content_type": 70
+    }
+  }, 
+  {
+    "pk": 213, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_actualuseinfotype_model", 
+      "name": "Can delete Actual use", 
+      "content_type": 70
+    }
+  }, 
+  {
+    "pk": 115, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_annotationinfotype_model", 
+      "name": "Can add Annotation", 
+      "content_type": 38
+    }
+  }, 
+  {
+    "pk": 116, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_annotationinfotype_model", 
+      "name": "Can change Annotation", 
+      "content_type": 38
+    }
+  }, 
+  {
+    "pk": 117, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_annotationinfotype_model", 
+      "name": "Can delete Annotation", 
+      "content_type": 38
+    }
+  }, 
+  {
+    "pk": 235, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_audioclassificationinfotype_model", 
+      "name": "Can add Audio classification", 
+      "content_type": 78
+    }
+  }, 
+  {
+    "pk": 236, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_audioclassificationinfotype_model", 
+      "name": "Can change Audio classification", 
+      "content_type": 78
+    }
+  }, 
+  {
+    "pk": 237, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_audioclassificationinfotype_model", 
+      "name": "Can delete Audio classification", 
+      "content_type": 78
+    }
+  }, 
+  {
+    "pk": 220, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_audiocontentinfotype_model", 
+      "name": "Can add Audio content", 
+      "content_type": 73
+    }
+  }, 
+  {
+    "pk": 221, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_audiocontentinfotype_model", 
+      "name": "Can change Audio content", 
+      "content_type": 73
+    }
+  }, 
+  {
+    "pk": 222, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_audiocontentinfotype_model", 
+      "name": "Can delete Audio content", 
+      "content_type": 73
+    }
+  }, 
+  {
+    "pk": 232, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_audioformatinfotype_model", 
+      "name": "Can add Audio format", 
+      "content_type": 77
+    }
+  }, 
+  {
+    "pk": 233, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_audioformatinfotype_model", 
+      "name": "Can change Audio format", 
+      "content_type": 77
+    }
+  }, 
+  {
+    "pk": 234, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_audioformatinfotype_model", 
+      "name": "Can delete Audio format", 
+      "content_type": 77
+    }
+  }, 
+  {
+    "pk": 223, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_audiosizeinfotype_model", 
+      "name": "Can add Audio size", 
+      "content_type": 74
+    }
+  }, 
+  {
+    "pk": 224, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_audiosizeinfotype_model", 
+      "name": "Can change Audio size", 
+      "content_type": 74
+    }
+  }, 
+  {
+    "pk": 225, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_audiosizeinfotype_model", 
+      "name": "Can delete Audio size", 
+      "content_type": 74
+    }
+  }, 
+  {
+    "pk": 130, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_captureinfotype_model", 
+      "name": "Can add Capture", 
+      "content_type": 43
+    }
+  }, 
+  {
+    "pk": 131, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_captureinfotype_model", 
+      "name": "Can change Capture", 
+      "content_type": 43
+    }
+  }, 
+  {
+    "pk": 132, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_captureinfotype_model", 
+      "name": "Can delete Capture", 
+      "content_type": 43
+    }
+  }, 
+  {
+    "pk": 184, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_characterencodinginfotype_model", 
+      "name": "Can add Character encoding", 
+      "content_type": 61
+    }
+  }, 
+  {
+    "pk": 185, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_characterencodinginfotype_model", 
+      "name": "Can change Character encoding", 
+      "content_type": 61
+    }
+  }, 
+  {
+    "pk": 186, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_characterencodinginfotype_model", 
+      "name": "Can delete Character encoding", 
+      "content_type": 61
+    }
+  }, 
+  {
+    "pk": 157, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_communicationinfotype_model", 
+      "name": "Can add Communication", 
+      "content_type": 52
+    }
+  }, 
+  {
+    "pk": 158, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_communicationinfotype_model", 
+      "name": "Can change Communication", 
+      "content_type": 52
+    }
+  }, 
+  {
+    "pk": 159, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_communicationinfotype_model", 
+      "name": "Can delete Communication", 
+      "content_type": 52
+    }
+  }, 
+  {
+    "pk": 148, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_compressioninfotype_model", 
+      "name": "Can add Compression", 
+      "content_type": 49
+    }
+  }, 
+  {
+    "pk": 149, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_compressioninfotype_model", 
+      "name": "Can change Compression", 
+      "content_type": 49
+    }
+  }, 
+  {
+    "pk": 150, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_compressioninfotype_model", 
+      "name": "Can delete Compression", 
+      "content_type": 49
+    }
+  }, 
+  {
+    "pk": 217, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_corpusaudioinfotype_model", 
+      "name": "Can add Corpus audio", 
+      "content_type": 72
+    }
+  }, 
+  {
+    "pk": 218, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_corpusaudioinfotype_model", 
+      "name": "Can change Corpus audio", 
+      "content_type": 72
+    }
+  }, 
+  {
+    "pk": 219, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_corpusaudioinfotype_model", 
+      "name": "Can delete Corpus audio", 
+      "content_type": 72
+    }
+  }, 
+  {
+    "pk": 259, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_corpusimageinfotype_model", 
+      "name": "Can add Corpus image", 
+      "content_type": 86
+    }
+  }, 
+  {
+    "pk": 260, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_corpusimageinfotype_model", 
+      "name": "Can change Corpus image", 
+      "content_type": 86
+    }
+  }, 
+  {
+    "pk": 261, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_corpusimageinfotype_model", 
+      "name": "Can delete Corpus image", 
+      "content_type": 86
+    }
+  }, 
+  {
+    "pk": 349, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_corpusinfotype_model", 
+      "name": "Can add Corpus", 
+      "content_type": 116
+    }
+  }, 
+  {
+    "pk": 350, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_corpusinfotype_model", 
+      "name": "Can change Corpus", 
+      "content_type": 116
+    }
+  }, 
+  {
+    "pk": 351, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_corpusinfotype_model", 
+      "name": "Can delete Corpus", 
+      "content_type": 116
+    }
+  }, 
+  {
+    "pk": 352, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_corpusmediatypetype_model", 
+      "name": "Can add Corpus media", 
+      "content_type": 117
+    }
+  }, 
+  {
+    "pk": 353, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_corpusmediatypetype_model", 
+      "name": "Can change Corpus media", 
+      "content_type": 117
+    }
+  }, 
+  {
+    "pk": 354, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_corpusmediatypetype_model", 
+      "name": "Can delete Corpus media", 
+      "content_type": 117
+    }
+  }, 
+  {
+    "pk": 238, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_corpustextinfotype_model", 
+      "name": "Can add Corpus text", 
+      "content_type": 79
+    }
+  }, 
+  {
+    "pk": 239, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_corpustextinfotype_model", 
+      "name": "Can change Corpus text", 
+      "content_type": 79
+    }
+  }, 
+  {
+    "pk": 240, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_corpustextinfotype_model", 
+      "name": "Can delete Corpus text", 
+      "content_type": 79
+    }
+  }, 
+  {
+    "pk": 280, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_corpustextngraminfotype_model", 
+      "name": "Can add Corpus text ngram", 
+      "content_type": 93
+    }
+  }, 
+  {
+    "pk": 281, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_corpustextngraminfotype_model", 
+      "name": "Can change Corpus text ngram", 
+      "content_type": 93
+    }
+  }, 
+  {
+    "pk": 282, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_corpustextngraminfotype_model", 
+      "name": "Can delete Corpus text ngram", 
+      "content_type": 93
+    }
+  }, 
+  {
+    "pk": 271, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_corpustextnumericalinfotype_model", 
+      "name": "Can add Corpus text numerical", 
+      "content_type": 90
+    }
+  }, 
+  {
+    "pk": 272, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_corpustextnumericalinfotype_model", 
+      "name": "Can change Corpus text numerical", 
+      "content_type": 90
+    }
+  }, 
+  {
+    "pk": 273, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_corpustextnumericalinfotype_model", 
+      "name": "Can delete Corpus text numerical", 
+      "content_type": 90
+    }
+  }, 
+  {
+    "pk": 247, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_corpusvideoinfotype_model", 
+      "name": "Can add Corpus video", 
+      "content_type": 82
+    }
+  }, 
+  {
+    "pk": 248, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_corpusvideoinfotype_model", 
+      "name": "Can change Corpus video", 
+      "content_type": 82
+    }
+  }, 
+  {
+    "pk": 249, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_corpusvideoinfotype_model", 
+      "name": "Can delete Corpus video", 
+      "content_type": 82
+    }
+  }, 
+  {
+    "pk": 97, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_creationinfotype_model", 
+      "name": "Can add Creation", 
+      "content_type": 32
+    }
+  }, 
+  {
+    "pk": 98, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_creationinfotype_model", 
+      "name": "Can change Creation", 
+      "content_type": 32
+    }
+  }, 
+  {
+    "pk": 99, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_creationinfotype_model", 
+      "name": "Can delete Creation", 
+      "content_type": 32
+    }
+  }, 
+  {
+    "pk": 175, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_distributioninfotype_model", 
+      "name": "Can add Distribution", 
+      "content_type": 58
+    }
+  }, 
+  {
+    "pk": 176, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_distributioninfotype_model", 
+      "name": "Can change Distribution", 
+      "content_type": 58
+    }
+  }, 
+  {
+    "pk": 177, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_distributioninfotype_model", 
+      "name": "Can delete Distribution", 
+      "content_type": 58
+    }
+  }, 
+  {
+    "pk": 103, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_documentationinfotype_model", 
+      "name": "Can add Documentation", 
+      "content_type": 34
+    }
+  }, 
+  {
+    "pk": 104, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_documentationinfotype_model", 
+      "name": "Can change Documentation", 
+      "content_type": 34
+    }
+  }, 
+  {
+    "pk": 105, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_documentationinfotype_model", 
+      "name": "Can delete Documentation", 
+      "content_type": 34
+    }
+  }, 
+  {
+    "pk": 106, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_documentinfotype_model", 
+      "name": "Can add Document", 
+      "content_type": 35
+    }
+  }, 
+  {
+    "pk": 107, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_documentinfotype_model", 
+      "name": "Can change Document", 
+      "content_type": 35
+    }
+  }, 
+  {
+    "pk": 108, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_documentinfotype_model", 
+      "name": "Can delete Document", 
+      "content_type": 35
+    }
+  }, 
+  {
+    "pk": 154, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_documentlisttype_model", 
+      "name": "Can add Document list", 
+      "content_type": 51
+    }
+  }, 
+  {
+    "pk": 155, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_documentlisttype_model", 
+      "name": "Can change Document list", 
+      "content_type": 51
+    }
+  }, 
+  {
+    "pk": 156, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_documentlisttype_model", 
+      "name": "Can delete Document list", 
+      "content_type": 51
+    }
+  }, 
+  {
+    "pk": 367, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_documentunstructuredstring_model", 
+      "name": "Can add document unstructured string_model", 
+      "content_type": 122
+    }
+  }, 
+  {
+    "pk": 368, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_documentunstructuredstring_model", 
+      "name": "Can change document unstructured string_model", 
+      "content_type": 122
+    }
+  }, 
+  {
+    "pk": 369, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_documentunstructuredstring_model", 
+      "name": "Can delete document unstructured string_model", 
+      "content_type": 122
+    }
+  }, 
+  {
+    "pk": 112, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_domaininfotype_model", 
+      "name": "Can add Domain", 
+      "content_type": 37
+    }
+  }, 
+  {
+    "pk": 113, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_domaininfotype_model", 
+      "name": "Can change Domain", 
+      "content_type": 37
+    }
+  }, 
+  {
+    "pk": 114, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_domaininfotype_model", 
+      "name": "Can delete Domain", 
+      "content_type": 37
+    }
+  }, 
+  {
+    "pk": 229, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_durationofaudioinfotype_model", 
+      "name": "Can add Duration of audio", 
+      "content_type": 76
+    }
+  }, 
+  {
+    "pk": 230, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_durationofaudioinfotype_model", 
+      "name": "Can change Duration of audio", 
+      "content_type": 76
+    }
+  }, 
+  {
+    "pk": 231, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_durationofaudioinfotype_model", 
+      "name": "Can delete Duration of audio", 
+      "content_type": 76
+    }
+  }, 
+  {
+    "pk": 226, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_durationofeffectivespeechinfotype_model", 
+      "name": "Can add Duration of effective speech", 
+      "content_type": 75
+    }
+  }, 
+  {
+    "pk": 227, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_durationofeffectivespeechinfotype_model", 
+      "name": "Can change Duration of effective speech", 
+      "content_type": 75
+    }
+  }, 
+  {
+    "pk": 228, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_durationofeffectivespeechinfotype_model", 
+      "name": "Can delete Duration of effective speech", 
+      "content_type": 75
+    }
+  }, 
+  {
+    "pk": 355, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_dynamicelementinfotype_model", 
+      "name": "Can add Dynamic element", 
+      "content_type": 118
+    }
+  }, 
+  {
+    "pk": 356, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_dynamicelementinfotype_model", 
+      "name": "Can change Dynamic element", 
+      "content_type": 118
+    }
+  }, 
+  {
+    "pk": 357, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_dynamicelementinfotype_model", 
+      "name": "Can delete Dynamic element", 
+      "content_type": 118
+    }
+  }, 
+  {
+    "pk": 208, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_foreseenuseinfotype_model", 
+      "name": "Can add Foreseen use", 
+      "content_type": 69
+    }
+  }, 
+  {
+    "pk": 209, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_foreseenuseinfotype_model", 
+      "name": "Can change Foreseen use", 
+      "content_type": 69
+    }
+  }, 
+  {
+    "pk": 210, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_foreseenuseinfotype_model", 
+      "name": "Can delete Foreseen use", 
+      "content_type": 69
+    }
+  }, 
+  {
+    "pk": 190, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_geographiccoverageinfotype_model", 
+      "name": "Can add Geographic coverage", 
+      "content_type": 63
+    }
+  }, 
+  {
+    "pk": 191, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_geographiccoverageinfotype_model", 
+      "name": "Can change Geographic coverage", 
+      "content_type": 63
+    }
+  }, 
+  {
+    "pk": 192, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_geographiccoverageinfotype_model", 
+      "name": "Can delete Geographic coverage", 
+      "content_type": 63
+    }
+  }, 
+  {
+    "pk": 85, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_identificationinfotype_model", 
+      "name": "Can add Identification", 
+      "content_type": 28
+    }
+  }, 
+  {
+    "pk": 86, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_identificationinfotype_model", 
+      "name": "Can change Identification", 
+      "content_type": 28
+    }
+  }, 
+  {
+    "pk": 87, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_identificationinfotype_model", 
+      "name": "Can delete Identification", 
+      "content_type": 28
+    }
+  }, 
+  {
+    "pk": 268, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_imageclassificationinfotype_model", 
+      "name": "Can add Image classification", 
+      "content_type": 89
+    }
+  }, 
+  {
+    "pk": 269, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_imageclassificationinfotype_model", 
+      "name": "Can change Image classification", 
+      "content_type": 89
+    }
+  }, 
+  {
+    "pk": 270, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_imageclassificationinfotype_model", 
+      "name": "Can delete Image classification", 
+      "content_type": 89
+    }
+  }, 
+  {
+    "pk": 262, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_imagecontentinfotype_model", 
+      "name": "Can add Image content", 
+      "content_type": 87
+    }
+  }, 
+  {
+    "pk": 263, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_imagecontentinfotype_model", 
+      "name": "Can change Image content", 
+      "content_type": 87
+    }
+  }, 
+  {
+    "pk": 264, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_imagecontentinfotype_model", 
+      "name": "Can delete Image content", 
+      "content_type": 87
+    }
+  }, 
+  {
+    "pk": 265, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_imageformatinfotype_model", 
+      "name": "Can add Image format", 
+      "content_type": 88
+    }
+  }, 
+  {
+    "pk": 266, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_imageformatinfotype_model", 
+      "name": "Can change Image format", 
+      "content_type": 88
+    }
+  }, 
+  {
+    "pk": 267, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_imageformatinfotype_model", 
+      "name": "Can delete Image format", 
+      "content_type": 88
+    }
+  }, 
+  {
+    "pk": 322, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_inputinfotype_model", 
+      "name": "Can add Input", 
+      "content_type": 107
+    }
+  }, 
+  {
+    "pk": 323, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_inputinfotype_model", 
+      "name": "Can change Input", 
+      "content_type": 107
+    }
+  }, 
+  {
+    "pk": 324, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_inputinfotype_model", 
+      "name": "Can delete Input", 
+      "content_type": 107
+    }
+  }, 
+  {
+    "pk": 76, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_invisiblestringmodel", 
+      "name": "Can add invisible string model", 
+      "content_type": 25
+    }
+  }, 
+  {
+    "pk": 77, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_invisiblestringmodel", 
+      "name": "Can change invisible string model", 
+      "content_type": 25
+    }
+  }, 
+  {
+    "pk": 78, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_invisiblestringmodel", 
+      "name": "Can delete invisible string model", 
+      "content_type": 25
+    }
+  }, 
+  {
+    "pk": 289, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_languagedescriptionencodinginfotype_model", 
+      "name": "Can add Language description encoding", 
+      "content_type": 96
+    }
+  }, 
+  {
+    "pk": 290, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_languagedescriptionencodinginfotype_model", 
+      "name": "Can change Language description encoding", 
+      "content_type": 96
+    }
+  }, 
+  {
+    "pk": 291, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_languagedescriptionencodinginfotype_model", 
+      "name": "Can delete Language description encoding", 
+      "content_type": 96
+    }
+  }, 
+  {
+    "pk": 304, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_languagedescriptionimageinfotype_model", 
+      "name": "Can add Language description image", 
+      "content_type": 101
+    }
+  }, 
+  {
+    "pk": 305, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_languagedescriptionimageinfotype_model", 
+      "name": "Can change Language description image", 
+      "content_type": 101
+    }
+  }, 
+  {
+    "pk": 306, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_languagedescriptionimageinfotype_model", 
+      "name": "Can delete Language description image", 
+      "content_type": 101
+    }
+  }, 
+  {
+    "pk": 343, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_languagedescriptioninfotype_model", 
+      "name": "Can add Language description", 
+      "content_type": 114
+    }
+  }, 
+  {
+    "pk": 344, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_languagedescriptioninfotype_model", 
+      "name": "Can change Language description", 
+      "content_type": 114
+    }
+  }, 
+  {
+    "pk": 345, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_languagedescriptioninfotype_model", 
+      "name": "Can delete Language description", 
+      "content_type": 114
+    }
+  }, 
+  {
+    "pk": 361, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_languagedescriptionmediatypetype_model", 
+      "name": "Can add Language description media", 
+      "content_type": 120
+    }
+  }, 
+  {
+    "pk": 362, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_languagedescriptionmediatypetype_model", 
+      "name": "Can change Language description media", 
+      "content_type": 120
+    }
+  }, 
+  {
+    "pk": 363, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_languagedescriptionmediatypetype_model", 
+      "name": "Can delete Language description media", 
+      "content_type": 120
+    }
+  }, 
+  {
+    "pk": 292, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_languagedescriptionoperationinfotype_model", 
+      "name": "Can add Language description operation", 
+      "content_type": 97
+    }
+  }, 
+  {
+    "pk": 293, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_languagedescriptionoperationinfotype_model", 
+      "name": "Can change Language description operation", 
+      "content_type": 97
+    }
+  }, 
+  {
+    "pk": 294, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_languagedescriptionoperationinfotype_model", 
+      "name": "Can delete Language description operation", 
+      "content_type": 97
+    }
+  }, 
+  {
+    "pk": 295, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_languagedescriptionperformanceinfotype_model", 
+      "name": "Can add Language description performance", 
+      "content_type": 98
+    }
+  }, 
+  {
+    "pk": 296, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_languagedescriptionperformanceinfotype_model", 
+      "name": "Can change Language description performance", 
+      "content_type": 98
+    }
+  }, 
+  {
+    "pk": 297, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_languagedescriptionperformanceinfotype_model", 
+      "name": "Can delete Language description performance", 
+      "content_type": 98
+    }
+  }, 
+  {
+    "pk": 298, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_languagedescriptiontextinfotype_model", 
+      "name": "Can add Language description text", 
+      "content_type": 99
+    }
+  }, 
+  {
+    "pk": 299, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_languagedescriptiontextinfotype_model", 
+      "name": "Can change Language description text", 
+      "content_type": 99
+    }
+  }, 
+  {
+    "pk": 300, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_languagedescriptiontextinfotype_model", 
+      "name": "Can delete Language description text", 
+      "content_type": 99
+    }
+  }, 
+  {
+    "pk": 301, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_languagedescriptionvideoinfotype_model", 
+      "name": "Can add Language description video", 
+      "content_type": 100
+    }
+  }, 
+  {
+    "pk": 302, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_languagedescriptionvideoinfotype_model", 
+      "name": "Can change Language description video", 
+      "content_type": 100
+    }
+  }, 
+  {
+    "pk": 303, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_languagedescriptionvideoinfotype_model", 
+      "name": "Can delete Language description video", 
+      "content_type": 100
+    }
+  }, 
+  {
+    "pk": 199, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_languageinfotype_model", 
+      "name": "Can add Language", 
+      "content_type": 66
+    }
+  }, 
+  {
+    "pk": 200, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_languageinfotype_model", 
+      "name": "Can change Language", 
+      "content_type": 66
+    }
+  }, 
+  {
+    "pk": 201, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_languageinfotype_model", 
+      "name": "Can delete Language", 
+      "content_type": 66
+    }
+  }, 
+  {
+    "pk": 196, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_languagevarietyinfotype_model", 
+      "name": "Can add Language variety", 
+      "content_type": 65
+    }
+  }, 
+  {
+    "pk": 197, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_languagevarietyinfotype_model", 
+      "name": "Can change Language variety", 
+      "content_type": 65
+    }
+  }, 
+  {
+    "pk": 198, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_languagevarietyinfotype_model", 
+      "name": "Can delete Language variety", 
+      "content_type": 65
+    }
+  }, 
+  {
+    "pk": 310, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_lexicalconceptualresourceaudioinfotype_model", 
+      "name": "Can add Lexical conceptual resource audio", 
+      "content_type": 103
+    }
+  }, 
+  {
+    "pk": 311, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_lexicalconceptualresourceaudioinfotype_model", 
+      "name": "Can change Lexical conceptual resource audio", 
+      "content_type": 103
+    }
+  }, 
+  {
+    "pk": 312, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_lexicalconceptualresourceaudioinfotype_model", 
+      "name": "Can delete Lexical conceptual resource audio", 
+      "content_type": 103
+    }
+  }, 
+  {
+    "pk": 307, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_lexicalconceptualresourceencodinginfotype_model", 
+      "name": "Can add Lexical conceptual resource encoding", 
+      "content_type": 102
+    }
+  }, 
+  {
+    "pk": 308, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_lexicalconceptualresourceencodinginfotype_model", 
+      "name": "Can change Lexical conceptual resource encoding", 
+      "content_type": 102
+    }
+  }, 
+  {
+    "pk": 309, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_lexicalconceptualresourceencodinginfotype_model", 
+      "name": "Can delete Lexical conceptual resource encoding", 
+      "content_type": 102
+    }
+  }, 
+  {
+    "pk": 319, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_lexicalconceptualresourceimageinfotype_model", 
+      "name": "Can add Lexical conceptual resource image", 
+      "content_type": 106
+    }
+  }, 
+  {
+    "pk": 320, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_lexicalconceptualresourceimageinfotype_model", 
+      "name": "Can change Lexical conceptual resource image", 
+      "content_type": 106
+    }
+  }, 
+  {
+    "pk": 321, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_lexicalconceptualresourceimageinfotype_model", 
+      "name": "Can delete Lexical conceptual resource image", 
+      "content_type": 106
+    }
+  }, 
+  {
+    "pk": 340, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_lexicalconceptualresourceinfotype_model", 
+      "name": "Can add Lexical conceptual resource", 
+      "content_type": 113
+    }
+  }, 
+  {
+    "pk": 341, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_lexicalconceptualresourceinfotype_model", 
+      "name": "Can change Lexical conceptual resource", 
+      "content_type": 113
+    }
+  }, 
+  {
+    "pk": 342, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_lexicalconceptualresourceinfotype_model", 
+      "name": "Can delete Lexical conceptual resource", 
+      "content_type": 113
+    }
+  }, 
+  {
+    "pk": 364, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_lexicalconceptualresourcemediatypetype_model", 
+      "name": "Can add Lexical conceptual resource media", 
+      "content_type": 121
+    }
+  }, 
+  {
+    "pk": 365, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_lexicalconceptualresourcemediatypetype_model", 
+      "name": "Can change Lexical conceptual resource media", 
+      "content_type": 121
+    }
+  }, 
+  {
+    "pk": 366, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_lexicalconceptualresourcemediatypetype_model", 
+      "name": "Can delete Lexical conceptual resource media", 
+      "content_type": 121
+    }
+  }, 
+  {
+    "pk": 313, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_lexicalconceptualresourcetextinfotype_model", 
+      "name": "Can add Lexical conceptual resource text", 
+      "content_type": 104
+    }
+  }, 
+  {
+    "pk": 314, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_lexicalconceptualresourcetextinfotype_model", 
+      "name": "Can change Lexical conceptual resource text", 
+      "content_type": 104
+    }
+  }, 
+  {
+    "pk": 315, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_lexicalconceptualresourcetextinfotype_model", 
+      "name": "Can delete Lexical conceptual resource text", 
+      "content_type": 104
+    }
+  }, 
+  {
+    "pk": 316, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_lexicalconceptualresourcevideoinfotype_model", 
+      "name": "Can add Lexical conceptual resource video", 
+      "content_type": 105
+    }
+  }, 
+  {
+    "pk": 317, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_lexicalconceptualresourcevideoinfotype_model", 
+      "name": "Can change Lexical conceptual resource video", 
+      "content_type": 105
+    }
+  }, 
+  {
+    "pk": 318, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_lexicalconceptualresourcevideoinfotype_model", 
+      "name": "Can delete Lexical conceptual resource video", 
+      "content_type": 105
+    }
+  }, 
+  {
+    "pk": 181, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_licenceinfotype_model", 
+      "name": "Can add Licence", 
+      "content_type": 60
+    }
+  }, 
+  {
+    "pk": 182, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_licenceinfotype_model", 
+      "name": "Can change Licence", 
+      "content_type": 60
+    }
+  }, 
+  {
+    "pk": 183, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_licenceinfotype_model", 
+      "name": "Can delete Licence", 
+      "content_type": 60
+    }
+  }, 
+  {
+    "pk": 193, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_lingualityinfotype_model", 
+      "name": "Can add Linguality", 
+      "content_type": 64
+    }
+  }, 
+  {
+    "pk": 194, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_lingualityinfotype_model", 
+      "name": "Can change Linguality", 
+      "content_type": 64
+    }
+  }, 
+  {
+    "pk": 195, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_lingualityinfotype_model", 
+      "name": "Can delete Linguality", 
+      "content_type": 64
+    }
+  }, 
+  {
+    "pk": 151, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_linktoothermediainfotype_model", 
+      "name": "Can add Link to other media", 
+      "content_type": 50
+    }
+  }, 
+  {
+    "pk": 152, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_linktoothermediainfotype_model", 
+      "name": "Can change Link to other media", 
+      "content_type": 50
+    }
+  }, 
+  {
+    "pk": 153, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_linktoothermediainfotype_model", 
+      "name": "Can delete Link to other media", 
+      "content_type": 50
+    }
+  }, 
+  {
+    "pk": 178, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_membershipinfotype_model", 
+      "name": "Can add Membership", 
+      "content_type": 59
+    }
+  }, 
+  {
+    "pk": 179, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_membershipinfotype_model", 
+      "name": "Can change Membership", 
+      "content_type": 59
+    }
+  }, 
+  {
+    "pk": 180, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_membershipinfotype_model", 
+      "name": "Can delete Membership", 
+      "content_type": 59
+    }
+  }, 
+  {
+    "pk": 100, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_metadatainfotype_model", 
+      "name": "Can add Metadata", 
+      "content_type": 33
+    }
+  }, 
+  {
+    "pk": 101, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_metadatainfotype_model", 
+      "name": "Can change Metadata", 
+      "content_type": 33
+    }
+  }, 
+  {
+    "pk": 102, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_metadatainfotype_model", 
+      "name": "Can delete Metadata", 
+      "content_type": 33
+    }
+  }, 
+  {
+    "pk": 124, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_modalityinfotype_model", 
+      "name": "Can add Modality", 
+      "content_type": 41
+    }
+  }, 
+  {
+    "pk": 125, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_modalityinfotype_model", 
+      "name": "Can change Modality", 
+      "content_type": 41
+    }
+  }, 
+  {
+    "pk": 126, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_modalityinfotype_model", 
+      "name": "Can delete Modality", 
+      "content_type": 41
+    }
+  }, 
+  {
+    "pk": 283, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_ngraminfotype_model", 
+      "name": "Can add Ngram", 
+      "content_type": 94
+    }
+  }, 
+  {
+    "pk": 284, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_ngraminfotype_model", 
+      "name": "Can change Ngram", 
+      "content_type": 94
+    }
+  }, 
+  {
+    "pk": 285, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_ngraminfotype_model", 
+      "name": "Can delete Ngram", 
+      "content_type": 94
+    }
+  }, 
+  {
+    "pk": 169, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_organizationinfotype_model", 
+      "name": "Can add Organization", 
+      "content_type": 56
+    }
+  }, 
+  {
+    "pk": 170, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_organizationinfotype_model", 
+      "name": "Can change Organization", 
+      "content_type": 56
+    }
+  }, 
+  {
+    "pk": 171, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_organizationinfotype_model", 
+      "name": "Can delete Organization", 
+      "content_type": 56
+    }
+  }, 
+  {
+    "pk": 163, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_organizationlisttype_model", 
+      "name": "Can add Organization list", 
+      "content_type": 54
+    }
+  }, 
+  {
+    "pk": 164, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_organizationlisttype_model", 
+      "name": "Can change Organization list", 
+      "content_type": 54
+    }
+  }, 
+  {
+    "pk": 165, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_organizationlisttype_model", 
+      "name": "Can delete Organization list", 
+      "content_type": 54
+    }
+  }, 
+  {
+    "pk": 325, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_outputinfotype_model", 
+      "name": "Can add Output", 
+      "content_type": 108
+    }
+  }, 
+  {
+    "pk": 326, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_outputinfotype_model", 
+      "name": "Can change Output", 
+      "content_type": 108
+    }
+  }, 
+  {
+    "pk": 327, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_outputinfotype_model", 
+      "name": "Can delete Output", 
+      "content_type": 108
+    }
+  }, 
+  {
+    "pk": 127, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_participantinfotype_model", 
+      "name": "Can add Participant", 
+      "content_type": 42
+    }
+  }, 
+  {
+    "pk": 128, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_participantinfotype_model", 
+      "name": "Can change Participant", 
+      "content_type": 42
+    }
+  }, 
+  {
+    "pk": 129, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_participantinfotype_model", 
+      "name": "Can delete Participant", 
+      "content_type": 42
+    }
+  }, 
+  {
+    "pk": 172, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_personinfotype_model", 
+      "name": "Can add Person", 
+      "content_type": 57
+    }
+  }, 
+  {
+    "pk": 173, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_personinfotype_model", 
+      "name": "Can change Person", 
+      "content_type": 57
+    }
+  }, 
+  {
+    "pk": 174, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_personinfotype_model", 
+      "name": "Can delete Person", 
+      "content_type": 57
+    }
+  }, 
+  {
+    "pk": 160, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_personlisttype_model", 
+      "name": "Can add Person list", 
+      "content_type": 53
+    }
+  }, 
+  {
+    "pk": 161, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_personlisttype_model", 
+      "name": "Can change Person list", 
+      "content_type": 53
+    }
+  }, 
+  {
+    "pk": 162, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_personlisttype_model", 
+      "name": "Can delete Person list", 
+      "content_type": 53
+    }
+  }, 
+  {
+    "pk": 133, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_personsourcesetinfotype_model", 
+      "name": "Can add Person source set", 
+      "content_type": 44
+    }
+  }, 
+  {
+    "pk": 134, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_personsourcesetinfotype_model", 
+      "name": "Can change Person source set", 
+      "content_type": 44
+    }
+  }, 
+  {
+    "pk": 135, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_personsourcesetinfotype_model", 
+      "name": "Can delete Person source set", 
+      "content_type": 44
+    }
+  }, 
+  {
+    "pk": 202, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_projectinfotype_model", 
+      "name": "Can add Project", 
+      "content_type": 67
+    }
+  }, 
+  {
+    "pk": 203, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_projectinfotype_model", 
+      "name": "Can change Project", 
+      "content_type": 67
+    }
+  }, 
+  {
+    "pk": 204, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_projectinfotype_model", 
+      "name": "Can delete Project", 
+      "content_type": 67
+    }
+  }, 
+  {
+    "pk": 214, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_projectlisttype_model", 
+      "name": "Can add Project list", 
+      "content_type": 71
+    }
+  }, 
+  {
+    "pk": 215, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_projectlisttype_model", 
+      "name": "Can change Project list", 
+      "content_type": 71
+    }
+  }, 
+  {
+    "pk": 216, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_projectlisttype_model", 
+      "name": "Can delete Project list", 
+      "content_type": 71
+    }
+  }, 
+  {
+    "pk": 142, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_recordinginfotype_model", 
+      "name": "Can add Recording", 
+      "content_type": 47
+    }
+  }, 
+  {
+    "pk": 143, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_recordinginfotype_model", 
+      "name": "Can change Recording", 
+      "content_type": 47
+    }
+  }, 
+  {
+    "pk": 144, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_recordinginfotype_model", 
+      "name": "Can delete Recording", 
+      "content_type": 47
+    }
+  }, 
+  {
+    "pk": 286, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_relatedlexiconinfotype_model", 
+      "name": "Can add Related lexicon", 
+      "content_type": 95
+    }
+  }, 
+  {
+    "pk": 287, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_relatedlexiconinfotype_model", 
+      "name": "Can change Related lexicon", 
+      "content_type": 95
+    }
+  }, 
+  {
+    "pk": 288, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_relatedlexiconinfotype_model", 
+      "name": "Can delete Related lexicon", 
+      "content_type": 95
+    }
+  }, 
+  {
+    "pk": 121, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_relationinfotype_model", 
+      "name": "Can add Relation", 
+      "content_type": 40
+    }
+  }, 
+  {
+    "pk": 122, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_relationinfotype_model", 
+      "name": "Can change Relation", 
+      "content_type": 40
+    }
+  }, 
+  {
+    "pk": 123, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_relationinfotype_model", 
+      "name": "Can delete Relation", 
+      "content_type": 40
+    }
+  }, 
+  {
+    "pk": 145, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_resolutioninfotype_model", 
+      "name": "Can add Resolution", 
+      "content_type": 48
+    }
+  }, 
+  {
+    "pk": 146, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_resolutioninfotype_model", 
+      "name": "Can change Resolution", 
+      "content_type": 48
+    }
+  }, 
+  {
+    "pk": 147, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_resolutioninfotype_model", 
+      "name": "Can delete Resolution", 
+      "content_type": 48
+    }
+  }, 
+  {
+    "pk": 337, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_resourcecomponenttypetype_model", 
+      "name": "Can add Resource component", 
+      "content_type": 112
+    }
+  }, 
+  {
+    "pk": 338, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_resourcecomponenttypetype_model", 
+      "name": "Can change Resource component", 
+      "content_type": 112
+    }
+  }, 
+  {
+    "pk": 339, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_resourcecomponenttypetype_model", 
+      "name": "Can delete Resource component", 
+      "content_type": 112
+    }
+  }, 
+  {
+    "pk": 94, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_resourcecreationinfotype_model", 
+      "name": "Can add Resource creation", 
+      "content_type": 31
+    }
+  }, 
+  {
+    "pk": 95, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_resourcecreationinfotype_model", 
+      "name": "Can change Resource creation", 
+      "content_type": 31
+    }
+  }, 
+  {
+    "pk": 96, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_resourcecreationinfotype_model", 
+      "name": "Can delete Resource creation", 
+      "content_type": 31
+    }
+  }, 
+  {
+    "pk": 109, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_resourcedocumentationinfotype_model", 
+      "name": "Can add Resource documentation", 
+      "content_type": 36
+    }
+  }, 
+  {
+    "pk": 110, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_resourcedocumentationinfotype_model", 
+      "name": "Can change Resource documentation", 
+      "content_type": 36
+    }
+  }, 
+  {
+    "pk": 111, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_resourcedocumentationinfotype_model", 
+      "name": "Can delete Resource documentation", 
+      "content_type": 36
+    }
+  }, 
+  {
+    "pk": 79, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_resourceinfotype_model", 
+      "name": "Can add Resource", 
+      "content_type": 26
+    }
+  }, 
+  {
+    "pk": 80, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_resourceinfotype_model", 
+      "name": "Can change Resource", 
+      "content_type": 26
+    }
+  }, 
+  {
+    "pk": 81, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_resourceinfotype_model", 
+      "name": "Can delete Resource", 
+      "content_type": 26
+    }
+  }, 
+  {
+    "pk": 139, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_runningenvironmentinfotype_model", 
+      "name": "Can add Running environment", 
+      "content_type": 46
+    }
+  }, 
+  {
+    "pk": 140, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_runningenvironmentinfotype_model", 
+      "name": "Can change Running environment", 
+      "content_type": 46
+    }
+  }, 
+  {
+    "pk": 141, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_runningenvironmentinfotype_model", 
+      "name": "Can delete Running environment", 
+      "content_type": 46
+    }
+  }, 
+  {
+    "pk": 136, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_settinginfotype_model", 
+      "name": "Can add Setting", 
+      "content_type": 45
+    }
+  }, 
+  {
+    "pk": 137, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_settinginfotype_model", 
+      "name": "Can change Setting", 
+      "content_type": 45
+    }
+  }, 
+  {
+    "pk": 138, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_settinginfotype_model", 
+      "name": "Can delete Setting", 
+      "content_type": 45
+    }
+  }, 
+  {
+    "pk": 82, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_sizeinfotype_model", 
+      "name": "Can add Size", 
+      "content_type": 27
+    }
+  }, 
+  {
+    "pk": 83, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_sizeinfotype_model", 
+      "name": "Can change Size", 
+      "content_type": 27
+    }
+  }, 
+  {
+    "pk": 84, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_sizeinfotype_model", 
+      "name": "Can delete Size", 
+      "content_type": 27
+    }
+  }, 
+  {
+    "pk": 358, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_staticelementinfotype_model", 
+      "name": "Can add Static element", 
+      "content_type": 119
+    }
+  }, 
+  {
+    "pk": 359, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_staticelementinfotype_model", 
+      "name": "Can change Static element", 
+      "content_type": 119
+    }
+  }, 
+  {
+    "pk": 360, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_staticelementinfotype_model", 
+      "name": "Can delete Static element", 
+      "content_type": 119
+    }
+  }, 
+  {
+    "pk": 118, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_targetresourceinfotype_model", 
+      "name": "Can add Target resource", 
+      "content_type": 39
+    }
+  }, 
+  {
+    "pk": 119, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_targetresourceinfotype_model", 
+      "name": "Can change Target resource", 
+      "content_type": 39
+    }
+  }, 
+  {
+    "pk": 120, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_targetresourceinfotype_model", 
+      "name": "Can delete Target resource", 
+      "content_type": 39
+    }
+  }, 
+  {
+    "pk": 244, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_textclassificationinfotype_model", 
+      "name": "Can add Text classification", 
+      "content_type": 81
+    }
+  }, 
+  {
+    "pk": 245, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_textclassificationinfotype_model", 
+      "name": "Can change Text classification", 
+      "content_type": 81
+    }
+  }, 
+  {
+    "pk": 246, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_textclassificationinfotype_model", 
+      "name": "Can delete Text classification", 
+      "content_type": 81
+    }
+  }, 
+  {
+    "pk": 241, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_textformatinfotype_model", 
+      "name": "Can add Text format", 
+      "content_type": 80
+    }
+  }, 
+  {
+    "pk": 242, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_textformatinfotype_model", 
+      "name": "Can change Text format", 
+      "content_type": 80
+    }
+  }, 
+  {
+    "pk": 243, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_textformatinfotype_model", 
+      "name": "Can delete Text format", 
+      "content_type": 80
+    }
+  }, 
+  {
+    "pk": 274, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_textnumericalcontentinfotype_model", 
+      "name": "Can add Text numerical content", 
+      "content_type": 91
+    }
+  }, 
+  {
+    "pk": 275, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_textnumericalcontentinfotype_model", 
+      "name": "Can change Text numerical content", 
+      "content_type": 91
+    }
+  }, 
+  {
+    "pk": 276, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_textnumericalcontentinfotype_model", 
+      "name": "Can delete Text numerical content", 
+      "content_type": 91
+    }
+  }, 
+  {
+    "pk": 277, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_textnumericalformatinfotype_model", 
+      "name": "Can add Text numerical format", 
+      "content_type": 92
+    }
+  }, 
+  {
+    "pk": 278, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_textnumericalformatinfotype_model", 
+      "name": "Can change Text numerical format", 
+      "content_type": 92
+    }
+  }, 
+  {
+    "pk": 279, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_textnumericalformatinfotype_model", 
+      "name": "Can delete Text numerical format", 
+      "content_type": 92
+    }
+  }, 
+  {
+    "pk": 187, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_timecoverageinfotype_model", 
+      "name": "Can add Time coverage", 
+      "content_type": 62
+    }
+  }, 
+  {
+    "pk": 188, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_timecoverageinfotype_model", 
+      "name": "Can change Time coverage", 
+      "content_type": 62
+    }
+  }, 
+  {
+    "pk": 189, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_timecoverageinfotype_model", 
+      "name": "Can delete Time coverage", 
+      "content_type": 62
+    }
+  }, 
+  {
+    "pk": 334, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_toolservicecreationinfotype_model", 
+      "name": "Can add Tool service creation", 
+      "content_type": 111
+    }
+  }, 
+  {
+    "pk": 335, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_toolservicecreationinfotype_model", 
+      "name": "Can change Tool service creation", 
+      "content_type": 111
+    }
+  }, 
+  {
+    "pk": 336, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_toolservicecreationinfotype_model", 
+      "name": "Can delete Tool service creation", 
+      "content_type": 111
+    }
+  }, 
+  {
+    "pk": 328, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_toolserviceevaluationinfotype_model", 
+      "name": "Can add Tool service evaluation", 
+      "content_type": 109
+    }
+  }, 
+  {
+    "pk": 329, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_toolserviceevaluationinfotype_model", 
+      "name": "Can change Tool service evaluation", 
+      "content_type": 109
+    }
+  }, 
+  {
+    "pk": 330, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_toolserviceevaluationinfotype_model", 
+      "name": "Can delete Tool service evaluation", 
+      "content_type": 109
+    }
+  }, 
+  {
+    "pk": 346, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_toolserviceinfotype_model", 
+      "name": "Can add Tool service", 
+      "content_type": 115
+    }
+  }, 
+  {
+    "pk": 347, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_toolserviceinfotype_model", 
+      "name": "Can change Tool service", 
+      "content_type": 115
+    }
+  }, 
+  {
+    "pk": 348, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_toolserviceinfotype_model", 
+      "name": "Can delete Tool service", 
+      "content_type": 115
+    }
+  }, 
+  {
+    "pk": 331, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_toolserviceoperationinfotype_model", 
+      "name": "Can add Tool service operation", 
+      "content_type": 110
+    }
+  }, 
+  {
+    "pk": 332, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_toolserviceoperationinfotype_model", 
+      "name": "Can change Tool service operation", 
+      "content_type": 110
+    }
+  }, 
+  {
+    "pk": 333, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_toolserviceoperationinfotype_model", 
+      "name": "Can delete Tool service operation", 
+      "content_type": 110
+    }
+  }, 
+  {
+    "pk": 205, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_usageinfotype_model", 
+      "name": "Can add Usage", 
+      "content_type": 68
+    }
+  }, 
+  {
+    "pk": 206, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_usageinfotype_model", 
+      "name": "Can change Usage", 
+      "content_type": 68
+    }
+  }, 
+  {
+    "pk": 207, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_usageinfotype_model", 
+      "name": "Can delete Usage", 
+      "content_type": 68
+    }
+  }, 
+  {
+    "pk": 91, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_validationinfotype_model", 
+      "name": "Can add Validation", 
+      "content_type": 30
+    }
+  }, 
+  {
+    "pk": 92, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_validationinfotype_model", 
+      "name": "Can change Validation", 
+      "content_type": 30
+    }
+  }, 
+  {
+    "pk": 93, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_validationinfotype_model", 
+      "name": "Can delete Validation", 
+      "content_type": 30
+    }
+  }, 
+  {
+    "pk": 88, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_versioninfotype_model", 
+      "name": "Can add Version", 
+      "content_type": 29
+    }
+  }, 
+  {
+    "pk": 89, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_versioninfotype_model", 
+      "name": "Can change Version", 
+      "content_type": 29
+    }
+  }, 
+  {
+    "pk": 90, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_versioninfotype_model", 
+      "name": "Can delete Version", 
+      "content_type": 29
+    }
+  }, 
+  {
+    "pk": 256, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_videoclassificationinfotype_model", 
+      "name": "Can add Video classification", 
+      "content_type": 85
+    }
+  }, 
+  {
+    "pk": 257, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_videoclassificationinfotype_model", 
+      "name": "Can change Video classification", 
+      "content_type": 85
+    }
+  }, 
+  {
+    "pk": 258, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_videoclassificationinfotype_model", 
+      "name": "Can delete Video classification", 
+      "content_type": 85
+    }
+  }, 
+  {
+    "pk": 250, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_videocontentinfotype_model", 
+      "name": "Can add Video content", 
+      "content_type": 83
+    }
+  }, 
+  {
+    "pk": 251, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_videocontentinfotype_model", 
+      "name": "Can change Video content", 
+      "content_type": 83
+    }
+  }, 
+  {
+    "pk": 252, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_videocontentinfotype_model", 
+      "name": "Can delete Video content", 
+      "content_type": 83
+    }
+  }, 
+  {
+    "pk": 253, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_videoformatinfotype_model", 
+      "name": "Can add Video format", 
+      "content_type": 84
+    }
+  }, 
+  {
+    "pk": 254, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_videoformatinfotype_model", 
+      "name": "Can change Video format", 
+      "content_type": 84
+    }
+  }, 
+  {
+    "pk": 255, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_videoformatinfotype_model", 
+      "name": "Can delete Video format", 
+      "content_type": 84
+    }
+  }, 
+  {
+    "pk": 16, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_session", 
+      "name": "Can add session", 
+      "content_type": 6
+    }
+  }, 
+  {
+    "pk": 17, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_session", 
+      "name": "Can change session", 
+      "content_type": 6
+    }
+  }, 
+  {
+    "pk": 18, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_session", 
+      "name": "Can delete session", 
+      "content_type": 6
+    }
+  }, 
+  {
+    "pk": 19, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_site", 
+      "name": "Can add site", 
+      "content_type": 7
+    }
+  }, 
+  {
+    "pk": 20, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_site", 
+      "name": "Can change site", 
+      "content_type": 7
+    }
+  }, 
+  {
+    "pk": 21, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_site", 
+      "name": "Can delete site", 
+      "content_type": 7
+    }
+  }, 
+  {
+    "pk": 58, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_lrstats", 
+      "name": "Can add lr stats", 
+      "content_type": 19
+    }
+  }, 
+  {
+    "pk": 59, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_lrstats", 
+      "name": "Can change lr stats", 
+      "content_type": 19
+    }
+  }, 
+  {
+    "pk": 60, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_lrstats", 
+      "name": "Can delete lr stats", 
+      "content_type": 19
+    }
+  }, 
+  {
+    "pk": 61, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_querystats", 
+      "name": "Can add query stats", 
+      "content_type": 20
+    }
+  }, 
+  {
+    "pk": 62, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_querystats", 
+      "name": "Can change query stats", 
+      "content_type": 20
+    }
+  }, 
+  {
+    "pk": 63, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_querystats", 
+      "name": "Can delete query stats", 
+      "content_type": 20
+    }
+  }, 
+  {
+    "pk": 64, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_usagestats", 
+      "name": "Can add usage stats", 
+      "content_type": 21
+    }
+  }, 
+  {
+    "pk": 65, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_usagestats", 
+      "name": "Can change usage stats", 
+      "content_type": 21
+    }
+  }, 
+  {
+    "pk": 66, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_usagestats", 
+      "name": "Can delete usage stats", 
+      "content_type": 21
+    }
+  }, 
+  {
+    "pk": 54, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_storageobject", 
+      "name": "Can add storage object", 
+      "content_type": 18
+    }
+  }, 
+  {
+    "pk": 57, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "can_sync", 
+      "name": "Can synchronize", 
+      "content_type": 18
+    }
+  }, 
+  {
+    "pk": 55, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_storageobject", 
+      "name": "Can change storage object", 
+      "content_type": 18
+    }
+  }, 
+  {
+    "pk": 56, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_storageobject", 
+      "name": "Can delete storage object", 
+      "content_type": 18
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "auth.group", 
+    "fields": {
+      "name": "globaleditors", 
+      "permissions": [
+        166, 
+        167, 
+        211, 
+        212, 
+        213, 
+        115, 
+        116, 
+        117, 
+        235, 
+        236, 
+        237, 
+        220, 
+        221, 
+        222, 
+        232, 
+        233, 
+        234, 
+        223, 
+        224, 
+        130, 
+        131, 
+        132, 
+        184, 
+        185, 
+        186, 
+        157, 
+        158, 
+        148, 
+        149, 
+        150, 
+        217, 
+        218, 
+        219, 
+        259, 
+        260, 
+        261, 
+        349, 
+        350, 
+        352, 
+        353, 
+        238, 
+        239, 
+        240, 
+        280, 
+        281, 
+        282, 
+        271, 
+        272, 
+        273, 
+        247, 
+        248, 
+        249, 
+        97, 
+        98, 
+        99, 
+        175, 
+        176, 
+        103, 
+        104, 
+        106, 
+        107, 
+        154, 
+        155, 
+        367, 
+        368, 
+        112, 
+        113, 
+        114, 
+        229, 
+        230, 
+        231, 
+        226, 
+        227, 
+        228, 
+        355, 
+        356, 
+        357, 
+        208, 
+        209, 
+        210, 
+        190, 
+        191, 
+        192, 
+        85, 
+        86, 
+        268, 
+        269, 
+        270, 
+        262, 
+        263, 
+        264, 
+        265, 
+        266, 
+        267, 
+        322, 
+        323, 
+        324, 
+        289, 
+        290, 
+        291, 
+        304, 
+        305, 
+        306, 
+        343, 
+        344, 
+        361, 
+        362, 
+        292, 
+        293, 
+        294, 
+        295, 
+        296, 
+        297, 
+        298, 
+        299, 
+        300, 
+        301, 
+        302, 
+        303, 
+        199, 
+        200, 
+        201, 
+        196, 
+        197, 
+        198, 
+        310, 
+        311, 
+        312, 
+        307, 
+        308, 
+        309, 
+        319, 
+        320, 
+        321, 
+        340, 
+        341, 
+        364, 
+        365, 
+        313, 
+        314, 
+        315, 
+        316, 
+        317, 
+        318, 
+        181, 
+        182, 
+        183, 
+        193, 
+        194, 
+        195, 
+        151, 
+        152, 
+        153, 
+        178, 
+        179, 
+        180, 
+        100, 
+        101, 
+        124, 
+        125, 
+        126, 
+        283, 
+        284, 
+        169, 
+        170, 
+        171, 
+        163, 
+        164, 
+        325, 
+        326, 
+        327, 
+        127, 
+        128, 
+        129, 
+        172, 
+        173, 
+        174, 
+        160, 
+        161, 
+        133, 
+        134, 
+        135, 
+        202, 
+        203, 
+        204, 
+        214, 
+        215, 
+        142, 
+        143, 
+        144, 
+        286, 
+        287, 
+        288, 
+        121, 
+        122, 
+        123, 
+        145, 
+        146, 
+        147, 
+        337, 
+        338, 
+        94, 
+        95, 
+        96, 
+        109, 
+        110, 
+        111, 
+        79, 
+        80, 
+        139, 
+        140, 
+        141, 
+        136, 
+        137, 
+        138, 
+        82, 
+        83, 
+        84, 
+        358, 
+        359, 
+        360, 
+        118, 
+        119, 
+        120, 
+        244, 
+        245, 
+        246, 
+        241, 
+        242, 
+        243, 
+        274, 
+        275, 
+        276, 
+        277, 
+        278, 
+        279, 
+        187, 
+        188, 
+        189, 
+        334, 
+        335, 
+        336, 
+        328, 
+        329, 
+        330, 
+        346, 
+        347, 
+        331, 
+        332, 
+        333, 
+        205, 
+        206, 
+        207, 
+        91, 
+        92, 
+        93, 
+        88, 
+        89, 
+        90, 
+        256, 
+        257, 
+        258, 
+        250, 
+        251, 
+        252, 
+        253, 
+        254, 
+        255
+      ]
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "admin", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "is_superuser": true, 
+      "is_staff": true, 
+      "last_login": "2014-11-08 09:58:32", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$81e0c$3f9718f7152f8f8a2feb625659ab8eb975e6242c", 
+      "email": "admin@example.com", 
+      "date_joined": "2014-11-08 09:58:32"
+    }
+  }
+]

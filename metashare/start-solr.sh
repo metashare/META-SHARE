@@ -16,14 +16,19 @@ echo "Checking for a previous running SOLR server..."
 
 
 # Update schema.xml files, just in case:
-python $METASHAREDIR/manage.py build_solr_schema --filename="$MAINSCHEMAFILE"
-cp "$MAINSCHEMAFILE" "$TESTINGSCHEMAFILE" 
+source "${METASHAREDIR}/../venv/bin/activate"
+
+python "$METASHAREDIR/manage.py" build_solr_schema --filename="$MAINSCHEMAFILE"
+
+deactivate
+
+cp "$MAINSCHEMAFILE" "$TESTINGSCHEMAFILE"
 
 echo "Trying to start SOLR server"
 
 # Actually start solr
 (cd "$SOLR_ROOT"
-nohup java -Djetty.port=$SOLR_PORT -DSTOP.PORT=$SOLR_STOP_PORT -DSTOP.KEY="$SOLR_STOP_KEY" -jar start.jar > "$SOLR_LOG" &
+nohup java -Djetty.port=$SOLR_PORT -DSTOP.PORT=$SOLR_STOP_PORT -DSTOP.KEY="$SOLR_STOP_KEY" -jar start.jar > "$SOLR_LOG" 2>&1 &
 )
 
 

@@ -14,7 +14,7 @@ def login_user(driver, user_name, user_passwd):
     assumes that the browser is at the top level META-SHARE page
     """
     # TODO remove this workaround when Selenium starts working again as intended
-    driver.set_window_size(1280, 1024)
+    driver.set_window_size(3250, 2600)
     driver.find_element_by_xpath("//div[@id='inner']/div[2]/a[2]/div").click()
     driver.find_element_by_id("id_username").clear()
     driver.find_element_by_id("id_username").send_keys(user_name)

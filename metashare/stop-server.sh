@@ -15,8 +15,11 @@ if [ -f $LIGHTTPD_PID ]; then
     rm -f $LIGHTTPD_PID
 fi
 
-# Unregister scheduled tasks for synchronization, session cleanup, etc.
-python2.7 manage.py uninstalltasks
+source "${PROJECT_ROOT}/../venv/bin/activate"
 
+# Unregister scheduled tasks for synchronization, session cleanup, etc.
+(cd "$PROJECT_ROOT" && python2.7 manage.py uninstalltasks )
+
+deactivate
 
 $PROJECT_ROOT/stop-solr.sh
