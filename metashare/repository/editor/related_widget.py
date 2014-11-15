@@ -13,7 +13,7 @@ from django.utils.html import escape
 class RelatedFieldWidgetWrapper(widgets.RelatedFieldWidgetWrapper):
     
     class Media:
-        js = (settings.MEDIA_URL + "js/related-widget-wrapper.js",)
+        js = (settings.STATIC_URL + "metashare/js/related-widget-wrapper.js",)
     
     def __init__(self, *args, **kwargs):
         self.can_change_related = kwargs.pop('can_change_related', None)
@@ -57,7 +57,6 @@ class RelatedFieldWidgetWrapper(widgets.RelatedFieldWidgetWrapper):
         rendered_widget = mark_safe(rendered_widget)
         context = {'widget': rendered_widget,
                    'name': name,
-                   'media_prefix': settings.ADMIN_MEDIA_PREFIX,
                    'can_change_related': self.can_change_related,
                    'can_add_related': self.can_add_related,
                    'can_delete_related': self.can_delete_related}

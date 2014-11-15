@@ -1,6 +1,7 @@
 from django.conf.urls.defaults import patterns, include
 from django.contrib import admin
 from django.views.generic.simple import direct_to_template
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from metashare.repository.editor import admin_site as editor_site
 from metashare.repository.sitemap import RepositorySitemap
@@ -58,8 +59,5 @@ if DJANGO_BASE == "":
         {'template': 'robots.txt', 'mimetype': 'text/plain', 'extra_context' : { 'sitemap_url' : SITEMAP_URL }}),
     )
 
-if DEBUG:
-    urlpatterns += patterns('',
-      (r'^{0}site_media/(?P<path>.*)$'.format(DJANGO_BASE),
-        'django.views.static.serve', {'document_root': MEDIA_ROOT})
-    )
+urlpatterns += staticfiles_urlpatterns()
+

@@ -24,7 +24,7 @@ from datetime import datetime, date
 from dateutil.relativedelta import relativedelta
 import urllib, urllib2
 from threading import Timer
-from metashare.settings import LOG_HANDLER, MEDIA_URL
+from metashare.settings import LOG_HANDLER
 from metashare.stats.geoip import getcountry_name
 
 try:

@@ -24,6 +24,10 @@ LANGUAGE_CODE = 'en-us'
 # Path to the local storage layer path used for persistent object storage.
 STORAGE_PATH = '{0}/../storage'.format(ROOT_PATH)
 
+# Path to the local directory where all the static files (images, js, css) will 
+# be collected and served by the web server in STATIC_URL
+STATIC_ROOT = '{0}/../static'.format(ROOT_PATH)
+
 # Directory in which lock files will temporarily be created.
 LOCK_DIR = join(tempfile.gettempdir(), 'metashare-locks')
 
