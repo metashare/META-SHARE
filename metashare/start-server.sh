@@ -20,8 +20,10 @@ $PROJECT_ROOT/start-solr.sh
 sleep 5 # give SOLR time to start up before trying to verify that it is there
 
 # Register scheduled tasks for synchronization, session cleanup, etc.
-python2.7 manage.py installtasks
+# 2014-12-10 : we now use a custom task for synchronization
+#python2.7 manage.py installtasks
 
 # Start the Django + lighttpd server:
-python2.7 manage.py runfcgi host=localhost port=9190 method=threaded pidfile=$DJANGO_PID
-lighttpd -f /opt/metashare_git/META-SHARE/metashare/lighttpd/metashare.conf
+python2.7 manage.py runfcgi host=188.165.235.120 port=8800 method=threaded pidfile=$DJANGO_PID
+#python2.7 manage.py runfcgi host=localhost port=9190 method=threaded pidfile=$DJANGO_PID
+#lighttpd -f /opt/metashare_git/META-SHARE/metashare/lighttpd/metashare.conf

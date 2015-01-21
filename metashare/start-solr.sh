@@ -1,9 +1,9 @@
 #!/bin/bash
 
-export METASHAREDIR=$(dirname "$0")
+export METASHAREDIR=`pwd`
 export SOLR_ROOT=$(cd "$METASHAREDIR/../solr" ; pwd)
 export SOLR_LOG=$SOLR_ROOT/solr.log
-export SOLR_PORT=8983
+export SOLR_PORT=8984
 export SOLR_STOP_PORT=8079
 export SOLR_STOP_KEY=stopkey
 
@@ -16,7 +16,7 @@ echo "Checking for a previous running SOLR server..."
 
 
 # Update schema.xml files, just in case:
-python $METASHAREDIR/manage.py build_solr_schema --filename="$MAINSCHEMAFILE"
+python2.7 $METASHAREDIR/manage.py build_solr_schema --filename="$MAINSCHEMAFILE"
 cp "$MAINSCHEMAFILE" "$TESTINGSCHEMAFILE" 
 
 echo "Trying to start SOLR server"

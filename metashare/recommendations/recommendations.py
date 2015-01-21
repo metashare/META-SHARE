@@ -7,6 +7,7 @@ from metashare.storage.models import StorageObject
 import datetime
 import logging
 import threading
+import multiprocessing
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -24,7 +25,7 @@ class SessionResourcesTracker:
     Keeps track of resources the user has viewed/downloaded within a session.
     """
     # a lock used for the thread-safe updating of TogetherManager with new pairs 
-    lock = threading.RLock()
+    lock = multiprocessing.RLock()
 
     @staticmethod
     def getTracker(request):

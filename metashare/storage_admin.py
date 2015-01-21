@@ -1,4 +1,5 @@
 import os
+import shutil
 # Magic python path, based on http://djangosnippets.org/snippets/281/
 
 from os.path import abspath, dirname, join
@@ -92,7 +93,8 @@ def purge():
                 _deleted += 1
             
             except OSError:
-                os.rename(_old_name, _new_name)
+                print _old_name
+                shutil.move(_old_name, _new_name)
                 _renamed += 1
     
     print "Done.  Total: {0}, Deleted: {1}, Renamed: {2}".format(_total,

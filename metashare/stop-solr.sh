@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export METASHAREDIR=$(dirname "$0")
+export METASHAREDIR=`pwd`
 export SOLR_ROOT=$(cd "$METASHAREDIR/../solr" ; pwd)
 export SOLR_STOP_PORT=8079
 export SOLR_STOP_KEY=stopkey
