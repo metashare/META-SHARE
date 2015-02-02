@@ -20,7 +20,7 @@ from django.views.decorators.csrf import csrf_protect
 
 from metashare import settings
 from metashare.accounts.models import EditorGroup, EditorGroupManagers
-from metashare.repository.editor.editorutils import FilteredChangeList
+from metashare.repository.editor.editorutils import FilteredChangeList, AllChangeList
 from metashare.repository.editor.forms import StorageObjectUploadForm
 from metashare.repository.editor.inlines import ReverseInlineFormSet, \
     ReverseInlineModelAdmin
@@ -39,7 +39,6 @@ from metashare.stats.model_utils import saveLRStats, UPDATE_STAT, INGEST_STAT, D
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
     ALLOWED_ARCHIVE_EXTENSIONS
 from metashare.utils import verify_subclass, create_breadcrumb_template_params
-
 
 csrf_protect_m = method_decorator(csrf_protect)
 
@@ -260,7 +259,9 @@ class MetadataInline(ReverseInlineModelAdmin):
     readonly_fields = ('metadataCreationDate', 'metadataLastDateUpdated',)
     
 
-class ResourceModelAdmin(SchemaModelAdmin):            
+class ResourceModelAdmin(SchemaModelAdmin): 
+    
+    haystack_connection = 'default'           
     inline_type = 'stacked'
     custom_one2one_inlines = {'identificationInfo':IdentificationInline,
                               'resourceComponentType':ResourceComponentInline,
@@ -273,6 +274,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         'export_xml_action', 'delete', 'add_group', 'remove_group',
         'add_owner', 'remove_owner')
     hidden_fields = ('storage_object', 'owners', 'editor_groups',)
+    search_fields = ("identificationInfo__resourceName", "identificationInfo__resourceShortName", "identificationInfo__description", "identificationInfo__identifier")
 
     def publish_action(self, request, queryset):
         if has_publish_permission(request, queryset):
@@ -724,7 +726,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
         request.POST = _post
         _extra_context = extra_context or {}
         _extra_context.update({'myresources':True})
-
         return self.changelist_view(request, _extra_context)
 
     def get_changelist(self, request, **kwargs):
@@ -734,7 +735,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         if 'myresources' in request.POST:
             return FilteredChangeList
         else:
-            return ChangeList
+            return AllChangeList
 
 
     @csrf_protect_m

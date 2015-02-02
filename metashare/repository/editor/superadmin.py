@@ -28,7 +28,9 @@ from metashare.repository.editor.related_mixin import RelatedAdminMixin
 from metashare.repository.editor.schemamodel_mixin import SchemaModelLookup
 from metashare.storage.models import MASTER
 from metashare.repository.model_utils import get_root_resources
+from metashare.repository.editor.editorutils import MetaShareSearchModelAdmin
 from metashare.repository.supermodel import REQUIRED, RECOMMENDED, OPTIONAL
+
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(settings.LOG_HANDLER)
@@ -37,7 +39,7 @@ csrf_protect_m = method_decorator(csrf_protect)
 
 
 
-class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
+class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModelLookup):
     '''
     Patched ModelAdmin class. The add_view method is overridden to
     allow the reverse inline formsets to be saved before the parent
