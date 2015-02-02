@@ -169,10 +169,9 @@ class MetaShareSearchModelAdmin(ModelAdmin):
         if not self.has_change_permission(request, None):
             raise PermissionDenied
         
-        if not SEARCH_VAR in request.GET:
+        if not SEARCH_VAR in request.GET or "action" in request.POST:
             # Do the usual song and dance.
             return super(MetaShareSearchModelAdmin, self).changelist_view(request, extra_context)
-        
         # Do a search of just this model and populate a Changelist with the
         # returned bits.
         if not self.model in connections['default'].get_unified_index().get_indexed_models():
