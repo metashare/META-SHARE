@@ -51,6 +51,9 @@ def is_inline(fieldname):
         return False
     
 class AllChangeList(ChangeList):
+    """
+    Customized changelist for haystack search in backoffice admin of all resources. 
+    """
     
     def get_results(self, request):
         if not SEARCH_VAR in request.GET:
@@ -98,9 +101,9 @@ class FilteredChangeList(ChangeList):
     A FilteredChangeList filters the result_list for request.user objects.
     
     This implementation always filters; use the superclass ChangeList for
-    unfiltered views.
+    unfiltered views. 
+    Customized for haystack search in backoffice admin of your own resources. 
     """
-    
     
     def __init__(self, request, model, list_display, list_display_links,
       list_filter, date_hierarchy, search_fields, list_select_related,
@@ -128,6 +131,9 @@ class FilteredChangeList(ChangeList):
         return reverse("editor:{}_{}_change".format(self.opts.app_label, self.opts.module_name), args=(getattr(result, self.pk_attname),))
     
     def get_results(self, request):
+        """
+        Use RelatedSearchQuerySet to get the filtered results for user.
+        """
         if not SEARCH_VAR in request.GET:
             return super(FilteredChangeList, self).get_results(request)
         
@@ -163,6 +169,10 @@ class FilteredChangeList(ChangeList):
         self.paginator = paginator
 
 class MetaShareSearchModelAdmin(ModelAdmin):
+    """
+    MetaShareSearchModelAdmin hooks up the Haystack search engine with the admin menus: 
+    "Manage your own resources" & "Manage all resources".
+    """
     
     @csrf_protect_m
     def changelist_view(self, request, extra_context=None):
