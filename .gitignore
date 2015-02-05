@@ -2,7 +2,7 @@
 *.pyc
 *.db
 .DS_Store
-local_settings.py
+metashare/local_settings.py
 reports
 test-tmp
 .project
@@ -25,3 +25,4 @@ lighttpd.pid
 lighttpd/
 opt/
 ._*
+stockage/
