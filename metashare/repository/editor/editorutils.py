@@ -60,7 +60,6 @@ class AllChangeList(ChangeList):
             return super(AllChangeList, self).get_results(request)
         
         # Note that pagination is 0-based, not 1-based.
-        
         sqs = RelatedSearchQuerySet().models(self.model).auto_query(request.GET[SEARCH_VAR]).load_all()
         if not request.user.is_superuser:
             result = self.model.objects.distinct().filter(Q(owners=request.user)
@@ -68,6 +67,8 @@ class AllChangeList(ChangeList):
                            request.user.groups.values_list('name', flat=True)))
         else:
             result = self.model.objects.distinct()
+        if 'storage_object__publication_status__exact' in request.GET:
+            result = result.filter(storage_object__publication_status__exact=request.GET["storage_object__publication_status__exact"])
         sqs = sqs.load_all_queryset(self.model, result)
         paginator = Paginator(sqs, self.list_per_page)
         # Fixed bug for pagination, count full_result_count
@@ -140,7 +141,11 @@ class FilteredChangeList(ChangeList):
         # Note that pagination is 0-based, not 1-based.
         
         sqs = RelatedSearchQuerySet().models(self.model).auto_query(request.GET[SEARCH_VAR]).load_all()
-        sqs = sqs.load_all_queryset(self.model, self.model.objects.filter(owners=request.user))
+        result = self.model.objects.distinct().filter(owners=request.user)
+        if 'storage_object__publication_status__exact' in request.GET:
+            result = result.filter(storage_object__publication_status__exact=request.GET["storage_object__publication_status__exact"])
+        sqs = sqs.load_all_queryset(self.model, result)
+        
         paginator = Paginator(sqs, self.list_per_page)
         # Fixed bug for pagination, count full_result_count
         full_result_count = 0
@@ -170,7 +175,7 @@ class FilteredChangeList(ChangeList):
 
 class MetaShareSearchModelAdmin(ModelAdmin):
     """
-    MetaShareSearchModelAdmin hooks up the Haystack search engine with the admin menus: 
+    MetaShareSearchModelAdmin hooks up the Haystack search engine in the admin menus: 
     "Manage your own resources" & "Manage all resources".
     """
     
