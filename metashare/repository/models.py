@@ -2866,7 +2866,7 @@ LICENCEINFOTYPE_LICENCE_CHOICES = _make_choices_from_list([
   u'MS-NC-NoReD-ND-FF',u'MSCommons-BY', u'MSCommons-BY-NC',
   u'MSCommons-BY-NC-ND',u'MSCommons-BY-NC-SA', u'MSCommons-BY-ND',
   u'MSCommons-BY-SA',u'CLARIN_ACA', u'CLARIN_ACA-NC', u'CLARIN_PUB',
-  u'CLARIN_RES',u'ELRA_END_USER', u'ELRA_EVALUATION', u'ELRA_VAR', u'AGPL',
+  u'CLARIN_RES',u'ELRA_END_USER', u'ELRA_EVALUATION', u'ELRA_VAR', u'ELRA_VAR_E', u'AGPL',
   u'ApacheLicence_2.0',u'BSD', u'BSD-style', u'GFDL', u'GPL', u'LGPL',
   u'Princeton_Wordnet',u'proprietary', u'underNegotiation', u'other', 
 ])

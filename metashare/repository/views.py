@@ -124,8 +124,10 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
   'MS-NC-NoReD': (MEDIA_URL + 'licences/META-SHARE_NonCommercial_' \
         'NoRedistribution-v1.0.htm', MEMBER_TYPES.GOD),
   'ELRA_EVALUATION': (MEDIA_URL + 'licences/EVALUATION.htm', MEMBER_TYPES.GOD),
-  'ELRA_VAR': (MEDIA_URL + 'licences/VAR-v3_2007.htm', MEMBER_TYPES.GOD),
   'ELRA_END_USER': (MEDIA_URL + 'licences/ENDUSER-v3_2007.htm',
+                    MEMBER_TYPES.GOD),
+  'ELRA_VAR': (MEDIA_URL + 'licences/VAR-v3_2007.htm', MEMBER_TYPES.GOD),
+  'ELRA_VAR_E': (MEDIA_URL + 'licences/Var-E-v2.htm',
                     MEMBER_TYPES.GOD),
   'proprietary': ('', MEMBER_TYPES.GOD),
   'CLARIN_PUB': (MEDIA_URL + 'licences/CLARIN_PUB.html', MEMBER_TYPES.GOD),
