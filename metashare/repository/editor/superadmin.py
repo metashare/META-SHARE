@@ -14,6 +14,7 @@ from django.db import transaction, models, router
 from django.forms.formsets import all_valid
 from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
+from django.template.response import TemplateResponse
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_unicode
 from django.utils.html import escape, escapejs
@@ -68,6 +69,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         self.exclude = self.exclude or []
         if not isinstance(self.exclude, list):
             self.exclude = list(self.exclude)
+        self.tmp_inline_instances = []
         # Prepare inlines for the required one2one fields:
         for field in model._meta.fields:
             if isinstance(field, models.OneToOneField):
@@ -94,8 +96,11 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                                            parent,
                                            admin_site,
                                            self.inline_type)
-                    self.inline_instances.append(inline)
+                    self.tmp_inline_instances.append(inline)
                     self.exclude.append(name)
+
+    def get_inline_instances(self, request):
+        return self.tmp_inline_instances + super(SchemaModelAdmin, self).get_inline_instances(request)
 
 
     def get_actions(self, request):
@@ -225,7 +230,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
     def add_view(self, request, form_url='', extra_context=None):
         """
         The 'add' admin view for this model.
-        This follows closely the base implementation from Django 1.3's
+        This follows closely the base implementation from Django 1.4's
         django.contrib.admin.options.ModelAdmin,
         with the explicitly marked modifications.
         """
@@ -244,6 +249,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
 
         ModelForm = self.get_form(request)
         formsets = []
+        inline_instances = self.get_inline_instances(request)
         if request.method == 'POST':            
             form = ModelForm(request.POST, request.FILES)
             if form.is_valid():
@@ -253,14 +259,14 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                 form_validated = False
                 new_object = self.model()
             prefixes = {}
-            for FormSet, inline in zip(self.get_formsets(request), self.inline_instances):
+            for FormSet, inline in zip(self.get_formsets(request), inline_instances):
                 #### begin modification ####
                 if getattr(FormSet, 'parent_fk_name', None) in self.no_inlines:
                     continue
                 #### end modification ####
                 prefix = FormSet.get_default_prefix()
                 prefixes[prefix] = prefixes.get(prefix, 0) + 1
-                if prefixes[prefix] != 1:
+                if prefixes[prefix] != 1 or not prefix:
                     prefix = "%s-%s" % (prefix, prefixes[prefix])
                 formset = FormSet(data=request.POST, files=request.FILES,
                                   instance=new_object,
@@ -314,15 +320,14 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                     initial[k] = initial[k].split(",")
             form = ModelForm(initial=initial)
             prefixes = {}
-            for FormSet, inline in zip(self.get_formsets(request),
-                                       self.inline_instances):
+            for FormSet, inline in zip(self.get_formsets(request), inline_instances):
                 #### begin modification ####
                 if getattr(FormSet, 'parent_fk_name', None) in self.no_inlines:
                     continue
                 #### end modification ####
                 prefix = FormSet.get_default_prefix()
                 prefixes[prefix] = prefixes.get(prefix, 0) + 1
-                if prefixes[prefix] != 1:
+                if prefixes[prefix] != 1 or not prefix:
                     prefix = "%s-%s" % (prefix, prefixes[prefix])
                 formset = FormSet(instance=self.model(), prefix=prefix,
                                   queryset=inline.queryset(request))
@@ -332,11 +337,12 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         media = self.media or []
         #### end modification ####
         inline_admin_formsets = []
-        for inline, formset in zip(self.inline_instances, formsets):
+        for inline, formset in zip(inline_instances, formsets):
             fieldsets = list(inline.get_fieldsets(request))
             readonly = list(inline.get_readonly_fields(request))
+            prepopulated = dict(inline.get_prepopulated_fields(request))
             inline_admin_formset = helpers.InlineAdminFormSet(inline, formset,
-                fieldsets, readonly, model_admin=self)
+                fieldsets, prepopulated, readonly, model_admin=self)
             #### begin modification ####
             self.add_lang_templ_params(inline_admin_formset)
             #### end modification ####
@@ -356,10 +362,9 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             'is_popup': "_popup" in request.REQUEST or \
                         "_popup_o2m" in request.REQUEST,
             'show_delete': False,
-            'media': mark_safe(media),
+            'media': media,
             'inline_admin_formsets': inline_admin_formsets,
             'errors': helpers.AdminErrorList(form, formsets),
-            'root_path': self.admin_site.root_path,
             'app_label': opts.app_label,
             'kb_link': settings.KNOWLEDGE_BASE_URL,
             'comp_name': _('%s') % force_unicode(opts.verbose_name),
@@ -370,10 +375,10 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
     
     @csrf_protect_m
     @transaction.commit_on_success
-    def change_view(self, request, object_id, extra_context=None):
+    def change_view(self, request, object_id, form_url='', extra_context=None):
         """
         The 'change' admin view for this model.
-        This follows closely the base implementation from Django 1.3's
+        This follows closely the base implementation from Django 1.4's
         django.contrib.admin.options.ModelAdmin,
         with the explicitly marked modifications.
         """
@@ -396,10 +401,13 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             raise Http404(_('%(name)s object with primary key %(key)r does not exist.') % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
         if request.method == 'POST' and "_saveasnew" in request.POST:
-            return self.add_view(request, form_url='../add/')
+            return self.add_view(request, form_url=reverse('admin:%s_%s_add' %
+                                    (opts.app_label, opts.module_name),
+                                    current_app=self.admin_site.name))
 
         ModelForm = self.get_form(request, obj)
         formsets = []
+        inline_instances = self.get_inline_instances(request)
         if request.method == 'POST':
             form = ModelForm(request.POST, request.FILES, instance=obj)
             if form.is_valid():
@@ -409,15 +417,14 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                 form_validated = False
                 new_object = obj
             prefixes = {}
-            for FormSet, inline in zip(self.get_formsets(request, new_object),
-                                       self.inline_instances):
+            for FormSet, inline in zip(self.get_formsets(request, new_object), inline_instances):
                 #### begin modification ####
                 if getattr(FormSet, 'parent_fk_name', None) in self.no_inlines:
                     continue
                 #### end modification ####
                 prefix = FormSet.get_default_prefix()
                 prefixes[prefix] = prefixes.get(prefix, 0) + 1
-                if prefixes[prefix] != 1:
+                if prefixes[prefix] != 1 or not prefix:
                     prefix = "%s-%s" % (prefix, prefixes[prefix])
                 formset = FormSet(request.POST, request.FILES,
                                   instance=new_object, prefix=prefix,
@@ -464,14 +471,14 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         else:
             form = ModelForm(instance=obj)
             prefixes = {}
-            for FormSet, inline in zip(self.get_formsets(request, obj), self.inline_instances):
+            for FormSet, inline in zip(self.get_formsets(request, obj), inline_instances):
                 #### begin modification ####
                 if getattr(FormSet, 'parent_fk_name', None) in self.no_inlines:
                     continue
                 #### end modification ####
                 prefix = FormSet.get_default_prefix()
                 prefixes[prefix] = prefixes.get(prefix, 0) + 1
-                if prefixes[prefix] != 1:
+                if prefixes[prefix] != 1 or not prefix:
                     prefix = "%s-%s" % (prefix, prefixes[prefix])
                 formset = FormSet(instance=obj, prefix=prefix,
                                   queryset=inline.queryset(request))
@@ -481,20 +488,20 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         media = self.media or []
         #### end modification ####
         inline_admin_formsets = []
-        for inline, formset in zip(self.inline_instances, formsets):
+        for inline, formset in zip(inline_instances, formsets):
             fieldsets = list(inline.get_fieldsets(request, obj))
             readonly = list(inline.get_readonly_fields(request, obj))
+            prepopulated = dict(inline.get_prepopulated_fields(request, obj))
             inline_admin_formset = helpers.InlineAdminFormSet(inline, formset,
-                fieldsets, readonly, model_admin=self)
+                fieldsets, prepopulated, readonly, model_admin=self)
             #### begin modification ####
             self.add_lang_templ_params(inline_admin_formset)
             #### end modification ####
             inline_admin_formsets.append(inline_admin_formset)
             media = media + inline_admin_formset.media
-
         #### begin modification ####
         adminForm = OrderedAdminForm(form, self.get_fieldsets_with_inlines(request, obj),
-            self.prepopulated_fields, self.get_readonly_fields(request, obj),
+            self.get_prepopulated_fields(request, obj), self.get_readonly_fields(request, obj),
             model_admin=self, inlines=inline_admin_formsets)
         media = media + adminForm.media
         #### end modification ####
@@ -506,10 +513,9 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             'original': obj,
             'is_popup': "_popup" in request.REQUEST or \
                         "_popup_o2m" in request.REQUEST,
-            'media': mark_safe(media),
+            'media': media,
             'inline_admin_formsets': inline_admin_formsets,
             'errors': helpers.AdminErrorList(form, formsets),
-            'root_path': self.admin_site.root_path,
             'app_label': opts.app_label,
             'kb_link': settings.KNOWLEDGE_BASE_URL,
             'comp_name': _('%s') % force_unicode(opts.verbose_name),
@@ -536,14 +542,15 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
                     context, context_instance=context_instance)
         #### end modification ####
 
-        return self.render_change_form(request, context, change=True, obj=obj)
+        return self.render_change_form(request, context, change=True, obj=obj, form_url=form_url)
+
 
     @csrf_protect_m
     @transaction.commit_on_success
     def delete_view(self, request, object_id, extra_context=None):
         """
         The 'delete' admin view for this model.
-        This follows closely the base implementation from Django 1.3's
+        This follows closely the base implementation from Django 1.4's
         django.contrib.admin.options.ModelAdmin,
         with the explicitly marked modifications.
         """
@@ -595,16 +602,15 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             "perms_lacking": perms_needed,
             "protected": protected,
             "opts": opts,
-            "root_path": self.admin_site.root_path,
             "app_label": app_label,
         }
         context.update(extra_context or {})
-        context_instance = template.RequestContext(request, current_app=self.admin_site.name)
-        return render_to_response(self.delete_confirmation_template or [
+
+        return TemplateResponse(request, self.delete_confirmation_template or [
             "admin/%s/%s/delete_confirmation.html" % (app_label, opts.object_name.lower()),
             "admin/%s/delete_confirmation.html" % app_label,
             "admin/delete_confirmation.html"
-        ], context, context_instance=context_instance)
+        ], context, current_app=self.admin_site.name)
 
 
 class OrderedAdminForm(helpers.AdminForm):

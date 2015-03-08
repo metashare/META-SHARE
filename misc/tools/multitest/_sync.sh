@@ -83,7 +83,7 @@ synchronize_node()
 	export NODE_DIR=$TEST_DIR/$NODE_NAME
 	echo "Synchronizing $NODE_NAME"
 	#cd "$METASHARE_DIR"
-	$PYTHON metashare/manage.py synchronize > "$REMOTE_DATA_FILE"
+	$PYTHON manage.py synchronize > "$REMOTE_DATA_FILE"
 	local ret_val=$?
 	if [[ $ret_val -ne 0 ]] ; then
 		echo -n "Error in synchronizing $NODE_NAME" >&3
@@ -105,7 +105,7 @@ synchronize_node_idf()
 	export NODE_DIR=$TEST_DIR/$NODE_NAME
 	echo "Synchronizing $NODE_NAME"
 	#cd "$METASHARE_DIR"
-	$PYTHON metashare/manage.py synchronize --id-file=$ID_FILE > $REMOTE_DATA_FILE
+	$PYTHON manage.py synchronize --id-file=$ID_FILE > $REMOTE_DATA_FILE
 	local ret_val=$?
 	#cd "$CURRENT_DIR"
 	return $ret_val
@@ -141,7 +141,7 @@ get_node_resource_list()
 		EXTRA_INFO="--extended"
 	fi
 	#cd "$METASHARE_DIR"
-	$PYTHON metashare/manage.py get_resource_list "$EXTRA_INFO" | sort
+	$PYTHON manage.py get_resource_list "$EXTRA_INFO" | sort
 	#cd "$CURRENT_DIR"
 }
 
@@ -178,7 +178,7 @@ update_digests_on_node()
 	export NODE_DIR=$TEST_DIR/$NODE_NAME
 	echo "Updating digests on node $NODE_NAME"
 	#cd "$METASHARE_DIR"
-	$PYTHON metashare/manage.py update_digests
+	$PYTHON manage.py update_digests
 	local ret_val=$?
 	#cd "$CURRENT_DIR"
 	return $ret_val

@@ -55,14 +55,14 @@ if [ "x$PYTHONWARNINGS" = "x" ]; then
     export PYTHONWARNINGS="d"
 fi
 
-python metashare/manage.py syncdb --noinput || exit 1
-#python metashare/manage.py dumpdata > metashare/django-dump.json
+python manage.py syncdb --noinput || exit 1
+#python manage.py dumpdata > metashare/django-dump.json
 rm metashare/initial_data.json || exit 1
 
 # Run testsuite:
 metashare/start-solr.sh || exit 1
 sleep 10
-coverage run -a metashare/manage.py test $1 || exit 1
+coverage run -a manage.py test $@ repository storage accounts sync stats || exit 1
 deactivate || exit 1
 metashare/stop-solr.sh || exit 1
 

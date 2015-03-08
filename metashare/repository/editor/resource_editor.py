@@ -818,7 +818,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
             'existing_download': existing_download,
             'object_id': object_id,
             'original': obj,
-            'root_path': self.admin_site.root_path,
             'app_label': opts.app_label,
         }
         context.update(extra_context or {})
@@ -939,7 +938,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
         context = {
             'title': 'Add %s' % force_unicode(opts.verbose_name),
             'show_delete': False,
-            'root_path': self.admin_site.root_path,
             'app_label': opts.app_label,
             'media': mark_safe(media),
             'add': True,
@@ -1206,7 +1204,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         _extra_context.update({'DJANGO_BASE':settings.DJANGO_BASE})
         _structures = self.get_hidden_structures(request, object_id)
         _extra_context.update(_structures)
-        return super(ResourceModelAdmin, self).change_view(request, object_id, _extra_context)
+        return super(ResourceModelAdmin, self).change_view(request, object_id, extra_context=_extra_context)
 
 class LicenceForm(forms.ModelForm):
     class Meta:

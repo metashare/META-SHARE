@@ -159,7 +159,7 @@ class SchemaModelLookup(object):
 
     def get_fieldsets_with_inlines(self, request, obj=None):
         # pylint: disable-msg=E1101
-        inline_names = [inline.parent_fk_name for inline in self.inline_instances if hasattr(inline, 'parent_fk_name')]
+        inline_names = [inline.parent_fk_name for inline in self.get_inline_instances(request) if hasattr(inline, 'parent_fk_name')]
         return self.build_fieldsets_from_schema(include_inlines=True, inlines=inline_names)
 
 

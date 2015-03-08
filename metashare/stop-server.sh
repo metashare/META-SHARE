@@ -18,7 +18,7 @@ fi
 source "${PROJECT_ROOT}/../venv/bin/activate"
 
 # Unregister scheduled tasks for synchronization, session cleanup, etc.
-(cd "$PROJECT_ROOT" && python2.7 manage.py uninstalltasks )
+(cd "$PROJECT_ROOT/.." && python2.7 manage.py uninstalltasks )
 
 deactivate
 

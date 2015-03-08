@@ -11,7 +11,7 @@ sys.path.insert(1, parentdir)
 
 
 try:
-    import settings # Assumed to be in the same directory.
+    from metashare import settings
 
 except ImportError:
     sys.stderr.write("Error: Can't find the file 'settings.py' in the " \
@@ -30,7 +30,7 @@ def print_usage():
     return
 
 if __name__ == "__main__":
-    os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+    os.environ['DJANGO_SETTINGS_MODULE'] = 'metashare.settings'
     PROJECT_HOME = os.path.normpath(os.getcwd() + "/..")
     sys.path.append(PROJECT_HOME)
     

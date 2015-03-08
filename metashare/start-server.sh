@@ -22,10 +22,10 @@ sleep 5 # give SOLR time to start up before trying to verify that it is there
 source "${PROJECT_ROOT}/../venv/bin/activate"
 
 # Register scheduled tasks for synchronization, session cleanup, etc.
-(cd "$PROJECT_ROOT"; python manage.py installtasks)
+(cd "$PROJECT_ROOT/../"; python manage.py installtasks)
 
 # Start the Django + lighttpd server:
-(cd "$PROJECT_ROOT"; python manage.py runfcgi host=localhost port=9190 method=threaded pidfile=$DJANGO_PID)
+(cd "$PROJECT_ROOT/../"; python manage.py runfcgi host=localhost port=9190 method=threaded pidfile=$DJANGO_PID)
 lighttpd -f "$PROJECT_ROOT/lighttpd.conf"
 
 deactivate

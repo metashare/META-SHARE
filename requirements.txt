@@ -1,4 +1,4 @@
-git+git://github.com/zeehio/django.git@fac11b4d80a310d0895d880bca6e6b8512c26982
+git+git://github.com/zeehio/django.git@233117ea8786c711ba9ad34115e61077f4be65d6
 Unidecode==0.04.16
 django-analytical==0.12.1
 git+git://github.com/zeehio/django-haystack.git@ea5dbd570f847ceb39ff741d9a27c77df09c9e3d                 

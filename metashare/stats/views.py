@@ -199,7 +199,7 @@ def usagestats (request):
     fields_count = usage_filter["required"] + usage_filter["optional"] + usage_filter["recommended"]
              
     # update usage stats according with the published resources
-    lr_usage = UsageStats.objects.values('lrid').distinct('lrid').count()
+    lr_usage = UsageStats.objects.values('lrid').distinct().count()
     if (len(lrset) != lr_usage):
         usagethread = updateUsageStats(lrset)
         if usagethread != None:

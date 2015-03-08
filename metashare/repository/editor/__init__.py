@@ -113,7 +113,6 @@ class MetashareBackendSite(AdminSite):
           'title': _('Upload new resource description(s)'),
           'form': form,
           'form_url': request.path,
-          'root_path': self.root_path,
         }
         context.update(extra_context or {})
         context_instance = template.RequestContext(request, current_app=self.name)

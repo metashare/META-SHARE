@@ -1,5 +1,6 @@
 #!/bin/bash
 
+export METASHARETOPDIR=$(readlink -f $(dirname "$0")/..)
 export METASHAREDIR=$(dirname "$0")
 export SOLR_ROOT=$(cd "$METASHAREDIR/../solr" ; pwd)
 export SOLR_LOG=$SOLR_ROOT/solr.log
@@ -18,7 +19,7 @@ echo "Checking for a previous running SOLR server..."
 # Update schema.xml files, just in case:
 source "${METASHAREDIR}/../venv/bin/activate"
 
-python "$METASHAREDIR/manage.py" build_solr_schema --filename="$MAINSCHEMAFILE"
+python "$METASHARETOPDIR/manage.py" build_solr_schema --filename="$MAINSCHEMAFILE"
 
 deactivate
 

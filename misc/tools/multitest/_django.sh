@@ -42,7 +42,7 @@ start_django()
 	export NODE_DIR="$TEST_DIR/$NODE_NAME"
 	local PID_NAME=`get_django_pid_filename`
 	local DJANGO_PID="$NODE_DIR/$PID_NAME"
-	$PYTHON metashare/manage.py runserver 0.0.0.0:$DJANGO_PORT --noreload &> "$TEST_DIR/$NODE_NAME/metashare.log" &
+	$PYTHON manage.py runserver 0.0.0.0:$DJANGO_PORT --noreload &> "$TEST_DIR/$NODE_NAME/metashare.log" &
 	echo $! > "$DJANGO_PID"
 	sleep 2
 	#cd "$CWD"
@@ -70,7 +70,7 @@ run_syncdb()
 	#cd "$METASHARE_DIR"
 	echo "Running manage.py syncdb"
 	export NODE_DIR=$TEST_DIR/$NODE_NAME
-	$PYTHON metashare/manage.py syncdb
+	$PYTHON manage.py syncdb
 	#cd "$CWD"
 }
 
