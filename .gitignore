@@ -9,7 +9,6 @@ test-tmp
 .pydevproject
 .settings
 .deps
-Makefile
 *.o
 *.cache
 *.log
