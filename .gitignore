@@ -12,6 +12,7 @@ test-tmp
 Makefile
 *.o
 *.cache
+metashare/.metadata/
 *.log
 *.status
 stamp-h1
