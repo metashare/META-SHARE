@@ -177,7 +177,7 @@ class BasicEditorTests(MetashareSeleniumTestCase):
 
         # tool info popup
         driver.find_element_by_id("edit_id_toolServiceInfo").click()
-        driver.switch_to_window("edit_id_toolServiceInfo")
+        driver.switch_to.window("edit_id_toolServiceInfo")
         Select(driver.find_element_by_id("id_toolServiceType")).select_by_visible_text("Tool")
         Select(driver.find_element_by_id("id_languageDependent")).select_by_visible_text("Yes")
         # save and close tool info popup
@@ -299,7 +299,7 @@ class BasicEditorTests(MetashareSeleniumTestCase):
         root_id = driver.current_window_handle
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
-        driver.switch_to_window("id_distributionInfo")
+        driver.switch_to.window("id_distributionInfo")
         # check sorting of Availability
         self.assertEqual("Available - Restricted Use", driver.find_element_by_xpath(
           "//select[@id='id_availability']/option[2]").text)
@@ -312,7 +312,7 @@ class BasicEditorTests(MetashareSeleniumTestCase):
         cancel_and_close(driver, root_id)
         # corpus info text popup
         driver.find_element_by_id("add_id_corpusTextInfo-0").click()
-        driver.switch_to_window("id_corpusTextInfo__dash__0")
+        driver.switch_to.window("id_corpusTextInfo__dash__0")
         # check sorting of Linguality
         self.assertEqual("Bilingual", driver.find_element_by_xpath(
           "//select[@id='id_form-0-lingualityType']/option[2]").text)
@@ -377,7 +377,7 @@ class BasicEditorTests(MetashareSeleniumTestCase):
           driver.find_element_by_css_selector("#content > h1").text)
         # distribution popup
         driver.find_element_by_css_selector("img[alt=\"Add information\"]").click()  
-        driver.switch_to_window("id_distributionInfo")
+        driver.switch_to.window("id_distributionInfo")
         # show licenses
         driver.find_element_by_id("fieldsetcollapser0").click()
         # check that the left window contains all entries
@@ -828,7 +828,7 @@ def _fill_distribution_popup(test, driver, ss_path, parent_id):
     fills the distribution popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_distributionInfo")
+    driver.switch_to.window("id_distributionInfo")
     test.spin_assert(lambda: test.assertEqual("Add Distribution",
         driver.find_element_by_css_selector("#content > h1").text))
     # remember current window id
@@ -906,7 +906,7 @@ def _fill_contactPerson_popup(test, driver, ss_path, parent_id):
     fills the contact person popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_contactPerson")
+    driver.switch_to.window("id_contactPerson")
     _fill_personInfo_form(test, driver, ss_path, "form-0-")
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -962,7 +962,7 @@ def _fill_affiliation_popup(test, driver, ss_path, parent_id):
     fills the affiliation popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_affiliation")
+    driver.switch_to.window("id_affiliation")
     test.spin_assert(lambda: test.assertEqual("Add Organization",
         driver.find_element_by_css_selector("#content > h1").text))
     driver.find_element_by_name("key_organizationName_0").clear()
@@ -1016,7 +1016,7 @@ def _fill_usage_popup(driver, ss_path, parent_id):
     fills the usage popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_usageInfo")
+    driver.switch_to.window("id_usageInfo")
     current_id = driver.current_window_handle
     # access tool popup
     driver.find_element_by_xpath("//a[@id='add_id_accessTool']/img").click()  
@@ -1063,7 +1063,7 @@ def _fill_accessTool_popup(driver, ss_path, parent_id):
     fills the access tool popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_accessTool")
+    driver.switch_to.window("id_accessTool")
     _fill_targetResource_form(driver, ss_path)
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -1083,7 +1083,7 @@ def _fill_validationTool_popup(driver, ss_path, parent_id):
     fills the validation tool popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_validationinfotype_model_set__dash__0__dash__validationTool")
+    driver.switch_to.window("id_validationinfotype_model_set__dash__0__dash__validationTool")
     _fill_targetResource_form(driver, ss_path)
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -1095,7 +1095,7 @@ def _fill_annotationTool_popup(driver, ss_path, parent_id):
     fills the annotation tool popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_annotationinfotype_model_set__dash__0__dash__annotationTool")
+    driver.switch_to.window("id_annotationinfotype_model_set__dash__0__dash__annotationTool")
     _fill_targetResource_form(driver, ss_path)
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -1107,7 +1107,7 @@ def _fill_originalSource_popup(driver, ss_path, parent_id):
     fills the original source popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_form__dash__2__dash__0__dash__originalSource")
+    driver.switch_to.window("id_form__dash__2__dash__0__dash__originalSource")
     _fill_targetResource_form(driver, ss_path)
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -1119,7 +1119,7 @@ def _fill_creationTool_popup(driver, ss_path, parent_id):
     fills the creation tool popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_form__dash__2__dash__0__dash__creationTool")
+    driver.switch_to.window("id_form__dash__2__dash__0__dash__creationTool")
     _fill_targetResource_form(driver, ss_path)
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -1131,7 +1131,7 @@ def _fill_resourceAssociatedWith_popup(driver, ss_path, parent_id):
     fills the resource associated with popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_resourceAssociatedWith")
+    driver.switch_to.window("id_resourceAssociatedWith")
     _fill_targetResource_form(driver, ss_path)
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -1143,7 +1143,7 @@ def _fill_usageReport_popup(driver, ss_path, parent_id):
     fills the usage report popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_actualuseinfotype_model_set__dash__0__dash__usageReport")
+    driver.switch_to.window("id_actualuseinfotype_model_set__dash__0__dash__usageReport")
     _fill_documentInfo_form(driver, ss_path)
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -1155,7 +1155,7 @@ def _fill_validationReport_popup(driver, ss_path, parent_id):
     fills the validation report popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_validationinfotype_model_set__dash__0__dash__validationReport")
+    driver.switch_to.window("id_validationinfotype_model_set__dash__0__dash__validationReport")
     _fill_documentInfo_form(driver, ss_path)
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -1167,7 +1167,7 @@ def _fill_documentation_popup(driver, ss_path, parent_id):
     fills the documentation popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_form__dash__4__dash__0__dash__documentation")
+    driver.switch_to.window("id_form__dash__4__dash__0__dash__documentation")
     _fill_documentInfo_form(driver, ss_path)
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -1179,7 +1179,7 @@ def _fill_annotationManual_popup(driver, ss_path, parent_id):
     fills the annotation manual popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_annotationinfotype_model_set__dash__0__dash__annotationManual")
+    driver.switch_to.window("id_annotationinfotype_model_set__dash__0__dash__annotationManual")
     _fill_documentInfo_form(driver, ss_path)
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -1238,7 +1238,7 @@ def _fill_derivedResource_popup(driver, ss_path, parent_id):
     fills the derived resource popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_actualuseinfotype_model_set__dash__0__dash__derivedResource")
+    driver.switch_to.window("id_actualuseinfotype_model_set__dash__0__dash__derivedResource")
     _fill_targetResource_form(driver, ss_path)
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -1250,7 +1250,7 @@ def _fill_relatedResource_popup(driver, ss_path, parent_id):
     fills the related resource popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_relationinfotype_model_set__dash__0__dash__relatedResource")
+    driver.switch_to.window("id_relationinfotype_model_set__dash__0__dash__relatedResource")
     _fill_targetResource_form(driver, ss_path)
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -1262,7 +1262,7 @@ def _fill_project_popup(driver, ss_path, parent_id):
     fills the project popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_actualuseinfotype_model_set__dash__0__dash__usageProject")
+    driver.switch_to.window("id_actualuseinfotype_model_set__dash__0__dash__usageProject")
     _fill_projectInfo_form(driver, ss_path)
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -1274,7 +1274,7 @@ def _fill_fundingProject_popup(driver, ss_path, parent_id):
     fills the funding project popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_form__dash__5__dash__0__dash__fundingProject")
+    driver.switch_to.window("id_form__dash__5__dash__0__dash__fundingProject")
     _fill_projectInfo_form(driver, ss_path)
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -1316,7 +1316,7 @@ def _fill_metadataCreator_popup(test, driver, ss_path, parent_id):
     fills the metadata creator popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_form__dash__2__dash__0__dash__metadataCreator")
+    driver.switch_to.window("id_form__dash__2__dash__0__dash__metadataCreator")
     _fill_personInfo_form(test, driver, ss_path, "form-0-")
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -1328,7 +1328,7 @@ def _fill_resourceCreator_popup(test, driver, ss_path, parent_id):
     fills the resource creator popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_form__dash__5__dash__0__dash__resourceCreator")
+    driver.switch_to.window("id_form__dash__5__dash__0__dash__resourceCreator")
     _fill_personInfo_form(test, driver, ss_path, "form-0-")
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -1340,7 +1340,7 @@ def _fill_annotator_popup(test, driver, ss_path, parent_id):
     fills the annotator popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_annotationinfotype_model_set__dash__0__dash__annotator")
+    driver.switch_to.window("id_annotationinfotype_model_set__dash__0__dash__annotator")
     _fill_personInfo_form(test, driver, ss_path, "form-0-")
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -1352,7 +1352,7 @@ def _fill_iprHolder_popup(test, driver, ss_path, parent_id):
     fills the ipr holder popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_iprHolder")
+    driver.switch_to.window("id_iprHolder")
     _fill_personInfo_form(test, driver, ss_path, "form-0-")
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -1364,7 +1364,7 @@ def _fill_licensor_popup(test, driver, ss_path, parent_id):
     fills the licensor popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_licenceinfotype_model_set__dash__0__dash__licensor")
+    driver.switch_to.window("id_licenceinfotype_model_set__dash__0__dash__licensor")
     test.spin_assert(lambda: test.assertEqual("Add Person",
         driver.find_element_by_css_selector("#content > h1").text))
     _fill_personInfo_form(test, driver, ss_path, "form-0-")
@@ -1378,7 +1378,7 @@ def _fill_validator_popup(test, driver, ss_path, parent_id):
     fills the validator popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_validationinfotype_model_set__dash__0__dash__validator")
+    driver.switch_to.window("id_validationinfotype_model_set__dash__0__dash__validator")
     time.sleep(20)
     _fill_personInfo_form(test, driver, ss_path, "form-0-")
     time.sleep(20)
@@ -1391,7 +1391,7 @@ def _fill_distributionRightsHolder_popup(test, driver, ss_path, parent_id):
     fills the distributino rights holder popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_licenceinfotype_model_set__dash__0__dash__distributionRightsHolder")
+    driver.switch_to.window("id_licenceinfotype_model_set__dash__0__dash__distributionRightsHolder")
     test.spin_assert(lambda: test.assertEqual("Add Person | META-SHARE backend",
         driver.get_title()))
     _fill_personInfo_form(test, driver, ss_path, "form-0-")
@@ -1405,7 +1405,7 @@ def _fill_membership_popup(driver, ss_path, parent_id):
     fills the membership popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_licenceinfotype_model_set__dash__0__dash__membershipInfo")
+    driver.switch_to.window("id_licenceinfotype_model_set__dash__0__dash__membershipInfo")
     Select(driver.find_element_by_xpath("//div[@class='form-row member']/div/select")) \
       .select_by_visible_text("Yes")
     Select(driver.find_element_by_name(
@@ -1422,7 +1422,7 @@ def _fill_corpusTextInfo_popup(test, driver, ss_path, parent_id):
     fills the corpus text info popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_corpusTextInfo__dash__0")
+    driver.switch_to.window("id_corpusTextInfo__dash__0")
     # required fields
     # corpus text info / linguality
     _fill_linguality_form(driver, ss_path, "form-0-")
@@ -1469,7 +1469,7 @@ def _fill_corpusAudioInfo_popup(driver, ss_path, parent_id):
     fills the corpus audio info popup with all required
     information and returns to the parent window
     """
-    driver.switch_to_window("id_corpusAudioInfo")
+    driver.switch_to.window("id_corpusAudioInfo")
     Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
       "Monolingual")
     # corpus audio info / language
@@ -1489,7 +1489,7 @@ def _fill_corpusVideoInfo_popup(driver, ss_path, parent_id):
     information and returns to the parent window
     """
     driver.find_element_by_id("add_id_corpusVideoInfo-0").click()
-    driver.switch_to_window("id_corpusVideoInfo__dash__0")
+    driver.switch_to.window("id_corpusVideoInfo__dash__0")
     # corpus video info / size popup
     driver.find_element_by_name("sizeinfotype_model_set-0-size").clear()
     driver.find_element_by_name("sizeinfotype_model_set-0-size").send_keys("100")
@@ -1505,7 +1505,7 @@ def _fill_corpusImageInfo_popup(driver, ss_path, parent_id):
     fills the corpus image info popup with all required
     information and returns to the parent window
     """
-    driver.switch_to_window("id_corpusImageInfo")
+    driver.switch_to.window("id_corpusImageInfo")
     # corpus image info / size popup
     driver.find_element_by_name("sizeinfotype_model_set-0-size").clear()
     driver.find_element_by_name("sizeinfotype_model_set-0-size").send_keys("100")
@@ -1521,7 +1521,7 @@ def _fill_corpusTextNumericalInfo_popup(driver, ss_path, parent_id):
     fills the corpus text numerical info popup with all required
     information and returns to the parent window
     """
-    driver.switch_to_window("id_corpusTextNumericalInfo")
+    driver.switch_to.window("id_corpusTextNumericalInfo")
 
     # save and close corpus text numerical info popup
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -1533,7 +1533,7 @@ def _fill_corpusTextNgramInfo_popup(driver, ss_path, parent_id):
     fills the corpus text ngram info popup with all required
     information and returns to the parent window
     """
-    driver.switch_to_window("id_corpusTextNgramInfo")
+    driver.switch_to.window("id_corpusTextNgramInfo")
     # corpus ngram info / base item
     Select(driver.find_element_by_name("form-0-baseItem_old")).select_by_visible_text("Other")
     driver.find_element_by_xpath("//a[@class='selector-add']").click()
@@ -1559,7 +1559,7 @@ def _fill_corpusLanguageDescriptionGeneralInfo_popup(driver, ss_path, parent_id)
     fills the language description general info popup with all required
     information and returns to the parent window
     """
-    driver.switch_to_window("edit_id_langdescInfo")
+    driver.switch_to.window("edit_id_langdescInfo")
     Select(driver.find_element_by_id("id_languageDescriptionType")).select_by_visible_text(
       "Grammar")
 
@@ -1572,7 +1572,7 @@ def _fill_corpusLanguageDescriptionTextInfo_popup(driver, ss_path, parent_id):
     fills the language description info text popup with all required
     information and returns to the parent window
     """
-    driver.switch_to_window("id_languageDescriptionTextInfo")
+    driver.switch_to.window("id_languageDescriptionTextInfo")
     Select(driver.find_element_by_id("id_form-2-0-lingualityType")).select_by_visible_text(
       "Monolingual")
     # language description info text / language
@@ -1620,7 +1620,7 @@ def _fill_sizePerLanguage_popup(driver, ss_path, parent_id):
     fills the size per language popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_languageinfotype_model_set__dash__0__dash__sizePerLanguage")
+    driver.switch_to.window("id_languageinfotype_model_set__dash__0__dash__sizePerLanguage")
     _fill_size_form(driver, ss_path, "")
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -1632,7 +1632,7 @@ def _fill_sizePerModalities_popup(driver, ss_path, parent_id):
     fills the size per modalities popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_modalityinfotype_model_set__dash__0__dash__sizePerModality")
+    driver.switch_to.window("id_modalityinfotype_model_set__dash__0__dash__sizePerModality")
     _fill_size_form(driver, ss_path, "")
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -1644,7 +1644,7 @@ def _fill_sizePerTextFormats_popup(driver, ss_path, parent_id):
     fills the size per text formats popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_textformatinfotype_model_set__dash__0__dash__sizePerTextFormat")
+    driver.switch_to.window("id_textformatinfotype_model_set__dash__0__dash__sizePerTextFormat")
     _fill_size_form(driver, ss_path, "")
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -1656,7 +1656,7 @@ def _fill_sizePerCharacterEncodings_popup(driver, ss_path, parent_id):
     fills the size per character encodings popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_characterencodinginfotype_model_set__dash__0__dash__sizePerCharacterEncoding")
+    driver.switch_to.window("id_characterencodinginfotype_model_set__dash__0__dash__sizePerCharacterEncoding")
     _fill_size_form(driver, ss_path, "")
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -1668,7 +1668,7 @@ def _fill_sizePerDomains_popup(driver, ss_path, parent_id):
     fills the size per domains popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_domaininfotype_model_set__dash__0__dash__sizePerDomain")
+    driver.switch_to.window("id_domaininfotype_model_set__dash__0__dash__sizePerDomain")
     _fill_size_form(driver, ss_path, "")
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -1690,7 +1690,7 @@ def _fill_languageVariety_popup(driver, ss_path, parent_id):
     fills the language variety popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_languageinfotype_model_set__dash__0__dash__languageVarietyInfo")
+    driver.switch_to.window("id_languageinfotype_model_set__dash__0__dash__languageVarietyInfo")
     Select(driver.find_element_by_id("id_languageVarietyType")).select_by_visible_text("Jargon")
     driver.find_element_by_id("id_languageVarietyName").clear()
     driver.find_element_by_id("id_languageVarietyName").send_keys("Jargon name")
@@ -1713,7 +1713,7 @@ def _fill_audioSize_form(driver, ss_path, parent_id):
     """
     fills the text size with required information
     """
-    driver.switch_to_window("id_audioSizeInfo")
+    driver.switch_to.window("id_audioSizeInfo")
     driver.find_element_by_id("id_sizeinfotype_model_set-0-size").send_keys("100")
     Select(driver.find_element_by_id("id_sizeinfotype_model_set-0-sizeUnit")).select_by_visible_text("Gb")
     save_and_close(driver, parent_id) 
@@ -1724,7 +1724,7 @@ def _fill_sizePerValidation_popup(driver, ss_path, parent_id):
     fills the size per validation popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_validationinfotype_model_set__dash__0__dash__sizePerValidation")
+    driver.switch_to.window("id_validationinfotype_model_set__dash__0__dash__sizePerValidation")
     _fill_size_form(driver, ss_path, "")
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -1736,7 +1736,7 @@ def _fill_sizePerAnnotation_popup(driver, ss_path, parent_id):
     fills the size per annotation popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_annotationinfotype_model_set__dash__0__dash__sizePerAnnotation")
+    driver.switch_to.window("id_annotationinfotype_model_set__dash__0__dash__sizePerAnnotation")
     _fill_size_form(driver, ss_path, "")
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -1748,7 +1748,7 @@ def _fill_sizePerTextClassification_popup(driver, ss_path, parent_id):
     fills the size per text classification popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_textclassificationinfotype_model_set__dash__0__dash__sizePerTextClassification")
+    driver.switch_to.window("id_textclassificationinfotype_model_set__dash__0__dash__sizePerTextClassification")
     _fill_size_form(driver, ss_path, "")
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -1760,7 +1760,7 @@ def _fill_sizePerTimeCoverage_popup(driver, ss_path, parent_id):
     fills the size per time coverage popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_timecoverageinfotype_model_set__dash__0__dash__sizePerTimeCoverage")
+    driver.switch_to.window("id_timecoverageinfotype_model_set__dash__0__dash__sizePerTimeCoverage")
     _fill_size_form(driver, ss_path, "")
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -1772,7 +1772,7 @@ def _fill_sizePerGeographicCoverage_popup(driver, ss_path, parent_id):
     fills the size per geographic coverage popup with all required, recommended and optional
     information and returns to the parent window
     """
-    driver.switch_to_window("id_geographiccoverageinfotype_model_set__dash__0__dash__sizePerGeographicCoverage")
+    driver.switch_to.window("id_geographiccoverageinfotype_model_set__dash__0__dash__sizePerGeographicCoverage")
     _fill_size_form(driver, ss_path, "")
 
     driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))

@@ -36,6 +36,10 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 DEBUG_JS = DEBUG
 
+# Please set the SECRET_KEY to a unique random string
+# The installation manual can give more information on how to create it
+SECRET_KEY = 'j/<JUf6+^1v1x<DS[p-mmh?neZiu@hWdGnY^q3Wj^cYqR7Qx/>'
+
 LOG_FILENAME = join(tempfile.gettempdir(), "metashare.log")
 
 # Configure administrators for this django project.  If DEBUG=False, errors

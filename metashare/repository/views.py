@@ -59,9 +59,9 @@ def _convert_to_template_tuples(element_tree):
     """
     # If we are dealing with a complex node containing children nodes, we have
     # to first recursively collect the data values from the sub components.
-    if len(element_tree.getchildren()):
+    if len(element_tree):
         values = []
-        for child in element_tree.getchildren():
+        for child in element_tree:
             values.append(_convert_to_template_tuples(child))
         # use pretty print name of element instead of tag; requires that 
         # element_tree is created using export_to_elementtree(pretty=True)

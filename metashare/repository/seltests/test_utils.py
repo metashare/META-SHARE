@@ -66,7 +66,7 @@ def wait_till_closed_and_switch(driver, closing_id, target_id):
         max_wait -= 1
     if not max_wait:
         raise TimeoutException('Window was not closed in time.')
-    driver.switch_to_window(target_id)
+    driver.switch_to.window(target_id)
 
 
 def cancel_and_close(driver, target_id):

@@ -540,7 +540,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # language description general info popup
         driver.find_element_by_id("edit_id_langdescInfo").click()
-        driver.switch_to_window("edit_id_langdescInfo")
+        driver.switch_to.window"edit_id_langdescInfo")
         Select(driver.find_element_by_id("id_languageDescriptionType")).select_by_visible_text(
           "Grammar")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time())) 
@@ -548,7 +548,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
   
         # language description info text popup
         driver.find_element_by_id("add_id_languageDescriptionTextInfo").click()
-        driver.switch_to_window("id_languageDescriptionTextInfo")
+        driver.switch_to.window"id_languageDescriptionTextInfo")
         Select(driver.find_element_by_id("id_form-2-0-lingualityType")).select_by_visible_text(
           "Monolingual")
         # language description info text / language
@@ -559,7 +559,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # language description info video popup
         driver.find_element_by_id("add_id_languageDescriptionVideoInfo").click()
-        driver.switch_to_window("id_languageDescriptionVideoInfo")
+        driver.switch_to.window"id_languageDescriptionVideoInfo")
         Select(driver.find_element_by_id("id_linktoothermediainfotype_model_set-0-otherMedia")) \
           .select_by_visible_text("Audio")
         # save and close language description info video popup
@@ -651,7 +651,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # language description general info popup
         driver.find_element_by_id("edit_id_langdescInfo").click()
-        driver.switch_to_window("edit_id_langdescInfo")
+        driver.switch_to.window"edit_id_langdescInfo")
         Select(driver.find_element_by_id("id_languageDescriptionType")).select_by_visible_text(
           "Grammar")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time())) 
@@ -659,7 +659,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
   
         # language description info text popup
         driver.find_element_by_id("add_id_languageDescriptionTextInfo").click()
-        driver.switch_to_window("id_languageDescriptionTextInfo")
+        driver.switch_to.window"id_languageDescriptionTextInfo")
         Select(driver.find_element_by_id("id_form-2-0-lingualityType")).select_by_visible_text(
           "Monolingual")
         # language description info text / language
@@ -670,7 +670,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # language description info image popup
         driver.find_element_by_id("add_id_languageDescriptionImageInfo").click()
-        driver.switch_to_window("id_languageDescriptionImageInfo")
+        driver.switch_to.window"id_languageDescriptionImageInfo")
         Select(driver.find_element_by_id("id_linktoothermediainfotype_model_set-0-otherMedia")) \
           .select_by_visible_text("Audio")
         # save and close language description info video popup
@@ -761,7 +761,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # lexical resource general info popup
         driver.find_element_by_id("edit_id_lexiconInfo").click()
-        driver.switch_to_window("edit_id_lexiconInfo")
+        driver.switch_to.window"edit_id_lexiconInfo")
         Select(driver.find_element_by_id("id_lexicalConceptualResourceType")).select_by_visible_text(
           "Word List")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time())) 
@@ -769,7 +769,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
   
         # lexical resource text info popup
         driver.find_element_by_id("add_id_lexicalConceptualResourceTextInfo").click()
-        driver.switch_to_window("id_lexicalConceptualResourceTextInfo")
+        driver.switch_to.window"id_lexicalConceptualResourceTextInfo")
         Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
           "Monolingual")
         # lexical resource text info / language
@@ -865,7 +865,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # lexical resource general info popup
         driver.find_element_by_id("edit_id_lexiconInfo").click()
-        driver.switch_to_window("edit_id_lexiconInfo")
+        driver.switch_to.window"edit_id_lexiconInfo")
         Select(driver.find_element_by_id("id_lexicalConceptualResourceType")).select_by_visible_text(
           "Word List")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time())) 
@@ -873,7 +873,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
   
         # lexical resource text info popup
         driver.find_element_by_id("add_id_lexicalConceptualResourceTextInfo").click()
-        driver.switch_to_window("id_lexicalConceptualResourceTextInfo")
+        driver.switch_to.window"id_lexicalConceptualResourceTextInfo")
         Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
           "Monolingual")
         # lexical resource text info / language
@@ -886,7 +886,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # lexical resource audio info popup
         driver.find_element_by_id("add_id_lexicalConceptualResourceAudioInfo").click()
-        driver.switch_to_window("id_lexicalConceptualResourceAudioInfo")
+        driver.switch_to.window"id_lexicalConceptualResourceAudioInfo")
         # save and close lexical resource text info popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         save_and_close(driver, root_id)
@@ -976,7 +976,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # lexical resource general info popup
         driver.find_element_by_id("edit_id_lexiconInfo").click()
-        driver.switch_to_window("edit_id_lexiconInfo")
+        driver.switch_to.window"edit_id_lexiconInfo")
         Select(driver.find_element_by_id("id_lexicalConceptualResourceType")).select_by_visible_text(
           "Word List")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time())) 
@@ -984,7 +984,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
   
         # lexical resource text info popup
         driver.find_element_by_id("add_id_lexicalConceptualResourceTextInfo").click()
-        driver.switch_to_window("id_lexicalConceptualResourceTextInfo")
+        driver.switch_to.window"id_lexicalConceptualResourceTextInfo")
         Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
           "Monolingual")
         # lexical resource text info / language
@@ -997,7 +997,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # lexical resource video info popup
         driver.find_element_by_id("add_id_lexicalConceptualResourceVideoInfo").click()
-        driver.switch_to_window("id_lexicalConceptualResourceVideoInfo")
+        driver.switch_to.window"id_lexicalConceptualResourceVideoInfo")
         driver.find_element_by_name("form-2-0-typeOfVideoContent").send_keys("Other")
         # save and close lexical resource video info popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
@@ -1088,7 +1088,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # lexical resource general info popup
         driver.find_element_by_id("edit_id_lexiconInfo").click()
-        driver.switch_to_window("edit_id_lexiconInfo")
+        driver.switch_to.window"edit_id_lexiconInfo")
         Select(driver.find_element_by_id("id_lexicalConceptualResourceType")).select_by_visible_text(
           "Word List")
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time())) 
@@ -1096,7 +1096,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
   
         # lexical resource text info popup
         driver.find_element_by_id("add_id_lexicalConceptualResourceTextInfo").click()
-        driver.switch_to_window("id_lexicalConceptualResourceTextInfo")
+        driver.switch_to.window"id_lexicalConceptualResourceTextInfo")
         Select(driver.find_element_by_id("id_form-0-lingualityType")).select_by_visible_text(
           "Monolingual")
         # lexical resource text info / language
@@ -1109,7 +1109,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # lexical resource image info popup
         driver.find_element_by_id("add_id_lexicalConceptualResourceImageInfo").click()
-        driver.switch_to_window("id_lexicalConceptualResourceImageInfo")
+        driver.switch_to.window"id_lexicalConceptualResourceImageInfo")
         # save and close lexical resource video info popup
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
         save_and_close(driver, root_id)
@@ -1203,7 +1203,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # corpus text info popup
         driver.find_element_by_id("add_id_corpusTextInfo-0").click()
-        driver.switch_to_window("id_corpusTextInfo__dash__0")
+        driver.switch_to.window"id_corpusTextInfo__dash__0")
         driver.find_element_by_name("_save").click()
         self.assertEqual("This field is required.", driver.find_element_by_xpath(
           "//div[@class='form-row errors lingualityType']/ul/li[1]").text)
@@ -1260,7 +1260,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # corpus audio info popup
         driver.find_element_by_id("add_id_corpusAudioInfo").click()
-        driver.switch_to_window("id_corpusAudioInfo")
+        driver.switch_to.window"id_corpusAudioInfo")
         driver.find_element_by_name("_save").click()
         self.assertEqual("This field is required.", driver.find_element_by_xpath(
           "//div[@class='form-row errors lingualityType']/ul/li[1]").text)
@@ -1315,7 +1315,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # corpus video info popup
         driver.find_element_by_id("add_id_corpusVideoInfo-0").click()
-        driver.switch_to_window("id_corpusVideoInfo__dash__0")
+        driver.switch_to.window"id_corpusVideoInfo__dash__0")
         driver.find_element_by_name("_save").click()
         self.assertEqual("This field is required.", driver.find_element_by_xpath(
           "//tr[@id='sizeinfotype_model_set-0']/td[@class='size']/ul/li[1]").text)
@@ -1366,7 +1366,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # corpus image info popup
         driver.find_element_by_id("add_id_corpusImageInfo").click()
-        driver.switch_to_window("id_corpusImageInfo")
+        driver.switch_to.window"id_corpusImageInfo")
         driver.find_element_by_name("_save").click()
         self.assertEqual("This field is required.", driver.find_element_by_xpath(
           "//tr[@id='sizeinfotype_model_set-0']/td[@class='size']/ul/li[1]").text)
@@ -1454,7 +1454,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # corpus text n-gram info popup
         driver.find_element_by_id("add_id_corpusTextNgramInfo").click()
-        driver.switch_to_window("id_corpusTextNgramInfo")
+        driver.switch_to.window"id_corpusTextNgramInfo")
         driver.find_element_by_name("_save").click()
         self.assertEqual("This field is required.", driver.find_element_by_xpath(
           "//div[@class='form-row errors baseItem']/ul/li[1]").text)
@@ -1516,7 +1516,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # corpus general info popup
         driver.find_element_by_id("edit_id_langdescInfo").click()
-        driver.switch_to_window("edit_id_langdescInfo")
+        driver.switch_to.window"edit_id_langdescInfo")
         driver.find_element_by_name("_save").click()
         self.assertEqual("This field is required.", driver.find_element_by_xpath(
           "//div[@class='form-row languageDescriptionType']/div/ul/li[1]").text)
@@ -1526,7 +1526,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # corpus text info popup
         driver.find_element_by_id("add_id_languageDescriptionTextInfo").click()
-        driver.switch_to_window("id_languageDescriptionTextInfo")
+        driver.switch_to.window"id_languageDescriptionTextInfo")
         driver.find_element_by_name("_save").click()
         self.assertEqual("This field is required.", driver.find_element_by_xpath(
           "//div[@class='form-row errors lingualityType']/ul/li[1]").text)
@@ -1583,7 +1583,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # corpus general info popup
         driver.find_element_by_id("edit_id_langdescInfo").click()
-        driver.switch_to_window("edit_id_langdescInfo")
+        driver.switch_to.window"edit_id_langdescInfo")
         driver.find_element_by_name("_save").click()
         self.assertEqual("This field is required.", driver.find_element_by_xpath(
           "//div[@class='form-row languageDescriptionType']/div/ul/li[1]").text)
@@ -1593,7 +1593,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # corpus text info popup
         driver.find_element_by_id("add_id_languageDescriptionTextInfo").click()
-        driver.switch_to_window("id_languageDescriptionTextInfo")
+        driver.switch_to.window"id_languageDescriptionTextInfo")
         driver.find_element_by_name("_save").click()
         self.assertEqual("This field is required.", driver.find_element_by_xpath(
           "//div[@class='form-row errors lingualityType']/ul/li[1]").text)
@@ -1607,7 +1607,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # corpus video info popup
         driver.find_element_by_id("add_id_languageDescriptionVideoInfo").click()
-        driver.switch_to_window("id_languageDescriptionVideoInfo")
+        driver.switch_to.window"id_languageDescriptionVideoInfo")
         driver.find_element_by_name("_save").click()
         self.assertEqual("This field is required.", driver.find_element_by_xpath(
           "//div[@class='form-row errors otherMedia']/ul/li[1]").text)
@@ -1660,7 +1660,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # corpus general info popup
         driver.find_element_by_id("edit_id_langdescInfo").click()
-        driver.switch_to_window("edit_id_langdescInfo")
+        driver.switch_to.window"edit_id_langdescInfo")
         driver.find_element_by_name("_save").click()
         self.assertEqual("This field is required.", driver.find_element_by_xpath(
           "//div[@class='form-row languageDescriptionType']/div/ul/li[1]").text)
@@ -1670,7 +1670,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # corpus text info popup
         driver.find_element_by_id("add_id_languageDescriptionTextInfo").click()
-        driver.switch_to_window("id_languageDescriptionTextInfo")
+        driver.switch_to.window"id_languageDescriptionTextInfo")
         driver.find_element_by_name("_save").click()
         self.assertEqual("This field is required.", driver.find_element_by_xpath(
           "//div[@class='form-row errors lingualityType']/ul/li[1]").text)
@@ -1684,7 +1684,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # corpus image info popup
         driver.find_element_by_id("add_id_languageDescriptionImageInfo").click()
-        driver.switch_to_window("id_languageDescriptionImageInfo")
+        driver.switch_to.window"id_languageDescriptionImageInfo")
         driver.find_element_by_name("_save").click()
         self.assertEqual("This field is required.", driver.find_element_by_xpath(
           "//div[@class='form-row errors otherMedia']/ul/li[1]").text)
@@ -1734,7 +1734,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # corpus general info popup
         driver.find_element_by_id("edit_id_lexiconInfo").click()
-        driver.switch_to_window("edit_id_lexiconInfo")
+        driver.switch_to.window"edit_id_lexiconInfo")
         driver.find_element_by_name("_save").click()
         self.assertEqual("This field is required.", driver.find_element_by_xpath(
           "//div[@class='form-row lexicalConceptualResourceType']/div/ul/li[1]").text)
@@ -1744,7 +1744,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # corpus text info popup
         driver.find_element_by_id("add_id_lexicalConceptualResourceTextInfo").click()
-        driver.switch_to_window("id_lexicalConceptualResourceTextInfo")
+        driver.switch_to.window"id_lexicalConceptualResourceTextInfo")
         driver.find_element_by_name("_save").click()
         self.assertEqual("This field is required.", driver.find_element_by_xpath(
           "//div[@class='form-row errors lingualityType']/ul/li[1]").text)
@@ -1805,7 +1805,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # corpus general info popup
         driver.find_element_by_id("edit_id_lexiconInfo").click()
-        driver.switch_to_window("edit_id_lexiconInfo")
+        driver.switch_to.window"edit_id_lexiconInfo")
         driver.find_element_by_name("_save").click()
         self.assertEqual("This field is required.", driver.find_element_by_xpath(
           "//div[@class='form-row lexicalConceptualResourceType']/div/ul/li[1]").text)
@@ -1815,7 +1815,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # corpus text info popup
         driver.find_element_by_id("add_id_lexicalConceptualResourceTextInfo").click()
-        driver.switch_to_window("id_lexicalConceptualResourceTextInfo")
+        driver.switch_to.window"id_lexicalConceptualResourceTextInfo")
         driver.find_element_by_name("_save").click()
         self.assertEqual("This field is required.", driver.find_element_by_xpath(
           "//div[@class='form-row errors lingualityType']/ul/li[1]").text)
@@ -1876,7 +1876,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # corpus general info popup
         driver.find_element_by_id("edit_id_lexiconInfo").click()
-        driver.switch_to_window("edit_id_lexiconInfo")
+        driver.switch_to.window"edit_id_lexiconInfo")
         driver.find_element_by_name("_save").click()
         self.assertEqual("This field is required.", driver.find_element_by_xpath(
           "//div[@class='form-row lexicalConceptualResourceType']/div/ul/li[1]").text)
@@ -1886,7 +1886,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # corpus text info popup
         driver.find_element_by_id("add_id_lexicalConceptualResourceTextInfo").click()
-        driver.switch_to_window("id_lexicalConceptualResourceTextInfo")
+        driver.switch_to.window"id_lexicalConceptualResourceTextInfo")
         driver.find_element_by_name("_save").click()
         self.assertEqual("This field is required.", driver.find_element_by_xpath(
           "//div[@class='form-row errors lingualityType']/ul/li[1]").text)
@@ -1904,7 +1904,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # corpus video info popup
         driver.find_element_by_id("add_id_lexicalConceptualResourceVideoInfo").click()
-        driver.switch_to_window("id_lexicalConceptualResourceVideoInfo")
+        driver.switch_to.window"id_lexicalConceptualResourceVideoInfo")
         driver.find_element_by_name("_save").click()
         self.assertEqual("This field is required.", driver.find_element_by_xpath(
           "//div[@class='form-row errors typeOfVideoContent']/ul/li[1]").text)
@@ -1957,7 +1957,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # corpus general info popup
         driver.find_element_by_id("edit_id_lexiconInfo").click()
-        driver.switch_to_window("edit_id_lexiconInfo")
+        driver.switch_to.window"edit_id_lexiconInfo")
         driver.find_element_by_name("_save").click()
         self.assertEqual("This field is required.", driver.find_element_by_xpath(
           "//div[@class='form-row lexicalConceptualResourceType']/div/ul/li[1]").text)
@@ -1967,7 +1967,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # corpus text info popup
         driver.find_element_by_id("add_id_lexicalConceptualResourceTextInfo").click()
-        driver.switch_to_window("id_lexicalConceptualResourceTextInfo")
+        driver.switch_to.window"id_lexicalConceptualResourceTextInfo")
         driver.find_element_by_name("_save").click()
         self.assertEqual("This field is required.", driver.find_element_by_xpath(
           "//div[@class='form-row errors lingualityType']/ul/li[1]").text)
@@ -2023,7 +2023,7 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
 
         # corpus tool / service info popup
         driver.find_element_by_id("edit_id_toolServiceInfo").click()
-        driver.switch_to_window("edit_id_toolServiceInfo")
+        driver.switch_to.window"edit_id_toolServiceInfo")
         driver.find_element_by_name("_save").click()
         self.assertEqual("This field is required.", driver.find_element_by_xpath(
           "//div[@class='form-row toolServiceType']/div/ul/li[1]").text)

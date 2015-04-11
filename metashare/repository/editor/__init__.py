@@ -53,7 +53,7 @@ class MetashareBackendSite(AdminSite):
     logout_template = 'repository/editor/logged_out.html'
 
     def get_urls(self):
-        from django.conf.urls.defaults import patterns, url
+        from django.conf.urls import patterns, url
 
         urls = super(MetashareBackendSite, self).get_urls()
         urls = patterns('',

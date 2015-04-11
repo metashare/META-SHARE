@@ -93,11 +93,10 @@ Here are now the steps you should follow for a successful migration:
    ``ALLOWED_HOSTS`` variable.
    See `Local Settings for META-SHARE Nodes`_ for information on how to generate it.
 
-
 7. Adapt any customization you had on the old ``start-server.sh``,
    ``stop-server.sh`` scripts into the new script version.
 
-7. Start your new META-SHARE instance using the ``start-server.sh`` script.
+8. Start your new META-SHARE instance using the ``start-server.sh`` script.
 
 
 Installing META-SHARE
@@ -250,7 +249,7 @@ first set up a development server. Proceed as follows.
        cp metashare/local_settings.sample metashare/local_settings.py    
 
    Edit at least the following constants: ``DJANGO_URL``, ``DJANGO_BASE``,
-   ``STORAGE_PATH``, ``DEBUG``, ``ADMINS``, ``DATABASES``, and ``EMAIL_BACKEND``. More
+   ``STORAGE_PATH``, ``DEBUG``, ``SECRET_KEY``, ``ADMINS``, ``DATABASES``, and ``EMAIL_BACKEND``. More
    information is available in `Local Settings for META-SHARE
    Nodes`_
 
@@ -371,6 +370,22 @@ The local settings are the following:
    stacktraces on the website, for example. This may include sensitive
    information, so use with care, preferably only for local development
    servers.
+
+-  ``SECRET_KEY``
+
+   Set this variable to a random value. This is used by django to salt the
+   passwords stored in the database and generate tokens.
+   See `SECRET_KEY django documentation <https://docs.djangoproject.com/en/dev/ref/settings/#secret-key>`__
+   for further information.
+   The following python code can help you to generate a random string:
+
+       ::
+
+           # From: https://gist.github.com/mattseymour/9205591
+           import string, random
+           chars = ''.join([string.ascii_letters, string.digits, string.punctuation]).replace('\'', '').replace('"', '').replace('\\', '')
+           print ''.join([random.SystemRandom().choice(chars) for i in range(50)]) 
+
 
 -  ``ADMINS``
 
