@@ -4,7 +4,7 @@ django-analytical==0.12.1
 git+git://github.com/zeehio/django-haystack.git@ea5dbd570f847ceb39ff741d9a27c77df09c9e3d                 
 django-jenkins==0.11.1
 git+git://github.com/zeehio/django-kronos.git@f22f638120920b722edd7619d6a037289edc678e
-git+git://github.com/zeehio/django-selectable.git@0641d278f19e367ce7e5170708b005e6a6a3022b
+django-selectable==0.5.2
 django-selenium==0.9.7
 flup==1.0.2
 httplib2==0.9

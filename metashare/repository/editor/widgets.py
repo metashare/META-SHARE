@@ -1,5 +1,6 @@
 import base64
 import logging
+import urlparse
 try:
     import cPickle as pickle
 except:
@@ -53,6 +54,7 @@ class MetaShareAutoCompleteSelectWidget(AutoCompleteSelectWidget):
             forms.HiddenInput(attrs={u'data-selectable-type': 'hidden'})
         ]
         super(AutoCompleteSelectWidget, self).__init__(widgets, *args, **kwargs)
+
 
 
 class DictWidget(widgets.Widget):
@@ -649,7 +651,7 @@ class AutoCompleteSelectMultipleEditWidget(SelectableMultiWidget, SelectableMedi
             attrs.update(more_attrs)
         query_params = kwargs.pop('query_params', {})
         widget_list = [
-            AutoCompleteWidget(
+            MetaShareAutoCompleteWidget(
                 lookup_class, allow_new=False,
                 limit=self.limit, query_params=query_params, attrs=attrs
             ),
@@ -719,7 +721,7 @@ class LookupMultipleHiddenInputMS(LookupMultipleHiddenInput):
             inputs.append(u'<input%s />' % flatatt(input_attrs))
         return mark_safe(u'\n'.join(inputs))
 
-class AutoCompleteSelectSingleWidget(AutoCompleteSelectWidget):
+class AutoCompleteSelectSingleWidget(MetaShareAutoCompleteSelectWidget):
 
     def __init__(self, lookup_class, *args, **kwargs):
         self.lookup_class = lookup_class
@@ -731,7 +733,7 @@ class AutoCompleteSelectSingleWidget(AutoCompleteSelectWidget):
             u'data-selectable-use-state-error': 'false',
         }
         widget_list = [
-            AutoCompleteWidget(
+            MetaShareAutoCompleteWidget(
                 lookup_class, allow_new=self.allow_new,
                 limit=self.limit, query_params=query_params, attrs=attrs
             ),

@@ -93,6 +93,7 @@ Here are now the steps you should follow for a successful migration:
    ``ALLOWED_HOSTS`` variable.
    See `Local Settings for META-SHARE Nodes`_ for information on how to generate it.
 
+
 7. Adapt any customization you had on the old ``start-server.sh``,
    ``stop-server.sh`` scripts into the new script version.
 
