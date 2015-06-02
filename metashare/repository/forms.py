@@ -16,6 +16,14 @@ from metashare.recommendations.recommendations import get_more_from_same_creator
 from haystack.forms import FacetedSearchForm
 from haystack.query import SQ
 
+#noinspection PyBroadException
+try:
+    OAI_PMH_IMPORT_FROM_DIR = None
+    from metashare.settings import OAI_PMH_IMPORT_FROM_DIR
+except:
+    pass
+
+
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -221,3 +229,43 @@ class DownloadContactForm(forms.Form):
     """
     userEmail = forms.EmailField(label=_("Your e-mail"))
     message = forms.CharField(label=_("Your message"), widget=forms.Textarea())
+
+
+from oai_pmh import supported_commands
+
+class OaiPmhForm(forms.Form):
+    """
+    	Settings form for OAI-PMH import.
+    """
+    url = forms.URLField(
+        label=u"Harvested URL supporting OAI-PMH",
+        initial=u"http://ufal-point.mff.cuni.cz/oai/request",
+        help_text=u"URL with OAI-PMH support (for importing file contents you need a little updated ORE support on the remote server)",
+    )
+
+    verb = forms.ChoiceField(
+        label=u"What to do",
+        choices=[ (name, name) for name in supported_commands.keys() ],
+        help_text=u"Select OAI-PMH action (fill out item id if applicable)",
+    )
+
+    metadata_str = forms.CharField(
+        label=u"OAI metadata format",
+        help_text=u"Use list metadata for choices",
+        initial=u"oai_metasharev3",
+        required=False,
+    )
+
+    itemid = forms.CharField(
+        label=u"OAI item ID",
+        help_text=u"Leave empty for the whole collection or if not applicable",
+        required=False,
+    )
+
+    import_from_dir = forms.CharField(
+        label=u"Imported directory",
+        help_text=u"Because of licensing, we use ORE only for information about directories and use local " + \
+                  u"(or remote) directories for importing. Should be provided in local_settings.py",
+        initial=OAI_PMH_IMPORT_FROM_DIR,
+        required=False,
+    )

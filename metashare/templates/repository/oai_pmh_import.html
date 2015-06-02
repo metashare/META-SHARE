@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block title %}
+ &ndash; Import OAI-PMH &ndash;
+{% endblock %}
+
+{% block content %}
+<h2>OAI-PMH (UFAL, Charles University specific implementation)</h2>
+
+{% if error_str %}
+    <div class="error">{{ error_str }}</div>
+{% endif %}
+
+<div class="content_box">
+  {% if showform == "1" %}
+    <h3>OAI-PMH Settings</h3>
+      <div class="content_box">
+          <form class="form_helper" action="{% url metashare.views.frontpage %}repository/oai-pmh-import/" method="post">
+              <table>
+                {% csrf_token %}
+                {{ form_input.as_table }}
+                <tr><td colspan="2">
+                        <input class="button middle_button" type="submit" value="Process" />
+                        <span style="margin:10px; white-space:nowrap;">
+                            <input class="simplebutton clickable"
+                                   type="submit" value="List formats" name="verb_list formats" />
+                            <input class="simplebutton clickable"
+                                   type="submit" value="List set IDs" name="verb_list sets" />
+                            <input class="simplebutton clickable"
+                                   type="submit" value="Identify server" name="verb_identify server" />
+                            <input class="simplebutton clickable"
+                                   type="submit" value="List records" name="verb_list records" />
+                            <input class="simplebutton clickable"
+                                   type="submit" value="Remove all items" name="verb_removeall" />
+                        </span>
+                    </td>
+                </tr>
+              </table>
+          </form>
+      </div>
+  {% endif %}
+
+
+    <br >
+    {% if data_dict %}
+        <div style="min-height:40px; ">
+            <span style="float:left">
+                 <h4>Result: {{ data_dict_title }}</h4>
+            </span>
+            <span style="float:right">
+                Info detail:{{ data_info }}
+            </span>
+        </div>
+        <div class="content_box">
+        <table class="oai_table">
+            {% for k, v in data_dict.iteritems %}
+                <tr>
+                    <td class="table-key"><em>{{ k }}</em></td>
+                    <td class="table-value">{{ v }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        </div>
+    {% endif %}
+
+    {% if data_info %}
+        <div class="content_box">
+            <h3>Info detail</h3>{{ data_info }}
+        </div>
+    {% endif %}
+
+    {% if javascript_for_id %}
+
+        <script language="JavaScript">
+            $(document).ready(function() {
+                $('table.oai_table > tbody  > tr').each(function() {
+                    $(this).click(function () {
+                        {% if javascript_for_id == 1 %}
+                            $('#id_itemid').val( $(".table-value", this).text() );
+                            $('#id_verb').val( '{{ import_verb }}' );
+                        {% else %}{% if javascript_for_id == 2 %}
+                            $('#id_metadata_str').val( $(".table-key", this).text() );
+                        {% endif %}{% endif %}
+                    });
+                    $(this).hover(
+                            function () {
+                                $(this).css( 'cursor', 'pointer' );
+                                $(this).css( 'background-color', 'rgba(10, 0, 0, 200)' );
+                            },
+                            function () {
+                                $(this).css( 'cursor', 'pointer' );
+                                $(this).css( 'background-color', '' );
+                            }
+                    );
+                });
+            });
+
+        </script>
+
+    {% endif %}
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}
+ &ndash; Export OAI-PMH &ndash;
+{% endblock %}
+
+{% block content %}
+<h2>OAI-PMH export</h2>
+
+{% if error_str %}
+    <div class="error">{{ error_str }}</div>
+{% endif %}
+
+<div class="content_box">
+    <h3>OAI-PMH Settings</h3>
+      <div class="content_box">
+          <table>
+              <tr>
+                  <td>OAI-PMH Identify</td><td><a href="{{ oai_url }}?verb=Identify" target="_blank">test</a></td>
+              </tr>
+              <tr>
+                  <td>OAI-PMH ListIdentifiers</td><td><a href="{{ oai_url }}?verb=ListIdentifiers&metadataPrefix=metashare" target="_blank">test</a></td>
+              </tr>
+              <tr>
+                  <td>OAI-PMH error</td><td><a href="{{ oai_url }}" target="_blank">test</a></td>
+              </tr>
+          </table>
+      </div>
+</div>
+
+
+{% endblock %}

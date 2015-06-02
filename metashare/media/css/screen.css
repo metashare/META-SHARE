@@ -791,3 +791,22 @@ table.result_table tr.odd{
 }
 
 
+table.oai_table tbody tr td {
+    overflow: auto;
+    max-width: 500px !important;
+}
+
+table.oai_table tbody tr:nth-child(even) {
+    background: #efefef;
+}
+
+input.clickable : hover {
+    cursor: pointer;
+    cursor: hand;
+}
+
+.simplebutton {
+    white-space:nowrap;
+    width:125px !important;
+}
+

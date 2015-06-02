@@ -24,3 +24,7 @@ lighttpd.pid
 lighttpd/
 opt/
 ._*
+metashare/store
+*.bat
+*.idea
+metashare-git-vidiecan
