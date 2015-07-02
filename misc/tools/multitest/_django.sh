@@ -38,14 +38,14 @@ start_django()
 
 	echo "Starting Django server"
 	local CWD=`pwd`
-	cd "$METASHARE_DIR"
+	#cd "$METASHARE_DIR"
 	export NODE_DIR="$TEST_DIR/$NODE_NAME"
 	local PID_NAME=`get_django_pid_filename`
 	local DJANGO_PID="$NODE_DIR/$PID_NAME"
-	"$PYTHON" manage.py runserver 0.0.0.0:$DJANGO_PORT --noreload &> "$TEST_DIR/$NODE_NAME/metashare.log" &
+	$PYTHON metashare/manage.py runserver 0.0.0.0:$DJANGO_PORT --noreload &> "$TEST_DIR/$NODE_NAME/metashare.log" &
 	echo $! > "$DJANGO_PID"
 	sleep 2
-	cd "$CWD"
+	#cd "$CWD"
 }
 
 stop_django()
@@ -67,11 +67,11 @@ run_syncdb()
 
 	cp "$MSERV_DIR/init_data/metashare_test.db" "$TEST_DIR/$NODE_NAME/$DATABASE_NAME"
 	local CWD=`pwd`
-	cd "$METASHARE_DIR"
+	#cd "$METASHARE_DIR"
 	echo "Running manage.py syncdb"
 	export NODE_DIR=$TEST_DIR/$NODE_NAME
-	"$PYTHON" manage.py syncdb
-	cd "$CWD"
+	$PYTHON metashare/manage.py syncdb
+	#cd "$CWD"
 }
 
 create_django_settings()
@@ -86,6 +86,7 @@ create_django_settings()
 	local SYNC_USERS="$1" ; shift
 
 	local NODE_SETTINGS_DIR="$TEST_DIR/$NODE_NAME/dj_settings"
+        mkdir -p "$NODE_SETTINGS_DIR"
 	local LOG_FILENAME="$TEST_DIR/$NODE_NAME/metashare.log"
 	echo "s#%%LOG_FILENAME%%#$LOG_FILENAME#g" > /tmp/sed.scr
 	echo "s/%%SOLR_PORT%%/$SOLR_PORT/g" >> /tmp/sed.scr

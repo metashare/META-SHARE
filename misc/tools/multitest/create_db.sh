@@ -6,14 +6,15 @@
 # If '-r' option is given in command line the database is deleted
 # if already exists and created empty.
 
-. _meta_dir.sh
-. _python.sh
-. _utils.sh
-. _django.sh
+MSERV_DIR=$(dirname "$0")
+. "${MSERV_DIR}/_meta_dir.sh"
+. "${MSERV_DIR}/_python.sh"
+. "${MSERV_DIR}/_utils.sh"
+. "${MSERV_DIR}/_django.sh"
 
 CURRENT_DIR=`pwd`
 
-cp init_data/settings_multitest.py $METASHARE_DIR/settings.py
+cp $MSERV_DIR/init_data/settings_multitest.py $METASHARE_DIR/settings.py
 ret_val=$?
 if [[ $ret_val -ne 0 ]] ; then
 	echo "Cannot copy settings/local_settings"
@@ -24,7 +25,7 @@ NODE_NAME="NodeDB"
 DJANGO_PORT=12345
 STORAGE_PATH="$TEST_DIR/$NODE_NAME/storageFolder"
 SOLR_PORT=54321
-DATABASE_FILE=$CURRENT_DIR/init_data/metashare_test.db
+DATABASE_FILE=$MSERV_DIR/init_data/metashare_test.db
 CORE_NODES="()"
 PROXIED_NODES="()"
 SYNC_USERS="()"
@@ -46,22 +47,22 @@ if [[ "$1" == "-r" ]] ; then
 	fi
 fi
 
-cd $METASHARE_DIR
+#cd $METASHARE_DIR
 echo "NODE_DIR = $NODE_DIR"
 echo "Creating database ...."
-"$PYTHON"  manage.py syncdb --noinput
+$PYTHON  metashare/manage.py syncdb --noinput
 ret_val=$?
 if [[ $ret_val -ne 0 ]] ; then
 	echo "Cannot build database"
 	exit $ret_val
 fi
-"$PYTHON"  manage.py createsuperuserwithpassword --username=admin --password=secret
+$PYTHON  metashare/manage.py createsuperuserwithpassword --username=admin --password=secret
 ret_val=$?
 if [[ $ret_val -ne 0 ]] ; then
 	echo "Cannot create superuser"
 	exit $ret_val
 fi
-cd $CURRENT_DIR
+#cd $CURRENT_DIR
 
 META_LOG=`get_meta_log`
 rm -f "$META_LOG"

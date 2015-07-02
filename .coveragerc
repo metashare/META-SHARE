@@ -1,0 +1,6 @@
+[run]
+source = metashare
+
+[report]
+omit = metashare/repository/seltests/*,metashare/repository/tests/*,metashare/repository/test_fixtures/*
+

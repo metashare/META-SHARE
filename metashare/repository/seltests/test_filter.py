@@ -1,8 +1,7 @@
-from django_selenium.testcases import SeleniumTestCase
 from metashare import settings, test_utils
 from metashare.repository.seltests.test_utils import setup_screenshots_folder, \
-    import_dir, click_and_wait
-from metashare.settings import DJANGO_BASE, ROOT_PATH
+    import_dir, click_and_wait, MetashareSeleniumTestCase
+from metashare.settings import DJANGO_URL, DJANGO_BASE, ROOT_PATH
 import time
 from django.core.management import call_command
 from selenium.webdriver.support.select import Select
@@ -10,7 +9,7 @@ from selenium.webdriver.support.select import Select
 
 TESTFIXTURE_XML = '{}/repository/test_fixtures/test_fixtures_for_filtering/'.format(ROOT_PATH)
 
-class FilterTest(SeleniumTestCase):
+class FilterTest(MetashareSeleniumTestCase):
 
     def setUp(self):
         # make sure the index does not contain any stale entries
@@ -20,8 +19,7 @@ class FilterTest(SeleniumTestCase):
         import_dir(TESTFIXTURE_XML)
 
         super(FilterTest, self).setUp()
-        self.base_url = 'http://{}:{}/{}' \
-            .format(self.testserver_host, self.testserver_port, DJANGO_BASE)
+        self.base_url = '{0}/{1}'.format(DJANGO_URL, DJANGO_BASE)
 
 
     def tearDown(self):
@@ -37,6 +35,7 @@ class FilterTest(SeleniumTestCase):
           "test_filter")
 
         driver = self.driver
+        driver.implicitly_wait(60)  # seconds
         driver.get(self.base_url)
         # TODO remove this workaround when Selenium starts working again as intended
         driver.set_window_size(3250, 2600)

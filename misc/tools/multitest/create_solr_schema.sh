@@ -1,14 +1,16 @@
 #!/bin/bash
 
-. _meta_dir.sh
-. _python.sh
-. _utils.sh
-. _django.sh
+MSERV_DIR=$(dirname $0)
+
+. ${MSERV_DIR}/_meta_dir.sh
+. ${MSERV_DIR}/_python.sh
+. ${MSERV_DIR}/_utils.sh
+. ${MSERV_DIR}/_django.sh
 
 CURRENT_DIR=`pwd`
-SCHEMA_FILE=$CURRENT_DIR/init_data/schema.xml
+SCHEMA_FILE=$MSERV_DIR/init_data/schema.xml
 
-cp init_data/settings_multitest.py $METASHARE_DIR/settings.py
+cp $MSERV_DIR/init_data/settings_multitest.py $METASHARE_DIR/settings.py
 
 NODE_NAME="NodeSolr"
 DJANGO_PORT=12345
@@ -24,10 +26,10 @@ create_django_settings "$NODE_NAME" $SOLR_PORT "$DATABASE_FILE" \
 	"$STORAGE_PATH" $DJANGO_PORT "$CORE_NODES" \
 	"$PROXIED_NODES" "$SYNC_USERS"
 
-cd $METASHARE_DIR
+#cd $METASHARE_DIR
 mkdir -p "$(basename $SCHEMA_FILE)"
-python manage.py build_solr_schema --filename="$SCHEMA_FILE"
-cd $CURRENT_DIR
+$PYTHON metashare/manage.py build_solr_schema --filename="$SCHEMA_FILE"
+#cd $CURRENT_DIR
 
 META_LOG=`get_meta_log`
 rm -r "$TEST_DIR/$NODE_NAME"

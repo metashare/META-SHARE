@@ -1,0 +1,92 @@
+# This file is used by travis-ci.org to test META-SHARE
+# env section
+# ============
+# This section sets environment variables. There are two kinds of environment
+# variables in travis: "global" and "matrix".
+# 
+# matrix variables
+# -----------------
+# matrix variables can be used to tell travis we want different jobs to run
+# for instance to split the testsuite in two subgroups.
+# Here TEST_SUITE takes two different values, so in one case the selenium
+# tests run, and in the other case the rest of the tests run.
+#
+# global variables
+# -----------------
+# Common environment variables for all the jobs that will run.
+#
+# In order to securely use external services (such as coveralls or sauce labs) 
+# with travis and github some secrets have to be shared. Travis provides
+# an option to encrypt environment variables in a way that only travis can
+# decrypt them and use them with the external services. By doing that, we can
+# safely store encrypted keys in this file and let travis decrypt and use them.
+#
+language: python
+env:
+  global:
+    ######## SAUCE LABS #############
+    # SAUCE_USERNAME and SAUCE_ACCESS_KEY
+    # https://docs.saucelabs.com/ci-integrations/travis-ci/
+    # You will need to create a saucelabs account, free for Free Software projects.
+    # ### keys for zeehio/META-SHARE:
+    - secure: IEtbjPMMqI9qiL9JzCoqkN4t700OOG6lM83a0M9PgIpuFviC7cmUv984Vpk55yuvnIvFp5N+BzIWFbw4frxV8Al+usVZs/WHdvwMKZfoolKY4uQAeibnQzivh5DJqRjz3A8nplH953SBosseVqXW6xQBKmexNdUmA7Iz6Tjag0A=
+    - secure: gi7/2rLtpYgaj4tld5eB1dL9jrRXfGAxeOVtBMAura+qKKknNE0iY0lJc6OSwY7imTRQUyg2A4xWFD0lSEw6ZQ2JpZzbCFXYXD5wsm5PPNw5lCWSUKLd1E4in9wmmQ6/tjlqH7J3DWD16Pb2AyE9RVN2jWMGUif73qygSneDudU=
+    #
+    # ### keys for metashare/META-SHARE:
+    # - secure: key_not_yet_created
+    # - secure: key_not_yet_created
+    #
+    ########### GIVE TRAVIS PUSH ACCESS ##########
+    # So we can push the generated gh-pages
+    # Generate your auth token here:
+    # https://github.com/settings/applications#personal-access-tokens
+    # Encrypt your token:
+    # $ gem install travis;
+    # $ travis login
+    # $ travis encrypt -r zeehio/META-SHARE "GH_AUTH='my_secret_token'"
+    # $ travis encrypt -r zeehio/META-SHARE "GH_REF=github.com/zeehio/META-SHARE.git"
+    # The repository GH_REF is not secret, but if we encrypt it we can keep 
+    # the zeehio/META-SHARE and the metashare/META-SHARE and travis will choose the
+    # right one on each case.
+    #
+    # ### keys for zeehio/META-SHARE:
+    # GH_AUTH:
+    - secure: "DmTgKEmMQatjTflWlDpX0PXJf/Gh8kiBqv09AkgjdO+5imCLJ0QcQbusZ2VeJPXVyvPQ/rywSCW1KJQrcZz/nJEX1kClWsV4z157oQAAroIsaAlHi77pPEQGg6EU6CXNHJp1U2v+sgeMx73KjYgHgVXPtOB7LqF6V0CWeQER+UA="
+    # GH_REF:
+    - secure: "k3+QkIQtF5chdMOBVWbuhVIVJ6KMWQ2FgyekBSbknAz7y8CmxtTuFw4Wgitja/3ESgbdsRY9z7/vMtMaxk5aNJWq8lZodMzhil0f0k+cKKbl+vMViBAomXKcCCCMpUACBObhJXuK5T4f0LhbqYdmXtOF5cubn5gDr33MV5Dk0+Q="
+    # ### keys for metashare/META-SHARE:
+    #- secure: "not generated"
+    # GH_REF:
+    #- secure: "not generated"
+  matrix:
+    # basic runs the metashare testsuite without selenium tests, followed
+    # by the multitest that checks node syncing.
+    # selenium runs the selenium tests only
+    # docs builds the documentation and pushes it to gh-pages
+    - TEST_SUITE="basic"
+    - TEST_SUITE="selenium"
+    - TEST_SUITE="docs"
+python:
+  - "2.7"
+# commands to install dependencies
+install:
+  - "sudo apt-get update"
+  - "sudo apt-get install libpq-dev python-sphinx"
+  - "pip install coveralls"
+  - "./install-dependencies.sh"
+# command to run tests
+script:
+  - "if [ \"x$TEST_SUITE\" = \"xbasic\" ]; then ./misc/test-ci/run-testsuite.sh; fi"
+  - "if [ \"x$TEST_SUITE\" = \"xselenium\" ]; then ./misc/test-ci/run-testsuite.sh --selenium-only; fi"
+  - "if [ \"x$TEST_SUITE\" = \"xdocs\" ] ; then ./misc/test-ci/autoupdate-docs.sh; fi"
+  - "if [ \"x$TEST_SUITE\" = \"xbasic\" ] ; then ./misc/test-ci/multitest.sh; fi"
+after_success:
+  - "if [ \"x$TEST_SUITE\" != \"xdocs\" ]; then coveralls; fi"
+
+addons:
+  sauce_connect: true
+
+branches:
+  only:
+    - master
+

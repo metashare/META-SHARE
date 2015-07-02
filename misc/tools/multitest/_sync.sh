@@ -7,7 +7,7 @@
 
 get_node_count()
 {
-	local NODE_COUNT=`"$PYTHON" "$MSERV_DIR/get_node_count.py"`
+	local NODE_COUNT=`$PYTHON "$MSERV_DIR/get_node_count.py"`
 	echo $NODE_COUNT
 }
 
@@ -22,16 +22,16 @@ import_file_on_node()
 	export NODE_DIR=$TEST_DIR/$NODE_NAME
 	local ret_val
 	echo "Import file $IMP_FILE on node $NODE_NAME"
-	cd "$METASHARE_DIR"
+	#cd "$METASHARE_DIR"
 	if [[ "$ID_FILE" == "" ]] ; then
-		"$PYTHON" import_xml.py "$IMP_FILE" > "$IMPORTS_LOG"
+		$PYTHON metashare/import_xml.py "$IMP_FILE" > "$IMPORTS_LOG"
 		ret_val=$?
 	else
-		"$PYTHON" import_xml.py --id-file="$ID_FILE" "$IMP_FILE" > "$IMPORTS_LOG"
+		$PYTHON metashare/import_xml.py --id-file="$ID_FILE" "$IMP_FILE" > "$IMPORTS_LOG"
 		ret_val=$?
 	fi
 	rm -f "$IMPORTS_LOG"
-	cd "$CURRENT_DIR"
+	#cd "$CURRENT_DIR"
 	return $ret_val
 }
 
@@ -82,8 +82,8 @@ synchronize_node()
 	local REMOTE_DATA_FILE=$TEST_DIR/rem_$NODE_NAME
 	export NODE_DIR=$TEST_DIR/$NODE_NAME
 	echo "Synchronizing $NODE_NAME"
-	cd "$METASHARE_DIR"
-	"$PYTHON" manage.py synchronize > "$REMOTE_DATA_FILE"
+	#cd "$METASHARE_DIR"
+	$PYTHON metashare/manage.py synchronize > "$REMOTE_DATA_FILE"
 	local ret_val=$?
 	if [[ $ret_val -ne 0 ]] ; then
 		echo -n "Error in synchronizing $NODE_NAME" >&3
@@ -91,7 +91,7 @@ synchronize_node()
 	fi
 	rm -f "$REMOTE_DATA_FILE"
 	local ret_val=$?
-	cd "$CURRENT_DIR"
+	#cd "$CURRENT_DIR"
 	return $ret_val
 }
 
@@ -104,10 +104,10 @@ synchronize_node_idf()
 	local REMOTE_DATA_FILE=$TEST_DIR/$NODE_NAME/rem.log
 	export NODE_DIR=$TEST_DIR/$NODE_NAME
 	echo "Synchronizing $NODE_NAME"
-	cd "$METASHARE_DIR"
-	"$PYTHON" manage.py synchronize --id-file=$ID_FILE > $REMOTE_DATA_FILE
+	#cd "$METASHARE_DIR"
+	$PYTHON metashare/manage.py synchronize --id-file=$ID_FILE > $REMOTE_DATA_FILE
 	local ret_val=$?
-	cd "$CURRENT_DIR"
+	#cd "$CURRENT_DIR"
 	return $ret_val
 }
 
@@ -140,9 +140,9 @@ get_node_resource_list()
 	if [ "$EXT" == "ext" ] ; then
 		EXTRA_INFO="--extended"
 	fi
-	cd "$METASHARE_DIR"
-	"$PYTHON" manage.py get_resource_list "$EXTRA_INFO" | sort
-	cd "$CURRENT_DIR"
+	#cd "$METASHARE_DIR"
+	$PYTHON metashare/manage.py get_resource_list "$EXTRA_INFO" | sort
+	#cd "$CURRENT_DIR"
 }
 
 get_digest()
@@ -177,10 +177,10 @@ update_digests_on_node()
 	local NODE_NAME=`get_node_info $NODE_NUM NODE_NAME`
 	export NODE_DIR=$TEST_DIR/$NODE_NAME
 	echo "Updating digests on node $NODE_NAME"
-	cd "$METASHARE_DIR"
-	"$PYTHON" manage.py update_digests
+	#cd "$METASHARE_DIR"
+	$PYTHON metashare/manage.py update_digests
 	local ret_val=$?
-	cd "$CURRENT_DIR"
+	#cd "$CURRENT_DIR"
 	return $ret_val
 }
 

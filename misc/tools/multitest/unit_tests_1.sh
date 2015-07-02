@@ -1,10 +1,11 @@
 #!/bin/bash
 
-THIS_DIR=$(dirname "$0")
-. "${THIS_DIR}/setvars.sh"
-. "${THIS_DIR}/_meta_dir.sh"
-. "${THIS_DIR}/_python.sh"
-cd "$MSERV_DIR"
+# Assume it is being called from base metashare directory
+# MSERV_DIR is the directory where this script lives
+MSERV_DIR=$(dirname "$0")
+. "${MSERV_DIR}/setvars.sh"
+. "${MSERV_DIR}/_meta_dir.sh"
+. "${MSERV_DIR}/_python.sh"
 
 TESTSUITE_NAME="ConfigData"
 
@@ -20,7 +21,7 @@ tearDown()
 
 test_filesets()
 {
-	"$PYTHON" check_fset.py
+	$PYTHON $MSERV_DIR/check_fset.py
 	local ret_val=$?
 	return $ret_val
 }
@@ -74,6 +75,9 @@ run_tests()
 	echo "</testsuite>" >> "$REPORT"
 
 	tearDown 1>>"$STDOUT" 2>>"$STDERR"
+        if [ $TOTAL != $SUCCESS ]; then
+           exit 1
+        fi
 }
 
 METASHARE_DIR="$METASHARE_SW_DIR/metashare"

@@ -5,7 +5,7 @@ git+git://github.com/toastdriven/django-haystack.git@ea5dbd570f847ceb39ff741d9a2
 django-jenkins==0.11.1
 django-kronos==0.3
 git+git://github.com/zeehio/django-selectable.git@0641d278f19e367ce7e5170708b005e6a6a3022b
-git+git://github.com/zeehio/django-selenium.git@1535b915a3abc3f680ac2c4ffd594426b85ff8fe
+django-selenium==0.9.7
 flup==1.0.2
 httplib2==0.7.1
 psycopg2==2.5.4
@@ -14,6 +14,6 @@ pygeoip==0.2.2
 pysolr==2.1.0-beta
 python-dateutil==1.5
 requests==2.4.1
-selenium==2.23.0
+selenium==2.45.0
 six==1.1.0
 wsgiref==0.1.2

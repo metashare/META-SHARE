@@ -1,5 +1,7 @@
 from os.path import abspath, dirname, join
+import os
 import tempfile
+
 ROOT_PATH = abspath(dirname(__file__))
 
 # The URL for this META-SHARE node django application.  Do not use trailing /.
@@ -93,8 +95,14 @@ XDIFF_LOCATION = "{0}/../misc/tools/xdiff-src/xdiff".format(ROOT_PATH)
 
 # The web browser to use for the Selenium tests; possible values are:
 # Firefox, Ie, Opera, Chrome
-SELENIUM_DRIVER = 'Firefox'
-SELENIUM_DRIVER_OPTS = {'firefox_profile' : "{0}/../firefox_profile".format(ROOT_PATH)}
+SELENIUM_DRIVER = 'Remote'
+SELENIUM_DRIVER_OPTS = dict()
+
+
+SELENIUM_HOST = "{0}:{1}@ondemand.saucelabs.com".format(os.environ["SAUCE_USERNAME"],os.environ["SAUCE_ACCESS_KEY"])
+SELENIUM_PORT = 80
+SELENIUM_CAPABILITY = {"tunnel-identifier": os.environ["TRAVIS_JOB_NUMBER"],
+                       "browserName": "firefox", "version": "", "platform": "ANY"}
 
 # The port of the Selenium test server;
 # this must be the same port as used in DJANGO_URL
