@@ -9,7 +9,7 @@ django-kronos==0.3
 django-selectable==0.4.1
 django-selenium==0.8
 flup==1.0.2
-httplib2==0.7.1
+httplib2==0.9.1
 logilab-common==0.62.1
 psycopg2==2.5.4
 pycountry==0.14.2
