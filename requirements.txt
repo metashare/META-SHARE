@@ -21,3 +21,4 @@ requests==2.4.1
 selenium==2.23.0
 six==1.8.0
 wsgiref==0.1.2
+django-analytical==0.22.0
