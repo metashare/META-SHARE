@@ -1,5 +1,4 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-{% load piwik %}
 {% load analytical %}
 {% load adminmedia %}
 {% spaceless %}
@@ -49,7 +48,6 @@
   {% include "footer.html" %}
   <script type="text/javascript">addFormHelper()</script>
   {% analytical_body_bottom %}
-  {% piwik %}
   </body>
 </html>
 {% endspaceless %}
