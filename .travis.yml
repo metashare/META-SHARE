@@ -70,8 +70,6 @@ python:
   - "2.7"
 # commands to install dependencies
 install:
-  - "sudo apt-get update"
-  - "sudo apt-get install libpq-dev python-sphinx"
   - "pip install coveralls"
   - "./install-dependencies.sh"
 # command to run tests
@@ -85,8 +83,10 @@ after_success:
 
 addons:
   sauce_connect: true
+  apt:
+    packages:
+    - libpq-dev
+    - python-sphinx
 
-branches:
-  only:
-    - master
+sudo: false
 
