@@ -257,6 +257,7 @@ def topstats (request):
     """ viewing statistics about the top LR and latest queries. """    
     topdata = []
     geovisits = []
+    visitstitle = "Unknown"
     view = request.GET.get('view', 'topviewed')
     last = request.GET.get('last', '')
     limit = int(request.GET.get('limit', '10'))
