@@ -256,6 +256,7 @@ def _add_usage_meta(usage_fields, component_name, field, verbose_name, status, m
 def topstats (request):
     """ viewing statistics about the top LR and latest queries. """    
     topdata = []
+    geovisits = []
     view = request.GET.get('view', 'topviewed')
     last = request.GET.get('last', '')
     limit = int(request.GET.get('limit', '10'))
