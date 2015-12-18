@@ -614,6 +614,13 @@ class modalityInfo_model_inline_corpusTextNumericalInfoType_model(SchemaModelInl
 
 
 # pylint: disable-msg=C0103
+class modalityInfo_model_inline_corpusVideoInfoType_model(SchemaModelInline):
+    model = modalityInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_corpusvideoinfotype_model'
+
+
+# pylint: disable-msg=C0103
 class modalityInfo_model_inline_languageDescriptionImageInfoType_model(SchemaModelInline):
     model = modalityInfoType_model
     template = 'admin/edit_inline/tabular.html'
