@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited by ILSP/Athena R.C. -->
+<xs:schema xmlns:ms="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.meta-share.org/META-SHARE_XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.1" xml:lang="en">
+	<xs:include schemaLocation="../../META-SHARE-SimpleTypes.xsd"/>
+	<xs:include schemaLocation="../../META-SHARE-BaseTypes.xsd"/>
+	<xs:complexType name="ngramInfoType">
+		<xs:sequence>
+			<xs:element name="baseItem" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Type of item that is represented in the n-gram resource</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<label>Base item</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+						<xs:enumeration value="word"/>
+						<xs:enumeration value="syllable"/>
+						<xs:enumeration value="letter"/>
+						<xs:enumeration value="phoneme"/>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="order" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>The maximum number of items in the sequence</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Order</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="perplexity" type="xs:double" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Derived from running on test set taken from the same corpus</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-one</relation>
+						<label>Perplexity</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="isFactored" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies whether the model is factored or not</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-one</relation>
+						<label>Is factored</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="factors" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The list of factors that have been used for the n-gram model</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-many</relation>
+						<label>Factors</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="150"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="smoothing" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The technique used for giving unseen items some probability</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-one</relation>
+						<label>Smoothing</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="interpolated" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Interpolated language models are constructed by 2 or more corpora. Each corpus is represented in the model according to a predefined weight.</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Interpolated</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ngramInfo" type="ms:ngramInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information specific to n-gram resources (e.g. range of n-grams, base item etc.)</xs:documentation>
+			<xs:appinfo>
+				<label>N-gram</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

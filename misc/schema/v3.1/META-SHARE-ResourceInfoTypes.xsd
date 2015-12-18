@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited by ILSP/Athena R.C. -->
+<xs:schema xmlns:ms="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.meta-share.org/META-SHARE_XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" xml:lang="en">
+	<!--include specific details for each LR type -->
+	<xs:include schemaLocation="./resourceTypes/Corpus.xsd"/>
+	<xs:include schemaLocation="./resourceTypes/languageDescription.xsd"/>
+	<xs:include schemaLocation="./resourceTypes/lexicalConceptualResource.xsd"/>
+	<xs:include schemaLocation="./resourceTypes/toolService.xsd"/>
+</xs:schema>
