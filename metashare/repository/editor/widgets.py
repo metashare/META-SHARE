@@ -7,7 +7,7 @@ except:
 
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
 from django.contrib.admin.widgets import AdminTextInputWidget
-from django.forms import widgets, TextInput, Textarea, Media
+from django.forms import widgets, TextInput, Textarea, Media, Select
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
 from selectable.forms.widgets import SelectableMediaMixin, SelectableMultiWidget, \
@@ -431,6 +431,183 @@ class MultiFieldWidget(widgets.Widget):
             #_data = []
             pass
         
+        return initial != _data
+
+class MultiChoiceWidget(widgets.Widget):
+    """
+    A MultiChoiceWidget allows to enter lists of data using a certain widget.
+
+    Attributes:
+    - widget: input widget, defaults to TextInput.
+    - style: CSS style settings for the input widget.
+    """
+    class Media:
+        """
+        Media sub class to inject custom CSS and JavaScript code.
+        """
+        css = {
+            'all': ('css/repository.css',)
+        }
+        js = ('js/multi-field-widget.js',)
+
+    def __init__(self, widget_id, max_length=None, choices = (), **kwargs):
+        """
+        Initialises a new MultiFieldWidget instance.
+
+        This saves the given, required widget_id, clears the errors dictionary
+        and then calls the super class constructor with any remaining args.
+        Any max_length argument is used to determine the appropriate size for
+        the input fields.
+        """
+        self.choices = [('','--------')]
+        self.choices.extend(choices)
+        self.widget_id = widget_id
+        self.max_length = max_length
+        self.errors = {}
+        super(MultiChoiceWidget, self).__init__(**kwargs)
+
+    def _render_input_widget(self, name, value, attrs):
+        """
+        Renders and returns the most suitable widget for inputting a single
+        field in this `MultiFieldWidget`.
+        """
+        # if self.max_length:
+        #     if self.max_length > _MAX_TEXT_INPUT_SIZE:
+        #         result = Select(choices=self.choices).render(name, value, attrs)
+        #     else:
+        #         result = Select(choices=self.choices) \
+        #             .render(name, value, attrs)
+        # else:
+        #     result = Select(choices=self.choices) \
+        #             .render(name, value, attrs)
+        return Select(choices=self.choices).render(name, value, attrs)
+
+    def _render_container(self, _context):
+        return render_to_string('repository/container.html', _context)
+
+    def _render_multifield(self, _context):
+        return render_to_string('repository/multi_field_widget.html', _context)
+
+
+    def render(self, name, value, attrs=None):
+        """
+        Renders the MultiFieldWidget with the given name and value.
+        """
+        LOGGER.debug('render({0}, {1} [{2}])'.format(name, value, type(value)))
+        LOGGER.debug('attrs: {0} errors: {1}'.format(self.attrs, self.errors))
+
+        # If no value is given, we set it to an empty list.
+        if not value:
+            value = []
+
+        # If we get a String object instead of the expected list-typed value,
+        # there has been a validation problem.  This means that the value is
+        # not yet converted from its serialised form into a list of values.
+        if isinstance(value, basestring):
+            # Try converting the String to list type.
+            try:
+                value = pickle.loads(base64.b64decode(value))
+
+            #
+            except:
+                LOGGER.error('Error converting value to list!')
+                value = []
+
+        # We collect all rendered widgets inside _field_widgets.
+        _field_widgets = []
+        _field_attrs = {'id': 'id_{0}'.format(name), 'class': 'input',
+                        'style': self.attrs.get('style', 'width:480px')
+                        }
+
+        # Iterate over all sub values for this MultiFieldWidget instance,
+        # adding an index number 0..n-1 to support container id generation.
+        for _id, _value in enumerate(value):
+            # Render input_widget instance as HTML.
+            _field_widget = self._render_input_widget(name, _value,
+                                                      _field_attrs)
+
+            # Define context for container template rendering.
+            _context = {'id': _id, 'field_widget': _field_widget,
+                        'widget_id': self.widget_id,
+                        'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX,
+                        'field_name': name}
+
+            # If there have been any validation errors, add the message.
+            if _value in self.errors.keys():
+                _context.update({'error_msg': self.errors[_value]})
+
+            # Render container for this sub value's widget and append to list.
+            _container = self._render_container(_context)
+            _field_widgets.append(_container)
+
+        # If list of values is empty, render an empty container instead.
+        _id = len(value)
+        if not _id:
+            # Note that value='' as values is empty.
+            _field_widget = self._render_input_widget(name, '', _field_attrs)
+            _context = {'id': _id, 'field_widget': _field_widget,
+                        'widget_id': self.widget_id,
+                        'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX,
+                        'field_name': name}
+
+            _container = self._render_container(_context)
+            _field_widgets.append(_container)
+
+            _field_widget = self._render_input_widget(name, '', _field_attrs)
+            _context = {'id': _id, 'field_widget': _field_widget,
+                        'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX}
+
+        # The JavaScript code needs an empty "template" to create new input
+        # widgets dynamically; this is pre-rendered and added to the template
+        # for the MultiFieldWidget instance here.
+        _empty_widget = self._render_input_widget(name, '', _field_attrs)
+        _context = {'empty_widget': _empty_widget,
+                    'field_widgets': mark_safe(u'\n'.join(_field_widgets)),
+                    'widget_id': self.widget_id,
+                    'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX,
+                    'field_name': name}
+
+        # Render final HTML for this MultiFieldWidget instance.
+        _html = self._render_multifield(_context)
+        return mark_safe(_html)
+
+    def value_from_datadict(self, data, files, name):
+        """
+        Encodes the data for this MultiFieldWidget instance as base64 String.
+        """
+        _value = [v for v in data.getlist(name) if v]
+        if not len(_value):
+            return None
+        return base64.b64encode(pickle.dumps(_value))
+
+    def _has_changed(self, initial, data):
+        """
+        Checks whether the field values have changed.  As data is already an
+        pickled, base64 encoded String, we have to de-serialise it first!
+        """
+        _data = data
+
+        if isinstance(data, basestring):
+            # Try converting the String to list type.
+            try:
+                _data = pickle.loads(base64.b64decode(data))
+
+            #
+            except:
+                LOGGER.error('Error converting value to list!')
+                _data = []
+
+        elif data is None:
+            # Salvatore: If the user leaves the field empty assigning
+            # an empty list will result in a comparison between
+            # None (the value of initial) and [] (the value of _data),
+            # yielding a True value as if the user changed the value
+            # of the field. Check if in other cases this should really
+            # be the empty list.
+
+            # _data = []
+            pass
+
         return initial != _data
 
 class TestHiddenWidget(TextInput, SelectableMediaMixin):

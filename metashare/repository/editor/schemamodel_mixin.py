@@ -13,18 +13,18 @@ from metashare.repository.models import inputInfoType_model, \
 # Fields that need the ComboWidget/MultiComboWidget with autocomplete functionality
 # to use with languageId,languageName pairs.
 LANGUAGE_ID_NAME_FIELDS = {
-   inputInfoType_model:
-       {'type': 'multiple', 'id': "languageId", 'name': "languageName"},
-   outputInfoType_model:
-       {'type': 'multiple', 'id': "languageId", 'name': "languageName"},
-   languageInfoType_model:
-       {'type': 'single', 'id': "languageId", 'name': "languageName"},
-   metadataInfoType_model:
-       {'type': 'multiple', 'id': "metadataLanguageId", 'name': "metadataLanguageName"},
-   documentInfoType_model:
-       {'type': 'single', 'id': "documentLanguageId", 'name': "documentLanguageName"},
-   annotationInfoType_model:
-       {'type': 'single', 'id': "tagsetLanguageId", 'name': "tagsetLanguageName"},
+   # inputInfoType_model:
+   #     {'type': 'multiple', 'id': "languageId", 'name': "languageName"},
+   # outputInfoType_model:
+   #     {'type': 'multiple', 'id': "languageId", 'name': "languageName"},
+   # languageInfoType_model:
+   #     {'type': 'single', 'id': "languageId", 'name': "languageName"},
+   # metadataInfoType_model:
+   #     {'type': 'multiple', 'id': "metadataLanguageId", 'name': "metadataLanguageName"},
+   # documentInfoType_model:
+   #     {'type': 'single', 'id': "documentLanguageId", 'name': "documentLanguageName"},
+   # annotationInfoType_model:
+   #     {'type': 'single', 'id': "tagsetLanguageId", 'name': "tagsetLanguageName"},
 }
 
 
