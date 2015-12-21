@@ -33,13 +33,14 @@ class FilteredChangeList(ChangeList):
     This implementation always filters; use the superclass ChangeList for
     unfiltered views.
     """
+
     def __init__(self, request, model, list_display, list_display_links,
       list_filter, date_hierarchy, search_fields, list_select_related,
-      list_per_page, list_editable, model_admin):
+      list_per_page, list_max_show_all, list_editable, model_admin):
         # Call super constructor to initialise object instance.
         super(FilteredChangeList, self).__init__(request, model, list_display,
           list_display_links, list_filter, date_hierarchy, search_fields,
-          list_select_related, list_per_page, list_editable, model_admin)
+          list_select_related, list_per_page, list_max_show_all, list_editable, model_admin)
         # Check if the current model has an "owners" ManyToManyField.
         _has_owners_field = False
         if 'owners' in self.opts.get_all_field_names():
@@ -52,8 +53,9 @@ class FilteredChangeList(ChangeList):
             _user = request.user
             self.root_query_set = self.root_query_set.filter(owners=_user)
 
-        self.query_set = self.get_query_set()
+        self.query_set = self.get_query_set(request)
         self.get_results(request)
 
     def url_for_result(self, result):
         return reverse("editor:{}_{}_change".format(self.opts.app_label, self.opts.module_name), args=(getattr(result, self.pk_attname),))
+        

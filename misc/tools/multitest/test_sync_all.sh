@@ -8,13 +8,14 @@
 # Also verify that non-published resource are not copied to other nodes.
 
 # Include environment variables and utility functions
-. _meta_dir.sh
-. _python.sh
-. _solr.sh
-. _node_info.sh
-. _django.sh
-. _sync.sh
-. _fset.sh
+MSERV_DIR=$(dirname "$0")
+. "${MSERV_DIR}/_meta_dir.sh"
+. "${MSERV_DIR}/_python.sh"
+. "${MSERV_DIR}/_solr.sh"
+. "${MSERV_DIR}/_node_info.sh"
+. "${MSERV_DIR}/_django.sh"
+. "${MSERV_DIR}/_sync.sh"
+. "${MSERV_DIR}/_fset.sh"
 
 usage()
 {

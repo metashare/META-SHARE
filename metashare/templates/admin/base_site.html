@@ -1,11 +1,12 @@
 {% extends "admin/base.html" %}
 {% load i18n %}
+{% load static from staticfiles %}
 
 {% block title %}{{ title }} | {% trans 'META-SHARE backend' %}{% endblock %}
 {% block extrastyle %}
-<link rel="stylesheet" type="text/css" href="{% load adminmedia %}{% admin_media_prefix %}css/metashare-editor.css" />
-<script type="text/javascript" src="{% admin_media_prefix %}js/jquery.min.js"></script>
-<script type="text/javascript" src="{% admin_media_prefix %}js/metashare-editor.js"></script>
+<link rel="stylesheet" type="text/css" href="{% static "metashare/css/metashare-editor.css" %}" />
+<script type="text/javascript" src="{% static "admin/js/jquery.min.js" %}"></script>
+<script type="text/javascript" src="{% static "metashare/js/metashare-editor.js" %}"></script>
 {% endblock %}
 {% block header %} 
 {% include "header.html" with page="admin" %}

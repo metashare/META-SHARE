@@ -7,10 +7,8 @@ import shutil
 # Magic python path, based on http://djangosnippets.org/snippets/281/
 from os.path import abspath, dirname, join
 parentdir = dirname(dirname(abspath(__file__)))
-# Insert our dependencies:
-sys.path.insert(0, join(parentdir, 'lib', 'python2.7', 'site-packages'))
 # Insert our parent directory (the one containing the folder metashare/):
-sys.path.insert(0, parentdir)
+sys.path.insert(1, parentdir)
 
 
 try:

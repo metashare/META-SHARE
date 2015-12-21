@@ -7,8 +7,8 @@
     <description lang="bg">DBSCd</description>
     <resourceShortName lang="el">ΜΙΚΡΗ</resourceShortName>
     <resourceShortName lang="en">SHORT</resourceShortName>
-    <url>www.aueb.gr</url>
-    <url>www.google.com</url>
+    <url>http://www.aueb.gr</url>
+    <url>http://www.google.com</url>
     <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
     <identifier>1002</identifier>
     <identifier>1003</identifier>
@@ -24,10 +24,10 @@
       <restrictionsOfUse>evaluationUse</restrictionsOfUse>
       <distributionAccessMedium>CD-ROM</distributionAccessMedium>
       <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
-      <downloadLocation>www.aueb.gr</downloadLocation>
-      <downloadLocation>www.yahoo.gr</downloadLocation>
-      <executionLocation>www.execute.gr</executionLocation>
-      <executionLocation>www.execute.com</executionLocation>
+      <downloadLocation>http://www.aueb.gr</downloadLocation>
+      <downloadLocation>http://www.yahoo.gr</downloadLocation>
+      <executionLocation>http://www.execute.gr</executionLocation>
+      <executionLocation>http://www.execute.com</executionLocation>
       <fee>500000 euro</fee>
       <attributionText lang="en">afgsdfg</attributionText>
       <licensor>
@@ -68,7 +68,7 @@
           <organizationName lang="en">OrgTest</organizationName>
           <communicationInfo>
             <email>orgtest@test.gr</email>
-            <url>www.org.gr</url>
+            <url>http://www.org.gr</url>
           </communicationInfo>
         </organizationInfo>
       </licensor>
@@ -374,7 +374,7 @@
     </metadataCreator>
     <source>META-SHARE/ILSP</source>
     <originalMetadataSchema>CLARIN</originalMetadataSchema>
-    <originalMetadataLink>www.meta-share.org</originalMetadataLink>
+    <originalMetadataLink>http://www.meta-share.org</originalMetadataLink>
     <metadataLanguageName>English</metadataLanguageName>
     <metadataLanguageName>Bulgarian</metadataLanguageName>
     <metadataLanguageId>en</metadataLanguageId>
@@ -729,8 +729,8 @@
         <conference>EACL 2009 Workshop on Language Technology and Resources for Cultural Heritage, Social Sciences, Humanities and Education - LaTeCH - SHELT&amp;R 2009</conference>
       </documentInfo>
     </documentation>
-    <samplesLocation>www.yahoo.gr</samplesLocation>
-    <samplesLocation>www.google.com</samplesLocation>
+    <samplesLocation>http://www.yahoo.gr</samplesLocation>
+    <samplesLocation>http://www.google.com</samplesLocation>
     <toolDocumentationType>helpFunctions</toolDocumentationType>
     <toolDocumentationType>manual</toolDocumentationType>
     <toolDocumentationType>none</toolDocumentationType>
@@ -796,7 +796,7 @@
       <projectName lang="en">ACCURAT: Analysis and evaluation of Comparable Corpora for Under Resourced Areas of machine Translation</projectName>
       <projectShortName lang="en">ACCURAT</projectShortName>
       <projectID>FP7-ICT-248347</projectID>
-      <url>www.accurat-project.eu</url>
+      <url>http://www.accurat-project.eu</url>
       <fundingType>euFunds</fundingType>
       <funder>FP7-ICT</funder>
       <projectStartDate>2010-01-01</projectStartDate>

@@ -1,15 +1,16 @@
+{% load static from staticfiles %}
 {% spaceless %}
 <div id="header">
 
   <div id="inner">
     <div class="inner_box" style="width:200px;float:left;padding-top:5px;">
       <div class="short popup_box">
-        <a href="{% url metashare.views.frontpage %}"><div class="icon" onmouseover="$('#popup1').show();" onmouseout="$('#popup1').hide();"><img src="{{ MEDIA_URL }}images/home.png" height="25" /></div></a>
-        <div id="popup1" class="popup" style="left:5px; top:60px;"><img style="left:20px;" src="{{ MEDIA_URL }}images/adv_search_pfeil.png" />Home</div>
+        <a href="{% url metashare.views.frontpage %}"><div class="icon" onmouseover="$('#popup1').show();" onmouseout="$('#popup1').hide();"><img src="{% static "metashare/images/home.png" %}" height="25" /></div></a>
+        <div id="popup1" class="popup" style="left:5px; top:60px;"><img style="left:20px;" src="{% static "metashare/images/adv_search_pfeil.png" %}" />Home</div>
       </div>
     </div>
     <span>
-        <img class="icon" src="{{ MEDIA_URL }}images/metashare.png" />
+        <img class="icon" src="{% static "metashare/images/metashare.png" %}" />
     </span>
     <div class="inner_box" style="width:200px;float:right;">
       {% if user.username %}
@@ -58,7 +59,7 @@
     {% endif %}
     <li title="Mailing lists, wiki, and more"><a target="_blank" href="http://metashare.ilsp.gr/forum">Community</a></li>
     <li title="View various statistics for this META-SHARE Node"><a href="{% url metashare.views.frontpage %}stats/top/">Statistics</a></li>
-    <li><a href="{{ MEDIA_URL }}documentation.pdf" title="Download the META-SHARE user&rsquo;s manual">Help</a></li>
+    <li><a href="{% static "metashare/documentation.pdf" %}" title="Download the META-SHARE user&rsquo;s manual">Help</a></li>
     <li><a href="{% url info %}">About</a>
       <ul>        
         <li><a href="{% url info %}#META-SHARE_Members">META-SHARE Members</a></li>

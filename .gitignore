@@ -24,3 +24,4 @@ lighttpd.pid
 lighttpd/
 opt/
 ._*
+venv

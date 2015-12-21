@@ -60,7 +60,7 @@ def _remove_namespace_from_tags(element_tree):
     """
     element_tree.tag = element_tree.tag.split('}')[-1]
     
-    for child in element_tree.getchildren():
+    for child in element_tree:
         _remove_namespace_from_tags(child)
     
     return element_tree
@@ -845,7 +845,7 @@ class SchemaModel(models.Model):
                     _delete_duplicate_objects = False
 
                 # If the current value is simple-typed, append its text value.
-                if not len(_value.getchildren()):
+                if not len(_value):
                     _text = SchemaModel._xml_to_python(_value.text, _field)
                     LOGGER.debug(u'_value.tag: {}, _value.text: {}'.format(
                       _value.tag, _text))

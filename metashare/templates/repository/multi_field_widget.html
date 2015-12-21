@@ -1,10 +1,11 @@
+{% load static from staticfiles %}
 <ul id="widget_{{widget_id}}" class="multifield_list">
 {{field_widgets}}
 <li class="container">
   <a id="add_button_{{widget_id}}" href="javascript:add_container({{widget_id}});" class="addlink">&nbsp;Add Another Field</a>
 </li>
 <li class="empty_widget" id="empty_widget_{{widget_id}}">
-  <a href="javascript:delete_container({{widget_id}});"><img src="{{admin_media_prefix}}img/admin/icon_deletelink.gif" width="10" height="10" alt="Delete This" /></a>&nbsp;
+  <a href="javascript:delete_container({{widget_id}});"><img src="{% static "admin/img/icon_deletelink.gif" %}" width="10" height="10" alt="Delete This" /></a>&nbsp;
   {{empty_widget}} <small>{{error_msg}}</small>
 {% if autocomp_name %}
   <div class="script">autocomp_multi("name", "container_{{widget_id}}___ID__", "id_{{field_name}}", "id_{{linked_field_name}}");</div>

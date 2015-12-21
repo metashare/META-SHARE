@@ -1,0 +1,201 @@
+from os.path import abspath, dirname, join
+import os
+import tempfile
+
+ROOT_PATH = abspath(dirname(__file__))
+
+# The URL for this META-SHARE node django application.  Do not use trailing /.
+# This URL has to include DJANGO_BASE (without its trailing /)!
+DJANGO_URL = 'http://localhost:8000'
+
+# The base path under which django is deployed at DJANGO_URL.  Use trailing /.
+# Do not use leading / though.  Leave empty if META-SHARE is deployed directly
+# under the given DJANGO_URL.
+DJANGO_BASE = ''
+
+# Required if deployed with lighttpd.
+# FORCE_SCRIPT_NAME = ""
+
+# Language code for this installation. All choices can be found here:
+# http://www.i18nguy.com/unicode/language-identifiers.html
+USE_L10N = True
+LANGUAGE_CODE = 'en-us'
+
+# Path to the local storage layer path used for persistent object storage.
+STORAGE_PATH = '{0}/../storage'.format(ROOT_PATH)
+
+# Path to the local directory where all the static files (images, js, css) will 
+# be collected and served by the web server in STATIC_URL
+STATIC_ROOT = '{0}/../static'.format(ROOT_PATH)
+
+# Directory in which lock files will temporarily be created.
+LOCK_DIR = join(tempfile.gettempdir(), 'metashare-locks')
+
+# Debug settings, setting DEBUG=True will give exception stacktraces.
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
+DEBUG_JS = DEBUG
+
+# Please set the SECRET_KEY to a unique random string
+# The installation manual can give more information on how to create it
+SECRET_KEY = '*?7loe^(I$AyQW7WzuDDJ,i(%m=v%`pXE{5M+(,Yi4--IWkAh.'
+
+LOG_FILENAME = join(tempfile.gettempdir(), "metashare.log")
+
+# Configure administrators for this django project.  If DEBUG=False, errors
+# will be reported as emails to these persons...
+ADMINS = (
+#     ('TestAdmin', 'example@example.com'),
+)
+
+# configure the database to use (see
+# https://docs.djangoproject.com/en/1.3/ref/settings/#databases for details)
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql',
+                                         # 'sqlite3', 'oracle'.
+        'NAME': '{0}/real.db'.format(ROOT_PATH),                      # database name -- or path to file if
+                                         # using sqlite3, e.g.
+                                         # '{0}/testing.db'.format(ROOT_PATH)
+        'TEST_NAME': '{0}/testing.db'.format(ROOT_PATH),   # test database name -- or path to file
+                                         # if using sqlite3, e.g.
+                                         # '{0}/testing2.db'.format(ROOT_PATH)
+                                         # mandatory when using Selenium tests
+        'USER': '',                      # Not used with sqlite3.
+        'PASSWORD': '',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to 'localhost' for localhost.
+                                         # Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default.
+                                         # Not used with sqlite3.
+        # Use the following for PostgreSQL.
+        #'OPTIONS': {
+        #  'autocommit': True,
+        #}
+    }
+}
+
+# the URL of the Solr server (or server core) which is used as a search backend
+SOLR_URL = 'http://127.0.0.1:8983/solr/main'
+# the URL of the Solr server (or server core) which is used as a search backend
+# when running tests
+TESTING_SOLR_URL = 'http://127.0.0.1:8983/solr/testing'
+
+# Instead of using an email server, print emails to server console:
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# For testing, use a builtin email server (not for production use):
+EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
+
+# For production use, you have to configure a proper mail server:
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#
+# See the Django documentation for more details:
+# - https://docs.djangoproject.com/en/1.3/topics/email/#smtp-backend
+
+# Local time zone for this installation. Choices can be found here:
+# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
+# although not all choices may be available on all operating systems.
+# If running in a Windows environment this must be set to the same as your
+# system time zone.
+TIME_ZONE = 'Europe/Berlin'
+
+# The location of the xdiff tool to compare XML files.
+XDIFF_LOCATION = "{0}/../misc/tools/xdiff-src/xdiff".format(ROOT_PATH)
+
+# The web browser to use for the Selenium tests; possible values are:
+# Firefox, Ie, Opera, Chrome
+SELENIUM_DRIVER = 'Firefox'
+SELENIUM_DRIVER_OPTS = dict(firefox_profile="{0}/../firefox_profile".format(ROOT_PATH))
+
+
+# The port of the Selenium test server;
+# this must be the same port as used in DJANGO_URL
+SELENIUM_TESTSERVER_PORT = 8000
+
+
+# Settings for synchronization:
+# Time interval settings. It sets the intervals when the synchronization 
+# task will be triggered. Uses "crontab" conventions. 
+# Defaults will run the synchronization task once an hour.
+SYNC_INTERVALS = {
+    'MINUTE' : '25',      # 0-59 - Default is 25
+    'HOUR' : '*',         # 0-23 - Default is *
+    'DAY_OF_MONTH' : '*', # 1-31 - Default is *
+    'MONTH' : '*',        # 1-12 - Default is *
+    'DAY_OF_WEEK' : '*',  # 0-6 (0 is Sunday) - Default is *
+}
+
+# Settings for digest updating:
+# Time interval settings. It sets the intervals when the digest updating  
+# task will be triggered. Uses "crontab" conventions. 
+# Defaults will run the updating task twice a day.
+# The update intervals should roughly be half of the MAX_DIGEST_AGE as
+# defined below
+UPDATE_INTERVALS = {
+    'MINUTE' : '59',      # 0-59 - Default is 59
+    'HOUR' : '*/12',      # 0-23 - Default is */12
+    'DAY_OF_MONTH' : '*', # 1-31 - Default is *
+    'MONTH' : '*',        # 1-12 - Default is *
+    'DAY_OF_WEEK' : '*',  # 0-6 (0 is Sunday) - Default is *
+}
+
+# Maximum age of digests in storage folder in seconds
+MAX_DIGEST_AGE = 60 * 60 * 24
+
+# List of other META-SHARE Managing Nodes from which the local node imports
+# resource descriptions. Any remote changes will later be updated
+# ("synchronized"). Use this if you are a META-SHARE Managing Node!
+# Important: make sure to use node IDs which are unique across both CORE_NODES
+#            and PROXIED_NODES!
+CORE_NODES = {
+#    'node_id_1': {
+#        'NAME': 'AUNI',                       # The short name of the node.
+#        'DESCRIPTION': 'xxx',                 # A short descpription of the node.
+#        'URL': 'http://metashare.example.com:8000', # The URL of the other
+#                                              # META-SHARE Managing Node (also
+#                                              # include the port if needed).
+#        'USERNAME': 'sync-user-1',            # The name of a sync user on 
+#                                              # the META-SHARE Managing Nodes.
+#        'PASSWORD': 'sync-user-pass',         # Sync user's password.
+#    },
+#    'node_id_2': {
+#        'NAME': 'BUNI',                     
+#        'DESCRIPTION': 'xxx',               
+#        'URL': 'http://example.com/pub/metashare',
+#        'USERNAME': 'sync-user-2',
+#        'PASSWORD': 'sync-user-pass-2',
+#    },
+}
+
+# User accounts with the permission to access synchronization information on
+# this node; whenever you change this setting, make sure to run
+# "manage.py syncdb" for the changes to take effect!
+SYNC_USERS = {
+    #'syncuser1': 'secret',
+    #'syncuser2': 'alsosecret',
+}
+
+# List of other META-SHARE Nodes from which the local node imports resource
+# descriptions. Any remote changes will later be updated ("synchronized"). Any
+# imported resource descriptions will also be shared with other nodes that
+# synchronize with this local node, i.e., this node acts as a proxy for the
+# listed nodes. This setting is meant to be used by META-SHARE Managing Nodes
+# which make normal META-SHARE Node resource descriptions available on the
+# META-SHARE Managing Nodes.
+# Important: make sure to use node IDs which are unique across both CORE_NODES
+#            and PROXIED_NODES!
+PROXIED_NODES = {
+#    'proxied_node_id_1': {
+#        'NAME': 'Proxied Node 1',
+#        'DESCRIPTION': 'xxx',
+#        'URL': 'http://metashare.example.org',
+#        'USERNAME': 'sync-user-3',
+#        'PASSWORD': 'sync-user-pass-3',
+#    },
+}
+
+# You cann add custom web analytics application settings here through the Django
+# Analytical framework which is integrated in META-SHARE. By default, all
+# META-SHARE services are monitored with a common Google Analytics tracking
+# code; see the Installation Manual for more information on this.
+# For the integration of other web analytics services' options, see
+# <http://packages.python.org/django-analytical/>.
