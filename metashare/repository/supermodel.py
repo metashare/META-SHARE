@@ -41,7 +41,7 @@ OPTIONAL = 2
 RECOMMENDED = 3
 
 # template of a META-SHARE metadata XML schema URL
-SCHEMA_URL = 'http://metashare.ilsp.gr/META-XMLSchema/v{0}/' \
+SCHEMA_URL = 'http://www.meta-share.org/META-SHARE_XMLSchema/v{0}/' \
   'META-SHARE-Resource.xsd'
 
 METASHARE_ID_REGEXP = re.compile('<metashareId>.+</metashareId>',

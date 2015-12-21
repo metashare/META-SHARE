@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited by ILSP/Athena R.C. -->
+<xs:schema xmlns:ms="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.meta-share.org/META-SHARE_XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.1" xml:lang="en">
+	<xs:include schemaLocation="../../../META-SHARE-SimpleTypes.xsd"/>
+	<xs:include schemaLocation="../../../META-SHARE-BaseTypes.xsd"/>
+	<xs:include schemaLocation="../VideoSpecific.xsd"/>
+	<xs:complexType name="corpusVideoInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on the video component of a corpus</xs:documentation>
+			<xs:appinfo>
+				<render-short>video ({lingualityInfo} {languageInfo})</render-short>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="mediaType" type="xs:string" fixed="video">
+				<xs:annotation>
+					<xs:documentation>Specifies the media type of the resource and basically corresponds to the physical medium of the content representation. Each media type is described through a distinctive set of features. A resource may consist of parts attributed to different types of media. A tool/service may take as input/output more than one different media types.</xs:documentation>
+					<xs:appinfo>
+						<label>Media type</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:lingualityInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Groups information on the number of languages of the resource part and of the way they are combined to each other</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Linguality</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:languageInfo" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information on the languages represented in the resource</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<label>Language</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:modalityInfo" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information on the modalities represented in the resource</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
+						<label>Modality</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:sizeInfo" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information on the size of the resource or of resource parts</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<inline-type>tabular</inline-type>
+						<label>Size</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:videoContentInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Groups together information on the contents of the video part of a resource</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-one</relation>
+						<label>Video content</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:settingInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Groups together information on the setting of the audio and/or video part of a resource</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-one</relation>
+						<label>Setting</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:videoFormatInfo" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information on the format(s) of a resource; repeated if parts of the resource are in different formats</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-many</relation>
+						<label>Video format</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:annotationInfo" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information on the annotated part(s) of a resource</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-many</relation>
+						<label>Annotation</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:domainInfo" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups together information on domains represented in the resource; can be repeated for parts of the resource with distinct domain</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-many</relation>
+						<inline-type>tabular</inline-type>
+						<label>Domain</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:timeCoverageInfo" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups together information on time classification of the resource</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-many</relation>
+						<inline-type>tabular</inline-type>
+						<label>Time coverage</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:geographicCoverageInfo" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information on geographic classification of the resource</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-many</relation>
+						<inline-type>tabular</inline-type>
+						<label>Geographic coverage</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:videoClassificationInfo" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups together information on video genre of the resource</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-many</relation>
+						<label>Video classification</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:recordingInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Groups together information on the recording of the audio or video part of a resource</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-one</relation>
+						<label>Recording</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:captureInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Groups together information on the capture of the audio or video part of a corpus</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-one</relation>
+						<label>Capture</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:creationInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Groups together information on the resource creation (e.g. for corpora, selection of texts/audio files/ video files etc. and structural encoding thereof; for lexica, construction of lemma list etc.)</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-one</relation>
+						<label>Creation</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:linkToOtherMediaInfo" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information on the way different media of the resource interact with or link to each other. To be used for multimodal resources or for resources representing sensorimotor data</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-many</relation>
+						<label>Link to other media</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- elements -->
+	<xs:element name="corpusVideoInfo" type="ms:corpusVideoInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on the video component of a corpus</xs:documentation>
+			<xs:appinfo>
+				<label>Corpus video component</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

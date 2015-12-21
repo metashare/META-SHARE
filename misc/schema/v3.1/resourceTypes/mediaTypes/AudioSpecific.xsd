@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited by ILSP/Athena R.C. -->
+<xs:schema xmlns:ms="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.meta-share.org/META-SHARE_XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.1" xml:lang="en">
+	<xs:include schemaLocation="../../META-SHARE-SimpleTypes.xsd"/>
+	<xs:include schemaLocation="../../META-SHARE-BaseTypes.xsd"/>
+	<xs:complexType name="audioContentInfoType">
+		<xs:sequence>
+			<xs:element name="speechItems" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the distinct elements that are pronounced and annotated as such</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<label>Speech items</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="isolatedWords"/>
+						<xs:enumeration value="isolatedDigits"/>
+						<xs:enumeration value="naturalNumbers"/>
+						<xs:enumeration value="properNouns"/>
+						<xs:enumeration value="applicationWords"/>
+						<xs:enumeration value="phoneticallyRichSentences"/>
+						<xs:enumeration value="phoneticallyRichWords"/>
+						<xs:enumeration value="phoneticallyBalancedSentences"/>
+						<xs:enumeration value="moneyAmounts"/>
+						<xs:enumeration value="creditCardNumbers"/>
+						<xs:enumeration value="telephoneNumbers"/>
+						<xs:enumeration value="yesNoQuestions"/>
+						<xs:enumeration value="vcvSequences"/>
+						<xs:enumeration value="freeSpeech"/>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="nonSpeechItems" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the distinct elements that maybe included in the audio corpus</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<label>Non-speech items</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="notes"/>
+						<xs:enumeration value="tempo"/>
+						<xs:enumeration value="sounds"/>
+						<xs:enumeration value="noise"/>
+						<xs:enumeration value="music"/>
+						<xs:enumeration value="commercial"/>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="textualDescription" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The legend of the soundtrack</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Textual description</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="noiseLevel" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies the level of background noise</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Noise level</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="low"/>
+						<xs:enumeration value="medium"/>
+						<xs:enumeration value="high"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="audioSizeInfoType">
+		<xs:sequence>
+			<xs:element ref="ms:sizeInfo" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information on the size of the resource or of resource parts</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<inline-type>tabular</inline-type>
+						<label>Size</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:durationOfEffectiveSpeechInfo" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups together information on the duration of effective speech</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<inline-type>tabular</inline-type>
+						<label>Duration of effective speech</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:durationOfAudioInfo" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups together information on the size of audio parts; for silences, music etc.</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<inline-type>tabular</inline-type>
+						<label>Duration of audio</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="durationOfEffectiveSpeechInfoType">
+		<xs:annotation>
+			<xs:appinfo>
+				<render-short>{size} {durationUnit}</render-short>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="size" type="xs:integer">
+				<xs:annotation>
+					<xs:documentation>Specifies the size of the resource with regard to the durationUnit measurement in form of a number</xs:documentation>
+					<xs:appinfo>
+						<label>Size</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="durationUnit">
+				<xs:annotation>
+					<xs:documentation>Specification of the unit of size that is used when providing information on the size of a resource</xs:documentation>
+					<xs:appinfo>
+						<label>Duration unit</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="hours"/>
+						<xs:enumeration value="minutes"/>
+						<xs:enumeration value="seconds"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="durationOfAudioInfoType">
+		<xs:annotation>
+			<xs:appinfo>
+				<render-short>{size} {durationUnit}</render-short>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="size" type="xs:integer">
+				<xs:annotation>
+					<xs:documentation>Specifies the size of the resource with regard to the durationUnit measurement in form of a number</xs:documentation>
+					<xs:appinfo>
+						<label>Size</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="durationUnit">
+				<xs:annotation>
+					<xs:documentation>Specification of the unit of duration (e.g. minutes, hours etc.)</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Duration unit</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="hours"/>
+						<xs:enumeration value="minutes"/>
+						<xs:enumeration value="seconds"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="audioFormatInfoType">
+		<xs:annotation>
+			<xs:appinfo>
+				<render-short>{mimeType} {signalEncoding}</render-short>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="ms:mimeType">
+				<xs:annotation>
+					<xs:documentation>The mime-type of the resource which is a formalized specifier for the format included or a mime-type that the tool/service accepts, in conformance with the values of the IANA (Internet Assigned Numbers Authority); you can select one of the pre-defined values or add a value, PREFERABLY FROM THE IANA MEDIA MIMETYPE RECOMMENDED VALUES (http://www.iana.org/assignments/media-types/media-types.xhtml)</xs:documentation>
+					<xs:appinfo>
+						<label>Mime type</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="signalEncoding" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the encoding the audio type uses</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<label>Signal encoding</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="aLaw"/>
+						<xs:enumeration value="linearPCM"/>
+						<xs:enumeration value="μ-law"/>
+						<xs:enumeration value="ADPCM"/>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="samplingRate" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies the format of files contained in the resource in Hertz</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<label>Sampling rate</label>
+						<!-- <relation>one-to-one</relation> -->
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="quantization" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The number of bits for each audio sample</xs:documentation>
+					<xs:appinfo>
+						<label>Quantization</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:integer">
+						<xs:enumeration value="8"/>
+						<xs:enumeration value="16"/>
+						<xs:enumeration value="24"/>
+						<xs:enumeration value="32"/>
+						<xs:enumeration value="64"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="byteOrder" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The byte order of 2 or more bytes sample</xs:documentation>
+					<xs:appinfo>
+						<label>Byte order</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="littleEndian"/>
+						<xs:enumeration value="bigEndian"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="signConvention" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Binary representation of numbers</xs:documentation>
+					<xs:appinfo>
+						<label>Sign convention</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="signedInteger"/>
+						<xs:enumeration value="unsignedInteger"/>
+						<xs:enumeration value="floatingPoint"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element ref="ms:compressionInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Groups together information on the compression status and method of a resource</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Compression</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="audioQualityMeasuresIncluded" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies the audio quality measures</xs:documentation>
+					<xs:appinfo>
+						<label>Audio quality measures included</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="SNR"/>
+						<xs:enumeration value="crossTalk"/>
+						<xs:enumeration value="clippingRate"/>
+						<xs:enumeration value="backgroundNoise"/>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="numberOfTracks" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies the number of audio channels</xs:documentation>
+					<xs:appinfo>
+						<label>Number of tracks</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:integer">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="4"/>
+						<xs:enumeration value="8"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="recordingQuality" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indication of the audio or video recording quality</xs:documentation>
+					<xs:appinfo>
+						<label>Recording quality</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="veryLow"/>
+						<xs:enumeration value="low"/>
+						<xs:enumeration value="medium"/>
+						<xs:enumeration value="high"/>
+						<xs:enumeration value="veryHigh"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="sizePerAudioFormat" type="ms:sizeInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Used to give info on size of parts of a resource that differ as to the format</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
+						<label>Size per audio format</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="audioClassificationInfoType">
+		<xs:sequence>
+			<xs:element name="audioGenre">
+				<xs:annotation>
+					<xs:documentation>A first indication of type of sounds recorded</xs:documentation>
+					<xs:appinfo>
+						<label>Audio genre</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="speech"/>
+						<xs:enumeration value="humanNonSpeech"/>
+						<xs:enumeration value="noise"/>
+						<xs:enumeration value="animalVocalizations"/>
+						<xs:enumeration value="song"/>
+						<xs:enumeration value="instrumentalMusic"/>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="speechGenre" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The conventionalized discourse of the content of the resource, based on extra-linguistic and internal linguistic criteria; the values here are intended only for speech</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<label>Speech genre</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="broadcastNews"/>
+						<xs:enumeration value="meeting"/>
+						<xs:enumeration value="lecture"/>
+						<xs:enumeration value="emotionalExpressive"/>
+						<xs:enumeration value="airTrafficControl"/>
+						<xs:enumeration value="conversation"/>
+						<xs:enumeration value="roundtable"/>
+						<xs:enumeration value="interview"/>
+						<xs:enumeration value="debate"/>
+						<xs:enumeration value="call-in"/>
+						<xs:enumeration value="questionAnswer"/>
+						<xs:enumeration value="presentation"/>
+						<xs:enumeration value="narrative"/>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element ref="ms:subject_topic" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>For corpora that have already been using subject classification</xs:documentation>
+					<xs:appinfo>
+						<label>Subject / Topic</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:register" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>For corpora that have already been using register classification</xs:documentation>
+					<xs:appinfo>
+						<label>Register</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:conformanceToClassificationScheme" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies the external classification schemes</xs:documentation>
+					<xs:appinfo>
+						<label>Conformance to classification scheme</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sizePerAudioClassification" type="ms:sizeInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The size of the audio subparts of the resource in terms of classification criteria</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
+						<label>Size per audio classification</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- defintion of elements -->
+	<xs:element name="durationOfEffectiveSpeechInfo" type="ms:durationOfEffectiveSpeechInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on the duration of effective speech</xs:documentation>
+			<xs:appinfo>
+				<label>Duration of effective speech</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="durationOfAudioInfo" type="ms:durationOfAudioInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on the size of audio parts; for silences, music etc.</xs:documentation>
+			<xs:appinfo>
+				<label>Duration of audio</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="audioFormatInfo" type="ms:audioFormatInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on the format of the audio part of a resource</xs:documentation>
+			<xs:appinfo>
+				<label>Audio format</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="audioClassificationInfo" type="ms:audioClassificationInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on audio type/genre of the resource</xs:documentation>
+			<xs:appinfo>
+				<label>Audio classification</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="audioContentInfo" type="ms:audioContentInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on the contents of the audio part of a resource</xs:documentation>
+			<xs:appinfo>
+				<label>Audio content</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>
