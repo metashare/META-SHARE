@@ -1,3 +1,8 @@
+/metashare/bcp47/convert.xslt
+/metashare/bcp47/.idea
+/misc/tools/generateMeta/31/models.py
+/misc/tools/generateMeta/31
+/metashare/local_settings.py
 *~
 *.pyc
 *.db

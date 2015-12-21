@@ -504,7 +504,7 @@ def view(request, resource_name=None, object_id=None):
                 text_counts.append(value)
             elif "Corpus_video" in key:
                 video_counts.append(value)
-
+              
     # Create a list of resource components dictionaries
     if resource_type == "corpus":
         for media_type in media_types:
@@ -749,8 +749,8 @@ class MetashareFacetedSearchView(FacetedSearchView):
                 sqs = sqs.order_by('-dl_count', 'resourceNameSort_exact')
             elif sort_list[0] == 'view_count_desc':
                 sqs = sqs.order_by('-view_count', 'resourceNameSort_exact')
-        else:
-            sqs = sqs.order_by('resourceNameSort_exact')
+            else:
+                sqs = sqs.order_by('resourceNameSort_exact')
 
         # collect statistics about the query
         starttime = datetime.now()
