@@ -198,6 +198,13 @@ def get_resource_license_types(res_obj):
             res_obj.distributionInfo.licenceinfotype_model_set.all()
             for licence in licence_info.get_licence_display_list()]
 
+def get_resource_attribution_texts(res_obj):
+    """
+    Returns a list of attribution texts for the given resource. The attribution
+    texts that are collected, are only in the default language
+    """
+    return [licence_info.get_default_attributionText() for licence_info in
+            res_obj.distributionInfo.licenceinfotype_model_set.iterator()]
 
 def get_resource_media_types(res_obj):
     """

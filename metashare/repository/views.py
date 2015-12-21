@@ -437,6 +437,7 @@ def view(request, resource_name=None, object_id=None):
     media_types = set(model_utils.get_resource_media_types(resource))
     linguality_infos = set(model_utils.get_resource_linguality_infos(resource))
     license_types = set(model_utils.get_resource_license_types(resource))
+    attribution_details = model_utils.get_resource_attribution_texts(resource)
 
     
     distribution_info_tuple = None
@@ -594,6 +595,7 @@ def view(request, resource_name=None, object_id=None):
                 'resource_component_dicts': resource_component_dicts,
                 'resource_component_dict': resource_component_dict,
                 'resourceName': resource_name,
+                'attribution_details': attribution_details,
                 'resourceType': resource_type,
                 'resource_creation_dict': resource_creation_dict,
                 'url': url,

@@ -160,6 +160,10 @@
 				<div style="clear:both"></div>
 			{% endif %}
 			
+			{% if attribution_details %}
+             <div class="attribution"><label>Attibution details:</label> {{ attribution_details|join:"<br /> " }}</div>
+            {% endif %}
+
 			{% if url %}
 			 	{% for address in url %}
 					<h3 style="font-size:14px;">

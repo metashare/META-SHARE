@@ -657,6 +657,20 @@ div.split{
 	padding-right: 0px;
 	overflow: hidden;
 }
+
+div.attribution {
+    display: block;
+    font-size: 14px;
+    background: #FFDDAA;
+    border-bottom: solid 1px #ccc;
+    border-left: solid 1px #ccc;
+    color:#000;
+    font-weight: normal;
+    display: inline-flex;
+    padding-left:2px;
+    margin: 5px 0px 1.5em;
+}
+
 /*table width*/
 table.result_table {
 	width:800px;
