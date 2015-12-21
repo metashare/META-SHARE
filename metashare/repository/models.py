@@ -1080,11 +1080,11 @@ class domainInfoType_model(SchemaModel):
       u'sizePerDomain': "sizeInfoType_model",
     }
 
-    domain = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=9, max_length=100),
+    domain = XmlCharField(
       verbose_name='Domain',
       help_text='Specifies the application domain of the resource or the' \
       ' tool/service',
-      validators=[validate_matches_xml_char_production], )
+      max_length=100, )
 
     sizePerDomain = models.OneToOneField("sizeInfoType_model",
       verbose_name='Size per domain',
@@ -2472,6 +2472,13 @@ class communicationInfoType_model(SchemaModel):
       blank=True, max_length=100,
       choices =_make_choices_from_list(sorted(iana.get_all_regions()))['choices'])
 
+    countryId = XmlCharField(
+      verbose_name='Country identifier',
+      help_text='The identifier of the country mentioned in the postal '\
+                'address of a person or organization as defined in the '\
+                'list of values of ISO 3166',
+      max_length=100, editable=False,)
+
     telephoneNumber = MultiTextField(max_length=30, widget=MultiFieldWidget(widget_id=16, max_length=30),
       verbose_name='Telephone number',
       help_text='The telephone number of a person or an organization; re' \
@@ -2483,6 +2490,13 @@ class communicationInfoType_model(SchemaModel):
       help_text='The fax number of a person or an organization; recommen' \
       'ded format: +_international code_city code_number',
       blank=True, validators=[validate_matches_xml_char_production], )
+
+    def save(self, *args, **kwargs):
+        if self.country:
+            self.countryId = iana.get_region_subtag(self.country)
+
+        # # Call save() method from super class with all arguments.
+        super(communicationInfoType_model, self).save(*args, **kwargs)
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
@@ -3151,7 +3165,7 @@ class geographicCoverageInfoType_model(SchemaModel):
       max_length=100, )
 
     sizePerGeographicCoverage = models.OneToOneField("sizeInfoType_model",
-      verbose_name='Geographic coverage',
+      verbose_name='Size per geographic coverage',
       help_text='Provides information on size per geographically distinc' \
       't section of the resource',
       blank=True, null=True, on_delete=models.SET_NULL, )
@@ -3478,6 +3492,14 @@ class projectInfoType_model(SchemaModel):
       'nding as mentioned in ISO3166',
       blank=True, validators=[validate_matches_xml_char_production], )
 
+
+    fundingCountryId = XmlCharField(
+      verbose_name='Funding country identifier',
+      help_text='The identifier of the funding country, '\
+                'in case of national funding as mentioned in '\
+                'ISO3166',
+      max_length=100, editable=False,)
+
     projectStartDate = models.DateField(
       verbose_name='Project start date',
       help_text='The starting date of a project related to the resource',
@@ -3496,6 +3518,13 @@ class projectInfoType_model(SchemaModel):
 
     copy_status = models.CharField(default=MASTER, max_length=1, choices=COPY_CHOICES,
         help_text="Generalized copy status flag for this entity instance.")
+
+
+    def save(self, *args, **kwargs):
+        if self.fundingCountry:
+            self.fundingCountryId = iana.get_region_subtag(self.fundingCountry)
+        # # Call save() method from super class with all arguments.
+        super(projectInfoType_model, self).save(*args, **kwargs)
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
@@ -7626,7 +7655,7 @@ class corpusMediaTypeType_model(SchemaModel):
       blank=True, null=True, on_delete=models.SET_NULL, )
 
     corpusTextNumericalInfo = models.OneToOneField("corpusTextNumericalInfoType_model",
-      verbose_name='Corpus numerical text compoennt',
+      verbose_name='Corpus numerical text component',
       help_text='Groups together information on the textNumerical compon' \
       'ent of a corpus. It is used basically for the textual representat' \
       'ion of measurements and observations linked to sensorimotor recor' \
