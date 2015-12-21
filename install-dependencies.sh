@@ -47,10 +47,10 @@ echo "Create the virtual environment for package installation:"
 # Select current version of virtualenv:
 VENV_DIR="${BASEDIR}/venv"
 VENV_VERSION="12.0.7"
-URL_BASE="http://pypi.python.org/packages/source/v/virtualenv"
+URL_BASE="https://pypi.python.org/packages/source/v/virtualenv"
 
 echo "Download virtualenv..."
-wget "$URL_BASE/virtualenv-${VENV_VERSION}.tar.gz" || exit 1
+wget --no-check-certificate "$URL_BASE/virtualenv-${VENV_VERSION}.tar.gz" || exit 1
 echo "Verify virtualenv..."
 echo "e08796f79d112f3bfa6653cc10840114  virtualenv-12.0.7.tar.gz" | md5sum -c - || exit 1
 echo "Extracting virtualenv"
