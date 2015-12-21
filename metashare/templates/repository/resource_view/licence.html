@@ -16,10 +16,10 @@
 	{% endfor %}
 
 	{% for key1, value1 in value.items %}
-		{% if "Restrictions_of_use" in key1 %}
+		{% if "Conditions_of_use" in key1 %}
 			<div class="dataline indented">
 				<label>
-					<strong>Restrictions: </strong>{{ value1 }}
+					<strong>Conditions: </strong>{{ value1 }}
 				</label>
 			</div>
 		{% endif %}
@@ -27,7 +27,7 @@
 
 	{% for key1, value1 in value.items %}
 
-		{% if "Distribution_access_medium" in key1 %}
+		{% if "Distribution___Access_medium" in key1 %}
 			<div class="dataline indented">
 				<label>
 					<strong>Distribution Access/Medium: </strong>{{ value1 }}

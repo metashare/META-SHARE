@@ -30,10 +30,10 @@
 			{% for key1, value1 in value.items %}
 				{% if "Foreseen_use" in key1 %}
 						<label class="subtitle">{{ value1.Foreseen_use }}</label>
-					{% if value1.Use_nlpspecific %}
+					{% if value1.Use_specific_to_NLP %}
 					     <div class="dataline indented">
 							<label>
-								<strong>Use NLP Specific:</strong> {{ value1.Use_nlpspecific }}
+								<strong>Use specific to NLP:</strong> {{ value1.Use_specific_to_NLP }}
 							</label>
 						</div>
 					{% endif %}
@@ -47,10 +47,10 @@
 			{% for key1, value1 in value.items %}
 				{% if "Actual_use" in key1 %}
 						<label class="title">Actual Use - {{ value1.Actual_use }}</label>							
-					{% if value1.Use_nlpspecific %}
+					{% if value1.Use_specific_to_NLP %}
 					     <div class="dataline indented">
 							<label>
-								<strong>Use NLP Specific:</strong> {{ value1.Use_nlpspecific }}
+								<strong>Use NLP Specific:</strong> {{ value1.Use_specific_to_NLP }}
 							</label>
 						</div>
 					{% endif %}

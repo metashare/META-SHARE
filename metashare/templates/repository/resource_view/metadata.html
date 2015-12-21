@@ -30,23 +30,23 @@
 	{% if metadata_dict.Metadata.Original_metadata_schema %}
 		<div class="dataline">
 			<label>
-				{% if metadata_dict.Metadata.Original_metadata_link %}
-					<a href="{{metadata_dict.Metadata.Original_metadata_link}}" target='_blank'>
+				{% if metadata_dict.Metadata.Original_metadata_record_link %}
+					<a href="{{metadata_dict.Metadata.Original_metadata_record_link}}" target='_blank'>
 				{% endif %}
 						{{ metadata_dict.Metadata.Original_metadata_schema }}
-				{% if metadata_dict.Metadata.Original_metadata_link %}
+				{% if metadata_dict.Metadata.Original_metadata_record_link %}
 					</a>
 				{% endif %}
 			</label>
 		</div>
 	{% endif %}
 
-	{% if metadata_dict.Metadata.Metadata_language_name %}
+	{% if metadata_dict.Metadata.Metadata_language %}
 		 <div class="dataline">
 			<label>
 				<strong>Metadata Language:</strong>
-				{{ metadata_dict.Metadata.Metadata_language_name }}
-				{% if metadata_dict.Metadata.Metadata_language_id %}({{ metadata_dict.Metadata.Metadata_language_id }}){% endif %}
+				{{ metadata_dict.Metadata.Metadata_language }}
+				{% if metadata_dict.Metadata.Metadata_language_identifier %}({{ metadata_dict.Metadata.Metadata_language_identifier }}){% endif %}
 			</label>
 		</div>
 	{% endif %}

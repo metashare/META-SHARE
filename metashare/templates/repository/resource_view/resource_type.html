@@ -6,12 +6,12 @@
 
 {# Lexical Conceptual Resource #}
 {% if type == "lexicalConceptualResource" %}
-	<div class='dataline'><label><strong><i>{{resource_component_dict.Resource_component.Lexical_conceptual_resource_type}}</i></strong></label></div>
+	<div class='dataline'><label><strong><i>{{resource_component_dict.Resource_component_type.Lexical_conceptual_resource_type}}</i></strong></label></div>
 {% else %}
-	<div class='dataline'><label><strong><i>{{resource_component_dict.Resource_component.Language_description_type}}</i></strong></label></div>
+	<div class='dataline'><label><strong><i>{{resource_component_dict.Resource_component_type.Language_description_type}}</i></strong></label></div>
 {% endif %}
 	
-	{% for key, value in resource_component_dict.Resource_component.items %}
+	{% for key, value in resource_component_dict.Resource_component_type.items %}
 		{% if "encoding" in key %}
 			<label class='title'>Encoding</label>
 			{% for key1, value1 in value.items %}
@@ -65,12 +65,12 @@
 					
 					
 					
-				 	{% if "Required_lrs" in value1 %}
+				 	{% if "Required_language_resources" in value1 %}
 					 	<label class='subtitle'>Required LRs</label>
 					 	<div class="dataline indented">			 		
 					 		<ul>					 	
 								 {% for key2, value2 in value1.items %}
-								 	{% if "Required_lrs" in key2 %}
+								 	{% if "Required_language_resources" in key2 %}
 								 		{% include "repository/resource_view/target_resource.html" with target=value2 title="Required LRs" level="list" %}
 								 	{% endif %}
 								 {% endfor %}

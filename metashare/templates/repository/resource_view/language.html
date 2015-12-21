@@ -5,7 +5,7 @@
 	{% for key, value in languages.items %}
 		{% for key1, value1 in value.items %}
 				{% if key1 == "Language_name" %}
-					<label class="subtitle" title="{{value.Language_id}}">
+					<label class="subtitle" title="{{value.Language_identifier}}">
 						{{ value1 }}
 						{# Take care of size #}
 						{% if "Size_per_language" in value %} 
@@ -19,6 +19,24 @@
 							<div class="dataline indented">
 								<label class="dataline"><strong>Language Script: </strong>{{value.Language_script}}
 							</label> 
+						</div>
+						{% endif %}
+					{% endif %}
+
+                    {% if "Region" in value %}
+						{% if value.Region %}
+							<div class="dataline indented">
+								<label class="dataline"><strong>Region: </strong>{{value.Region}}
+							</label>
+						</div>
+						{% endif %}
+					{% endif %}
+
+                    {% if "Variants" in value %}
+						{% if value.Variants %}
+							<div class="dataline indented">
+								<label class="dataline"><strong>Variants: </strong>{{value.Variants}}
+							</label>
 						</div>
 						{% endif %}
 					{% endif %}

@@ -200,6 +200,27 @@
 		    </a>
 			<div style="clear: both;"></div>
 		</div>
+            {% for key, value in documentation_dict.items %}
+                {% for key1, value1 in value.items %}
+                    {% for key2, value2 in value1.items %}
+                        {% if "Citation" in key1 %}
+                             <div class="citation" style="margin-top:2%; border:thin dotted; padding:0.5em;">
+                            <span>PLEASE CITE AS:</span><br/>
+                             {% if value2.Author %}
+                                <span>{{ value2.Author }}</span>
+                            {% endif %}
+                            {% if value2.Title %}
+                                <span>, </span><span style="font-weight: bold; font-style: italic">{{ value2.Title }}</span>
+                            {% endif %}
+                            </div>
+                            {% if value2.Editor %}
+                                <span>, </span><span style="font-weight: bold; font-style: italic">{{ value2.Editor }}</span>
+                            {% endif %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            {% endfor %}
 	</div>
 	
 	<div class="white_box column corner">
@@ -287,7 +308,7 @@
 							</label>
 						</div>
 					{% endif %}
-					{% if "Tool_documentation" in key1 %}
+					{% if "Type_of_documentation_for_tools" in key1 %}
 						 <div class="dataline">
 							<label>
 								<strong>Tool Documentation: </strong>{{value1}}

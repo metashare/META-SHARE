@@ -35,10 +35,10 @@
 			</label>
 		</div>
 		
-		{% if "Url" in person_dict.Communication %}
+		{% if "URL_Landing_page" in person_dict.Communication %}
 			<div>
 				{% for key, value in person_dict.Communication.items %}
-					{% if "Url" in key %}
+					{% if "URL_Landing_page" in key %}
 						<label class="dataline" style="clear:both;">
 							{{ value|urlizetrunc:23 }}</a>
 						</label>
@@ -155,8 +155,8 @@
 		</div>
 		<div>
 			<label class="dataline">
-				{% if person_dict.Affiliation.Communication.Url %}
-					{{ person_dict.Affiliation.Communication.Url|urlizetrunc:23 }}
+				{% if person_dict.Affiliation.Communication.URL_Landing_page %}
+					{{ person_dict.Affiliation.Communication.URL_Landing_page|urlizetrunc:23 }}
 				{% endif %}
 			</label>
 		</div>

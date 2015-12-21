@@ -5,7 +5,7 @@
 	{% if annotations.Tagset %}
 		<div>
 			<label class="dataline indented">
-				<strong>Tagset: </strong> {{ annotations.Tagset }} {% if annotations.Tagset_language_name %} <label {% if annotations.Tagset_language_id %}title="{{annotations.Tagset_language_id}}" {% endif %} class="dataline">({{ annotations.Tagset_language_name }})</label> {% endif %}
+				<strong>Tagset: </strong> {{ annotations.Tagset }} {% if annotations.Tagset_language %} <label {% if annotations.Tagset_language_identifier %}title="{{annotations.Tagset_language_identifier}}" {% endif %} class="dataline">({{ annotations.Tagset_language }})</label> {% endif %}
 			</label>
 		</div>
 	{% endif %}
@@ -38,10 +38,10 @@
 			</label>
 		</div>
 	{% endif %}
-	{% if annotations.Conformance_to_standards_best_practices %}
+	{% if annotations.Conformance_to_standards___best_practices %}
 		<div>
 			<label class="dataline indented">
-				<strong>Standard practices conformance: </strong> {{ annotations.Conformance_to_standards_best_practices }}
+				<strong>Standard practices conformance: </strong> {{ annotations.Conformance_to_standards___best_practices }}
 			</label>
 		</div>
 	{% endif %}

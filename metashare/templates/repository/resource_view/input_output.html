@@ -27,7 +27,7 @@
 
 {% if data.Language_name %}
 	 <div class="dataline indented">
-		<label title="{{ data.Language_id }}">
+		<label title="{{ data.Language_identifier }}">
 			<strong>Language: </strong>{{ data.Language_name }} {% if data.Language_variety_name %} &mdash; <strong>variety:</strong> {{ data.Language_variety_name }} {% endif %}
 		</label>
 	</div>
@@ -81,10 +81,10 @@
 	</div>
 {% endif %}
 
-{% if data.Conformance_to_standards_best_practices %}
+{% if data.Conformance_to_standards___best_practices %}
 	 <div class="dataline indented">
 		<label>
-			<strong>Conformance to standards best practices:</strong> {{ data.Conformance_to_standards_best_practices }}
+			<strong>Conformance to standards best practices:</strong> {{ data.Conformance_to_standards___best_practices }}
 		</label>
 	</div>
 {% endif %}

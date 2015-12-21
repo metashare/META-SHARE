@@ -11,10 +11,10 @@
 
 {% if level == "sub" or level == "simple" or indent == "yes" %}<div class="indented">{% endif %}
 
-	{% if documentation.Document %}
+	{% if documentation.Document_type %}
 		<div class="dataline">
 			<label>
-				<strong>Document Type:</strong> {{ documentation.Document }}
+				<strong>Document Type:</strong> {{ documentation.Document_type }}
 			</label>
 		</div>
 	{% endif %}
@@ -25,9 +25,9 @@
 				{{ documentation.Author }}, 			
 			{% endif %}
 			<strong><i>{{ documentation.Title }}</i></strong>, 
-			{% if documentation.Url %}
+			{% if documentation.URL_Landing_page %}
 				{% for key, value in documentation.items %}
-					{% if "Url" in key %}
+					{% if "URL_Landing_page" in key %}
 						{{ value|urlizetrunc:23 }}
 					{% endif %}
 				{% endfor %}
@@ -46,8 +46,8 @@
 				, {{ documentation.Conference }}
 			{% endif %}
 			
-			{% if documentation.Year %}
-				, {{ documentation.Year }}
+			{% if documentation.Year_of_publication %}
+				, {{ documentation.Year_of_publication }}
 			{% endif %}		
 			
 		</label>
@@ -94,26 +94,26 @@
 	{% endif %}	
 
 	
-	{% if documentation.Doi %}
+	{% if documentation.DOI %}
 		 <div class="dataline">
 			<label>
-				<strong>Digital Object Identifier - DOI:</strong> {{ documentation.Doi|urlizetrunc:23 }}
+				<strong>Digital Object Identifier - DOI:</strong> {{ documentation.DOI|urlizetrunc:23 }}
 			</label>
 		</div>
 	{% endif %}
 	
-	{% if documentation.Issn %}
+	{% if documentation.ISSN %}
 		 <div class="dataline">
 			<label>
-				<strong>ISSN:</strong> {{ documentation.Issn }}
+				<strong>ISSN:</strong> {{ documentation.ISSN }}
 			</label>
 		</div>
 	{% endif %}
 	
-	{% if documentation.Isbn %}
+	{% if documentation.ISBN %}
 		 <div class="dataline">
 			<label>
-				<strong>ISBN:</strong> {{ documentation.Isbn }}
+				<strong>ISBN:</strong> {{ documentation.ISBN }}
 			</label>
 		</div>
 	{% endif %}
@@ -126,15 +126,15 @@
 		</div>
 	{% endif %}
 	
-	{% if documentation.Document_language_name %}
+	{% if documentation.Document_language %}
 		 <div class="dataline">
 			<label>
 				<strong>Document Language:</strong> 
-				{% if documentation.Document_language_id %}
-					<label title="{{documentation.Document_language_id}}">
+				{% if documentation.Document_language_identifier %}
+					<label title="{{documentation.Document_language_identifier}}">
 				{% endif %}
-				{{ documentation.Document_language_name }}
-				{% if documentation.Document_language_id %}
+				{{ documentation.Document_language }}
+				{% if documentation.Document_language_identifier %}
 					</label>
 				{% endif %}
 			</label>
