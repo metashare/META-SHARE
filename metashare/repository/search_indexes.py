@@ -738,9 +738,9 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
                         media_type.corpusAudioInfo.modalityinfotype_model_set.all()
                         for mt in modalityInfo.get_modalityType_display_list()])
             for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-                if corpus_info.modalityInfo:
-                    result.extend(corpus_info.modalityInfo \
-                                  .get_modalityType_display_list())
+                result.extend([mt for modalityInfo in
+                        corpus_info.modalityinfotype_model_set.all() for mt in
+                        modalityInfo.get_modalityType_display_list()])
             if media_type.corpusTextNgramInfo and \
                     media_type.corpusTextNgramInfo.modalityInfo:
                 result.extend(media_type.corpusTextNgramInfo.modalityInfo \
