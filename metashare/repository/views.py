@@ -748,8 +748,6 @@ class MetashareFacetedSearchView(FacetedSearchView):
                 sqs = sqs.order_by('-view_count', 'resourceNameSort_exact')
             else:
                 sqs = sqs.order_by('resourceNameSort_exact')
-        else:
-            sqs = sqs.order_by('resourceNameSort_exact')
 
         # collect statistics about the query
         starttime = datetime.now()
