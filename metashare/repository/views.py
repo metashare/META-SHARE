@@ -437,6 +437,7 @@ def view(request, resource_name=None, object_id=None):
     media_types = set(model_utils.get_resource_media_types(resource))
     linguality_infos = set(model_utils.get_resource_linguality_infos(resource))
     license_types = set(model_utils.get_resource_license_types(resource))
+    attribution_details = model_utils.get_resource_attribution_texts(resource)
 
     
     distribution_info_tuple = None
@@ -468,7 +469,7 @@ def view(request, resource_name=None, object_id=None):
             resource_creation_info_tuple = _tuple
         elif _tuple[0] == "Relation":
             relation_info_tuples.append(_tuple)
-        elif _tuple[0] == "Resource component":
+        elif _tuple[0] == "Resource component type":
             resource_component_tuple = _tuple[1]
     
     # Convert resource_component_tuple to nested dictionaries
@@ -496,83 +497,86 @@ def view(request, resource_name=None, object_id=None):
     # Count individual media resource components
     text_counts = []
     video_counts = []
+
     if resource_type == "corpus":
-        for key, value in resource_component_dict['Resource_component']['Corpus_media'].items():
+        for key, value in resource_component_dict['Resource_component_type']['Media_type_component_of_corpus'].items():
             if "Corpus_text" in key and not "numerical" in key and not "ngram" in key:
                 text_counts.append(value)
             elif "Corpus_video" in key:
                 video_counts.append(value)
-              
+
     # Create a list of resource components dictionaries
     if resource_type == "corpus":
         for media_type in media_types:
             if media_type == "text":
                 resource_component_dicts['text'] = \
-                  resource_component_dict['Resource_component'] \
-                    ['Corpus_media']['Corpus_text']
+                  resource_component_dict['Resource_component_type'] \
+                    ['Media_type_component_of_corpus']['Corpus_text']
             if media_type == "audio":
                 resource_component_dicts['audio'] = \
-                  resource_component_dict['Resource_component'] \
-                    ['Corpus_media']['Corpus_audio']
+                  resource_component_dict['Resource_component_type'] \
+                    ['Media_type_component_of_corpus']['Corpus_audio_component']
             if media_type == "video":
                 resource_component_dicts['video'] = \
-                  resource_component_dict['Resource_component'] \
-                    ['Corpus_media']['Corpus_video']
+                  resource_component_dict['Resource_component_type'] \
+                    ['Media_type_component_of_corpus']['Corpus_video']
             if media_type == "image":
                 resource_component_dicts['image'] = \
-                  resource_component_dict['Resource_component'] \
-                    ['Corpus_media']['Corpus_image']
+                  resource_component_dict['Resource_component_type'] \
+                    ['Media_type_component_of_corpus']['Corpus_image_component']
             if media_type == "textNgram":
                 resource_component_dicts['textNgram'] = \
-                  resource_component_dict['Resource_component'] \
-                     ['Corpus_media']['Corpus_textNgram']
+                  resource_component_dict['Resource_component_type'] \
+                     ['Media_type_component_of_corpus']['Corpus_textNgram']
             if media_type == "textNumerical":
                 resource_component_dicts['textNumerical'] = \
-                  resource_component_dict['Resource_component'] \
-                     ['Corpus_media']['Corpus_textNumerical']
-          
+                  resource_component_dict['Resource_component_type'] \
+                     ['Media_type_component_of_corpus']['Corpus_textNumerical']
+
+
     elif resource_type == "languageDescription":
         for media_type in media_types:
             if media_type == "text":
                 resource_component_dicts['text'] = \
-                  resource_component_dict['Resource_component'] \
-                    ['Language_description_media']['Language_description_text']
+                  resource_component_dict['Resource_component_type'] \
+                    ['Media_type_component_of_language_description']['Language_description_text_component']
             if media_type == "image":
                 resource_component_dicts['image'] = \
-                  resource_component_dict['Resource_component'] \
-                    ['Language_description_media']['Language_description_image']
+                  resource_component_dict['Resource_component_type'] \
+                    ['Media_type_component_of_language_description']['Language_description_image_component']
             if media_type == "video":
                 resource_component_dicts['video'] = \
-                  resource_component_dict['Resource_component'] \
-                    ['Language_description_media']['Language_description_video']
-      
-            
+                  resource_component_dict['Resource_component_type'] \
+                    ['Media_type_component_of_language_description']['Language_description_video_component']
+
+
     elif resource_type == "lexicalConceptualResource":
         for media_type in media_types:
+
             if media_type == "text":
                 resource_component_dicts['text'] = \
-                  resource_component_dict['Resource_component'] \
-                    ['Lexical_conceptual_resource_media'] \
-                    ['Lexical_conceptual_resource_text']
+                  resource_component_dict['Resource_component_type'] \
+                    ['Media_type_component_of_lexical___conceptual_resource'] \
+                    ['Lexical___Conceptual_resource_text_component']
             if media_type == "audio":
                 resource_component_dicts['audio'] = \
-                  resource_component_dict['Resource_component'] \
-                  ['Lexical_conceptual_resource_media'] \
-                  ['Lexical_conceptual_resource_audio']
+                  resource_component_dict['Resource_component_type'] \
+                  ['Media_type_component_of_lexical___conceptual_resource'] \
+                  ['Lexical___Conceptual_resource_audio_component']
             if media_type == "video":
                 resource_component_dicts['video'] = \
-                  resource_component_dict['Resource_component'] \
-                  ['Lexical_conceptual_resource_media'] \
-                  ['Lexical_conceptual_resource_video']
+                  resource_component_dict['Resource_component_type'] \
+                  ['Media_type_component_of_lexical___conceptual_resource'] \
+                  ['Lexical___Conceptual_resource_video_component']
             if media_type == "image":
                 resource_component_dicts['image'] = \
-                  resource_component_dict['Resource_component'] \
-                  ['Lexical_conceptual_resource_media'] \
-                  ['Lexical_conceptual_resource_image']
+                  resource_component_dict['Resource_component_type'] \
+                  ['Media_type_component_of_lexical___conceptual_resource'] \
+                  ['Lexical___Conceptual_resource_image_component']
 
     elif resource_type == "toolService":
         resource_component_dicts['toolService'] = \
-          resource_component_dict['Resource_component']
+          resource_component_dict['Resource_component_type']
    
     # Define context for template rendering.
     context = {
@@ -594,6 +598,7 @@ def view(request, resource_name=None, object_id=None):
                 'resource_component_dicts': resource_component_dicts,
                 'resource_component_dict': resource_component_dict,
                 'resourceName': resource_name,
+                'attribution_details': attribution_details,
                 'resourceType': resource_type,
                 'resource_creation_dict': resource_creation_dict,
                 'url': url,
@@ -657,7 +662,7 @@ def tuple2dict(_tuple):
             if isinstance(item[0], basestring):
                 # Replace spaces by underscores for component names.
                 if item[0].find(" "):
-                    _key = item[0].replace(" ", "_")
+                    _key = item[0].replace(" ", "_").replace("/","_")
                 else: 
                     _key = item[0]
                 if _key in _dict:
@@ -678,7 +683,7 @@ def tuple2dict(_tuple):
                 if isinstance(item[0], tuple):
                     # Replace spaces by underscores for element names.
                     if item[0][0].find(" "):
-                        _key = item[0][0].replace(" ", "_")
+                        _key = item[0][0].replace(" ", "_").replace('(',"").replace(")","").replace("/","_").replace("-","_")
                     else: _key = item[0][0]
 
                     # If the item is a date, convert it to real datetime
@@ -744,8 +749,6 @@ class MetashareFacetedSearchView(FacetedSearchView):
                 sqs = sqs.order_by('-dl_count', 'resourceNameSort_exact')
             elif sort_list[0] == 'view_count_desc':
                 sqs = sqs.order_by('-view_count', 'resourceNameSort_exact')
-            else:
-                sqs = sqs.order_by('resourceNameSort_exact')
         else:
             sqs = sqs.order_by('resourceNameSort_exact')
 
