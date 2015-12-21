@@ -54,7 +54,7 @@ def get_script_subtag(script):
 
 def get_region_subtag(region):
     xpath = u"//region[description=\"{}\"]/@subtag".format(region)
-    return ''.join(registry.xpath(xpath))
+    return '/'.join(registry.xpath(xpath))
 
 def get_variant_subtag(variant):
     xpath = u"//registry/variants//variant[description=\"{}\"]/@subtag".format(variant)
