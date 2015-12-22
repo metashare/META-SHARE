@@ -161,9 +161,23 @@
 			{% endif %}
 			
 			{% if attribution_details %}
-             <div class="attribution"><label>Attibution details:</label> {{ attribution_details|join:"<br /> " }}</div>
+             <div class="attribution"><label>Attibution details:</label> {{ attribution_details|join:"<br /> " }}
             {% endif %}
-
+            {% for key, value in documentation_dict.items %}
+                {% for key1, value1 in value.items %}
+                    {% for key2, value2 in value1.items %}
+                        {% if "Citation" in key1 %}
+                            <div class="citation">
+                                <label>Please, acknowledge use of the resource with the following citation:</label><br/>
+                                {% if value2.Title %}
+								    {% include "repository/resource_view/citation.html" with documentation=value2 type="Citation" %}
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            {% endfor %}
+            </div>
 			{% if url %}
 			 	{% for address in url %}
 					<h3 style="font-size:14px;">
@@ -204,27 +218,6 @@
 		    </a>
 			<div style="clear: both;"></div>
 		</div>
-            {% for key, value in documentation_dict.items %}
-                {% for key1, value1 in value.items %}
-                    {% for key2, value2 in value1.items %}
-                        {% if "Citation" in key1 %}
-                             <div class="citation" style="margin-top:2%; border:thin dotted; padding:0.5em;">
-                            <span>PLEASE CITE AS:</span><br/>
-                             {% if value2.Author %}
-                                <span>{{ value2.Author }}</span>
-                            {% endif %}
-                            {% if value2.Title %}
-                                <span>, </span><span style="font-weight: bold; font-style: italic">{{ value2.Title }}</span>
-                            {% endif %}
-                            </div>
-                            {% if value2.Editor %}
-                                <span>, </span><span style="font-weight: bold; font-style: italic">{{ value2.Editor }}</span>
-                            {% endif %}
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                {% endfor %}
-            {% endfor %}
 	</div>
 	
 	<div class="white_box column corner">
