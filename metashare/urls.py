@@ -22,6 +22,12 @@ urlpatterns = patterns('',
     include(admin.site.urls)),
   (r'^{0}editor/'.format(DJANGO_BASE),
     include(editor_site.urls)),
+  (r'^{0}update_lang_variants/'.format(DJANGO_BASE),
+    'metashare.bcp47.views.update_lang_variants'),
+  (r'^{0}update_var_variants/'.format(DJANGO_BASE),
+    'metashare.bcp47.views.update_var_variants'),
+  (r'^{0}update_lang_variants_with_script/'.format(DJANGO_BASE),
+    'metashare.bcp47.views.update_lang_variants_with_script'),
 )
 
 urlpatterns += patterns('metashare.accounts.views',

@@ -45,6 +45,9 @@ function compute_next_id(widget_id) {
 function add_container(widget_id) {
     var id = compute_next_id(widget_id);
     var input = django.jQuery('#container_'+widget_id+'_'+id+' .input');
+    // check if the container will manage language variants. We do this because
+    //each selection determines the available options for the next selection
+    var isVariant = input.closest("div").attr("title") == "Variants";
 
     if (input.length === 0) {
         // First, we clone the empty_widget for this widget id and turn it
@@ -78,8 +81,12 @@ function add_container(widget_id) {
         
         // And put a reference into input.
         input = django.jQuery('#container_'+widget_id+'_'+id+' .input');
-    }
 
+    }
+    //call the update variants function only for language variants
+    if(new_container.closest(".form-row").attr("class")=='form-row variant'){
+      update_var_variants(new_container.prev("li"), new_container);
+    }
     input.focus();
 }
 
@@ -125,4 +132,136 @@ django.jQuery(document).ready(function() {
 		var wId = getNextMultifieldWidgetId();
 		setWidgetId($(elem), wId);
 	});
+
+
+    $(this).find(".form-row.languageName select").each(
+        function () {
+            update_lang_variants($(this));
+        }
+    );
+
+    $(this).find(".form-row.languageScript select").each(
+        function () {
+                update_lang_variants_with_script($(this));
+        }
+    );
+
+    $(this).find(".variant select").each(
+        function () {
+                update_var_variants($(this), $(this).parent().next("li"));
+        }
+    );
+
+    $(this).find(".form-row.languageName select").change(
+        function () {
+            $(this).parent().parent().siblings(".languageScript").find("select").val("");
+            if ($(this).parent().parent().siblings(".variant").find("select").length > 1) {
+                $(this).parent().parent().parent().find("li[id*='container']:not(:first)").remove();
+            }
+            update_lang_variants($(this));
+        }
+    );
+
+    $(this).find(".form-row.languageScript select").change(
+        function () {
+            //if ($(this).parent().parent().siblings(".variants").find("select").length > 1) {
+            //    $(this).parent().parent().parent().find("li[id*='container']:not(:first)").remove();
+            //}
+            update_lang_variants_with_script($(this));
+        }
+    );
+
+    $(this).find(".variant select").change(
+        function () {
+            //if($(this).parent().next("li").attr("id") != null){
+                update_var_variants($(this), $(this).parent().next("li"));
+            //}
+        }
+    );
 });
+
+
+function update_lang_variants(e) {
+    var root = $(e).closest(".module.aligned");
+    var variants = root.find(".variant:first");
+    var selected = variants.find("select option:selected").val();
+    if (e.val() != "") {
+        $.ajax({
+            url: "/update_lang_variants/",
+            type: 'POST',
+            data: {'lang': e.val()},
+            success: function (result) {
+                vars = result.split("//");
+                selElement = variants.find("select:first");
+                selElement.empty();
+                selElement.append($("<option></option>").
+                    attr("value", "").text("--------"));
+                for (var r in vars) {
+                    selElement.append($("<option></option>").
+                        attr("value", vars[r]).text(vars[r]));
+                }
+                selElement.val(selected);
+            }
+        })
+    };
+}
+
+function update_lang_variants_with_script(e) {
+    var root = $(e).closest(".module.aligned");
+    var variants = root.find(".variant:first");
+    var selected = variants.find("select option:selected").val();
+    if (e.val() != "") {
+        $.ajax({
+            url: "/update_lang_variants_with_script/",
+            type: 'POST',
+            data: {'script': e.val(), 'lang': e.parent().parent().prev(".languageName").find("select option:selected").val()},
+            success: function (result) {
+                vars = result.split("//");
+                selElement = variants.find("select:first");
+                selElement.empty();
+                selElement.append($("<option></option>").
+                    attr("value", "").text("--------"));
+                for (var r in vars) {
+                    selElement.append($("<option></option>").
+                        attr("value", vars[r]).text(vars[r]));
+                }
+                selElement.val(selected);
+            }
+        })
+    };
+}
+
+function update_var_variants(prevRef, element) {
+    var selElement = element.find("select:first");
+    var selected = element.find("select option:selected").val();
+    var param = prevRef.find("option:selected").val();
+    var dataValue = prevRef.find("option:selected").val();
+    if (param != "") {
+        $.ajax({
+            url: "/update_var_variants/",
+            type: 'POST',
+            data: {'variant': unescape(dataValue)},
+            contentType: "text/html; charset=utf-8",
+            success: function (result) {
+                vars = result.split("//");
+                selElement.empty();
+                selElement.append($("<option></option>").
+                    attr("value", "").text("--------"));
+                for (var r in vars) {
+                    selElement.append($("<option></option>").
+                        attr("value", vars[r]).text(vars[r]));
+                }
+                selElement.val(selected);
+                //if (result.length) {
+                //    selElement.parent().show().prop('disabled', false);
+                //    selElement.parent().next("li").has("a").prop('disabled', false);
+                //}
+                //else {
+                //    selElement.parent().next("li").has("a").prop('disabled', true);
+                //    selElement.parent().hide().prop('disabled', true);
+                //}
+            }
+        })
+    };
+}
+
