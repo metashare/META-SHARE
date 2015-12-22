@@ -848,7 +848,7 @@
 			</xs:element>
 			<xs:element name="documentLanguageId" type="ms:languageTagType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>The id of the language the document is written in; an autocompletion mechanism with values from the ISO 639 is provided in the editor, but the values can be subsequently edited for further specification (according to the IETF BCP47 guidelines)</xs:documentation>
+					<xs:documentation>The id of the language the document is written in (according to the IETF BCP47 guidelines)</xs:documentation>
 					<xs:appinfo>
 						<label>Document language identifier</label>
 					</xs:appinfo>
@@ -934,7 +934,7 @@
 	</xs:complexType>
 	<xs:complexType name="domainInfoType">
 		<xs:sequence>
-			<xs:element ref="ms:domain" maxOccurs="unbounded">
+			<xs:element ref="ms:domain">
 				<xs:annotation>
 					<xs:documentation>Specifies the application domain of the resource or the tool/service</xs:documentation>
 					<xs:appinfo>
@@ -1033,7 +1033,7 @@
 			</xs:element>
 			<xs:element name="tagsetLanguageId" type="ms:languageTagType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>The identifier of the tagset language; an autocompletion mechanism with values from the ISO 639 is provided in the editor, but the values can be subsequently edited for further specification (according to the IETF BCP47 guidelines)</xs:documentation>
+					<xs:documentation>The identifier of the tagset language (according to the IETF BCP47 guidelines)</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
 						<label>Tagset language identifier</label>
@@ -1042,7 +1042,7 @@
 			</xs:element>
 			<xs:element name="tagsetLanguageName" type="ms:languageNameType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>The name of the tagset language; an autocompletion mechanism with values from the ISO 639 is provided in the editor, but the values can be subsequently edited for further specification (according to the IETF BCP47 guidelines)</xs:documentation>
+					<xs:documentation>The name of the tagset language (according to the IETF BCP47 guidelines)</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
 						<label>Tagset language</label>

@@ -88,7 +88,7 @@
 					<xs:appinfo>
 						<relation>one-to-one</relation>
 						<inline-type>tabular</inline-type>
-						<label>Geographic coverage</label>
+						<label>Size per geographic coverage</label>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>

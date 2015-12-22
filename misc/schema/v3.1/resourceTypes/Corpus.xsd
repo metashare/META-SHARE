@@ -82,7 +82,7 @@
 								<xs:appinfo>
 									<recommended>true</recommended>
 									<relation>one-to-one</relation>
-									<label>Corpus numerical text compoennt</label>
+									<label>Corpus numerical text component</label>
 								</xs:appinfo>
 							</xs:annotation>
 						</xs:element>

@@ -65630,8 +65630,7 @@
 			<xs:enumeration value="Latin America and the Caribbean"/>
 		</xs:restriction>
 	</xs:simpleType>
-	<!--
-	<xs:simpleType name="regionNameType">
+	<xs:simpleType name="regionIdType">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="AA">
 				<xs:annotation>
@@ -67665,7 +67664,6 @@
 			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
--->
 	<xs:simpleType name="variantNameType">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="Late Middle French (to 1606)"/>

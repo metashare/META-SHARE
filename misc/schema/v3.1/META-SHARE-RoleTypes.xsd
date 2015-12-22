@@ -97,6 +97,16 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="countryId" type="ms:regionIdType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The identifier of the country mentioned in the postal address of a person or organization as defined in the list of values of ISO 3166</xs:documentation>
+					<xs:appinfo>
+						<iso>ISO3166</iso>
+						<relation>one-to-one</relation>
+						<label>Country identifier</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="telephoneNumber" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>The telephone number of a person or an organization; recommended format: +_international code_city code_number</xs:documentation>

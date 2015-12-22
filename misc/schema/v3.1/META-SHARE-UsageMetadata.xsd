@@ -141,6 +141,16 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="fundingCountryId" type="ms:regionIdType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The identifier of the funding country, in case of national funding as mentioned in ISO3166</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-many</relation>
+						<label>Funding country identifier</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="projectStartDate" type="xs:date" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>The starting date of a project related to the resource</xs:documentation>

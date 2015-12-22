@@ -10,7 +10,7 @@
 					<xs:documentation>Main type of object or people represented in the video</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-many</relation>
-						<label>Type of content</label>
+						<label>Type of video content</label>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
