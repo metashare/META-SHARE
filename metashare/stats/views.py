@@ -252,6 +252,21 @@ def _add_usage_meta(usage_fields, component_name, field, verbose_name, status, m
         usage_fields[component_name].append(metadata)
     return True
 
+def portalstats(request):
+    from django.contrib.auth.models import User
+
+    data = {}
+
+    # data to gather from the portal specified managing node
+    data['language resources'] = resourceInfoType_model.objects.filter(
+        storage_object__publication_status=PUBLISHED,
+        storage_object__deleted=False).count()
+    data['text corpora'] = UsageStats.objects.filter(elname = 'corpusTextInfo').count()
+
+    # data to gather from all partners including managing nodes
+    data['users'] = User.objects.all().count()
+    data['number of downloads'] = LRStats.objects.filter(action='d').count()
+    return HttpResponse(JSONEncoder().encode(data), mimetype="application/json")
 
 def topstats (request):
     """ viewing statistics about the top LR and latest queries. """    
