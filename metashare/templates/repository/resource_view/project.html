@@ -17,12 +17,11 @@
 	
 	
 	{% endif %}
-	
-	
+
 	{% if project.URL_Landing_page %}
 		<div class='dataline indented'>
 			<label>
-				<strong>URL{% if ", " in project.URL_Landing_page %}s{% endif %}: </strong>{{ project.Url|urlizetrunc:23 }}
+				<strong>URL{% if ", " in project.URL_Landing_page %}s{% endif %}: </strong>{{ project.URL_Landing_page|urlizetrunc:23 }}
 			</label>
 		</div>
 	{% endif %}
