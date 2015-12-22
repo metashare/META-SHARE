@@ -1282,18 +1282,12 @@ class annotationInfoType_model(SchemaModel):
 
     tagsetLanguageId = XmlCharField(
       verbose_name='Tagset language identifier',
-      help_text='The identifier of the tagset language; an autocompletio' \
-      'n mechanism with values from the ISO 639 is provided in the edito' \
-      'r, but the values can be subsequently edited for further specific' \
-      'ation (according to the IETF BCP47 guidelines)',
+      help_text='The identifier of the tagset language (according to the IETF BCP47 guidelines)',
       blank=True, max_length=20, editable=False)
 
     tagsetLanguageName = models.CharField(
       verbose_name='Tagset language',
-      help_text='The name of the tagset language; an autocompletion mech' \
-      'anism with values from the ISO 639 is provided in the editor, but' \
-      ' the values can be subsequently edited for further specification ' \
-      '(according to the IETF BCP47 guidelines)',
+      help_text='The name of the tagset language (according to the IETF BCP47 guidelines)',
       blank=True, max_length=150,
       choices=languagename_optgroup_choices(),)
 
