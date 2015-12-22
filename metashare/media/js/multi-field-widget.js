@@ -47,7 +47,6 @@ function add_container(widget_id) {
     var input = django.jQuery('#container_'+widget_id+'_'+id+' .input');
     // check if the container will manage language variants. We do this because
     //each selection determines the available options for the next selection
-    var isVariant = input.closest("div").attr("title") == "Variants";
 
     if (input.length === 0) {
         // First, we clone the empty_widget for this widget id and turn it
