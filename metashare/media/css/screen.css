@@ -660,15 +660,32 @@ div.split{
 
 div.attribution {
     display: block;
-    font-size: 14px;
-    background: #FFDDAA;
+    font-size: 12px;
+    background: #D1D1D1;
     border-bottom: solid 1px #ccc;
     border-left: solid 1px #ccc;
     color:#000;
     font-weight: normal;
-    display: inline-flex;
-    padding-left:2px;
+    padding: 1%;
     margin: 5px 0px 1.5em;
+}
+
+div.citation {
+    display: block;
+    background: #D1D1D1;
+    font-size: 12px;
+    color:#000;
+    margin: 5px 0px 1.5em;
+}
+
+div.citation span, div.citation label, div.citation label a {
+    font-size: 1em;
+    font-size: 12px;
+}
+
+div.citation label a {
+    font-size: 1em;
+    font-size: 12px;
 }
 
 /*table width*/
