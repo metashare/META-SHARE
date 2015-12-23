@@ -5,8 +5,8 @@
 {% with media_info=resource_component_dict.Resource_component_type %}
 	{% if type == "text" %}
 		{% for key, value in resource_component_dict.Resource_component_type.items %}
-			{% if "Media" in key %}
-				{% if "Corpus" in key and text_counts|length > 1 %}
+            {% if "Media" in key %}
+				{% if "corpus" in key and text_counts|length > 1 %}
 				<div class="textsubfields subfields">
 					<ul class="my-list">
 						{% for text in text_counts %}
