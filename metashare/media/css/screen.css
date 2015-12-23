@@ -667,7 +667,6 @@ div.attribution {
     color:#000;
     font-weight: normal;
     padding: 1%;
-    margin: 5px 0px 1.5em;
 }
 
 div.citation {
@@ -675,7 +674,8 @@ div.citation {
     background: #D1D1D1;
     font-size: 12px;
     color:#000;
-    margin: 5px 0px 1.5em;
+    padding: 1%;
+    margin-bottom: 1%;
 }
 
 div.citation span, div.citation label, div.citation label a {
