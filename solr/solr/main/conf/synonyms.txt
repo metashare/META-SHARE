@@ -11,9 +11,12 @@
 # limitations under the License.
 
 #-----------------------------------------------------------------------
-#some test synonym mappings unlikely to appear in real input text
-#aaafoo => aaabar
-#bbbfoo => bbbfoo bbbbar
-#cccfoo => cccbar cccbaz
-#fooaaa,baraaa,bazaaa
-#a\,a => b\,b
+coprus => corpus
+corpus, corpora, collection
+lexicon, dictionary
+terminological, term
+video, multimedia
+morphologically, tagged
+synactically, parsed, treebank
+lemmatizer, lemmatiser
+

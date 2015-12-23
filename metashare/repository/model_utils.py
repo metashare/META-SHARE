@@ -204,7 +204,8 @@ def get_resource_attribution_texts(res_obj):
     texts that are collected, are only in the default language
     """
     return [licence_info.get_default_attributionText() for licence_info in
-            res_obj.distributionInfo.licenceinfotype_model_set.iterator()]
+            res_obj.distributionInfo.licenceinfotype_model_set.iterator() \
+            if licence_info.get_default_attributionText()]
 
 def get_resource_media_types(res_obj):
     """

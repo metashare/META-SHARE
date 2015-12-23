@@ -161,7 +161,7 @@
 			{% endif %}
 			
 			{% if attribution_details %}
-             <div class="attribution"><label>Attibution details:</label> {{ attribution_details|join:"<br /> " }}
+             <div class="attribution"><label>Attibution details:</label> {{ attribution_details|join:"<br /> " }}</div>
             {% endif %}
             {% for key, value in documentation_dict.items %}
                 {% for key1, value1 in value.items %}
@@ -177,7 +177,7 @@
                     {% endfor %}
                 {% endfor %}
             {% endfor %}
-            </div>
+
 			{% if url %}
 			 	{% for address in url %}
 					<h3 style="font-size:14px;">
