@@ -82,17 +82,26 @@ div.resourceName>div.accessStats>img {
     margin: 0 0.25em 0 0.3em;
 }
 
-div.resourceName ul li {
-	list-style-type: none;
-	margin: 2px 2px 2px 2px;
-	padding: 1px 1px 1px 1px;
-	font-size: 7pt;
-	font-weight: bold;
-	color: #889;
-	background-color: #F5ECCE;
-	float: left;
-	border-radius: 5px 5px 5px 5px;
-	border:1px solid #bbc; 
+div.resourceName ul li.languages {
+    list-style-type: none;
+    margin: 2px 2px 2px 2px;
+    padding: 2px;
+    font-size: 7pt;
+    font-weight: bold;
+    color: #333;
+    background-color: #ebebeb;
+    float: left;
+    border-radius: 5px 5px 5px 5px;
+    border: 1px solid #bbc;
+}
+
+div.resourceName ul li.licence {
+    margin: -3px;
+    /*display:block;*/
+    /*padding: 2px;*/
+    list-style-type: none;
+    text-align: right;
+    /*float: right;*/
 }
 
 div.results {

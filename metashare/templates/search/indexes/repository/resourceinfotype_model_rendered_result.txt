@@ -1,4 +1,5 @@
 {% spaceless %}
+{% load resource_distribution %}
 {% load resource_languages %}
 {% load resource_media_types %}
 {% load resource_access_stats %}
@@ -21,6 +22,12 @@
 <ul>
   {% resource_languages object.resourceComponentType.as_subclass %}  
 </ul>
-
+<ul>
+   {% for l in object.distributionInfo.licenceinfotype_model_set.all %}
+   {% for licence in l.licence %}
+    <li class="licence">{{ licence|licence_icon|safe }}{% for c in l.restrictionsOfUse %}{{ c|condition_icon|safe }}{% endfor %}</li>
+    {% endfor %}
+   {% endfor %}
+</ul>
 </div>
 {% endspaceless %}
