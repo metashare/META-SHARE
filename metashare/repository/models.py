@@ -5311,7 +5311,7 @@ class imageClassificationInfoType_model(SchemaModel):
 class corpusTextNumericalInfoType_model(SchemaModel):
 
     class Meta:
-        verbose_name = "Corpus text numerical"
+        verbose_name = "Corpus numerical text component"
 
 
     __schema_name__ = 'corpusTextNumericalInfoType'
@@ -5475,7 +5475,7 @@ class textNumericalFormatInfoType_model(SchemaModel):
 class corpusTextNgramInfoType_model(SchemaModel):
 
     class Meta:
-        verbose_name = "Corpus text ngram"
+        verbose_name = "Corpus n-gram text component"
 
 
     __schema_name__ = 'corpusTextNgramInfoType'
@@ -7611,7 +7611,7 @@ class corpusInfoType_model(resourceComponentTypeType_model):
 class corpusMediaTypeType_model(SchemaModel):
 
     class Meta:
-        verbose_name = "Corpus media"
+        verbose_name = "Media type component of corpus"
 
 
     __schema_name__ = 'corpusMediaTypeType'
