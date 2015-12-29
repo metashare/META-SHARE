@@ -2829,7 +2829,8 @@ LICENCEINFOTYPE_RESTRICTIONSOFUSE_CHOICES = _make_choices_from_list([
   u'attribution', u'nonCommercialUse', u'commercialUse', u'shareAlike',
   u'noDerivatives',u'noRedistribution', u'evaluationUse', u'research',
   u'education',u'informLicensor', u'redeposit', u'compensate',
-  u'personalDataIncluded',u'sensitiveDataIncluded', u'other',
+  u'languageEngineeringResearch', u'requestPlan', u'spatialConstraint',
+  u'userIdentified', u'personalDataIncluded',u'sensitiveDataIncluded', u'other',
 ])
 
 LICENCEINFOTYPE_DISTRIBUTIONACCESSMEDIUM_CHOICES = _make_choices_from_list([
