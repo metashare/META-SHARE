@@ -8,6 +8,7 @@
 		<xs:annotation>
 			<xs:appinfo>
 				<render-short>{identificationInfo/resourceName}</render-short>
+				<label>Resource</label>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>

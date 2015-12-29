@@ -256,12 +256,16 @@
 						<xs:enumeration value="noRedistribution"/>
 						<xs:enumeration value="evaluationUse"/>
 						<xs:enumeration value="research"/>
+						<xs:enumeration value="languageEngineeringResearch"/>
 						<xs:enumeration value="education"/>
 						<xs:enumeration value="informLicensor"/>
 						<xs:enumeration value="redeposit"/>
 						<xs:enumeration value="compensate"/>
 						<xs:enumeration value="personalDataIncluded"/>
 						<xs:enumeration value="sensitiveDataIncluded"/>
+						<xs:enumeration value="requestPlan"/>
+						<xs:enumeration value="spatialConstraint"/>
+						<xs:enumeration value="userIdentified"/>
 						<xs:enumeration value="other"/>
 					</xs:restriction>
 				</xs:simpleType>

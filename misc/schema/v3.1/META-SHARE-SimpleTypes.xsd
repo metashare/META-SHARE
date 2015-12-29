@@ -754,13 +754,6 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="questionAnswering">
-					<xs:annotation>
-						<xs:appinfo>
-							<label>questionAnswering</label>
-						</xs:appinfo>
-					</xs:annotation>
-				</xs:enumeration>
 				<xs:enumeration value="readingAndWritingAidApplications">
 					<xs:annotation>
 						<xs:appinfo>

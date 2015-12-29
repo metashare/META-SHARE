@@ -8,6 +8,11 @@
 	<!-- definition of complex types -->
 	<!-- media type info TextInfo/imageInfo/AudioInfo/VideInfo etc-->
 	<xs:complexType name="characterEncodingInfoType">
+		<xs:annotation>
+			<xs:appinfo>
+				<label>Character encoding</label>
+			</xs:appinfo>
+		</xs:annotation>
 		<xs:sequence>
 			<xs:element ref="ms:characterEncoding">
 				<xs:annotation>
@@ -40,6 +45,11 @@
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="timeCoverageInfoType">
+		<xs:annotation>
+			<xs:appinfo>
+				<label>Time coverage</label>
+			</xs:appinfo>
+		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="timeCoverage">
 				<xs:annotation>
@@ -98,6 +108,7 @@
 		<xs:annotation>
 			<xs:appinfo>
 				<render-short>{lingualityType}</render-short>
+				<label>Linguality</label>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
