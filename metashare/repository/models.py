@@ -2719,7 +2719,7 @@ class distributionInfoType_model(SchemaModel):
     __schema_name__ = 'distributionInfoType'
     __schema_fields__ = (
       ( u'availability', u'availability', REQUIRED ),
-      ( u'licenceInfo', u'licenceinfotype_model_set', OPTIONAL ),
+      ( u'licenceInfo', u'licenceinfotype_model_set', REQUIRED ),
       ( 'iprHolder/personInfo', 'iprHolder', OPTIONAL ),
       ( 'iprHolder/organizationInfo', 'iprHolder', OPTIONAL ),
       ( u'availabilityEndDate', u'availabilityEndDate', OPTIONAL ),
