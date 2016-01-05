@@ -134,7 +134,7 @@ class MetashareMyDriver(MyDriver):
     def __init__(self):
         driver = getattr(webdriver, dj_settings.SELENIUM_DRIVER, None)
         assert driver, "dj_settings.SELENIUM_DRIVER contains non-existing driver"
-        driver_opts = getattr(dj_settings, "SELENIUM_DRIVER_OPTS", dict())
+        driver_opts = getattr(settings, "SELENIUM_DRIVER_OPTS", dict())
         if "firefox_profile" in driver_opts.keys():
             driver_opts["firefox_profile"] = webdriver.FirefoxProfile(driver_opts["firefox_profile"])
         if driver is webdriver.Remote:
