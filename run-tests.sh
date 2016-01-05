@@ -17,7 +17,9 @@ if [ "$LOCAL_TEST" = "no" ]; then
 fi
 
 ./misc/test-ci/run-testsuite.sh || exit 1
-./misc/test-ci/run-testsuite.sh --selenium-only || exit 1
+if [ "$LOCAL_TEST" = "no" ]; then
+  ./misc/test-ci/run-testsuite.sh --selenium-only || exit 1
+fi
 ./misc/test-ci/multitest.sh || exit 1
 
 if [ "$LOCAL_TEST" = "no" ]; then
