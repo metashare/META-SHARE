@@ -49,7 +49,7 @@ fi
 # Initialize database
 rm -f metashare/testing.db
 source venv/bin/activate || exit 1
-pip install coverage==3.7.1 || exit 1
+pip install coverage || exit 1
 
 if [ "x$PYTHONWARNINGS" = "x" ]; then
     export PYTHONWARNINGS="d"
@@ -62,7 +62,7 @@ rm metashare/initial_data.json || exit 1
 # Run testsuite:
 metashare/start-solr.sh || exit 1
 sleep 10
-coverage run -a manage.py jenkins $@ repository storage accounts sync stats || exit 1
+coverage run -a manage.py test $@ repository storage accounts sync stats || exit 1
 deactivate || exit 1
 metashare/stop-solr.sh || exit 1
 
