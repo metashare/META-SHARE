@@ -14,6 +14,7 @@ export TESTINGSCHEMAFILE=$SOLR_ROOT/solr/testing/conf/schema.xml
 echo "Checking for a previous running SOLR server..."
 "$METASHAREDIR/stop-solr-win.sh"
 
+sleep 5
 
 # Update schema.xml files, just in case:
 python "$(cygpath -w $METASHAREDIR/manage.py)" build_solr_schema --filename="$(cygpath -w "$MAINSCHEMAFILE")"

@@ -15,6 +15,7 @@ export TESTINGSCHEMAFILE=$SOLR_ROOT/solr/testing/conf/schema.xml
 echo "Checking for a previous running SOLR server..."
 "$METASHAREDIR/stop-solr.sh"
 
+sleep 5
 
 # Update schema.xml files, just in case:
 source "${METASHAREDIR}/../venv/bin/activate"
