@@ -67,15 +67,17 @@ TEST_LIST="test_sync_inner test_sync_outer test_del_inner test_del_outer"
 
 run_tests()
 {
-	REPORT="$REPORT_DIR/${TESTSUITE_NAME}_report.xml"
-	STDOUT="$REPORT_DIR/${TESTSUITE_NAME}_stdout.log"
-	STDERR="$REPORT_DIR/${TESTSUITE_NAME}_stderr.log"
-	DETAILS="$REPORT_DIR/${TESTSUITE_NAME}_details.log"
-	CLASSNAME="Sync"
+	REPORT="$REPORT_DIR/TEST-${TESTSUITE_NAME}_report.xml"
+	STDOUT="$REPORT_DIR/TEST-${TESTSUITE_NAME}_stdout.log"
+	STDERR="$REPORT_DIR/TEST-${TESTSUITE_NAME}_stderr.log"
+	DETAILS="$REPORT_DIR/TEST-${TESTSUITE_NAME}_details.log"
+	CLASSNAME="sync.${TESTSUITE_NAME}"
 
 	echo -n > "$STDOUT"
 	echo -n > "$STDERR"
-	echo "<testsuite name=\"$TESTSUITE_NAME\">" > "$REPORT"
+	echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>" > "$REPORT"
+	echo "<testsuites>" >> "$REPORT"
+	echo "<testsuite name=\"$TESTSUITE_NAME\">" >> "$REPORT"
 	TOTAL=0
 	SUCCESS=0
 	echo "Running tests."
@@ -110,6 +112,7 @@ run_tests()
 	cat "$STDERR" >> "$REPORT"
 	echo "]]></system-err>" >> "$REPORT"
 	echo "</testsuite>" >> "$REPORT"
+	echo "</testsuites>" >> "$REPORT"
 
 	tearDown 1>>"$STDOUT" 2>>"$STDERR"
         if [ $TOTAL != $SUCCESS ]; then

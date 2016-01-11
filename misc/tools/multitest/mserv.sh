@@ -208,6 +208,15 @@ while get_node_info $counter NODE_NAME &> /dev/null ; do
 			exit $ret_val
 		fi
 	else
+		# Restore the original settings.py
+		cp $MSERV_DIR/init_data/settings_original.py $METASHARE_DIR/settings.py
+		ret_val=$?
+		if [[ $ret_val -ne 0 ]] ; then
+			if [[ "$DET_FILE" != "" ]] ; then
+				echo -n "Cannot restore settings.py" >> "$DET_FILE"
+			fi
+			exit $ret_val
+		fi
 		rm -r "$TEST_DIR/$NODE_NAME"
 		ret_val=$?
 		if [[ $ret_val -ne 0 ]] ; then
