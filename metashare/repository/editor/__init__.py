@@ -53,7 +53,7 @@ class MetashareBackendSite(AdminSite):
     logout_template = 'repository/editor/logged_out.html'
 
     def get_urls(self):
-        from django.conf.urls.defaults import patterns, url
+        from django.conf.urls import patterns, url
 
         urls = super(MetashareBackendSite, self).get_urls()
         urls = patterns('',
@@ -113,7 +113,6 @@ class MetashareBackendSite(AdminSite):
           'title': _('Upload new resource description(s)'),
           'form': form,
           'form_url': request.path,
-          'root_path': self.root_path,
         }
         context.update(extra_context or {})
         context_instance = template.RequestContext(request, current_app=self.name)

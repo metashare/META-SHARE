@@ -1,10 +1,11 @@
 #!/bin/bash
 
-THIS_DIR=$(dirname "$0")
-. "${THIS_DIR}/setvars.sh"
-. "${THIS_DIR}/_meta_dir.sh"
-. "${THIS_DIR}/_python.sh"
-cd "$MSERV_DIR"
+# Assume it is being called from base metashare directory
+# MSERV_DIR is the directory where this script lives
+MSERV_DIR=$(readlink -f $(dirname "$0"))
+. "${MSERV_DIR}/setvars.sh"
+. "${MSERV_DIR}/_meta_dir.sh"
+. "${MSERV_DIR}/_python.sh"
 
 TESTSUITE_NAME="MultiNodeServerTest"
 
@@ -20,7 +21,6 @@ tearDown()
 
 test_start()
 {
-	cd "$MSERV_DIR"
 	local DET_FILE=`tempfile`
 	"$MSERV_DIR"/mserv.sh --det-file "$DET_FILE" start
 	local ret_val=$?
@@ -32,7 +32,6 @@ test_start()
 
 test_stop()
 {
-	cd "$MSERV_DIR"
 	local DET_FILE=`tempfile`
 	"$MSERV_DIR"/mserv.sh --det-file "$DET_FILE" stop
 	local ret_val=$?
@@ -44,7 +43,6 @@ test_stop()
 
 test_clean()
 {
-	cd "$MSERV_DIR"
 	local DET_FILE=`tempfile`
 	"$MSERV_DIR"/mserv.sh --det-file "$DET_FILE" clean
 	local ret_val=$?
@@ -103,6 +101,9 @@ run_tests()
 	echo "</testsuite>" >> "$REPORT"
 
 	tearDown 1>>"$STDOUT" 2>>"$STDERR"
+        if [ $TOTAL != $SUCCESS ]; then
+           exit 1
+        fi
 }
 
 METASHARE_DIR="$METASHARE_SW_DIR/metashare"

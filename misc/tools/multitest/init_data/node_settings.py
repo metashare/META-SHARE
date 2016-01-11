@@ -8,6 +8,8 @@ DJANGO_URL = 'http://localhost:{0}/metashare'.format(%%DJANGO_PORT%%)
 
 DJANGO_BASE = 'metashare/'
 
+SECRET_KEY = 'fdklsc)dscdus8f7odc$slacud%%8so7cwp2fsFDASFWR/REFEsfjskdcjsdl3W'
+
 #STORAGE_PATH = ROOT_PATH + '/storageFolder'
 STORAGE_PATH = '%%STORAGE_PATH%%'
 

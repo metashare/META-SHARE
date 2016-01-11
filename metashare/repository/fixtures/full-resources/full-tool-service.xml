@@ -8,7 +8,7 @@
     <resourceShortName lang="el">InfoBeaver</resourceShortName>
     <resourceShortName lang="en">BeaverInfo</resourceShortName>
     <url>http://cesar.matf.bg.ac.rs/</url>
-    <url>www.google.com</url>
+    <url>http://www.google.com</url>
     <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
     <identifier>606</identifier>
     <identifier>707</identifier>
@@ -22,10 +22,10 @@
       <restrictionsOfUse>commercialUse</restrictionsOfUse>
       <distributionAccessMedium>bluRay</distributionAccessMedium>
       <distributionAccessMedium>webExecutable</distributionAccessMedium>
-      <downloadLocation>www.google.com</downloadLocation>
-      <downloadLocation>www.aueb.gr</downloadLocation>
+      <downloadLocation>http://www.google.com</downloadLocation>
+      <downloadLocation>http://www.aueb.gr</downloadLocation>
       <executionLocation>http://www.korpus.matf.bg.ac.rs/InfoBeaver/</executionLocation>
-      <executionLocation>www.google.com</executionLocation>
+      <executionLocation>http://www.google.com</executionLocation>
       <fee>no price</fee>
       <attributionText lang="en">BLA</attributionText>
       <licensor>
@@ -138,8 +138,8 @@
       <licence>ApacheLicence_2.0</licence>
       <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
       <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
-      <downloadLocation>www.google.com</downloadLocation>
-      <executionLocation>www.google.com</executionLocation>
+      <downloadLocation>http://www.google.com</downloadLocation>
+      <executionLocation>http://www.google.com</executionLocation>
       <fee>500 euros</fee>
       <attributionText lang="en">BLABLA</attributionText>
       <licensor>
@@ -207,8 +207,8 @@
       <licence>ApacheLicence_2.0</licence>
       <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
       <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
-      <downloadLocation>www.google.com</downloadLocation>
-      <executionLocation>www.aueb.gr</executionLocation>
+      <downloadLocation>http://www.google.com</downloadLocation>
+      <executionLocation>http://www.aueb.gr</executionLocation>
       <fee>500 Euros</fee>
       <attributionText lang="en">TEXT-ATTRIBUTION</attributionText>
       <licensor>
@@ -392,7 +392,7 @@
     </metadataCreator>
     <source>CESAR</source>
     <originalMetadataSchema>MET-SHARE</originalMetadataSchema>
-    <originalMetadataLink>www.meta-share.org</originalMetadataLink>
+    <originalMetadataLink>http://www.meta-share.org</originalMetadataLink>
     <metadataLanguageName>English</metadataLanguageName>
     <metadataLanguageName>Greek</metadataLanguageName>
     <metadataLanguageId>en-us</metadataLanguageId>
@@ -577,7 +577,7 @@
       </documentInfo>
     </documentation>
     <samplesLocation>http://www.korpus.matf.bg.ac.rs/InfoBeaver/demo/</samplesLocation>
-    <samplesLocation>www.google.com</samplesLocation>
+    <samplesLocation>http://www.google.com</samplesLocation>
     <toolDocumentationType>helpFunctions</toolDocumentationType>
     <toolDocumentationType>manual</toolDocumentationType>
     <toolDocumentationType>none</toolDocumentationType>
@@ -639,7 +639,7 @@
       <projectName lang="en">ACCURAT: Analysis and evaluation of Comparable Corpora for Under Resourced Areas of machine Translation</projectName>
       <projectShortName lang="en">ACCURAT</projectShortName>
       <projectID>FP7-ICT-248347</projectID>
-      <url>www.accurat-project.eu</url>
+      <url>http://www.accurat-project.eu</url>
       <fundingType>euFunds</fundingType>
       <funder>FP7-ICT</funder>
       <projectStartDate>2010-01-01</projectStartDate>

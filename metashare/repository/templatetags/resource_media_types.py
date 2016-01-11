@@ -3,7 +3,7 @@ from django import template
 from metashare.repository.models import corpusInfoType_model, \
     toolServiceInfoType_model, lexicalConceptualResourceInfoType_model, \
     languageDescriptionInfoType_model
-from metashare.settings import MEDIA_URL
+from metashare.settings import STATIC_URL
 
 register = template.Library()
 
@@ -78,29 +78,29 @@ class ResourceMediaTypes(template.Node):
         # use images instead of plain text when displaying media types
         image_tag = ""
         if "text" in result:
-            image_tag = ' <img title="text" src="{}css/sexybuttons/images/icons/silk/page' \
+            image_tag = ' <img title="text" src="{}metashare/css/sexybuttons/images/icons/silk/page' \
               '_white_text_media_type.png" /> &nbsp;' \
-              .format(MEDIA_URL)
+              .format(STATIC_URL)
         if "audio" in result:
-            image_tag = image_tag + ' <img title="audio" src="{}css/sexybuttons/images/' \
+            image_tag = image_tag + ' <img title="audio" src="{}metashare/css/sexybuttons/images/' \
               'icons/silk/sound_none.png" /> &nbsp; ' \
-              .format(MEDIA_URL)
+              .format(STATIC_URL)
         if "image" in result:
-            image_tag = image_tag + ' <img title="image" src="{}css/sexybuttons/images/' \
+            image_tag = image_tag + ' <img title="image" src="{}metashare/css/sexybuttons/images/' \
               'icons/silk/picture.png" /> &nbsp; ' \
-              .format(MEDIA_URL)
+              .format(STATIC_URL)
         if "video" in result:
-            image_tag = image_tag + ' <img title="video" src="{}css/sexybuttons/images/' \
+            image_tag = image_tag + ' <img title="video" src="{}metashare/css/sexybuttons/images/' \
               'icons/silk/film.png" />' \
-              .format(MEDIA_URL)
+              .format(STATIC_URL)
         if "textNumerical" in result:
-            image_tag = image_tag + ' <img title="textNumerical" src="{}css/sexybuttons/images/' \
+            image_tag = image_tag + ' <img title="textNumerical" src="{}metashare/css/sexybuttons/images/' \
               'icons/silk/eye.png" />' \
-              .format(MEDIA_URL)
+              .format(STATIC_URL)
         if "textNgram" in result:
-            image_tag = image_tag + ' <img title="textNgram" src="{}css/sexybuttons/images/' \
+            image_tag = image_tag + ' <img title="textNgram" src="{}metashare/css/sexybuttons/images/' \
               'icons/silk/text_align_left.png" />' \
-              .format(MEDIA_URL)
+              .format(STATIC_URL)
 
         return image_tag
 

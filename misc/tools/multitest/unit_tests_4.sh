@@ -1,16 +1,16 @@
 #!/bin/bash
 
-THIS_DIR=$(dirname "$0")
-. "${THIS_DIR}/setvars.sh"
-. "${THIS_DIR}/_meta_dir.sh"
-. "${THIS_DIR}/_python.sh"
-cd "$MSERV_DIR"
+# Assume it is being called from base metashare directory
+# MSERV_DIR is the directory where this script lives
+MSERV_DIR=$(readlink -f $(dirname "$0"))
+. "${MSERV_DIR}/setvars.sh"
+. "${MSERV_DIR}/_meta_dir.sh"
+. "${MSERV_DIR}/_python.sh"
 
 TESTSUITE_NAME="CoreNodesSync"
 
 setUp()
 {
-	cd "$MSERV_DIR"
 	"$MSERV_DIR"/mserv.sh start
 	local ret_val=$?
 	return $ret_val
@@ -18,7 +18,6 @@ setUp()
 
 tearDown()
 {
-	cd "$MSERV_DIR"
 	"$MSERV_DIR"/mserv.sh stop
 	local ret_val=$?
 
@@ -26,7 +25,6 @@ tearDown()
 		return $ret_val
 	fi
 
-	cd "$MSERV_DIR"
 	"$MSERV_DIR"/mserv.sh clean
 	local ret_val=$?
 
@@ -35,7 +33,6 @@ tearDown()
 
 test_sync_core_nodes()
 {
-	cd "$MSERV_DIR"
 	"$MSERV_DIR/test_sync_ic.sh"
 	local ret_val=$?
 	return $ret_val
@@ -90,6 +87,9 @@ run_tests()
 	echo "</testsuite>" >> "$REPORT"
 
 	tearDown 1>>"$STDOUT" 2>>"$STDERR"
+        if [ $TOTAL != $SUCCESS ]; then
+           exit 1
+        fi
 }
 
 METASHARE_DIR="$METASHARE_SW_DIR/metashare"
