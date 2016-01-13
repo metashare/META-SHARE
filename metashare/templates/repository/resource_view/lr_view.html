@@ -41,7 +41,7 @@
 	            fixedArrows: false,
 	            arrowsOpacity: 0.8,
 	            width: 273,
-	            height:24,
+	            height:24
         	});	
 		
 			$(".tab_content").hide();
@@ -161,7 +161,7 @@
 			{% endif %}
 			
 			{% if attribution_details %}
-             <div class="attribution"><label>Attibution details:</label> {{ attribution_details|join:"<br /> " }}</div>
+             <div class="attribution"><label>Attribution details:</label> {{            attribution_details|join:"<br /> " }}</div>
             {% endif %}
             {% for key, value in documentation_dict.items %}
                 {% for key1, value1 in value.items %}
