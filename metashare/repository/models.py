@@ -85,7 +85,7 @@ class resourceInfoType_model(SchemaModel):
     __schema_name__ = 'resourceInfo'
     __schema_fields__ = (
       ( u'identificationInfo', u'identificationInfo', REQUIRED ),
-      ( u'distributionInfo', u'distributionInfo', REQUIRED ),
+      ( u'distributionInfo', u'distributioninfotype_model_set', REQUIRED ),
       ( u'contactPerson', u'contactPerson', REQUIRED ),
       ( u'metadataInfo', u'metadataInfo', REQUIRED ),
       ( u'versionInfo', u'versionInfo', RECOMMENDED ),
@@ -122,10 +122,7 @@ class resourceInfoType_model(SchemaModel):
       'urce',
       )
 
-    distributionInfo = models.OneToOneField("distributionInfoType_model",
-      verbose_name='Distribution',
-      help_text='Groups information on the distribution of the resource',
-      )
+    # OneToMany field: distributionInfo
 
     contactPerson = models.ManyToManyField("personInfoType_model",
       verbose_name='Contact person',
@@ -2416,6 +2413,7 @@ class communicationInfoType_model(SchemaModel):
       ( u'city', u'city', OPTIONAL ),
       ( u'region', u'region', OPTIONAL ),
       ( u'country', u'country', OPTIONAL ),
+      ( u'countryId', u'countryId', OPTIONAL ),
       ( u'telephoneNumber', u'telephoneNumber', OPTIONAL ),
       ( u'faxNumber', u'faxNumber', OPTIONAL ),
     )
@@ -2709,6 +2707,15 @@ DISTRIBUTIONINFOTYPE_AVAILABILITY_CHOICES = _make_choices_from_list([
   u'available', u'availableThroughOtherDistributor', u'underNegotiation',
 ])
 
+DISTRIBUTIONINFOTYPE_DISTRIBUTIONACCESSMEDIUM_CHOICES = _make_choices_from_list([
+  u'webExecutable', u'paperCopy', u'hardDisk', u'bluRay', u'DVD-R',
+  u'CD-ROM',u'downloadable', u'accessibleThroughInterface', u'other',
+])
+
+DISTRIBUTIONINFOTYPE_USERNATURE_CHOICES = _make_choices_from_list([
+  u'academic', u'commercial',
+])
+
 # pylint: disable-msg=C0103
 class distributionInfoType_model(SchemaModel):
 
@@ -2719,14 +2726,26 @@ class distributionInfoType_model(SchemaModel):
     __schema_name__ = 'distributionInfoType'
     __schema_fields__ = (
       ( u'availability', u'availability', REQUIRED ),
-      ( u'licenceInfo', u'licenceinfotype_model_set', REQUIRED ),
+      ( u'licenceInfo', u'licenceInfo', REQUIRED ),
+      ( u'distributionAccessMedium', u'distributionAccessMedium', RECOMMENDED ),
+      ( u'downloadLocation', u'downloadLocation', OPTIONAL ),
+      ( u'executionLocation', u'executionLocation', OPTIONAL ),
+      ( u'attributionText', u'attributionText', OPTIONAL ),
+      ( u'fee', u'fee', OPTIONAL ),
+      ( 'licensor/personInfo', 'licensor', RECOMMENDED ),
+      ( 'licensor/organizationInfo', 'licensor', RECOMMENDED ),
+      ( 'distributionRightsHolder/personInfo', 'distributionRightsHolder', RECOMMENDED ),
+      ( 'distributionRightsHolder/organizationInfo', 'distributionRightsHolder', RECOMMENDED ),
       ( 'iprHolder/personInfo', 'iprHolder', OPTIONAL ),
       ( 'iprHolder/organizationInfo', 'iprHolder', OPTIONAL ),
+      ( u'userNature', u'userNature', OPTIONAL ),
+      ( u'membershipInfo', u'membershipInfo', OPTIONAL ),
       ( u'availabilityEndDate', u'availabilityEndDate', OPTIONAL ),
       ( u'availabilityStartDate', u'availabilityStartDate', OPTIONAL ),
     )
     __schema_classes__ = {
       u'licenceInfo': "licenceInfoType_model",
+      u'membershipInfo': "membershipInfoType_model",
       u'organizationInfo': "organizationInfoType_model",
       u'personInfo': "personInfoType_model",
     }
@@ -2742,7 +2761,82 @@ class distributionInfoType_model(SchemaModel):
                      key=lambda choice: choice[1].lower()),
       )
 
-    # OneToMany field: licenceInfo
+    licenceInfo = models.ManyToManyField("licenceInfoType_model",
+      verbose_name='Licence',
+      help_text='Groups information on licences for the resource; can be' \
+      ' repeated to allow for different modes of access and restrictions' \
+      ' of use (e.g. free for academic use, on-a-fee basis for commercia' \
+      'l use, download of a sample for free use etc.)',
+      related_name="licenceInfo_%(class)s_related", )
+
+    distributionAccessMedium = MultiSelectField(
+      verbose_name='Distribution / Access medium',
+      help_text='Specifies the medium (channel) used for delivery or pro' \
+      'viding access to the resource',
+      blank=True,
+      max_length=1 + len(DISTRIBUTIONINFOTYPE_DISTRIBUTIONACCESSMEDIUM_CHOICES['choices']) / 4,
+      choices=DISTRIBUTIONINFOTYPE_DISTRIBUTIONACCESSMEDIUM_CHOICES['choices'],
+      )
+
+    downloadLocation = MultiTextField(max_length=150, widget=MultiFieldWidget(widget_id=17, max_length=150),
+      verbose_name='Download location', validators=[HTTPURI_VALIDATOR],
+      help_text='Any url where the resource can be downloaded from; plea' \
+      'se, use if the resource is "downloadable" and you have not upload' \
+      'ed the resource in the repository',
+      blank=True, )
+
+    executionLocation = MultiTextField(max_length=150, widget=MultiFieldWidget(widget_id=18, max_length=150),
+      verbose_name='Execution location', validators=[HTTPURI_VALIDATOR],
+      help_text=' Any url where the service providing access to a resour' \
+      'ce is being executed; please use for resources that are "accessib' \
+      'leThroughInterface" or "webExecutable" ',
+      blank=True, )
+
+    attributionText = DictField(validators=[validate_lang_code_keys, validate_dict_values],
+      default_retriever=best_lang_value_retriever,
+      verbose_name='Attribution text',
+      max_val_length=1000,
+      help_text=' The text that must be quoted for attribution purposes ' \
+      'when using a resource - for cases where a resource is provided wi' \
+      'th a restriction on attribution; you can use a standard text such' \
+      ' as "Resource A by Resource Creator/Owner B used under licence C ' \
+      'as accessed at D" ',
+      blank=True)
+
+    fee = XmlCharField(
+      verbose_name='Fee',
+      help_text='Specifies the costs that are required to access the res' \
+      'ource, a fragment of the resource or to use a tool or service',
+      blank=True, max_length=100, )
+
+    licensor = models.ManyToManyField("actorInfoType_model",
+      verbose_name='Licensor',
+      help_text='Groups information on the person who is legally eligibl' \
+      'e to licence and actually licenses the resource. The licensor cou' \
+      'ld be different from the creator, the distributor or the IP right' \
+      'sholder. The licensor has the necessary rights or licences to lic' \
+      'ense the work and is the party that actually licenses the resourc' \
+      'e that enters the META-SHARE network. She will have obtained the ' \
+      'necessary rights or licences from the IPR holder and she may have' \
+      ' a distribution agreement with a distributor that disseminates th' \
+      'e work under a set of conditions defined in the specific licence ' \
+      'and collects revenue on the licensor\'s behalf. The attribution o' \
+      'f the creator, separately from the attribution of the licensor, m' \
+      'ay be part of the licence under which the resource is distributed' \
+      ' (as e.g. is the case with Creative Commons Licences)',
+      blank=True, null=True, related_name="licensor_%(class)s_related", )
+
+    distributionRightsHolder = models.ManyToManyField("actorInfoType_model",
+      verbose_name='Distribution rights holder',
+      help_text='Groups information on a person or an organization that ' \
+      'holds the distribution rights. The range and scope of distributio' \
+      'n rights is defined in the distribution agreement. The distributo' \
+      'r in most cases only has a limited licence to distribute the work' \
+      ' and collect royalties on behalf of the licensor or the IPR holde' \
+      'r and cannot give to any recipient of the work permissions that e' \
+      'xceed the scope of the distribution agreement (e.g. to allow uses' \
+      ' of the work that are not defined in the distribution agreement)',
+      blank=True, null=True, related_name="distributionRightsHolder_%(class)s_related", )
 
     iprHolder = models.ManyToManyField("actorInfoType_model",
       verbose_name='IPR holder',
@@ -2755,6 +2849,19 @@ class distributionInfoType_model(SchemaModel):
       'pecific licence (i.e. a permission) to distribute the work within' \
       ' the META-SHARE network.',
       blank=True, null=True, related_name="iprHolder_%(class)s_related", )
+
+    userNature = MultiSelectField(
+      verbose_name='User nature',
+      help_text='The conditions imposed by the nature of the user (for i' \
+      'nstance, a research use may have different implications depending' \
+      ' on this)',
+      blank=True,
+      max_length=1 + len(DISTRIBUTIONINFOTYPE_USERNATURE_CHOICES['choices']) / 4,
+      choices=DISTRIBUTIONINFOTYPE_USERNATURE_CHOICES['choices'],
+      )
+
+    membershipInfo = models.ManyToManyField("membershipInfoType_model",
+      verbose_name='Membership', blank=True, null=True, related_name="membershipInfo_%(class)s_related", )
 
     availabilityEndDate = models.DateField(
       verbose_name='Availability end date',
@@ -2769,6 +2876,8 @@ class distributionInfoType_model(SchemaModel):
       '- only for cases where a resource is available for a restricted t' \
       'ime period.',
       blank=True, null=True, )
+
+    back_to_resourceinfotype_model = models.ForeignKey("resourceInfoType_model",  blank=True, null=True)
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
@@ -2825,22 +2934,19 @@ LICENCEINFOTYPE_LICENCE_CHOICES = _make_choices_from_list([
   u'underNegotiation',u'nonStandardLicenceTerms',
 ])
 
+LICENCEINFOTYPE_VERSION_CHOICES = _make_choices_from_list([
+  u'1.0', u'2.0', u'3.0', u'4.0',
+])
+
 LICENCEINFOTYPE_RESTRICTIONSOFUSE_CHOICES = _make_choices_from_list([
   u'attribution', u'nonCommercialUse', u'commercialUse', u'shareAlike',
   u'noDerivatives',u'noRedistribution', u'evaluationUse', u'research',
-  u'education',u'informLicensor', u'redeposit', u'compensate',
-  u'languageEngineeringResearch', u'requestPlan', u'spatialConstraint',
-  u'userIdentified', u'personalDataIncluded',u'sensitiveDataIncluded', u'other',
+  u'languageEngineeringResearch',u'education', u'informLicensor',
+  u'redeposit',u'compensate', u'personalDataIncluded',
+  u'sensitiveDataIncluded',u'requestPlan', u'spatialConstraint',
+  u'userIdentified',u'other',
 ])
 
-LICENCEINFOTYPE_DISTRIBUTIONACCESSMEDIUM_CHOICES = _make_choices_from_list([
-  u'webExecutable', u'paperCopy', u'hardDisk', u'bluRay', u'DVD-R',
-  u'CD-ROM',u'downloadable', u'accessibleThroughInterface', u'other',
-])
-
-LICENCEINFOTYPE_USERNATURE_CHOICES = _make_choices_from_list([
-  u'academic', u'commercial',
-])
 
 # pylint: disable-msg=C0103
 class licenceInfoType_model(SchemaModel):
@@ -2852,35 +2958,30 @@ class licenceInfoType_model(SchemaModel):
     __schema_name__ = 'licenceInfoType'
     __schema_fields__ = (
       ( u'licence', u'licence', REQUIRED ),
+      ( u'version', u'version', OPTIONAL ),
       ( u'nonStandardLicenceName', u'nonStandardLicenceName', OPTIONAL ),
       ( u'nonStandardLicenceTermsURL', u'nonStandardLicenceTermsURL', OPTIONAL ),
       ( u'nonStandaradLicenceTermsText', u'nonStandaradLicenceTermsText', OPTIONAL ),
       ( u'restrictionsOfUse', u'restrictionsOfUse', OPTIONAL ),
-      ( u'distributionAccessMedium', u'distributionAccessMedium', RECOMMENDED ),
-      ( u'downloadLocation', u'downloadLocation', OPTIONAL ),
-      ( u'executionLocation', u'executionLocation', OPTIONAL ),
-      ( u'attributionText', u'attributionText', OPTIONAL ),
-      ( u'fee', u'fee', OPTIONAL ),
-      ( 'licensor/personInfo', 'licensor', RECOMMENDED ),
-      ( 'licensor/organizationInfo', 'licensor', RECOMMENDED ),
-      ( 'distributionRightsHolder/personInfo', 'distributionRightsHolder', RECOMMENDED ),
-      ( 'distributionRightsHolder/organizationInfo', 'distributionRightsHolder', RECOMMENDED ),
-      ( u'userNature', u'userNature', OPTIONAL ),
-      ( u'membershipInfo', u'membershipInfo', OPTIONAL ),
     )
-    __schema_classes__ = {
-      u'membershipInfo': "membershipInfoType_model",
-      u'organizationInfo': "organizationInfoType_model",
-      u'personInfo': "personInfoType_model",
-    }
 
-    licence = MultiSelectField(
+    licence = models.CharField(
       verbose_name='Licence',
       help_text='The licence of use for the resource; if possible, pleas' \
       'e use one of the recommended standard licences',
 
-      max_length=1 + len(LICENCEINFOTYPE_LICENCE_CHOICES['choices']) / 4,
-      choices=LICENCEINFOTYPE_LICENCE_CHOICES['choices'],
+      max_length=100,
+      choices=sorted(LICENCEINFOTYPE_LICENCE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
+      )
+
+    version = models.CharField(
+      verbose_name='Version',
+      help_text='The version of the licence; the preferred options are "' \
+      '4.0" for all CC-licences and "2.0" for the META-SHARE-NoReD ones',
+      blank=True,
+      max_length=LICENCEINFOTYPE_VERSION_CHOICES['max_length'],
+      choices=LICENCEINFOTYPE_VERSION_CHOICES['choices'],
       )
 
     nonStandardLicenceName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
@@ -2917,88 +3018,6 @@ class licenceInfoType_model(SchemaModel):
       max_length=1 + len(LICENCEINFOTYPE_RESTRICTIONSOFUSE_CHOICES['choices']) / 4,
       choices=LICENCEINFOTYPE_RESTRICTIONSOFUSE_CHOICES['choices'],
       )
-
-    distributionAccessMedium = MultiSelectField(
-      verbose_name='Distribution / Access medium',
-      help_text='Specifies the medium (channel) used for delivery or pro' \
-      'viding access to the resource',
-      blank=True,
-      max_length=1 + len(LICENCEINFOTYPE_DISTRIBUTIONACCESSMEDIUM_CHOICES['choices']) / 4,
-      choices=LICENCEINFOTYPE_DISTRIBUTIONACCESSMEDIUM_CHOICES['choices'],
-      )
-
-    downloadLocation = MultiTextField(max_length=150, widget=MultiFieldWidget(widget_id=18, max_length=150),
-      verbose_name='Download location', validators=[HTTPURI_VALIDATOR],
-      help_text='Any url where the resource can be downloaded from; plea' \
-      'se, use if the resource is "downloadable" and you have not upload' \
-      'ed the resource in the repository',
-      blank=True, )
-
-    executionLocation = MultiTextField(max_length=150, widget=MultiFieldWidget(widget_id=19, max_length=150),
-      verbose_name='Execution location', validators=[HTTPURI_VALIDATOR],
-      help_text=' Any url where the service providing access to a resour' \
-      'ce is being executed; please use for resources that are "accessib' \
-      'leThroughInterface" or "webExecutable" ',
-      blank=True, )
-
-    attributionText = DictField(validators=[validate_lang_code_keys, validate_dict_values],
-      default_retriever=best_lang_value_retriever,
-      verbose_name='Attribution text',
-      max_val_length=1000,
-      help_text=' The text that must be quoted for attribution purposes ' \
-      'when using a resource - for cases where a resource is provided wi' \
-      'th a restriction on attribution; you can use a standard text such' \
-      ' as "Resource A by Resource Creator/Owner B used under licence C ' \
-      'as accessed at D" ',
-      blank=True)
-
-    fee = XmlCharField(
-      verbose_name='Fee',
-      help_text='Specifies the costs that are required to access the res' \
-      'ource, a fragment of the resource or to use a tool or service',
-      blank=True, max_length=100, )
-
-    licensor = models.ManyToManyField("actorInfoType_model",
-      verbose_name='Licensor',
-      help_text='Groups information on the person who is legally eligibl' \
-      'e to licence and actually licenses the resource. The licensor cou' \
-      'ld be different from the creator, the distributor or the IP right' \
-      'sholder. The licensor has the necessary rights or licences to lic' \
-      'ense the work and is the party that actually licenses the resourc' \
-      'e that enters the META-SHARE network. She will have obtained the ' \
-      'necessary rights or licences from the IPR holder and she may have' \
-      ' a distribution agreement with a distributor that disseminates th' \
-      'e work under a set of conditions defined in the specific licence ' \
-      'and collects revenue on the licensor\'s behalf. The attribution o' \
-      'f the creator, separately from the attribution of the licensor, m' \
-      'ay be part of the licence under which the resource is distributed' \
-      ' (as e.g. is the case with Creative Commons Licences)',
-      blank=True, null=True, related_name="licensor_%(class)s_related", )
-
-    distributionRightsHolder = models.ManyToManyField("actorInfoType_model",
-      verbose_name='Distribution rights holder',
-      help_text='Groups information on a person or an organization that ' \
-      'holds the distribution rights. The range and scope of distributio' \
-      'n rights is defined in the distribution agreement. The distributo' \
-      'r in most cases only has a limited licence to distribute the work' \
-      ' and collect royalties on behalf of the licensor or the IPR holde' \
-      'r and cannot give to any recipient of the work permissions that e' \
-      'xceed the scope of the distribution agreement (e.g. to allow uses' \
-      ' of the work that are not defined in the distribution agreement)',
-      blank=True, null=True, related_name="distributionRightsHolder_%(class)s_related", )
-
-    userNature = MultiSelectField(
-      verbose_name='User nature',
-      help_text='The conditions imposed by the nature of the user (for i' \
-      'nstance, a research use may have different implications depending' \
-      ' on this)',
-      blank=True,
-      max_length=1 + len(LICENCEINFOTYPE_USERNATURE_CHOICES['choices']) / 4,
-      choices=LICENCEINFOTYPE_USERNATURE_CHOICES['choices'],
-      )
-
-    membershipInfo = models.ManyToManyField("membershipInfoType_model",
-      verbose_name='Membership', blank=True, null=True, related_name="membershipInfo_%(class)s_related", )
 
     back_to_distributioninfotype_model = models.ForeignKey("distributionInfoType_model",  blank=True, null=True)
 
@@ -3433,6 +3452,7 @@ class projectInfoType_model(SchemaModel):
       ( u'fundingType', u'fundingType', REQUIRED ),
       ( u'funder', u'funder', RECOMMENDED ),
       ( u'fundingCountry', u'fundingCountry', RECOMMENDED ),
+      ( u'fundingCountryId', u'fundingCountryId', RECOMMENDED ),
       ( u'projectStartDate', u'projectStartDate', OPTIONAL ),
       ( u'projectEndDate', u'projectEndDate', OPTIONAL ),
     )
@@ -3486,7 +3506,6 @@ class projectInfoType_model(SchemaModel):
       help_text='The name of the funding country, in case of national fu' \
       'nding as mentioned in ISO3166',
       blank=True, validators=[validate_matches_xml_char_production], )
-
 
     fundingCountryId = XmlCharField(
       verbose_name='Funding country identifier',
@@ -3678,16 +3697,15 @@ ACTUALUSEINFOTYPE_USENLPSPECIFIC_CHOICES = _make_choices_from_list([
   u'naturalLanguageGeneration',u'naturalLanguageUnderstanding',
   u'opinionMining',u'other', u'personIdentification', u'personRecognition',
   u'persuasiveExpressionMining',u'phraseAlignment', u'qualitativeAnalysis',
-  u'questionAnswering',u'questionAnswering',
-  u'readingAndWritingAidApplications',u'semanticRoleLabelling',
-  u'semanticWeb',u'sentenceAlignment', u'sentenceSplitting',
-  u'sentimentAnalysis',u'shallowParsing', u'signLanguageGeneration',
-  u'signLanguageRecognition',u'speakerIdentification',
-  u'speakerVerification',u'speechAnalysis', u'speechAssistedVideoControl',
-  u'speechLipsCorrelationAnalysis',u'speechRecognition', u'speechSynthesis',
-  u'speechToSpeechTranslation',u'speechUnderstanding',
-  u'speechVerification',u'spellChecking', u'spokenDialogueSystems',
-  u'summarization',u'talkingHeadSynthesis',
+  u'questionAnswering',u'readingAndWritingAidApplications',
+  u'semanticRoleLabelling',u'semanticWeb', u'sentenceAlignment',
+  u'sentenceSplitting',u'sentimentAnalysis', u'shallowParsing',
+  u'signLanguageGeneration',u'signLanguageRecognition',
+  u'speakerIdentification',u'speakerVerification', u'speechAnalysis',
+  u'speechAssistedVideoControl',u'speechLipsCorrelationAnalysis',
+  u'speechRecognition',u'speechSynthesis', u'speechToSpeechTranslation',
+  u'speechUnderstanding',u'speechVerification', u'spellChecking',
+  u'spokenDialogueSystems',u'summarization', u'talkingHeadSynthesis',
   u'temporalExpressionRecognition',u'terminologyExtraction',
   u'textCategorisation',u'textGeneration', u'textMining',
   u'textToSpeechSynthesis',u'textualEntailment', u'tokenization',

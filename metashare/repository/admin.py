@@ -219,6 +219,11 @@ class corpusVideoInfo_model_inline(SchemaModelInline):
 
 
 # pylint: disable-msg=C0103
+class distributionInfo_model_inline(SchemaModelInline):
+    model = distributionInfoType_model
+
+
+# pylint: disable-msg=C0103
 class documentInfo_model_inline(SchemaModelInline):
     model = documentInfoType_model
 
@@ -524,12 +529,8 @@ class languageInfo_model_inline_lexicalConceptualResourceVideoInfoType_model(Sch
 class lexicalConceptualResourceInfo_model_inline(SchemaModelInline):
     model = lexicalConceptualResourceInfoType_model
 
-
-# pylint: disable-msg=C0103
-class licenceInfo_model_inline(SchemaModelInline):
-    model = licenceInfoType_model
-    collapse = True
-
+# class licenceInfo_model_inline(SchemaModelInline):
+#     model = licenceInfoType_model
 
 # pylint: disable-msg=C0103
 class linkToOtherMediaInfo_model_inline_corpusAudioInfoType_model(SchemaModelInline):

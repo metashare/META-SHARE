@@ -584,7 +584,8 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         """
         Collect the data to filter the resources on Availability
         """
-        return obj.distributionInfo.get_availability_display()
+        return [distributionInfo.get_availability_display()
+                for distributionInfo in obj.distributioninfotype_model_set.all()]
 
     def prepare_licenceFilter(self, obj):
         """
@@ -596,8 +597,9 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         """
         Collect the data to filter the resources on Restrictions Of USe
         """
-        return [restr for licence_info in
-                obj.distributionInfo.licenceinfotype_model_set.all()
+        return [restr for distributionInfo in obj.distributioninfotype_model_set.all()
+                for licence_info in
+                distributionInfo.licenceinfotype_model_set.all()
                 for restr in licence_info.get_restrictionsOfUse_display_list()]
 
     def prepare_validatedFilter(self, obj):
@@ -630,6 +632,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         """
         Collect the data to filter the resources on Linguality Type
         """
+
         return model_utils.get_resource_linguality_infos(obj)
 
     def prepare_multilingualityTypeFilter(self, obj):

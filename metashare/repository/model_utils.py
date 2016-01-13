@@ -194,18 +194,18 @@ def get_resource_license_types(res_obj):
     Returns a list of license under which the given language resource is
     available.
     """
-    return [licence for licence_info in
-            res_obj.distributionInfo.licenceinfotype_model_set.all()
-            for licence in licence_info.get_licence_display_list()]
+    return [licence_info.licence for distributionInfo in
+            res_obj.distributioninfotype_model_set.all()
+            for licence_info in
+            distributionInfo.licenceinfotype_model_set.all()]
 
 def get_resource_attribution_texts(res_obj):
     """
     Returns a list of attribution texts for the given resource. The attribution
     texts that are collected, are only in the default language
     """
-    return [licence_info.get_default_attributionText() for licence_info in
-            res_obj.distributionInfo.licenceinfotype_model_set.iterator() \
-            if licence_info.get_default_attributionText()]
+    return [distributionInfo.get_default_attributionText() for distributionInfo in
+            res_obj.distributioninfotype_model_set.all()]
 
 def get_resource_media_types(res_obj):
     """
