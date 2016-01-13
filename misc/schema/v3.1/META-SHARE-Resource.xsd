@@ -21,11 +21,11 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element ref="ms:distributionInfo">
+			<xs:element ref="ms:distributionInfo" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Groups information on the distribution of the resource</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-one</relation>
+						<relation>one-to-many</relation>
 						<label>Distribution</label>
 					</xs:appinfo>
 				</xs:annotation>
