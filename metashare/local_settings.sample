@@ -187,3 +187,6 @@ PROXIED_NODES = {
 # code; see the Installation Manual for more information on this.
 # For the integration of other web analytics services' options, see
 # <http://packages.python.org/django-analytical/>.
+
+PIWIK_DOMAIN_PATH = "stats.elda.org"
+PIWIK_SITE_ID = "3"
