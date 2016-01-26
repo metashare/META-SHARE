@@ -12,7 +12,7 @@ from metashare.repository.models import personInfoType_model, \
     targetResourceInfoType_model, languageVarietyInfoType_model, \
     sizeInfoType_model, annotationInfoType_model, videoFormatInfoType_model, \
     imageFormatInfoType_model, resolutionInfoType_model, \
-    audioSizeInfoType_model
+    audioSizeInfoType_model, licenceInfoType_model
 from metashare.storage.models import MASTER
 import logging
 from metashare.settings import LOG_HANDLER
@@ -182,6 +182,8 @@ class SizeDummyLookup(ModelLookup):
 class AudioSizeDummyLookup(ModelLookup):
     model = audioSizeInfoType_model
 
+class LicenceInfoDummyLookup(ModelLookup):
+    model = licenceInfoType_model
 
 class ProjectLookup(ModelLookup):
     model = projectInfoType_model

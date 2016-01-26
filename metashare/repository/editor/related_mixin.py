@@ -20,12 +20,12 @@ from metashare.repository.models import actorInfoType_model, \
     personInfoType_model, \
     targetResourceInfoType_model, documentInfoType_model, \
     languageVarietyInfoType_model, \
-    sizeInfoType_model, resolutionInfoType_model, audioSizeInfoType_model
+    sizeInfoType_model, resolutionInfoType_model, audioSizeInfoType_model, licenceInfoType_model
 from metashare.repository.editor.lookups import ActorLookup, \
     OrganizationLookup, ProjectLookup, MembershipDummyLookup, \
     PersonLookup, TargetResourceLookup, DocumentLookup, \
     DocumentationLookup, LanguageVarietyDummyLookup, SizeDummyLookup, \
-    ResolutionDummyLookup, AudioSizeDummyLookup
+    ResolutionDummyLookup, AudioSizeDummyLookup, LicenceInfoDummyLookup
 from metashare.repository.editor.widgets import AutoCompleteSelectMultipleSubClsWidget
 from metashare.repository.editor.widgets import AutoCompleteSelectMultipleEditWidget
 from metashare.repository.editor.widgets import AutoCompleteSelectSingleWidget
@@ -52,6 +52,7 @@ class RelatedAdminMixin(object):
         sizeInfoType_model: OneToManyWidget(lookup_class=SizeDummyLookup),
         resolutionInfoType_model: OneToManyWidget(lookup_class=ResolutionDummyLookup),
         audioSizeInfoType_model: OneToManyWidget(lookup_class=AudioSizeDummyLookup),
+        licenceInfoType_model: OneToManyWidget(lookup_class=LicenceInfoDummyLookup)
     }
     
     custom_m2o_widget_overrides = {
