@@ -22,7 +22,7 @@ from metashare.repository.forms import LicenseSelectionForm, \
     LicenseAgreementForm, DownloadContactForm, MORE_FROM_SAME_CREATORS, \
     MORE_FROM_SAME_PROJECTS
 from metashare.repository import model_utils
-from metashare.repository.models import licenceInfoType_model, \
+from metashare.repository.models import distributionInfoType_model, licenceInfoType_model, \
     resourceInfoType_model
 from metashare.repository.search_indexes import resourceInfoType_modelIndex, \
     update_lr_index_entry
@@ -86,58 +86,58 @@ MEMBER_TYPES = type('MemberEnum', (), dict(GOD=100, FULL=3, ASSOCIATE=2, NON=1))
 # is required at a minimum to be able to download the associated resource
 # straight away; otherwise the licence requires a hard-copy signature
 LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
-  'AGPL': (MEDIA_URL + 'licences/AGPL.pdf', MEMBER_TYPES.NON),
-  'LGPL': (MEDIA_URL + 'licences/LGPL.pdf', MEMBER_TYPES.NON),
-  'CC-ZERO': (MEDIA_URL + 'licences/CC-ZERO.pdf', MEMBER_TYPES.NON),
-  'CC-BY-NC-ND': (MEDIA_URL + 'licences/CC-BY-NC-ND.pdf', MEMBER_TYPES.NON),
-  'CC-BY-NC-SA': (MEDIA_URL + 'licences/CC-BY-NC-SA.pdf', MEMBER_TYPES.NON),
-  'CC-BY-NC': (MEDIA_URL + 'licences/CC-BY-NC.pdf', MEMBER_TYPES.NON),
-  'CC-BY-ND': (MEDIA_URL + 'licences/CC-BY-ND.pdf', MEMBER_TYPES.NON),
-  'CC-BY-SA': (MEDIA_URL + 'licences/CC-BY-SA.pdf', MEMBER_TYPES.NON),
-  'CC-BY': (MEDIA_URL + 'licences/CC-BY.pdf', MEMBER_TYPES.NON),
-  'PDDL': (MEDIA_URL + 'licences/PDDL.pdf', MEMBER_TYPES.NON),
-  'ODC-BY': (MEDIA_URL + 'licences/ODC-BY.pdf', MEMBER_TYPES.NON),
-  'ODbL': (MEDIA_URL + 'licences/ODbL.pdf', MEMBER_TYPES.NON),
-  # 'MSCommons-BY': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BY_v1.0.htm',
-  #                  MEMBER_TYPES.FULL),
-  # 'MSCommons-BY-NC': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNC_v1.0.htm',
-  #                     MEMBER_TYPES.FULL),
-  # 'MSCommons-BY-NC-ND': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNCND_' \
-  #                        'v1.0.htm', MEMBER_TYPES.FULL),
-  # 'MSCommons-BY-NC-SA': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNCSA' \
-  #                        '_v1.0.htm', MEMBER_TYPES.FULL),
-  # 'MSCommons-BY-ND': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYND_v1.0.htm',
-  #                     MEMBER_TYPES.FULL),
-  # 'MSCommons-BY-SA': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYSA_v1.0.htm',
-  #                     MEMBER_TYPES.FULL),
-  'MS-NoReD-FF': (MEDIA_URL + 'licences/MS-NoReD-FF.pdf', MEMBER_TYPES.GOD),
-  'MS-NoReD': (MEDIA_URL + 'licences/MS-NoReD.pdf', MEMBER_TYPES.GOD),
-  'MS-NoReD-ND-FF': (MEDIA_URL + 'licences/MS-NoReD-ND-FF.pdf', MEMBER_TYPES.GOD),
-  'MS-NoReD-ND': (MEDIA_URL + 'licences/MS-NoReD-ND.pdf', MEMBER_TYPES.GOD),
-  'MS-NC-NoReD-ND-FF': (MEDIA_URL + 'licences/MS-NC-NoReD-ND-FF.pdf', MEMBER_TYPES.GOD),
-  'MS-NC-NoReD-ND': (MEDIA_URL + 'licences/MS-NC-NoReD-ND.pdf', MEMBER_TYPES.GOD),
-  'MS-NC-NoReD-FF': (MEDIA_URL + 'licences/MS-NC-NoReD-FF.pdf', MEMBER_TYPES.GOD),
-  'MS-NC-NoReD': (MEDIA_URL + 'licences/MS-NC-NoReD.pdf', MEMBER_TYPES.GOD),
-  'ELRA_EVALUATION': (MEDIA_URL + 'licences/ELRA_EVALUATION.pdf', MEMBER_TYPES.GOD),
-  'ELRA_VAR': (MEDIA_URL + 'licences/ELRA_VAR.pdf', MEMBER_TYPES.GOD),
-  'ELRA_END_USER': (MEDIA_URL + 'licences/ELRA_END_USER.pdf', MEMBER_TYPES.GOD),
-  'CLARIN_PUB': (MEDIA_URL + 'licences/CLARIN_PUB.pdf', MEMBER_TYPES.GOD),
-  'CLARIN_ACA-NC': (MEDIA_URL + 'licences/CLARIN_ACA-NC.pdf', MEMBER_TYPES.GOD),
-  'CLARIN_ACA': (MEDIA_URL + 'licences/CLARIN_ACA.pdf', MEMBER_TYPES.GOD),
-  'CLARIN_RES': (MEDIA_URL + 'licences/CLARIN_RES.pdf', MEMBER_TYPES.GOD),
-  'Princeton_Wordnet': (MEDIA_URL + 'licences/Princeton_Wordnet.pdf',
-                        MEMBER_TYPES.NON),
-  'GPL': (MEDIA_URL + 'licences/GPL.pdf', MEMBER_TYPES.NON),
-  'GFDL': (MEDIA_URL + 'licences/GFDL.pdf', MEMBER_TYPES.NON),
-  'ApacheLicence_2.0': (MEDIA_URL + 'licences/ApacheLicence_2.0.pdf',
-                        MEMBER_TYPES.NON),
-  'BSD_3-clause': (MEDIA_URL + 'licences/BSD_3-clause.pdf', MEMBER_TYPES.NON),
-  'BSD_4-clause': (MEDIA_URL + 'licences/BSD_4-clause.pdf', MEMBER_TYPES.NON),
-  'FreeBSD': (MEDIA_URL + 'licences/FreeBSD.pdf', MEMBER_TYPES.NON),
-  'proprietary': ('', MEMBER_TYPES.GOD),
-  'underNegotiation': ('', MEMBER_TYPES.GOD),
-  'nonStandardLicenceTerms': ('', MEMBER_TYPES.NON),
-  # 'other': ('', MEMBER_TYPES.GOD)
+    'AGPL': (MEDIA_URL + 'licences/AGPL.pdf', MEMBER_TYPES.NON),
+    'LGPL': (MEDIA_URL + 'licences/LGPL.pdf', MEMBER_TYPES.NON),
+    'CC-ZERO': (MEDIA_URL + 'licences/CC-ZERO.pdf', MEMBER_TYPES.NON),
+    'CC-BY-NC-ND': (MEDIA_URL + 'licences/CC-BY-NC-ND.pdf', MEMBER_TYPES.NON),
+    'CC-BY-NC-SA': (MEDIA_URL + 'licences/CC-BY-NC-SA.pdf', MEMBER_TYPES.NON),
+    'CC-BY-NC': (MEDIA_URL + 'licences/CC-BY-NC.pdf', MEMBER_TYPES.NON),
+    'CC-BY-ND': (MEDIA_URL + 'licences/CC-BY-ND.pdf', MEMBER_TYPES.NON),
+    'CC-BY-SA': (MEDIA_URL + 'licences/CC-BY-SA.pdf', MEMBER_TYPES.NON),
+    'CC-BY': (MEDIA_URL + 'licences/CC-BY.pdf', MEMBER_TYPES.NON),
+    'PDDL': (MEDIA_URL + 'licences/PDDL.pdf', MEMBER_TYPES.NON),
+    'ODC-BY': (MEDIA_URL + 'licences/ODC-BY.pdf', MEMBER_TYPES.NON),
+    'ODbL': (MEDIA_URL + 'licences/ODbL.pdf', MEMBER_TYPES.NON),
+    # 'MSCommons-BY': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BY_v1.0.htm',
+    # MEMBER_TYPES.FULL),
+    # 'MSCommons-BY-NC': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNC_v1.0.htm',
+    #                     MEMBER_TYPES.FULL),
+    # 'MSCommons-BY-NC-ND': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNCND_' \
+    #                        'v1.0.htm', MEMBER_TYPES.FULL),
+    # 'MSCommons-BY-NC-SA': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNCSA' \
+    #                        '_v1.0.htm', MEMBER_TYPES.FULL),
+    # 'MSCommons-BY-ND': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYND_v1.0.htm',
+    #                     MEMBER_TYPES.FULL),
+    # 'MSCommons-BY-SA': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYSA_v1.0.htm',
+    #                     MEMBER_TYPES.FULL),
+    'MS-NoReD-FF': (MEDIA_URL + 'licences/MS-NoReD-FF.pdf', MEMBER_TYPES.GOD),
+    'MS-NoReD': (MEDIA_URL + 'licences/MS-NoReD.pdf', MEMBER_TYPES.GOD),
+    'MS-NoReD-ND-FF': (MEDIA_URL + 'licences/MS-NoReD-ND-FF.pdf', MEMBER_TYPES.GOD),
+    'MS-NoReD-ND': (MEDIA_URL + 'licences/MS-NoReD-ND.pdf', MEMBER_TYPES.GOD),
+    'MS-NC-NoReD-ND-FF': (MEDIA_URL + 'licences/MS-NC-NoReD-ND-FF.pdf', MEMBER_TYPES.GOD),
+    'MS-NC-NoReD-ND': (MEDIA_URL + 'licences/MS-NC-NoReD-ND.pdf', MEMBER_TYPES.GOD),
+    'MS-NC-NoReD-FF': (MEDIA_URL + 'licences/MS-NC-NoReD-FF.pdf', MEMBER_TYPES.GOD),
+    'MS-NC-NoReD': (MEDIA_URL + 'licences/MS-NC-NoReD.pdf', MEMBER_TYPES.GOD),
+    'ELRA_EVALUATION': (MEDIA_URL + 'licences/ELRA_EVALUATION.pdf', MEMBER_TYPES.GOD),
+    'ELRA_VAR': (MEDIA_URL + 'licences/ELRA_VAR.pdf', MEMBER_TYPES.GOD),
+    'ELRA_END_USER': (MEDIA_URL + 'licences/ELRA_END_USER.pdf', MEMBER_TYPES.GOD),
+    'CLARIN_PUB': (MEDIA_URL + 'licences/CLARIN_PUB.pdf', MEMBER_TYPES.GOD),
+    'CLARIN_ACA-NC': (MEDIA_URL + 'licences/CLARIN_ACA-NC.pdf', MEMBER_TYPES.GOD),
+    'CLARIN_ACA': (MEDIA_URL + 'licences/CLARIN_ACA.pdf', MEMBER_TYPES.GOD),
+    'CLARIN_RES': (MEDIA_URL + 'licences/CLARIN_RES.pdf', MEMBER_TYPES.GOD),
+    'Princeton_Wordnet': (MEDIA_URL + 'licences/Princeton_Wordnet.pdf',
+                          MEMBER_TYPES.NON),
+    'GPL': (MEDIA_URL + 'licences/GPL.pdf', MEMBER_TYPES.NON),
+    'GFDL': (MEDIA_URL + 'licences/GFDL.pdf', MEMBER_TYPES.NON),
+    'ApacheLicence_2.0': (MEDIA_URL + 'licences/ApacheLicence_2.0.pdf',
+                          MEMBER_TYPES.NON),
+    'BSD_3-clause': (MEDIA_URL + 'licences/BSD_3-clause.pdf', MEMBER_TYPES.NON),
+    'BSD_4-clause': (MEDIA_URL + 'licences/BSD_4-clause.pdf', MEMBER_TYPES.NON),
+    'FreeBSD': (MEDIA_URL + 'licences/FreeBSD.pdf', MEMBER_TYPES.NON),
+    'proprietary': ('', MEMBER_TYPES.GOD),
+    'underNegotiation': ('', MEMBER_TYPES.GOD),
+    'nonStandardLicenceTerms': ('', MEMBER_TYPES.NON),
+    # 'other': ('', MEMBER_TYPES.GOD)
 }
 
 
@@ -163,12 +163,19 @@ def _get_licences(resource, user_membership):
     whether the resource may (and can) be directly downloaded or if there need
     to be further negotiations of some sort.
     """
-    licence_infos = tuple(licenceInfoType_model.objects \
-        .filter(back_to_distributioninfotype_model__id=\
-                resource.distributionInfo.id))
-    
-    all_licenses = dict([(l_name, l_info) for l_info in licence_infos
-                         for l_name in l_info.licence])
+    distribution_infos = tuple(distributionInfoType_model.objects.filter \
+                                   (back_to_resourceinfotype_model__id=resource.id))
+
+    licenInfoList = list()
+
+    for distributionInfo in distribution_infos:
+        licenInfoList.extend(
+            distributionInfo.licenceInfo.all())
+
+    licence_infos = tuple(licenInfoList)
+
+    all_licenses = dict([(l_info.licence, l_info) for l_info in licence_infos])
+
     result = {}
     for name, info in all_licenses.items():
         access = LICENCEINFOTYPE_URLS_LICENCE_CHOICES.get(name, None)
@@ -177,8 +184,10 @@ def _get_licences(resource, user_membership):
                         "object #{}: {}".format(resource.id, name))
             del all_licenses[name]
         elif user_membership >= access[1] \
-                and (info.downloadLocation \
-                     or resource.storage_object.get_download()):
+                and (distributionInfoType_model.objects.get \
+                    (licenceInfo = info).downloadLocation \
+                             or resource.storage_object.get_download()):
+            # and (info.downloadLocation \
             # the resource can be downloaded somewhere under the current license
             # terms and the user's membership allows her to immediately download
             # the resource
@@ -186,6 +195,7 @@ def _get_licences(resource, user_membership):
         else:
             # further negotiations are required with the current license
             result[name] = (info, False)
+
     return result
 
 
@@ -207,28 +217,35 @@ def download(request, object_id):
     # redirected to the master copy
     if not resource.storage_object.master_copy:
         return render_to_response('repository/redirect.html',
-                { 'resource': resource,
-                  'redirection_url': model_utils.get_lr_master_url(resource) },
-                context_instance=RequestContext(request))
+                                  {'resource': resource,
+                                   'redirection_url': model_utils.get_lr_master_url(resource)},
+                                  context_instance=RequestContext(request))
 
     licence_choice = None
     if request.method == "POST":
         licence_choice = request.POST.get('licence', None)
+
         if licence_choice and 'in_licence_agree_form' in request.POST:
             la_form = LicenseAgreementForm(licence_choice, data=request.POST)
             if la_form.is_valid():
                 # before really providing the download, we have to make sure
                 # that the user hasn't tried to circumvent the permission system
                 if licences[licence_choice][1]:
+                    dl = distributionInfoType_model.objects.get \
+                    (id=licences[licence_choice][0].back_to_distributioninfotype_model_id).downloadLocation
                     return _provide_download(request, resource,
-                                licences[licence_choice][0].downloadLocation)
+                                             dl)
             else:
                 return render_to_response('repository/licence_agreement.html',
-                    { 'form': la_form, 'resource': resource,
-                      'licence_name': licence_choice, 'licence_path': \
-                      LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
-                      'download_available': licences[licence_choice][1] },
-                    context_instance=RequestContext(request))
+                                          {'form': la_form, 'resource': resource,
+                                           'licence_name': licence_choice, 'licence_path': \
+                                              LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
+                                           'download_available': \
+                                               licences[licence_choice][1],
+                                           'l_name': licences[licence_choice][0].nonStandardLicenceName,
+                                           'l_url': licences[licence_choice][0].nonStandardLicenceTermsURL,
+                                           'l_text': licences[licence_choice][0].nonStandaradLicenceTermsText.values()},
+                                          context_instance=RequestContext(request))
         elif licence_choice and not licence_choice in licences:
             licence_choice = None
 
@@ -238,20 +255,24 @@ def download(request, object_id):
 
     if licence_choice:
         return render_to_response('repository/licence_agreement.html',
-            { 'form': LicenseAgreementForm(licence_choice),
-              'resource': resource, 'licence_name': licence_choice, 
-              'licence_path': \
-                LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
-              'download_available': licences[licence_choice][1] },
-            context_instance=RequestContext(request))
+                                  {'form': LicenseAgreementForm(licence_choice),
+                                   'resource': resource, 'licence_name': licence_choice,
+                                   'licence_path': \
+                                       LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
+                                   'download_available': licences[licence_choice][1],
+                                   'l_name': licences[licence_choice][0].nonStandardLicenceName,
+                                   'l_url': licences[licence_choice][0].nonStandardLicenceTermsURL,
+                                           'l_text': licences[licence_choice][0].nonStandaradLicenceTermsText.values()},
+                                  context_instance=RequestContext(request))
+
     elif len(licences) > 1:
         return render_to_response('repository/licence_selection.html',
-            { 'form': LicenseSelectionForm(licences), 'resource': resource },
-            context_instance=RequestContext(request))
+                                  {'form': LicenseSelectionForm(licences), 'resource': resource},
+                                  context_instance=RequestContext(request))
     else:
         return render_to_response('repository/lr_not_downloadable.html',
-                                  { 'resource': resource,
-                                    'reason': 'no_suitable_license' },
+                                  {'resource': resource,
+                                   'reason': 'no_suitable_license'},
                                   context_instance=RequestContext(request))
 
 
@@ -273,10 +294,10 @@ def _provide_download(request, resource, download_urls):
             # content is a stream of the download file
             filemimetype = guess_type(dl_path)[0] or "application/octet-stream"
             response = HttpResponse(dl_stream_generator(),
-                                    mimetype=filemimetype)
-            response['Content-Length'] = getsize(dl_path) 
+                mimetype=filemimetype)
+            response['Content-Length'] = getsize(dl_path)
             response['Content-Disposition'] = 'attachment; filename={0}' \
-                                                .format(split(dl_path)[1])
+                .format(split(dl_path)[1])
             _update_download_stats(resource, request)
             LOGGER.info("Offering a local download of resource #{0}." \
                         .format(resource.id))
@@ -300,11 +321,11 @@ def _provide_download(request, resource, download_urls):
         LOGGER.error("No download could be offered for resource #{0} with " \
                      "storage object identifier #{1} although our code " \
                      "considered it to be downloadable!".format(resource.id,
-                                           resource.storage_object.identifier))
+                                                                resource.storage_object.identifier))
 
     # no download could be provided
     return render_to_response('repository/lr_not_downloadable.html',
-                              { 'resource': resource, 'reason': 'internal' },
+                              {'resource': resource, 'reason': 'internal'},
                               context_instance=RequestContext(request))
 
 
@@ -333,15 +354,15 @@ def download_contact(request, object_id):
                                  storage_object__publication_status=PUBLISHED)
 
     default_message = "We are interested in using the above mentioned " \
-        "resource. Please provide us with all the relevant information (e.g.," \
-        " licensing provisions and restrictions, any fees required etc.) " \
-        "which is necessary for concluding a deal for getting a license. We " \
-        "are happy to provide any more information on our request and our " \
-        "envisaged usage of your resource.\n\n" \
-        "[Please include here any other request you may have regarding this " \
-        "resource or change this message altogether]\n\n" \
-        "Please kindly use the above mentioned e-mail address for any " \
-        "further communication."
+                      "resource. Please provide us with all the relevant information (e.g.," \
+                      " licensing provisions and restrictions, any fees required etc.) " \
+                      "which is necessary for concluding a deal for getting a license. We " \
+                      "are happy to provide any more information on our request and our " \
+                      "envisaged usage of your resource.\n\n" \
+                      "[Please include here any other request you may have regarding this " \
+                      "resource or change this message altogether]\n\n" \
+                      "Please kindly use the above mentioned e-mail address for any " \
+                      "further communication."
 
     # Find out the relevant resource contact emails and names
     resource_emails = []
@@ -367,22 +388,22 @@ def download_contact(request, object_id):
 
             # Render notification email template with correct values.
             data = {'message': message, 'resource': resource,
-                'resourceContactName': resource_contacts, 'user': request.user,
-                'user_email': user_email, 'node_url': DJANGO_URL}
+                    'resourceContactName': resource_contacts, 'user': request.user,
+                    'user_email': user_email, 'node_url': DJANGO_URL}
             try:
                 # Send out email to the resource contacts
                 send_mail('Request for information regarding a resource',
-                    render_to_string('repository/' \
-                      'resource_download_information.email', data),
-                    user_email, resource_emails, fail_silently=False)
-            except: #SMTPException:
+                          render_to_string('repository/' \
+                                           'resource_download_information.email', data),
+                          user_email, resource_emails, fail_silently=False)
+            except:  # SMTPException:
                 # If the email could not be sent successfully, tell the user
                 # about it.
                 messages.error(request,
-                  _("There was an error sending out the request email."))
+                               _("There was an error sending out the request email."))
             else:
                 messages.success(request, _('You have successfully ' \
-                    'sent a message to the resource contact person.'))
+                                            'sent a message to the resource contact person.'))
 
             # Redirect the user to the resource page.
             return redirect(resource.get_absolute_url())
@@ -392,13 +413,13 @@ def download_contact(request, object_id):
         form = DownloadContactForm(initial={'userEmail': request.user.email,
                                             'message': default_message})
 
-    dictionary = { 'username': request.user,
-      'resource': resource,
-      'resourceContactName': resource_contacts,
-      'resourceContactEmail': resource_emails,
-      'form': form }
+    dictionary = {'username': request.user,
+                  'resource': resource,
+                  'resourceContactName': resource_contacts,
+                  'resourceContactEmail': resource_emails,
+                  'form': form}
     return render_to_response('repository/download_contact_form.html',
-                        dictionary, context_instance=RequestContext(request))
+                              dictionary, context_instance=RequestContext(request))
 
 
 def view(request, resource_name=None, object_id=None):
@@ -421,9 +442,9 @@ def view(request, resource_name=None, object_id=None):
     res_short_names = resource.identificationInfo.resourceShortName.values()
     description = resource.identificationInfo.get_default_description()
     other_res_names = [name for name in resource.identificationInfo \
-            .resourceName.itervalues() if name != resource_name]
+        .resourceName.itervalues() if name != resource_name]
     other_descriptions = [name for name in resource.identificationInfo \
-            .description.itervalues() if name != description]
+        .description.itervalues() if name != description]
 
     # Create fields lists
     url = resource.identificationInfo.url
@@ -434,8 +455,6 @@ def view(request, resource_name=None, object_id=None):
     linguality_infos = set(model_utils.get_resource_linguality_infos(resource))
     license_types = set(model_utils.get_resource_license_types(resource))
     attribution_details = model_utils.get_resource_attribution_texts(resource)
-
-    
     distribution_info_tuple = None
     contact_person_tuples = []
     metadata_info_tuple = None
@@ -460,19 +479,19 @@ def view(request, resource_name=None, object_id=None):
         elif _tuple[0] == "Usage":
             usage_info_tuple = _tuple
         elif _tuple[0] == "Resource documentation":
-            documentation_info_tuple = _tuple            
+            documentation_info_tuple = _tuple
         elif _tuple[0] == "Resource creation":
             resource_creation_info_tuple = _tuple
         elif _tuple[0] == "Relation":
             relation_info_tuples.append(_tuple)
         elif _tuple[0] == "Resource component type":
             resource_component_tuple = _tuple[1]
-    
+
     # Convert resource_component_tuple to nested dictionaries
     resource_component_dicts = {}
     validation_dicts = []
-    relation_dicts = []    
-    
+    relation_dicts = []
+
     # Convert several tuples to dictionaries to facilitate rendering
     # the templates.
     contact_person_dicts = []
@@ -500,50 +519,50 @@ def view(request, resource_name=None, object_id=None):
                 text_counts.append(value)
             elif "Corpus_video" in key:
                 video_counts.append(value)
-              
+
     # Create a list of resource components dictionaries
     if resource_type == "corpus":
         for media_type in media_types:
             if media_type == "text":
                 resource_component_dicts['text'] = \
-                  resource_component_dict['Resource_component_type'] \
-                    ['Media_type_component_of_corpus']['Corpus_text']
+                    resource_component_dict['Resource_component_type'] \
+                        ['Media_type_component_of_corpus']['Corpus_text']
             if media_type == "audio":
                 resource_component_dicts['audio'] = \
-                  resource_component_dict['Resource_component_type'] \
-                    ['Media_type_component_of_corpus']['Corpus_audio_component']
+                    resource_component_dict['Resource_component_type'] \
+                        ['Media_type_component_of_corpus']['Corpus_audio_component']
             if media_type == "video":
                 resource_component_dicts['video'] = \
-                  resource_component_dict['Resource_component_type'] \
-                    ['Media_type_component_of_corpus']['Corpus_video']
+                    resource_component_dict['Resource_component_type'] \
+                        ['Media_type_component_of_corpus']['Corpus_video']
             if media_type == "image":
                 resource_component_dicts['image'] = \
-                  resource_component_dict['Resource_component_type'] \
-                    ['Media_type_component_of_corpus']['Corpus_image_component']
+                    resource_component_dict['Resource_component_type'] \
+                        ['Media_type_component_of_corpus']['Corpus_image_component']
             if media_type == "textNgram":
                 resource_component_dicts['textNgram'] = \
-                  resource_component_dict['Resource_component_type'] \
-                     ['Media_type_component_of_corpus']['Corpus_textNgram']
+                    resource_component_dict['Resource_component_type'] \
+                        ['Media_type_component_of_corpus']['Corpus_textNgram']
             if media_type == "textNumerical":
                 resource_component_dicts['textNumerical'] = \
-                  resource_component_dict['Resource_component_type'] \
-                     ['Media_type_component_of_corpus']['Corpus_textNumerical']
+                    resource_component_dict['Resource_component_type'] \
+                        ['Media_type_component_of_corpus']['Corpus_textNumerical']
 
 
     elif resource_type == "languageDescription":
         for media_type in media_types:
             if media_type == "text":
                 resource_component_dicts['text'] = \
-                  resource_component_dict['Resource_component_type'] \
-                    ['Media_type_component_of_language_description']['Language_description_text_component']
+                    resource_component_dict['Resource_component_type'] \
+                        ['Media_type_component_of_language_description']['Language_description_text_component']
             if media_type == "image":
                 resource_component_dicts['image'] = \
-                  resource_component_dict['Resource_component_type'] \
-                    ['Media_type_component_of_language_description']['Language_description_image_component']
+                    resource_component_dict['Resource_component_type'] \
+                        ['Media_type_component_of_language_description']['Language_description_image_component']
             if media_type == "video":
                 resource_component_dicts['video'] = \
-                  resource_component_dict['Resource_component_type'] \
-                    ['Media_type_component_of_language_description']['Language_description_video_component']
+                    resource_component_dict['Resource_component_type'] \
+                        ['Media_type_component_of_language_description']['Language_description_video_component']
 
 
     elif resource_type == "lexicalConceptualResource":
@@ -551,59 +570,59 @@ def view(request, resource_name=None, object_id=None):
 
             if media_type == "text":
                 resource_component_dicts['text'] = \
-                  resource_component_dict['Resource_component_type'] \
-                    ['Media_type_component_of_lexical___conceptual_resource'] \
-                    ['Lexical___Conceptual_resource_text_component']
+                    resource_component_dict['Resource_component_type'] \
+                        ['Media_type_component_of_lexical___conceptual_resource'] \
+                        ['Lexical___Conceptual_resource_text_component']
             if media_type == "audio":
                 resource_component_dicts['audio'] = \
-                  resource_component_dict['Resource_component_type'] \
-                  ['Media_type_component_of_lexical___conceptual_resource'] \
-                  ['Lexical___Conceptual_resource_audio_component']
+                    resource_component_dict['Resource_component_type'] \
+                        ['Media_type_component_of_lexical___conceptual_resource'] \
+                        ['Lexical___Conceptual_resource_audio_component']
             if media_type == "video":
                 resource_component_dicts['video'] = \
-                  resource_component_dict['Resource_component_type'] \
-                  ['Media_type_component_of_lexical___conceptual_resource'] \
-                  ['Lexical___Conceptual_resource_video_component']
+                    resource_component_dict['Resource_component_type'] \
+                        ['Media_type_component_of_lexical___conceptual_resource'] \
+                        ['Lexical___Conceptual_resource_video_component']
             if media_type == "image":
                 resource_component_dicts['image'] = \
-                  resource_component_dict['Resource_component_type'] \
-                  ['Media_type_component_of_lexical___conceptual_resource'] \
-                  ['Lexical___Conceptual_resource_image_component']
+                    resource_component_dict['Resource_component_type'] \
+                        ['Media_type_component_of_lexical___conceptual_resource'] \
+                        ['Lexical___Conceptual_resource_image_component']
 
     elif resource_type == "toolService":
         resource_component_dicts['toolService'] = \
-          resource_component_dict['Resource_component_type']
-   
+            resource_component_dict['Resource_component_type']
+
     # Define context for template rendering.
     context = {
-                'contact_person_dicts': contact_person_dicts,
-                'description': description,
-                'distribution_dict': distribution_dict,
-                'documentation_dict': documentation_dict,
-                'license_types': license_types,
-                'linguality_infos': linguality_infos,
-                'mediaTypes': media_types,
-                'metadata_dict': metadata_dict,
-                'metaShareId': metashare_id,
-                'identifier': identifier,
-                'other_res_names': other_res_names,
-                'other_descriptions': other_descriptions,
-                'relation_dicts': relation_dicts,
-                'res_short_names': res_short_names,
-                'resource': resource,
-                'resource_component_dicts': resource_component_dicts,
-                'resource_component_dict': resource_component_dict,
-                'resourceName': resource_name,
-                'attribution_details': attribution_details,
-                'resourceType': resource_type,
-                'resource_creation_dict': resource_creation_dict,
-                'url': url,
-                'usage_dict': usage_dict,
-                'validation_dicts': validation_dicts,                
-                'version_dict': version_dict,
-                'text_counts': text_counts,
-                'video_counts': video_counts,
-              }
+        'contact_person_dicts': contact_person_dicts,
+        'description': description,
+        'distribution_dict': distribution_dict,
+        'documentation_dict': documentation_dict,
+        'license_types': license_types,
+        'linguality_infos': linguality_infos,
+        'mediaTypes': media_types,
+        'metadata_dict': metadata_dict,
+        'metaShareId': metashare_id,
+        'identifier': identifier,
+        'other_res_names': other_res_names,
+        'other_descriptions': other_descriptions,
+        'relation_dicts': relation_dicts,
+        'res_short_names': res_short_names,
+        'resource': resource,
+        'resource_component_dicts': resource_component_dicts,
+        'resource_component_dict': resource_component_dict,
+        'resourceName': resource_name,
+        'attribution_details': attribution_details,
+        'resourceType': resource_type,
+        'resource_creation_dict': resource_creation_dict,
+        'url': url,
+        'usage_dict': usage_dict,
+        'validation_dicts': validation_dicts,
+        'version_dict': version_dict,
+        'text_counts': text_counts,
+        'video_counts': video_counts,
+    }
     template = 'repository/resource_view/lr_view.html'
 
     # For users who have edit permission for this resource, we have to add 
@@ -612,7 +631,7 @@ def view(request, resource_name=None, object_id=None):
     if has_edit_permission(request, resource):
         context['LR_EDIT'] = reverse(
             'admin:repository_resourceinfotype_model_change', \
-              args=(resource.id,))
+            args=(resource.id,))
 
     # Update statistics:
     if saveLRStats(resource, VIEW_STAT, request):
@@ -625,7 +644,7 @@ def view(request, resource_name=None, object_id=None):
 
     # Add download/view/last updated statistics to the template context.
     context['LR_STATS'] = getLRStats(resource.storage_object.identifier)
-            
+
     # Add recommendations for 'also viewed' resources
     context['also_viewed'] = \
         _format_recommendations(get_view_recommendations(resource))
@@ -644,7 +663,10 @@ def view(request, resource_name=None, object_id=None):
 
     # Render and return template with the defined context.
     ctx = RequestContext(request)
+
+
     return render_to_response(template, context, context_instance=ctx)
+
 
 def tuple2dict(_tuple):
     '''
@@ -658,8 +680,8 @@ def tuple2dict(_tuple):
             if isinstance(item[0], basestring):
                 # Replace spaces by underscores for component names.
                 if item[0].find(" "):
-                    _key = item[0].replace(" ", "_").replace("/","_")
-                else: 
+                    _key = item[0].replace(" ", "_").replace("/", "_")
+                else:
                     _key = item[0]
                 if _key in _dict:
                     # If a repeatable component is found, a customized 
@@ -679,8 +701,10 @@ def tuple2dict(_tuple):
                 if isinstance(item[0], tuple):
                     # Replace spaces by underscores for element names.
                     if item[0][0].find(" "):
-                        _key = item[0][0].replace(" ", "_").replace('(',"").replace(")","").replace("/","_").replace("-","_")
-                    else: _key = item[0][0]
+                        _key = item[0][0].replace(" ", "_").replace('(', "").replace(")", "").replace("/", "_").replace(
+                            "-", "_")
+                    else:
+                        _key = item[0][0]
 
                     # If the item is a date, convert it to real datetime
                     if _key.find("_date") != -1:
@@ -718,13 +742,14 @@ class MetashareFacetedSearchView(FacetedSearchView):
     A modified `FacetedSearchView` which makes sure that only such results will
     be returned that are accessible by the current user.
     """
+
     def get_results(self):
         sqs = super(MetashareFacetedSearchView, self).get_results()
 
         # Sort the results (on only one sorting value)
         if 'sort' in self.request.GET:
             sort_list = self.request.GET.getlist('sort')
-            
+
             if sort_list[0] == 'resourcename_asc':
                 sqs = sqs.order_by('resourceNameSort_exact')
             elif sort_list[0] == 'resourcename_desc':
@@ -753,12 +778,12 @@ class MetashareFacetedSearchView(FacetedSearchView):
         results_count = sqs.count()
         if self.query:
             saveQueryStats(self.query, \
-                str(sorted(self.request.GET.getlist("selected_facets"))), \
-                results_count, \
-                (datetime.now() - starttime).microseconds, self.request)
+                           str(sorted(self.request.GET.getlist("selected_facets"))), \
+                           results_count, \
+                           (datetime.now() - starttime).microseconds, self.request)
 
         return sqs
-    
+
     def _get_selected_facets(self):
         """
         Returns the selected facets from the current GET request as a more
@@ -774,7 +799,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
                     else:
                         result[field] = [value]
         return result
-    
+
     def _create_filters_structure(self, facet_fields):
         """
         Creates a data structure encapsulating most of the logic which is
@@ -797,7 +822,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
         if sel_facets:
             # add all top level facets (sorted by their facet IDs):
             for name, label, facet_id, _dummy in \
-              [f for f in filter_labels if f[3] == 0]:
+                    [f for f in filter_labels if f[3] == 0]:
                 name_exact = '{0}_exact'.format(name)
                 # only add selected facets in step (1)
                 if name_exact in sel_facets:
@@ -808,29 +833,29 @@ class MetashareFacetedSearchView(FacetedSearchView):
                         # only items with a count > 0 are shown
                         for item in [i for i in items if i[1] > 0]:
                             subfacets = [f for f in filter_labels if (f[3] == \
-                              facet_id and item[0] in f[0]) ]
+                                                                      facet_id and item[0] in f[0])]
                             subfacets_exactname_list = []
                             subfacets_exactname_list.extend( \
-                              [u'{0}_exact'.format(subfacet[0]) \
-                              for subfacet in subfacets])
+                                [u'{0}_exact'.format(subfacet[0]) \
+                                 for subfacet in subfacets])
                             subresults = []
                             for facet in subfacets:
                                 subresults = self.show_subfilter( \
-                                  facet, sel_facets, facet_fields, subresults)
+                                    facet, sel_facets, facet_fields, subresults)
                             if item[0] in sel_facets[name_exact]:
                                 if item[0] != "":
                                     lab_item = " ".join(re.findall( \
-                                      '[A-Z\_]*[^A-Z]*', \
-                                      item[0][0].capitalize()+item[0][1:]))[:-1]
+                                        '[A-Z\_]*[^A-Z]*', \
+                                        item[0][0].capitalize() + item[0][1:]))[:-1]
                                     removable.append({'label': lab_item,
-                                        'count': item[1], 'targets':
-                                            [u'{0}:{1}'.format(name, value)
-                                             for name, values in
-                                             sel_facets.iteritems() for value in
-                                             values if (name != name_exact
-                                             or value != item[0]) and name \
-                                               not in subfacets_exactname_list], \
-                                               'subresults': subresults})
+                                                      'count': item[1], 'targets':
+                                        [u'{0}:{1}'.format(name, value)
+                                         for name, values in
+                                         sel_facets.iteritems() for value in
+                                         values if (name != name_exact
+                                                    or value != item[0]) and name \
+                                         not in subfacets_exactname_list], \
+                                                      'subresults': subresults})
                             else:
                                 targets = [u'{0}:{1}'.format(name, value)
                                            for name, values in
@@ -840,20 +865,20 @@ class MetashareFacetedSearchView(FacetedSearchView):
                                                                  item[0]))
                                 if item[0] != "":
                                     lab_item = " ".join(re.findall( \
-                                      '[A-Z\_]*[^A-Z]*', \
-                                      item[0][0].capitalize()+item[0][1:]))[:-1]
+                                        '[A-Z\_]*[^A-Z]*', \
+                                        item[0][0].capitalize() + item[0][1:]))[:-1]
                                     addable.append({'label': lab_item,
-                                                'count': item[1],
-                                                'targets': targets,
-                                                'subresults': subresults})
+                                                    'count': item[1],
+                                                    'targets': targets,
+                                                    'subresults': subresults})
 
                         result.append({'label': label, 'removable': removable,
-                                       'addable': addable})                    
+                                       'addable': addable})
 
-        # Step (2): add all top level facets without selected facet items at the
+                        # Step (2): add all top level facets without selected facet items at the
         # end (sorted by their facet IDs):
         for name, label, facet_id, _dummy in \
-          [f for f in filter_labels if f[3] == 0]:
+                [f for f in filter_labels if f[3] == 0]:
             name_exact = '{0}_exact'.format(name)
             # only add facets without selected items in step (2)
             if not name_exact in sel_facets:
@@ -868,11 +893,11 @@ class MetashareFacetedSearchView(FacetedSearchView):
                         targets.append(u'{0}:{1}'.format(name_exact, item[0]))
 
                         if item[0] != "":
-                            lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', 
-                              item[0][0].capitalize()+item[0][1:]))[:-1]
+                            lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*',
+                                                           item[0][0].capitalize() + item[0][1:]))[:-1]
                             addable.append({'label': lab_item, 'count': item[1],
-                                        'targets': targets})
-                    subresults = [f for f in filter_labels if f[3] == facet_id] 
+                                            'targets': targets})
+                    subresults = [f for f in filter_labels if f[3] == facet_id]
                     result.append({'label': label, 'removable': [],
                                    'addable': addable, 'subresults': subresults})
 
@@ -884,14 +909,14 @@ class MetashareFacetedSearchView(FacetedSearchView):
         # for rendering the filters/facets
         if 'fields' in extra['facets']:
             extra['filters'] = self._create_filters_structure(
-                                        extra['facets']['fields'])
+                extra['facets']['fields'])
         else:
             # in case of forced empty search results, the fields entry is not set;
             # this can happen with recommendations when using the
             # get_more_from_same_... methods
             extra['filters'] = []
         return extra
-    
+
     def show_subfilter(self, facet, sel_facets, facet_fields, results):
         """
         Creates a second level for faceting. 
@@ -913,15 +938,15 @@ class MetashareFacetedSearchView(FacetedSearchView):
                 for item in [i for i in items if i[1] > 0]:
                     if item[0] in sel_facets[name_exact]:
                         if item[0] != "":
-                            lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', 
-                              item[0][0].capitalize()+item[0][1:]))[:-1]
+                            lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*',
+                                                           item[0][0].capitalize() + item[0][1:]))[:-1]
                             removable.append({'label': lab_item,
-                                'count': item[1], 'targets':
-                                    [u'{0}:{1}'.format(name, value)
-                                     for name, values in
-                                     sel_facets.iteritems() for value in
-                                     values if name != name_exact
-                                     or value != item[0]]})
+                                              'count': item[1], 'targets':
+                                [u'{0}:{1}'.format(name, value)
+                                 for name, values in
+                                 sel_facets.iteritems() for value in
+                                 values if name != name_exact
+                                 or value != item[0]]})
                     else:
                         targets = [u'{0}:{1}'.format(name, value)
                                    for name, values in
@@ -930,14 +955,14 @@ class MetashareFacetedSearchView(FacetedSearchView):
                         targets.append(u'{0}:{1}'.format(name_exact,
                                                          item[0]))
                         if item[0] != "":
-                            lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', 
-                              item[0][0].capitalize()+item[0][1:]))[:-1]
+                            lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*',
+                                                           item[0][0].capitalize() + item[0][1:]))[:-1]
                             addable.append({'label': lab_item,
-                                        'count': item[1],
-                                        'targets': targets})
-                if (addable+removable):
+                                            'count': item[1],
+                                            'targets': targets})
+                if (addable + removable):
                     results.append({'label': label, 'removable': removable,
-                               'addable': addable})
+                                    'addable': addable})
         else:
             items = facet_fields.get(name)
             if items:
@@ -949,12 +974,12 @@ class MetashareFacetedSearchView(FacetedSearchView):
                                for value in values]
                     targets.append(u'{0}:{1}'.format(name_exact, item[0]))
                     if item[0] != "":
-                        lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', 
-                          item[0][0].capitalize()+item[0][1:]))[:-1]
+                        lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*',
+                                                       item[0][0].capitalize() + item[0][1:]))[:-1]
                         addable.append({'label': lab_item, 'count': item[1],
-                                    'targets': targets})
+                                        'targets': targets})
                 if addable:
                     results.append({'label': label, 'removable': [],
-                               'addable': addable})
+                                    'addable': addable})
 
         return results

@@ -197,7 +197,7 @@ def get_resource_license_types(res_obj):
     return [licence_info.licence for distributionInfo in
             res_obj.distributioninfotype_model_set.all()
             for licence_info in
-            distributionInfo.licenceinfotype_model_set.all()]
+            distributionInfo.licenceInfo.all()]
 
 def get_resource_attribution_texts(res_obj):
     """

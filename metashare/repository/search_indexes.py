@@ -599,7 +599,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         """
         return [restr for distributionInfo in obj.distributioninfotype_model_set.all()
                 for licence_info in
-                distributionInfo.licenceinfotype_model_set.all()
+                distributionInfo.licenceInfo.all()
                 for restr in licence_info.get_restrictionsOfUse_display_list()]
 
     def prepare_validatedFilter(self, obj):

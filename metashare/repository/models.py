@@ -3013,13 +3013,21 @@ class licenceInfoType_model(SchemaModel):
     restrictionsOfUse = MultiSelectField(
       verbose_name='Conditions of use',
       help_text='Specifies the conditions and terms of use imposed by th' \
-      'e licence',
+      'e licence. It is an optional element and only to be taken as prov' \
+      'iding brief human readable information on the fact that the LR is' \
+      ' provided under a specific set of conditions. These correspond to' \
+      ' the most frequently used conditions imposed by the licensor of t' \
+      'he LR (via the specified licence). The proper exposition of all c' \
+      'onditions and possible exceptions is to be found inside the licen' \
+      'ce text. LR depositors should, hence, carefully choose the values' \
+      ' of this field to match the licence chosen and users should caref' \
+      'ully read that licence before using the LR.',
       blank=True,
       max_length=1 + len(LICENCEINFOTYPE_RESTRICTIONSOFUSE_CHOICES['choices']) / 4,
       choices=LICENCEINFOTYPE_RESTRICTIONSOFUSE_CHOICES['choices'],
       )
 
-    back_to_distributioninfotype_model = models.ForeignKey("distributionInfoType_model",  blank=True, null=True)
+    # back_to_distributioninfotype_model = models.ForeignKey("distributionInfoType_model",  blank=True, null=True)
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
