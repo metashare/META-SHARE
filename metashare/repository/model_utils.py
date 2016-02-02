@@ -9,6 +9,7 @@ from django.db.models import OneToOneField, Sum
 from metashare.repository.models import resourceInfoType_model, \
     corpusInfoType_model, lexicalConceptualResourceInfoType_model, \
     languageDescriptionInfoType_model, toolServiceInfoType_model
+from metashare.repository.templatetags.replace import pretty_camel
 from metashare.settings import LOG_HANDLER
 from metashare.stats.models import LRStats
 
@@ -194,7 +195,7 @@ def get_resource_license_types(res_obj):
     Returns a list of license under which the given language resource is
     available.
     """
-    return [licence_info.licence for distributionInfo in
+    return [pretty_camel(licence_info.licence) for distributionInfo in
             res_obj.distributioninfotype_model_set.all()
             for licence_info in
             distributionInfo.licenceInfo.all()]
