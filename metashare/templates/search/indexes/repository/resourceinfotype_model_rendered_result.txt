@@ -18,15 +18,21 @@
   <img src="{% get_media_url %}stats/img/download_icon.gif" alt="Number of downloads" title="Number of downloads" />&nbsp;{{ object.storage_object.identifier|get_download_count }}
   <img src="{% get_media_url %}stats/img/view_icon.gif" alt="Number of views" title="Number of views" />&nbsp;{{ object.storage_object.identifier|get_view_count }}
 </div>
-
-<ul>
-  {% resource_languages object.resourceComponentType.as_subclass %}  
-</ul>
-<ul>
-   {% for l in object.distributionInfo.licenceinfotype_model_set.all %}
-   {% for licence in l.licence %}
-    <li class="licence">{{ licence|licence_icon|safe }}{% for c in l.restrictionsOfUse %}{{ c|condition_icon|safe }}{% endfor %}</li>
-    {% endfor %}
+<div class= "languages">
+    <ul>
+      {% resource_languages object.resourceComponentType.as_subclass %}
+    </ul>
+</div>
+<ul class= "licencing">
+   {% for d in object.distributioninfotype_model_set.all %}
+        {% for l in d.licenceInfo.all %}
+            <li class="licence">
+                <!--{% for c in l.restrictionsOfUse %}
+                    {{ c|condition_icon|safe }}
+                {% endfor %}-->
+                {{ l.licence|licence_icon|safe }}
+            </li>
+        {% endfor %}
    {% endfor %}
 </ul>
 </div>

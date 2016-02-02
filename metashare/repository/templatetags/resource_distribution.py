@@ -7,15 +7,8 @@ register = template.Library()
 
 @register.filter("licence_icon")
 def licence_icon(licence):
-    if licence == "nonStandardLicenceTerms":
-        img_location = "{}images/licence_icons/licences/other.png".format(MEDIA_URL)
-    elif licence.startswith("CC"):
-        img_location = "{}images/licence_icons/licences/cc.png".format(MEDIA_URL)
-    elif licence == ("underNegotiation"):
-        img_location = "{}images/licence_icons/licences/negotiate.png".format(MEDIA_URL)
-    else:
-        img_location = "{}images/licence_icons/licences/open_licence.png".format(MEDIA_URL)
-    return u"".join(u"<img style=\"padding:1px\" src=\"{}\" title=\"{}\" alt=\"{}\" width=\"17\" height=\"17\"/>" \
+    img_location = "{}images/licence_icons/licences/{}.png".format(MEDIA_URL,licence)
+    return u"".join(u"<img style=\"padding:1px\" src=\"{}\" title=\"{}\" alt=\"{}\" height=\"20\"/>" \
                     .format(img_location, pretty_camel(licence), pretty_camel(licence)))
 
 
