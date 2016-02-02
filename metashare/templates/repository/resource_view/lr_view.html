@@ -160,7 +160,7 @@
 				<div style="clear:both"></div>
 			{% endif %}
 			
-			{% if attribution_details %}
+			{% if not attribution_details|join:"" == '' %}
              <div class="attribution"><label>Attribution details:</label> {{            attribution_details|join:"<br /> " }}</div>
             {% endif %}
             {% for key, value in documentation_dict.items %}
@@ -198,7 +198,7 @@
 		 		</div>
 	 		{% endif %}
 	 		
-		<h4 style="text-align:justify" class="readmore desc">{{ description|linebreaksbr }}</h4>
+		<h4 style="text-align:justify; margin-top: 5px" class="readmore desc">{{ description|linebreaksbr }}</h4>
 		
 		{% ifnotequal other_descriptions|length 0 %}
 			<div class='more'>View resource description in all available languages</div>

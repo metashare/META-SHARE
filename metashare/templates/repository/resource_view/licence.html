@@ -6,13 +6,13 @@
 {% if "Licence" in key %}
 
 	{% for key1, value1 in value.items %}
-		{% if "Licence" in key1 %}
-			<div class="subtitle">
-				<label class="licence">
-					<strong><i>{{ value1|rep }}</i></strong>
-				</label>
-			</div>
-		{% endif %}
+            {% if "Licence" in key1 %}
+                <div class="subtitle">
+                    <label class="licence">
+                        <strong><i>{{ value1|rep }}{% if distribution_dict.Distribution.Licence.Name_for_non_standard_licences %} ({{distribution_dict.Distribution.Licence.Name_for_non_standard_licences|rep }}){% endif %}</i></strong>
+                    </label>
+                </div>
+        {% endif %}
 	{% endfor %}
 
 	{% for key1, value1 in value.items %}
@@ -60,6 +60,7 @@
 		{% endif %}
 
 		{% if "Attribution" in key1 %}
+            {{ key1 }}
 			<div class="dataline indented">
 				<label>
 					<strong>Attribution Details: </strong>{{ value1 }}
