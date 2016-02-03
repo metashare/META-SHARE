@@ -22,11 +22,11 @@ from metashare.repository.forms import LicenseSelectionForm, \
     LicenseAgreementForm, DownloadContactForm, MORE_FROM_SAME_CREATORS, \
     MORE_FROM_SAME_PROJECTS
 from metashare.repository import model_utils
-from metashare.repository.models import distributionInfoType_model, licenceInfoType_model, \
+from metashare.repository.models import distributionInfoType_model, \
     resourceInfoType_model
 from metashare.repository.search_indexes import resourceInfoType_modelIndex, \
     update_lr_index_entry
-from metashare.settings import LOG_HANDLER, MEDIA_URL, DJANGO_URL
+from metashare.settings import LOG_HANDLER, STATIC_URL, DJANGO_URL
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
 from metashare.storage.models import PUBLISHED
@@ -59,9 +59,9 @@ def _convert_to_template_tuples(element_tree):
     """
     # If we are dealing with a complex node containing children nodes, we have
     # to first recursively collect the data values from the sub components.
-    if len(element_tree.getchildren()):
+    if len(element_tree):
         values = []
-        for child in element_tree.getchildren():
+        for child in element_tree:
             values.append(_convert_to_template_tuples(child))
         # use pretty print name of element instead of tag; requires that 
         # element_tree is created using export_to_elementtree(pretty=True)
@@ -86,58 +86,45 @@ MEMBER_TYPES = type('MemberEnum', (), dict(GOD=100, FULL=3, ASSOCIATE=2, NON=1))
 # is required at a minimum to be able to download the associated resource
 # straight away; otherwise the licence requires a hard-copy signature
 LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
-    'AGPL': (MEDIA_URL + 'licences/AGPL.pdf', MEMBER_TYPES.NON),
-    'LGPL': (MEDIA_URL + 'licences/LGPL.pdf', MEMBER_TYPES.NON),
-    'CC-ZERO': (MEDIA_URL + 'licences/CC-ZERO.pdf', MEMBER_TYPES.NON),
-    'CC-BY-NC-ND': (MEDIA_URL + 'licences/CC-BY-NC-ND.pdf', MEMBER_TYPES.NON),
-    'CC-BY-NC-SA': (MEDIA_URL + 'licences/CC-BY-NC-SA.pdf', MEMBER_TYPES.NON),
-    'CC-BY-NC': (MEDIA_URL + 'licences/CC-BY-NC.pdf', MEMBER_TYPES.NON),
-    'CC-BY-ND': (MEDIA_URL + 'licences/CC-BY-ND.pdf', MEMBER_TYPES.NON),
-    'CC-BY-SA': (MEDIA_URL + 'licences/CC-BY-SA.pdf', MEMBER_TYPES.NON),
-    'CC-BY': (MEDIA_URL + 'licences/CC-BY.pdf', MEMBER_TYPES.NON),
-    'PDDL': (MEDIA_URL + 'licences/PDDL.pdf', MEMBER_TYPES.NON),
-    'ODC-BY': (MEDIA_URL + 'licences/ODC-BY.pdf', MEMBER_TYPES.NON),
-    'ODbL': (MEDIA_URL + 'licences/ODbL.pdf', MEMBER_TYPES.NON),
-    # 'MSCommons-BY': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BY_v1.0.htm',
-    # MEMBER_TYPES.FULL),
-    # 'MSCommons-BY-NC': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNC_v1.0.htm',
-    #                     MEMBER_TYPES.FULL),
-    # 'MSCommons-BY-NC-ND': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNCND_' \
-    #                        'v1.0.htm', MEMBER_TYPES.FULL),
-    # 'MSCommons-BY-NC-SA': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNCSA' \
-    #                        '_v1.0.htm', MEMBER_TYPES.FULL),
-    # 'MSCommons-BY-ND': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYND_v1.0.htm',
-    #                     MEMBER_TYPES.FULL),
-    # 'MSCommons-BY-SA': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYSA_v1.0.htm',
-    #                     MEMBER_TYPES.FULL),
-    'MS-NoReD-FF': (MEDIA_URL + 'licences/MS-NoReD-FF.pdf', MEMBER_TYPES.GOD),
-    'MS-NoReD': (MEDIA_URL + 'licences/MS-NoReD.pdf', MEMBER_TYPES.GOD),
-    'MS-NoReD-ND-FF': (MEDIA_URL + 'licences/MS-NoReD-ND-FF.pdf', MEMBER_TYPES.GOD),
-    'MS-NoReD-ND': (MEDIA_URL + 'licences/MS-NoReD-ND.pdf', MEMBER_TYPES.GOD),
-    'MS-NC-NoReD-ND-FF': (MEDIA_URL + 'licences/MS-NC-NoReD-ND-FF.pdf', MEMBER_TYPES.GOD),
-    'MS-NC-NoReD-ND': (MEDIA_URL + 'licences/MS-NC-NoReD-ND.pdf', MEMBER_TYPES.GOD),
-    'MS-NC-NoReD-FF': (MEDIA_URL + 'licences/MS-NC-NoReD-FF.pdf', MEMBER_TYPES.GOD),
-    'MS-NC-NoReD': (MEDIA_URL + 'licences/MS-NC-NoReD.pdf', MEMBER_TYPES.GOD),
-    'ELRA_EVALUATION': (MEDIA_URL + 'licences/ELRA_EVALUATION.pdf', MEMBER_TYPES.GOD),
-    'ELRA_VAR': (MEDIA_URL + 'licences/ELRA_VAR.pdf', MEMBER_TYPES.GOD),
-    'ELRA_END_USER': (MEDIA_URL + 'licences/ELRA_END_USER.pdf', MEMBER_TYPES.GOD),
-    'CLARIN_PUB': (MEDIA_URL + 'licences/CLARIN_PUB.pdf', MEMBER_TYPES.GOD),
-    'CLARIN_ACA-NC': (MEDIA_URL + 'licences/CLARIN_ACA-NC.pdf', MEMBER_TYPES.GOD),
-    'CLARIN_ACA': (MEDIA_URL + 'licences/CLARIN_ACA.pdf', MEMBER_TYPES.GOD),
-    'CLARIN_RES': (MEDIA_URL + 'licences/CLARIN_RES.pdf', MEMBER_TYPES.GOD),
-    'Princeton_Wordnet': (MEDIA_URL + 'licences/Princeton_Wordnet.pdf',
+    'AGPL': (STATIC_URL + 'metashare/licences/AGPL.pdf', MEMBER_TYPES.NON),
+    'LGPL': (STATIC_URL + 'metashare/licences/LGPL.pdf', MEMBER_TYPES.NON),
+    'CC-ZERO': (STATIC_URL + 'metashare/licences/CC-ZERO.pdf', MEMBER_TYPES.NON),
+    'CC-BY-NC-ND': (STATIC_URL + 'metashare/licences/CC-BY-NC-ND.pdf', MEMBER_TYPES.NON),
+    'CC-BY-NC-SA': (STATIC_URL + 'metashare/licences/CC-BY-NC-SA.pdf', MEMBER_TYPES.NON),
+    'CC-BY-NC': (STATIC_URL + 'metashare/licences/CC-BY-NC.pdf', MEMBER_TYPES.NON),
+    'CC-BY-ND': (STATIC_URL + 'metashare/licences/CC-BY-ND.pdf', MEMBER_TYPES.NON),
+    'CC-BY-SA': (STATIC_URL + 'metashare/licences/CC-BY-SA.pdf', MEMBER_TYPES.NON),
+    'CC-BY': (STATIC_URL + 'metashare/licences/CC-BY.pdf', MEMBER_TYPES.NON),
+    'PDDL': (STATIC_URL + 'metashare/licences/PDDL.pdf', MEMBER_TYPES.NON),
+    'ODC-BY': (STATIC_URL + 'metashare/licences/ODC-BY.pdf', MEMBER_TYPES.NON),
+    'ODbL': (STATIC_URL + 'metashare/licences/ODbL.pdf', MEMBER_TYPES.NON),
+    'MS-NoReD-FF': (STATIC_URL + 'metashare/licences/MS-NoReD-FF.pdf', MEMBER_TYPES.GOD),
+    'MS-NoReD': (STATIC_URL + 'metashare/licences/MS-NoReD.pdf', MEMBER_TYPES.GOD),
+    'MS-NoReD-ND-FF': (STATIC_URL + 'metashare/licences/MS-NoReD-ND-FF.pdf', MEMBER_TYPES.GOD),
+    'MS-NoReD-ND': (STATIC_URL + 'metashare/licences/MS-NoReD-ND.pdf', MEMBER_TYPES.GOD),
+    'MS-NC-NoReD-ND-FF': (STATIC_URL + 'metashare/licences/MS-NC-NoReD-ND-FF.pdf', MEMBER_TYPES.GOD),
+    'MS-NC-NoReD-ND': (STATIC_URL + 'metashare/licences/MS-NC-NoReD-ND.pdf', MEMBER_TYPES.GOD),
+    'MS-NC-NoReD-FF': (STATIC_URL + 'metashare/licences/MS-NC-NoReD-FF.pdf', MEMBER_TYPES.GOD),
+    'MS-NC-NoReD': (STATIC_URL + 'metashare/licences/MS-NC-NoReD.pdf', MEMBER_TYPES.GOD),
+    'ELRA_EVALUATION': (STATIC_URL + 'metashare/licences/ELRA_EVALUATION.pdf', MEMBER_TYPES.GOD),
+    'ELRA_VAR': (STATIC_URL + 'metashare/licences/ELRA_VAR.pdf', MEMBER_TYPES.GOD),
+    'ELRA_END_USER': (STATIC_URL + 'metashare/licences/ELRA_END_USER.pdf', MEMBER_TYPES.GOD),
+    'CLARIN_PUB': (STATIC_URL + 'metashare/licences/CLARIN_PUB.pdf', MEMBER_TYPES.GOD),
+    'CLARIN_ACA-NC': (STATIC_URL + 'metashare/licences/CLARIN_ACA-NC.pdf', MEMBER_TYPES.GOD),
+    'CLARIN_ACA': (STATIC_URL + 'metashare/licences/CLARIN_ACA.pdf', MEMBER_TYPES.GOD),
+    'CLARIN_RES': (STATIC_URL + 'metashare/licences/CLARIN_RES.pdf', MEMBER_TYPES.GOD),
+    'Princeton_Wordnet': (STATIC_URL + 'metashare/licences/Princeton_Wordnet.pdf',
                           MEMBER_TYPES.NON),
-    'GPL': (MEDIA_URL + 'licences/GPL.pdf', MEMBER_TYPES.NON),
-    'GFDL': (MEDIA_URL + 'licences/GFDL.pdf', MEMBER_TYPES.NON),
-    'ApacheLicence_2.0': (MEDIA_URL + 'licences/ApacheLicence_2.0.pdf',
+    'GPL': (STATIC_URL + 'metashare/licences/GPL.pdf', MEMBER_TYPES.NON),
+    'GFDL': (STATIC_URL + 'metashare/licences/GFDL.pdf', MEMBER_TYPES.NON),
+    'ApacheLicence_2.0': (STATIC_URL + 'metashare/licences/ApacheLicence_2.0.pdf',
                           MEMBER_TYPES.NON),
-    'BSD_3-clause': (MEDIA_URL + 'licences/BSD_3-clause.pdf', MEMBER_TYPES.NON),
-    'BSD_4-clause': (MEDIA_URL + 'licences/BSD_4-clause.pdf', MEMBER_TYPES.NON),
-    'FreeBSD': (MEDIA_URL + 'licences/FreeBSD.pdf', MEMBER_TYPES.NON),
+    'BSD_3-clause': (STATIC_URL + 'metashare/licences/BSD_3-clause.pdf', MEMBER_TYPES.NON),
+    'BSD_4-clause': (STATIC_URL + 'metashare/licences/BSD_4-clause.pdf', MEMBER_TYPES.NON),
+    'FreeBSD': (STATIC_URL + 'metashare/licences/FreeBSD.pdf', MEMBER_TYPES.NON),
     'proprietary': ('', MEMBER_TYPES.GOD),
     'underNegotiation': ('', MEMBER_TYPES.GOD),
     'nonStandardLicenceTerms': ('', MEMBER_TYPES.NON),
-    # 'other': ('', MEMBER_TYPES.GOD)
 }
 
 

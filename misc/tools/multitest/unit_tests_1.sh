@@ -1,10 +1,11 @@
 #!/bin/bash
 
-THIS_DIR=$(dirname "$0")
-. "${THIS_DIR}/setvars.sh"
-. "${THIS_DIR}/_meta_dir.sh"
-. "${THIS_DIR}/_python.sh"
-cd "$MSERV_DIR"
+# Assume it is being called from base metashare directory
+# MSERV_DIR is the directory where this script lives
+MSERV_DIR=$(dirname "$0")
+. "${MSERV_DIR}/setvars.sh"
+. "${MSERV_DIR}/_meta_dir.sh"
+. "${MSERV_DIR}/_python.sh"
 
 TESTSUITE_NAME="ConfigData"
 
@@ -20,7 +21,7 @@ tearDown()
 
 test_filesets()
 {
-	"$PYTHON" check_fset.py
+	$PYTHON $MSERV_DIR/check_fset.py
 	local ret_val=$?
 	return $ret_val
 }
@@ -29,15 +30,17 @@ TEST_LIST="test_filesets"
 
 run_tests()
 {
-	REPORT="$REPORT_DIR/${TESTSUITE_NAME}_report.xml"
-	STDOUT="$REPORT_DIR/${TESTSUITE_NAME}_stdout.log"
-	STDERR="$REPORT_DIR/${TESTSUITE_NAME}_stderr.log"
-	DETAILS="$REPORT_DIR/${TESTSUITE_NAME}_details.log"
-	CLASSNAME="Sync"
+	REPORT="$REPORT_DIR/TEST-${TESTSUITE_NAME}_report.xml"
+	STDOUT="$REPORT_DIR/TEST-${TESTSUITE_NAME}_stdout.log"
+	STDERR="$REPORT_DIR/TEST-${TESTSUITE_NAME}_stderr.log"
+	DETAILS="$REPORT_DIR/TEST-${TESTSUITE_NAME}_details.log"
+	CLASSNAME="sync.${TESTSUITE_NAME}"
 
 	echo -n > "$STDOUT"
 	echo -n > "$STDERR"
-	echo "<testsuite name=\"$TESTSUITE_NAME\">" > "$REPORT"
+	echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>" > "$REPORT"
+	echo "<testsuites>" >> "$REPORT"
+	echo "<testsuite name=\"$TESTSUITE_NAME\">" >> "$REPORT"
 	TOTAL=0
 	SUCCESS=0
 	echo "Running tests."
@@ -72,8 +75,12 @@ run_tests()
 	cat "$STDERR" >> "$REPORT"
 	echo "]]></system-err>" >> "$REPORT"
 	echo "</testsuite>" >> "$REPORT"
+	echo "</testsuites>" >> "$REPORT"
 
 	tearDown 1>>"$STDOUT" 2>>"$STDERR"
+        if [ $TOTAL != $SUCCESS ]; then
+           exit 1
+        fi
 }
 
 METASHARE_DIR="$METASHARE_SW_DIR/metashare"

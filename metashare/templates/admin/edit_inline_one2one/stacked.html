@@ -1,4 +1,5 @@
 {% load i18n adminmedia %}
+{% load static from staticfiles %}
 <div class="inline-group" id="{{ inline_admin_formset.formset.prefix }}-group">
   <h2 class="customtitle">{{ inline_admin_formset.opts.verbose_name_plural|title }}<span class="helpLink" kblink="{{ help_link }}"><img class="help_icon" src="{{ help_icon_url }}" kblink="{{ help_link }}"></img></span></h2><div style="clear: both"></div>
 {{ inline_admin_formset.formset.management_form }}
@@ -41,11 +42,11 @@
             if (typeof SelectFilter != "undefined"){
                 $(".selectfilter").each(function(index, value){
                   var namearr = value.name.split('-');
-                  SelectFilter.init(value.id, namearr[namearr.length-1], false, "{% admin_media_prefix %}");
+                  SelectFilter.init(value.id, namearr[namearr.length-1], false, "{% static "admin/" %}");
                 });
                 $(".selectfilterstacked").each(function(index, value){
                   var namearr = value.name.split('-');
-                  SelectFilter.init(value.id, namearr[namearr.length-1], true, "{% admin_media_prefix %}");
+                  SelectFilter.init(value.id, namearr[namearr.length-1], true, "{% static "admin/" %}");
                 });
             }
         }

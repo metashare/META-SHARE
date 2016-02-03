@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
+{% load static from staticfiles %}
 
 {% block title %}
 Search and Browse &ndash; META-SHARE 
 {% endblock %}
 
 {% block links %}
-<link rel="stylesheet" href="{{ MEDIA_URL }}css/results.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="{% static "metashare/css/results.css" %}" type="text/css" media="screen" />
 {% endblock %}
 
 {% block content %}
@@ -71,7 +72,7 @@ function addStatus(filter){
     {{ form.non_field_errors }}
 	<table>
 	  <tr>
-        <td><img src="{{ MEDIA_URL }}images/keyvisual-200.png" /></td>
+        <td><img src="{% static "metashare/images/keyvisual-200.png" %}" /></td>
 	  	<td>{{ form.q }}</td>
         <td><input id="search_button" class="button middle_button" type="submit" value="Search" /></td>
       </tr>
@@ -96,19 +97,19 @@ function addStatus(filter){
 		<table id="resource_type">
 			<tr>
 				<td width="120">Corpus:</td>
-				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/database_yellow.png" /></td>
+				<td><img src="{% static "metashare/css/sexybuttons/images/icons/silk/database_yellow.png" %}" /></td>
 			</tr>
 			<tr>
 				<td width="120">Lexical/Conceptual:</td>
-				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/text_ab.png" /></td>
+				<td><img src="{% static "metashare/css/sexybuttons/images/icons/silk/text_ab.png" %}" /></td>
 			</tr>
 			<tr>
 				<td width="120">Tool/Service:</td>
-				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/page_white_gear.png" /></td>
+				<td><img src="{% static "metashare/css/sexybuttons/images/icons/silk/page_white_gear.png" %}" /></td>
 			</tr>
 			<tr>
 				<td width="120">Language Description:</td>
-				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/script.png" /></td>
+				<td><img src="{% static "metashare/css/sexybuttons/images/icons/silk/script.png" %}" /></td>
 			</tr>
 			</table>
 	</div>
@@ -117,27 +118,27 @@ function addStatus(filter){
 		<table id="media_type">
 			<tr>
 				<td width="120">Text:</td>
-				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/page_white_text_media_type.png" /></td>
+				<td><img src="{% static "metashare/css/sexybuttons/images/icons/silk/page_white_text_media_type.png" %}" /></td>
 			</tr>
 			<tr>
 				<td width="120">Audio:</td>
-				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/sound_none.png" /></td>
+				<td><img src="{% static "metashare/css/sexybuttons/images/icons/silk/sound_none.png" %}" /></td>
 			</tr>
 			<tr>
 				<td width="120">Image:</td>
-				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/picture.png" /></td>
+				<td><img src="{% static "metashare/css/sexybuttons/images/icons/silk/picture.png" %}" /></td>
 			</tr>
 			<tr>
 				<td width="120">Video:</td>
-				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/film.png" /></td>
+				<td><img src="{% static "metashare/css/sexybuttons/images/icons/silk/film.png" %}" /></td>
 			</tr>					
 			<tr>
 				<td width="120">Text Numerical:</td>
-				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/numerical_text.png" /></td>
+				<td><img src="{% static "metashare/css/sexybuttons/images/icons/silk/numerical_text.png" %}" /></td>
 			</tr>					
 			<tr>
 				<td width="120">Text N-Gram:</td>
-				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/text_align_left.png" /></td>
+				<td><img src="{% static "metashare/css/sexybuttons/images/icons/silk/text_align_left.png" %}" /></td>
 			</tr>					
 		</table>	
 	</div>			

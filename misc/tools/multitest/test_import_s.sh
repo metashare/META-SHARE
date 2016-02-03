@@ -1,9 +1,10 @@
 #!/bin/bash
 
-. _meta_dir.sh
-. _python.sh
-. _node_info.sh
-. _sync.sh
+MSERV_DIR=$(dirname "$0")
+. "${MSERV_DIR}/_meta_dir.sh"
+. "${MSERV_DIR}/_python.sh"
+. "${MSERV_DIR}/_node_info.sh"
+. "${MSERV_DIR}/_sync.sh"
 
 
 check_results()

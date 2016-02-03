@@ -1,0 +1,102 @@
+# This file is used by travis-ci.org to test META-SHARE
+# env section
+# ============
+# This section sets environment variables. There are two kinds of environment
+# variables in travis: "global" and "matrix".
+# 
+# matrix variables
+# -----------------
+# matrix variables can be used to tell travis we want different jobs to run
+# for instance to split the testsuite in two subgroups.
+# Here TEST_SUITE takes two different values, so in one case the selenium
+# tests run, and in the other case the rest of the tests run.
+#
+# global variables
+# -----------------
+# Common environment variables for all the jobs that will run.
+#
+# In order to securely use external services (such as coveralls or sauce labs) 
+# with travis and github some secrets have to be shared. Travis provides
+# an option to encrypt environment variables in a way that only travis can
+# decrypt them and use them with the external services. By doing that, we can
+# safely store encrypted keys in this file and let travis decrypt and use them.
+#
+language: python
+env:
+  global:
+    ######## SAUCE LABS #############
+    # SAUCE_USERNAME and SAUCE_ACCESS_KEY
+    # https://docs.saucelabs.com/ci-integrations/travis-ci/
+    # You will need to create a saucelabs account, free for Free Software projects.
+    # ### keys for zeehio/META-SHARE:
+    - secure: IEtbjPMMqI9qiL9JzCoqkN4t700OOG6lM83a0M9PgIpuFviC7cmUv984Vpk55yuvnIvFp5N+BzIWFbw4frxV8Al+usVZs/WHdvwMKZfoolKY4uQAeibnQzivh5DJqRjz3A8nplH953SBosseVqXW6xQBKmexNdUmA7Iz6Tjag0A=
+    - secure: gi7/2rLtpYgaj4tld5eB1dL9jrRXfGAxeOVtBMAura+qKKknNE0iY0lJc6OSwY7imTRQUyg2A4xWFD0lSEw6ZQ2JpZzbCFXYXD5wsm5PPNw5lCWSUKLd1E4in9wmmQ6/tjlqH7J3DWD16Pb2AyE9RVN2jWMGUif73qygSneDudU=
+    #
+    # ### keys for jsteffen/META-SHARE:
+    - secure: FG2VtZKmd22Ji1FJCvGmUxq7XyVE5YxP1PYfvDeJ1Z4G3Liv2HkMUGKNjM7mHs5xHLjQERT0c9UnaemuXaEX1GgnKkD/z8xlWMFCcca0wM7jrH65pS6uzBVIRLtyGUOH0NV7tyD8lIdBopZPidOCS4sacdjEkw7V8zvJbS5v15msBp1gqE+mp+MAHEmGN7euOywvBvUMbEvu8yosj1+dL83+QcpxecInK5VvnwaYvpSgnakQB0PeH7E/+epYWiPKit6WtmA1VhBUYfBuCoV6aWy4YTto20Rhece+gXS/wxdDJuh7BlsbWpcsRu8I5P/GqcwM7qJSuwCIRD7W2BeIZR7HTrtiDWtJ+aPjUxpVVhonkvmoC9EvewBNCks592GKTyrFKLkE74AsBArz9LY7u36uyTlF0zP2SsN6hmIzTYrrDSAXiw4dPWfdgJbXeAJWG+NJnUkRyr4kD0vNwSwD+orG+lqXjiCuFKb5RWxXf4FAiuIysFNIx1Cy0gKUmxnd11D8GPzpqPEygmE1F2Q9VLGQJ7q+R6p+uz9ApW0sbjU9OFyPB8mHGUhVq/UTUxLDME6Kfi0MtRyXwhbrdMtTK9+92P4KCjrlheBo49hLvW2Y8/pRhVHQm1LSXmtZB5aXD9M14HK0FTn4iTVy0JOoBgSdqNtA6cSnbp1aOd4sA8o=
+    - secure: ZhxlxxGnr41ZidU0EsimsLiXcQR5Z8JdIJCEoTmNJ6sw8117jyycGHQDQzmrrPaR53glXbQXIhryHdcJ7gvx0DCiceAdmTygzVpzLcKpU2gNM/vMl9R1XsAxFHsc528IFtakV08dX05iCAtrtf1I3LroLyrtgVbf1u8+zz8ZCe5JV8dfRZmWRTdS3O6sA/FV8kcoLOVVMQLhqA0C4dd31VoPmO6zHEBjJwzbrR9rysf65NOcykfcgTzfCpvEOs3zNo4lv85mRdbjoJC5HQBw/Zh40laimTC45N9hppwhGGcMMnSPVtPj7ubvCeWheNYk3KuQNBMQYy3+q/ThdyE2kYZTjCpwy0vTYibctjO5bJFbNXsQilIQMVwVt24+eJqu61gosnWlGj90UJ1phOFQYSb8esL89M23xKTk/s7rxZfGsd7HXq1bibijnEVAUxWKBEfi9eac9+Pjx75WMYz+B6Vf7WNgWV76moy02fuFh+bGyLyKp23REa8TqdgwH0Jaj41stoC0TOGUF8mBzsPTAILrYX2MJuA0Jz1QeI6UUYgEaxd0oQcVQHYjJ0ZO8Yg61/GXHM5Vnlxsu0Ur2ZYswUP1bEoVMXZ8CzO99oaYphvn58mPdmfZS0H7xkkEs6Dma397fgKA5+oyE5Uncodn3CbNXSbXjrHX1xoSKzFY3lM=
+    #
+    # ### keys for metashare/META-SHARE:
+    - secure: F/qJoZod9/1uxheK57ZfDRunKHo0ZFpVTtMD75ZApH5zq+ep2grPvFCqpJHzrnAQc+qvKGVkns+hD//z2ubjLrvbEWFDdMuIsuD7az+OsrhSKZ0KgUWPM3VCb1sof+I60sYuutpxXwPLv0HYgmCJLRvjLHjmfqoEN26UwTPUhi+/EYuPJli/OOMrEnhuUmEmzUYNq7TsusfUcyijlfUvwfXvKtXX1VTLzAhszwaF8fB8aEeONEd+gdK9EeGTmYM8vehamW5nsA+VOq/tu7nh/vjGH3ZuLFICIgb8IQqCVVNYEWGfx/Jcj7YX3CgOFYcH80OgQLh3gGdPcP2bD8iNdQY0Jqa3e2S+Z6JU5LVX0+yKTC/4B6tSLAJp1MPv4PgU356S+P1L8iZpoh//We8hN6C7x6Snj0IhORcy6hhvi+3nupV5IqUIaPFbzfreYX4fV6CpEAQ3OadOkpSlkKGPAfkSzG+Oj31P2CI86Hn6wQ2TxhlX69/SGQ9F65UfbRt95yJUpcsEd02hbF8LxJAhD+Lgn8OAvM+1iX2mx0X0hQfN5HvQFaV7/LTxVnzbX5U59k2ulEISX+mEHVuJ0Bjk4+Xlrot2+iYVGnMdtcR+QviotDKdJK+jJaXOnqwpFTEhUnyMMxzGa3/r+T5IVIMJ1dls9MeI9vV73Slj43l2UUM=
+    - secure: DVquZU4p8LJt5kkRE8QPf/ufZUFl5QlvREQTFiSGYlTxNUNZ3gkrjYzDL2/67bY06x5r5UIp04OhSsG2l5wwa82BkaXScNjsHb8Auhrr1RH+i0S/OhjxZGU2M9xBPIhfoJ2E+iKicM5RTNyo+AnBm+gTy4B/+QMJX5heHgolcxLz8lxikO1mT3Cwr4N9StR8UTm/ue816ZCWUvOKjOL97sjkvs2+xuM/+2vD6N7NGVu7cBeXZoC4EwbqkBAzXwqI8F2D9xRsPg+mJ0fmOdpghFZ+jRZ+Ym2PtbxXSJwbCyEeAs04lqSLILb96SmMjRbYdpaMLD65q8/oTkC6FShHvzkWq4BLgaPQMvVEH+9BtrAdspVRENKldawnvbEl5Xu/7FAQFT3pKI264LRfnTidrVfQoks9lVu4WverEJd9/k3vDJShS9H1nkx4CVYoeY4aRHd9G/ZnE4jDFAbX7MygSNRCTps8Rz3w1l2k9plc8s9wO+I4oUTwfmioe1wTZhmOCY66ZJq8DZJNMyv6XxhcSxSehDZGQzhqPK3c1FdHNU5u3K7QgVR2Vob4f5wDYyCrpxpF4h1nUyiEhkIy06GCh17RaPFmm0T3/E89m8TR/Yr8j3nL9Y1oy3pk9GE5+un+SItLOmUJK67wzlJRGigPOwT0SDxd23ogEJMUy19Jbps=
+    #
+    ########### GIVE TRAVIS PUSH ACCESS ##########
+    # So we can push the generated gh-pages
+    # Generate your auth token here:
+    # https://github.com/settings/applications#personal-access-tokens
+    # Encrypt your token:
+    # $ gem install travis;
+    # $ travis login
+    # $ travis encrypt -r zeehio/META-SHARE "GH_AUTH='my_secret_token'"
+    # $ travis encrypt -r zeehio/META-SHARE "GH_REF=github.com/zeehio/META-SHARE.git"
+    # The repository GH_REF is not secret, but if we encrypt it we can keep 
+    # the zeehio/META-SHARE and the metashare/META-SHARE and travis will choose the
+    # right one on each case.
+    #
+    # ### keys for zeehio/META-SHARE:
+    # GH_AUTH:
+    - secure: "DmTgKEmMQatjTflWlDpX0PXJf/Gh8kiBqv09AkgjdO+5imCLJ0QcQbusZ2VeJPXVyvPQ/rywSCW1KJQrcZz/nJEX1kClWsV4z157oQAAroIsaAlHi77pPEQGg6EU6CXNHJp1U2v+sgeMx73KjYgHgVXPtOB7LqF6V0CWeQER+UA="
+    # GH_REF:
+    - secure: "k3+QkIQtF5chdMOBVWbuhVIVJ6KMWQ2FgyekBSbknAz7y8CmxtTuFw4Wgitja/3ESgbdsRY9z7/vMtMaxk5aNJWq8lZodMzhil0f0k+cKKbl+vMViBAomXKcCCCMpUACBObhJXuK5T4f0LhbqYdmXtOF5cubn5gDr33MV5Dk0+Q="
+    # ### keys for jsteffen/META-SHARE:
+    # GH_AUTH:
+    - secure: "oK01Q6xxJgGL1csGRrUP9UiORx1SXOyy+S/C1YmYPaCI7ANWewhXF82ZX7HT/FOawNUGEAllQsABRo7Iea11xaSP+5UZ/lEVT/XJp6Z5AHvmYQgqTh8VfZwxxAtrphjkCoiAZMDWZ724mvtmIfQuZkFkJgBUyd1qHgPH9BfjpUcuOQYdIjOsFovtNpIkACN2o1/2sl2ad/6SZRlTsQtP77nNfNRTdKHSW0CmqEOkWO+rzFvXU0IndLImKwfD1fYoy2s0/S+XUFW2k/qZCnPC1/5ATjZjHYUkzJxWf1hP7EegWIGoU4PbM88h3RsHdAd8A20sJRvED1YCQ+TmD7W6jstL6M3H1/u4VPqhf45zFMadE6ny3ejUxKOR4vyoxXF044V+CzVtzv/CkGFIDVFECIuo9/tDFcBjrV75f8r9c1qni4Hky/Fca5AWdhMh4InbcvGFWIvXmkT4gm5BqS+uzqoK67U6ZTIeXhoZ5+4N4MhqfQ/m8eFcnEmuxguBXljTpBxaqYlF+HZIQ3H6ty0KHDiLFfRnoJcQNpSY5lIVPDUulPSD5ZyHCjFWhCPmAldrqIvF/7+/YEVcSf7dA+Ken7pMGGbKt7iOrPV9+v3EvEYZtB1XM1h9lkNq51mEso2I3tMYxWtAOIOYzdcG2EdqoA3cN7amQozxixDLvJpZFLw="
+    # GH_REF:
+    - secure: "VB8yedjjISBVpwzNN4yvC4P/9DS389uX8VWCkeyIbsyf4WMfqxXMqv8AXrleYrodI8HrxvPwtZoc5V30xnvb8V5q9R+Ibu2xW7yT53cnEpzJjR/CG2+vBA9DfPFXH70wWbWtcT1cyiwz85BBxFwTX66m3QKreWYk1Ei2qD3/kjavaiRI7nPmoc6JTYwHhvUOUMZ08wq/z8M28VPFDS1FlQxPAN6Kl5ZCD3NR5QFy+cMJ8DKdKngCq5hZjnJ+KJNXNUgY0ZLQGMIegNWEhmQ/zTu+vu7VyMTGKHkE1D+0BHmVgoF23O4oMDcyUDTXuNn8JnI1DIs3rXarTRNyUkMgyGc1PPzZM7H4zUA1liHFaqrmiq1YV5m4OFPw6KwT/oAXrJ7zInBD+36xvT4ZlsnwNUGge3ZrgTDVfC+fiOB14UHnntenS7ygNefNYbROHSGTmj16wgp1CXjuyAj5A3wEPaT/isM4HV4kW1QS03sp1zYRkIR4R2M6sMO9ODU7XDvzL83Ovsb6EdKX2fJTRM6rdc2vDJ3DaPWaQDB6B/S2aRhU/E/mskTr8y/HYyxQCtvfXTnX3fEkVGI7Tx3bkDas8NBmTEuJ+7Uq6yqn9osrR/e6iyZ+9p9dv9ndVMKCXEPNJdjEfGryhZpyWATfNHC3t0dlfH7Kdm1xv+vpzqMoxRo="
+    # ### keys for metashare/META-SHARE:
+    # GH_AUTH:
+    - secure: "ldabFY+TJH832PwrfeJllGlczcg0sSuUNYw4Gk4A8Sqgd9ijTi2WVWQZXw8ZCMsxK7Szdx67iddrWa3cOrNEnJA+xeNsiXyAVijAv4W2rmR7YsKm3IcziHPQGBsaVPNa3IKLnsdQzxmnWxpa8vdJjxVZ0iDeiUQUn+DwXv1XfbKbCIOFaiaUSB7x/qJJPI00SkJtv9r3XScCyItu4eSfxg4/UNnITF4X6MgB7um/zje3yrU+NITwONCFFoa/SQLb8vSI6zrblgPP90bF7eQ1knUvKG0VqxsdqDuGRUCP9aH2hsuh0kyXblA8cqS1ZLwHvKx7LQoG56fVx+/KvjOT855hXsWnh/qzMsPRsUUBQhmF6EtFV0XxGLWXmJ7zocS+cOzHfbyVfL2qYa4iZhaHdaFHgsOYXZyhRuGG7LayDEHO+MqWXd6dUjRpGpYVS+qmhMEDRZtWTznfdR75xEQJpmkCapRbzw2k7ulLK8PROdZrAtwQFZ2LQIiewqqn3yRKl+hnaucxnrbbBcdHnHXEGDR7H6yzw++r9TKHx7tWm1+70kN/FB57VKvtjnfu7bWwq7O+Tfys58reidPDY54XjCU9ncT+k57bmdaNveOBgufFX39EmaQbzfNXk3Ubc8zZYT1o+Y00zcK/bm0ZU39pWiH0/s6Iyb1eA7epRX1vAjs="
+    # GH_REF:
+    - secure: "dBBbxtQTfmw6b32Mdsl6Sb0vOiQI9F0/lL+s6MHGKn8nMjbVm+MIVyZkFuPtSvS029yRMSPtGdhqy0urTITSyzlSxEeeCEiY2rrsg229oYlcO2tQnatel4OwcIOcVYdbYEstSLkK/rmzRzermHnDjFM1EZP/+XOhZVb5fmn91cgZw8YvCCKSjIwpxd2Byl6wdMbXTzFsd8A2eWL4D0O0zxjvlncuYBOwJRgxtz2BksR3N+TBWccbNlstlsI8Ytaa9lSC7fcj/ZUmexMfcdjRKpULzJxkOFvjSBY+oFb9v1EGHpd0BN+jGMrgloyhLb9HmuXJQuuZ2vQgjr7uhhb7cJDjMfChVKLOMqtdHm09u4Yo71vSb4hfjyXWHL/QK+lWo89eDu56slxQEKGWOPZ0+bmFT5fjVHlvM2nQteerNo7aU02a02FVBdrUJv3eheAZw67Qep9PMpvm3I5Z/Pdpmber0off35AB+XLPiw29821UOgvQGw5gt5IKiWhINcVYCCQXhNkTJ2X+oVwUc7kvEATVf2goL6p/KVnOJTwgzvDblYyQ7WTTlVLD1/urMLTNK/V3uKCr3kAlC7Pmx3WkpKY6forh50Ba7ZIu53BxZQnPNYEAnNLekHYXXr5Sr1g1/XxbXD8DHvQy+H1us8SGsEuBNNwJdqZGNYAE/tpCJQY="
+  matrix:
+    # basic runs the metashare testsuite without selenium tests, followed
+    # by the multitest that checks node syncing.
+    # selenium runs the selenium tests only
+    # docs builds the documentation and pushes it to gh-pages
+    - TEST_SUITE="basic"
+    - TEST_SUITE="selenium"
+    - TEST_SUITE="docs"
+python:
+  - "2.7"
+# commands to install dependencies
+install:
+  - "pip install coveralls"
+  - "./install-dependencies.sh"
+# command to run tests
+script:
+  - "if [ \"x$TEST_SUITE\" = \"xbasic\" ]; then ./misc/test-ci/run-testsuite.sh; fi"
+  - "if [ \"x$TEST_SUITE\" = \"xselenium\" ]; then ./misc/test-ci/run-testsuite.sh --selenium-only; fi"
+  - "if [ \"x$TEST_SUITE\" = \"xdocs\" ] ; then ./misc/test-ci/autoupdate-docs.sh; fi"
+  - "if [ \"x$TEST_SUITE\" = \"xbasic\" ] ; then ./misc/test-ci/multitest.sh; fi"
+after_success:
+  - "if [ \"x$TEST_SUITE\" != \"xdocs\" ]; then coveralls; fi"
+
+addons:
+  sauce_connect: true
+  apt:
+    packages:
+    - libpq-dev
+    - python-sphinx
+
+sudo: false
+

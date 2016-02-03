@@ -1,7 +1,18 @@
 {% spaceless %}
+{% load static from staticfiles %}
+
 <div id="footer">
-  <div class="split"></div>    
- META-SHARE has received funding from the EU’s Horizon 2020 research and innovation programme through the contract <a target="_blank" href="http://www.meta-net.eu/projects/cracker/" class="">CRACKER</a> (grant agreement no.: 645357). Formerly co-funded by FP7 and ICT PSP through the contracts <a target="_blank" href="http://www.meta-net.eu/projects/t4me/">T4ME</a> (grant agreement no.: 249119), <a target="_blank" href="http://www.meta-net.eu/projects/cesar/">CESAR</a> (grant agreement no.: 271022), <a target="_blank" href="http://www.meta-net.eu/projects/METANET4U/">METANET4U</a> (grant agreement no.: 270893) and <a target="_blank" href="http://www.meta-net.eu/projects/meta-nord/">META-NORD</a> (grant agreement no.: 270899). This website uses Google Analytics (<a target="_blank" href="http://www.meta-net.eu/imprint" class="">more details</a>)<br/>
-  <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="{{ MEDIA_URL }}/images/licence_icons/licences/CC-BY-NC-SA.png" width="120px" title="CC-BY-NC-SA 4.0" alt="CC-BY-NC-SA 4.0"/></a><br /><a href="{{ MEDIA_URL }}{% if request.user.is_authenticated %}terms_of_service_reg.pdf{% else %}terms_of_service_non_reg.pdf{% endif %}">Terms of Service</a>
+  <div class="split"></div>
+ META-SHARE has received funding from the EU&#39;s Horizon 2020 research and innovation programme through the contract
+ <a target="_blank" href="http://www.meta-net.eu/projects/cracker/" class="">CRACKER</a> (grant agreement no.: 645357). 
+ Formerly co-funded by FP7 and ICT PSP through the contracts 
+ <a target="_blank" href="http://www.meta-net.eu/projects/t4me/">T4ME</a> (grant agreement no.: 249119), 
+ <a target="_blank" href="http://www.meta-net.eu/projects/cesar/">CESAR</a> (grant agreement no.: 271022), 
+ <a target="_blank" href="http://www.meta-net.eu/projects/METANET4U/">METANET4U</a> (grant agreement no.: 270893) and 
+ <a target="_blank" href="http://www.meta-net.eu/projects/meta-nord/">META-NORD</a> (grant agreement no.: 270899). 
+ This website uses Google Analytics (<a target="_blank" href="http://www.meta-net.eu/imprint" class="">more details</a>)<br/>
+ <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+  <img src="{% static "metashare/images/licence_icons/licences/CC-BY-NC-SA.png" %}" width="120px" title="CC-BY-NC-SA 4.0" alt="CC-BY-NC-SA 4.0"/></a><br />
+  <a href="{% if request.user.is_authenticated %}{% static "metashare/terms_of_service_reg.pdf" %}{% else %}{% static "metashare/terms_of_service_non_reg.pdf" %}{% endif %}">Terms of Service</a>
 </div>
 {% endspaceless %}

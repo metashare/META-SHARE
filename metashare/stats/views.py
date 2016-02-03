@@ -24,7 +24,7 @@ from datetime import datetime, date
 from dateutil.relativedelta import relativedelta
 import urllib, urllib2
 from threading import Timer
-from metashare.settings import LOG_HANDLER, MEDIA_URL
+from metashare.settings import LOG_HANDLER
 from metashare.stats.geoip import getcountry_name
 
 try:
@@ -199,7 +199,7 @@ def usagestats (request):
     fields_count = usage_filter["required"] + usage_filter["optional"] + usage_filter["recommended"]
              
     # update usage stats according with the published resources
-    lr_usage = UsageStats.objects.values('lrid').distinct('lrid').count()
+    lr_usage = UsageStats.objects.values('lrid').distinct().count()
     if (len(lrset) != lr_usage):
         usagethread = updateUsageStats(lrset)
         if usagethread != None:
@@ -271,6 +271,8 @@ def portalstats(request):
 def topstats (request):
     """ viewing statistics about the top LR and latest queries. """    
     topdata = []
+    geovisits = []
+    visitstitle = "Unknown"
     view = request.GET.get('view', 'topviewed')
     last = request.GET.get('last', '')
     limit = int(request.GET.get('limit', '10'))

@@ -93,7 +93,3 @@ def get_suppressed_script_description(lang):
     sctipt_subtag = ''.join(registry.xpath(xpath))
     xpath = u"//script[@subtag=\"{}\"]/description/text()".format(sctipt_subtag)
     return ''.join(registry.xpath(xpath))
-
-# print get_variants_by_language(u"Japanese")
-#
-# print get_variants_by_script(u"Latin", u"Japanese", )

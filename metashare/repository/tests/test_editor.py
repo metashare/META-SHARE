@@ -187,7 +187,7 @@ class EditorTest(TestCase):
         self.assertEqual(request.status_code, 200)
         login = client.post(ADMINROOT, EditorTest.normal_login)
         # successful login redirects (status 302), failed login gives a status of 200:
-        self.assertContains(login, 'Please enter a correct username and password', status_code=200)
+        self.assertContains(login, 'Please enter the correct username and password', status_code=200)
            
     def test_editor_can_see_model_list(self):
         client = test_utils.get_client_with_user_logged_in(EditorTest.editor_login)
@@ -217,7 +217,7 @@ class EditorTest(TestCase):
     def test_staff_cannot_see_corpus_add(self):
         client = test_utils.get_client_with_user_logged_in(EditorTest.staff_login)
         response = client.get(ADMINROOT+'repository/corpusinfotype_model/add/')
-        self.assertContains(response, 'Permission denied', status_code=403)
+        self.assertContains(response, '403 Forbidden', status_code=403)
 
     def test_editor_can_see_models_add(self):
         # We don't expect the following add forms to work, because the editor
