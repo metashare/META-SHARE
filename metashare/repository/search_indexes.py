@@ -305,7 +305,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         In our case this is a QuerySet containing only published resources that
         have not been deleted, yet.
         """
-        return self.read_queryset()
+        return self.get_model().objects.filter(storage_object__deleted=False)
 
     def read_queryset(self):
         """
