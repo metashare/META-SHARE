@@ -3385,7 +3385,7 @@ class languageInfoType_model(SchemaModel):
       verbose_name='Variants',
       help_text='Name of the variant of the language of the resource is ' \
       'spoken (according to IETF BCP47)',
-      blank=True)
+      blank=True, null=True)
 
     sizePerLanguage = models.OneToOneField("sizeInfoType_model",
       verbose_name='Size per language',
@@ -3545,6 +3545,8 @@ class projectInfoType_model(SchemaModel):
     def save(self, *args, **kwargs):
         if self.fundingCountry:
             self.fundingCountryId = iana.get_region_subtag(self.fundingCountry)
+        elif self.fundingCountryId:
+            self.fundingCountry = iana.get_language_by_subtag(self.fundingCountryId)
         # # Call save() method from super class with all arguments.
         super(projectInfoType_model, self).save(*args, **kwargs)
 
@@ -6783,7 +6785,7 @@ class inputInfoType_model(SchemaModel):
       verbose_name='Domain',
       help_text='Specifies the application domain of the resource or the' \
       ' tool/service',
-      blank=True, validators=[validate_matches_xml_char_production], )
+      blank=True, null=True, validators=[validate_matches_xml_char_production], )
 
     annotationType = MultiSelectField(
       verbose_name='Annotation type',
