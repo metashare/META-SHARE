@@ -62,7 +62,7 @@ div.content_box{
 
 div.resourceName{
 	width: 95%;
-	background-color: #faf9cd;
+	background-color: #f8f8f8;
 	padding: 4px 4px 4px 4px;
 	margin: .9em 0 .3em 0;
 	color: #777;
@@ -109,7 +109,7 @@ div.resourceName ul li:last-child { border: none; }
 div.resourceName div.languages {
     /*margin: 0.2em 0.5em 0.5em 0;*/
     /*padding: 5px;*/
-    border: 1px solid #faf9cd;
+    border: 1px solid #f8f8f8;
     width: 84%;
     display: inline-block;
 }
