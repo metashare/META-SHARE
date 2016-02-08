@@ -3385,7 +3385,7 @@ class languageInfoType_model(SchemaModel):
       verbose_name='Variants',
       help_text='Name of the variant of the language of the resource is ' \
       'spoken (according to IETF BCP47)',
-      blank=True)
+      blank=True, null=True)
 
     sizePerLanguage = models.OneToOneField("sizeInfoType_model",
       verbose_name='Size per language',
@@ -3545,6 +3545,8 @@ class projectInfoType_model(SchemaModel):
     def save(self, *args, **kwargs):
         if self.fundingCountry:
             self.fundingCountryId = iana.get_region_subtag(self.fundingCountry)
+        elif self.fundingCountryId:
+            self.fundingCountry = iana.get_language_by_subtag(self.fundingCountryId)
         # # Call save() method from super class with all arguments.
         super(projectInfoType_model, self).save(*args, **kwargs)
 
@@ -3719,7 +3721,7 @@ ACTUALUSEINFOTYPE_USENLPSPECIFIC_CHOICES = _make_choices_from_list([
   u'textToSpeechSynthesis',u'textualEntailment', u'tokenization',
   u'tokenizationAndSentenceSplitting',u'topicDetection_Tracking',
   u'userAuthentication',u'visualSceneUnderstanding', u'voiceControl',
-  u'wordAlignment',u'wordSenseDisambiguation',
+  u'wordAlignment',u'wordSenseDisambiguation', u'lexiconMerging'
 ])
 
 # pylint: disable-msg=C0103
@@ -4124,18 +4126,20 @@ class durationOfAudioInfoType_model(SchemaModel):
         return self.unicode_(formatstring, formatargs)
 
 AUDIOFORMATINFOTYPE_MIMETYPE_CHOICES = _make_choices_from_list([
-  u'text/plain', u'application/vnd.xmi+xml', u'application/xml',
+  u'text/plain', u'application/vnd.xmi+xml', u'text/xml',
   u'application/x-tmx+xml',u'application/x-xces+xml',
   u'application/tei+xml',u'application/rdf+xml', u'application/xhtml+xml',
   u'application/emma+xml',u'application/pls+xml',
   u'application/voicexml+xml',u'text/sgml', u'text/html',
   u'application/x-tex',u'application/rtf', u'application/x-latex',
   u'text/csv',u'text/tab-separated-values', u'application/pdf',
-  u'application/x-msaccess',u'audio/mp4', u'audio/mpeg', u'audio/x-wav',
+  u'application/x-msaccess',u'audio/mp4', u'audio/mpeg', u'audio/wav',
   u'image/bmp',u'image/gif', u'image/jpeg', u'image/png', u'image/svg+xml',
   u'image/tiff',u'video/jpeg', u'video/mp4', u'video/mpeg', u'video/x-flv',
   u'video/x-msvideo',u'video/x-ms-wmv', u'application/msword',
-  u'application/vnd.ms-excel',u'audio/mpeg3', u'text/turtle', u'other',
+  u'application/vnd.ms-excel',u'audio/mpeg3', u'text/turtle',
+  u'audio/flac', u'audio/PCMA', u'audio/speex', u'audio/vorbis', u'video/mp2t',
+  u'other',
 ])
 
 AUDIOFORMATINFOTYPE_SIGNALENCODING_CHOICES = _make_choices_from_list([
@@ -6783,7 +6787,7 @@ class inputInfoType_model(SchemaModel):
       verbose_name='Domain',
       help_text='Specifies the application domain of the resource or the' \
       ' tool/service',
-      blank=True, validators=[validate_matches_xml_char_production], )
+      blank=True, null=True, validators=[validate_matches_xml_char_production], )
 
     annotationType = MultiSelectField(
       verbose_name='Annotation type',
@@ -7549,13 +7553,10 @@ class toolServiceInfoType_model(resourceComponentTypeType_model):
                      key=lambda choice: choice[1].lower()),
       )
 
-    toolServiceSubtype = MultiSelectField(
+    toolServiceSubtype = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=63, max_length=100),
       verbose_name='Subtype of tool / service',
       help_text='Specifies the subtype of tool or service',
-      blank=True,
-      max_length=1 + len(TOOLSERVICEINFOTYPE_TOOLSERVICESUBTYPE_CHOICES['choices']) / 4,
-      choices=TOOLSERVICEINFOTYPE_TOOLSERVICESUBTYPE_CHOICES['choices'],
-      )
+      blank=True, null=True, validators=[validate_matches_xml_char_production], )
 
     languageDependent = MetaBooleanField(
       verbose_name='Language dependent',
