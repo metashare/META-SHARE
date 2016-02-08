@@ -28,38 +28,6 @@ def run_account_registration_request_cleanup():
     RegistrationRequest.objects.filter(
         created__lt=(datetime.now() - timedelta(days=3))).delete()
 
-
-# periodically run the synchronization on META-SHARE Managing Nodes
-if len(settings.CORE_NODES) or len(settings.PROXIED_NODES):
-    sync_interval_settings = ""
-    # Get sync interval settings
-    sync_interval_settings = "{} {} {} {} {}".format( \
-        settings.SYNC_INTERVALS['MINUTE'],
-        settings.SYNC_INTERVALS['HOUR'],
-        settings.SYNC_INTERVALS['DAY_OF_MONTH'],
-        settings.SYNC_INTERVALS['MONTH'],
-        settings.SYNC_INTERVALS['DAY_OF_WEEK']
-        )
-    
-    @kronos.register(sync_interval_settings)
-    def run_synchronization():
-        call_command('synchronize', interactive=False)
-
-
-update_interval_settings = ""
-# Get update interval settings
-update_interval_settings = "{} {} {} {} {}".format( \
-    settings.UPDATE_INTERVALS['MINUTE'],
-    settings.UPDATE_INTERVALS['HOUR'],
-    settings.UPDATE_INTERVALS['DAY_OF_MONTH'],
-    settings.UPDATE_INTERVALS['MONTH'],
-    settings.UPDATE_INTERVALS['DAY_OF_WEEK']
-    )
-
-@kronos.register(update_interval_settings)
-def run_digest_update():
-    call_command('update_digests', interactive=False)
-    
 # update the GeoIP database every first day of the month
 @kronos.register("12 4 1 * *")
 def run_update_geoip_db():
