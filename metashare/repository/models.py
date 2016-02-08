@@ -7553,7 +7553,7 @@ class toolServiceInfoType_model(resourceComponentTypeType_model):
                      key=lambda choice: choice[1].lower()),
       )
 
-    toolServiceSubtype = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=43, max_length=100),
+    toolServiceSubtype = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=63, max_length=100),
       verbose_name='Subtype of tool / service',
       help_text='Specifies the subtype of tool or service',
       blank=True, null=True, validators=[validate_matches_xml_char_production], )
