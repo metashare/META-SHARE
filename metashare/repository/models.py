@@ -7553,13 +7553,10 @@ class toolServiceInfoType_model(resourceComponentTypeType_model):
                      key=lambda choice: choice[1].lower()),
       )
 
-    toolServiceSubtype = MultiSelectField(
+    toolServiceSubtype = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=43, max_length=100),
       verbose_name='Subtype of tool / service',
       help_text='Specifies the subtype of tool or service',
-      blank=True,
-      max_length=1 + len(TOOLSERVICEINFOTYPE_TOOLSERVICESUBTYPE_CHOICES['choices']) / 4,
-      choices=TOOLSERVICEINFOTYPE_TOOLSERVICESUBTYPE_CHOICES['choices'],
-      )
+      blank=True, null=True, validators=[validate_matches_xml_char_production], )
 
     languageDependent = MetaBooleanField(
       verbose_name='Language dependent',
