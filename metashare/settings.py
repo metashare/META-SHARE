@@ -175,6 +175,7 @@ INSTALLED_APPS = (
     
     # Other apps:
     'selectable',
+    'south',
 )
 
 # add Kronos to installed apps if not running on Windows

@@ -15,6 +15,8 @@ from django.utils.functional import curry
 from django.utils.text import capfirst
 from django.utils.translation import ugettext_lazy as _
 
+from south.modelsinspector import introspector
+
 from metashare.repository.editor import form_fields
 
 # NOTE: Custom fields for Django are described in the Django docs:
@@ -188,6 +190,11 @@ class MultiTextField(models.Field):
         # the exception we have encountered. This is useful for debugging.
         except  :
             return [u'Exception for value {} ({})'.format(value, type(value))]
+
+    def south_field_triple(self):
+        field_class_path = "django.db.models.Field"
+        args,kwargs = introspector(self)
+        return (field_class_path,args,kwargs)
 
 
 # pylint: disable-msg=W0201
@@ -539,6 +546,11 @@ class DictField(models.Field):
         cls._meta.add_field(self)
         setattr(cls, 'get_default_%s' % self.name,
                 curry(self._get_default_FIELD, field=self))
+
+    def south_field_triple(self):
+        field_class_path = "django.db.models.Field"
+        args,kwargs = introspector(self)
+        return (field_class_path,args,kwargs)
 
 
 class XmlCharField(models.CharField):
