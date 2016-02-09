@@ -15,7 +15,7 @@ from metashare.settings import ROOT_PATH, LOG_HANDLER
 from metashare.storage.models import PUBLISHED, INGESTED, StorageObject
 from metashare.test_utils import create_user
 from metashare.stats.models import LRStats, UsageStats
-from metashare.sync.sync_utils import remove_resource
+from metashare.storage.utils import remove_resource
 from metashare.stats.model_utils import saveLRStats, UPDATE_STAT
 from django.db.utils import IntegrityError
 from django.core.management import call_command
