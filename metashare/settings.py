@@ -38,10 +38,6 @@ logging.basicConfig(format=LOG_FORMAT, datefmt=LOG_DATE, level=LOG_LEVEL)
 # bigger files, feel free to try and increase this value.
 MAXIMUM_UPLOAD_SIZE = 10 * 1024 * 1024
 
-# Synchronization info:
-SYNC_NEEDS_AUTHENTICATION = True
-
-
 # URL for the Metashare Knowledge Base
 KNOWLEDGE_BASE_URL = 'http://www.meta-share.org/portal/knowledgebase/'
 
@@ -57,8 +53,6 @@ GEOIP_DATA_URL = "http://geolite.maxmind.com/download/geoip/database/GeoLiteCoun
 try:
     if not os.path.isdir(STORAGE_PATH):
         os.makedirs(STORAGE_PATH)
-    if not os.path.isdir(LOCK_DIR):
-        os.makedirs(LOCK_DIR)
 except:
     raise OSError, "STORAGE_PATH and LOCK_DIR must exist and be writable!"
 
