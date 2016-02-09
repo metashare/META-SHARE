@@ -173,19 +173,6 @@ class StatsTest(TestCase):
                         STATS_SERVER_URL)
             
 
-    def test_add_new_node(self):
-        """
-        checking if there is at least one resource report available
-        from the META-SHARE statistics server.
-        """
-        LOGGER.info("Connecting ... %s", STATS_SERVER_URL)
-        try:
-            response = urllib2.urlopen("{0}addnode?{1}".format(STATS_SERVER_URL, urlencode({'url': DJANGO_URL})))
-            self.assertEquals(200, response.code)
-        except urllib2.URLError:
-            LOGGER.warn('Failed to contact statistics server on %s',
-                        STATS_SERVER_URL)
-
     def test_daily_stats(self):
         """
         checking if there are the statistics of the day

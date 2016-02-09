@@ -192,7 +192,6 @@ PROJECT_APPS = (
     'metashare.accounts',
     'metashare.stats',
     'metashare.storage',
-    'metashare.sync',
     'metashare.recommendations',
 )
 
@@ -248,8 +247,4 @@ MAX_VIEW_INTERVAL = 60 * 5
 # used in recommendations
 MAX_DOWNLOAD_INTERVAL = 60 * 10
 
-# list of synchronization protocols supported by this node
-SYNC_PROTOCOLS = (
-    '1.0',
-)
 
