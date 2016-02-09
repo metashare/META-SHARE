@@ -614,6 +614,13 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
+				<xs:enumeration value="lexiconMerging">
+					<xs:annotation>
+						<xs:appinfo>
+							<label>lexiconMerging</label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
 				<xs:enumeration value="lexiconVisualization">
 					<xs:annotation>
 						<xs:appinfo>
@@ -1132,7 +1139,7 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="application/xml">
+				<xs:enumeration value="text/xml">
 					<xs:annotation>
 						<xs:appinfo>
 							<label>XML</label>
@@ -1272,7 +1279,7 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="audio/x-wav">
+				<xs:enumeration value="audio/wav">
 					<xs:annotation>
 						<xs:appinfo>
 							<label>WAV</label>
@@ -1398,6 +1405,11 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
+				<xs:enumeration value="audio/PCMA"/>
+				<xs:enumeration value="audio/flac"/>
+				<xs:enumeration value="audio/speex"/>
+				<xs:enumeration value="audio/vorbis"/>
+				<xs:enumeration value="video/mp2t"/>
 			</xs:restriction>
 		</xs:simpleType>
 	</xs:element>
