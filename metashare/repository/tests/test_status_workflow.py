@@ -22,19 +22,17 @@ class StatusWorkflowTest(TestCase):
 
     resource_id = None
     
-    @classmethod
-    def setUpClass(cls):
+    def setUp(self):
         """
         Import a resource to test the workflow changes for
         """
-        LOGGER.info("running '{}' tests...".format(cls.__name__))
-        test_utils.set_index_active(False)        
+        test_utils.set_index_active(False)
         test_utils.setup_test_storage()
         _test_editor_group = \
             EditorGroup.objects.create(name='test_editor_group')
         _test_manager_group = \
             EditorGroupManagers.objects.create(name='test_manager_group',
-                                               managed_group=_test_editor_group)            
+                                               managed_group=_test_editor_group)
         test_utils.create_manager_user(
             'manageruser', 'manager@example.com', 'secret',
             (_test_editor_group, _test_manager_group))
@@ -44,8 +42,7 @@ class StatusWorkflowTest(TestCase):
         _result.editor_groups.add(_test_editor_group)
         StatusWorkflowTest.resource_id = _result.id
     
-    @classmethod
-    def tearDownClass(cls):
+    def tearDown(self):
         """
         Clean up the test
         """
@@ -53,7 +50,6 @@ class StatusWorkflowTest(TestCase):
         test_utils.clean_storage()
         test_utils.clean_user_db()
         test_utils.set_index_active(True)
-        LOGGER.info("finished '{}' tests".format(cls.__name__))
 
     def test_can_publish_ingested(self):
         client = Client()
