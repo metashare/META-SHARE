@@ -26,9 +26,7 @@ class ContactFormTest(django.test.TestCase):
     """
     test_login = None
     
-    @classmethod
-    def setUpClass(cls):
-        LOGGER.info("running '{}' tests...".format(cls.__name__))
+    def setUp(self):
         UserProfileTest.test_login = {
             REDIRECT_FIELD_NAME: '/{}'.format(DJANGO_BASE),
             LOGIN_FORM_KEY: 1,
@@ -38,10 +36,8 @@ class ContactFormTest(django.test.TestCase):
         User.objects.create_user(UserProfileTest.test_login['username'],
             'editor@example.com', UserProfileTest.test_login['password'])
 
-    @classmethod
-    def tearDownClass(cls):
+    def tearDown(self):
         test_utils.clean_user_db()
-        LOGGER.info("finished '{}' tests".format(cls.__name__))
 
     def test_contact_form_access(self):
         """
@@ -97,9 +93,10 @@ class UserProfileTest(django.test.TestCase):
     ms_full_member_perm = None
     ms_assoc_member_perm = None
     
-    @classmethod
-    def setUpClass(cls):
-        LOGGER.info("running '{}' tests...".format(cls.__name__))
+    def tearDown(self):
+        test_utils.clean_user_db()
+
+    def setUp(self):
         UserProfileTest.test_login = {
             REDIRECT_FIELD_NAME: '/{}'.format(DJANGO_BASE),
             LOGIN_FORM_KEY: 1,
@@ -122,13 +119,6 @@ class UserProfileTest(django.test.TestCase):
             content_type=_profile_ct, codename='ms_full_member')
         UserProfileTest.ms_assoc_member_perm = Permission.objects.get(
             content_type=_profile_ct, codename='ms_associate_member')
-
-    @classmethod
-    def tearDownClass(cls):
-        test_utils.clean_user_db()
-        LOGGER.info("finished '{}' tests".format(cls.__name__))
-
-    def setUp(self):
         self.test_user = test_utils.create_editor_user(
             UserProfileTest.test_login['username'], 'editor@example.com',
             UserProfileTest.test_login['password'],
@@ -544,6 +534,16 @@ class EditorGroupApplicationTest(django.test.TestCase):
     @classmethod
     def setUpClass(cls):
         LOGGER.info("running '{}' tests...".format(cls.__name__))
+
+    @classmethod
+    def tearDownClass(cls):
+        test_utils.clean_user_db()
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
+
+    def setUp(self):
+        """
+        Sets up a test user and a `Client` with which to test.
+        """
         # create two test editor groups
         EditorGroupApplicationTest.editor_group_1 = \
             EditorGroup.objects.create(name='test_editor_group_1')
@@ -568,16 +568,6 @@ class EditorGroupApplicationTest(django.test.TestCase):
         # create a test superuser
         EditorGroupApplicationTest.superuser = User.objects.create_superuser(
             'superuser', 'su@example.com', 'secret')
-
-    @classmethod
-    def tearDownClass(cls):
-        test_utils.clean_user_db()
-        LOGGER.info("finished '{}' tests".format(cls.__name__))
-
-    def setUp(self):
-        """
-        Sets up a test user and a `Client` with which to test.
-        """
         self.normal_user = User.objects.create_user(
             'normaluser', 'normal@example.com', 'secret')
         self.client = Client()
