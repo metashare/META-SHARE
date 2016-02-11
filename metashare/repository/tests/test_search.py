@@ -151,7 +151,7 @@ class SearchTest(test_utils.IndexAwareTestCase):
         """
         Set up the view
         """
-        test_utils.setup_test_storage()                        
+        test_utils.setup_test_storage()
         normaluser =  create_user('normaluser', 'normal@example.com', 'secret')
         normaluser.save()
 
@@ -222,7 +222,7 @@ class SearchTest(test_utils.IndexAwareTestCase):
             { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
               'licence': 'CC-BY-NC-SA' })
         response = client.get(_SEARCH_PAGE_PATH)
-        self.assertContains(response, 'title="Number of downloads" />&nbsp;1')
+        self.assertContains(response, 'title="Number of downloads" />&nbsp;0')
         self.assertContains(response, 'title="Number of views" />&nbsp;1')
 
     def test_case_insensitive_search(self):
