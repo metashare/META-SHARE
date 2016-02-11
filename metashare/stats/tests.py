@@ -24,12 +24,10 @@ class StatsTest(TestCase):
 
     resource_id = None
     
-    @classmethod
-    def setUpClass(cls):
+    def setUp(self):
         """
         Import a resource to test the workflow changes for
         """
-        LOGGER.info("running '{}' tests...".format(cls.__name__))
         test_utils.set_index_active(False)        
         test_utils.setup_test_storage()
         _test_editor_group = \
@@ -56,8 +54,7 @@ class StatsTest(TestCase):
         test_utils.create_user('user', 'user@example.com', 'mypasswd')
         
     
-    @classmethod
-    def tearDownClass(cls):
+    def tearDown(self):
         """
         Clean up the test
         """
@@ -65,7 +62,6 @@ class StatsTest(TestCase):
         test_utils.clean_storage()
         test_utils.clean_user_db()
         test_utils.set_index_active(True)
-        LOGGER.info("finished '{}' tests".format(cls.__name__))
 
     def test_stats_actions(self):
         """
