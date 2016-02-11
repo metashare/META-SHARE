@@ -48,13 +48,13 @@ STATS_SERVER_URL = "http://metastats.fbk.eu/"
 GEOIP_DATA_URL = "http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz" 
 
 
-# If STORAGE_PATH or LOCK_DIR does not exist, try to create it and halt if not
+# If STORAGE_PATH does not exist, try to create it and halt if not
 # possible.
 try:
     if not os.path.isdir(STORAGE_PATH):
         os.makedirs(STORAGE_PATH)
 except:
-    raise OSError, "STORAGE_PATH and LOCK_DIR must exist and be writable!"
+    raise OSError, "STORAGE_PATH must exist and be writable!"
 
 
 # If XDIFF_LOCATION was not set in local_settings, set a default here:
