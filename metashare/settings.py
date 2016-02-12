@@ -57,6 +57,8 @@ SYNC_NEEDS_AUTHENTICATION = True
 # URL for the Metashare Knowledge Base
 KNOWLEDGE_BASE_URL = 'http://www.meta-share.org/portal/knowledgebase/'
 
+#TODO: KNOWLEDGE_BASE_URL = 'http://www.meta-share.org/knowledgebase/'
+
 # The URL for META-SHARE statistics server.
 STATS_SERVER_URL = "http://metastats.fbk.eu/"
 
