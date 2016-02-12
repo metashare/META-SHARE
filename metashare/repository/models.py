@@ -4489,18 +4489,20 @@ class corpusTextInfoType_model(SchemaModel):
         return self.unicode_(formatstring, formatargs)
 
 TEXTFORMATINFOTYPE_MIMETYPE_CHOICES = _make_choices_from_list([
-  u'text/plain', u'application/vnd.xmi+xml', u'application/xml',
+  u'text/plain', u'application/vnd.xmi+xml', u'text/xml',
   u'application/x-tmx+xml',u'application/x-xces+xml',
   u'application/tei+xml',u'application/rdf+xml', u'application/xhtml+xml',
   u'application/emma+xml',u'application/pls+xml',
   u'application/voicexml+xml',u'text/sgml', u'text/html',
   u'application/x-tex',u'application/rtf', u'application/x-latex',
   u'text/csv',u'text/tab-separated-values', u'application/pdf',
-  u'application/x-msaccess',u'audio/mp4', u'audio/mpeg', u'audio/x-wav',
+  u'application/x-msaccess',u'audio/mp4', u'audio/mpeg', u'audio/wav',
   u'image/bmp',u'image/gif', u'image/jpeg', u'image/png', u'image/svg+xml',
   u'image/tiff',u'video/jpeg', u'video/mp4', u'video/mpeg', u'video/x-flv',
   u'video/x-msvideo',u'video/x-ms-wmv', u'application/msword',
-  u'application/vnd.ms-excel',u'audio/mpeg3', u'text/turtle', u'other',
+  u'application/vnd.ms-excel',u'audio/mpeg3', u'text/turtle',
+  u'audio/flac', u'audio/PCMA', u'audio/speex', u'audio/vorbis', u'video/mp2t',
+  u'other',
 ])
 
 # pylint: disable-msg=C0103
@@ -4801,18 +4803,20 @@ class videoContentInfoType_model(SchemaModel):
         return _unicode
 
 VIDEOFORMATINFOTYPE_MIMETYPE_CHOICES = _make_choices_from_list([
-  u'text/plain', u'application/vnd.xmi+xml', u'application/xml',
+ u'text/plain', u'application/vnd.xmi+xml', u'text/xml',
   u'application/x-tmx+xml',u'application/x-xces+xml',
   u'application/tei+xml',u'application/rdf+xml', u'application/xhtml+xml',
   u'application/emma+xml',u'application/pls+xml',
   u'application/voicexml+xml',u'text/sgml', u'text/html',
   u'application/x-tex',u'application/rtf', u'application/x-latex',
   u'text/csv',u'text/tab-separated-values', u'application/pdf',
-  u'application/x-msaccess',u'audio/mp4', u'audio/mpeg', u'audio/x-wav',
+  u'application/x-msaccess',u'audio/mp4', u'audio/mpeg', u'audio/wav',
   u'image/bmp',u'image/gif', u'image/jpeg', u'image/png', u'image/svg+xml',
   u'image/tiff',u'video/jpeg', u'video/mp4', u'video/mpeg', u'video/x-flv',
   u'video/x-msvideo',u'video/x-ms-wmv', u'application/msword',
-  u'application/vnd.ms-excel',u'audio/mpeg3', u'text/turtle', u'other',
+  u'application/vnd.ms-excel',u'audio/mpeg3', u'text/turtle',
+  u'audio/flac', u'audio/PCMA', u'audio/speex', u'audio/vorbis', u'video/mp2t',
+  u'other',
 ])
 
 VIDEOFORMATINFOTYPE_COLOURSPACE_CHOICES = _make_choices_from_list([
@@ -5135,18 +5139,20 @@ class imageContentInfoType_model(SchemaModel):
         return _unicode
 
 IMAGEFORMATINFOTYPE_MIMETYPE_CHOICES = _make_choices_from_list([
-  u'text/plain', u'application/vnd.xmi+xml', u'application/xml',
+  u'text/plain', u'application/vnd.xmi+xml', u'text/xml',
   u'application/x-tmx+xml',u'application/x-xces+xml',
   u'application/tei+xml',u'application/rdf+xml', u'application/xhtml+xml',
   u'application/emma+xml',u'application/pls+xml',
   u'application/voicexml+xml',u'text/sgml', u'text/html',
   u'application/x-tex',u'application/rtf', u'application/x-latex',
   u'text/csv',u'text/tab-separated-values', u'application/pdf',
-  u'application/x-msaccess',u'audio/mp4', u'audio/mpeg', u'audio/x-wav',
+  u'application/x-msaccess',u'audio/mp4', u'audio/mpeg', u'audio/wav',
   u'image/bmp',u'image/gif', u'image/jpeg', u'image/png', u'image/svg+xml',
   u'image/tiff',u'video/jpeg', u'video/mp4', u'video/mpeg', u'video/x-flv',
   u'video/x-msvideo',u'video/x-ms-wmv', u'application/msword',
-  u'application/vnd.ms-excel',u'audio/mpeg3', u'text/turtle', u'other',
+  u'application/vnd.ms-excel',u'audio/mpeg3', u'text/turtle',
+  u'audio/flac', u'audio/PCMA', u'audio/speex', u'audio/vorbis', u'video/mp2t',
+  u'other',
 ])
 
 IMAGEFORMATINFOTYPE_COLOURSPACE_CHOICES = _make_choices_from_list([
@@ -5444,18 +5450,20 @@ class textNumericalContentInfoType_model(SchemaModel):
         return _unicode
 
 TEXTNUMERICALFORMATINFOTYPE_MIMETYPE_CHOICES = _make_choices_from_list([
-  u'text/plain', u'application/vnd.xmi+xml', u'application/xml',
+  u'text/plain', u'application/vnd.xmi+xml', u'text/xml',
   u'application/x-tmx+xml',u'application/x-xces+xml',
   u'application/tei+xml',u'application/rdf+xml', u'application/xhtml+xml',
   u'application/emma+xml',u'application/pls+xml',
   u'application/voicexml+xml',u'text/sgml', u'text/html',
   u'application/x-tex',u'application/rtf', u'application/x-latex',
   u'text/csv',u'text/tab-separated-values', u'application/pdf',
-  u'application/x-msaccess',u'audio/mp4', u'audio/mpeg', u'audio/x-wav',
+  u'application/x-msaccess',u'audio/mp4', u'audio/mpeg', u'audio/wav',
   u'image/bmp',u'image/gif', u'image/jpeg', u'image/png', u'image/svg+xml',
   u'image/tiff',u'video/jpeg', u'video/mp4', u'video/mpeg', u'video/x-flv',
   u'video/x-msvideo',u'video/x-ms-wmv', u'application/msword',
-  u'application/vnd.ms-excel',u'audio/mpeg3', u'text/turtle', u'other',
+  u'application/vnd.ms-excel',u'audio/mpeg3', u'text/turtle',
+  u'audio/flac', u'audio/PCMA', u'audio/speex', u'audio/vorbis', u'video/mp2t',
+  u'other',
 ])
 
 # pylint: disable-msg=C0103
@@ -6583,18 +6591,20 @@ INPUTINFOTYPE_MODALITYTYPE_CHOICES = _make_choices_from_list([
 ])
 
 INPUTINFOTYPE_MIMETYPE_CHOICES = _make_choices_from_list([
-  u'text/plain', u'application/vnd.xmi+xml', u'application/xml',
+  u'text/plain', u'application/vnd.xmi+xml', u'text/xml',
   u'application/x-tmx+xml',u'application/x-xces+xml',
   u'application/tei+xml',u'application/rdf+xml', u'application/xhtml+xml',
   u'application/emma+xml',u'application/pls+xml',
   u'application/voicexml+xml',u'text/sgml', u'text/html',
   u'application/x-tex',u'application/rtf', u'application/x-latex',
   u'text/csv',u'text/tab-separated-values', u'application/pdf',
-  u'application/x-msaccess',u'audio/mp4', u'audio/mpeg', u'audio/x-wav',
+  u'application/x-msaccess',u'audio/mp4', u'audio/mpeg', u'audio/wav',
   u'image/bmp',u'image/gif', u'image/jpeg', u'image/png', u'image/svg+xml',
   u'image/tiff',u'video/jpeg', u'video/mp4', u'video/mpeg', u'video/x-flv',
   u'video/x-msvideo',u'video/x-ms-wmv', u'application/msword',
-  u'application/vnd.ms-excel',u'audio/mpeg3', u'text/turtle', u'other',
+  u'application/vnd.ms-excel',u'audio/mpeg3', u'text/turtle',
+  u'audio/flac', u'audio/PCMA', u'audio/speex', u'audio/vorbis', u'video/mp2t',
+  u'other',
 ])
 
 INPUTINFOTYPE_CHARACTERENCODING_CHOICES = _make_choices_from_list([
@@ -6853,18 +6863,20 @@ OUTPUTINFOTYPE_MODALITYTYPE_CHOICES = _make_choices_from_list([
 ])
 
 OUTPUTINFOTYPE_MIMETYPE_CHOICES = _make_choices_from_list([
-  u'text/plain', u'application/vnd.xmi+xml', u'application/xml',
+  u'text/plain', u'application/vnd.xmi+xml', u'text/xml',
   u'application/x-tmx+xml',u'application/x-xces+xml',
   u'application/tei+xml',u'application/rdf+xml', u'application/xhtml+xml',
   u'application/emma+xml',u'application/pls+xml',
   u'application/voicexml+xml',u'text/sgml', u'text/html',
   u'application/x-tex',u'application/rtf', u'application/x-latex',
   u'text/csv',u'text/tab-separated-values', u'application/pdf',
-  u'application/x-msaccess',u'audio/mp4', u'audio/mpeg', u'audio/x-wav',
+  u'application/x-msaccess',u'audio/mp4', u'audio/mpeg', u'audio/wav',
   u'image/bmp',u'image/gif', u'image/jpeg', u'image/png', u'image/svg+xml',
   u'image/tiff',u'video/jpeg', u'video/mp4', u'video/mpeg', u'video/x-flv',
   u'video/x-msvideo',u'video/x-ms-wmv', u'application/msword',
-  u'application/vnd.ms-excel',u'audio/mpeg3', u'text/turtle', u'other',
+  u'application/vnd.ms-excel',u'audio/mpeg3', u'text/turtle',
+  u'audio/flac', u'audio/PCMA', u'audio/speex', u'audio/vorbis', u'video/mp2t',
+  u'other',
 ])
 
 OUTPUTINFOTYPE_CHARACTERENCODING_CHOICES = _make_choices_from_list([
