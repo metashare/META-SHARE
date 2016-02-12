@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- $Id$ --><resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
+<!-- $Id$ -->
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema META-SHARE-Resource.xsd">
    <identificationInfo>
@@ -11,7 +12,7 @@
 	  		</metaShareId>
    </identificationInfo>
    <distributionInfo>
-      <availability>available-unrestrictedUse</availability>
+      <availability>available</availability>
       <licenceInfo>
          <licence>CLARIN_RES</licence>
          <restrictionsOfUse>attribution</restrictionsOfUse>
