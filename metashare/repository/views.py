@@ -171,8 +171,8 @@ def _get_licences(resource, user_membership):
                         "object #{}: {}".format(resource.id, name))
             del all_licenses[name]
         elif user_membership >= access[1] \
-                and (distributionInfoType_model.objects.get \
-                    (licenceInfo = info).downloadLocation \
+                and (distributionInfoType_model.objects.filter \
+                    (licenceInfo = info)[0].downloadLocation \
                              or resource.storage_object.get_download()):
             # and (info.downloadLocation \
             # the resource can be downloaded somewhere under the current license
@@ -218,8 +218,8 @@ def download(request, object_id):
                 # before really providing the download, we have to make sure
                 # that the user hasn't tried to circumvent the permission system
                 if licences[licence_choice][1]:
-                    dl = distributionInfoType_model.objects.get \
-                    (id=licences[licence_choice][0].back_to_distributioninfotype_model_id).downloadLocation
+                    dl = distributionInfoType_model.objects.filter \
+                    (licenceInfo=licences[licence_choice][0])[0].downloadLocation
                     return _provide_download(request, resource,
                                              dl)
             else:
