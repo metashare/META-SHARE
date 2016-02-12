@@ -14,18 +14,15 @@ LOGGER.addHandler(LOG_HANDLER)
 
 RESOURCES_ZIP_FILE = '{0}/../misc/testdata/v3.0/all.zip'.format(ROOT_PATH) 
 
-class NightlyTests(TestCase):
+class NightlyTest(TestCase):
     """
     Defines a number of tests for the nightly build.
     """
     
-    @classmethod
-    def setUpClass(cls):
+    def setUp(self):
         """
         Set up the test
         """
-        LOGGER.info("running '{}' tests...".format(cls.__name__))
-        
         # disable indexing during import
         test_utils.set_index_active(False)
         
@@ -41,14 +38,10 @@ class NightlyTests(TestCase):
         from django.core.management import call_command
         call_command('rebuild_index', interactive=False, using=TEST_MODE_NAME)
         
-    
-    @classmethod
-    def tearDownClass(cls):
+    def tearDown(self):
         """
         Clean up the test
         """
-        LOGGER.info("finished '{}' tests".format(cls.__name__))
-        
         # disable indexing during import
         test_utils.set_index_active(False)
         
@@ -64,7 +57,7 @@ class NightlyTests(TestCase):
         call_command('rebuild_index', interactive=False, using=TEST_MODE_NAME)
 
         
-    def testSuccessfulImport(self):
+    def test_successful_import(self):
         """
         Checks that all resources have been imported.
         """
@@ -80,7 +73,7 @@ class NightlyTests(TestCase):
 
 
     #TODO replace with next text when single resource view is complete
-    def testSingleResourceView(self):
+    def test_single_resource_view(self):
         """
         Checks that each resource's single view is displayed correctly.
         """
@@ -104,7 +97,7 @@ class NightlyTests(TestCase):
 
 
     #TODO activate when single resource view is complete
-    def deactivated_testSingleResourceViewAll(self):
+    def test_deactivated_single_resource_view_all(self):
         """
         Checks that each resource's single view is displayed correctly.
         """
