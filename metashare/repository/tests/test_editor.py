@@ -26,6 +26,7 @@ from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, REMOTE, \
     StorageObject
 from selectable.views import get_lookup
+from django.contrib.contenttypes.models import ContentType
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -72,15 +73,13 @@ class EditorTest(TestCase):
     testfixture3 = None
     testfixture4 = None
     
-    @classmethod
-    def setUpClass(cls):
+    def setUp(self):
         """
         set up test users with and without staff permissions.
         These will live in the test database only, so will not
         pollute the "normal" development db or the production db.
         As a consequence, they need no valuable password.
         """
-        LOGGER.info("running '{}' tests...".format(cls.__name__))
         test_utils.set_index_active(False)
         test_utils.setup_test_storage()
 
@@ -160,15 +159,11 @@ class EditorTest(TestCase):
         EditorTest.testfixture4.owners.add(editoruser)
         EditorTest.testfixture4.save()
 
-
-    @classmethod
-    def tearDownClass(cls):
+    def tearDown(self):
         test_utils.clean_resources_db()
         test_utils.clean_storage()
         test_utils.clean_user_db()
         test_utils.set_index_active(True)
-        LOGGER.info("finished '{}' tests".format(cls.__name__))
-
 
     def test_can_log_in_staff(self):
         client = Client()
@@ -785,15 +780,13 @@ class LookupTest(TestCase):
     testfixture = None
     client = None
     
-    @classmethod
-    def setUpClass(cls):
+    def setUp(self):
         """
         set up test editor user with staff permissions.
         These will live in the test database only, so will not
         pollute the "normal" development db or the production db.
         As a consequence, they need no valuable password.
         """
-        LOGGER.info("running '{}' tests...".format(cls.__name__))
         test_utils.set_index_active(False)
         test_utils.setup_test_storage()
 
@@ -816,13 +809,11 @@ class LookupTest(TestCase):
 
         LookupTest.client = test_utils.get_client_with_user_logged_in(LookupTest.editor_login)
 
-    @classmethod
-    def tearDownClass(cls):
+    def tearDown(self):
         test_utils.clean_resources_db()
         test_utils.clean_storage()
         test_utils.clean_user_db()
         test_utils.set_index_active(True)
-        LOGGER.info("finished '{}' tests".format(cls.__name__))
 
     def test_editor_autocompletion_for_person(self):
         """
@@ -917,9 +908,7 @@ class DataUploadTests(TestCase):
     testfixture3 = None
     testfixture4 = None
     
-    @classmethod
-    def setUpClass(cls):
-        LOGGER.info("running '{}' tests...".format(cls.__name__))
+    def setUp(self):
         test_utils.set_index_active(False)
 
         DataUploadTests.test_editor_group = \
@@ -946,13 +935,6 @@ class DataUploadTests(TestCase):
             'password': 'secret',
         }
 
-    @classmethod
-    def tearDownClass(cls):
-        test_utils.clean_user_db()
-        test_utils.set_index_active(True)
-        LOGGER.info("finished '{}' tests".format(cls.__name__))
-
-    def setUp(self):
         test_utils.setup_test_storage()
         # first test resource
         DataUploadTests.testfixture = \
@@ -975,6 +957,8 @@ class DataUploadTests(TestCase):
     def tearDown(self):
         # we have to clean up both the resources DB and the storage folder as
         # uploads change the storage folder
+        test_utils.clean_user_db()
+        test_utils.set_index_active(True)
         test_utils.clean_resources_db()
         test_utils.clean_storage()
 
@@ -1112,7 +1096,6 @@ class DestructiveTests(TestCase):
     def setUpClass(cls):
         
         LOGGER.info("running '{}' tests...".format(cls.__name__))
-        
         # login POST dict
         DestructiveTests.superuser_login = {
             REDIRECT_FIELD_NAME: ADMINROOT,
@@ -1164,6 +1147,7 @@ class DestructiveTests(TestCase):
         test_utils.clean_resources_db()
         test_utils.clean_storage()
         test_utils.clean_user_db()
+        ContentType.objects.clear_cache()
 
     def test_editor_user_can_add_editor_group_to_own_resources_only(self):
         """
