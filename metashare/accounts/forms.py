@@ -247,6 +247,7 @@ class EditorGroupForm(ModelForm):
     """
     class Meta:
         model = EditorGroup
+        exclude = ()
         widgets = {
             'permissions': forms.widgets.MultipleHiddenInput
         }
@@ -259,6 +260,7 @@ class EditorGroupManagersForm(ModelForm):
     """
     class Meta:
         model = EditorGroupManagers
+        exclude = ()
         widgets = {
             'permissions': forms.widgets.MultipleHiddenInput
         }
@@ -271,6 +273,7 @@ class OrganizationForm(ModelForm):
     """
     class Meta:
         model = Organization
+        exclude = ()
         widgets = {
             'permissions': widgets.FilteredSelectMultiple(
                 Organization._meta.get_field('permissions').verbose_name, False)
@@ -284,6 +287,7 @@ class OrganizationManagersForm(ModelForm):
     """
     class Meta:
         model = OrganizationManagers
+        exclude = ()
         widgets = {
             'permissions': widgets.FilteredSelectMultiple(OrganizationManagers \
                     ._meta.get_field('permissions').verbose_name, False)

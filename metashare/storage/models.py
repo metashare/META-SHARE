@@ -102,7 +102,7 @@ class StorageObject(models.Model):
             ('can_sync', 'Can synchronize'),
         )
       
-    source_url = models.URLField(verify_exists=False, editable=False,
+    source_url = models.URLField(editable=False,
       default=settings.DJANGO_URL,
       help_text="(Read-only) base URL for the server where the master copy of " \
       "the associated language resource is located.")

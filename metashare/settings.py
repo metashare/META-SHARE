@@ -168,8 +168,8 @@ INSTALLED_APPS = (
 )
 
 # add Kronos to installed apps if not running on Windows
-if os.name != 'nt':
-    INSTALLED_APPS += ('kronos',)
+# if os.name != 'nt':
+#     INSTALLED_APPS += ('kronos',)
 
 # Continuous Integration support using django_jenkins: only add application
 # if django_jenkins module can be imported properly.
@@ -241,4 +241,35 @@ MAX_VIEW_INTERVAL = 60 * 5
 # used in recommendations
 MAX_DOWNLOAD_INTERVAL = 60 * 10
 
-
+SECRET_KEY = '8lu*6g0lg)9z!ba+a$ehk)xt)x%rxgb$i1&amp;022shmi1jcgihb*'
+LOGGING_CONFIG = None
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    }
+}
+DEFAULT_INDEX_TABLESPACE = ''
+DEFAULT_TABLESPACE = ''
+ABSOLUTE_URL_OVERRIDES = {}
+USE_TZ = False
+AUTH_USER_MODEL = 'auth.User'
+STATIC_URL = '/static/'
+LOCALE_PATHS = ()

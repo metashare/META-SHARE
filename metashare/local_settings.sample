@@ -105,3 +105,8 @@ SELENIUM_TESTSERVER_PORT = 8000
 
 PIWIK_DOMAIN_PATH = "stats.elda.org"
 PIWIK_SITE_ID = "3"
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    }
+}

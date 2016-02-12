@@ -142,7 +142,7 @@ class EditorGroupAdmin(admin.ModelAdmin):
                 self.fields['users'] = forms.ModelMultipleChoiceField(self.choices)
 
     @csrf_protect_m
-    @transaction.commit_on_success
+    @transaction.atomic
     def add_view(self, request, form_url='', extra_context=None):
         """
         The 'add' admin view for this model.
@@ -457,7 +457,7 @@ class EditorGroupManagersAdmin(admin.ModelAdmin):
                 self.fields['users'] = forms.ModelMultipleChoiceField(self.choices)
 
     @csrf_protect_m
-    @transaction.commit_on_success
+    @transaction.atomic
     def add_view(self, request, form_url='', extra_context=None):
         """
         The 'add' admin view for this model.
@@ -911,7 +911,7 @@ class OrganizationManagersAdmin(admin.ModelAdmin):
                 self.fields['users'] = forms.ModelMultipleChoiceField(self.choices)
 
     @csrf_protect_m
-    @transaction.commit_on_success
+    @transaction.atomic
     def add_view(self, request, form_url='', extra_context=None):
         """
         The 'add' admin view for this model.

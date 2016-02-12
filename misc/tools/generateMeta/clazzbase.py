@@ -407,7 +407,7 @@ TOP_LEVEL_TYPE_EXTRA_CODE_TEMPLATE = '''
 '''
 
 REUSABLE_ENTITY_SNIPPET = '''
-    source_url = models.URLField(verify_exists=False, 
+    source_url = models.URLField(
       default=DJANGO_URL,
       help_text="(Read-only) base URL for the server where the master copy of " \\
       "the associated entity instance is located.")

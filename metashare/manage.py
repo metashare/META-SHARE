@@ -4,15 +4,12 @@
 
 from os.path import abspath, dirname, join
 import sys
-
+import os
 parentdir = dirname(dirname(abspath(__file__)))
 # Insert our dependencies:
 sys.path.insert(0, join(parentdir, 'lib', 'python2.7', 'site-packages'))
 # Insert our parent directory (the one containing the folder metashare/):
 sys.path.insert(0, parentdir)
-
-
-from django.core.management import execute_manager
 
 try:
     import settings # Assumed to be in the same directory.
@@ -32,9 +29,7 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         command = sys.argv[1]
         if command in fail_early_commands:
-            from django.core.management import setup_environ
-            setup_environ(settings)
+            os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
             from metashare.repository import verify_at_startup
             verify_at_startup() # may raise Exception, which we don't want to catch.
-    
-    execute_manager(settings)
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")

@@ -973,7 +973,7 @@ class documentInfoType_model(documentationInfoType_model):
       blank=True, max_length=20, )
 
 
-    source_url = models.URLField(verify_exists=False, 
+    source_url = models.URLField(
       default=DJANGO_URL,
       help_text="(Read-only) base URL for the server where the master copy of " \
       "the associated entity instance is located.")
@@ -2637,7 +2637,7 @@ class organizationInfoType_model(actorInfoType_model):
       )
 
 
-    source_url = models.URLField(verify_exists=False, 
+    source_url = models.URLField( 
       default=DJANGO_URL,
       help_text="(Read-only) base URL for the server where the master copy of " \
       "the associated entity instance is located.")
@@ -2727,7 +2727,7 @@ class personInfoType_model(actorInfoType_model):
       blank=True, null=True, related_name="affiliation_%(class)s_related", )
 
 
-    source_url = models.URLField(verify_exists=False, 
+    source_url = models.URLField(
       default=DJANGO_URL,
       help_text="(Read-only) base URL for the server where the master copy of " \
       "the associated entity instance is located.")
@@ -3511,7 +3511,7 @@ class projectInfoType_model(SchemaModel):
       blank=True, null=True, )
 
 
-    source_url = models.URLField(verify_exists=False, 
+    source_url = models.URLField( 
       default=DJANGO_URL,
       help_text="(Read-only) base URL for the server where the master copy of " \
       "the associated entity instance is located.")
