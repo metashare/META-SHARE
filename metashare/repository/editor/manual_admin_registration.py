@@ -34,7 +34,7 @@ from metashare.repository.editor.related_mixin import RelatedAdminMixin
 from django.views.decorators.csrf import csrf_protect
 from django.db import transaction
 from django.utils.decorators import method_decorator
-from django.contrib.admin.util import unquote
+from django.contrib.admin.utils import unquote
 from django.core.exceptions import PermissionDenied
 from django.utils.html import escape
 from django.utils.encoding import force_unicode

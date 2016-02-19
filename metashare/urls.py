@@ -1,6 +1,6 @@
-from django.conf.urls.defaults import patterns, include
+from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from django.views.generic.simple import direct_to_template
+from django.views.generic import TemplateView
 
 from metashare.repository.editor import admin_site as editor_site
 from metashare.repository.sitemap import RepositorySitemap
@@ -12,8 +12,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
   (r'^{0}$'.format(DJANGO_BASE),
     'metashare.views.frontpage'),
-  (r'^{0}info/$'.format(DJANGO_BASE),
-     direct_to_template, {'template': 'metashare-info.html'}, "info"),
+  url(r'^{0}info/$'.format(DJANGO_BASE), TemplateView.as_view(template_name='metashare-info.html'), name='info'),
   (r'^{0}login/$'.format(DJANGO_BASE),
     'metashare.views.login', {'template_name': 'login.html'}),
   (r'^{0}logout/$'.format(DJANGO_BASE),
@@ -48,10 +47,13 @@ urlpatterns += patterns('',
   (r'^{}sitemap\.xml$'.format(DJANGO_BASE), 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
 )
 
+class RobotView(TemplateView):
+    mimetype = 'text/plain'
+    extra_context = { 'sitemap_url' : SITEMAP_URL }
+    
 if DJANGO_BASE == "":
     urlpatterns += patterns('',
-      (r'^{}robots\.txt$'.format(DJANGO_BASE), direct_to_template, 
-        {'template': 'robots.txt', 'mimetype': 'text/plain', 'extra_context' : { 'sitemap_url' : SITEMAP_URL }}),
+    (r'^{}robots\.txt$'.format(DJANGO_BASE), RobotView.as_view(template_name='robots.txt'))
     )
 
 if DEBUG:

@@ -2,7 +2,7 @@ import datetime
 
 from django import forms
 from django.contrib import admin, messages
-from django.contrib.admin.util import unquote
+from django.contrib.admin.utils import unquote
 from django.contrib.admin.views.main import ChangeList
 from django.contrib.auth.decorators import permission_required
 from django.core.exceptions import ValidationError, PermissionDenied
@@ -685,7 +685,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
 
 
     def get_urls(self):
-        from django.conf.urls.defaults import patterns, url
+        from django.conf.urls import patterns, url
         urlpatterns = super(ResourceModelAdmin, self).get_urls()
 
         def wrap(view):
@@ -693,7 +693,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 return self.admin_site.admin_view(view)(*args, **kwargs)
             return update_wrapper(wrapper, view)
 
-        info = self.model._meta.app_label, self.model._meta.module_name
+        info = self.model._meta.app_label, self.model._meta.model_name
         
         urlpatterns = patterns('',
             url(r'^(.+)/upload-data/$',

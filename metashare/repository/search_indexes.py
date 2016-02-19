@@ -298,7 +298,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         """
         return resourceInfoType_model
 
-    def index_queryset(self):
+    def index_queryset(self, using=None):
         """
         Returns the default QuerySet to index when doing a full index update.
 

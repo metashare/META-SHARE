@@ -8,7 +8,7 @@ from django import template
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.admin import helpers
-from django.contrib.admin.util import unquote, get_deleted_objects
+from django.contrib.admin.utils import unquote, get_deleted_objects
 from django.core.exceptions import PermissionDenied
 from django.db import transaction, models, router
 from django.forms.formsets import all_valid

@@ -15,7 +15,7 @@ from selectable.forms.widgets import SelectableMediaMixin, SelectableMultiWidget
 from django.utils.http import urlencode
 from metashare import settings
 from selectable.forms.widgets import AutoCompleteWidget, AutoCompleteSelectWidget        
-from django.forms.util import flatatt
+from django.forms.utils import flatatt
 from django.utils.encoding import force_unicode
 from django import forms
 
