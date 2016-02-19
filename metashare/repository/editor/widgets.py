@@ -702,18 +702,13 @@ class AutoCompleteSelectSingleWidget(AutoCompleteSelectWidget):
             u'data-selectable-throbber-img': '{0}img/admin/throbber_16.gif'.format(settings.ADMIN_MEDIA_PREFIX),
             u'data-selectable-use-state-error': 'false',
         }
-        widget_list = [
-            AutoCompleteWidget(
-                lookup_class, allow_new=self.allow_new,
-                limit=self.limit, query_params=query_params, attrs=attrs
-            ),
-            forms.HiddenInput(attrs={u'data-selectable-type': 'hidden'})
-        ]
         # Directly call the super-super-class __init__ method.
         # The super-class __init__ method does not allow custom attributes
         # to be passed to the AutoCompleteWidget. For this reason this
         # __init__ method is a modified version of the super-class one
         # and replaces it.
         # pylint: disable-msg=E1003
-        super(AutoCompleteSelectWidget, self).__init__(widget_list, *args, **kwargs)
+        # All of the texts are not true in django-selectable==0.9.0, so we don't need dirty modifications in lib
+        super(AutoCompleteSelectWidget, self).__init__(lookup_class, allow_new=self.allow_new,
+                limit=self.limit, query_params=query_params, attrs=attrs)
     

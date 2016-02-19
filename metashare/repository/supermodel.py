@@ -1361,7 +1361,7 @@ class InvisibleStringModel(SchemaModel):
     __schema_name__ = 'STRINGMODEL'
 
     value = models.TextField()
-
+    
     def __unicode__(self):
         if not self.value:
             return u''

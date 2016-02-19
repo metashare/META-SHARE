@@ -273,3 +273,6 @@ USE_TZ = False
 AUTH_USER_MODEL = 'auth.User'
 STATIC_URL = '/static/'
 LOCALE_PATHS = ()
+SILENCED_SYSTEM_CHECKS= ["models.E005"]
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+

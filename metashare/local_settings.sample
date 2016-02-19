@@ -55,9 +55,7 @@ DATABASES = {
         'PORT': '',                      # Set to empty string for default.
                                          # Not used with sqlite3.
         # Use the following for PostgreSQL.
-        #'OPTIONS': {
-        #  'autocommit': True,
-        #}
+       'AUTOCOMMIT': True,
     }
 }
 

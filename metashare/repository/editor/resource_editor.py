@@ -12,7 +12,7 @@ from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_unicode
-from django.utils.functional import update_wrapper
+from functools import update_wrapper
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _, ungettext
@@ -1213,6 +1213,7 @@ class LicenceForm(forms.ModelForm):
     class Meta:
         model = licenceInfoType_model
         widgets = {'membershipInfo': OneToManyWidget(lookup_class=MembershipDummyLookup)}
+        exclude = ()
 
 class LicenceModelAdmin(SchemaModelAdmin):
     form = LicenceForm
