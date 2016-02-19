@@ -1,4 +1,4 @@
-Django==1.8
+Django==1.8.9
 argparse==1.2.1
 django-analytical==0.22.0
 django-extensions==1.4.9
