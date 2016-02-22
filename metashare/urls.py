@@ -10,16 +10,16 @@ from metashare.settings import MEDIA_ROOT, DEBUG, DJANGO_BASE, SITEMAP_URL
 admin.autodiscover()
 
 urlpatterns = patterns('',
-  (r'^{0}$'.format(DJANGO_BASE),
-    'metashare.views.frontpage'),
+  url(r'^{0}$'.format(DJANGO_BASE),
+    'metashare.views.frontpage', name='frontpage'),
   url(r'^{0}info/$'.format(DJANGO_BASE), TemplateView.as_view(template_name='metashare-info.html'), name='info'),
-  (r'^{0}login/$'.format(DJANGO_BASE),
-    'metashare.views.login', {'template_name': 'login.html'}),
-  (r'^{0}logout/$'.format(DJANGO_BASE),
-    'metashare.views.logout', {'next_page': '/{0}'.format(DJANGO_BASE)}),
-  (r'^{0}admin/'.format(DJANGO_BASE),
+  url(r'^{0}login/$'.format(DJANGO_BASE),
+    'metashare.views.login', {'template_name': 'login.html'}, name='login'),
+  url(r'^{0}logout/$'.format(DJANGO_BASE),
+    'metashare.views.logout', {'next_page': '/{0}'.format(DJANGO_BASE)}, name='logout'),
+  url(r'^{0}admin/'.format(DJANGO_BASE),
     include(admin.site.urls)),
-  (r'^{0}editor/'.format(DJANGO_BASE),
+  url(r'^{0}editor/'.format(DJANGO_BASE),
     include(editor_site.urls)),
 )
 

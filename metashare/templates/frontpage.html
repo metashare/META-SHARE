@@ -8,7 +8,7 @@
     <p><img src="{{ MEDIA_URL }}meta-share-logo.png" style="border: 1px solid #cccccc;width: 850px;padding:10px;background-color:white;" /></p>
     <p>{{resources|intcomma}} language resource{{resources|pluralize}} at your disposal</p>
   </div>
-  <form method="get" action="{% url metashare.views.frontpage %}repository/search/" class="form_helper">
+  <form method="get" action="{% url 'frontpage' %}repository/search/" class="form_helper">
     <div id="search">
       <div id="search_input"><input class="big_input span-14" type="text" name="q" defaultText="Type in your keywords, please..." /></div>
       <div id="search_button"><button type="submit" class="big_button button">Search</button></div>
