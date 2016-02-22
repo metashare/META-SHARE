@@ -5,7 +5,7 @@
 {% block content %}
 <h2>Contact Resource Maintainer</h2>
 <div class="content_box">
-  <form class="form_helper" action="{% url metashare.repository.views.download_contact resource.storage_object.identifier %}" method="post">
+  <form class="form_helper" action="{% url 'download_contact' resource.storage_object.identifier %}" method="post">
     <table>
 	  <tr>
         <th><label>Resource name</label></th><td class="readonly">{{ resource }}</td>

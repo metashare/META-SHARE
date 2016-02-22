@@ -477,7 +477,7 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
                 if prefixes[prefix] != 1:
                     prefix = "%s-%s" % (prefix, prefixes[prefix])
                 formset = FormSet(instance=obj, prefix=prefix,
-                                  queryset=inline.queryset(request))
+                                  queryset=inline.get_queryset(request))
                 formsets.append(formset)
 
         #### begin modification ####

@@ -144,7 +144,7 @@ class RelatedAdminMixin(object):
                     attrs['value'] = _instance.id
             widget = HiddenInput(attrs=attrs)
             # But don't treat it as a hidden widget, e.g. in tabular inlines:
-            widget.is_hidden = False
+            widget.input_type = 'text'
             kwargs['widget'] = widget
 
     def is_related_widget_appropriate(self, kwargs, formfield):
