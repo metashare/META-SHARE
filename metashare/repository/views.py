@@ -507,9 +507,9 @@ def view(request, resource_name=None, object_id=None):
               
     # Create a list of resource components dictionaries
     if resource_type == "corpus":
-        #import pprint
-        #pp = pprint.PrettyPrinter(indent=4)
-        #pp.pprint(resource_component_dict['Resource_component'])
+#         import pprint
+#         pp = pprint.PrettyPrinter(indent=4)
+#         pp.pprint(resource_component_dict['Resource_component'])
         for media_type in media_types:
             if media_type == "text":
                 resource_component_dicts['text'] = \
@@ -526,7 +526,7 @@ def view(request, resource_name=None, object_id=None):
             if media_type == "image":
                 resource_component_dicts['image'] = \
                   resource_component_dict['Resource_component'] \
-                    ['Corpus_media']['Corpus_media']['Corpus_image']
+                    ['Corpus_media']['Corpus_image']['Corpus_image']
             if media_type == "textNgram":
                 resource_component_dicts['textNgram'] = \
                   resource_component_dict['Resource_component'] \
