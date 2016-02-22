@@ -16,7 +16,7 @@
           {% if not download_available %}
             <p>Please contact the resource maintainer for more information on how to obtain the selected resource under these license terms.</p>
           {% else %}
-            <form action="{% url metashare.repository.views.download resource.storage_object.identifier %}" method="post">
+            <form action="{% url 'download' resource.storage_object.identifier %}" method="post">
               {% csrf_token %}
               {{ form.as_p }}
               <input class="span-8 button middle_button" style="margin-left:150px;" type="submit" value="Download" />
@@ -32,7 +32,7 @@
         </td></tr>
       <tr><td>
         <a href="{{ resource.get_absolute_url }}"><input type="button" class="span-6 button middle_button" value="&laquo;&nbsp;Resource View" /></a>
-        <a href="{% url metashare.repository.views.download_contact resource.storage_object.identifier %}"><input type="button" class="span-8 button middle_button" value="Contact Resource Maintainer" /></a>
+        <a href="{% url 'download_contact' resource.storage_object.identifier %}"><input type="button" class="span-8 button middle_button" value="Contact Resource Maintainer" /></a>
       </td></tr>
     </table>
   </div>

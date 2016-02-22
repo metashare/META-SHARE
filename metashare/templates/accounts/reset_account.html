@@ -3,7 +3,7 @@
 {% block content %}
 <h2>Reset Account</h2>
 <div class="content_box">
-<form class="form_helper" method="post" action="{% url metashare.accounts.views.reset %}">
+<form class="form_helper" method="post" action="{% url 'reset' %}">
 {% csrf_token %}
 <table>
   {{ form.as_table }}

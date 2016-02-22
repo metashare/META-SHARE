@@ -304,5 +304,5 @@ def create_profile(sender, instance, created, **kwargs):
     # be saved in order to update the modified timestamp.  This will trigger
     # synchronise_profile() and perform synchronisation if required.
     else:
-        profile = instance.get_profile()
+        profile = instance.userprofile
         profile.save()

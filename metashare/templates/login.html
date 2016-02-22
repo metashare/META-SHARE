@@ -11,7 +11,7 @@
 {% block content %}
 <h2>User Authentication</h2>
 <div class="content_box">
-<form class="form_helper" method="post" action="{% url metashare.views.login %}">
+<form class="form_helper" method="post" action="{% url 'login' %}">
   {% csrf_token %}
   <table>
     {{ form.as_table }}
@@ -24,7 +24,7 @@
   </table>
   <input type="hidden" name="next" value="{{ next }}" />  
 </form>
-<p><a href="{% url metashare.accounts.views.reset %}">Forgotten your username or password? Click here to reset your password.</a></p>
-<p><a href="{% url metashare.accounts.views.create %}">Don&rsquo;t have an account, yet? Click here to create one.</a></p>
+<p><a href="{% url 'reset' %}">Forgotten your username or password? Click here to reset your password.</a></p>
+<p><a href="{% url 'create' %}">Don&rsquo;t have an account, yet? Click here to create one.</a></p>
 </div>
 {% endblock %}

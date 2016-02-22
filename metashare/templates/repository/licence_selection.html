@@ -9,7 +9,7 @@
   <form action="." method="post" id="licence_sel_form">
     {{ form }}
     <table>
-      <tr><th><input class="span-8 button middle_button" type="submit" value="Select Licence" /></th><td><a href="{% url metashare.repository.views.download_contact resource.storage_object.identifier %}"><input type="button" class="span-8 button middle_button" value="Contact Resource Maintainer" /></a></td></tr>
+      <tr><th><input class="span-8 button middle_button" type="submit" value="Select Licence" /></th><td><a href="{% url 'download_contact' resource.storage_object.identifier %}"><input type="button" class="span-8 button middle_button" value="Contact Resource Maintainer" /></a></td></tr>
     </table>
   </form>
 </div>
