@@ -34,7 +34,7 @@
             function () {
                var selection = geochart.getSelection()[0];
                var countrycode = data.getValue(selection.row, 0);
-               window.location.replace("{% url metashare.views.frontpage %}stats/top/?view={{ view }}&country="+countrycode);
+               window.location.replace("{% url 'frontpage' %}stats/top/?view={{ view }}&country="+countrycode);
             });
       
         geochart.draw(data, options);
@@ -109,16 +109,16 @@ function addStatus(filter){
 <div class='tab-container'>
  <ul class='etabs'>
    <li class='tab tab-nobr'>META-SHARE node visits statistics</li>
-    <li class='tab'><a href="{% url metashare.views.frontpage %}stats/usage/">Statistics on resource metadata</a></li>
+    <li class='tab'><a href="{% url 'frontpage' %}stats/usage/">Statistics on resource metadata</a></li>
    {% if user.username and myres %}
-        <li class='tab'><a href="{% url metashare.views.frontpage %}stats/mystats/">My resources</a></li>
+        <li class='tab'><a href="{% url 'frontpage' %}stats/mystats/">My resources</a></li>
    {% endif %}   
  </ul>
 </div>
 
 <div class="content_tab"> 
 	<div style="margin-left: 20px; padding-top: 10px;">
-	    <form class="form_helper" name="topform" id="topform" action="{% url metashare.views.frontpage %}stats/top/" method="get">
+	    <form class="form_helper" name="topform" id="topform" action="{% url 'frontpage' %}stats/top/" method="get">
             <h4>Show the <select style="color: #000; background: #eee" name='view' onchange="topform.submit();">
             
             <option value='topviewed' style="background-image: url({{ MEDIA_URL }}stats/img/view_icon.gif); background-repeat: no-repeat; padding-left: 20px;"
