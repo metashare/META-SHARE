@@ -507,11 +507,14 @@ def view(request, resource_name=None, object_id=None):
               
     # Create a list of resource components dictionaries
     if resource_type == "corpus":
+        #import pprint
+        #pp = pprint.PrettyPrinter(indent=4)
+        #pp.pprint(resource_component_dict['Resource_component'])
         for media_type in media_types:
             if media_type == "text":
                 resource_component_dicts['text'] = \
                   resource_component_dict['Resource_component'] \
-                    ['Corpus_media']['Corpus_text']
+                    ['Corpus_media']['Corpus_media']['Corpus_text']
             if media_type == "audio":
                 resource_component_dicts['audio'] = \
                   resource_component_dict['Resource_component'] \
@@ -519,19 +522,19 @@ def view(request, resource_name=None, object_id=None):
             if media_type == "video":
                 resource_component_dicts['video'] = \
                   resource_component_dict['Resource_component'] \
-                    ['Corpus_media']['Corpus_video']
+                    ['Corpus_media']['Corpus_media_1']['Corpus_video']
             if media_type == "image":
                 resource_component_dicts['image'] = \
                   resource_component_dict['Resource_component'] \
-                    ['Corpus_media']['Corpus_image']
+                    ['Corpus_media']['Corpus_media']['Corpus_image']
             if media_type == "textNgram":
                 resource_component_dicts['textNgram'] = \
                   resource_component_dict['Resource_component'] \
-                     ['Corpus_media']['Corpus_textNgram']
+                     ['Corpus_media']['Corpus_media']['Corpus_textNgram']
             if media_type == "textNumerical":
                 resource_component_dicts['textNumerical'] = \
                   resource_component_dict['Resource_component'] \
-                     ['Corpus_media']['Corpus_textNumerical']
+                     ['Corpus_media']['Corpus_media']['Corpus_textNumerical']
           
     elif resource_type == "languageDescription":
         for media_type in media_types:
