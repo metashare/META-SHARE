@@ -307,7 +307,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         """
         return self.get_model().objects.filter(storage_object__deleted=False)
 
-    def read_queryset(self):
+    def read_queryset(self, using=None):
         """
         Returns the default QuerySet for read actions.
 

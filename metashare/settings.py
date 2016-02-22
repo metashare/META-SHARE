@@ -292,4 +292,5 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 

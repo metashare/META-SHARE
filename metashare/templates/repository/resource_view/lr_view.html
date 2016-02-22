@@ -191,7 +191,7 @@
 		
 		<div style="clear: both;">
 			<a href="javascript:history.back();"><button class="span-12 button middle_button">&laquo; Back</button></a>
-		    <a href="{% url metashare.repository.views.download resource.storage_object.identifier %}">
+		    <a href="{% url 'download' resource.storage_object.identifier %}">
 		       	<button class="span-4 button middle_button">Download</button>
 		    </a>
 		  	<a {% if LR_EDIT %} href="{{ LR_EDIT }}" {% else %} href="#" class="tip" {% endif %}>
