@@ -44,6 +44,7 @@ class MetaBooleanField(models.NullBooleanField):
     # pylint: disable-msg=W0231,W0233
     def __init__(self, *args, **kwargs):
         kwargs['null'] = True
+        kwargs['blank'] = True
         kwargs['choices'] = self.YES_NO_CHOICES
         models.Field.__init__(self, *args, **kwargs)
 
