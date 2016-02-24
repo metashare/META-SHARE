@@ -417,7 +417,7 @@ class EditorGroupApplicationAdmin(admin.ModelAdmin):
             "perms_lacking": perms_needed,
             "protected": protected,
             "opts": opts,
-            "root_path": self.admin_site.root_path,
+            "root_path": self.admin_site.site_url,
             "app_label": app_label,
             'action_checkbox_name': helpers.ACTION_CHECKBOX_NAME,
         }
@@ -870,7 +870,7 @@ class OrganizationApplicationAdmin(admin.ModelAdmin):
             "perms_lacking": perms_needed,
             "protected": protected,
             "opts": opts,
-            "root_path": self.admin_site.root_path,
+            "root_path": self.admin_site.site_url,
             "app_label": app_label,
             'action_checkbox_name': helpers.ACTION_CHECKBOX_NAME,
         }

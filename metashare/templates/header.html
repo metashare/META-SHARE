@@ -26,7 +26,7 @@
   {# drop-down menu created with http://javascript-array.com/scripts/jquery_simple_drop_down_menu/ #}
   <ul id="jsddm">
     <li title="Browse the resources of the META-SHARE catalogue"><a href="{% url 'frontpage' %}repository/search/">Browse Resources</a></li>
-    {% if user.get_profile.has_editor_permission %}
+    {% if user.userprofile.has_editor_permission %}
     <li title="Create/edit resource metadata or upload resource data"><a>Manage Resources</a>
       <ul>
         <li title="Create/edit your own resource metadata or upload resource data"><a href="{% url 'editor:repository_resourceinfotype_model_myresources' %}">Manage your own resources</a></li>
