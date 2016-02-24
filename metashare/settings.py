@@ -156,6 +156,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.humanize',
     'django.contrib.sitemaps',
+    'django.contrib.staticfiles',
 
     'haystack',
     'analytical',
@@ -272,6 +273,7 @@ ABSOLUTE_URL_OVERRIDES = {}
 USE_TZ = False
 AUTH_USER_MODEL = 'auth.User'
 STATIC_URL = '/static/'
+STATIC_ROOT = '{0}/static/'.format(ROOT_PATH)
 LOCALE_PATHS = ()
 SILENCED_SYSTEM_CHECKS= ["models.E005"]
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'

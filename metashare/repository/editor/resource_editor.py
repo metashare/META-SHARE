@@ -819,7 +819,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
             'existing_download': existing_download,
             'object_id': object_id,
             'original': obj,
-            'root_path': self.admin_site.root_path,
+            'root_path': self.admin_site.site_url,
             'app_label': opts.app_label,
         }
         context.update(extra_context or {})
