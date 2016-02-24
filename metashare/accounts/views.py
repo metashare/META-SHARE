@@ -184,7 +184,7 @@ def edit_profile(request):
     Edits user account profile for the logged in user.
     """
     # Get UserProfile instance corresponding to the current user.
-    profile = request.user.get_profile()
+    profile = request.user.userprofile
 
     # Check if the edit form has been submitted.
     if request.method == "POST":
@@ -335,7 +335,7 @@ def update_default_editor_groups(request):
     Update default Editor Groups.
     """
     # Get UserProfile instance corresponding to the current user.
-    profile = request.user.get_profile()
+    profile = request.user.userprofile
 
     # Exclude from the list the editor groups for which the user is not a member
     available_editor_groups = EditorGroup.objects \
