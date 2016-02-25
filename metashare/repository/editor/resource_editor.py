@@ -1151,7 +1151,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
             return
 
         # Get UserProfile instance corresponding to the current user.
-        profile = request.user.get_profile()
+        profile = request.user.userprofile
 
         # Need to add user to owners and groups to editor_groups
         owners.append(user_id)

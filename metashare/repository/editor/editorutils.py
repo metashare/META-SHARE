@@ -7,7 +7,7 @@ metashare.repository.editor.
 '''
 from django.db import models
 from django.core.urlresolvers import reverse
-from django.contrib.admin.options import ModelAdmin
+from django.contrib.admin.options import ModelAdmin, IncorrectLookupParameters
 from haystack.admin import list_max_show_all
 from django.contrib.admin.views.main import ChangeList, SEARCH_VAR
 from django.core.exceptions import PermissionDenied
@@ -19,6 +19,7 @@ from django.utils.translation import ungettext
 from haystack import connections
 from haystack.query import RelatedSearchQuerySet
 from django.db.models import Q
+from django.core.exceptions import ImproperlyConfigured, SuspiciousOperation
 try:
     from django.contrib.admin.options import csrf_protect_m
 except ImportError:
@@ -96,7 +97,7 @@ class AllChangeList(ChangeList):
         self.can_show_all = can_show_all
         self.multi_page = multi_page
         self.paginator = paginator
-    
+
 class FilteredChangeList(ChangeList):
     """
     A FilteredChangeList filters the result_list for request.user objects.
@@ -106,30 +107,62 @@ class FilteredChangeList(ChangeList):
     Customized for haystack search in backoffice admin of your own resources. 
     """
     
-    def __init__(self, request, model, list_display, list_display_links,
-      list_filter, date_hierarchy, search_fields, list_select_related,
-      list_per_page, list_editable, model_admin):
-        # Call super constructor to initialise object instance.
-        super(FilteredChangeList, self).__init__(request, model, list_display,
-          list_display_links, list_filter, date_hierarchy, search_fields,
-          list_select_related, list_per_page, list_editable, model_admin)
-        # Check if the current model has an "owners" ManyToManyField.
+    def get_queryset(self, request):
+        # First, we collect all the declared list filters.
+        (self.filter_specs, self.has_filters, remaining_lookup_params,
+         filters_use_distinct) = self.get_filters(request)
+
+        # Then, we let every list filter modify the queryset to its liking.
+        qs = self.root_queryset
+        for filter_spec in self.filter_specs:
+            new_qs = filter_spec.queryset(request, qs)
+            if new_qs is not None:
+                qs = new_qs
+
+        try:
+            # Finally, we apply the remaining lookup parameters from the query
+            # string (i.e. those that haven't already been processed by the
+            # filters).
+            qs = qs.filter(**remaining_lookup_params)
+        except (SuspiciousOperation, ImproperlyConfigured):
+            # Allow certain types of errors to be re-raised as-is so that the
+            # caller can treat them in a special way.
+            raise
+        except Exception as e:
+            # Every other error is caught with a naked except, because we don't
+            # have any other way of validating lookup parameters. They might be
+            # invalid if the keyword arguments are incorrect, or if the values
+            # are not in the correct type, so we might get FieldError,
+            # ValueError, ValidationError, or ?.
+            raise IncorrectLookupParameters(e)
+
+        if not qs.query.select_related:
+            qs = self.apply_select_related(qs)
+
+        # Set ordering.
+        ordering = self.get_ordering(request, qs)
+        qs = qs.order_by(*ordering)
+
+        # Apply search results
+        qs, search_use_distinct = self.model_admin.get_search_results(
+            request, qs, self.query)
+
         _has_owners_field = False
         if 'owners' in self.opts.get_all_field_names():
             _field = self.opts.get_field_by_name('owners')[0]
             _has_owners_field = isinstance(_field, models.ManyToManyField)
-
-        # If "owners" are available, we
-        # have to constrain the QuerySet using an additional filter...
         if _has_owners_field:
             _user = request.user
-            self.root_query_set = self.root_query_set.filter(owners=_user)
-
-        self.query_set = self.get_query_set()
-        self.get_results(request)
-
+            qs = qs.filter(owners=_user)
+        
+        # Remove duplicates from results, if necessary
+        if filters_use_distinct | search_use_distinct:
+            return qs.distinct()
+        else:
+            return qs
+    
     def url_for_result(self, result):
-        return reverse("editor:{}_{}_change".format(self.opts.app_label, self.opts.module_name), args=(getattr(result, self.pk_attname),))
+        return reverse("editor:{}_{}_change".format(self.opts.app_label, self.opts.model_name), args=(getattr(result, self.pk_attname),))
     
     def get_results(self, request):
         """
@@ -172,6 +205,10 @@ class FilteredChangeList(ChangeList):
         self.can_show_all = can_show_all
         self.multi_page = multi_page
         self.paginator = paginator
+        
+from django.contrib.admin.views.main import ERROR_FLAG
+from django.template.response import SimpleTemplateResponse
+from django.http import HttpResponseRedirect
 
 class MetaShareSearchModelAdmin(ModelAdmin):
     """
@@ -196,10 +233,30 @@ class MetaShareSearchModelAdmin(ModelAdmin):
         
         # So. Much. Boilerplate.
         # Why copy-paste a few lines when you can copy-paste TONS of lines?
-        list_display = list(self.list_display)
+        list_display = self.get_list_display(request)
+        list_display_links = self.get_list_display_links(request, list_display)
+        list_filter = self.get_list_filter(request)
+        search_fields = self.get_search_fields(request)
         
         ChangeListClass = self.get_changelist(request)
-        changelist = ChangeListClass(request, self.model, list_display, self.list_display_links, self.list_filter, self.date_hierarchy, self.search_fields, self.list_select_related, self.list_per_page, self.list_editable, self)
+        try:
+            changelist = ChangeListClass(request, self.model, list_display,
+                list_display_links, list_filter, self.date_hierarchy,
+                search_fields, self.list_select_related, self.list_per_page,
+                self.list_max_show_all, self.list_editable, self)
+
+        except IncorrectLookupParameters:
+            # Wacky lookup parameters were given, so redirect to the main
+            # changelist page, without parameters, and pass an 'invalid=1'
+            # parameter via the query string. If wacky parameters were given
+            # and the 'invalid=1' parameter was already in the query string,
+            # something is screwed up with the database, so display an error
+            # page.
+            if ERROR_FLAG in request.GET.keys():
+                return SimpleTemplateResponse('admin/invalid_setup.html', {
+                    'title': _('Database error'),
+                })
+            return HttpResponseRedirect(request.path + '?' + ERROR_FLAG + '=1')
         formset = changelist.formset = None
         media = self.media
         
