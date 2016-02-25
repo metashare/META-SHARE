@@ -83,7 +83,7 @@ def _get_root_resources(ignore, *instances):
         if isinstance(instance, resourceInfoType_model):
             result.add(instance)
         # an instance may be None, in which case we ignore it
-        elif instance:
+        elif hasattr(instance, '_meta'):
             # There are 3 possibilities for going backward in our model graph:
 
             # case (1): we have to follow a `ForeignKey` with a name starting
