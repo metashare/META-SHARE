@@ -161,7 +161,7 @@ def usagestats (request):
                 metadata_type = model_name
                 if not metaname in _fields:
                     if not verbose_name:
-                        if not "_set" in _field:
+                        if not "_set" in _field and not "validation_info_type" in _field and not "relation_info_type" in _field:
                             verbose_name = eval(u'{0}._meta.get_field("{1}").verbose_name'.format(_model, _field))
                             class_name = eval(u'{0}._meta.verbose_name'.format(_classes[_component]))
                             if verbose_name != class_name:
