@@ -382,7 +382,7 @@ class identificationInfoType_model(SchemaModel):
       'uage.',
       blank=True)
 
-    url = MultiTextField(max_length=150, widget=MultiFieldWidget(widget_id=0, max_length=150),
+    url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=0, max_length=1000),
       verbose_name='URL (Landing page)', validators=[HTTPURI_VALIDATOR],
       help_text='A URL used as homepage of an entity (e.g. of a person, ' \
       'organization, resource etc.); it provides general information (fo' \
@@ -753,7 +753,7 @@ class metadataInfoType_model(SchemaModel):
       'vesting',
       blank=True, max_length=1000, )
 
-    metadataLanguageName = MultiTextField(max_length=100, widget=MultiChoiceWidget(widget_id=2,choices= languagename_optgroup_choices(),),
+    metadataLanguageName = MultiTextField(max_length=1000, widget=MultiChoiceWidget(widget_id=2, choices= languagename_optgroup_choices(),),
       verbose_name='Metadata language',
       help_text='The language in which the metadata description is writt' \
       'en according to IETF BCP47 (ISO 639-1 or ISO 639-3 for languages ' \
@@ -1031,7 +1031,7 @@ class resourceDocumentationInfoType_model(SchemaModel):
       'resource',
       blank=True, null=True, related_name="documentation_%(class)s_related", )
 
-    samplesLocation = MultiTextField(max_length=150, widget=MultiFieldWidget(widget_id=8, max_length=150),
+    samplesLocation = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=8, max_length=1000),
       verbose_name='Samples location', validators=[HTTPURI_VALIDATOR],
       help_text='A url with samples of the resource or, in the case of t' \
       'ools, of samples of the output',
@@ -2425,7 +2425,7 @@ class communicationInfoType_model(SchemaModel):
       help_text='The email address of a person or an organization',
       )
 
-    url = MultiTextField(max_length=150, widget=MultiFieldWidget(widget_id=15, max_length=150),
+    url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=15, max_length=1000),
       verbose_name='URL (Landing page)', validators=[HTTPURI_VALIDATOR],
       help_text='A URL used as homepage of an entity (e.g. of a person, ' \
       'organization, resource etc.); it provides general information (fo' \
@@ -2780,14 +2780,14 @@ class distributionInfoType_model(SchemaModel):
       choices=DISTRIBUTIONINFOTYPE_DISTRIBUTIONACCESSMEDIUM_CHOICES['choices'],
       )
 
-    downloadLocation = MultiTextField(max_length=150, widget=MultiFieldWidget(widget_id=17, max_length=150),
+    downloadLocation = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=17, max_length=1000),
       verbose_name='Download location', validators=[HTTPURI_VALIDATOR],
       help_text='Any url where the resource can be downloaded from; plea' \
       'se, use if the resource is "downloadable" and you have not upload' \
       'ed the resource in the repository',
       blank=True, )
 
-    executionLocation = MultiTextField(max_length=150, widget=MultiFieldWidget(widget_id=18, max_length=150),
+    executionLocation = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=18, max_length=1000),
       verbose_name='Execution location', validators=[HTTPURI_VALIDATOR],
       help_text=' Any url where the service providing access to a resour' \
       'ce is being executed; please use for resources that are "accessib' \
@@ -3498,7 +3498,7 @@ class projectInfoType_model(SchemaModel):
       'ource',
       blank=True, max_length=100, )
 
-    url = MultiTextField(max_length=150, widget=MultiFieldWidget(widget_id=20, max_length=150),
+    url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=20, max_length=1000),
       verbose_name='URL (Landing page)', validators=[HTTPURI_VALIDATOR],
       help_text='A URL used as homepage of an entity (e.g. of a person, ' \
       'organization, resource etc.); it provides general information (fo' \
@@ -6759,7 +6759,7 @@ class inputInfoType_model(SchemaModel):
       choices=INPUTINFOTYPE_MODALITYTYPE_CHOICES['choices'],
       )
 
-    languageName = MultiTextField(max_length=500, widget=MultiChoiceWidget(widget_id=30, choices = languagename_optgroup_choices()),
+    languageName = MultiTextField(max_length=1000, widget=MultiChoiceWidget(widget_id=30, choices = languagename_optgroup_choices()),
     verbose_name='Language name',
     help_text='A human understandable name of the language that is use' \
       'd in the resource or supported by the tool/service, as specified ' \
@@ -7031,7 +7031,7 @@ class outputInfoType_model(SchemaModel):
       choices=OUTPUTINFOTYPE_MODALITYTYPE_CHOICES['choices'],
       )
 
-    languageName = MultiTextField(max_length=500, widget=MultiChoiceWidget(widget_id=36, choices = languagename_optgroup_choices()),
+    languageName = MultiTextField(max_length=1000, widget=MultiChoiceWidget(widget_id=36, choices = languagename_optgroup_choices()),
       verbose_name='Language name',
       help_text='A human understandable name of the language that is use' \
       'd in the resource or supported by the tool/service, as specified ' \
