@@ -8030,10 +8030,3 @@ class documentUnstructuredString_model(InvisibleStringModel, documentationInfoTy
             # pylint: disable-msg=W0201
             self.id = _compute_documentationInfoType_key()
         super(documentUnstructuredString_model, self).save(*args, **kwargs)
-
-
-
-from south.modelsinspector import add_introspection_rules
-add_introspection_rules([], ["^metashare\.repository\.fields\.MetaBooleanField"])
-add_introspection_rules([], ["^metashare\.repository\.fields\.MultiSelectField"])
-add_introspection_rules([], ["^metashare\.repository\.fields\.XmlCharField"])
