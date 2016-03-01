@@ -157,7 +157,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django.contrib.sitemaps',
     'django.contrib.staticfiles',
-
+    'selectable',
     'haystack',
     'analytical',
 
@@ -295,4 +295,4 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
-
+SOUTH_TESTS_MIGRATE = False

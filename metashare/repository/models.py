@@ -92,11 +92,11 @@ class resourceInfoType_model(SchemaModel):
       ( u'contactPerson', u'contactPerson', REQUIRED ),
       ( u'metadataInfo', u'metadataInfo', REQUIRED ),
       ( u'versionInfo', u'versionInfo', RECOMMENDED ),
-      ( u'validationInfo', u'validation_info_type', RECOMMENDED ),
+      ( u'validationInfo', u'validation_info_type_set', RECOMMENDED ),
       ( u'usageInfo', u'usageInfo', RECOMMENDED ),
       ( u'resourceDocumentationInfo', u'resourceDocumentationInfo', RECOMMENDED ),
       ( u'resourceCreationInfo', u'resourceCreationInfo', RECOMMENDED ),
-      ( u'relationInfo', u'relation_info_type', RECOMMENDED ),
+      ( u'relationInfo', u'relation_info_type_set', RECOMMENDED ),
       ( 'resourceComponentType/corpusInfo', 'resourceComponentType', REQUIRED ),
       ( 'resourceComponentType/toolServiceInfo', 'resourceComponentType', REQUIRED ),
       ( 'resourceComponentType/languageDescriptionInfo', 'resourceComponentType', REQUIRED ),
@@ -581,7 +581,7 @@ class validationInfoType_model(SchemaModel):
       '(s) that validated the resource',
       blank=True, null=True, related_name="validator_%(class)s_related", )
 
-    back_to_resourceinfotype_model = models.ForeignKey("resourceInfoType_model",  blank=True, null=True, related_name="validation_info_type")
+    back_to_resourceinfotype_model = models.ForeignKey("resourceInfoType_model",  blank=True, null=True, related_name="validation_info_type_set")
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -1454,7 +1454,7 @@ class relationInfoType_model(SchemaModel):
       ' resource',
       )
 
-    back_to_resourceinfotype_model = models.ForeignKey("resourceInfoType_model",  blank=True, null=True, related_name='relation_info_type')
+    back_to_resourceinfotype_model = models.ForeignKey("resourceInfoType_model",  blank=True, null=True, related_name='relation_info_type_set')
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)

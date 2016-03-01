@@ -100,10 +100,19 @@
 				$(this).attr('checked', 'checked');
 			}
 		});
+	
 		$('#id_submit').click(function() {
 			if( $('#id_resourceType option:selected').attr('value') == 'corpus' &&  $('div#id_corpusInfo').children('input[type="checkbox"][checked]').length == 0 ){
-				alert("At least one media type must be selected.");		
-				return false;
+				var is_checked = false;
+				$('div#id_corpusInfo').children('input[type="checkbox"]').each(function(){
+					if ($(this).is(':checked')) {
+						is_checked = true;
+					}
+				});
+				if (! is_checked) {
+					alert("At least one media type must be selected.");
+					return false;
+				}
 			}
 		});
 		

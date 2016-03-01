@@ -261,7 +261,7 @@ class MetadataInline(ReverseInlineModelAdmin):
 
 class ResourceModelAdmin(SchemaModelAdmin): 
     
-    haystack_connection = 'default'           
+    haystack_connection = 'default'
     inline_type = 'stacked'
     custom_one2one_inlines = {'identificationInfo':IdentificationInline,
                               'resourceComponentType':ResourceComponentInline,
@@ -914,7 +914,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     _relevant_fields.append(_fieldname_to_append)
                     _verbose_names.append(self.model.get_verbose_name(_field_name))
             
-            
             if len(_visible_fields) > 0:
                 _detail = ', '.join(_visible_fields_verbose_names)
                 _caption = '{0} administration information: {1}'.format(_field_status.capitalize(), _detail)
@@ -930,10 +929,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
         _hidden_fields = self.get_hidden_fields()
         if _hidden_fields:
             _fieldsets.append((None, {'fields': _hidden_fields, 'classes':('display_none',)}))
-
         return _fieldsets
-
-
+    
     def resource_type_selection_view(self, request, form_url, extra_context):
         opts = self.model._meta
         media = self.media or []
@@ -1192,7 +1189,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         super(ResourceModelAdmin, self).save_model(request, obj, form, change)
         # update statistics
         if hasattr(obj, 'storage_object') and obj.storage_object is not None:
-            saveLRStats(obj, UPDATE_STAT, request)          
+            saveLRStats(obj, UPDATE_STAT, request)
     
     def delete_model(self, request, obj):
         obj.storage_object.deleted = True

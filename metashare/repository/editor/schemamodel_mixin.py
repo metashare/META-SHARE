@@ -9,6 +9,9 @@ from metashare.repository.editor.widgets import ComboWidget, MultiComboWidget
 from metashare.repository.models import inputInfoType_model, \
     outputInfoType_model, languageInfoType_model, metadataInfoType_model, \
     documentInfoType_model, annotationInfoType_model
+import warnings
+from django.utils.deprecation import (RenameMethodsBase,
+    RemovedInDjango18Warning, RemovedInDjango19Warning)
 
 # Fields that need the ComboWidget/MultiComboWidget with autocomplete functionality
 # to use with languageId,languageName pairs.
@@ -145,23 +148,20 @@ class SchemaModelLookup(object):
         _hidden_fields = self.get_hidden_fields()
         if _hidden_fields:
             _fieldsets.append((None, {'fields': _hidden_fields, 'classes':('display_none', )}))
-
         return _fieldsets
 
     def build_fieldsets_from_schema(self, include_inlines=False, inlines=()):
         if self.show_tabbed_fieldsets:
             return self.build_fieldsets_from_schema_tabbed(include_inlines, inlines)
         return self.build_fieldsets_from_schema_plain(include_inlines, inlines)
-
+    
     def get_fieldsets(self, request, obj=None):
         return self.build_fieldsets_from_schema()
-
 
     def get_fieldsets_with_inlines(self, request, obj=None):
         # pylint: disable-msg=E1101
         inline_names = [inline.parent_fk_name for inline in self.inline_instances if hasattr(inline, 'parent_fk_name')]
         return self.build_fieldsets_from_schema(include_inlines=True, inlines=inline_names)
-
 
     def get_inline_classes(self, model, status):
         '''

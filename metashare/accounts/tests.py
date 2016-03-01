@@ -1,7 +1,6 @@
 import logging
 import django.test
 from django.contrib.admin.helpers import ACTION_CHECKBOX_NAME
-from django.contrib.admin.sites import LOGIN_FORM_KEY
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.models import User, Permission, Group
 from django.contrib.contenttypes.models import ContentType
@@ -19,6 +18,8 @@ from metashare.settings import DJANGO_BASE, LOG_HANDLER
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
+
+LOGIN_FORM_KEY = 'this_is_the_login_form'
 
 class ContactFormTest(django.test.TestCase):
     """

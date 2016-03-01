@@ -78,11 +78,11 @@
     <li title="Profile settings and actions"><a href="{% url 'metashare.accounts.views.edit_profile' %}">Your Profile, {% filter force_escape %}{% firstof user.first_name user.username %}{% endfilter %}</a>
       <ul>
         {% if user.is_staff %}<li><a href="{% url 'editor:index' %}">View your recent actions</a></li>{% endif %}
-        <li><a href="{% url 'metashare.accounts.views.edit_profile' %}" title='View or edit your personal details'>Edit your profile</a></li>
-        <li><a href="{% url 'django.contrib.auth.views.password_change' %}">Change your password</a></li>
-        <li><a href="{% url 'metashare.accounts.views.editor_group_application' %}" title="Apply for membership in editor groups">Apply for editor group membership</a></li>
-        <li><a href="{% url 'metashare.accounts.views.update_default_editor_groups' %}" title='Set the editor groups to which all new resources you create shall belong'>Update default editor groups</a></li>
-        <li><a href="{% url 'metashare.accounts.views.organization_application' %}" title="Apply for membership in organizations">Apply for organization membership</a></li>
+        <li><a href="{% url 'edit_profile' %}" title='View or edit your personal details'>Edit your profile</a></li>
+        <li><a href="{% url 'password_change' %}">Change your password</a></li>
+        <li><a href="{% url 'editor_group_application' %}" title="Apply for membership in editor groups">Apply for editor group membership</a></li>
+        <li><a href="{% url 'update_default_editor_groups' %}" title='Set the editor groups to which all new resources you create shall belong'>Update default editor groups</a></li>
+        <li><a href="{% url 'organization_application' %}" title="Apply for membership in organizations">Apply for organization membership</a></li>
       </ul>
     </li>
     {% endif %}

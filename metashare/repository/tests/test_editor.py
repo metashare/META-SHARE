@@ -4,7 +4,6 @@ import shutil
 import django.db.models
 
 from django.contrib import admin
-from django.contrib.admin.sites import LOGIN_FORM_KEY
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
@@ -31,6 +30,8 @@ from django.contrib.contenttypes.models import ContentType
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
+
+LOGIN_FORM_KEY = 'this_is_the_login_form'
 
 ADMINROOT = '/{0}editor/'.format(DJANGO_BASE)
 TESTFIXTURE_XML = '{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
