@@ -8,7 +8,7 @@ django-selectable==0.5.2
 django-selenium==0.9.7
 flup==1.0.2
 httplib2==0.9.1
-lxml==3.5.0
+lxml=3.4.2
 psycopg2==2.6.1
 pycountry==1.12
 pygeoip==0.3.2

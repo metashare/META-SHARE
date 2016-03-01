@@ -384,14 +384,14 @@ class SearchTestPublishedResources(TestCase):
         client = Client()
         response = client.get(_SEARCH_PAGE_PATH, follow=True, 
           data={'selected_facets':
-                'availabilityFilter_exact:Available - Unrestricted Use'})
+                'availabilityFilter_exact:Available'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
               
     def testLicenceFacet(self):   
         client = Client()
         response = client.get(_SEARCH_PAGE_PATH,
-            data={'selected_facets':'licenceFilter_exact:ELRA_END_USER'})
+            data={'selected_facets':'licenceFilter_exact:ELRA END USER'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "2 Language Resources", status_code=200)
     
@@ -408,7 +408,7 @@ class SearchTestPublishedResources(TestCase):
         client = Client()
         response = client.get(_SEARCH_PAGE_PATH, follow=True, 
           data={'selected_facets':
-                'restrictionsOfUseFilter_exact:Academic - Non Commercial Use'})
+                'restrictionsOfUseFilter_exact:Non Commercial Use'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "2 Language Resources", status_code=200)
       
@@ -458,7 +458,7 @@ class SearchTestPublishedResources(TestCase):
     def testMimeTypeFacet(self):   
         client = Client()
         response = client.get(_SEARCH_PAGE_PATH, follow=True, 
-          data={'selected_facets':'mimeTypeFilter_exact:audio mime type'})
+          data={'selected_facets':'mimeTypeFilter_exact:audio/mpeg'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
     
