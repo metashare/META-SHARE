@@ -605,7 +605,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         Collect the data to filter the resources on Validated
         """
         return [validation_info.validated for validation_info in
-                obj.validation_info_type.all()]
+                obj.validation_info_type_set.all()]
 
     def prepare_foreseenUseFilter(self, obj):
         """

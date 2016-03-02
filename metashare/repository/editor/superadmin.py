@@ -266,7 +266,10 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
                 return self.add_view(request, form_url=reverse('admin:%s_%s_add' % (
                     opts.app_label, opts.model_name),
                     current_app=self.admin_site.name))
-                    
+        
+        if request.method == 'POST' and "_saveasnew" in request.POST:
+            return self.add_view(request, form_url='../add/')
+        
         request.session.set_expiry(settings.SESSION_COOKIE_AGE)
         
         ModelForm = self.get_form(request, obj)
@@ -282,7 +285,7 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
                 
             prefixes = {}
             
-            for FormSet, inline in zip(self.get_formsets(request, obj), self.inline_instances):
+            for FormSet, inline in zip(self.get_formsets(request, new_object), self.inline_instances):
                 #### begin modification ####
                 if getattr(FormSet, 'parent_fk_name', None) in self.no_inlines:
                     continue
@@ -319,10 +322,17 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
                     if changes:
                         assert len(changes) == 1
                         setattr(new_object, parent_fk_name, changes[0])
+                    if not add:
+                        # If we have deleted a one-to-one inline, we must manually unset the field value.
+                        if formset.deleted_objects:
+                            parent_fk_name = getattr(formset, 'parent_fk_name', '')
+                            if parent_fk_name:
+                                setattr(new_object, parent_fk_name, None)
                 self.save_model(request, new_object, form, not add)
-                self.save_related(request, form, formsets, not add)   
+                self.save_related(request, form, formsets, not add)
                 for formset in unsaved_formsets:
-                    self.save_formset(request, form, formset, change=False)
+                    self.save_formset(request, form, formset, not add)
+                
                 # for resource info, explicitly write its metadata XML and
                 # storage object to the storage folder
                 if self.model.__schema_name__ == "resourceInfo":
@@ -362,9 +372,21 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
                     formset = FormSet(instance=self.model(), prefix=prefix,
                                       queryset=inline.queryset(request))
                     formsets.append(formset)
-            else: #TODO, change_view
+            else:
                 form = ModelForm(instance=obj)
-                formsets, inline_instances = self._create_formsets(request, obj, change=True)
+                prefixes = {}
+                for FormSet, inline in zip(self.get_formsets(request, obj), self.inline_instances):
+                    #### begin modification ####
+                    if getattr(FormSet, 'parent_fk_name', None) in self.no_inlines:
+                        continue
+                    #### end modification ####
+                    prefix = FormSet.get_default_prefix()
+                    prefixes[prefix] = prefixes.get(prefix, 0) + 1
+                    if prefixes[prefix] != 1:
+                        prefix = "%s-%s" % (prefix, prefixes[prefix])
+                    formset = FormSet(instance=obj, prefix=prefix,
+                                      queryset=inline.queryset(request))
+                    formsets.append(formset)
                 
         #### begin modification ####
         media = self.media or []
@@ -387,7 +409,7 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
             prepopulated, self.get_readonly_fields(request),
             model_admin=self, inlines=inline_admin_formsets)
         
-        media = self.media + adminForm.media
+        media = media + adminForm.media
         context = dict(self.admin_site.each_context(),
             title=(_('Add %s') if add else _('Change %s')) % force_text(opts.verbose_name),
             adminform=adminForm,
@@ -396,7 +418,7 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
             is_popup=(IS_POPUP_VAR in request.POST or
                       IS_POPUP_VAR in request.GET),
             to_field=to_field,
-            media=media,
+            media=mark_safe(media),
             inline_admin_formsets=inline_admin_formsets,
             errors=helpers.AdminErrorList(form, formsets),
             preserved_filters=self.get_preserved_filters(request),
@@ -407,6 +429,26 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
         )
     
         context.update(extra_context or {})
+        if not add:
+            #### begin modification ####
+            # redirection for reusable entities which are no master copies:
+            if hasattr(obj, 'copy_status') and obj.copy_status != MASTER:
+                context['url'] = obj.source_url
+                context_instance = template.RequestContext(
+                    request, current_app=self.admin_site.name)
+                return render_to_response('admin/repository/cannot_edit.html',
+                    context, context_instance=context_instance)
+            # redirection for resources and their parts which are no master copies:
+            else:
+                for res in [r for r in get_root_resources(obj)
+                            if not r.storage_object.master_copy]:
+                    context['redirection_url'] = model_utils.get_lr_master_url(res)
+                    context['resource'] = res
+                    context_instance = template.RequestContext(
+                        request, current_app=self.admin_site.name)
+                    return render_to_response('admin/repository/cannot_edit.html',
+                        context, context_instance=context_instance)
+            #### end modification ####
         return self.render_change_form(request, context, add=add, change=not add, obj=obj, form_url=form_url)
     
     def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
@@ -420,7 +462,6 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
             'has_delete_permission': self.has_delete_permission(request, obj),
             'has_file_field': True, # FIXME - this should check if form or formsets have a FileField,
             'has_absolute_url': hasattr(self.model, 'get_absolute_url'),
-            'form_url': mark_safe(form_url),
             'opts': opts,
             'content_type_id': ContentType.objects.get_for_model(self.model).id,
             'save_as': self.save_as,

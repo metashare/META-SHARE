@@ -272,7 +272,7 @@ DEFAULT_TABLESPACE = ''
 ABSOLUTE_URL_OVERRIDES = {}
 USE_TZ = False
 AUTH_USER_MODEL = 'auth.User'
-STATIC_URL = '/static/'
+STATIC_URL = '/site_static/'
 STATIC_ROOT = '{0}/static/'.format(ROOT_PATH)
 LOCALE_PATHS = ()
 SILENCED_SYSTEM_CHECKS= ["models.E005"]
@@ -296,3 +296,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 SOUTH_TESTS_MIGRATE = False
+STATICFILES_DIRS = (
+    os.path.join(ROOT_PATH, 'media'),
+)
