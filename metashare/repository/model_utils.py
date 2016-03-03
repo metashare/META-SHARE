@@ -13,7 +13,6 @@ from metashare.repository.templatetags.replace import pretty_camel
 from metashare.settings import LOG_HANDLER
 from metashare.stats.models import LRStats
 
-
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
@@ -81,7 +80,7 @@ def _get_root_resources(ignore, *instances):
         ignore.add(instance)
 
         # `resourceInfoType_model` instances are our actual results
-        if isinstance(instance, resourceInfoType_model):
+        if instance.__class__.__name__  ==  u'resourceInfoType_model':
             result.add(instance)
         # an instance may be None, in which case we ignore it
         elif instance:
