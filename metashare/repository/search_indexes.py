@@ -34,7 +34,10 @@ def update_lr_index_entry(res_obj):
     
     The appropriate search index is automatically chosen.
     """
-    haystack_connections[haystack_connection_router.for_write()] \
+    router_name = haystack_connection_router.for_write()
+    if hasattr(router_name, '__iter__'):
+        router_name = router_name[0]
+    haystack_connections[router_name] \
         .get_unified_index().get_index(resourceInfoType_model) \
         .update_object(res_obj)
 
