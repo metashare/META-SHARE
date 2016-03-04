@@ -73,9 +73,12 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
         self.filter_horizontal = self.list_m2m_fields_without_custom_widget(model)
         admin_site.site_url = "/"
         super(SchemaModelAdmin, self).__init__(model, admin_site)
+        self.inline_instances = []
+        for inline_class in self.inlines:
+            inline_instance = inline_class(self.model, self.admin_site)
+            self.inline_instances.append(inline_instance)
         # Reverse inline code:
         self.no_inlines = []
-        self.inline_instances = []
         self.exclude = self.exclude or []
         if not isinstance(self.exclude, list):
             self.exclude = list(self.exclude)
@@ -267,9 +270,6 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
                     opts.app_label, opts.model_name),
                     current_app=self.admin_site.name))
         
-        if request.method == 'POST' and "_saveasnew" in request.POST:
-            return self.add_view(request, form_url='../add/')
-        
         request.session.set_expiry(settings.SESSION_COOKIE_AGE)
         
         ModelForm = self.get_form(request, obj)
@@ -292,7 +292,7 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
                 #### end modification ####
                 prefix = FormSet.get_default_prefix()
                 prefixes[prefix] = prefixes.get(prefix, 0) + 1
-                if prefixes[prefix] != 1:
+                if prefixes[prefix] != 1 or not prefix:
                     prefix = "%s-%s" % (prefix, prefixes[prefix])
                 formset = FormSet(data=request.POST, files=request.FILES,
                                   instance=new_object,
@@ -320,8 +320,15 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
                     # data), then we need to manually make sure that the inline
                     # data is connected to the parent object:
                     if changes:
-                        assert len(changes) == 1
-                        setattr(new_object, parent_fk_name, changes[0])
+                        parent_fk_name = getattr(formset, 'parent_fk_name', '')
+                        # for the moment ignore all formsets that are no reverse
+                        # inlines
+                        if parent_fk_name:
+                            # if the current reverse inline is used (i.e., filled with
+                            # data), then we need to manually make sure that the inline
+                            # data is connected to the parent object:
+                            assert len(changes) == 1
+                            setattr(new_object, parent_fk_name, changes[0])
                     if not add:
                         # If we have deleted a one-to-one inline, we must manually unset the field value.
                         if formset.deleted_objects:

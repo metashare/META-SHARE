@@ -24,4 +24,4 @@
 			return false;
 		})
 	}
-)(django.jQuery); 
+)(django.jQuery);

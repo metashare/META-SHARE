@@ -884,7 +884,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
         # pylint: disable-msg=E1101
         _fields = self.model.get_fields()
         _has_content_fields = hasattr(self, 'content_fields')
-
         for _field_status in ('required', 'recommended', 'optional'):
             _visible_fields = []
             _visible_fields_verbose_names = []
@@ -1210,7 +1209,6 @@ class LicenceForm(forms.ModelForm):
     class Meta:
         model = licenceInfoType_model
         widgets = {'membershipInfo': OneToManyWidget(lookup_class=MembershipDummyLookup)}
-        exclude = ()
 
 class LicenceModelAdmin(SchemaModelAdmin):
     form = LicenceForm
