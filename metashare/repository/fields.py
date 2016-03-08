@@ -15,6 +15,9 @@ from django.utils.functional import curry
 from django.utils.text import capfirst
 from django.utils.translation import ugettext_lazy as _
 
+from south.modelsinspector import introspector
+
+from metashare import settings
 from metashare.repository.editor import form_fields
 
 # NOTE: Custom fields for Django are described in the Django docs:
@@ -189,6 +192,11 @@ class MultiTextField(models.Field):
         except  :
             return [u'Exception for value {} ({})'.format(value, type(value))]
 
+    def south_field_triple(self):
+        field_class_path = "metashare.repository.fields.MultiTextField"
+        args,kwargs = introspector(self)
+        return (field_class_path,args,kwargs)
+
 
 # pylint: disable-msg=W0201
 class MultiSelectField(models.Field):
@@ -291,7 +299,6 @@ class MultiSelectField(models.Field):
         # If the value is empty or None, we return an empty String for it.
         if not value:
             return ''
-
         # If the value is already a String, we simply return the value.
         if isinstance(value, basestring):
             return value
@@ -364,7 +371,6 @@ class MultiSelectField(models.Field):
         for index, choice in enumerate(self.choices):
             if index in indices:
                 values.append(choice[0])
-
         # Finally, we return the list of selected choice values.
         return values
 
@@ -390,6 +396,14 @@ class MultiSelectField(models.Field):
         Used by the serialisers to convert the field into a string for output.
         """
         return self.get_prep_value(self._get_val_from_obj(obj))
+
+    def south_field_triple(self):
+        field_class_path = "metashare.repository.fields.MultiSelectField"
+        args, kwargs = introspector(self)
+        kwargs.update({
+            'choices': repr(self.choices),
+        })
+        return (field_class_path, args, kwargs)
 
 
 class DictField(models.Field):
@@ -540,6 +554,11 @@ class DictField(models.Field):
         setattr(cls, 'get_default_%s' % self.name,
                 curry(self._get_default_FIELD, field=self))
 
+    def south_field_triple(self):
+        field_class_path = "metashare.repository.fields.DictField"
+        args,kwargs = introspector(self)
+        return (field_class_path,args,kwargs)
+
 
 class XmlCharField(models.CharField):
     """
@@ -578,3 +597,9 @@ def best_lang_value_retriever(_dict):
     else:
         _result = ''
     return force_unicode(_result, strings_only=True)
+
+# South integration
+if 'south' in settings.INSTALLED_APPS:
+    from south.modelsinspector import add_introspection_rules
+    add_introspection_rules([], ["^metashare\.repository\.fields\.MetaBooleanField",
+                                 "^metashare\.repository\.fields\.XmlCharField"])

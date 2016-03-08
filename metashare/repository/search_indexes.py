@@ -128,7 +128,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
     mediaTypeFilter = LabeledMultiValueField(
                                 label=_('Media Type'), facet_id=3, parent_id=0,
                                 faceted=True)
-    availabilityFilter = LabeledCharField(
+    availabilityFilter = LabeledMultiValueField(
                                 label=_('Availability'), facet_id=4, parent_id=0,
                                 faceted=True)
     licenceFilter = LabeledMultiValueField(

@@ -221,6 +221,7 @@ class corpusVideoInfo_model_inline(SchemaModelInline):
 # pylint: disable-msg=C0103
 class distributionInfo_model_inline(SchemaModelInline):
     model = distributionInfoType_model
+    extra = 1
 
 
 # pylint: disable-msg=C0103
