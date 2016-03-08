@@ -146,42 +146,35 @@ def _get_licences(resource, user_membership):
     is possible for the given user membership.
     
     The result is a dictionary mapping from licence names to pairs. Each pair
-    contains the corresponding `licenceInfoType_model` and a boolean denoting
-    whether the resource may (and can) be directly downloaded or if there need
-    to be further negotiations of some sort.
+    contains the corresponding `licenceInfoType_model`, the download location
+    URLs and a boolean denoting whether the resource may (and can) be directly
+    downloaded or if there need to be further negotiations of some sort.
     """
-    distribution_infos = tuple(distributionInfoType_model.objects.filter \
-                                   (back_to_resourceinfotype_model__id=resource.id))
+    distribution_infos = tuple(resource.distributioninfotype_model_set.all())
 
-    licenInfoList = list()
+    licence_infos = tuple([(l_info, d_info.downloadLocation) \
+        for d_info in distribution_infos  for l_info in d_info.licenceInfo.all()])
 
-    for distributionInfo in distribution_infos:
-        licenInfoList.extend(
-            distributionInfo.licenceInfo.all())
-
-    licence_infos = tuple(licenInfoList)
-
-    all_licenses = dict([(l_info.licence, l_info) for l_info in licence_infos])
+    all_licenses = dict([(l_info.licence, (l_info, dl_link)) \
+                                        for l_info, dl_link in licence_infos])
 
     result = {}
     for name, info in all_licenses.items():
+        l_info, dl_link = info
         access = LICENCEINFOTYPE_URLS_LICENCE_CHOICES.get(name, None)
         if access == None:
             LOGGER.warn("Unknown license name discovered in the database for " \
                         "object #{}: {}".format(resource.id, name))
             del all_licenses[name]
         elif user_membership >= access[1] \
-                and (distributionInfoType_model.objects.filter \
-                    (licenceInfo = info)[0].downloadLocation \
-                             or resource.storage_object.get_download()):
-            # and (info.downloadLocation \
+                and (dl_link or resource.storage_object.get_download()):
             # the resource can be downloaded somewhere under the current license
             # terms and the user's membership allows her to immediately download
             # the resource
-            result[name] = (info, True)
+            result[name] = (l_info, dl_link, True)
         else:
             # further negotiations are required with the current license
-            result[name] = (info, False)
+            result[name] = (l_info, dl_link, False)
 
     return result
 
@@ -198,6 +191,8 @@ def download(request, object_id):
     resource = get_object_or_404(resourceInfoType_model,
                                  storage_object__identifier=object_id,
                                  storage_object__publication_status=PUBLISHED)
+    # Get a dictionary, where the values are triplets:
+    # (licenceInfo instance, download location, access)
     licences = _get_licences(resource, user_membership)
 
     # Check whether the resource is from the current node, or whether it must be
@@ -214,25 +209,23 @@ def download(request, object_id):
 
         if licence_choice and 'in_licence_agree_form' in request.POST:
             la_form = LicenseAgreementForm(licence_choice, data=request.POST)
+            l_info, dl_link, access = licences[licence_choice]
             if la_form.is_valid():
                 # before really providing the download, we have to make sure
                 # that the user hasn't tried to circumvent the permission system
-                if licences[licence_choice][1]:
-                    dl = distributionInfoType_model.objects.filter \
-                    (licenceInfo=licences[licence_choice][0])[0].downloadLocation
-                    return _provide_download(request, resource,
-                                             dl)
+                if access:
+                    return _provide_download(request, resource, dl_link)
             else:
+                _dict = {'form': la_form,
+                         'resource': resource,
+                         'licence_name': licence_choice,
+                         'licence_path': LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
+                         'download_available': access,
+                         'l_name': l_info.nonStandardLicenceName,
+                         'l_url': l_info.nonStandardLicenceTermsURL,
+                         'l_text': l_info.nonStandaradLicenceTermsText.values()}
                 return render_to_response('repository/licence_agreement.html',
-                                          {'form': la_form, 'resource': resource,
-                                           'licence_name': licence_choice, 'licence_path': \
-                                              LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
-                                           'download_available': \
-                                               licences[licence_choice][1],
-                                           'l_name': licences[licence_choice][0].nonStandardLicenceName,
-                                           'l_url': licences[licence_choice][0].nonStandardLicenceTermsURL,
-                                           'l_text': licences[licence_choice][0].nonStandaradLicenceTermsText.values()},
-                                          context_instance=RequestContext(request))
+                    _dict, context_instance=RequestContext(request))
         elif licence_choice and not licence_choice in licences:
             licence_choice = None
 
@@ -241,20 +234,21 @@ def download(request, object_id):
         licence_choice = licences.iterkeys().next()
 
     if licence_choice:
+        l_info, dl_link, access = licences[licence_choice]
+        _dict = {'form': LicenseAgreementForm(licence_choice),
+               'resource': resource, 'licence_name': licence_choice,
+               'licence_path': LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
+               'download_available': access,
+               'l_name': l_info.nonStandardLicenceName,
+               'l_url': l_info.nonStandardLicenceTermsURL,
+               'l_text': l_info.nonStandaradLicenceTermsText.values()}
         return render_to_response('repository/licence_agreement.html',
-                                  {'form': LicenseAgreementForm(licence_choice),
-                                   'resource': resource, 'licence_name': licence_choice,
-                                   'licence_path': \
-                                       LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
-                                   'download_available': licences[licence_choice][1],
-                                   'l_name': licences[licence_choice][0].nonStandardLicenceName,
-                                   'l_url': licences[licence_choice][0].nonStandardLicenceTermsURL,
-                                           'l_text': licences[licence_choice][0].nonStandaradLicenceTermsText.values()},
-                                  context_instance=RequestContext(request))
+            _dict, context_instance=RequestContext(request))
 
     elif len(licences) > 1:
         return render_to_response('repository/licence_selection.html',
-                                  {'form': LicenseSelectionForm(licences), 'resource': resource},
+                                  {'form': LicenseSelectionForm(licences),
+                                   'resource': resource},
                                   context_instance=RequestContext(request))
     else:
         return render_to_response('repository/lr_not_downloadable.html',
