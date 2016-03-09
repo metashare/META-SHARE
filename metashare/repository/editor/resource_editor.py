@@ -151,7 +151,7 @@ class ResourceComponentInlineFormSet(ReverseInlineFormSet):
                 
     def save_toolservice(self, tool, commit):
         pass
-
+    
     def get_actual_resourceComponentType(self):
         if not (self.forms and self.forms[0].instance):
             raise Exception, "Cannot save for unexisting instance"
@@ -1203,7 +1203,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         _extra_context.update({'DJANGO_BASE':settings.DJANGO_BASE})
         _structures = self.get_hidden_structures(request, object_id)
         _extra_context.update(_structures)
-        return super(ResourceModelAdmin, self).change_view(request, object_id, _extra_context)
+        return super(ResourceModelAdmin, self).change_view(request, object_id, '', _extra_context)
 
 class LicenceForm(forms.ModelForm):
     class Meta:
