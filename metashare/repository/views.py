@@ -22,8 +22,7 @@ from metashare.repository.forms import LicenseSelectionForm, \
     LicenseAgreementForm, DownloadContactForm, MORE_FROM_SAME_CREATORS, \
     MORE_FROM_SAME_PROJECTS
 from metashare.repository import model_utils
-from metashare.repository.models import distributionInfoType_model, \
-    resourceInfoType_model
+from metashare.repository.models import resourceInfoType_model
 from metashare.repository.search_indexes import resourceInfoType_modelIndex, \
     update_lr_index_entry
 from metashare.settings import LOG_HANDLER, STATIC_URL, DJANGO_URL
@@ -753,6 +752,8 @@ class MetashareFacetedSearchView(FacetedSearchView):
                 sqs = sqs.order_by('-view_count', 'resourceNameSort_exact')
             else:
                 sqs = sqs.order_by('resourceNameSort_exact')
+        else:
+            sqs = sqs.order_by('resourceNameSort_exact')
 
         # collect statistics about the query
         starttime = datetime.now()
