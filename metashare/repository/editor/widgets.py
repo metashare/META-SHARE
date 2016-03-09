@@ -483,7 +483,7 @@ class MultiChoiceWidget(widgets.Widget):
         js = ('{}metashare/js/multi-field-widget.js' \
               .format(settings.STATIC_URL),)
 
-    def __init__(self, widget_id, max_length=None, choices = (), **kwargs):
+    def __init__(self, widget_id, max_length=None, choices=(), **kwargs):
         """
         Initialises a new MultiChoiceWidget instance.
 
@@ -504,15 +504,6 @@ class MultiChoiceWidget(widgets.Widget):
         Renders and returns the most suitable widget for inputting a single
         field in this `MultiChoiceWidget`.
         """
-        # if self.max_length:
-        #     if self.max_length > _MAX_TEXT_INPUT_SIZE:
-        #         result = Select(choices=self.choices).render(name, value, attrs)
-        #     else:
-        #         result = Select(choices=self.choices) \
-        #             .render(name, value, attrs)
-        # else:
-        #     result = Select(choices=self.choices) \
-        #             .render(name, value, attrs)
         return Select(choices=self.choices).render(name, value, attrs)
 
     def _render_container(self, _context):

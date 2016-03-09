@@ -10,7 +10,7 @@ from django import forms
 from django.core import exceptions, validators
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.utils.encoding import force_unicode
+from django.utils.encoding import force_unicode, smart_unicode
 from django.utils.functional import curry
 from django.utils.text import capfirst
 from django.utils.translation import ugettext_lazy as _
@@ -108,9 +108,26 @@ class MultiTextField(models.Field):
         Validates value and throws `ValidationError`.
         """
         super(MultiTextField, self).validate(value, model_instance)
+        if hasattr(self.widget, 'choices') and not self.valid_value(value):
+            raise exceptions.ValidationError(
+                    self.error_messages['invalid_choice'] % {'value': value})
+
         if self.max_length and len(value) > self.max_length:
             raise exceptions.ValidationError(self.error_messages['too_long']
                                     .format(self.max_length, len(value)))
+
+    def valid_value(self, value):
+        "Check to see if the provided value is a valid choice"
+        for k, v in self.widget.choices:
+            if isinstance(v, (list, tuple)):
+                # This is an optgroup, so look inside the group for options
+                for k2, v2 in v:
+                    if value == smart_unicode(k2):
+                        return True
+            else:
+                if value == smart_unicode(k):
+                    return True
+        return False
 
     def clean(self, value, model_instance):
         """

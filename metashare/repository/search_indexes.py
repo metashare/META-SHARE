@@ -15,8 +15,7 @@ from metashare.repository.models import resourceInfoType_model, \
     corpusInfoType_model, \
     toolServiceInfoType_model, lexicalConceptualResourceInfoType_model, \
     languageDescriptionInfoType_model
-from metashare.repository.search_fields import LabeledCharField, \
-    LabeledMultiValueField
+from metashare.repository.search_fields import LabeledMultiValueField
 from metashare.storage.models import StorageObject, INGESTED, PUBLISHED
 from metashare.settings import LOG_HANDLER
 from metashare.stats.model_utils import DOWNLOAD_STAT, VIEW_STAT

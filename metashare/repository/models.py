@@ -753,14 +753,14 @@ class metadataInfoType_model(SchemaModel):
       'vesting',
       blank=True, max_length=1000, )
 
-    metadataLanguageName = MultiTextField(max_length=1000, widget=MultiChoiceWidget(widget_id=2, choices= languagename_optgroup_choices(),),
+    metadataLanguageName = MultiTextField(max_length=1000,
+      widget=MultiChoiceWidget(widget_id=2, choices= languagename_optgroup_choices(),),
       verbose_name='Metadata language',
       help_text='The language in which the metadata description is writt' \
       'en according to IETF BCP47 (ISO 639-1 or ISO 639-3 for languages ' \
       'not covered by the first standard)',
       blank=True, validators=[validate_matches_xml_char_production], \
-      editable=False,
-      choices = languagename_optgroup_choices())
+      editable=False,)
 
     metadataLanguageId = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=3, max_length=1000),
       verbose_name='Metadata language identifier',
@@ -3392,12 +3392,12 @@ class languageInfoType_model(SchemaModel):
       blank=True, max_length=100,
       choices =_make_choices_from_list(sorted(iana.get_all_regions()))['choices'])
 
-    variant = MultiTextField(max_length=500, widget=MultiChoiceWidget(widget_id=65, choices = _make_choices_from_list(sorted(iana.get_all_variants()))['choices']),
+    variant = MultiTextField(max_length=500,
+      widget=MultiChoiceWidget(widget_id=65, choices = _make_choices_from_list(sorted(iana.get_all_variants()))['choices']),
       verbose_name='Variants',
       help_text='Name of the variant of the language of the resource is ' \
       'spoken (according to IETF BCP47)',
-      blank=True, null=True,
-      choices = _make_choices_from_list(sorted(iana.get_all_variants()))['choices'])
+      blank=True, null=True,)
 
     sizePerLanguage = models.OneToOneField("sizeInfoType_model",
       verbose_name='Size per language',
@@ -3520,13 +3520,12 @@ class projectInfoType_model(SchemaModel):
       help_text='The full name of the funder of the project',
       blank=True, validators=[validate_matches_xml_char_production], )
 
-    fundingCountry =  MultiTextField(max_length=100, widget=MultiChoiceWidget(widget_id=22,\
-      choices = _make_choices_from_list(sorted(iana.get_all_regions()))['choices']),
+    fundingCountry =  MultiTextField(max_length=100,
+      widget=MultiChoiceWidget(widget_id=22, choices = _make_choices_from_list(sorted(iana.get_all_regions()))['choices']),
       verbose_name='Funding country',
       help_text='The name of the funding country, in case of national fu' \
       'nding as mentioned in ISO3166',
-      blank=True, validators=[validate_matches_xml_char_production],
-      choices = _make_choices_from_list(sorted(iana.get_all_regions()))['choices'])
+      blank=True, validators=[validate_matches_xml_char_production],)
 
     fundingCountryId = XmlCharField(
       verbose_name='Funding country identifier',
@@ -6759,7 +6758,8 @@ class inputInfoType_model(SchemaModel):
       choices=INPUTINFOTYPE_MODALITYTYPE_CHOICES['choices'],
       )
 
-    languageName = MultiTextField(max_length=1000, widget=MultiChoiceWidget(widget_id=30, choices = languagename_optgroup_choices()),
+    languageName = MultiTextField(max_length=1000,
+    widget=MultiChoiceWidget(widget_id=30, choices = languagename_optgroup_choices()),
     verbose_name='Language name',
     help_text='A human understandable name of the language that is use' \
       'd in the resource or supported by the tool/service, as specified ' \
@@ -6768,8 +6768,7 @@ class inputInfoType_model(SchemaModel):
       'd for languages not covered by this, the ISO 639-3; (b) the scrip' \
       't tag according to ISO 15924; (c) the region tag according to ISO' \
       ' 3166-1; (d) the variant subtag',
-    blank=True, validators=[validate_matches_xml_char_production],
-    choices = languagename_optgroup_choices())
+    blank=True, validators=[validate_matches_xml_char_production])
 
     languageId = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=31, max_length=100),
         verbose_name='Language identifier',
@@ -7031,7 +7030,8 @@ class outputInfoType_model(SchemaModel):
       choices=OUTPUTINFOTYPE_MODALITYTYPE_CHOICES['choices'],
       )
 
-    languageName = MultiTextField(max_length=1000, widget=MultiChoiceWidget(widget_id=36, choices = languagename_optgroup_choices()),
+    languageName = MultiTextField(max_length=1000,
+      widget=MultiChoiceWidget(widget_id=36, choices = languagename_optgroup_choices()),
       verbose_name='Language name',
       help_text='A human understandable name of the language that is use' \
       'd in the resource or supported by the tool/service, as specified ' \
@@ -7040,8 +7040,7 @@ class outputInfoType_model(SchemaModel):
       'd for languages not covered by this, the ISO 639-3; (b) the scrip' \
       't tag according to ISO 15924; (c) the region tag according to ISO' \
       ' 3166-1; (d) the variant subtag',
-      blank=True, validators=[validate_matches_xml_char_production],
-      choices = languagename_optgroup_choices())
+      blank=True, validators=[validate_matches_xml_char_production],)
 
     languageId = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=37, max_length=100),
       verbose_name='Language identifier',
