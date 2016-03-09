@@ -16,7 +16,7 @@
   {% endif %}
   <p>
     <a href="{{ resource.get_absolute_url }}"><button class="span-12 button middle_button">&laquo;&nbsp;Resource View</button></a>
-    <a href="{% url metashare.repository.views.download_contact resource.storage_object.identifier %}"><input type="button" class="span-8 button middle_button" value="Contact Resource Maintainer" /></a>
+    <a href="{% url 'download_contact' resource.storage_object.identifier %}"><input type="button" class="span-8 button middle_button" value="Contact Resource Maintainer" /></a>
   </p>
 </div>
 {% endblock %}
