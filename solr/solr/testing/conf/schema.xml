@@ -191,7 +191,7 @@
       stored="true" multiValued="true" />
     
     <field name="availabilityFilter_exact" type="string" indexed="true"
-      stored="true" multiValued="false" />
+      stored="true" multiValued="true" />
     
     <field name="textnumericalTypeOfTnContentFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
@@ -212,7 +212,7 @@
       stored="true" multiValued="true" />
     
     <field name="availabilityFilter" type="text_en" indexed="true"
-      stored="true" multiValued="false" />
+      stored="true" multiValued="true" />
     
     <field name="toolServiceAnnotationFormatFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
