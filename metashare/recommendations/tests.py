@@ -97,7 +97,10 @@ class SimpleTogetherManagerTest(django.test.TestCase):
         """
         Clean up the test
         """
-        test_utils.clean_resources_db()
+        try:
+            test_utils.clean_resources_db()
+        except:
+            pass
         test_utils.clean_storage()
     
 
