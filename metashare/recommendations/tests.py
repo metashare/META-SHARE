@@ -62,9 +62,9 @@ def _download_resource(client, resource):
     it is assumed that it is downloadable and has an AGPL license; 
     returns the http response
     """
-    return client.post(reverse(views.download, args=(resource.storage_object.identifier,)),
-      { 'in_licence_agree_form': 'True', 'licence_agree': 'True', 'licence': 'AGPL' },
-        follow = True)
+    return client.post(reverse('download', args=(resource.storage_object.identifier,)),
+      data={ 'in_licence_agree_form': 'True', 'licence_agree': 'True', 'licence': 'AGPL' },
+        follow=True)
         
 
 class SimpleTogetherManagerTest(django.test.TestCase):

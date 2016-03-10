@@ -279,7 +279,7 @@ def _provide_download(request, resource, download_urls):
             # content is a stream of the download file
             filemimetype = guess_type(dl_path)[0] or "application/octet-stream"
             response = HttpResponse(dl_stream_generator(),
-                                    mimetype=filemimetype)
+                                    content_type=filemimetype)
             response['Content-Length'] = getsize(dl_path) 
             response['Content-Disposition'] = 'attachment; filename={0}' \
                                                 .format(split(dl_path)[1])
