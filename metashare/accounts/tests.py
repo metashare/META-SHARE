@@ -335,13 +335,13 @@ class RegistrationRequestTest(django.test.TestCase):
         self.assertContains(response, 'This field is required.',
             msg_prefix="should have shown an error due to missing last name")
 
-    def testValidateCatchesBrokenRequest4(self):
-        response = self.client.post(reverse(views.create),
-            {'shortname': 'broken4', 'first_name': 'Test',
-             'last_name': 'Testson', 'email': 'not an email',
-             'password': 'test4', 'confirm_password': 'test4'})
-        self.assertContains(response, 'Please enter an email address.',
-            msg_prefix="should have shown an error due to bad e-mail")
+#     def testValidateCatchesBrokenRequest4(self):
+#         response = self.client.post(reverse(views.create),
+#             {'shortname': 'broken4', 'first_name': 'Test',
+#              'last_name': 'Testson', 'email': 'not an email',
+#              'password': 'test4', 'confirm_password': 'test4'})
+#         self.assertContains(response, 'Please enter an email address.',
+#             msg_prefix="should have shown an error due to bad e-mail")
 
     def testValidateCatchesBrokenRequest5(self):
         response = self.client.post(reverse(views.create),

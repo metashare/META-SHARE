@@ -241,7 +241,7 @@ function addStatus(filter){
          {% endifnotequal %}           
  
          <div class="resourceName">
-         <a href="{% url metashare.views.frontpage %}repository/search/?{{ object.4 }}"><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/zoom.png"> {{ object.0 }}</a>
+         <a href="{% url 'frontpage' %}repository/search/?{{ object.4 }}"><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/zoom.png"> {{ object.0 }}</a>
             {% ifnotequal object.1 "" %}  
                 &nbsp;&nbsp;filter by: <div style="display: inline; font-size: 8pt; color: #000">{{ object.1 }}</div>
             {% endifnotequal %}

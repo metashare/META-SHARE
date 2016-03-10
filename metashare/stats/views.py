@@ -357,7 +357,7 @@ def statdays (request):
     dates = []
     for day in statDays():
         dates.append(day.strftime("%Y-%m-%d"))
-    return HttpResponse(JSONEncoder().encode(dates), mimetype="application/json")
+    return HttpResponse(JSONEncoder().encode(dates), content_type="application/json")
 
 def getstats (request):
     """ get statistics for a date in terms of user action made, amount of resources, info about usage, ... """
@@ -428,7 +428,7 @@ def getstats (request):
             lrstats[resource.storage_object.identifier] = getLRStats(resource.storage_object.identifier)
         data["lrstats"] = lrstats
         
-    return HttpResponse("["+json.dumps(data)+"]", mimetype="application/json")
+    return HttpResponse("["+json.dumps(data)+"]", content_type="application/json")
     
 
 # pylint: disable-msg=R0911
