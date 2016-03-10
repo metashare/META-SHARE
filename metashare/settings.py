@@ -296,7 +296,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
-SOUTH_TESTS_MIGRATE = False
 STATICFILES_DIRS = (
     os.path.join(ROOT_PATH, 'media'),
 )

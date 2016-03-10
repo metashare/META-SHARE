@@ -131,7 +131,7 @@ class UserProfileTest(django.test.TestCase):
         """
         Verifies that the user profile page can be edited.
         """
-        _profile = self.test_user.get_profile()
+        _profile = self.test_user.userprofile
         _profile.position = 'whatever'
         _profile.homepage = 'http://example.org'
         _profile.save()
@@ -340,7 +340,7 @@ class RegistrationRequestTest(django.test.TestCase):
             {'shortname': 'broken4', 'first_name': 'Test',
              'last_name': 'Testson', 'email': 'not an email',
              'password': 'test4', 'confirm_password': 'test4'})
-        self.assertContains(response, 'Enter a valid e-mail address.',
+        self.assertContains(response, 'Please enter an email address.',
             msg_prefix="should have shown an error due to bad e-mail")
 
     def testValidateCatchesBrokenRequest5(self):

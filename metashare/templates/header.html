@@ -15,10 +15,10 @@
     </span>
     <div class="inner_box" style="width:200px;float:right;">
       {% if user.username %}
-        <a href="{% url 'metashare.views.logout' %}?next={{ request.path }}" style="float:right; margin-right:20px;"><div class="topright">Logout</div></a>
+        <a href="{% url 'logout' %}?next={{ request.path }}" style="float:right; margin-right:20px;"><div class="topright">Logout</div></a>
       {% else %}
-        <a href="{% url 'metashare.accounts.views.create' %}"><div class="topright">Register</div></a>
-        <a href="{% url 'metashare.views.login' %}?next={{ request.path }}"><div class="topright">Login</div></a>
+        <a href="{% url 'create' %}"><div class="topright">Register</div></a>
+        <a href="{% url 'login' %}?next={{ request.path }}"><div class="topright">Login</div></a>
       {% endif %}
     </div>
   </div>
@@ -39,7 +39,7 @@
       </ul>
     </li>
     {% endif %}
-    {% if user.is_superuser or user.get_profile.has_organization_manager_permission or user.get_profile.has_manager_permission %}
+    {% if user.is_superuser or user.userprofile.has_organization_manager_permission or user.userprofile.has_manager_permission %}
     <li title="Manage groups and users"><a>Administration</a>
       <ul>
       {% if user.is_superuser %}
@@ -49,10 +49,10 @@
         <li><a href="{% url 'editor:accounts_organization_changelist' %}">Organizations</a></li>
         <li><a href="{% url 'editor:accounts_organizationmanagers_changelist' %}">Organization managers</a></li>
       {% endif %}
-      {% if user.get_profile.has_manager_permission %}
+      {% if user.userprofile.has_manager_permission %}
         <li><a href="{% url 'admin:accounts_editorgroupapplication_changelist' %}">Editor group applications</a></li>
       {% endif %}
-      {% if user.is_superuser or user.get_profile.has_organization_manager_permission %}
+      {% if user.is_superuser or user.userprofile.has_organization_manager_permission %}
         <li><a href="{% url 'admin:accounts_organizationapplication_changelist' %}">Organization applications</a></li>
       {% endif %}
       </ul>
@@ -75,7 +75,7 @@
       </ul>
     </li>
     {% if user.is_active %}
-    <li title="Profile settings and actions"><a href="{% url 'metashare.accounts.views.edit_profile' %}">Your Profile, {% filter force_escape %}{% firstof user.first_name user.username %}{% endfilter %}</a>
+    <li title="Profile settings and actions"><a href="{% url 'edit_profile' %}">Your Profile, {% filter force_escape %}{% firstof user.first_name user.username %}{% endfilter %}</a>
       <ul>
         {% if user.is_staff %}<li><a href="{% url 'editor:index' %}">View your recent actions</a></li>{% endif %}
         <li><a href="{% url 'edit_profile' %}" title='View or edit your personal details'>Edit your profile</a></li>

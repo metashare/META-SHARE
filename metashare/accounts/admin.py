@@ -254,7 +254,7 @@ class EditorGroupApplicationAdmin(admin.ModelAdmin):
         The action to accept editor group applications.
         """
         if not request.user.is_superuser and \
-                not request.user.get_profile().has_manager_permission():
+                not request.user.userprofile.has_manager_permission():
             messages.error(request,
                 _('You must be superuser or group manager to accept applications.'))
             return HttpResponseRedirect(request.get_full_path())
@@ -265,9 +265,7 @@ class EditorGroupApplicationAdmin(admin.ModelAdmin):
         _accepted_groups = 0
         for req in queryset:
             _total_groups += 1
-
-            if request.user.get_profile().has_manager_permission(
-                    req.editor_group) or request.user.is_superuser:
+            if request.user.userprofile.has_manager_permission(req.editor_group) or request.user.is_superuser:
                 req.user.groups.add(req.editor_group)
                 req.delete()
                 _accepted_groups += 1

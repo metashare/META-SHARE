@@ -94,8 +94,11 @@ class RegistrationRequestForm(Form):
         _email = self.cleaned_data['email']
         try:
             User.objects.get(email=_email)
-        except:
+        except User.DoesNotExist:
             pass
+        except User.MultipleObjectsReturned:
+            raise ValidationError(_('There is already an account registered ' \
+                                    'with this e-mail address.'))
         else:
             raise ValidationError(_('There is already an account registered ' \
                                     'with this e-mail address.'))

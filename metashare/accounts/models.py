@@ -249,7 +249,7 @@ class UserProfile(models.Model):
                 self.user.groups.values_list('name', flat=True)).exists()
              or repository.models.resourceInfoType_model.objects \
                 .filter(owners__username=self.user.username).exists())
-    @property
+        
     def has_manager_permission(self, editor_group=None):
         """
         Return whether the user profile has permission to manage the given
