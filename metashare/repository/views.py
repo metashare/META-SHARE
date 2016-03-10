@@ -430,6 +430,7 @@ def view(request, resource_name=None, object_id=None):
     url = resource.identificationInfo.url
     metashare_id = resource.identificationInfo.metaShareId
     identifier = resource.identificationInfo.identifier
+    islrn = resource.identificationInfo.ISLRN
     resource_type = resource.resourceComponentType.as_subclass().resourceType
     media_types = set(model_utils.get_resource_media_types(resource))
     linguality_infos = set(model_utils.get_resource_linguality_infos(resource))
@@ -585,6 +586,7 @@ def view(request, resource_name=None, object_id=None):
         'metadata_dict': metadata_dict,
         'metaShareId': metashare_id,
         'identifier': identifier,
+        'islrn': islrn,
         'other_res_names': other_res_names,
         'other_descriptions': other_descriptions,
         'relation_dicts': relation_dicts,

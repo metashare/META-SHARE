@@ -160,7 +160,7 @@
 				<h3 class="shortnames"><i>{% for name in res_short_names %}{{ name }}<img src="{% static "metashare/images/trenner.png" %}" class="trenner" />{% endfor %}</i></h3> 
 				<div style="clear:both"></div>
 			{% endif %}
-			
+
 			{% if not attribution_details|join:"" == '' %}
              <div class="attribution"><label>Attribution details:</label> {{            attribution_details|join:"<br /> " }}</div>
             {% endif %}
@@ -178,6 +178,12 @@
                     {% endfor %}
                 {% endfor %}
             {% endfor %}
+
+            {% if islrn %}
+                <span style="font-size:14px;">
+                    <label>ISLRN: </label>{{ islrn }}
+                </span>
+            {% endif %}
 
 			{% if url %}
 			 	{% for address in url %}

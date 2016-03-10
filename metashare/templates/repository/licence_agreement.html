@@ -24,6 +24,7 @@
           {% endif %}
     {% else %}
      {% if l_url %}
+         {{ download_available }}
                 <h3>Licence Agreement {% for key, value in l_name.items %} &ndash; {{ value }}{% endfor %}</h3>
                 <iframe src="{{ l_url }}" width="850" height="400"><a href="{{ l_url }}">View licence</a>
                 </iframe>

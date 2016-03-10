@@ -1,4 +1,5 @@
 {% load replace %}
+{% load humanize %}
 {% spaceless %}
 
 <label class='component'>Distribution</label>
@@ -29,15 +30,87 @@
 	</div>
 {% endif %}
 
-{% if "Licence" in distribution.Distribution %}
+{% if "Licences" in distribution.Distribution %}
 	<label class="title">Licence</label>
 	{% for key, value in distribution.Distribution.items %}
 		{% if "Licence" in key %}
 	    	{% include "repository/resource_view/licence.html" with licence=value %}
 		{% endif %}
 	{% endfor %}
-{% endif %}
+    {% for key1, value1 in distribution.Distribution.items %}
+		{% if "Distribution___Access_medium" in key1 %}
+			<div class="dataline indented">
+				<label>
+					<strong>Distribution Access/Medium: </strong>{{ value1 }}
+				</label>
+			</div>
+		{% endif %}
 
+		{% if "Download_location" in key1 %}
+			<div class="dataline indented">
+				<label>
+					<strong>Download location{% if ", " in value1 %}s{% endif %}: </strong><i>hidden</i>{# value1|urlizetrunc:23 #}
+				</label>
+			</div>
+		{% endif %}
+
+		{% if "Execution_location" in key1 %}
+			<div class="dataline indented">
+				<label>
+					<strong>Execution location{% if ", " in value1 %}s{% endif %}: </strong><i>hidden</i>{# value1|urlizetrunc:23 #}
+				</label>
+			</div>
+		{% endif %}
+
+		{% if "Fee" in key1 %}
+			<div class="dataline indented">
+				<label>
+					<strong>Fee: </strong>{{ value1|intcomma }}
+				</label>
+			</div>
+		{% endif %}
+
+		{% if "Attribution" in key1 %}
+			<div class="dataline indented">
+				<label>
+					<strong>Attribution Details: </strong>{{ value1 }}
+				</label>
+			</div>
+		{% endif %}
+
+		{% if "User_nature" in key1 %}
+			<div class="dataline indented">
+				<label>
+					<strong>User Nature: </strong>{{ value1 }}
+				</label>
+			</div>
+		{% endif %}
+
+		{% if "Membership" in key1 %}
+			{% include "repository/resource_view/membership.html" with membership=value1 %}
+		{% endif %}
+	{% endfor %}
+{% endif %}
+{% if distribution.Distribution.Licensor %}
+     <div class="dataline">
+                <label class="dataline indented"><strong>Licensors:</strong></label>
+     {% for key, value in distribution.Distribution.items %}
+                {% if "Licensor" in key %}
+                    {% include "repository/resource_view/person.html" with person_dict=value.Licensor type="Licensor" %}
+                {% endif %}
+     {% endfor %}
+	    </div>
+    {% endif %}
+{% if distribution.Distribution.Distribution_rights_holder %}
+    <div class="dataline">
+                <label class="dataline indented"><strong>Distribution rights holders:</strong></label>
+   {% for key, value in distribution.Distribution.items %}
+			{% if "Distribution_rights_holder" in key %}
+				{% include "repository/resource_view/person.html" with person_dict=value.Distribution_rights_holder type="Distribution_rights_holder" %}
+			{% endif %}
+		{% endfor %}
+    </div>
+    {% endif %}
 {% if distribution.Distribution.IPR_holder %}
 	<label class="title">IPR Holder</label>
 	{% for key, value in distribution.Distribution.items %}
