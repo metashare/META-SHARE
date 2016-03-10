@@ -48,8 +48,11 @@ urlpatterns += patterns('',
 )
 
 class RobotView(TemplateView):
-    mimetype = 'text/plain'
-    extra_context = { 'sitemap_url' : SITEMAP_URL }
+    
+    def get_context_data(self, **kwargs):
+        context = super(RobotView, self).get_context_data(**kwargs)
+        context['sitemap_url'] = SITEMAP_URL
+        return context
     
 if DJANGO_BASE == "":
     urlpatterns += patterns('',
