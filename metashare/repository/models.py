@@ -3609,8 +3609,8 @@ FORESEENUSEINFOTYPE_USENLPSPECIFIC_CHOICES = _make_choices_from_list([
   u'languageModelling',u'languageModelsTraining', u'lemmatization',
   u'lexiconAccess',u'lexiconAcquisitionFromCorpora', u'lexiconEnhancement',
   u'lexiconExtractionFromLexica',u'lexiconFormatConversion',
-  u'lexiconMerging',u'lexiconVisualization', u'linguisticResearch',
-  u'lipTrackingAnalysis',u'machineTranslation', u'morphologicalAnalysis',
+  u'lexiconVisualization',u'linguisticResearch', u'lipTrackingAnalysis',
+  u'machineTranslation',u'morphologicalAnalysis',
   u'morphosyntacticAnnotation-bPosTagging',
   u'morphosyntacticAnnotation-posTagging',u'multimediaDevelopment',
   u'multimediaDocumentProcessing',u'namedEntityRecognition',
@@ -3631,7 +3631,7 @@ FORESEENUSEINFOTYPE_USENLPSPECIFIC_CHOICES = _make_choices_from_list([
   u'textToSpeechSynthesis',u'textualEntailment', u'tokenization',
   u'tokenizationAndSentenceSplitting',u'topicDetection_Tracking',
   u'userAuthentication',u'visualSceneUnderstanding', u'voiceControl',
-  u'wordAlignment',u'wordSenseDisambiguation',
+  u'wordAlignment',u'wordSenseDisambiguation', u'lexiconMerging',
 ])
 
 # pylint: disable-msg=C0103
@@ -3691,8 +3691,8 @@ ACTUALUSEINFOTYPE_USENLPSPECIFIC_CHOICES = _make_choices_from_list([
   u'languageModelling',u'languageModelsTraining', u'lemmatization',
   u'lexiconAccess',u'lexiconAcquisitionFromCorpora', u'lexiconEnhancement',
   u'lexiconExtractionFromLexica',u'lexiconFormatConversion',
-  u'lexiconMerging',u'lexiconVisualization', u'linguisticResearch',
-  u'lipTrackingAnalysis',u'machineTranslation', u'morphologicalAnalysis',
+  u'lexiconVisualization',u'linguisticResearch', u'lipTrackingAnalysis',
+  u'machineTranslation',u'morphologicalAnalysis',
   u'morphosyntacticAnnotation-bPosTagging',
   u'morphosyntacticAnnotation-posTagging',u'multimediaDevelopment',
   u'multimediaDocumentProcessing',u'namedEntityRecognition',
@@ -3713,7 +3713,7 @@ ACTUALUSEINFOTYPE_USENLPSPECIFIC_CHOICES = _make_choices_from_list([
   u'textToSpeechSynthesis',u'textualEntailment', u'tokenization',
   u'tokenizationAndSentenceSplitting',u'topicDetection_Tracking',
   u'userAuthentication',u'visualSceneUnderstanding', u'voiceControl',
-  u'wordAlignment',u'wordSenseDisambiguation',
+  u'wordAlignment',u'wordSenseDisambiguation', u'lexiconMerging',
 ])
 
 # pylint: disable-msg=C0103
@@ -4129,8 +4129,8 @@ AUDIOFORMATINFOTYPE_MIMETYPE_CHOICES = _make_choices_from_list([
   u'image/bmp',u'image/gif', u'image/jpeg', u'image/png', u'image/svg+xml',
   u'image/tiff',u'video/jpeg', u'video/mp4', u'video/mpeg', u'video/x-flv',
   u'video/x-msvideo',u'video/x-ms-wmv', u'application/msword',
-  u'application/vnd.ms-excel',u'audio/mpeg3', u'text/turtle', u'audio/PCMA',
-  u'audio/flac',u'audio/speex', u'audio/vorbis', u'video/mp2t', u'other',
+  u'application/vnd.ms-excel',u'audio/mpeg3', u'text/turtle', u'audio/flac',
+  u'audio/PCMA',u'audio/speex', u'audio/vorbis', u'video/mp2t', u'other',
 ])
 
 AUDIOFORMATINFOTYPE_SIGNALENCODING_CHOICES = _make_choices_from_list([
@@ -4491,8 +4491,8 @@ TEXTFORMATINFOTYPE_MIMETYPE_CHOICES = _make_choices_from_list([
   u'image/bmp',u'image/gif', u'image/jpeg', u'image/png', u'image/svg+xml',
   u'image/tiff',u'video/jpeg', u'video/mp4', u'video/mpeg', u'video/x-flv',
   u'video/x-msvideo',u'video/x-ms-wmv', u'application/msword',
-  u'application/vnd.ms-excel',u'audio/mpeg3', u'text/turtle', u'audio/PCMA',
-  u'audio/flac',u'audio/speex', u'audio/vorbis', u'video/mp2t', u'other',
+  u'application/vnd.ms-excel',u'audio/mpeg3', u'text/turtle', u'audio/flac',
+  u'audio/PCMA',u'audio/speex', u'audio/vorbis', u'video/mp2t', u'other',
 ])
 
 # pylint: disable-msg=C0103
@@ -4804,8 +4804,8 @@ VIDEOFORMATINFOTYPE_MIMETYPE_CHOICES = _make_choices_from_list([
   u'image/bmp',u'image/gif', u'image/jpeg', u'image/png', u'image/svg+xml',
   u'image/tiff',u'video/jpeg', u'video/mp4', u'video/mpeg', u'video/x-flv',
   u'video/x-msvideo',u'video/x-ms-wmv', u'application/msword',
-  u'application/vnd.ms-excel',u'audio/mpeg3', u'text/turtle', u'audio/PCMA',
-  u'audio/flac',u'audio/speex', u'audio/vorbis', u'video/mp2t', u'other',
+  u'application/vnd.ms-excel',u'audio/mpeg3', u'text/turtle', u'audio/flac',
+  u'audio/PCMA',u'audio/speex', u'audio/vorbis', u'video/mp2t', u'other',
 ])
 
 VIDEOFORMATINFOTYPE_COLOURSPACE_CHOICES = _make_choices_from_list([
@@ -5139,8 +5139,8 @@ IMAGEFORMATINFOTYPE_MIMETYPE_CHOICES = _make_choices_from_list([
   u'image/bmp',u'image/gif', u'image/jpeg', u'image/png', u'image/svg+xml',
   u'image/tiff',u'video/jpeg', u'video/mp4', u'video/mpeg', u'video/x-flv',
   u'video/x-msvideo',u'video/x-ms-wmv', u'application/msword',
-  u'application/vnd.ms-excel',u'audio/mpeg3', u'text/turtle', u'audio/PCMA',
-  u'audio/flac',u'audio/speex', u'audio/vorbis', u'video/mp2t', u'other',
+  u'application/vnd.ms-excel',u'audio/mpeg3', u'text/turtle', u'audio/flac',
+  u'audio/PCMA',u'audio/speex', u'audio/vorbis', u'video/mp2t', u'other',
 ])
 
 IMAGEFORMATINFOTYPE_COLOURSPACE_CHOICES = _make_choices_from_list([
@@ -5449,8 +5449,8 @@ TEXTNUMERICALFORMATINFOTYPE_MIMETYPE_CHOICES = _make_choices_from_list([
   u'image/bmp',u'image/gif', u'image/jpeg', u'image/png', u'image/svg+xml',
   u'image/tiff',u'video/jpeg', u'video/mp4', u'video/mpeg', u'video/x-flv',
   u'video/x-msvideo',u'video/x-ms-wmv', u'application/msword',
-  u'application/vnd.ms-excel',u'audio/mpeg3', u'text/turtle', u'audio/PCMA',
-  u'audio/flac',u'audio/speex', u'audio/vorbis', u'video/mp2t', u'other',
+  u'application/vnd.ms-excel',u'audio/mpeg3', u'text/turtle', u'audio/flac',
+  u'audio/PCMA',u'audio/speex', u'audio/vorbis', u'video/mp2t', u'other',
 ])
 
 # pylint: disable-msg=C0103
@@ -6589,8 +6589,8 @@ INPUTINFOTYPE_MIMETYPE_CHOICES = _make_choices_from_list([
   u'image/bmp',u'image/gif', u'image/jpeg', u'image/png', u'image/svg+xml',
   u'image/tiff',u'video/jpeg', u'video/mp4', u'video/mpeg', u'video/x-flv',
   u'video/x-msvideo',u'video/x-ms-wmv', u'application/msword',
-  u'application/vnd.ms-excel',u'audio/mpeg3', u'text/turtle', u'audio/PCMA',
-  u'audio/flac',u'audio/speex', u'audio/vorbis', u'video/mp2t', u'other',
+  u'application/vnd.ms-excel',u'audio/mpeg3', u'text/turtle', u'audio/flac',
+  u'audio/PCMA',u'audio/speex', u'audio/vorbis', u'video/mp2t', u'other',
 ])
 
 INPUTINFOTYPE_CHARACTERENCODING_CHOICES = _make_choices_from_list([
@@ -6860,8 +6860,8 @@ OUTPUTINFOTYPE_MIMETYPE_CHOICES = _make_choices_from_list([
   u'image/bmp',u'image/gif', u'image/jpeg', u'image/png', u'image/svg+xml',
   u'image/tiff',u'video/jpeg', u'video/mp4', u'video/mpeg', u'video/x-flv',
   u'video/x-msvideo',u'video/x-ms-wmv', u'application/msword',
-  u'application/vnd.ms-excel',u'audio/mpeg3', u'text/turtle', u'audio/PCMA',
-  u'audio/flac',u'audio/speex', u'audio/vorbis', u'video/mp2t', u'other',
+  u'application/vnd.ms-excel',u'audio/mpeg3', u'text/turtle', u'audio/flac',
+  u'audio/PCMA',u'audio/speex', u'audio/vorbis', u'video/mp2t', u'other',
 ])
 
 OUTPUTINFOTYPE_CHARACTERENCODING_CHOICES = _make_choices_from_list([
