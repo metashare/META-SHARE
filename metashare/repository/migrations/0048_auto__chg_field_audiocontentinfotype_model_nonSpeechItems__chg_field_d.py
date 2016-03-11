@@ -8,14 +8,23 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
+
         # Changing field 'audioContentInfoType_model.nonSpeechItems'
         db.alter_column('repository_audiocontentinfotype_model', 'nonSpeechItems', self.gf('metashare.repository.fields.MultiSelectField')(choices=((u'notes', u'Notes'), (u'tempo', u'Tempo'), (u'sounds', u'Sounds'), (u'noise', u'Noise'), (u'music', u'Music'), (u'commercial', u'Commercial'), (u'other', u'Other')), max_length=2))
 
+        # Changing field 'durationOfEffectiveSpeechInfoType_model.size'
+        db.alter_column('repository_durationofeffectivespeechinfotype_model', 'size', self.gf('metashare.repository.fields.XmlCharField')(max_length=1000))
+
+        # Changing field 'documentInfoType_model.documentLanguageId'
+        db.alter_column('repository_documentinfotype_model', 'documentLanguageId', self.gf('metashare.repository.fields.XmlCharField')(max_length=1000))
         # Adding field 'identificationInfoType_model.ISLRN'
         db.add_column('repository_identificationinfotype_model', 'ISLRN',
                       self.gf('metashare.repository.fields.XmlCharField')(default='', max_length=17, blank=True),
                       keep_default=False)
 
+
+        # Changing field 'annotationInfoType_model.tagsetLanguageId'
+        db.alter_column('repository_annotationinfotype_model', 'tagsetLanguageId', self.gf('metashare.repository.fields.XmlCharField')(max_length=1000))
         # Deleting field 'licenceInfoType_model.distributionAccessMedium'
         db.delete_column('repository_licenceinfotype_model', 'distributionAccessMedium')
 
@@ -53,8 +62,14 @@ class Migration(SchemaMigration):
         db.delete_table(db.shorten_name('repository_licenceinfotype_model_licensor'))
 
 
+        # Changing field 'licenceInfoType_model.version'
+        db.alter_column('repository_licenceinfotype_model', 'version', self.gf('metashare.repository.fields.XmlCharField')(max_length=100))
+
         # Changing field 'imageClassificationInfoType_model.subject_topic'
         db.alter_column('repository_imageclassificationinfotype_model', 'subject_topic', self.gf('metashare.repository.fields.XmlCharField')(max_length=500))
+
+        # Changing field 'durationOfAudioInfoType_model.size'
+        db.alter_column('repository_durationofaudioinfotype_model', 'size', self.gf('metashare.repository.fields.XmlCharField')(max_length=1000))
 
         # Changing field 'audioFormatInfoType_model.signalEncoding'
         db.alter_column('repository_audioformatinfotype_model', 'signalEncoding', self.gf('metashare.repository.fields.MultiSelectField')(choices=((u'aLaw', u'A Law'), (u'linearPCM', u'LinearPCM'), (u'\u03bc-law', u'\u039c - Law'), (u'ADPCM', u'ADPCM'), (u'other', u'Other')), max_length=2))
@@ -65,7 +80,7 @@ class Migration(SchemaMigration):
 
         # Adding field 'inputInfoType_model.domain'
         db.add_column('repository_inputinfotype_model', 'domain',
-                      self.gf('metashare.repository.fields.MultiTextField')(max_length=100, null=True, blank=True),
+                      self.gf('metashare.repository.fields.MultiTextField')(default='', max_length=100, blank=True),
                       keep_default=False)
 
 
@@ -88,12 +103,17 @@ class Migration(SchemaMigration):
         # Changing field 'audioContentInfoType_model.nonSpeechItems'
         db.alter_column('repository_audiocontentinfotype_model', 'nonSpeechItems', self.gf('metashare.repository.fields.MultiSelectField')(max_length=2, choices=((u'notes', u'Notes'), (u'tempo', u'Tempo'), (u'sounds', u'Sounds'), (u'noise', u'Noise'), (u'music', u'Music'), (u'commercial ', u'Commercial'), (u'other', u'Other'))))
 
+        # Changing field 'durationOfEffectiveSpeechInfoType_model.size'
+        db.alter_column('repository_durationofeffectivespeechinfotype_model', 'size', self.gf('django.db.models.fields.BigIntegerField')())
 
-        # Changing field 'toolServiceInfoType_model.toolServiceSubtype'
-        db.alter_column('repository_toolserviceinfotype_model', 'toolServiceSubtype', self.gf('metashare.repository.fields.MultiTextField')(default='', max_length=100))
+        # Changing field 'documentInfoType_model.documentLanguageId'
+        db.alter_column('repository_documentinfotype_model', 'documentLanguageId', self.gf('metashare.repository.fields.XmlCharField')(max_length=20))
         # Deleting field 'identificationInfoType_model.ISLRN'
         db.delete_column('repository_identificationinfotype_model', 'ISLRN')
 
+
+        # Changing field 'annotationInfoType_model.tagsetLanguageId'
+        db.alter_column('repository_annotationinfotype_model', 'tagsetLanguageId', self.gf('metashare.repository.fields.XmlCharField')(max_length=20))
         # Adding field 'licenceInfoType_model.distributionAccessMedium'
         db.add_column('repository_licenceinfotype_model', 'distributionAccessMedium',
                       self.gf('metashare.repository.fields.MultiSelectField')(blank=True, default='', max_length=3, choices=((u'webExecutable', u'Web Executable'), (u'paperCopy', u'Paper Copy'), (u'hardDisk', u'Hard Disk'), (u'bluRay', u'Blu Ray'), (u'DVD-R', u'DVD - R'), (u'CD-ROM', u'CD - ROM'), (u'downloadable', u'Downloadable'), (u'accessibleThroughInterface', u'Accessible Through Interface'), (u'other', u'Other'))),
@@ -167,8 +187,14 @@ class Migration(SchemaMigration):
         db.create_unique(m2m_table_name, ['licenceinfotype_model_id', 'actorinfotype_model_id'])
 
 
+        # Changing field 'licenceInfoType_model.version'
+        db.alter_column('repository_licenceinfotype_model', 'version', self.gf('django.db.models.fields.CharField')(max_length=3))
+
         # Changing field 'imageClassificationInfoType_model.subject_topic'
         db.alter_column('repository_imageclassificationinfotype_model', 'subject_topic', self.gf('metashare.repository.fields.XmlCharField')(max_length=1000))
+
+        # Changing field 'durationOfAudioInfoType_model.size'
+        db.alter_column('repository_durationofaudioinfotype_model', 'size', self.gf('django.db.models.fields.BigIntegerField')())
 
         # Changing field 'audioFormatInfoType_model.signalEncoding'
         db.alter_column('repository_audioformatinfotype_model', 'signalEncoding', self.gf('metashare.repository.fields.MultiSelectField')(max_length=2, choices=((u'aLaw', u'A Law'), (u'linearPCM', u'LinearPCM'), (u'\xb5-law', u'\u039c - Law'), (u'ADPCM', u'ADPCM'), (u'other', u'Other'))))
@@ -273,8 +299,8 @@ class Migration(SchemaMigration):
             'segmentationLevel': ('metashare.repository.fields.MultiSelectField', [], {'choices': "((u'paragraph', u'Paragraph'), (u'sentence', u'Sentence'), (u'clause', u'Clause'), (u'word', u'Word'), (u'wordGroup', u'Word Group'), (u'utterance', u'Utterance'), (u'topic', u'Topic'), (u'signal', u'Signal'), (u'phoneme', u'Phoneme'), (u'syllable', u'Syllable'), (u'phrase', u'Phrase'), (u'diphone', u'Diphone'), (u'prosodicBoundaries', u'Prosodic Boundaries'), (u'frame', u'Frame'), (u'scene', u'Scene'), (u'shot', u'Shot'), (u'token', u'Token'), (u'other', u'Other'))", 'max_length': '5', 'blank': 'True'}),
             'sizePerAnnotation': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['repository.sizeInfoType_model']", 'unique': 'True', 'null': 'True', 'on_delete': 'models.SET_NULL', 'blank': 'True'}),
             'tagset': ('metashare.repository.fields.XmlCharField', [], {'max_length': '500', 'blank': 'True'}),
-            'tagsetLanguageId': ('metashare.repository.fields.XmlCharField', [], {'max_length': '20', 'blank': 'True'}),
-            'tagsetLanguageName': ('django.db.models.fields.CharField', [], {'max_length': '100', 'blank': 'True'}),
+            'tagsetLanguageId': ('metashare.repository.fields.XmlCharField', [], {'max_length': '1000', 'blank': 'True'}),
+            'tagsetLanguageName': ('django.db.models.fields.CharField', [], {'max_length': '1000', 'blank': 'True'}),
             'theoreticModel': ('metashare.repository.fields.XmlCharField', [], {'max_length': '500', 'blank': 'True'})
         },
         'repository.audioclassificationinfotype_model': {
@@ -343,7 +369,7 @@ class Migration(SchemaMigration):
             'address': ('metashare.repository.fields.XmlCharField', [], {'max_length': '200', 'blank': 'True'}),
             'city': ('metashare.repository.fields.XmlCharField', [], {'max_length': '50', 'blank': 'True'}),
             'country': ('metashare.repository.fields.XmlCharField', [], {'max_length': '100', 'blank': 'True'}),
-            'countryId': ('metashare.repository.fields.XmlCharField', [], {'max_length': '100'}),
+            'countryId': ('metashare.repository.fields.XmlCharField', [], {'max_length': '1000', 'blank': 'True'}),
             'email': ('metashare.repository.fields.MultiTextField', [], {'max_length': '100'}),
             'faxNumber': ('metashare.repository.fields.MultiTextField', [], {'max_length': '30', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -471,8 +497,8 @@ class Migration(SchemaMigration):
             'bookTitle': ('metashare.repository.fields.XmlCharField', [], {'max_length': '200', 'blank': 'True'}),
             'conference': ('metashare.repository.fields.XmlCharField', [], {'max_length': '300', 'blank': 'True'}),
             'copy_status': ('django.db.models.fields.CharField', [], {'default': "'m'", 'max_length': '1'}),
-            'documentLanguageId': ('metashare.repository.fields.XmlCharField', [], {'max_length': '20', 'blank': 'True'}),
-            'documentLanguageName': ('django.db.models.fields.CharField', [], {'max_length': '100', 'blank': 'True'}),
+            'documentLanguageId': ('metashare.repository.fields.XmlCharField', [], {'max_length': '1000', 'blank': 'True'}),
+            'documentLanguageName': ('django.db.models.fields.CharField', [], {'max_length': '1000', 'blank': 'True'}),
             'documentType': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
             'documentationinfotype_model_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['repository.documentationInfoType_model']", 'unique': 'True', 'primary_key': 'True'}),
             'doi': ('metashare.repository.fields.XmlCharField', [], {'max_length': '100', 'blank': 'True'}),
@@ -554,7 +580,7 @@ class Migration(SchemaMigration):
             'back_to_usageinfotype_model': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['repository.usageInfoType_model']", 'null': 'True', 'blank': 'True'}),
             'foreseenUse': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'useNLPSpecific': ('metashare.repository.fields.MultiSelectField', [], {'choices': "((u'alignment', u'Alignment'), (u'annotation', u'Annotation'), (u'avatarSynthesis', u'Avatar Synthesis'), (u'bilingualLexiconInduction', u'Bilingual Lexicon Induction'), (u'contradictionDetection', u'Contradiction Detection'), (u'coreferenceResolution', u'Coreference Resolution'), (u'dependencyParsing', u'Dependency Parsing'), (u'derivationalMorphologicalAnalysis', u'Derivational Morphological Analysis'), (u'discourseAnalysis', u'Discourse Analysis'), (u'documentClassification', u'Document Classification'), (u'emotionGeneration', u'Emotion Generation'), (u'emotionRecognition', u'Emotion Recognition'), (u'entityMentionRecognition', u'Entity Mention Recognition'), (u'eventExtraction', u'Event Extraction'), (u'expressionRecognition', u'Expression Recognition'), (u'faceRecognition', u'Face Recognition'), (u'faceVerification', u'Face Verification'), (u'humanoidAgentSynthesis', u'Humanoid Agent Synthesis'), (u'informationExtraction', u'Information Extraction'), (u'informationRetrieval', u'Information Retrieval'), (u'intra-documentCoreferenceResolution', u'Intra - Document Coreference Resolution'), (u'knowledgeDiscovery', u'Knowledge Discovery'), (u'knowledgeRepresentation', u'Knowledge Representation'), (u'languageIdentification', u'Language Identification'), (u'languageModelling', u'Language Modelling'), (u'languageModelsTraining', u'Language Models Training'), (u'lemmatization', u'Lemmatization'), (u'lexiconAccess', u'Lexicon Access'), (u'lexiconAcquisitionFromCorpora', u'Lexicon Acquisition From Corpora'), (u'lexiconEnhancement', u'Lexicon Enhancement'), (u'lexiconExtractionFromLexica', u'Lexicon Extraction From Lexica'), (u'lexiconFormatConversion', u'Lexicon Format Conversion'), (u'lexiconVisualization', u'Lexicon Visualization'), (u'linguisticResearch', u'Linguistic Research'), (u'lipTrackingAnalysis', u'Lip Tracking Analysis'), (u'machineTranslation', u'Machine Translation'), (u'morphologicalAnalysis', u'Morphological Analysis'), (u'morphosyntacticAnnotation-bPosTagging', u'Morphosyntactic Annotation - B Pos Tagging'), (u'morphosyntacticAnnotation-posTagging', u'Morphosyntactic Annotation - Pos Tagging'), (u'multimediaDevelopment', u'Multimedia Development'), (u'multimediaDocumentProcessing', u'Multimedia Document Processing'), (u'namedEntityRecognition', u'Named Entity Recognition'), (u'naturalLanguageGeneration', u'Natural Language Generation'), (u'naturalLanguageUnderstanding', u'Natural Language Understanding'), (u'opinionMining', u'Opinion Mining'), (u'other', u'Other'), (u'personIdentification', u'Person Identification'), (u'personRecognition', u'Person Recognition'), (u'persuasiveExpressionMining', u'Persuasive Expression Mining'), (u'phraseAlignment', u'Phrase Alignment'), (u'qualitativeAnalysis', u'Qualitative Analysis'), (u'questionAnswering', u'Question Answering'), (u'readingAndWritingAidApplications', u'Reading And Writing Aid Applications'), (u'semanticRoleLabelling', u'Semantic Role Labelling'), (u'semanticWeb', u'Semantic Web'), (u'sentenceAlignment', u'Sentence Alignment'), (u'sentenceSplitting', u'Sentence Splitting'), (u'sentimentAnalysis', u'Sentiment Analysis'), (u'shallowParsing', u'Shallow Parsing'), (u'signLanguageGeneration', u'Sign Language Generation'), (u'signLanguageRecognition', u'Sign Language Recognition'), (u'speakerIdentification', u'Speaker Identification'), (u'speakerVerification', u'Speaker Verification'), (u'speechAnalysis', u'Speech Analysis'), (u'speechAssistedVideoControl', u'Speech Assisted Video Control'), (u'speechLipsCorrelationAnalysis', u'Speech Lips Correlation Analysis'), (u'speechRecognition', u'Speech Recognition'), (u'speechSynthesis', u'Speech Synthesis'), (u'speechToSpeechTranslation', u'Speech To Speech Translation'), (u'speechUnderstanding', u'Speech Understanding'), (u'speechVerification', u'Speech Verification'), (u'spellChecking', u'Spell Checking'), (u'spokenDialogueSystems', u'Spoken Dialogue Systems'), (u'summarization', u'Summarization'), (u'talkingHeadSynthesis', u'Talking Head Synthesis'), (u'temporalExpressionRecognition', u'Temporal Expression Recognition'), (u'terminologyExtraction', u'Terminology Extraction'), (u'textCategorisation', u'Text Categorisation'), (u'textGeneration', u'Text Generation'), (u'textMining', u'Text Mining'), (u'textToSpeechSynthesis', u'Text To Speech Synthesis'), (u'textualEntailment', u'Textual Entailment'), (u'tokenization', u'Tokenization'), (u'tokenizationAndSentenceSplitting', u'Tokenization And Sentence Splitting'), (u'topicDetection_Tracking', u'Topic Detection_ Tracking'), (u'userAuthentication', u'User Authentication'), (u'visualSceneUnderstanding', u'Visual Scene Understanding'), (u'voiceControl', u'Voice Control'), (u'wordAlignment', u'Word Alignment'), (u'wordSenseDisambiguation', u'Word Sense Disambiguation'))", 'max_length': '23', 'blank': 'True'})
+            'useNLPSpecific': ('metashare.repository.fields.MultiSelectField', [], {'choices': "((u'alignment', u'Alignment'), (u'annotation', u'Annotation'), (u'avatarSynthesis', u'Avatar Synthesis'), (u'bilingualLexiconInduction', u'Bilingual Lexicon Induction'), (u'contradictionDetection', u'Contradiction Detection'), (u'coreferenceResolution', u'Coreference Resolution'), (u'dependencyParsing', u'Dependency Parsing'), (u'derivationalMorphologicalAnalysis', u'Derivational Morphological Analysis'), (u'discourseAnalysis', u'Discourse Analysis'), (u'documentClassification', u'Document Classification'), (u'emotionGeneration', u'Emotion Generation'), (u'emotionRecognition', u'Emotion Recognition'), (u'entityMentionRecognition', u'Entity Mention Recognition'), (u'eventExtraction', u'Event Extraction'), (u'expressionRecognition', u'Expression Recognition'), (u'faceRecognition', u'Face Recognition'), (u'faceVerification', u'Face Verification'), (u'humanoidAgentSynthesis', u'Humanoid Agent Synthesis'), (u'informationExtraction', u'Information Extraction'), (u'informationRetrieval', u'Information Retrieval'), (u'intra-documentCoreferenceResolution', u'Intra - Document Coreference Resolution'), (u'knowledgeDiscovery', u'Knowledge Discovery'), (u'knowledgeRepresentation', u'Knowledge Representation'), (u'languageIdentification', u'Language Identification'), (u'languageModelling', u'Language Modelling'), (u'languageModelsTraining', u'Language Models Training'), (u'lemmatization', u'Lemmatization'), (u'lexiconAccess', u'Lexicon Access'), (u'lexiconAcquisitionFromCorpora', u'Lexicon Acquisition From Corpora'), (u'lexiconEnhancement', u'Lexicon Enhancement'), (u'lexiconExtractionFromLexica', u'Lexicon Extraction From Lexica'), (u'lexiconFormatConversion', u'Lexicon Format Conversion'), (u'lexiconVisualization', u'Lexicon Visualization'), (u'linguisticResearch', u'Linguistic Research'), (u'lipTrackingAnalysis', u'Lip Tracking Analysis'), (u'machineTranslation', u'Machine Translation'), (u'morphologicalAnalysis', u'Morphological Analysis'), (u'morphosyntacticAnnotation-bPosTagging', u'Morphosyntactic Annotation - B Pos Tagging'), (u'morphosyntacticAnnotation-posTagging', u'Morphosyntactic Annotation - Pos Tagging'), (u'multimediaDevelopment', u'Multimedia Development'), (u'multimediaDocumentProcessing', u'Multimedia Document Processing'), (u'namedEntityRecognition', u'Named Entity Recognition'), (u'naturalLanguageGeneration', u'Natural Language Generation'), (u'naturalLanguageUnderstanding', u'Natural Language Understanding'), (u'opinionMining', u'Opinion Mining'), (u'other', u'Other'), (u'personIdentification', u'Person Identification'), (u'personRecognition', u'Person Recognition'), (u'persuasiveExpressionMining', u'Persuasive Expression Mining'), (u'phraseAlignment', u'Phrase Alignment'), (u'qualitativeAnalysis', u'Qualitative Analysis'), (u'questionAnswering', u'Question Answering'), (u'readingAndWritingAidApplications', u'Reading And Writing Aid Applications'), (u'semanticRoleLabelling', u'Semantic Role Labelling'), (u'semanticWeb', u'Semantic Web'), (u'sentenceAlignment', u'Sentence Alignment'), (u'sentenceSplitting', u'Sentence Splitting'), (u'sentimentAnalysis', u'Sentiment Analysis'), (u'shallowParsing', u'Shallow Parsing'), (u'signLanguageGeneration', u'Sign Language Generation'), (u'signLanguageRecognition', u'Sign Language Recognition'), (u'speakerIdentification', u'Speaker Identification'), (u'speakerVerification', u'Speaker Verification'), (u'speechAnalysis', u'Speech Analysis'), (u'speechAssistedVideoControl', u'Speech Assisted Video Control'), (u'speechLipsCorrelationAnalysis', u'Speech Lips Correlation Analysis'), (u'speechRecognition', u'Speech Recognition'), (u'speechSynthesis', u'Speech Synthesis'), (u'speechToSpeechTranslation', u'Speech To Speech Translation'), (u'speechUnderstanding', u'Speech Understanding'), (u'speechVerification', u'Speech Verification'), (u'spellChecking', u'Spell Checking'), (u'spokenDialogueSystems', u'Spoken Dialogue Systems'), (u'summarization', u'Summarization'), (u'talkingHeadSynthesis', u'Talking Head Synthesis'), (u'temporalExpressionRecognition', u'Temporal Expression Recognition'), (u'terminologyExtraction', u'Terminology Extraction'), (u'textCategorisation', u'Text Categorisation'), (u'textGeneration', u'Text Generation'), (u'textMining', u'Text Mining'), (u'textToSpeechSynthesis', u'Text To Speech Synthesis'), (u'textualEntailment', u'Textual Entailment'), (u'tokenization', u'Tokenization'), (u'tokenizationAndSentenceSplitting', u'Tokenization And Sentence Splitting'), (u'topicDetection_Tracking', u'Topic Detection_ Tracking'), (u'userAuthentication', u'User Authentication'), (u'visualSceneUnderstanding', u'Visual Scene Understanding'), (u'voiceControl', u'Voice Control'), (u'wordAlignment', u'Word Alignment'), (u'wordSenseDisambiguation', u'Word Sense Disambiguation'), (u'lexiconMerging', u'Lexicon Merging'))", 'max_length': '23', 'blank': 'True'})
         },
         'repository.geographiccoverageinfotype_model': {
             'Meta': {'object_name': 'geographicCoverageInfoType_model'},
@@ -580,7 +606,7 @@ class Migration(SchemaMigration):
             'description': ('metashare.repository.fields.DictField', [], {'null': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'identifier': ('metashare.repository.fields.MultiTextField', [], {'max_length': '100', 'blank': 'True'}),
-            'metaShareId': ('metashare.repository.fields.XmlCharField', [], {'default': "'NOT_DEFINED_FOR_V2'", 'max_length': '100'}),
+            'metaShareId': ('metashare.repository.fields.XmlCharField', [], {'default': "'NOT_DEFINED'", 'max_length': '100'}),
             'resourceName': ('metashare.repository.fields.DictField', [], {'null': 'True'}),
             'resourceShortName': ('metashare.repository.fields.DictField', [], {'null': 'True', 'blank': 'True'}),
             'url': ('metashare.repository.fields.MultiTextField', [], {'max_length': '1000', 'blank': 'True'})
@@ -623,7 +649,7 @@ class Migration(SchemaMigration):
             'annotationType': ('metashare.repository.fields.MultiSelectField', [], {'choices': "((u'alignment', u'Alignment'), (u'discourseAnnotation', u'Discourse Annotation'), (u'discourseAnnotation-audienceReactions', u'Discourse Annotation - Audience Reactions'), (u'discourseAnnotation-coreference', u'Discourse Annotation - Coreference'), (u'discourseAnnotation-dialogueActs', u'Discourse Annotation - Dialogue Acts'), (u'discourseAnnotation-discourseRelations', u'Discourse Annotation - Discourse Relations'), (u'lemmatization', u'Lemmatization'), (u'morphosyntacticAnnotation-bPosTagging', u'Morphosyntactic Annotation - B Pos Tagging'), (u'morphosyntacticAnnotation-posTagging', u'Morphosyntactic Annotation - Pos Tagging'), (u'segmentation', u'Segmentation'), (u'semanticAnnotation', u'Semantic Annotation'), (u'semanticAnnotation-certaintyLevel', u'Semantic Annotation - Certainty Level'), (u'semanticAnnotation-emotions', u'Semantic Annotation - Emotions'), (u'semanticAnnotation-entityMentions', u'Semantic Annotation - Entity Mentions'), (u'semanticAnnotation-events', u'Semantic Annotation - Events'), (u'semanticAnnotation-namedEntities', u'Semantic Annotation - Named Entities'), (u'semanticAnnotation-polarity', u'Semantic Annotation - Polarity'), (u'semanticAnnotation-questionTopicalTarget', u'Semantic Annotation - Question Topical Target'), (u'semanticAnnotation-semanticClasses', u'Semantic Annotation - Semantic Classes'), (u'semanticAnnotation-semanticRelations', u'Semantic Annotation - Semantic Relations'), (u'semanticAnnotation-semanticRoles', u'Semantic Annotation - Semantic Roles'), (u'semanticAnnotation-speechActs', u'Semantic Annotation - Speech Acts'), (u'semanticAnnotation-temporalExpressions', u'Semantic Annotation - Temporal Expressions'), (u'semanticAnnotation-textualEntailment', u'Semantic Annotation - Textual Entailment'), (u'semanticAnnotation-wordSenses', u'Semantic Annotation - Word Senses'), (u'speechAnnotation', u'Speech Annotation'), (u'speechAnnotation-orthographicTranscription', u'Speech Annotation - Orthographic Transcription'), (u'speechAnnotation-paralanguageAnnotation', u'Speech Annotation - Paralanguage Annotation'), (u'speechAnnotation-phoneticTranscription', u'Speech Annotation - Phonetic Transcription'), (u'speechAnnotation-prosodicAnnotation', u'Speech Annotation - Prosodic Annotation'), (u'speechAnnotation-soundEvents', u'Speech Annotation - Sound Events'), (u'speechAnnotation-soundToTextAlignment', u'Speech Annotation - Sound To Text Alignment'), (u'speechAnnotation-speakerIdentification', u'Speech Annotation - Speaker Identification'), (u'speechAnnotation-speakerTurns', u'Speech Annotation - Speaker Turns'), (u'stemming', u'Stemming'), (u'structuralAnnotation', u'Structural Annotation'), (u'syntacticAnnotation-subcategorizationFrames', u'Syntactic Annotation - Subcategorization Frames'), (u'syntacticAnnotation-dependencyTrees', u'Syntactic Annotation - Dependency Trees'), (u'syntacticAnnotation-constituencyTrees', u'Syntactic Annotation - Constituency Trees'), (u'syntacticosemanticAnnotation-links', u'Syntacticosemantic Annotation - Links'), (u'translation', u'Translation'), (u'transliteration', u'Transliteration'), (u'modalityAnnotation-bodyMovements', u'Modality Annotation - Body Movements'), (u'modalityAnnotation-facialExpressions', u'Modality Annotation - Facial Expressions'), (u'modalityAnnotation-gazeEyeMovements', u'Modality Annotation - Gaze Eye Movements'), (u'modalityAnnotation-handArmGestures', u'Modality Annotation - Hand Arm Gestures'), (u'modalityAnnotation-handManipulationOfObjects', u'Modality Annotation - Hand Manipulation Of Objects'), (u'modalityAnnotation-headMovements', u'Modality Annotation - Head Movements'), (u'modalityAnnotation-lipMovements', u'Modality Annotation - Lip Movements'), (u'other', u'Other'))", 'max_length': '13', 'blank': 'True'}),
             'characterEncoding': ('metashare.repository.fields.MultiSelectField', [], {'choices': "((u'US-ASCII', u'US - ASCII'), (u'windows-1250', u'Windows - 1250'), (u'windows-1251', u'Windows - 1251'), (u'windows-1252', u'Windows - 1252'), (u'windows-1253', u'Windows - 1253'), (u'windows-1254', u'Windows - 1254'), (u'windows-1257', u'Windows - 1257'), (u'ISO-8859-1', u'ISO - 8859 - 1'), (u'ISO-8859-2', u'ISO - 8859 - 2'), (u'ISO-8859-4', u'ISO - 8859 - 4'), (u'ISO-8859-5', u'ISO - 8859 - 5'), (u'ISO-8859-7', u'ISO - 8859 - 7'), (u'ISO-8859-9', u'ISO - 8859 - 9'), (u'ISO-8859-13', u'ISO - 8859 - 13'), (u'ISO-8859-15', u'ISO - 8859 - 15'), (u'KOI8-R', u'KOI8 - R'), (u'UTF-8', u'UTF - 8'), (u'UTF-16', u'UTF - 16'), (u'UTF-16BE', u'UTF - 16BE'), (u'UTF-16LE', u'UTF - 16LE'), (u'windows-1255', u'Windows - 1255'), (u'windows-1256', u'Windows - 1256'), (u'windows-1258', u'Windows - 1258'), (u'ISO-8859-3', u'ISO - 8859 - 3'), (u'ISO-8859-6', u'ISO - 8859 - 6'), (u'ISO-8859-8', u'ISO - 8859 - 8'), (u'windows-31j', u'Windows - 31j'), (u'EUC-JP', u'EUC - JP'), (u'x-EUC-JP-LINUX', u'X - EUC - JP - LINUX'), (u'Shift_JIS', u'Shift_JIS'), (u'ISO-2022-JP', u'ISO - 2022 - JP'), (u'x-mswin-936', u'X - Mswin - 936'), (u'GB18030', u'GB18030'), (u'x-EUC-CN', u'X - EUC - CN'), (u'GBK', u'GBK'), (u'ISCII91', u'ISCII91'), (u'x-windows-949', u'X - Windows - 949'), (u'EUC-KR', u'EUC - KR'), (u'ISO-2022-KR', u'ISO - 2022 - KR'), (u'x-windows-950', u'X - Windows - 950'), (u'x-MS950-HKSCS', u'X - MS950 - HKSCS'), (u'x-EUC-TW', u'X - EUC - TW'), (u'Big5', u'Big5'), (u'Big5-HKSCS', u'Big5 - HKSCS'), (u'TIS-620', u'TIS - 620'), (u'Big5_Solaris', u'Big5_ Solaris'), (u'Cp037', u'Cp037'), (u'Cp273', u'Cp273'), (u'Cp277', u'Cp277'), (u'Cp278', u'Cp278'), (u'Cp280', u'Cp280'), (u'Cp284', u'Cp284'), (u'Cp285', u'Cp285'), (u'Cp297', u'Cp297'), (u'Cp420', u'Cp420'), (u'Cp424', u'Cp424'), (u'Cp437', u'Cp437'), (u'Cp500', u'Cp500'), (u'Cp737', u'Cp737'), (u'Cp775', u'Cp775'), (u'Cp838', u'Cp838'), (u'Cp850', u'Cp850'), (u'Cp852', u'Cp852'), (u'Cp855', u'Cp855'), (u'Cp856', u'Cp856'), (u'Cp857', u'Cp857'), (u'Cp858', u'Cp858'), (u'Cp860', u'Cp860'), (u'Cp861', u'Cp861'), (u'Cp862', u'Cp862'), (u'Cp863', u'Cp863'), (u'Cp864', u'Cp864'), (u'Cp865', u'Cp865'), (u'Cp866', u'Cp866'), (u'Cp868', u'Cp868'), (u'Cp869', u'Cp869'), (u'Cp870', u'Cp870'), (u'Cp871', u'Cp871'), (u'Cp874', u'Cp874'), (u'Cp875', u'Cp875'), (u'Cp918', u'Cp918'), (u'Cp921', u'Cp921'), (u'Cp922', u'Cp922'), (u'Cp930', u'Cp930'), (u'Cp933', u'Cp933'), (u'Cp935', u'Cp935'), (u'Cp937', u'Cp937'), (u'Cp939', u'Cp939'), (u'Cp942', u'Cp942'), (u'Cp942C', u'Cp942C'), (u'Cp943', u'Cp943'), (u'Cp943C', u'Cp943C'), (u'Cp948', u'Cp948'), (u'Cp949', u'Cp949'), (u'Cp949C', u'Cp949C'), (u'Cp950', u'Cp950'), (u'Cp964', u'Cp964'), (u'Cp970', u'Cp970'), (u'Cp1006', u'Cp1006'), (u'Cp1025', u'Cp1025'), (u'Cp1026', u'Cp1026'), (u'Cp1046', u'Cp1046'), (u'Cp1047', u'Cp1047'), (u'Cp1097', u'Cp1097'), (u'Cp1098', u'Cp1098'), (u'Cp1112', u'Cp1112'), (u'Cp1122', u'Cp1122'), (u'Cp1123', u'Cp1123'), (u'Cp1124', u'Cp1124'), (u'Cp1140', u'Cp1140'), (u'Cp1141', u'Cp1141'), (u'Cp1142', u'Cp1142'), (u'Cp1143', u'Cp1143'), (u'Cp1144', u'Cp1144'), (u'Cp1145', u'Cp1145'), (u'Cp1146', u'Cp1146'), (u'Cp1147', u'Cp1147'), (u'Cp1148', u'Cp1148'), (u'Cp1149', u'Cp1149'), (u'Cp1381', u'Cp1381'), (u'Cp1383', u'Cp1383'), (u'Cp33722', u'Cp33722'), (u'ISO2022_CN_CNS', u'ISO2022_CN_CNS'), (u'ISO2022_CN_GB', u'ISO2022_CN_GB'), (u'JISAutoDetect', u'JIS Auto Detect'), (u'MS874', u'MS874'), (u'MacArabic', u'Mac Arabic'), (u'MacCentralEurope', u'Mac Central Europe'), (u'MacCroatian', u'Mac Croatian'), (u'MacCyrillic', u'Mac Cyrillic'), (u'MacDingbat', u'Mac Dingbat'), (u'MacGreek', u'Mac Greek'), (u'MacHebrew', u'Mac Hebrew'), (u'MacIceland', u'Mac Iceland'), (u'MacRoman', u'Mac Roman'), (u'MacRomania', u'Mac Romania'), (u'MacSymbol', u'Mac Symbol'), (u'MacThai', u'Mac Thai'), (u'MacTurkish', u'Mac Turkish'), (u'MacUkraine', u'Mac Ukraine'))", 'max_length': '36', 'blank': 'True'}),
             'conformanceToStandardsBestPractices': ('metashare.repository.fields.MultiSelectField', [], {'choices': "((u'BML', u'BML'), (u'CES', u'CES'), (u'EAGLES', u'EAGLES'), (u'EML', u'EML'), (u'EMMA', u'EMMA'), (u'GMX', u'GMX'), (u'GrAF', u'GrAF'), (u'HamNoSys', u'Ham No Sys'), (u'InkML', u'InkML'), (u'ILSP_NLP', u'ILSP_NLP'), (u'ISO12620', u'ISO12620'), (u'ISO16642', u'ISO16642'), (u'ISO1987', u'ISO1987'), (u'ISO26162', u'ISO26162'), (u'ISO30042', u'ISO30042'), (u'ISO704', u'ISO704'), (u'LAF', u'LAF'), (u'LMF', u'LMF'), (u'MAF', u'MAF'), (u'MLIF', u'MLIF'), (u'MOSES', u'MOSES'), (u'MULTEXT', u'MULTEXT'), (u'MUMIN', u'MUMIN'), (u'multimodalInteractionFramework', u'Multimodal Interaction Framework'), (u'OAXAL', u'OAXAL'), (u'OWL', u'OWL'), (u'PANACEA', u'PANACEA'), (u'pennTreeBank', u'Penn Tree Bank'), (u'pragueTreebank', u'Prague Treebank'), (u'RDF', u'RDF'), (u'SemAF', u'SemAF'), (u'SemAF_DA', u'SemAF_DA'), (u'SemAF_NE', u'SemAF_NE'), (u'SemAF_SRL', u'SemAF_SRL'), (u'SemAF_DS', u'SemAF_DS'), (u'SKOS', u'SKOS'), (u'SRX', u'SRX'), (u'SynAF', u'SynAF'), (u'TBX', u'TBX'), (u'TMX', u'TMX'), (u'TEI', u'TEI'), (u'TEI_P3', u'TEI_P3'), (u'TEI_P4', u'TEI_P4'), (u'TEI_P5', u'TEI_P5'), (u'TimeML', u'TimeML'), (u'XCES', u'XCES'), (u'XLIFF', u'XLIFF'), (u'WordNet', u'Word Net'), (u'other', u'Other'))", 'max_length': '13', 'blank': 'True'}),
-            'domain': ('metashare.repository.fields.MultiTextField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
+            'domain': ('metashare.repository.fields.MultiTextField', [], {'max_length': '100', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'languageId': ('metashare.repository.fields.MultiTextField', [], {'max_length': '100', 'blank': 'True'}),
             'languageName': ('metashare.repository.fields.MultiTextField', [], {'max_length': '1000', 'blank': 'True'}),
@@ -722,12 +748,12 @@ class Migration(SchemaMigration):
             'back_to_lexicalconceptualresourcevideoinfotype_model': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['repository.lexicalConceptualResourceVideoInfoType_model']", 'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'languageId': ('metashare.repository.fields.XmlCharField', [], {'max_length': '100'}),
-            'languageName': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'languageName': ('django.db.models.fields.CharField', [], {'max_length': '1000'}),
             'languageScript': ('metashare.repository.fields.XmlCharField', [], {'max_length': '100', 'blank': 'True'}),
             'languageVarietyInfo': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "'languageVarietyInfo_languageinfotype_model_related'", 'null': 'True', 'symmetrical': 'False', 'to': "orm['repository.languageVarietyInfoType_model']"}),
             'region': ('metashare.repository.fields.XmlCharField', [], {'max_length': '100', 'blank': 'True'}),
             'sizePerLanguage': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['repository.sizeInfoType_model']", 'unique': 'True', 'null': 'True', 'on_delete': 'models.SET_NULL', 'blank': 'True'}),
-            'variant': ('metashare.repository.fields.MultiTextField', [], {'max_length': '500', 'null': 'True', 'blank': 'True'})
+            'variant': ('metashare.repository.fields.MultiTextField', [], {'max_length': '1000', 'blank': 'True'})
         },
         'repository.languagevarietyinfotype_model': {
             'Meta': {'object_name': 'languageVarietyInfoType_model'},
@@ -799,7 +825,7 @@ class Migration(SchemaMigration):
             'nonStandardLicenceName': ('metashare.repository.fields.DictField', [], {'null': 'True', 'blank': 'True'}),
             'nonStandardLicenceTermsURL': ('metashare.repository.fields.XmlCharField', [], {'max_length': '1000', 'blank': 'True'}),
             'restrictionsOfUse': ('metashare.repository.fields.MultiSelectField', [], {'choices': "((u'attribution', u'Attribution'), (u'nonCommercialUse', u'Non Commercial Use'), (u'commercialUse', u'Commercial Use'), (u'shareAlike', u'Share Alike'), (u'noDerivatives', u'No Derivatives'), (u'noRedistribution', u'No Redistribution'), (u'evaluationUse', u'Evaluation Use'), (u'research', u'Research'), (u'languageEngineeringResearch', u'Language Engineering Research'), (u'education', u'Education'), (u'informLicensor', u'Inform Licensor'), (u'redeposit', u'Redeposit'), (u'compensate', u'Compensate'), (u'personalDataIncluded', u'Personal Data Included'), (u'sensitiveDataIncluded', u'Sensitive Data Included'), (u'requestPlan', u'Request Plan'), (u'spatialConstraint', u'Spatial Constraint'), (u'userIdentified', u'User Identified'), (u'other', u'Other'))", 'max_length': '5', 'blank': 'True'}),
-            'version': ('django.db.models.fields.CharField', [], {'max_length': '3', 'blank': 'True'})
+            'version': ('metashare.repository.fields.XmlCharField', [], {'max_length': '100', 'blank': 'True'})
         },
         'repository.lingualityinfotype_model': {
             'Meta': {'object_name': 'lingualityInfoType_model'},
@@ -970,7 +996,7 @@ class Migration(SchemaMigration):
             'copy_status': ('django.db.models.fields.CharField', [], {'default': "'m'", 'max_length': '1'}),
             'funder': ('metashare.repository.fields.MultiTextField', [], {'max_length': '100', 'blank': 'True'}),
             'fundingCountry': ('metashare.repository.fields.MultiTextField', [], {'max_length': '100', 'blank': 'True'}),
-            'fundingCountryId': ('metashare.repository.fields.XmlCharField', [], {'max_length': '100'}),
+            'fundingCountryId': ('metashare.repository.fields.MultiTextField', [], {'max_length': '1000', 'blank': 'True'}),
             'fundingType': ('metashare.repository.fields.MultiSelectField', [], {'max_length': '2', 'choices': "((u'other', u'Other'), (u'ownFunds', u'Own Funds'), (u'nationalFunds', u'National Funds'), (u'euFunds', u'Eu Funds'))"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'projectEndDate': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
@@ -1194,7 +1220,7 @@ class Migration(SchemaMigration):
             'toolServiceCreationInfo': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['repository.toolServiceCreationInfoType_model']", 'unique': 'True', 'null': 'True', 'on_delete': 'models.SET_NULL', 'blank': 'True'}),
             'toolServiceEvaluationInfo': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['repository.toolServiceEvaluationInfoType_model']", 'unique': 'True', 'null': 'True', 'on_delete': 'models.SET_NULL', 'blank': 'True'}),
             'toolServiceOperationInfo': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['repository.toolServiceOperationInfoType_model']", 'unique': 'True', 'null': 'True', 'on_delete': 'models.SET_NULL', 'blank': 'True'}),
-            'toolServiceSubtype': ('metashare.repository.fields.MultiTextField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
+            'toolServiceSubtype': ('metashare.repository.fields.MultiTextField', [], {'max_length': '100', 'blank': 'True'}),
             'toolServiceType': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
         'repository.toolserviceoperationinfotype_model': {
@@ -1276,11 +1302,11 @@ class Migration(SchemaMigration):
             'digest_modified': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
             'global_storage': ('django.db.models.fields.TextField', [], {'default': "'not set yet'"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'identifier': ('django.db.models.fields.CharField', [], {'default': "'d1b8998aded611e5b70ef04da2da8af8a33caf667aac4e7599989ad65ae15d79'", 'unique': 'True', 'max_length': '64'}),
+            'identifier': ('django.db.models.fields.CharField', [], {'default': "'c2b5262ae79511e5b53af04da2da8af80c23df1ca9ca4d7584394d887cc0a731'", 'unique': 'True', 'max_length': '64'}),
             'local_storage': ('django.db.models.fields.TextField', [], {'default': "'not set yet'"}),
             'metadata': ('django.db.models.fields.TextField', [], {}),
             'metashare_version': ('django.db.models.fields.CharField', [], {'default': "'3.0'", 'max_length': '32'}),
-            'modified': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2016, 2, 29, 0, 0)'}),
+            'modified': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2016, 3, 11, 0, 0)'}),
             'publication_status': ('django.db.models.fields.CharField', [], {'default': "'i'", 'max_length': '1'}),
             'revision': ('django.db.models.fields.PositiveIntegerField', [], {'default': '1'}),
             'source_node': ('django.db.models.fields.CharField', [], {'max_length': '32', 'null': 'True', 'blank': 'True'}),
