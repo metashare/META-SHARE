@@ -773,8 +773,8 @@ class FullViewTest(TestCase):
         test_utils.set_index_active(True)
     
         # update index
-        from django.core.management import call_command
-        call_command('rebuild_index', interactive=False, using=TEST_MODE_NAME)
+        from haystack.management.commands import update_index
+        update_index.Command().handle(using=[TEST_MODE_NAME,])
         
     
     @classmethod
@@ -795,9 +795,8 @@ class FullViewTest(TestCase):
         test_utils.set_index_active(True)
     
         # update index
-        from django.core.management import call_command
-        call_command('rebuild_index', interactive=False, using=TEST_MODE_NAME)
-        
+        from haystack.management.commands import update_index
+        update_index.Command().handle(using=[TEST_MODE_NAME,])
     
     def testSingleResourceView(self):
         """
