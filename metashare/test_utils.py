@@ -100,8 +100,9 @@ def clean_storage():
             os.rmdir(os.path.join(settings.STORAGE_PATH, _folder))
 
 def create_user(username, email, password):
-    User.objects.all().filter(username=username).delete()
-    return User.objects.create_user(username, email, password)
+    user, _ = User.objects.get_or_create(username=username, email=email)
+    user.set_password(password)
+    return user
 
 def get_client_with_user_logged_in(user_credentials):
     client = Client()
