@@ -92,7 +92,7 @@
 								<xs:appinfo>
 									<recommended>true</recommended>
 									<relation>one-to-one</relation>
-									<label>Corpus n-gram text component</label>
+									<label>Corpus n_gram text component</label>
 								</xs:appinfo>
 							</xs:annotation>
 						</xs:element>
