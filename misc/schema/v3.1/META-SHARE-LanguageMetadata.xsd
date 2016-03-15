@@ -282,16 +282,16 @@
 					<xs:documentation>Name of the region where the language of the resource is spoken (e.g. for English as spoken in the US or the UK etc.)</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
-						<label>region</label>
+						<label>Region</label>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="variant" type="ms:variantNameType" minOccurs="0">
+			<xs:element name="variant" type="ms:variantNameType" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Name of the variant of the language of the resource is spoken (according to IETF BCP47)</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
-						<label>variant</label>
+						<label>Variants</label>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>

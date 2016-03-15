@@ -8,6 +8,7 @@
 		<xs:annotation>
 			<xs:appinfo>
 				<render-short>textNumerical ({modalityInfo} {sizeInfo})</render-short>
+                <label>Corpus numerical text component</label>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>

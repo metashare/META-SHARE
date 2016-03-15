@@ -55,7 +55,7 @@
 					<xs:documentation>Groups information on licences for the resource; can be repeated to allow for different modes of access and restrictions of use (e.g. free for academic use, on-a-fee basis for commercial use, download of a sample for free use etc.)</xs:documentation>
 					<xs:appinfo>
 						<relation>many-to-many</relation>
-						<label>Licence</label>
+						<label>Licences</label>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -334,10 +334,7 @@
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
-						<xs:enumeration value="1.0"/>
-						<xs:enumeration value="2.0"/>
-						<xs:enumeration value="3.0"/>
-						<xs:enumeration value="4.0"/>
+                        <xs:maxLength value="100"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
