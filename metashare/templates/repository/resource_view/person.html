@@ -41,7 +41,7 @@
 				{% for key, value in person_dict.Communication.items %}
 					{% if "URL_Landing_page" in key %}
 						<label class="dataline" style="clear:both;">
-							{{ value|urlizetrunc:23 }}</a>
+							<a>{{ value|urlizetrunc:23 }}</a>
 						</label>
 					{% endif %}
 				{% endfor %}
@@ -126,7 +126,7 @@
 		</div>
 		<div>
 			<label class="dataline">
-				{{ person_dict.Communication.Country }}
+				{{ person_dict.Communication.Country }} ({{ person_dict.Communication.Country_identifier }})
 			</label>
 		</div>
 		
