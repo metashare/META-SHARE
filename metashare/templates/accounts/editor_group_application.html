@@ -9,7 +9,7 @@
 {% block content %}
 <h2>Apply for editor group membership</h2>
 <div class="content_box">
-<form class="form_helper" method="post" action="{% url metashare.accounts.views.editor_group_application %}">
+<form class="form_helper" method="post" action="{% url 'editor_group_application' %}">
 {% csrf_token %}
 <table>
   {{ form.as_table }}

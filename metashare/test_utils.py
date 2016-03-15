@@ -149,7 +149,8 @@ def create_editor_user(user_name, email, password, groups=None):
     Creates a new editor user account with the given credentials and group
     memberships.
     """
-    result = User.objects.create_user(user_name, email, password)
+    result, _ = User.objects.get_or_create(username=user_name, email=email)
+    result.set_password(password)
     result.is_staff = True
     if groups:
         for group in groups:
