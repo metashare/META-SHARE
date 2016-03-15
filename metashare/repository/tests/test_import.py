@@ -124,7 +124,7 @@ class ImportTest(TestCase):
         client = Client()
         client.login(username='superuser', password='secret')
 
-        ImportTest.super_user.get_profile().default_editor_groups \
+        ImportTest.super_user.userprofile.default_editor_groups \
             .add(ImportTest.test_editor_group)
 
         resourcefile = open('{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH))
