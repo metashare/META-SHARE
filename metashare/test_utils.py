@@ -23,7 +23,7 @@ from metashare.storage.models import PUBLISHED, MASTER, StorageObject, INTERNAL
 from metashare.xml_utils import import_from_file
 import os
 from metashare.stats.models import LRStats, UsageStats, QueryStats
-
+from haystack.management.commands import update_index
 
 TEST_STORAGE_PATH = '{0}/test-tmp'.format(settings.ROOT_PATH)
 
@@ -195,12 +195,10 @@ class IndexAwareTestCase(TestCase):
     """
     def _fixture_setup(self):
         result = super(IndexAwareTestCase, self)._fixture_setup()
-        call_command('rebuild_index', interactive=False,
-                     using=settings.TEST_MODE_NAME)
+        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
         return result
 
     def _fixture_teardown(self):
         result = super(IndexAwareTestCase, self)._fixture_teardown()
-        call_command('rebuild_index', interactive=False,
-                     using=settings.TEST_MODE_NAME)
+        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
         return result

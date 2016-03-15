@@ -1209,6 +1209,7 @@ class LicenceForm(forms.ModelForm):
     class Meta:
         model = licenceInfoType_model
         widgets = {'membershipInfo': OneToManyWidget(lookup_class=MembershipDummyLookup)}
+        exclude = ()
 
 class LicenceModelAdmin(SchemaModelAdmin):
     form = LicenceForm
