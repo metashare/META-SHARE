@@ -180,6 +180,9 @@ INSTALLED_APPS = (
     'south',
 )
 
+SOUTH_TESTS_MIGRATE = False # To disable migrations and use syncdb instead
+SKIP_SOUTH_TESTS = True # To disable South's own unit tests
+
 # add Kronos to installed apps if not running on Windows
 if os.name != 'nt':
     INSTALLED_APPS += ('kronos',)
