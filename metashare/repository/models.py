@@ -5500,7 +5500,7 @@ class textNumericalFormatInfoType_model(SchemaModel):
 class corpusTextNgramInfoType_model(SchemaModel):
 
     class Meta:
-        verbose_name = "Corpus n-gram text component"
+        verbose_name = "Corpus n_gram text component"
 
 
     __schema_name__ = 'corpusTextNgramInfoType'
@@ -5547,7 +5547,7 @@ class corpusTextNgramInfoType_model(SchemaModel):
       default="textNgram", editable=False, max_length=1000, )
 
     ngramInfo = models.OneToOneField("ngramInfoType_model",
-      verbose_name='N-gram',
+      verbose_name='N_gram',
       help_text='Groups information specific to n-gram resources (e.g. r' \
       'ange of n-grams, base item etc.)',
       )
@@ -5604,7 +5604,7 @@ NGRAMINFOTYPE_BASEITEM_CHOICES = _make_choices_from_list([
 class ngramInfoType_model(SchemaModel):
 
     class Meta:
-        verbose_name = "Ngram"
+        verbose_name = "N_gram"
 
 
     __schema_name__ = 'ngramInfoType'
@@ -7640,7 +7640,7 @@ class corpusMediaTypeType_model(SchemaModel):
       blank=True, null=True, on_delete=models.SET_NULL, )
 
     corpusTextNgramInfo = models.OneToOneField("corpusTextNgramInfoType_model",
-      verbose_name='Corpus n-gram text component',
+      verbose_name='Corpus n_gram text component',
       help_text='Groups together information required for n-gram resourc' \
       'es; information can be provided both as regards features drawn fr' \
       'om the source corpus (e.g. language coverage, size, format, domai' \
