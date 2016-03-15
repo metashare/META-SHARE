@@ -14,6 +14,7 @@ import shutil
 import time
 import logging
 from zipfile import ZipFile
+from haystack.management.commands import update_index
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -53,7 +54,7 @@ class PersistenceTest(TestCase):
     
     def setUp(self):
         # make sure the index does not contain any stale entries
-        call_command('rebuild_index', interactive=False, using=settings.TEST_MODE_NAME)
+        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
         
     def tearDown(self):
         test_utils.clean_resources_db()
@@ -132,7 +133,7 @@ class RestoreTest(TestCase):
     
     def setUp(self):
         # make sure the index does not contain any stale entries
-        call_command('rebuild_index', interactive=False, using=settings.TEST_MODE_NAME)
+        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
 
     def tearDown(self):
         test_utils.clean_resources_db()
