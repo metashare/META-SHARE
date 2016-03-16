@@ -4057,7 +4057,7 @@ class durationOfEffectiveSpeechInfoType_model(SchemaModel):
       verbose_name='Size', 
       help_text='Specifies the size of the resource with regard to the d' \
       'urationUnit measurement in form of a number',
-      max_length=1000, )
+      )
 
     durationUnit = models.CharField(
       verbose_name='Duration unit', 
@@ -4098,7 +4098,7 @@ class durationOfAudioInfoType_model(SchemaModel):
       verbose_name='Size', 
       help_text='Specifies the size of the resource with regard to the d' \
       'urationUnit measurement in form of a number',
-      max_length=1000, )
+      )
 
     durationUnit = models.CharField(
       verbose_name='Duration unit', 

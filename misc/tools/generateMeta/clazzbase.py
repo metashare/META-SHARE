@@ -935,7 +935,7 @@ class Clazz(object):
                     if self.name.startswith("durationOf") and \
                             name == "size":
                         self.generate_simple_field(name, 'BigIntegerField',
-                      options + choice_options, '')
+                      options, '')
                     else:
                         self.generate_simple_field(name, 'XmlCharField',
                       options + choice_options, '')
