@@ -38,7 +38,20 @@ class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
     @classmethod
     def tearDownClass(cls):
         LOGGER.info("finished '{}' tests".format(cls.__name__))
-    
+        
+    def setUp(self):
+        """
+        Set up the email test
+        """
+        test_utils.setup_test_storage()
+        
+    def tearDown(self):
+        """
+        Clean up the test
+        """
+        test_utils.clean_resources_db()
+        test_utils.clean_storage()
+        
     def test_index_updates_on_import(self):
         """
         Verifies that the index is correctly updated when importing a resource.
@@ -48,6 +61,7 @@ class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
         resource = test_utils.import_xml(SearchIndexUpdateTests.RES_PATH_1)
         resource.storage_object.publication_status = PUBLISHED
         resource.storage_object.save()
+        resource.save()
         # make sure the import has automatically changed the search index
         self.assertEqual(SearchQuerySet().count(), 1,
             "After the import of a resource the index must automatically " \
@@ -56,6 +70,7 @@ class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
         resource = test_utils.import_xml(SearchIndexUpdateTests.RES_PATH_2)
         resource.storage_object.publication_status = PUBLISHED
         resource.storage_object.save()
+        resource.save()
         # make sure the import has automatically changed the search index
         self.assertEqual(SearchQuerySet().count(), 2,
             "After the import of a resource the index must automatically " \
@@ -91,6 +106,7 @@ class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
         # now flag the resource as deleted
         resource.storage_object.deleted = True
         resource.storage_object.save()
+        resource.save()
         # make sure the deletion has automatically changed the search index
         self.assertEqual(SearchQuerySet().count(), 0,
             "After a resource is flagged to be deleted in the storage object," \
@@ -129,6 +145,7 @@ class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
         resource = test_utils.import_xml(SearchIndexUpdateTests.RES_PATH_1)
         resource.storage_object.publication_status = PUBLISHED
         resource.storage_object.save()
+        resource.save()
         # make sure the import has automatically changed the search index
         self.assertEqual(SearchQuerySet().count(), 1,
           "After the import of a resource the index must automatically " \

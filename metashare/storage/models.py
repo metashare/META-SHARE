@@ -253,7 +253,6 @@ class StorageObject(models.Model):
         """
         # Perform a full validation for this storage object instance.
         self.full_clean()
-        
         # Call save() method from super class with all arguments.
         super(StorageObject, self).save(*args, **kwargs)
     
