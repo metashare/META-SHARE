@@ -10,6 +10,9 @@ from django.db.models import Count
 from django.forms.models import model_to_dict
 from django.core import serializers
 
+from metashare.repository.migrations import write_warning_to_resources_to_be_modified_file
+from metashare.settings import ROOT_PATH
+
 DEFAULT_LICENCE = u"other"
 AVAILABILITY_MAP = {u"available-restrictedUse": u"available",
     u"available-unrestrictedUse": u"available",
@@ -51,7 +54,7 @@ class Migration(DataMigration):
 
         - licenceInfo: 1 with multiple licences
             o repeat as many times as required with one licence each time;
-            o if a standard licence, wmap the restrictionsOfUse element, instead of what is already there;
+            o if a standard licence, map the restrictionsOfUse element, instead of what is already there;
             o if a non-standard licence, repeat all the restrictionsOfUse element values in the new licenceInfo components
             o move (both single and multiple) distributionAccessMedium, downloadLocation, executionLocation, attributionText, licensor, distributionRigthsHolder and userNature to distributionInfo
         è multiple licenceInfo, one distributionInfo
@@ -97,7 +100,11 @@ class Migration(DataMigration):
                     licence_info.licence = licence
                 # Assign restrictions of use
                 if LICENCES_TO_RESTRICTIONSOFUSE.get(licence):
-                    licence_info.restrictionsOfUse = LICENCES_TO_RESTRICTIONSOFUSE.get(licence)
+                    if licence_info.restrictionsOfUse != LICENCES_TO_RESTRICTIONSOFUSE.get(licence):
+                        invalid_value = u', '.join(licence_info.restrictionsOfUse)
+                        valid_value = u', '.join(LICENCES_TO_RESTRICTIONSOFUSE.get(licence))
+                        write_warning_to_resources_to_be_modified_file(_file, licence_info, invalid_value, valid_value,
+                                                                       'licenceInfo -- > restrictionsOfUse')
                 elif any(restriction for restriction in RESTRICTIONSOFUSE_MAP.keys() \
                          if restriction in licence_info.restrictionsOfUse_old):
                     restrictions = []
@@ -137,6 +144,11 @@ class Migration(DataMigration):
                     licence_info.save()
                     distribution_info.licenceInfo.add(licence_info)
     
+        path = "{0}/../misc/tools/migration/to_3_1/resources_to_be_modified.txt".format(ROOT_PATH)
+        _file = open(path, 'a+')
+        _file.write(u"\n\nThe following resources had restrictions of use value that " \
+            u"couldn't be matched to the selected licence. Please modify the restrictions of use:\n")
+
         from metashare.repository.models import DISTRIBUTIONINFOTYPE_AVAILABILITY_CHOICES
         availability_choices = dict(DISTRIBUTIONINFOTYPE_AVAILABILITY_CHOICES["choices"])
         for distribution_info in orm.distributionInfoType_model.objects.iterator():
@@ -795,10 +807,10 @@ class Migration(DataMigration):
             'nonStandaradLicenceTermsText': ('metashare.repository.fields.DictField', [], {'null': 'True', 'blank': 'True'}),
             'nonStandardLicenceName': ('metashare.repository.fields.DictField', [], {'null': 'True', 'blank': 'True'}),
             'nonStandardLicenceTermsURL': ('metashare.repository.fields.XmlCharField', [], {'max_length': '1000', 'blank': 'True'}),
-            'restrictionsOfUse': ('metashare.repository.fields.MultiSelectField', [], {'choices': "((u'attribution', u'Attribution'), (u'nonCommercialUse', u'Non Commercial Use'), (u'commercialUse', u'Commercial Use'), (u'shareAlike', u'Share Alike'), (u'noDerivatives', u'No Derivatives'), (u'noRedistribution', u'No Redistribution'), (u'evaluationUse', u'Evaluation Use'), (u'research', u'Research'), (u'languageEngineeringResearch', u'Language Engineering Research'), (u'education', u'Education'), (u'informLicensor', u'Inform Licensor'), (u'redeposit', u'Redeposit'), (u'compensate', u'Compensate'), (u'personalDataIncluded', u'Personal Data Included'), (u'sensitiveDataIncluded', u'Sensitive Data Included'), (u'requestPlan', u'Request Plan'), (u'spatialConstraint', u'Spatial Constraint'), (u'userIdentified', u'User Identified'), (u'other', u'Other'))", 'max_length': '5', 'blank': 'True'}),
+            'restrictionsOfUse': ('metashare.repository.fields.MultiSelectField', [], {'choices': "((u'attribution', u'Attribution'), (u'nonCommercialUse', u'Non Commercial Use'), (u'commercialUse', u'Commercial Use'), (u'shareAlike', u'Share Alike'), (u'noDerivatives', u'No Derivatives'), (u'noRedistribution', u'No Redistribution'), (u'evaluationUse', u'Evaluation Use'), (u'research', u'Research'), (u'languageEngineeringResearch', u'Language Engineering Research'), (u'education', u'Education'), (u'informLicensor', u'Inform Licensor'), (u'redeposit', u'Redeposit'), (u'compensate', u'Compensate'), (u'personalDataIncluded', u'Personal Data Included'), (u'sensitiveDataIncluded', u'Sensitive Data Included'), (u'requestPlan', u'Request Plan'), (u'spatialConstraint', u'Spatial Constraint'), (u'userIdentified', u'User Identified'), (u'onlyMSmembers', u'OnlyM Smembers'), (u'other', u'Other'))", 'max_length': '6', 'blank': 'True'}),
             'restrictionsOfUse_old': ('metashare.repository.fields.MultiSelectField', [], {'choices': "((u'informLicensor', u'Inform Licensor'), (u'redeposit', u'Redeposit'), (u'onlyMSmembers', u'OnlyM Smembers'), (u'academic-nonCommercialUse', u'Academic - Non Commercial Use'), (u'evaluationUse', u'Evaluation Use'), (u'commercialUse', u'Commercial Use'), (u'attribution', u'Attribution'), (u'shareAlike', u'Share Alike'), (u'noDerivatives', u'No Derivatives'), (u'noRedistribution', u'No Redistribution'), (u'other', u'Other'))", 'max_length': '3', 'blank': 'True'}),
             'userNature': ('metashare.repository.fields.MultiSelectField', [], {'choices': "((u'academic', u'Academic'), (u'commercial', u'Commercial'))", 'max_length': '1', 'blank': 'True'}),
-            'version': ('django.db.models.fields.CharField', [], {'max_length': '3', 'blank': 'True'})
+            'version': ('metashare.repository.fields.XmlCharField', [], {'max_length': '100', 'blank': 'True'}),
         },
         'repository.lingualityinfotype_model': {
             'Meta': {'object_name': 'lingualityInfoType_model'},
