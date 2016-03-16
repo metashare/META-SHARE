@@ -9,12 +9,12 @@
 	<distributionInfo>
 		<availability>available</availability>
 		<licenceInfo>
-			<licence>MS-NoReD-ND-FF</licence>
-			<version>4.0</version>
+      <licence>MSCommons-BY-NC-SA</licence>
+			<version>1.0</version>
 			<restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
 			<restrictionsOfUse>shareAlike</restrictionsOfUse>
 			<restrictionsOfUse>attribution</restrictionsOfUse>
-			<restrictionsOfUse>other</restrictionsOfUse>
+      <restrictionsOfUse>onlyMSmembers</restrictionsOfUse>
 		</licenceInfo>
 		<distributionAccessMedium>DVD-R</distributionAccessMedium>
 		<distributionAccessMedium>CD-ROM</distributionAccessMedium>

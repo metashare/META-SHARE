@@ -294,6 +294,12 @@
 						<xs:enumeration value="MS-NC-NoReD-FF"/>
 						<xs:enumeration value="MS-NC-NoReD-ND"/>
 						<xs:enumeration value="MS-NC-NoReD-ND-FF"/>
+						<xs:enumeration value="MSCommons-BY"/>
+						<xs:enumeration value="MSCommons-BY-NC"/>
+						<xs:enumeration value="MSCommons-BY-NC-ND"/>
+						<xs:enumeration value="MSCommons-BY-NC-SA"/>
+						<xs:enumeration value="MSCommons-BY-ND"/>
+						<xs:enumeration value="MSCommons-BY-SA"/>
 						<xs:enumeration value="ELRA_END_USER"/>
 						<xs:enumeration value="ELRA_EVALUATION"/>
 						<xs:enumeration value="ELRA_VAR"/>
@@ -334,7 +340,7 @@
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
-                        <xs:maxLength value="100"/>
+						<xs:maxLength value="100"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -413,6 +419,7 @@
 						<xs:enumeration value="requestPlan"/>
 						<xs:enumeration value="spatialConstraint"/>
 						<xs:enumeration value="userIdentified"/>
+						<xs:enumeration value="onlyMSmembers"/>
 						<xs:enumeration value="other"/>
 					</xs:restriction>
 				</xs:simpleType>

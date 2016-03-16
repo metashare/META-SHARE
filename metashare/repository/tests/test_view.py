@@ -307,8 +307,8 @@ class DownloadViewTest(TestCase):
             _import_resource('downloadable_1_license.xml')
         self.downloadable_resource_3 = \
             _import_resource('downloadable_3_licenses.xml')
-        # self.ms_nored_resource = \
-        #     _import_resource('downloadable_ms_nored_license.xml')
+        self.ms_commons_resource = \
+            _import_resource('downloadable_ms_commons_license.xml')
         self.local_download_resource = \
             _import_resource('local_download.xml')
         # assign and copy downloadable resource
@@ -561,56 +561,98 @@ class DownloadViewTest(TestCase):
         self.assertContains(response, "repository/download/{0}".format(
                         self.downloadable_resource_1.storage_object.identifier))
 
-    # def test_resource_download_as_unauthorized_user(self):
-    #     """
-    #     Verifies that a non-authorized user cannot download certain resources.
-    #     """
-    #     client = Client()
-    #     client.login(username='associatemember', password='secret')
-    #     # make sure the license page is shown on both a GET and a POST request
-    #     # with no data:
-    #     response = client.get(reverse(views.download,
-    #                 args=(self.ms_nored_resource.storage_object.identifier,)),
-    #         follow = True)
-    #     self.assertTemplateUsed(response, 'repository/licence_agreement.html',
-    #                             "license agreement page expected")
-    #     self.assertContains(response,
-    #                         'licences/MS-NoReD-ND-FF.pdf',
-    #                         msg_prefix="the correct license appears to not " \
-    #                             "be shown in an iframe")
-    #     response = client.post(reverse(views.download,
-    #                 args=(self.ms_nored_resource.storage_object.identifier,)),
-    #         follow = True)
-    #     self.assertTemplateUsed(response, 'repository/licence_agreement.html',
-    #                             "license agreement page expected")
-    #     self.assertContains(response,
-    #                         'licences/MS-NoReD-ND-FF.pdf',
-    #                         msg_prefix="the correct license appears to not " \
-    #                             "be shown in an iframe")
-    #     # LR must not be downloadable via POST with just a selected license ...
-    #     response = client.post(reverse(views.download,
-    #                 args=(self.ms_nored_resource.storage_object.identifier,)),
-    #         { 'licence': 'MS-NoReD-ND-FF' },
-    #         follow = True)
-    #     self.assertTemplateUsed(response, 'repository/licence_agreement.html',
-    #                             "license agreement page expected")
-    #     self.assertContains(response,
-    #                         'licences/MS-NoReD-ND-FF.pdf',
-    #                         msg_prefix="the correct license appears to not " \
-    #                             "be shown in an iframe")
-    #     # ... nor via POST with an agreement to the license:
-    #     response = client.post(reverse(views.download,
-    #                 args=(self.ms_nored_resource.storage_object.identifier,)),
-    #         { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
-    #           'licence': 'MS-NoReD-ND-FF' },
-    #         follow = True)
-    #     self.assertTemplateUsed(response, 'repository/licence_agreement.html',
-    #                             "license agreement page expected")
-    #     self.assertContains(response,
-    #                         'licences/MS-NoReD-ND-FF.pdf',
-    #                         msg_prefix="the correct license appears to not " \
-    #                             "be shown in an iframe")
+    def test_resource_download_as_unauthorized_user(self):
+        """
+        Verifies that a non-authorized user cannot download certain resources.
+        """
+        client = Client()
+        client.login(username='associatemember', password='secret')
+        # make sure the license page is shown on both a GET and a POST request
+        # with no data:
+        response = client.get(reverse(views.download,
+                    args=(self.ms_commons_resource.storage_object.identifier,)),
+            follow = True)
+        self.assertTemplateUsed(response, 'repository/licence_agreement.html',
+                                "license agreement page expected")
+        self.assertContains(response,
+                            'licences/MSCommons-BY-NC-SA.pdf',
+                            msg_prefix="the correct license appears to not " \
+                                "be shown in an iframe")
+        response = client.post(reverse(views.download,
+                    args=(self.ms_commons_resource.storage_object.identifier,)),
+            follow = True)
+        self.assertTemplateUsed(response, 'repository/licence_agreement.html',
+                                "license agreement page expected")
+        self.assertContains(response,
+                            'licences/MSCommons-BY-NC-SA.pdf',
+                            msg_prefix="the correct license appears to not " \
+                                "be shown in an iframe")
+        # LR must not be downloadable via POST with just a selected license ...
+        response = client.post(reverse(views.download,
+                    args=(self.ms_commons_resource.storage_object.identifier,)),
+            { 'licence': 'MSCommons-BY-NC-SA' },
+            follow = True)
+        self.assertTemplateUsed(response, 'repository/licence_agreement.html',
+                                "license agreement page expected")
+        self.assertContains(response,
+                            'licences/MSCommons-BY-NC-SA.pdf',
+                            msg_prefix="the correct license appears to not " \
+                                "be shown in an iframe")
+        # ... nor via POST with an agreement to the license:
+        response = client.post(reverse(views.download,
+                    args=(self.ms_commons_resource.storage_object.identifier,)),
+            { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
+              'licence': 'MSCommons-BY-NC-SA' },
+            follow = True)
+        self.assertTemplateUsed(response, 'repository/licence_agreement.html',
+                                "license agreement page expected")
+        self.assertContains(response,
+                            'licences/MSCommons-BY-NC-SA.pdf',
+                            msg_prefix="the correct license appears to not " \
+                                "be shown in an iframe")
 
+    def test_downloadable_resource_for_ms_full_members(self):
+        """
+        Verifies that a resource with an MS Commons license can be downloaded by
+        a META-SHARE full member.
+        """
+        client = Client()
+        client.login(username='fullmember', password='secret')
+        # make sure the license page is shown:
+        response = client.get(reverse(views.download,
+                    args=(self.ms_commons_resource.storage_object.identifier,)),
+            follow = True)
+        self.assertTemplateUsed(response, 'repository/licence_agreement.html',
+                                "license agreement page expected")
+        self.assertContains(response,
+                            'licences/MSCommons-BY-NC-SA.pdf',
+                            msg_prefix="the correct license appears to not " \
+                                "be shown in an iframe")
+        # make sure the license agreement page is shown again if the license was
+        # not accepted:
+        response = client.post(reverse(views.download,
+                    args=(self.ms_commons_resource.storage_object.identifier,)),
+            { 'in_licence_agree_form': 'True', 'licence_agree': 'False',
+              'licence': 'MSCommons-BY-NC-SA' },
+            follow = True)
+        self.assertTemplateUsed(response, 'repository/licence_agreement.html',
+                                "license agreement page expected")
+        self.assertContains(response,
+                            'licences/MSCommons-BY-NC-SA.pdf',
+                            msg_prefix="the correct license appears to not " \
+                                "be shown in an iframe")
+        # make sure the download was started after accepting the license:
+        response = client.post(reverse(views.download,
+                    args=(self.ms_commons_resource.storage_object.identifier,)),
+            { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
+              'licence': 'MSCommons-BY-NC-SA' },
+            follow = True)
+        self.assertTemplateNotUsed(response, 'repository/licence_agreement.html',
+                            msg_prefix="a download should have been started")
+        self.assertTemplateNotUsed(response, 'repository/licence_selection.html',
+                            msg_prefix="a download should have been started")
+        self.assertTemplateNotUsed(response, 'repository/lr_not_downloadable.html',
+                            msg_prefix="a download should have been started")
 
     def test_can_download_master_copy(self):
         client = Client()
@@ -630,37 +672,71 @@ class DownloadViewTest(TestCase):
                               .format(DJANGO_BASE, self.downloadable_resource_1.storage_object.identifier))
         self.assertContains(response, "You will now be redirected")
 
+    def test_downloadable_resource_for_organization_ms_full_members(self):
+        """
+        Verifies that a resource with an MS Commons license can be downloaded by
+        a user of an organization which has the META-SHARE full member
+        permission.
+        """
+        client = Client()
+        client.login(username='organization_member_ms', password='secret')
+        # make sure the license page is shown:
+        response = client.get(
+            reverse(views.download,
+                    args=(self.ms_commons_resource.storage_object.identifier,)),
+            follow = True)
+        self.assertTemplateUsed(response, 'repository/licence_agreement.html',
+                                "license agreement page expected")
+        self.assertContains(response,
+            'licences/MSCommons-BY-NC-SA.pdf', msg_prefix="the " \
+                "correct license appears to not be shown in an iframe")
+        # make sure the download is started after accepting the license:
+        response = client.post(
+            reverse(views.download,
+                    args=(self.ms_commons_resource.storage_object.identifier,)),
+            { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
+              'licence': 'MSCommons-BY-NC-SA' },
+            follow = True)
+        self.assertTemplateNotUsed(response,
+            'repository/licence_agreement.html',
+            msg_prefix="a download should have been started")
+        self.assertTemplateNotUsed(response,
+            'repository/licence_selection.html',
+            msg_prefix="a download should have been started")
+        self.assertTemplateNotUsed(response,
+            'repository/lr_not_downloadable.html',
+            msg_prefix="a download should have been started")
 
-    # def test_non_downloadable_resource_for_normal_organization_members(self):
-    #     """
-    #     Verifies that a resource with an MS Commons license cannot be downloaded
-    #     by a user of an organization which does not have the META-SHARE full
-    #     member permission.
-    #     """
-    #     test_passwd = 'secret'
-    #     test_user = test_utils.create_organization_member(
-    #         'organization_member_non_ms', 'om_non_ms@example.com', test_passwd,
-    #         (Organization.objects.create(name='test_organization_non_ms'),))
-    #     client = Client()
-    #     client.login(username=test_user.username, password=test_passwd)
-    #     # make sure the license page is shown:
-    #     response = client.get(reverse(views.download,
-    #                 args=(self.ms_nored_resource.storage_object.identifier,)),
-    #         follow = True)
-    #     self.assertTemplateUsed(response, 'repository/licence_agreement.html',
-    #                             "license agreement page expected")
-    #     self.assertContains(response,
-    #         'licences/MS-NoReD-ND-FF.pdf', msg_prefix="the " \
-    #             "correct license appears to not be shown in an iframe")
-    #     # make sure the download cannot be started:
-    #     response = client.post(
-    #         reverse(views.download,
-    #                 args=(self.ms_nored_resource.storage_object.identifier,)),
-    #         { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
-    #           'licence': 'MS-NoReD-ND-FF' },
-    #         follow = True)
-    #     self.assertTemplateUsed(response, 'repository/licence_agreement.html',
-    #         msg_prefix="a download should not have been started")
+    def test_non_downloadable_resource_for_normal_organization_members(self):
+        """
+        Verifies that a resource with an MS Commons license cannot be downloaded
+        by a user of an organization which does not have the META-SHARE full
+        member permission.
+        """
+        test_passwd = 'secret'
+        test_user = test_utils.create_organization_member(
+            'organization_member_non_ms', 'om_non_ms@example.com', test_passwd,
+            (Organization.objects.create(name='test_organization_non_ms'),))
+        client = Client()
+        client.login(username=test_user.username, password=test_passwd)
+        # make sure the license page is shown:
+        response = client.get(reverse(views.download,
+                    args=(self.ms_commons_resource.storage_object.identifier,)),
+            follow = True)
+        self.assertTemplateUsed(response, 'repository/licence_agreement.html',
+                                "license agreement page expected")
+        self.assertContains(response,
+            'licences/MSCommons-BY-NC-SA.pdf', msg_prefix="the " \
+                "correct license appears to not be shown in an iframe")
+        # make sure the download cannot be started:
+        response = client.post(
+            reverse(views.download,
+                    args=(self.ms_commons_resource.storage_object.identifier,)),
+            { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
+              'licence': 'MSCommons-BY-NC-SA' },
+            follow = True)
+        self.assertTemplateUsed(response, 'repository/licence_agreement.html',
+            msg_prefix="a download should not have been started")
 
 
 class FullViewTest(TestCase):
@@ -811,6 +887,7 @@ def check_resource_view(queryset, test_case):
     for _res in queryset:
         parent_dict = {}
         _res.export_to_elementtree(pretty=True, parent_dict=parent_dict)
+
         count += 1
         LOGGER.info("calling {}. resource at {}".format(
           count, _res.get_absolute_url()))
@@ -819,6 +896,7 @@ def check_resource_view(queryset, test_case):
         response = client.get(_res.get_absolute_url(), follow = True)
         test_case.assertEquals(200, response.status_code)
         test_case.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
+
         for _ele in parent_dict:
 
             if not _ele.text:
