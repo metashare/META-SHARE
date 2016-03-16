@@ -932,7 +932,12 @@ class Clazz(object):
                         options += "choices =_make_choices_from_list(sorted(iana.get_all_regions()))['choices'], "
                     elif name == "languageScript":
                         options += "choices =_make_choices_from_list(sorted(iana.get_all_scripts()))['choices'], "
-                    self.generate_simple_field(name, 'XmlCharField',
+                    if self.name.startswith("durationOf") and \
+                            name == "size":
+                        self.generate_simple_field(name, 'BigIntegerField',
+                      options + choice_options, '')
+                    else:
+                        self.generate_simple_field(name, 'XmlCharField',
                       options + choice_options, '')
                 else:
                     if not 'validators=' in options:
