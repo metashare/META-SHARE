@@ -6,6 +6,9 @@ from metashare.recommendations.tests import _import_resource
 import django.test
 from django.test.client import Client
 from metashare.settings import DJANGO_BASE, LOG_HANDLER
+from haystack.management.commands import update_index
+from django.conf import settings
+
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -36,6 +39,7 @@ class SpecialQueryTest(django.test.TestCase):
         self.res_2 = _import_resource('creators-projects-2.xml')
         self.res_3 = _import_resource('creators-projects-3.xml')
         self.res_4 = _import_resource('creators-projects-4.xml')
+        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
     
     def tearDown(self):
         """
