@@ -6829,7 +6829,8 @@ class inputInfoType_model(SchemaModel):
 
     def save(self, *args, **kwargs):
         if self.languageName:
-            self.languageId = iana.get_language_subtag(self.languageName)
+            for ln in self.languageName:
+                self.languageId.append(iana.get_language_subtag(ln))
         super(inputInfoType_model, self).save(*args, **kwargs)
 
     def __unicode__(self):
@@ -7093,7 +7094,8 @@ class outputInfoType_model(SchemaModel):
 
     def save(self, *args, **kwargs):
         if self.languageName:
-            self.languageId = iana.get_language_subtag(self.languageName)
+            for ln in self.languageName:
+                self.languageId.append(iana.get_language_subtag(ln))
         super(outputInfoType_model, self).save(*args, **kwargs)
 
     def __unicode__(self):
