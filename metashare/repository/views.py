@@ -446,7 +446,7 @@ def view(request, resource_name=None, object_id=None):
     linguality_infos = set(model_utils.get_resource_linguality_infos(resource))
     license_types = set(model_utils.get_resource_license_types(resource))
     attribution_details = model_utils.get_resource_attribution_texts(resource)
-    distribution_info_tuple = None
+    distribution_info_tuples = []
     contact_person_tuples = []
     metadata_info_tuple = None
     version_info_tuple = None
@@ -458,7 +458,7 @@ def view(request, resource_name=None, object_id=None):
     resource_component_tuple = None
     for _tuple in lr_content[1]:
         if _tuple[0] == "Distribution":
-            distribution_info_tuple = _tuple
+            distribution_info_tuples.append( _tuple)
         elif _tuple[0] == "Contact person":
             contact_person_tuples.append(_tuple)
         elif _tuple[0] == "Metadata":
@@ -486,9 +486,11 @@ def view(request, resource_name=None, object_id=None):
     # Convert several tuples to dictionaries to facilitate rendering
     # the templates.
     contact_person_dicts = []
+    distribution_dicts = []
     for item in contact_person_tuples:
         contact_person_dicts.append(tuple2dict([item]))
-    distribution_dict = tuple2dict([distribution_info_tuple])
+    for item in distribution_info_tuples:
+        distribution_dicts.append(tuple2dict([item]))
     resource_component_dict = tuple2dict(resource_component_tuple)
     resource_creation_dict = tuple2dict([resource_creation_info_tuple])
     metadata_dict = tuple2dict([metadata_info_tuple])
@@ -588,7 +590,7 @@ def view(request, resource_name=None, object_id=None):
     context = {
         'contact_person_dicts': contact_person_dicts,
         'description': description,
-        'distribution_dict': distribution_dict,
+        'distribution_dicts': distribution_dicts,
         'documentation_dict': documentation_dict,
         'license_types': license_types,
         'linguality_infos': linguality_infos,
