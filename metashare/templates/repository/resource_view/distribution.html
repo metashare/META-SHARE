@@ -82,16 +82,7 @@
 			{% include "repository/resource_view/membership.html" with membership=value1 %}
 		{% endif %}
 	{% endfor %}
-{% if "Licences" in distribution.Distribution %}
-	<label class="title">Licences</label>
-	{% for key, value in distribution.Distribution.items %}
-		{% if "Licence" in key %}
-	    	{% include "repository/resource_view/licence.html" with licence=value %}
-		{% endif %}
-	{% endfor %}
-
-{% endif %}
-{% if distribution.Distribution.Licensor %}
+    {% if distribution.Distribution.Licensor %}
      <div class="dataline">
                 <label class="dataline indented"><strong>Licensors:</strong></label>
      {% for key, value in distribution.Distribution.items %}
@@ -103,7 +94,7 @@
     {% endif %}
 {% if distribution.Distribution.Distribution_rights_holder %}
     <div class="dataline">
-                <label class="dataline indented"><strong>Distribution rights holders:</strong></label>
+                <label class="dataline indented"><strong>Distribution Rights Holders:</strong></label>
    {% for key, value in distribution.Distribution.items %}
 			{% if "Distribution_rights_holder" in key %}
 				{% include "repository/resource_view/person.html" with person_dict=value.Distribution_rights_holder type="Distribution_rights_holder" %}
@@ -112,12 +103,23 @@
     </div>
     {% endif %}
 {% if distribution.Distribution.IPR_holder %}
-	<label class="title">IPR Holder</label>
+    <div class="dataline">
+    <label class="dataline indented"><strong>IPR Holders:</strong></label>
 	{% for key, value in distribution.Distribution.items %}
 		{% if "IPR_holder" in key %}
 	    	{% include "repository/resource_view/person.html" with person_dict=value.IPR_holder type="IPR Holder" %}
 		{% endif %}
 	{% endfor %}
+    </div>
+{% endif %}
+{% if "Licences" in distribution.Distribution %}
+	<label class="title">Licences</label>
+	{% for key, value in distribution.Distribution.items %}
+		{% if "Licence" in key %}
+	    	{% include "repository/resource_view/licence.html" with licence=value %}
+		{% endif %}
+	{% endfor %}
+
 {% endif %}
 
 {% endspaceless %}
