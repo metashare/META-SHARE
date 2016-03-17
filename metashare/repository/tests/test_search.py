@@ -41,7 +41,7 @@ class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
         
     def setUp(self):
         """
-        Set up the email test
+        Set up the test
         """
         test_utils.setup_test_storage()
         
@@ -354,10 +354,11 @@ class SearchTestPublishedResources(TestCase):
         Set up the view
         """
         LOGGER.info("running '{}' tests...".format(cls.__name__))
-        test_utils.setup_test_storage()                        
-        # Make sure the index does not contain any stale entries:
-        call_command('rebuild_index', interactive=False, using=settings.TEST_MODE_NAME)
+        test_utils.setup_test_storage()
         cls.importPublishedFixtures()
+        # Make sure the index does not contain any stale entries:
+        from haystack.management.commands import update_index
+        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
 
     @classmethod
     def tearDownClass(cls):
