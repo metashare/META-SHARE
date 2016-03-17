@@ -4,12 +4,12 @@
 
 <label class='component'>Distribution</label>
 
-<label class="title">Availability</label>
+<label class="title">Distribution details</label>
 
 {% if distribution.Distribution.Availability %}
 	 <div class="dataline indented">
 		<label>
-			{{ distribution.Distribution.Availability }}
+			<strong>Availability: </strong>{{ distribution.Distribution.Availability }}
 		</label>
 	</div>
 {% endif %}
@@ -17,7 +17,7 @@
 {% if distribution.Distribution.Availability_start_date %}
 	 <div class="dataline indented">
 		<label>
-			<strong>Start date: </strong>{{ distribution.Distribution.Availability_start_date|date:"SHORT_DATE_FORMAT" }}
+			<strong>Availability start date: </strong>{{ distribution.Distribution.Availability_start_date|date:"SHORT_DATE_FORMAT" }}
 		</label>
 	</div>
 {% endif %}
@@ -25,19 +25,11 @@
 {% if distribution.Distribution.Availability_end_date %}
 	 <div class="dataline indented">
 		<label>
-			<strong>End date: </strong>{{ distribution.Distribution.Availability_end_date|date:"SHORT_DATE_FORMAT" }}
+			<strong>Availability end date: </strong>{{ distribution.Distribution.Availability_end_date|date:"SHORT_DATE_FORMAT" }}
 		</label>
 	</div>
 {% endif %}
-
-{% if "Licences" in distribution.Distribution %}
-	<label class="title">Licence</label>
-	{% for key, value in distribution.Distribution.items %}
-		{% if "Licence" in key %}
-	    	{% include "repository/resource_view/licence.html" with licence=value %}
-		{% endif %}
-	{% endfor %}
-    {% for key1, value1 in distribution.Distribution.items %}
+{% for key1, value1 in distribution.Distribution.items %}
 		{% if "Distribution___Access_medium" in key1 %}
 			<div class="dataline indented">
 				<label>
@@ -90,6 +82,14 @@
 			{% include "repository/resource_view/membership.html" with membership=value1 %}
 		{% endif %}
 	{% endfor %}
+{% if "Licences" in distribution.Distribution %}
+	<label class="title">Licences</label>
+	{% for key, value in distribution.Distribution.items %}
+		{% if "Licence" in key %}
+	    	{% include "repository/resource_view/licence.html" with licence=value %}
+		{% endif %}
+	{% endfor %}
+
 {% endif %}
 {% if distribution.Distribution.Licensor %}
      <div class="dataline">
