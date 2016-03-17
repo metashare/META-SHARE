@@ -4,7 +4,7 @@
 
 <label class='component'>Distribution</label>
 
-<label class="title">Distribution details</label>
+<label class="title">Distribution Details</label>
 
 {% if distribution.Distribution.Availability %}
 	 <div class="dataline indented">
@@ -17,7 +17,7 @@
 {% if distribution.Distribution.Availability_start_date %}
 	 <div class="dataline indented">
 		<label>
-			<strong>Availability start date: </strong>{{ distribution.Distribution.Availability_start_date|date:"SHORT_DATE_FORMAT" }}
+			<strong>Availability Start date: </strong>{{ distribution.Distribution.Availability_start_date|date:"SHORT_DATE_FORMAT" }}
 		</label>
 	</div>
 {% endif %}
@@ -25,7 +25,7 @@
 {% if distribution.Distribution.Availability_end_date %}
 	 <div class="dataline indented">
 		<label>
-			<strong>Availability end date: </strong>{{ distribution.Distribution.Availability_end_date|date:"SHORT_DATE_FORMAT" }}
+			<strong>Availability End Date: </strong>{{ distribution.Distribution.Availability_end_date|date:"SHORT_DATE_FORMAT" }}
 		</label>
 	</div>
 {% endif %}
