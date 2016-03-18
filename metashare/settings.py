@@ -55,7 +55,7 @@ SYNC_NEEDS_AUTHENTICATION = True
 
 
 # URL for the Metashare Knowledge Base
-KNOWLEDGE_BASE_URL = 'http://www.meta-share.org/portal/knowledgebase/'
+KNOWLEDGE_BASE_URL = 'http://www.meta-share.org/knowledgebase/'
 
 #TODO: KNOWLEDGE_BASE_URL = 'http://www.meta-share.org/knowledgebase/'
 
@@ -104,7 +104,7 @@ MANAGERS = ADMINS
 
 SITE_ID = 1
 
-METASHARE_VERSION = '3.0'
+METASHARE_VERSION = '3.1'
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
