@@ -125,6 +125,13 @@ class Migration(DataMigration):
                 write_to_resources_to_be_modified_file(_file, lang_info,
                     lang_script, 'languageInfo -- > languageScript')
                 lang_info.languageScript = DEFAULT_LANGUAGESCRIPT
+                
+            if lang_info.languageName:
+                if not lang_info.languageScript:
+                    lang_info.languageScript = \
+                        iana.get_suppressed_script_description(lang_info.languageName)
+                lang_info.languageId = \
+                    iana.make_id(lang_info.languageName, lang_info.languageScript, lang_info.region, lang_info.variant)
             lang_info.save()
         
         
@@ -141,6 +148,7 @@ class Migration(DataMigration):
                 write_to_resources_to_be_modified_file(_file, doc_info,
                     doclangname, 'documentInfo --> documentLanguageName')
                 doc_info.documentLanguageName = DEFAULT_LANGUAGENAME
+            doc_info.documentLanguageId = iana.get_language_subtag(doc_info.documentLanguageName)
             doc_info.save()
                 
         for anno_info in orm.annotationInfoType_model.objects.iterator():
@@ -153,6 +161,7 @@ class Migration(DataMigration):
                 write_to_resources_to_be_modified_file(_file, anno_info,
                     tagsetlangname, 'annotationInfo --> tagsetLanguageName')
                 anno_info.tagsetLanguageName = DEFAULT_LANGUAGENAME
+            anno_info.tagsetLanguageId = iana.get_language_subtag(anno_info.tagsetLanguageName)
             anno_info.save()
         
         invalid_metalangnames = METADATALANGUAGENAME_MAP.keys()
@@ -173,6 +182,9 @@ class Migration(DataMigration):
                         metalangname, 'metadataInfo --> metadataLanguageName')
                     metalangnames.append(DEFAULT_LANGUAGENAME)
             metadata_info.metadataLanguageName = metalangnames
+            metalangids = [iana.get_language_subtag(metalangname) \
+                        for metalangname in metadata_info.metadataLanguageName]
+            metadata_info.metadataLanguageId = metalangids
             metadata_info.save()
         
         for input_info in orm.inputInfoType_model.objects.iterator():
@@ -190,6 +202,8 @@ class Migration(DataMigration):
                         inputlangname, 'inputInfo --> languageName')
                     inputlangnames.append(DEFAULT_LANGUAGENAME)
             input_info.languageName = inputlangnames
+            input_info.languageId = [iana.get_language_subtag(inputlangname) \
+                                for inputlangname in input_info.languageName]
             input_info.save()
         
         for output_info in orm.outputInfoType_model.objects.iterator():
@@ -207,6 +221,8 @@ class Migration(DataMigration):
                                 outputlangname, 'outputInfo --> languageName')
                     outputlangnames.append(DEFAULT_LANGUAGENAME)
             output_info.languageName = outputlangnames
+            output_info.languageId = [iana.get_language_subtag(outputlangname) \
+                                for outputlangname in output_info.languageName]
             output_info.save()
         
         _file.close()

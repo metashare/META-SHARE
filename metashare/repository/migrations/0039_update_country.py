@@ -34,6 +34,7 @@ class Migration(DataMigration):
 
         from metashare.repository.models import communicationInfoType_model, \
             projectInfoType_model
+        from metashare.bcp47 import iana
         # Validate and update in communicationInfoType_model.country
         country_choices = dict(communicationInfoType_model._meta.get_field('country').choices)
         for communication_info in orm.communicationInfoType_model.objects.iterator():
@@ -41,13 +42,14 @@ class Migration(DataMigration):
             if not country:
                 continue
             elif country_choices.get(country):
-                continue
+                pass
             elif COUNTRY_MAP.get(country):
                 communication_info.country = COUNTRY_MAP.get(country)
             else:
                 write_to_resources_to_be_modified_file(_file, communication_info,
                         country, u'communicationInfo --> country')
                 communication_info.country = DEFAULT_VALUE
+            communication_info.countryId = iana.get_region_subtag(communication_info.country)
             communication_info.save()
         
         # Validate and update in projectInfoType_model.fundingCountry
@@ -64,6 +66,8 @@ class Migration(DataMigration):
                         country, u'projectInfo --> fundingCountry')
                     countries.append(DEFAULT_VALUE)
             project_info.fundingCountry = countries
+            for fc in project_info.fundingCountry:
+                project_info.fundingCountryId.append(iana.get_region_subtag(fc))
             project_info.save()
         _file.close()
 
