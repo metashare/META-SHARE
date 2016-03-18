@@ -7,14 +7,7 @@ from django.db import models
 class Migration(DataMigration):
 
     def forwards(self, orm):
-        "Write your forwards methods here."
-        #-------- for resource in orm.resourceInfoType_model.objects.iterator():
-            #------------------------------------ resource.storage_object.save()
-            #--------------------------------------------------- resource.save()
-            #--------------------------- #get the resource description languages
-            # resource_lang = list(resource.identificationInfo.description.iterkeys())
-            #------------------- resource.metadataInfo.save(langs=resource_lang)
-        
+        "Write your forwards methods here."        
         from metashare.repository.models import resourceInfoType_model
         for resource in resourceInfoType_model.objects.iterator():
             #get the resource description languages
