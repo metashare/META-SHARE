@@ -21,7 +21,7 @@ from metashare.repository.editor.lookups import PersonLookup, ActorLookup, \
     TargetResourceLookup
 from metashare.repository.models import languageDescriptionInfoType_model, \
     lexicalConceptualResourceInfoType_model, personInfoType_model,\
-    resourceInfoType_model
+    resourceInfoType_model, distributionInfoType_model
 from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, REMOTE, \
     StorageObject
@@ -187,7 +187,7 @@ class EditorTest(TestCase):
         self.assertEqual(request.status_code, 200)
         login = client.post(ADMINROOT, EditorTest.normal_login)
         # successful login redirects (status 302), failed login gives a status of 200:
-        self.assertContains(login, 'Please enter a correct username and password', status_code=200)
+        self.assertContains(login, 'Please enter the correct username and password', status_code=200)
            
     def test_editor_can_see_model_list(self):
         client = test_utils.get_client_with_user_logged_in(EditorTest.editor_login)
@@ -217,7 +217,7 @@ class EditorTest(TestCase):
     def test_staff_cannot_see_corpus_add(self):
         client = test_utils.get_client_with_user_logged_in(EditorTest.staff_login)
         response = client.get(ADMINROOT+'repository/corpusinfotype_model/add/')
-        self.assertContains(response, 'Permission denied', status_code=403)
+        self.assertContains(response, '403 Forbidden', status_code=403)
 
     def test_editor_can_see_models_add(self):
         # We don't expect the following add forms to work, because the editor
@@ -424,31 +424,7 @@ class EditorTest(TestCase):
         response = client.get('{}repository/resourceinfotype_model/{}/'.format(ADMINROOT, EditorTest.testfixture.id))
         # Resource name is a field of identification, so if this is present, identification is shown inline:
         self.assertContains(response, "Resource name:", msg_prefix='Identification is not shown inline')
-        
-    def test_one2one_distribution_is_hidden(self):
-        """
-        Asserts that a required OneToOneField referring to models that "contain"
-        one2many fields is hidden, i.e., the model is edited in a popup/overlay.
-        """
-        client = test_utils.get_client_with_user_logged_in(EditorTest.editor_login)
-        response = client.get('{}repository/resourceinfotype_model/{}/'
-                              .format(ADMINROOT, EditorTest.testfixture.id))
-        self.assertContains(response, 'type="hidden" id="id_distributionInfo"',
-                            msg_prefix='Required One-to-one field ' \
-                                'distributionInfo" should have been hidden.')
 
-    def test_one2one_distribution_uses_related_widget(self):
-        """
-        Asserts that a required OneToOneField referring to models that "contain"
-        one2many fields is edited in a popup/overlay.
-        """
-        client = test_utils.get_client_with_user_logged_in(EditorTest.editor_login)
-        response = client.get('{}repository/resourceinfotype_model/{}/' \
-                              .format(ADMINROOT, EditorTest.testfixture.id))
-        self.assertContains(response, 'related-widget-wrapper-change-link" ' \
-                                'id="edit_id_distributionInfo"',
-                msg_prefix='Required One-to-one field ' \
-                    '"distributionInfo" not rendered using related widget.')
         
     def test_one2one_usage_is_hidden(self):
         """
@@ -477,12 +453,6 @@ class EditorTest(TestCase):
                     'rendered using related widget, although it contains ' \
                     'a One-to-Many field.')
 
-    def test_licenceinfo_inline_is_present(self):
-        client = test_utils.get_client_with_user_logged_in(EditorTest.editor_login)
-        response = client.get('{}repository/distributioninfotype_model/{}/'.format(ADMINROOT, EditorTest.testfixture.distributionInfo.id))
-        self.assertContains(response, '<div class="inline-group" id="licenceinfotype_model_set-group">',
-                            msg_prefix='expected licence info inline')
-        
 
     def test_one2one_sizepervalidation_is_hidden(self):
         client = test_utils.get_client_with_user_logged_in(EditorTest.editor_login)
@@ -597,7 +567,7 @@ class EditorTest(TestCase):
             'expected the user to be allowed to change the resource')
         # make sure the editor may change some part of the resource:
         response = client.get('{}repository/distributioninfotype_model/{}/'
-                .format(ADMINROOT, res.distributionInfo.id))
+                .format(ADMINROOT, distributionInfoType_model.objects.get(back_to_resourceinfotype_model = res.id).id))
         self.assertContains(response, '>Change Distribution<', msg_prefix=
             'expected the user to be allowed to change parts of the resource')
 
@@ -614,7 +584,7 @@ class EditorTest(TestCase):
             'expected the editor to not be allowed to change the resource')
         # make sure the editor may not change some part of the resource:
         response = client.get('{}repository/distributioninfotype_model/{}/'
-                .format(ADMINROOT, EditorTest.testfixture2.distributionInfo.id))
+                .format(ADMINROOT, distributionInfoType_model.objects.get(back_to_resourceinfotype_model =  EditorTest.testfixture2.id).id))
         self.assertIn(response.status_code, (403, 404), msg=
             'expected the editor to not be allowed to change resource parts')
 
@@ -637,13 +607,15 @@ class EditorTest(TestCase):
         # make sure the editor may not delete any part of non-internal resources
         response = client.get(
             '{}repository/distributioninfotype_model/{}/delete/'
-                .format(ADMINROOT, EditorTest.testfixture2.distributionInfo.id))
+                .format(ADMINROOT, \
+                        distributionInfoType_model.objects.get(back_to_resourceinfotype_model = EditorTest.testfixture2.id).id))
         self.assertIn(response.status_code, (403, 404), msg='expected the ' \
                 'editor to not be allowed to delete any resource parts')
         # make sure the editor may not delete any part of internal resources:
         response = client.get(
             '{}repository/distributioninfotype_model/{}/delete/'
-                .format(ADMINROOT, EditorTest.testfixture4.distributionInfo.id))
+                .format(ADMINROOT,  \
+                        distributionInfoType_model.objects.get(back_to_resourceinfotype_model = EditorTest.testfixture4.id).id))
         self.assertIn(response.status_code, (403, 404), msg="expected the " \
                 "editor to not be allowed to delete internal resource' parts")
 

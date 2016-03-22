@@ -4,6 +4,11 @@
 	<xs:include schemaLocation="../../META-SHARE-SimpleTypes.xsd"/>
 	<xs:include schemaLocation="../../META-SHARE-BaseTypes.xsd"/>
 	<xs:complexType name="ngramInfoType">
+        <xs:annotation>
+            <xs:appinfo>
+                <label>N_gram</label>
+            </xs:appinfo>
+        </xs:annotation>
 		<xs:sequence>
 			<xs:element name="baseItem" maxOccurs="unbounded">
 				<xs:annotation>
@@ -93,7 +98,7 @@
 		<xs:annotation>
 			<xs:documentation>Groups information specific to n-gram resources (e.g. range of n-grams, base item etc.)</xs:documentation>
 			<xs:appinfo>
-				<label>N-gram</label>
+				<label>N_gram</label>
 			</xs:appinfo>
 		</xs:annotation>
 	</xs:element>

@@ -4,10 +4,8 @@ import os
 from os.path import abspath, dirname, join
 import sys
 parentdir = dirname(dirname(abspath(__file__)))
-# Insert our dependencies:
-sys.path.insert(0, join(parentdir, 'lib', 'python2.7', 'site-packages'))
 # Insert our parent directory (the one containing the folder metashare/):
-sys.path.insert(0, parentdir)
+sys.path.insert(1, parentdir)
 
 
 USAGE_INFORMATION = {

@@ -123,10 +123,10 @@ class DocumentUnstructuredStringModelAdmin(admin.ModelAdmin, RelatedAdminMixin):
 
     @csrf_protect_m
     @transaction.commit_on_success
-    def change_view(self, request, object_id, extra_context=None):
+    def change_view(self, request, object_id, form_url='', extra_context=None):
         """
         The 'change' admin view for this model.
-        This follows closely the base implementation from Django 1.3's
+        This follows closely the base implementation from Django 1.4's
         django.contrib.admin.options.ModelAdmin,
         with the explicitly marked modifications.
         """
@@ -149,10 +149,13 @@ class DocumentUnstructuredStringModelAdmin(admin.ModelAdmin, RelatedAdminMixin):
             raise Http404(_('%(name)s object with primary key %(key)r does not exist.') % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
         if request.method == 'POST' and "_saveasnew" in request.POST:
-            return self.add_view(request, form_url='../add/')
+            return self.add_view(request, form_url=reverse('admin:%s_%s_add' %
+                                    (opts.app_label, opts.module_name),
+                                    current_app=self.admin_site.name))
 
         ModelForm = self.get_form(request, obj)
         formsets = []
+        inline_instances = self.get_inline_instances(request)
         if request.method == 'POST':
             form = ModelForm(request.POST, request.FILES, instance=obj)
             if form.is_valid():
@@ -164,7 +167,7 @@ class DocumentUnstructuredStringModelAdmin(admin.ModelAdmin, RelatedAdminMixin):
 
             if form_validated:
                 #### begin modification ####
-                self.save_model(request, new_object, form, change=True)
+                self.save_model(request, new_object, form, True)
                 #### end modification ####
 
                 change_message = self.construct_change_message(request, form, formsets)
@@ -181,7 +184,8 @@ class DocumentUnstructuredStringModelAdmin(admin.ModelAdmin, RelatedAdminMixin):
 
         #### begin modification ####
         adminForm = helpers.AdminForm(form, self.get_fieldsets(request, obj),
-            self.prepopulated_fields, self.get_readonly_fields(request, obj),
+            self.get_prepopulated_fields(request, obj),
+            self.get_readonly_fields(request, obj),
             model_admin=self)
         media = media + adminForm.media
         #### end modification ####
@@ -193,16 +197,15 @@ class DocumentUnstructuredStringModelAdmin(admin.ModelAdmin, RelatedAdminMixin):
             'original': obj,
             'is_popup': "_popup" in request.REQUEST or \
                         "_popup_o2m" in request.REQUEST,
-            'media': mark_safe(media),
+            'media': media,
             'inline_admin_formsets': inline_admin_formsets,
             'errors': helpers.AdminErrorList(form, formsets),
-            'root_path': self.admin_site.root_path,
             'app_label': opts.app_label,
             'kb_link': settings.KNOWLEDGE_BASE_URL,
             'comp_name': _('%s') % force_unicode(opts.verbose_name),
         }
         context.update(extra_context or {})
-        return self.render_change_form(request, context, change=True, obj=obj)
+        return self.render_change_form(request, context, change=True, obj=obj, form_url=form_url)
 
 # Models which are always rendered inline so they don't need their own admin form:
 purely_inline_models = (

@@ -38,6 +38,7 @@
 			{% if type == "video" %}				
 				{% for key, value in resource_component_dict.Resource_component_type.items %}
 
+
 					{% if "Media" in key %}
 						{% if "corpus" in key and video_counts|length > 1 %}
 							<div class="videosubfields subfields">

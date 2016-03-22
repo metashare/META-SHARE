@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 {% load get_icon %}
+{% load static from staticfiles %}
 
 {% block title %}
   {{ resourceName }} &ndash; META-SHARE
 {% endblock %}
 
 {% block links %}
-<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/resource_view.css" />
-<link type="text/css" rel="stylesheet" href="{{ MEDIA_URL }}js/jquery.hoverscroll-0.2.4/jquery.hoverscroll.css" />
+<link rel="stylesheet" type="text/css" href="{% static "metashare/css/resource_view.css" %}" />
+<link type="text/css" rel="stylesheet" href="{% static "metashare/js/jquery.hoverscroll-0.2.4/jquery.hoverscroll.css" %}" />
 {% endblock %}
 
 {% block description %}{{ description|truncatewords:30 }}{% endblock %}
@@ -16,8 +17,8 @@
 
 {% block content %}
 {% spaceless %}
-	<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.hoverscroll-0.2.4/jquery.hoverscroll.js"></script>
-	<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.expander.min.js"></script>
+	<script type="text/javascript" src="{% static "metashare/js/jquery.hoverscroll-0.2.4/jquery.hoverscroll.js" %}"></script>
+	<script type="text/javascript" src="{% static "metashare/js/jquery.expander.min.js" %}"></script>
 	<script type="text/javascript">
 		$(function () {
 			$('.readmore').expander({
@@ -136,7 +137,7 @@
                     &nbsp;<div align=right style="float: right"><i>(Last modified: {{ stat.last }})</i>&nbsp;</div>
                 {% else %}
                 	<a href="#" class="tip">
-                    <img src="{{ MEDIA_URL }}stats/img/{{ stat.action }}_icon.gif"
+                    <img src="{% static "stats/img/"|add:stat.action|add:"_icon.gif" %}"
                     alt="Last {{ stat.action }}: {{ stat.last }}"/>
                     <strong>{{ stat.count }}</strong>&nbsp;
                     <span>Last {{ stat.action }}: {{ stat.last }}</span>
@@ -156,10 +157,10 @@
 		{% endifnotequal %}
 			
 			{% if res_short_names %}
-				<h3 class="shortnames"><i>{% for name in res_short_names %}{{ name }}<img src="{{ MEDIA_URL }}images/trenner.png" class="trenner" />{% endfor %}</i></h3> 
+				<h3 class="shortnames"><i>{% for name in res_short_names %}{{ name }}<img src="{% static "metashare/images/trenner.png" %}" class="trenner" />{% endfor %}</i></h3> 
 				<div style="clear:both"></div>
 			{% endif %}
-			
+
 			{% if not attribution_details|join:"" == '' %}
              <div class="attribution"><label>Attribution details:</label> {{            attribution_details|join:"<br /> " }}</div>
             {% endif %}
@@ -177,6 +178,12 @@
                     {% endfor %}
                 {% endfor %}
             {% endfor %}
+
+            {% if islrn %}
+                <span style="font-size:14px;">
+                    <label>ISLRN: </label>{{ islrn }}
+                </span>
+            {% endif %}
 
 			{% if url %}
 			 	{% for address in url %}
@@ -219,10 +226,12 @@
 			<div style="clear: both;"></div>
 		</div>
 	</div>
-	
 	<div class="white_box column corner">
-		{% include "repository/resource_view/distribution.html" with distribution=distribution_dict %}
-
+        {% if distribution_dicts %}
+            {% for distribution in distribution_dicts %}
+		        {% include "repository/resource_view/distribution.html" with distribution_dict=distribution.Distribution %}
+            {% endfor %}
+        {% endif %}
 		{% if contact_person_dicts %}
 			<label class='component'>Contact Person{{ contact_person_dicts|length|pluralize }}</label>
 			{% for contact_person in contact_person_dicts %}

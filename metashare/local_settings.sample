@@ -19,8 +19,15 @@ DJANGO_BASE = 'path/to/metashare/'
 USE_L10N = True
 LANGUAGE_CODE = 'en-us'
 
+# Allowed hosts: Host and domain names that this django site can serve:
+ALLOWED_HOSTS = ['www.example.com']
+
 # Path to the local storage layer path used for persistent object storage.
 STORAGE_PATH = '/path/to/storage/path'
+
+# Path to the local directory where all the static files (images, js, css) will 
+# be collected and served by the web server in STATIC_URL
+STATIC_ROOT = '/path/to/static/path'
 
 # Directory in which lock files will temporarily be created.
 LOCK_DIR = join(tempfile.gettempdir(), 'metashare-locks')
@@ -29,6 +36,10 @@ LOCK_DIR = join(tempfile.gettempdir(), 'metashare-locks')
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 DEBUG_JS = DEBUG
+
+# Please set the SECRET_KEY to a unique random string
+# The installation manual can give more information on how to create it
+SECRET_KEY = ''
 
 LOG_FILENAME = join(tempfile.gettempdir(), "metashare.log")
 
@@ -94,6 +105,7 @@ XDIFF_LOCATION = "{0}/../misc/tools/xdiff-src/xdiff".format(ROOT_PATH)
 # The web browser to use for the Selenium tests; possible values are:
 # Firefox, Ie, Opera, Chrome
 SELENIUM_DRIVER = 'Firefox'
+#SELENIUM_DRIVER_OPTS = dict(firefox_profile="{0}/../firefox_profile".format(ROOT_PATH))
 
 # The port of the Selenium test server;
 # this must be the same port as used in DJANGO_URL
@@ -181,7 +193,7 @@ PROXIED_NODES = {
 #    },
 }
 
-# You cann add custom web analytics application settings here through the Django
+# You can add custom web analytics application settings here through the Django
 # Analytical framework which is integrated in META-SHARE. By default, all
 # META-SHARE services are monitored with a common Google Analytics tracking
 # code; see the Installation Manual for more information on this.

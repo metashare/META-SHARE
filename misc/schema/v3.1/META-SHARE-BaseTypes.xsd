@@ -887,7 +887,7 @@
 				<xs:annotation>
 					<xs:documentation>Publication to be used for citation purposes</xs:documentation>
 					<xs:appinfo>
-						<relation>one-to-many</relation>
+						<relation>many-to-one</relation>
 						<recommended>true</recommended>
 						<label>Citation</label>
 					</xs:appinfo>

@@ -195,7 +195,7 @@ class UpdateDefaultEditorGroupForm(ModelForm):
     class Media:
         css = {
             # required by the FilteredSelectMultiple widget
-            'all':['{}css/widgets.css'.format(settings.ADMIN_MEDIA_PREFIX)],
+            'all':['{}admin/css/widgets.css'.format(settings.STATIC_URL)],
         }
         # required by the FilteredSelectMultiple widget
         js = ['/{}admin/jsi18n/'.format(settings.DJANGO_BASE)]

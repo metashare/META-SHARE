@@ -16,5 +16,4 @@ if [ ! -d "$METASHARE_SW_DIR" ] ; then
 fi
 
 export METASHARE_DIR="$METASHARE_SW_DIR/metashare"
-MSERV_DIR="$METASHARE_SW_DIR/misc/tools/multitest"
 

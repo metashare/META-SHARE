@@ -19,8 +19,9 @@ from metashare.repository.models import actorInfoType_model, \
     membershipInfoType_model, \
     personInfoType_model, \
     targetResourceInfoType_model, documentInfoType_model, \
-    languageVarietyInfoType_model, \
-    sizeInfoType_model, resolutionInfoType_model, audioSizeInfoType_model, licenceInfoType_model
+    languageVarietyInfoType_model, sizeInfoType_model, \
+    resolutionInfoType_model, audioSizeInfoType_model, \
+    distributionInfoType_model, licenceInfoType_model
 from metashare.repository.editor.lookups import ActorLookup, \
     OrganizationLookup, ProjectLookup, MembershipDummyLookup, \
     PersonLookup, TargetResourceLookup, DocumentLookup, \
@@ -166,6 +167,14 @@ class RelatedAdminMixin(object):
                 related_modeladmin.has_change_permission(request))
             can_delete_related = bool(related_modeladmin and 
                 related_modeladmin.has_delete_permission(request))
+            # FIXME:
+            # This is a hack to workaround github issue #748
+            # https://github.com/metashare/META-SHARE/issues/748
+            # There is probably a better way to fix it but this
+            # will have to do for now until a cleaner solution is found
+            if db_field.rel.to == distributionInfoType_model:
+                can_delete_related = False
+            # END FIXME
             widget = RelatedFieldWidgetWrapper.from_contrib_wrapper(formfield.widget, 
                 can_change_related, 
                 can_delete_related)

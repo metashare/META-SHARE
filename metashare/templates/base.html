@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 {% load analytical %}
-{% load adminmedia %}
+{% load static from staticfiles %}
 {% spaceless %}
 <html lang="en">
   <head>
@@ -9,15 +9,15 @@
     <title>{% spaceless %}{% block title %}META-SHARE{% endblock %}{% endspaceless %}</title>
     <meta name="description" content="{% spaceless %}{% block description %}META-SHARE: a sustainable network of repositories of language resources documented with high-quality metadata, allowing for uniform search and access to resources.{% endblock %}{% endspaceless %}" />
     <meta name="keywords" content="{% spaceless %}{% block keywords %}META-SHARE, language resources, language tools, META-NET{% endblock %}{% endspaceless %}" />
-    <link rel="shortcut icon" href="{{ MEDIA_URL }}images/favicon.ico" />
-    <link rel="stylesheet" href="{{ MEDIA_URL }}css/blueprint/screen.css" type="text/css" media="screen, projection">
-    <link rel="stylesheet" href="{{ MEDIA_URL }}css/blueprint/print.css" type="text/css" media="print">
-    <!--[if lt IE 8]><link rel="stylesheet" href="{{ MEDIA_URL }}css/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
-    <link rel="stylesheet" href="{{ MEDIA_URL }}css/sexybuttons/sexybuttons.css" type="text/css" media="screen">
-    <link rel="stylesheet" href="{{ MEDIA_URL }}css/screen.css" type="text/css" media="screen">
-    <link rel="stylesheet" href="{{ MEDIA_URL }}css/typo.css" type="text/css" media="screen">
-    <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-1.7.1.min.js"></script>
-    <script type="text/javascript" src="{{ MEDIA_URL }}js/metashare.js"></script>
+    <link rel="shortcut icon" href="{% static "metashare/images/favicon.ico" %}" />
+    <link rel="stylesheet" href="{% static "metashare/css/blueprint/screen.css" %}" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="{% static "metashare/css/blueprint/print.css" %}" type="text/css" media="print">
+    <!--[if lt IE 8]><link rel="stylesheet" href="{% static "metashare/css/blueprint/ie.css" %}" type="text/css" media="screen, projection"><![endif]-->
+    <link rel="stylesheet" href="{% static "metashare/css/sexybuttons/sexybuttons.css" %}" type="text/css" media="screen">
+    <link rel="stylesheet" href="{% static "metashare/css/screen.css" %}" type="text/css" media="screen">
+    <link rel="stylesheet" href="{% static "metashare/css/typo.css" %}" type="text/css" media="screen">
+    <script type="text/javascript" src="{% static "metashare/js/jquery-1.7.1.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "metashare/js/metashare.js" %}"></script>
     {% block links %}{% endblock %}{% analytical_head_bottom %}
     <script type="text/javascript">
     var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-36199711-1']); _gaq.push(['_gat._anonymizeIp']);

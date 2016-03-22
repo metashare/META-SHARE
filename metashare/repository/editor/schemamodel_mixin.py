@@ -1,32 +1,11 @@
 '''
 The mixin code for ModelAdmin to link to the SchemaModel objects in models.py.
 '''
+from django.db.models.fields import FieldDoesNotExist
+
 from metashare.utils import verify_subclass, get_class_by_name
 from metashare.repository.supermodel import SchemaModel
 from metashare.repository.editor.editorutils import encode_as_inline
-from django.db.models.fields import FieldDoesNotExist
-from metashare.repository.editor.widgets import ComboWidget, MultiComboWidget
-from metashare.repository.models import inputInfoType_model, \
-    outputInfoType_model, languageInfoType_model, metadataInfoType_model, \
-    documentInfoType_model, annotationInfoType_model
-
-# Fields that need the ComboWidget/MultiComboWidget with autocomplete functionality
-# to use with languageId,languageName pairs.
-LANGUAGE_ID_NAME_FIELDS = {
-   # inputInfoType_model:
-   #     {'type': 'multiple', 'id': "languageId", 'name': "languageName"},
-   # outputInfoType_model:
-   #     {'type': 'multiple', 'id': "languageId", 'name': "languageName"},
-   # languageInfoType_model:
-   #     {'type': 'single', 'id': "languageId", 'name': "languageName"},
-   # metadataInfoType_model:
-   #     {'type': 'multiple', 'id': "metadataLanguageId", 'name': "metadataLanguageName"},
-   # documentInfoType_model:
-   #     {'type': 'single', 'id': "documentLanguageId", 'name': "documentLanguageName"},
-   # annotationInfoType_model:
-   #     {'type': 'single', 'id': "tagsetLanguageId", 'name': "tagsetLanguageName"},
-}
-
 
 class SchemaModelLookup(object):
     show_tabbed_fieldsets = False
@@ -159,7 +138,7 @@ class SchemaModelLookup(object):
 
     def get_fieldsets_with_inlines(self, request, obj=None):
         # pylint: disable-msg=E1101
-        inline_names = [inline.parent_fk_name for inline in self.inline_instances if hasattr(inline, 'parent_fk_name')]
+        inline_names = [inline.parent_fk_name for inline in self.get_inline_instances(request) if hasattr(inline, 'parent_fk_name')]
         return self.build_fieldsets_from_schema(include_inlines=True, inlines=inline_names)
 
 
@@ -211,42 +190,3 @@ class SchemaModelLookup(object):
             except AttributeError:
                 pass
         return get_class_by_name('metashare.repository.admin', inline_class_name)
-    
-    def add_lang_widget(self, db_field):
-        # pylint: disable-msg=E1101
-        model_cls = self.model().__class__
-        widget_dict = {}
-        if model_cls in LANGUAGE_ID_NAME_FIELDS:
-            item = LANGUAGE_ID_NAME_FIELDS[model_cls]
-            if item['type'] == 'single':
-                attrs = {}
-                attrs['id_field'] = item['id']
-                attrs['name_field'] = item['name']
-                if db_field.name == item['id']:
-                    widget_dict.update({'widget': ComboWidget(field_type='id', attrs=attrs)})
-                elif db_field.name == item['name']:
-                    widget_dict.update({'widget': ComboWidget(field_type='name', attrs=attrs)})
-            elif item['type'] == 'multiple':
-                attrs = {}
-                attrs['id_field'] = item['id']
-                attrs['name_field'] = item['name']
-                if db_field.name == item['name']:
-                    prev_widget = db_field.widget
-                    widget_id = prev_widget.widget_id
-                    max_length = prev_widget.max_length
-                    widget_dict.update({'widget': MultiComboWidget(field_type='name', attrs=attrs, widget_id=widget_id, max_length=max_length)})
-                elif db_field.name == item['id']:
-                    prev_widget = db_field.widget
-                    widget_id = prev_widget.widget_id
-                    max_length = prev_widget.max_length
-                    widget_dict.update({'widget': MultiComboWidget(field_type='id', attrs=attrs, widget_id=widget_id, max_length=max_length)})
-
-        return widget_dict
-    
-    def add_lang_templ_params(self, inline_admin_formset):
-        model_cls = inline_admin_formset.formset.form.Meta.model().__class__
-        if model_cls in LANGUAGE_ID_NAME_FIELDS:
-            item = LANGUAGE_ID_NAME_FIELDS[model_cls]
-            inline_admin_formset.has_lang = True
-            inline_admin_formset.lang_id = item['id']
-            inline_admin_formset.lang_name = item['name']

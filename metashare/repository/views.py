@@ -22,11 +22,10 @@ from metashare.repository.forms import LicenseSelectionForm, \
     LicenseAgreementForm, DownloadContactForm, MORE_FROM_SAME_CREATORS, \
     MORE_FROM_SAME_PROJECTS
 from metashare.repository import model_utils
-from metashare.repository.models import distributionInfoType_model, licenceInfoType_model, \
-    resourceInfoType_model
+from metashare.repository.models import resourceInfoType_model
 from metashare.repository.search_indexes import resourceInfoType_modelIndex, \
     update_lr_index_entry
-from metashare.settings import LOG_HANDLER, MEDIA_URL, DJANGO_URL
+from metashare.settings import LOG_HANDLER, STATIC_URL, DJANGO_URL
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
 from metashare.storage.models import PUBLISHED
@@ -59,9 +58,9 @@ def _convert_to_template_tuples(element_tree):
     """
     # If we are dealing with a complex node containing children nodes, we have
     # to first recursively collect the data values from the sub components.
-    if len(element_tree.getchildren()):
+    if len(element_tree):
         values = []
-        for child in element_tree.getchildren():
+        for child in element_tree:
             values.append(_convert_to_template_tuples(child))
         # use pretty print name of element instead of tag; requires that 
         # element_tree is created using export_to_elementtree(pretty=True)
@@ -86,58 +85,55 @@ MEMBER_TYPES = type('MemberEnum', (), dict(GOD=100, FULL=3, ASSOCIATE=2, NON=1))
 # is required at a minimum to be able to download the associated resource
 # straight away; otherwise the licence requires a hard-copy signature
 LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
-    'AGPL': (MEDIA_URL + 'licences/AGPL.pdf', MEMBER_TYPES.NON),
-    'LGPL': (MEDIA_URL + 'licences/LGPL.pdf', MEMBER_TYPES.NON),
-    'CC-ZERO': (MEDIA_URL + 'licences/CC-ZERO.pdf', MEMBER_TYPES.NON),
-    'CC-BY-NC-ND': (MEDIA_URL + 'licences/CC-BY-NC-ND.pdf', MEMBER_TYPES.NON),
-    'CC-BY-NC-SA': (MEDIA_URL + 'licences/CC-BY-NC-SA.pdf', MEMBER_TYPES.NON),
-    'CC-BY-NC': (MEDIA_URL + 'licences/CC-BY-NC.pdf', MEMBER_TYPES.NON),
-    'CC-BY-ND': (MEDIA_URL + 'licences/CC-BY-ND.pdf', MEMBER_TYPES.NON),
-    'CC-BY-SA': (MEDIA_URL + 'licences/CC-BY-SA.pdf', MEMBER_TYPES.NON),
-    'CC-BY': (MEDIA_URL + 'licences/CC-BY.pdf', MEMBER_TYPES.NON),
-    'PDDL': (MEDIA_URL + 'licences/PDDL.pdf', MEMBER_TYPES.NON),
-    'ODC-BY': (MEDIA_URL + 'licences/ODC-BY.pdf', MEMBER_TYPES.NON),
-    'ODbL': (MEDIA_URL + 'licences/ODbL.pdf', MEMBER_TYPES.NON),
-    # 'MSCommons-BY': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BY_v1.0.htm',
-    # MEMBER_TYPES.FULL),
-    # 'MSCommons-BY-NC': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNC_v1.0.htm',
-    #                     MEMBER_TYPES.FULL),
-    # 'MSCommons-BY-NC-ND': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNCND_' \
-    #                        'v1.0.htm', MEMBER_TYPES.FULL),
-    # 'MSCommons-BY-NC-SA': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNCSA' \
-    #                        '_v1.0.htm', MEMBER_TYPES.FULL),
-    # 'MSCommons-BY-ND': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYND_v1.0.htm',
-    #                     MEMBER_TYPES.FULL),
-    # 'MSCommons-BY-SA': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYSA_v1.0.htm',
-    #                     MEMBER_TYPES.FULL),
-    'MS-NoReD-FF': (MEDIA_URL + 'licences/MS-NoReD-FF.pdf', MEMBER_TYPES.GOD),
-    'MS-NoReD': (MEDIA_URL + 'licences/MS-NoReD.pdf', MEMBER_TYPES.GOD),
-    'MS-NoReD-ND-FF': (MEDIA_URL + 'licences/MS-NoReD-ND-FF.pdf', MEMBER_TYPES.GOD),
-    'MS-NoReD-ND': (MEDIA_URL + 'licences/MS-NoReD-ND.pdf', MEMBER_TYPES.GOD),
-    'MS-NC-NoReD-ND-FF': (MEDIA_URL + 'licences/MS-NC-NoReD-ND-FF.pdf', MEMBER_TYPES.GOD),
-    'MS-NC-NoReD-ND': (MEDIA_URL + 'licences/MS-NC-NoReD-ND.pdf', MEMBER_TYPES.GOD),
-    'MS-NC-NoReD-FF': (MEDIA_URL + 'licences/MS-NC-NoReD-FF.pdf', MEMBER_TYPES.GOD),
-    'MS-NC-NoReD': (MEDIA_URL + 'licences/MS-NC-NoReD.pdf', MEMBER_TYPES.GOD),
-    'ELRA_EVALUATION': (MEDIA_URL + 'licences/ELRA_EVALUATION.pdf', MEMBER_TYPES.GOD),
-    'ELRA_VAR': (MEDIA_URL + 'licences/ELRA_VAR.pdf', MEMBER_TYPES.GOD),
-    'ELRA_END_USER': (MEDIA_URL + 'licences/ELRA_END_USER.pdf', MEMBER_TYPES.GOD),
-    'CLARIN_PUB': (MEDIA_URL + 'licences/CLARIN_PUB.pdf', MEMBER_TYPES.GOD),
-    'CLARIN_ACA-NC': (MEDIA_URL + 'licences/CLARIN_ACA-NC.pdf', MEMBER_TYPES.GOD),
-    'CLARIN_ACA': (MEDIA_URL + 'licences/CLARIN_ACA.pdf', MEMBER_TYPES.GOD),
-    'CLARIN_RES': (MEDIA_URL + 'licences/CLARIN_RES.pdf', MEMBER_TYPES.GOD),
-    'Princeton_Wordnet': (MEDIA_URL + 'licences/Princeton_Wordnet.pdf',
+    'AGPL': (STATIC_URL + 'metashare/licences/AGPL.pdf', MEMBER_TYPES.NON),
+    'LGPL': (STATIC_URL + 'metashare/licences/LGPL.pdf', MEMBER_TYPES.NON),
+    'CC-ZERO': (STATIC_URL + 'metashare/licences/CC-ZERO.pdf', MEMBER_TYPES.NON),
+    'CC-BY-NC-ND': (STATIC_URL + 'metashare/licences/CC-BY-NC-ND.pdf', MEMBER_TYPES.NON),
+    'CC-BY-NC-SA': (STATIC_URL + 'metashare/licences/CC-BY-NC-SA.pdf', MEMBER_TYPES.NON),
+    'CC-BY-NC': (STATIC_URL + 'metashare/licences/CC-BY-NC.pdf', MEMBER_TYPES.NON),
+    'CC-BY-ND': (STATIC_URL + 'metashare/licences/CC-BY-ND.pdf', MEMBER_TYPES.NON),
+    'CC-BY-SA': (STATIC_URL + 'metashare/licences/CC-BY-SA.pdf', MEMBER_TYPES.NON),
+    'CC-BY': (STATIC_URL + 'metashare/licences/CC-BY.pdf', MEMBER_TYPES.NON),
+    'PDDL': (STATIC_URL + 'metashare/licences/PDDL.pdf', MEMBER_TYPES.NON),
+    'ODC-BY': (STATIC_URL + 'metashare/licences/ODC-BY.pdf', MEMBER_TYPES.NON),
+    'ODbL': (STATIC_URL + 'metashare/licences/ODbL.pdf', MEMBER_TYPES.NON),
+    'MS-NoReD-FF': (STATIC_URL + 'metashare/licences/MS-NoReD-FF.pdf', MEMBER_TYPES.GOD),
+    'MS-NoReD': (STATIC_URL + 'metashare/licences/MS-NoReD.pdf', MEMBER_TYPES.GOD),
+    'MS-NoReD-ND-FF': (STATIC_URL + 'metashare/licences/MS-NoReD-ND-FF.pdf', MEMBER_TYPES.GOD),
+    'MS-NoReD-ND': (STATIC_URL + 'metashare/licences/MS-NoReD-ND.pdf', MEMBER_TYPES.GOD),
+    'MS-NC-NoReD-ND-FF': (STATIC_URL + 'metashare/licences/MS-NC-NoReD-ND-FF.pdf', MEMBER_TYPES.GOD),
+    'MS-NC-NoReD-ND': (STATIC_URL + 'metashare/licences/MS-NC-NoReD-ND.pdf', MEMBER_TYPES.GOD),
+    'MS-NC-NoReD-FF': (STATIC_URL + 'metashare/licences/MS-NC-NoReD-FF.pdf', MEMBER_TYPES.GOD),
+    'MS-NC-NoReD': (STATIC_URL + 'metashare/licences/MS-NC-NoReD.pdf', MEMBER_TYPES.GOD),
+    'MSCommons-BY': (STATIC_URL + 'metashare/licences/MSCommons-BY.pdf', MEMBER_TYPES.FULL),
+    'MSCommons-BY-NC': (STATIC_URL + 'metashare/licences/MSCommons-BY-NC.pdf', MEMBER_TYPES.FULL),
+    'MSCommons-BY-NC-ND': (STATIC_URL + 'metashare/licences/MSCommons-BY-NC-ND.pdf', MEMBER_TYPES.FULL),
+    'MSCommons-BY-NC-SA': (STATIC_URL + 'metashare/licences/MSCommons-BY-NC-SA.pdf', MEMBER_TYPES.FULL),
+    'MSCommons-BY-ND': (STATIC_URL + 'metashare/licences/MSCommons-BY-ND.pdf', MEMBER_TYPES.FULL),
+    'MSCommons-BY-SA': (STATIC_URL + 'metashare/licences/MSCommons-BY-SA.pdf', MEMBER_TYPES.FULL),
+    'MS-C-NoReD-FF': (STATIC_URL + 'metashare/licences/MS-C-NoReD-FF.pdf', MEMBER_TYPES.GOD),
+    'MS-C-NoReD': (STATIC_URL + 'metashare/licences/MS-C-NoReD.pdf', MEMBER_TYPES.GOD),
+    'MS-C-NoReD-ND-FF': (STATIC_URL + 'metashare/licences/MS-C-NoReD-ND-FF.pdf', MEMBER_TYPES.GOD),
+    'MS-C-NoReD-ND': (STATIC_URL + 'metashare/licences/MS-C-NoReD-ND.pdf', MEMBER_TYPES.GOD),
+    'ELRA_EVALUATION': (STATIC_URL + 'metashare/licences/ELRA_EVALUATION.pdf', MEMBER_TYPES.GOD),
+    'ELRA_VAR': (STATIC_URL + 'metashare/licences/ELRA_VAR.pdf', MEMBER_TYPES.GOD),
+    'ELRA_END_USER': (STATIC_URL + 'metashare/licences/ELRA_END_USER.pdf', MEMBER_TYPES.GOD),
+    'CLARIN_PUB': (STATIC_URL + 'metashare/licences/CLARIN_PUB.pdf', MEMBER_TYPES.GOD),
+    'CLARIN_ACA-NC': (STATIC_URL + 'metashare/licences/CLARIN_ACA-NC.pdf', MEMBER_TYPES.GOD),
+    'CLARIN_ACA': (STATIC_URL + 'metashare/licences/CLARIN_ACA.pdf', MEMBER_TYPES.GOD),
+    'CLARIN_RES': (STATIC_URL + 'metashare/licences/CLARIN_RES.pdf', MEMBER_TYPES.GOD),
+    'Princeton_Wordnet': (STATIC_URL + 'metashare/licences/Princeton_Wordnet.pdf',
                           MEMBER_TYPES.NON),
-    'GPL': (MEDIA_URL + 'licences/GPL.pdf', MEMBER_TYPES.NON),
-    'GFDL': (MEDIA_URL + 'licences/GFDL.pdf', MEMBER_TYPES.NON),
-    'ApacheLicence_2.0': (MEDIA_URL + 'licences/ApacheLicence_2.0.pdf',
+    'GPL': (STATIC_URL + 'metashare/licences/GPL.pdf', MEMBER_TYPES.NON),
+    'GFDL': (STATIC_URL + 'metashare/licences/GFDL.pdf', MEMBER_TYPES.NON),
+    'ApacheLicence_2.0': (STATIC_URL + 'metashare/licences/ApacheLicence_2.0.pdf',
                           MEMBER_TYPES.NON),
-    'BSD_3-clause': (MEDIA_URL + 'licences/BSD_3-clause.pdf', MEMBER_TYPES.NON),
-    'BSD_4-clause': (MEDIA_URL + 'licences/BSD_4-clause.pdf', MEMBER_TYPES.NON),
-    'FreeBSD': (MEDIA_URL + 'licences/FreeBSD.pdf', MEMBER_TYPES.NON),
+    'BSD_3-clause': (STATIC_URL + 'metashare/licences/BSD_3-clause.pdf', MEMBER_TYPES.NON),
+    'BSD_4-clause': (STATIC_URL + 'metashare/licences/BSD_4-clause.pdf', MEMBER_TYPES.NON),
+    'FreeBSD': (STATIC_URL + 'metashare/licences/FreeBSD.pdf', MEMBER_TYPES.NON),
     'proprietary': ('', MEMBER_TYPES.GOD),
     'underNegotiation': ('', MEMBER_TYPES.GOD),
     'nonStandardLicenceTerms': ('', MEMBER_TYPES.NON),
-    # 'other': ('', MEMBER_TYPES.GOD)
 }
 
 
@@ -159,42 +155,35 @@ def _get_licences(resource, user_membership):
     is possible for the given user membership.
     
     The result is a dictionary mapping from licence names to pairs. Each pair
-    contains the corresponding `licenceInfoType_model` and a boolean denoting
-    whether the resource may (and can) be directly downloaded or if there need
-    to be further negotiations of some sort.
+    contains the corresponding `licenceInfoType_model`, the download location
+    URLs and a boolean denoting whether the resource may (and can) be directly
+    downloaded or if there need to be further negotiations of some sort.
     """
-    distribution_infos = tuple(distributionInfoType_model.objects.filter \
-                                   (back_to_resourceinfotype_model__id=resource.id))
+    distribution_infos = tuple(resource.distributioninfotype_model_set.all())
 
-    licenInfoList = list()
+    licence_infos = tuple([(l_info, d_info.downloadLocation) \
+        for d_info in distribution_infos  for l_info in d_info.licenceInfo.all()])
 
-    for distributionInfo in distribution_infos:
-        licenInfoList.extend(
-            distributionInfo.licenceInfo.all())
-
-    licence_infos = tuple(licenInfoList)
-
-    all_licenses = dict([(l_info.licence, l_info) for l_info in licence_infos])
+    all_licenses = dict([(l_info.licence, (l_info, dl_link)) \
+                                        for l_info, dl_link in licence_infos])
 
     result = {}
     for name, info in all_licenses.items():
+        l_info, dl_link = info
         access = LICENCEINFOTYPE_URLS_LICENCE_CHOICES.get(name, None)
         if access == None:
             LOGGER.warn("Unknown license name discovered in the database for " \
                         "object #{}: {}".format(resource.id, name))
             del all_licenses[name]
         elif user_membership >= access[1] \
-                and (distributionInfoType_model.objects.get \
-                    (licenceInfo = info).downloadLocation \
-                             or resource.storage_object.get_download()):
-            # and (info.downloadLocation \
+                and (dl_link or resource.storage_object.get_download()):
             # the resource can be downloaded somewhere under the current license
             # terms and the user's membership allows her to immediately download
             # the resource
-            result[name] = (info, True)
+            result[name] = (l_info, dl_link, True)
         else:
             # further negotiations are required with the current license
-            result[name] = (info, False)
+            result[name] = (l_info, dl_link, False)
 
     return result
 
@@ -211,6 +200,8 @@ def download(request, object_id):
     resource = get_object_or_404(resourceInfoType_model,
                                  storage_object__identifier=object_id,
                                  storage_object__publication_status=PUBLISHED)
+    # Get a dictionary, where the values are triplets:
+    # (licenceInfo instance, download location, access)
     licences = _get_licences(resource, user_membership)
 
     # Check whether the resource is from the current node, or whether it must be
@@ -227,25 +218,23 @@ def download(request, object_id):
 
         if licence_choice and 'in_licence_agree_form' in request.POST:
             la_form = LicenseAgreementForm(licence_choice, data=request.POST)
+            l_info, dl_link, access = licences[licence_choice]
             if la_form.is_valid():
                 # before really providing the download, we have to make sure
                 # that the user hasn't tried to circumvent the permission system
-                if licences[licence_choice][1]:
-                    dl = distributionInfoType_model.objects.get \
-                    (id=licences[licence_choice][0].back_to_distributioninfotype_model_id).downloadLocation
-                    return _provide_download(request, resource,
-                                             dl)
+                if access:
+                    return _provide_download(request, resource, dl_link)
             else:
+                _dict = {'form': la_form,
+                         'resource': resource,
+                         'licence_name': licence_choice,
+                         'licence_path': LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
+                         'download_available': access,
+                         'l_name': l_info.nonStandardLicenceName,
+                         'l_url': l_info.nonStandardLicenceTermsURL,
+                         'l_text': l_info.nonStandaradLicenceTermsText.values()}
                 return render_to_response('repository/licence_agreement.html',
-                                          {'form': la_form, 'resource': resource,
-                                           'licence_name': licence_choice, 'licence_path': \
-                                              LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
-                                           'download_available': \
-                                               licences[licence_choice][1],
-                                           'l_name': licences[licence_choice][0].nonStandardLicenceName,
-                                           'l_url': licences[licence_choice][0].nonStandardLicenceTermsURL,
-                                           'l_text': licences[licence_choice][0].nonStandaradLicenceTermsText.values()},
-                                          context_instance=RequestContext(request))
+                    _dict, context_instance=RequestContext(request))
         elif licence_choice and not licence_choice in licences:
             licence_choice = None
 
@@ -254,20 +243,21 @@ def download(request, object_id):
         licence_choice = licences.iterkeys().next()
 
     if licence_choice:
+        l_info, dl_link, access = licences[licence_choice]
+        _dict = {'form': LicenseAgreementForm(licence_choice),
+               'resource': resource, 'licence_name': licence_choice,
+               'licence_path': LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
+               'download_available': access,
+               'l_name': l_info.nonStandardLicenceName,
+               'l_url': l_info.nonStandardLicenceTermsURL,
+               'l_text': l_info.nonStandaradLicenceTermsText.values()}
         return render_to_response('repository/licence_agreement.html',
-                                  {'form': LicenseAgreementForm(licence_choice),
-                                   'resource': resource, 'licence_name': licence_choice,
-                                   'licence_path': \
-                                       LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
-                                   'download_available': licences[licence_choice][1],
-                                   'l_name': licences[licence_choice][0].nonStandardLicenceName,
-                                   'l_url': licences[licence_choice][0].nonStandardLicenceTermsURL,
-                                           'l_text': licences[licence_choice][0].nonStandaradLicenceTermsText.values()},
-                                  context_instance=RequestContext(request))
+            _dict, context_instance=RequestContext(request))
 
     elif len(licences) > 1:
         return render_to_response('repository/licence_selection.html',
-                                  {'form': LicenseSelectionForm(licences), 'resource': resource},
+                                  {'form': LicenseSelectionForm(licences),
+                                   'resource': resource},
                                   context_instance=RequestContext(request))
     else:
         return render_to_response('repository/lr_not_downloadable.html',
@@ -450,12 +440,13 @@ def view(request, resource_name=None, object_id=None):
     url = resource.identificationInfo.url
     metashare_id = resource.identificationInfo.metaShareId
     identifier = resource.identificationInfo.identifier
+    islrn = resource.identificationInfo.ISLRN
     resource_type = resource.resourceComponentType.as_subclass().resourceType
     media_types = set(model_utils.get_resource_media_types(resource))
     linguality_infos = set(model_utils.get_resource_linguality_infos(resource))
     license_types = set(model_utils.get_resource_license_types(resource))
     attribution_details = model_utils.get_resource_attribution_texts(resource)
-    distribution_info_tuple = None
+    distribution_info_tuples = []
     contact_person_tuples = []
     metadata_info_tuple = None
     version_info_tuple = None
@@ -467,7 +458,7 @@ def view(request, resource_name=None, object_id=None):
     resource_component_tuple = None
     for _tuple in lr_content[1]:
         if _tuple[0] == "Distribution":
-            distribution_info_tuple = _tuple
+            distribution_info_tuples.append( _tuple)
         elif _tuple[0] == "Contact person":
             contact_person_tuples.append(_tuple)
         elif _tuple[0] == "Metadata":
@@ -495,9 +486,11 @@ def view(request, resource_name=None, object_id=None):
     # Convert several tuples to dictionaries to facilitate rendering
     # the templates.
     contact_person_dicts = []
+    distribution_dicts = []
     for item in contact_person_tuples:
         contact_person_dicts.append(tuple2dict([item]))
-    distribution_dict = tuple2dict([distribution_info_tuple])
+    for item in distribution_info_tuples:
+        distribution_dicts.append(tuple2dict([item]))
     resource_component_dict = tuple2dict(resource_component_tuple)
     resource_creation_dict = tuple2dict([resource_creation_info_tuple])
     metadata_dict = tuple2dict([metadata_info_tuple])
@@ -597,7 +590,7 @@ def view(request, resource_name=None, object_id=None):
     context = {
         'contact_person_dicts': contact_person_dicts,
         'description': description,
-        'distribution_dict': distribution_dict,
+        'distribution_dicts': distribution_dicts,
         'documentation_dict': documentation_dict,
         'license_types': license_types,
         'linguality_infos': linguality_infos,
@@ -605,6 +598,7 @@ def view(request, resource_name=None, object_id=None):
         'metadata_dict': metadata_dict,
         'metaShareId': metashare_id,
         'identifier': identifier,
+        'islrn': islrn,
         'other_res_names': other_res_names,
         'other_descriptions': other_descriptions,
         'relation_dicts': relation_dicts,
@@ -772,6 +766,8 @@ class MetashareFacetedSearchView(FacetedSearchView):
                 sqs = sqs.order_by('-view_count', 'resourceNameSort_exact')
             else:
                 sqs = sqs.order_by('resourceNameSort_exact')
+        else:
+            sqs = sqs.order_by('resourceNameSort_exact')
 
         # collect statistics about the query
         starttime = datetime.now()

@@ -1,33 +1,25 @@
-from django.conf.urls.defaults import patterns, include
+from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from django.views.generic.simple import direct_to_template
+from django.views.generic.base import TemplateView
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from metashare.repository.editor import admin_site as editor_site
 from metashare.repository.sitemap import RepositorySitemap
-from metashare.settings import MEDIA_ROOT, DEBUG, DJANGO_BASE, SITEMAP_URL
+from metashare.settings import DJANGO_BASE, SITEMAP_URL
 
 
 admin.autodiscover()
 
 urlpatterns = patterns('',
-  (r'^{0}$'.format(DJANGO_BASE),
-    'metashare.views.frontpage'),
-  (r'^{0}info/$'.format(DJANGO_BASE),
-     direct_to_template, {'template': 'metashare-info.html'}, "info"),
-  (r'^{0}login/$'.format(DJANGO_BASE),
+  url(r'^{0}$'.format(DJANGO_BASE), 'metashare.views.frontpage'),
+  url(r'^{0}info/$'.format(DJANGO_BASE),
+     TemplateView.as_view(template_name='metashare-info.html'), name="info"),
+  url(r'^{0}login/$'.format(DJANGO_BASE),
     'metashare.views.login', {'template_name': 'login.html'}),
-  (r'^{0}logout/$'.format(DJANGO_BASE),
+  url(r'^{0}logout/$'.format(DJANGO_BASE),
     'metashare.views.logout', {'next_page': '/{0}'.format(DJANGO_BASE)}),
-  (r'^{0}admin/'.format(DJANGO_BASE),
-    include(admin.site.urls)),
-  (r'^{0}editor/'.format(DJANGO_BASE),
-    include(editor_site.urls)),
-  (r'^{0}update_lang_variants/'.format(DJANGO_BASE),
-    'metashare.bcp47.views.update_lang_variants'),
-  (r'^{0}update_var_variants/'.format(DJANGO_BASE),
-    'metashare.bcp47.views.update_var_variants'),
-  (r'^{0}update_lang_variants_with_script/'.format(DJANGO_BASE),
-    'metashare.bcp47.views.update_lang_variants_with_script'),
+  url(r'^{0}admin/'.format(DJANGO_BASE), include(admin.site.urls)),
+  url(r'^{0}editor/'.format(DJANGO_BASE), include(editor_site.urls)),
 )
 
 urlpatterns += patterns('metashare.accounts.views',
@@ -40,6 +32,10 @@ urlpatterns += patterns('metashare.stats.views',
 
 urlpatterns += patterns('metashare.repository.views',
   (r'^{0}repository/'.format(DJANGO_BASE), include('metashare.repository.urls')),
+)
+
+urlpatterns += patterns('metashare.bcp47.xhr',
+  (r'^{0}bcp47/'.format(DJANGO_BASE), include('metashare.bcp47.urls')),
 )
 
 urlpatterns += patterns('metashare.sync.views',
@@ -58,14 +54,33 @@ urlpatterns += patterns('',
   (r'^{}sitemap\.xml$'.format(DJANGO_BASE), 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
 )
 
+class RobotsTemplateView(TemplateView):
+    """ This class is defined as a need for migrating from function-based
+        generic views that existed in django-1.2 to class-based generic views.
+        https://docs.djangoproject.com/en/1.4/topics/generic-views-migration/
+    """
+    def render_to_response(self, context, **kwargs):
+        """ This method is overloaded to provide the content_type parameter.
+            Django-1.5 supports content_type argument so this method will
+            be removed in the django-1.5 META-SHARE version as the content_type
+            will be used in the instantiation.
+            Django-1.4: RobotsTemplateView.as_view(template_name='robots.txt')
+            Django-1.5: RobotsTemplateView.as_view(template_name='robots.txt', content_type="text/plain")
+        """
+        return super(RobotsTemplateView, self).render_to_response(context,
+                        content_type='text/plain', **kwargs)
+
+    def get_context_data(self, **kwargs):
+        """ This method is overloaded to pass the SITEMAP_URL into the context data"""
+        context = super(RobotsTemplateView, self).get_context_data(**kwargs)
+        context.update({'sitemap_url': SITEMAP_URL})
+        return context
+
+
 if DJANGO_BASE == "":
     urlpatterns += patterns('',
-      (r'^{}robots\.txt$'.format(DJANGO_BASE), direct_to_template, 
-        {'template': 'robots.txt', 'mimetype': 'text/plain', 'extra_context' : { 'sitemap_url' : SITEMAP_URL }}),
+      (r'^{}robots\.txt$'.format(DJANGO_BASE), RobotsTemplateView.as_view(template_name='robots.txt')),
     )
 
-if DEBUG:
-    urlpatterns += patterns('',
-      (r'^{0}site_media/(?P<path>.*)$'.format(DJANGO_BASE),
-        'django.views.static.serve', {'document_root': MEDIA_ROOT})
-    )
+urlpatterns += staticfiles_urlpatterns()
+

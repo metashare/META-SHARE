@@ -7,7 +7,7 @@ from xml.etree.ElementTree import fromstring
 from StringIO import StringIO
 from zipfile import ZipFile
 
-from django.test.testcases import TestCase
+from django.test import TestCase
 from django.test.client import Client
 from django.contrib.auth.models import User, Group, Permission
 from django.contrib.admin.sites import LOGIN_FORM_KEY
@@ -24,7 +24,7 @@ from metashare.test_utils import set_index_active
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 
-class MetadataSyncTest (TestCase):
+class MetadataSyncTest(TestCase):
     SYNC_BASE = "/{0}sync/".format(DJANGO_BASE)
     INVENTORY_URL = SYNC_BASE
     
@@ -87,15 +87,21 @@ class MetadataSyncTest (TestCase):
 
     @classmethod
     def setUpClass(cls):
+        LOGGER.info("running '{}' tests...".format(cls.__name__))
+        set_index_active(False)
+
+    @classmethod
+    def tearDownClass(cls):
+        set_index_active(True)
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
+
+    def setUp(self):
         """
         set up test users with and without sync permissions.
         These will live in the test database only, so will not
         pollute the "normal" development db or the production db.
         As a consequence, they need no valuable password.
         """
-        LOGGER.info("running '{}' tests...".format(cls.__name__))
-        
-        set_index_active(False)
         test_utils.setup_test_storage()
         syncuser = User.objects.create_user('syncuser', 'staff@example.com',
           'secret')
@@ -132,24 +138,21 @@ class MetadataSyncTest (TestCase):
             'password': 'secret',
         }
         
-        testres = cls.import_test_resource('testfixture.xml', INGESTED)
+        testres = self.import_test_resource('testfixture.xml', INGESTED)
         testres.storage_object.digest_modified = datetime.date(2012, 6, 1)
         testres.storage_object.save()
         
-        cls.import_test_resource('roundtrip.xml', INTERNAL)
+        self.import_test_resource('roundtrip.xml', INTERNAL)
         
-        pubres = cls.import_test_resource('ILSP10.xml', PUBLISHED)
+        pubres = self.import_test_resource('ILSP10.xml', PUBLISHED)
         pubres.storage_object.digest_modified = datetime.date(2012, 1, 1)
         pubres.storage_object.save()
 
 
-    @classmethod
-    def tearDownClass(cls):
+    def tearDown(self):
         test_utils.clean_resources_db()
         test_utils.clean_storage()
         test_utils.clean_user_db()
-        set_index_active(True)
-        LOGGER.info("finished '{}' tests".format(cls.__name__))
     
 
     def test_unprotected_inventory(self):

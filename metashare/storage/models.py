@@ -1,27 +1,26 @@
-from django.core.exceptions import ValidationError, ObjectDoesNotExist
-from django.db import models
-# pylint: disable-msg=E0611
-from hashlib import md5
-from metashare.settings import LOG_HANDLER
-from metashare import settings
-from os import mkdir
-from os.path import exists
-import os.path
-from uuid import uuid1, uuid4
-from xml.etree import ElementTree as etree
-from datetime import datetime, timedelta
+import glob
+import zipfile
 import logging
 import re
+import os.path
+from datetime import datetime, timedelta
+from os import mkdir
+# pylint: disable-msg=E0611
+from hashlib import md5
 from json import dumps, loads
+from uuid import uuid1, uuid4
+from xml.etree import ElementTree as etree
+
+from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.core.serializers.json import DjangoJSONEncoder
-import zipfile
-from zipfile import ZIP_DEFLATED
+from django.db import models
 from django.db.models.query_utils import Q
-import glob
+
+from metashare import settings
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
-LOGGER.addHandler(LOG_HANDLER)
+LOGGER.addHandler(settings.LOG_HANDLER)
 
 ALLOWED_ARCHIVE_EXTENSIONS = ('zip', 'tar.gz', 'gz', 'tgz', 'tar', 'bzip2')
 MAXIMUM_MD5_BLOCK_SIZE = 1024
@@ -240,7 +239,7 @@ class StorageObject(models.Model):
         _path = '{0}/archive'.format(self._storage_folder())
         for _ext in ALLOWED_ARCHIVE_EXTENSIONS:
             _binary_data = '{0}.{1}'.format(_path, _ext)
-            if exists(_binary_data):
+            if os.path.exists(_binary_data):
                 return _binary_data
 
         return None
@@ -265,7 +264,7 @@ class StorageObject(models.Model):
         force_digest (optional): if True, always recreate the digest zip-archive
         """
         # check if the storage folder for this storage object instance exists
-        if self._storage_folder() and not exists(self._storage_folder()):
+        if self._storage_folder() and not os.path.exists(self._storage_folder()):
             # If not, create the storage folder.
             mkdir(self._storage_folder())
 
@@ -392,7 +391,7 @@ class StorageObject(models.Model):
 
         if self.copy_status in (MASTER, PROXY):
             _zf_name = '{0}/resource.zip'.format(self._storage_folder())
-            _zf = zipfile.ZipFile(_zf_name, mode='w', compression=ZIP_DEFLATED)
+            _zf = zipfile.ZipFile(_zf_name, mode='w', compression=zipfile.ZIP_DEFLATED)
             try:
                 _zf.write(
                   '{0}/metadata-{1:04d}.xml'.format(self._storage_folder(), self.revision),

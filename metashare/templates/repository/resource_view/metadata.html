@@ -26,6 +26,13 @@
 			</label>
 		</div>
 	{% endif %}
+    {% if metadata_dict.Metadata.Source_repository_URL %}
+		<div class="dataline">
+			<label>
+			<strong>Source Repository: </strong>{{ metadata_dict.Metadata.Source_repository_URL }}
+			</label>
+		</div>
+	{% endif %}
 
 	{% if metadata_dict.Metadata.Original_metadata_schema %}
 		<div class="dataline">

@@ -1,6 +1,7 @@
 {% extends "admin/base_site.html" %}
 {% load i18n admin_modify adminmedia %}
 {% load url from future %}
+{% load static from staticfiles %}
 
 {% block extrahead %}{{ block.super }}
 {% url 'admin:jsi18n' as jsi18nurl %}
@@ -10,8 +11,8 @@
 {% endblock %}
 
 {% block extrastyle %}{{ block.super }}
-<link rel="stylesheet" type="text/css" href="{% admin_media_prefix %}css/forms.css" />
-<link rel="stylesheet" type="text/css" href="{% admin_media_prefix %}css/themes/smoothness/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "admin/css/themes/smoothness/jquery-ui.css" %}" />
 {% endblock %}
 
 {% block coltype %}{% if ordered_objects %}colMS{% else %}colM{% endif %}{% endblock %}
@@ -60,7 +61,7 @@
   		
 	});			
 </script>		
-<div id="explanation">Fields marked with <img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/asterisk_orange.png" style="height:8px;"/> are required.</div>
+<div id="explanation">Fields marked with <img src="{% static "metashare/css/sexybuttons/images/icons/silk/asterisk_orange.png" %}" style="height:8px;"/> are required.</div>
 
 <form {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post" id="{{ opts.module_name }}_form">{% csrf_token %}{% block form_top %}{% endblock %}
 <div>

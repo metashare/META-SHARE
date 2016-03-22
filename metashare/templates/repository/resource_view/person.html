@@ -1,5 +1,6 @@
 {% load email_protection %}
 {% load get_icon %}
+{% load static from staticfiles %}
 {% spaceless %}
 
 <div class="dataline" style="margin-bottom:3px;">
@@ -16,7 +17,7 @@
 			{{ person_dict.Given_name }}
 			{{ person_dict.Surname }}
 			{{ person_dict.Organization_name }}	
-			<img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/vcard.png" />
+			<img src="{% static "metashare/css/sexybuttons/images/icons/silk/vcard.png" %}"/>
 		</label>
 	</a>
 
@@ -40,7 +41,7 @@
 				{% for key, value in person_dict.Communication.items %}
 					{% if "URL_Landing_page" in key %}
 						<label class="dataline" style="clear:both;">
-							{{ value|urlizetrunc:23 }}</a>
+							<a>{{ value|urlizetrunc:23 }}</a>
 						</label>
 					{% endif %}
 				{% endfor %}
@@ -125,7 +126,9 @@
 		</div>
 		<div>
 			<label class="dataline">
-				{{ person_dict.Communication.Country }}
+                {% if person_dict.Communication.Country %}
+				    {{ person_dict.Communication.Country }} ({{ person_dict.Communication.Country_identifier }})
+                {% endif %}
 			</label>
 		</div>
 		

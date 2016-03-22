@@ -7,91 +7,63 @@ META-SHARE Installation Manual
    
    *A Network of Excellence forging the Multilingual Europe Technology Alliance*
 
-Authors: Christian Federmann, Marc Schröder and Christian Spurk
+Authors: Christian Federmann, Marc Schröder,  Christian Spurk and Sergio Oller
 
-Date: December 17, 2012
 
 .. contents::
 
 Executive Summary
 -----------------
 
-This document is a guide for installing META-SHARE V3.0. It is intended
+This document is a guide for installing META-SHARE V3.0.3. It is intended
 for system administrators setting up META-SHARE nodes. It also contains
-a section on how to migrate an existing META-SHARE V2.1.x installation
-to V3.0.
+a section on how to upgrade an existing META-SHARE V3.0.x installation
+to V3.0.3.
 
-Migrating Data and User Accounts from an old META-SHARE Installation
---------------------------------------------------------------------
+Backing up META-SHARE 
+----------------------
 
-If you already have a META-SHARE V2.1.x installation and you would like
-to migrate your resource descriptions, uploaded resource data, user
-accounts and statistics to a new META-SHARE installation, then this
-section is the right place to start with.
+META-SHARE stores the information in two places: a database and a storage
+directory. Please follow these instructions to back up both things 
+before any upgrade, to revert to the previous version in case of problems.
 
-To upgrade a META-SHARE node with a software version that is older than
-V2.1, you first have to migrate your installation to V2.1.x as described
-in the Installation Manual that comes with a V2.1.x release. When you
-have such an installation working (at least as a development server),
-you can follow the migration instructions to the most recent version in
-the remainder of this chapter.
+Before backing up, stop the server to prevent database modifications during
+the backup process. The server can be stopped using the ``stop-server.sh``
+script.
 
-If you should have been one of our kind beta testers with a V2.9-beta
-installation currently running on your site, then you can also migrate
-all relevant data from this beta installation to the latest META-SHARE
-release. The migration steps are the same as described below, except
-that you use the following two scripts for export and import:
+The storage directory is defined in the ``STORAGE_PATH`` variable
+in the ``metashare/local_settings.py`` file of your current META-SHARE
+installation. Create a backup of that directory.
 
--  ``misc/tools/migration/export_node_from_2_9_beta_to_3_0.py``
--  ``misc/tools/migration/import_node_to_3_0_from_2_9_beta.py``
+If you are using a PostgreSQL database, you can use the ``pg_dump`` command
+to create a dump of the META-SHARE database. The database name, host
+and port are stored in the ``DATABASES`` variable in
+``metashare/local_settings.py``.
 
-Migrated Data and Non-Migrated Data
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   ::
 
-META-SHARE V3.0 provides tools for the semi-automatic migration of data
-from a META-SHARE V2.1.x installation. The following data can be
-migrated with these tools:
+        pg_dump metashare_db_name > metashare_database_backup.sql
 
--  *resource descriptions* (metadata) – there is no need for a manual
-   export/import cycle!
--  actual *resource data* which can be directly downloaded from the node
--  *user accounts* and the corresponding user profiles
--  *resource ownership* information
--  collected node *statistics*
+Make sure the database dump you have created has contents (is not empty)
+and no error appears. Check the `PostgreSQL Documentation: SQL Dump 
+<http://www.postgresql.org/docs/9.1/static/backup-dump.html>`__ for
+further details if needed.
 
-This should cater for most META-SHARE V2.1.x installations. Please note,
-however, that the following data is **not** migrated:
+If instead of PostgreSQL you are using the SQLite database,
+you can just copy the SQLite file pointed in the ``DATABASES`` variable.
+Be aware that the SQLite database is not recommended on production servers.
 
--  *local settings*: you have to make a new node installation before you
-   can migrate your data, see `Step-by-Step
-   Migration <#step-by-step-migration>`__.
--  *any custom Django groups*: as a superuser you could create Django
-   groups, however, on a V2.1.x node, this information would not have
-   been used by META-SHARE directly. Therefore we assume that no such
-   groups have been created.
--  *permissions*: as a superuser you could assign Django permissions to
-   users/groups, however, on a V2.1.x node, this information would not
-   have been used by META-SHARE directly. Therefore we assume that no
-   such groups have been created. An exception to this might be
-   META-SHARE membership permissions: while these permissions influence
-   the behaviour of the system, we assume that they have not been used
-   as they were not documented.
 
-Even if you should have created custom Django groups or if you should
-have assigned permissions manually, going through the migration steps in
-`Step-by-Step Migration <#step-by-step-migration>`__ should be
-worthwhile. While we recommend to use the newly introduced user rights
-management features (see the META-SHARE Provider Manual for more
-information), you can still always recreate your custom groups in the
-new installation again and/or reassign any permissions.
+Upgrading META-SHARE
+---------------------
 
-Due to bugs in V2.1.x that are now resolved, it was possible that you
-could create invalid resource descriptions with the metadata editor.
-Such resource descriptions have to be manually fixed during the
-migration, see `Step-by-Step Migration <#step-by-step-migration>`__.
-
-Step-by-Step Migration
-~~~~~~~~~~~~~~~~~~~~~~
+If you have an installation of META-SHARE previous to V3.0 and you would
+like to migrate your resource descriptions, uploaded resource data, user
+accounts and statistics to a new META-SHARE installation, then you should
+first upgrade to V3.0.x using the Installation Manual that comes with
+a V3.0.x release. When you have such an installation working (at least as
+a development server), you can follow the migration instructions to the
+most recent version in the remainder of this chapter.
 
 Before diving into the actual migration, it should be noted that two
 META-SHARE installations on the same machine can interfere with each
@@ -102,150 +74,162 @@ are doing.
 
 Here are now the steps you should follow for a successful migration:
 
-1.  `Get META-SHARE
-    V3.0 <https://github.com/metashare/META-SHARE/downloads>`__ and
-    install it as explained in `Installation
-    Requirements <#installation-requirements>`__ and further sections.
-    Note: during the installation you can skip the creation of a
-    superuser account `Development Server <#development-server>`__; we
-    will migrate your old superuser account(s) instead.
-2.  If you should have started your new node installation, then stop it
-    again now.
-3.  Copy ``misc/tools/migration/export_node_from_2_1_x_to_3_0.py`` to
-    the ``metashare/`` folder of your old META-SHARE V2.1.x
-    installation.
-4.  In the ``metashare/`` folder of your old META-SHARE V2.1.x
-    installation run:
+1.  Make sure your META-SHARE-3.0.x instance is stopped.
 
-    ::
+2. If you have not done it already, go through `Backing up META-SHARE`_.
 
-        python2.7 ./export_node_from_2_1_x_to_3_0.py /tmp/MS21_EXPORT | tee /tmp/ms21_export.log
+3. Follow the `Installing META-SHARE`_ section on a new directory.    
 
-    *Note:* you can use any other temporary directory as an argument to
-    the Python script; just make sure that there is enough space
-    available for at least your actual resource data plus about 100
-    megabytes more.
+   **Note:** during the installation you can skip the creation of a
+   database and a role for PostgreSQL, as you already have one in your
+   current installation.
 
-5.  You can now remove the ``export_node_from_2_1_x_to_3_0.py`` Python
-    script again from your old installation.
+4. Make sure your META-SHARE instances are stopped (no development server running).
 
-6.  Due to some (now fixed) bugs in V2.1.x and some smaller metadata
-    schema changes, we strongly recommend to validate the resource
-    descriptions to migrate. We therefore employ the tool ``xmllint``
-    which should be installed on your machine for this. Run the
-    following shell command from the ``metashare/`` folder of your new
-    META-SHARE V3.0 installation:
+5. Copy ``/path/to/old/MetaShareNode-3.0/metashare/local_settings.py``
+   to ``/path/to/MetaShareNode-3.0.3/metashare/local_settings.py``
 
-    ::
+6. Edit the ``local_settings.py``. Add a ``SECRET_KEY`` variable and a
+   ``ALLOWED_HOSTS`` variable.
+   See `Local Settings for META-SHARE Nodes`_ for information on how to generate it.
 
-        xmllint --noout --schema ../misc/schema/v3.0/META-SHARE-Resource.xsd \
-           $(find "/tmp/MS21_EXPORT/" -name metadata.xml) 2>&1 | grep -Ev 'validates$'
 
-    Note: make sure to use the same temporary directory as an argument
-    after find that you have used above.
+7. Adapt any customization you had on the old ``start-server.sh``,
+   ``stop-server.sh`` scripts into the new script version.
 
-7.  If there was any output when running the validation command from the
-    previous step, then please make sure to manually fix the validation
-    problem(s) directly in the specified ``metadata.xml`` file(s) before
-    continuing.
+8. Start your new META-SHARE instance using the ``start-server.sh`` script.
 
-    If you like, you can at least automatically update license names
-    that have changed in v3.0 of the metadata XML Schema. We therefore
-    provide an XSLT script which you may run from the
-    ``misc/tools/migration/`` folder of your new META-SHARE V3.0
-    installation in the following way:
 
-    ::
+Installing META-SHARE
+--------------------------
 
-        find '/tmp/MS21_EXPORT' -name metadata.xml -print0 | \
-        while read -d $'\0' f; \
-        do \
-          xsltproc -o "$f".new upgrade_license_info_from_2_x_to_3_0.xsl "$f"; \
-          mv -f "$f".new "$f"; \
-        done
+This section explains how to download and install META-SHARE V3.0.3 and
+its dependencies.
 
-    To run this line of Bash script, you need the ``xsltproc`` command
-    on your ``PATH``. Please note, however, that you use the script at
-    your own risk!
+Start by downloading META-SHARE from the
+`download page <https://github.com/metashare/META-SHARE/downloads>`__.
 
-    When done, return to the previous step in order to be on the safe
-    side that there are no validation problems left.
-
-8.  Copy ``misc/tools/migration/import_node_to_3_0_from_2_1_x.py`` to
-    the ``metashare/`` folder of your new META-SHARE V3.0 installation.
-
-9.  Make sure you have Solr running (but not the entire new META-SHARE
-    node installation!); in the ``metashare/`` folder of your new
-    META-SHARE V3.0 installation run the following command:
-
-    ::
-
-        ./start-solr.sh
-
-10. In the ``metashare/`` folder of your new META-SHARE V3.0
-    installation run the following command (which may take a while to
-    complete):
-
-    ::
-
-        python2.7 ./import_node_to_3_0_from_2_1_x.py /tmp/MS21_EXPORT | \
-            tee /tmp/ms21_import.log
-
-    *Note:* make sure to use the same temporary directory as an argument
-    to the Python script that you have used above.
-
-    *Also note:* as the data from your temporary export directory is
-    copied to the new META-SHARE installation, make sure that there is
-    again enough space available for at least a full copy of the
-    directory!
-
-11. If all went as expected, you should now have a new META-SHARE V3.0
-    installation containing your old data and user accounts.
-12. You can now remove the ``import_node_to_3_0_from_2_1_x.py`` Python
-    script again from your new installation.
-13. You can also remove your temporary export directory and any created
-    log files, for example:
-
-    ::
-
-        rm -rf /tmp/MS21_EXPORT /tmp/ms21_export.log /tmp/ms21_import.log
-
-Post-Migration Recommendations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-In META-SHARE V2.1.x, users could either be editors or not, and all
-editors could edit all available resources. The new META-SHARE version
-has a more fine-grained access rights system. After the migration, users
-will only be allowed to edit their own resources. We highly recommend
-using the new user access rights system which is described in the
-META-SHARE Provider Manual. As a superuser you should create one or more
-editor groups and assign the relevant user accounts to these groups. In
-addition, you should assign all resources to the relevant groups.
-
-After a successful migration and the setup/assignment of new editor
-groups, you can also remove all former editor users from the legacy
-``globaleditors`` group to get a clean new node installation.
-
-Installation Requirements
--------------------------
-
-This section lists all software packages that are required to install
-and run a META-SHARE node. We assume that you have
-`downloaded <https://github.com/metashare/META-SHARE/downloads>`__ and
-extracted the META-SHARE software package into a designated META-SHARE
+Extract the downloaded software into a designated META-SHARE
 folder, e.g., ``/path/to/local/MetaShareNode/``.
 
-*Note:* if you just want to run META-SHARE in **development mode**, you
-can skip the web server/database setup.
-
 Software Dependencies
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+
+Database Software
+^^^^^^^^^^^^^^^^^^
+
+*Note:* if you just want to run META-SHARE in **development mode**, or
+if you are upgrading META-SHARE you can skip the database setup.
+
+We currently use SQLite or PostgreSQL as our database software. SQLite
+comes built-in with Python 2.7. Since SQLite has a number of
+limitations, including missing transaction management and access
+permission management, the preferred database is PostgreSQL. We have
+tested ``PostgreSQL 9.0.5``.
+
+On Debian, Ubuntu and derivatives:
+
+Install PostgreSQL with:
+
+    ::
+
+        sudo apt-get update
+        sudo apt-get install postgresql postgresql-contrib
+
+Create a user named ``metashare_user`` (choose any name you like)
+for META-SHARE:
+
+    ::
+
+        sudo su – postgres
+        createuser -W metashare_user 
+
+Create a database ``metashare_db`` (or any other name), owned by the
+just created user ``metashare_user`` (or the name you chose above):
+
+    ::
+
+        sudo su – postgres
+        createdb --owner=metashare_user metashare_db
+
+
+Python interpreter
+^^^^^^^^^^^^^^^^^^
+
+*Note:* If you are upgrading from a previous META-SHARE installation
+AND python-2.7 was installed during the previous installation in
+``/path/to/old/MetaShareNode3.0/`` please make sure to remove
+from your ``PATH`` variable ``/path/to/old/MetaShareNode3.0/opt/bin``.
+No path modifications are required anymore.
+
+META-SHARE V3.0.3 requires Python 2.7. Most Linux/Unix distributions come
+already with a preinstalled version of Python. You may check the installed
+python version with ``python2 --version``.
+
+In case the output is something like "2.7.x", nothing else needs to be done.
+
+If you have a previous python version, python 2.7 will be installed
+to ``/path/to/MetaNode/opt`` during the META-SHARE installation. To do so,
+you will need to install some dependencies, such as ``libsqlite3-dev``,
+``libssl-dev`` and ``zlib1g-dev``. Please note that these packages may
+have different names depending on your Linux/Unix distribution.
+
+On an older Ubuntu without Python 2.7 you might also use the following
+command to get all required build dependencies:
+
+    ::
+
+        apt-get build-dep python2.6
+
+
+Python Modules
+^^^^^^^^^^^^^^^^^^
+
+META-SHARE V3.0.3 does not bundle anymore all the python dependencies.
+Instead of doing that, we follow the standard way of working with
+python apps, based on `virtualenv <https://virtualenv.pypa.io>`__ and
+`pip <https://pip.pypa.io>`__. Virtualenv allows us to create
+isolated python environments, preventing conflicts between coexisting
+python applications with different dependencies. Pip is
+the recommended tool to install python packages.
+
+The ``psycopg2`` python module is used for connecting PostgreSQL to META-SHARE.
+In order to build this module, header files for the PostgreSQL library
+``libpq5`` have to be installed, as well as the python headers. On Debian, 
+Ubuntu and derivatives, this can be achieved installing the ``libpq-dev`` and 
+``python-dev`` packages using ``apt-get install libpq-dev python-dev``.
+
+Once this header files are installed, the rest of the dependencies can be
+installed simply by:
+
+    ::
+
+        cd "/path/to/local/MetaShareNode/"
+        ./install-dependencies.sh
+
+This script will:
+
+1. Check that Python 2.7 is installed, or download and install it to
+   ``/path/to/local/MetaShareNode/opt/bin``.
+2. Download virtualenv
+3. Create a virtual environment at ``/path/to/local/MetaShareNode/venv``.
+4. Download, build and install all META-SHARE dependencies using pip in the
+   created virtual environment.
+
+If everything is installed successfully the message ``Installation of
+META-SHARE dependencies complete.`` should appear in the end.
+
+For your information, the dependencies and their respective versions are
+listed in the `requirements.txt` file.
 
 Web Server
-^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^
+
+*Note:* if you just want to run META-SHARE in **development mode**, you
+can skip the web server setup.
 
 META-SHARE is a web application that builds on a web server. Deployment
-has been tested with ``lighttpd 1.4.29`` via FastCGI. Other web servers
+has been tested with ``lighttpd 1.4.33`` via FastCGI. Other web servers
 can be used, but you do so on your own risk.
 
 We strongly recommend to set up your web server so that it only serves
@@ -253,138 +237,81 @@ SSL encrypted connections. We are shipping a sample configuration for
 ``lighttpd`` under ``metashare/lighttpd-ssl.conf.sample`` which should
 give you an idea on how to set this up.
 
-Database Software
-^^^^^^^^^^^^^^^^^
-
-We currently use SQLite or PostgreSQL as our database software. SQLite
-comes built-in with Python 2.7. Since SQLite has a number of
-limitations, including missing transaction management and access
-permission management, the preferred database is PostgreSQL.
-
-We have tested ``PostgreSQL 9.0.5``. To connect PostgreSQL and your
-Django project, you need to install ``psycopg2``. See `How to install
-psycopg2 <#how-do-i-install-psycopg2-for-using-postgresql>`__ for further
-instructions.
-
-Python Module Dependencies
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-All Python-related dependencies are bundled with META-SHARE V3.0. A
-Linux/Unix/Mac install script is provided as
-``/path/to/local/MetaShareNode/install-dependencies.sh``. Run this
-script once after unpacking the bundle.
-
-If you don’t have a local Python installed, or it does not have the
-right version, the install script will build and install the required
-python version locally below ``/path/to/local/MetaShareNode/opt/``. If
-you use this version of Python, make sure to prepend
-``/path/to/local/MetaShareNode/opt/bin`` to your PATH variable.
-
-*Note:* In order to build Python with the modules required for
-META-SHARE, you probably need to install some development files on your
-local machine first. See `How to build python for
-metashare <#how-to-build-python-for-metashare>`__ for details on these
-requirements.
-
-The compatible Python module dependencies are compiled and installed
-into ``/path/to/local/MetaShareNode/lib/python2.7/site-packages``.
-
-This location is automatically added to the ``PYTHONPATH`` in the Django
-server script ``/path/to/local/MetaShareNode/metashare/manage.py``.
-
-For information, the dependencies and their versions are listed here:
-
-1.  `Python 2.7.2 <http://www.python.org/download/releases/2.7.2/>`__
-2.  `Django 1.3.3 <https://www.djangoproject.com/download/>`__
-3.  `setuptools
-    0.6c11 <http://pypi.python.org/packages/source/s/setuptools/setuptools-0.6c11.tar.gz>`__
-4.  `httplib2
-    0.7.1 <http://httplib2.googlecode.com/files/httplib2-0.7.1.tar.gz>`__
-5.  `pygeoip 0.2.2 <http://code.google.com/p/pygeoip/downloads/>`__
-6.  `DjangoKronos 0.3 <https://github.com/jgorset/django-kronos>`__
-7.  `Django Analytical
-    0.12.1 <http://packages.python.org/django-analytical/>`__
-8.  `python-dateutil
-    1.5 <http://pypi.python.org/pypi/python-dateutil/>`__
-9.  `Unidecode 0.04.10 <http://pypi.python.org/pypi/Unidecode>`__
-10. `django\_jenkins
-    0.12.0 <https://github.com/kmmbvnr/django-jenkins>`__
-11. `django-selenium
-    0.8 <https://github.com/dragoon/django-selenium/>`__
-12. `Haystack 2.0.0-beta <http://haystacksearch.org/>`__
-13. `pycountry 0.14.2 <http://pypi.python.org/pypi/pycountry/>`__
-14. `django-selectable
-    0.4.1 <http://pypi.python.org/pypi/django-selectable>`__
-15. `Selenium Python Client Driver
-    2.23 <http://pypi.python.org/pypi/selenium>`__
-
 Development Server
-------------------
+~~~~~~~~~~~~~~~~~~~
 
 To verify that you have installed all dependencies correctly, you should
 first set up a development server. Proceed as follows.
 
-1. Install all required software as described in `Installation
-   Requirements <#installation-requirements>`__.
-
-2. Extract the ``metashare-v3.0.tar.gz`` release package into a local
-   folder ``MetaShareNode``.
-
-3. Create ``local_settings.py`` for your local META-SHARE node:
+1. Create ``local_settings.py`` for your local META-SHARE node:
 
    ::
 
-       $ cd MetaShareNode/metashare    
-       $ cp local_settings.sample local_settings.py    
+       cp metashare/local_settings.sample metashare/local_settings.py    
 
-   Edit at least the following constants: DJANGO\_URL, DJANGO\_BASE,
-   STORAGE\_PATH, DEBUG, ADMINS, DATABASES, and EMAIL\_BACKEND. More
+   Edit at least the following constants: ``DJANGO_URL``, ``DJANGO_BASE``,
+   ``STORAGE_PATH``, ``DEBUG``, ``SECRET_KEY``, ``ADMINS``, ``DATABASES``, and ``EMAIL_BACKEND``. More
    information is available in `Local Settings for META-SHARE
-   Nodes <#local-settings-for-meta-share-nodes>`__
+   Nodes`_
 
-4. Initialize database contents:
+   **Note:** If you are upgrading from a previous META-SHARE version,
+   make sure to NOT use your production ``STORAGE_PATH`` or your production
+   database in ``local_settings.py`` for testing the installation.
+
+2. Initialize database contents:
 
    ::
 
-       $ python manage.py syncdb
+       source venv/bin/activate # enables META-SHARE virtual environment
+       python manage.py syncdb
+       deactivate  # disables META-SHARE virtual environment
 
 Answer “yes” when asked to create a superuser account and fill in the
 requested details.
 
-5. Start an Apache Solr server for the search index (uses Java and
-   Python internally, the latter should be at least Python 2.7!):
+3. Start an Apache Solr server for the search index (uses Java and
+   Python internally):
 
    ::
 
-       $ ./start-solr.sh
+       metashare/start-solr.sh
 
-6. Run tests to check that Django can load and serve META-SHARE:
+4. Run tests to check that Django can load and serve META-SHARE:
 
    ::
 
-       $ python manage.py test repository storage accounts sync stats  
+       source venv/bin/activate
+       python manage.py test repository storage accounts sync stats  
+       deactivate
 
    This should return “OK”.
 
    *Note:* This step may take a few minutes.
 
-7. Run a Django development server:
+5. Run a Django development server:
 
    ::
 
-       $ python manage.py runserver    
-       Validating models...    
-       0 errors found  
-       Django version 1.3.x, using settings 'metashare.settings'   
-       Development server is running at http://127.0.0.1:8000/ 
-       Quit the server with CONTROL-C.
+       source venv/bin/activate
+       python manage.py runserver    
+         Validating models...    
+         0 errors found  
+         Django version 1.4.x, using settings 'metashare.settings'   
+         Development server is running at http://127.0.0.1:8000/ 
+         Quit the server with CONTROL-C.
+       deactivate
 
-Congratulations: you have successfully started a META-SHARE V3.0 node in
+Congratulations: you have successfully started a META-SHARE V3.0.3 node in
 development mode. This means that all required Python and Django
 dependencies are functioning correctly.
 
 Local Settings for META-SHARE Nodes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Note:** If you are upgrading a META-SHARE installation, you can now
+follow the rest of the `Upgrading META-SHARE`_ instructions as the
+``local_settings.py`` file will be copied from the previous META-SHARE
+installation.
 
 Django projects usually store all their configuration settings in a file
 named settings.py. For META-SHARE, we have split up the set of
@@ -424,6 +351,11 @@ The local settings are the following:
    submits. ``FORCE_SCRIPT_NAME= ""`` fixes the issue and hence is
    required for lighttpd use.
 
+-  ``ALLOWED_HOSTS = [ 'www.example.com' ]
+
+   A list of strings representing the host/domain names this META-SHARE
+   instance can be served at.
+
 -  ``STORAGE_PATH = '/path/to/storage/path'``
 
    Absolute path to the local storage base, i.e., the folder in which
@@ -439,6 +371,22 @@ The local settings are the following:
    stacktraces on the website, for example. This may include sensitive
    information, so use with care, preferably only for local development
    servers.
+
+-  ``SECRET_KEY``
+
+   Set this variable to a random value. This is used by django to salt the
+   passwords stored in the database and generate tokens.
+   See `SECRET_KEY django documentation <https://docs.djangoproject.com/en/dev/ref/settings/#secret-key>`__
+   for further information.
+   The following python code can help you to generate a random string:
+
+       ::
+
+           # From: https://gist.github.com/mattseymour/9205591
+           import string, random
+           chars = ''.join([string.ascii_letters, string.digits, string.punctuation]).replace('\'', '').replace('"', '').replace('\\', '')
+           print ''.join([random.SystemRandom().choice(chars) for i in range(50)]) 
+
 
 -  ``ADMINS``
 
@@ -501,16 +449,14 @@ The local settings are the following:
    configured META-SHARE Node. If you are no META-SHARE Managing Node,
    then you will only need at most sync user account here. Such an
    account is required for linking your node to the META-SHARE Network –
-   see (Linking your
-   node)[#linking-your-node-with-the-meta-share-network]. Essentially a
+   see `Linking your Node with the META-SHARE Network`_. Essentially a
    sync user account is a normal user account and therefore it also
    lives in the same namespace. Thus, a sync user account must have a
    different name from any existing user accounts! You always have to
    run ``manage.py syncdb``, whenever you change the ``SYNC_USERS``
    setting.
 
-See also `Search Engine Optimization and Web
-Analytics <#search-engine-optimization-and-web-analytics>`__ for further
+See also `Search Engine Optimization and Web Analytics`_ for further
 settings that can be used in the context of web analytics.
 
 *Note:* settings changes will only take effect when the Django server is
@@ -520,15 +466,12 @@ Deployment Server
 -----------------
 
 For deployment, we assume that you have downloaded and installed the
-lighttpd web server (see also `I Want to use MySQL and/or Apache <#i-want-to-use-mysql-and-or-apache>`__) and a
+lighttpd web server (see also `I Want to use MySQL and/or Apache`_) and a
 ``PostgreSQL database``. You have to adapt ``start_server.sh`` and
 ``stop_server.sh`` with correct IP addresses and port numbers. The IP
 addresses should be identical to the one you added to your
 ``lighttpd.conf``, the port number, of course, needs to be different
-from the web server’s. If the ``python`` binary on your ``PATH``
-environment variable should not be at least Python 2.7, then you also
-have to make sure that ``start_server.sh`` and ``stop_server.sh`` are
-changed so that they explicitly call a Python 2.7 binary.
+from the web server’s.
 
 You can test your PostgreSQL database by calling ``manage.py syncdb``;
 this will complain if it cannot properly access the database.
@@ -573,7 +516,7 @@ how to operate and configure the Solr server.
 Installing Solr
 ~~~~~~~~~~~~~~~
 
-1. Make sure you have Java 1.6 or later (run java -version to check!).
+1. Make sure you have Java 1.6 or later (run ``java -version`` to check!).
 2. Download the latest version of Solr from here.
 3. Unzip into a folder, henceforth called ``$SOLR_DIR``.
 4. Go to ``misc/solr-config-sample`` in your local META-SHARE-Software
@@ -622,7 +565,9 @@ Manually Updating the Solr Configuration
 
    ::
 
-       python manage.pybuild_solr_schema
+       source venv/bin/activate
+       python manage.py build_solr_schema
+       deactivate
 
    The XML output of this command should go into both
    ``$SOLR_DIR/example/solr/main/conf/schema.xml`` and
@@ -640,7 +585,9 @@ Manually Updating the Solr Configuration
 
    ::
 
+       source venv/bin/activate
        python manage.py rebuild_index
+       deactivate
 
    Any future changes and additions to your database should
    automatically be reflected in the search index. A manual rebuild
@@ -666,7 +613,7 @@ copy of the central inventory.
 
 To actually link your META-SHARE Node installation with the META-SHARE
 Network, your node has to be proxied by a META-SHARE Managing Node.
-`Here <#step-by-step-instructions>`__ are detailed the steps that are
+In `Step-by-Step Instructions`_ are detailed the steps that are
 required for this.
 
 Step-by-Step Instructions
@@ -675,25 +622,29 @@ Step-by-Step Instructions
 These are the steps which are required for linking your META-SHARE node
 with the META-SHARE Network:
 
--  In your ``local_settings.py`` file (see `Local Settings for META-SHARE Nodes <#local-settings-for-meta-share-nodes>`__), make sure to
+-  In your ``local_settings.py`` file (see `Local Settings for META-SHARE Nodes`_), make sure to
    have an entry in the ``SYNC_USERS`` dictionary. Remember to run the
    following command, whenever you change the ``SYNC_USERS`` setting:
 
-   python ./manage.py syncdb
+       ::
+
+            source venv/bin/activate
+            python ./manage.py syncdb
+            deactivate
 
 -  Give the account credentials of your ``SYNC_USERS`` entry and your
    public node URL (e.g., ``http://you.example.org/metashare``) to the
    system administrator of the META-SHARE Managing Node which shall
    proxy your META-SHARE node.
 
-   -  Contact either the administrator at CNR, DFKI, ELDA, FBK or ILSP
-      (current META-SHARE Managing Node providers); never go to more
-      than one of these META-SHARE Managing Nodes. You can use the
-      contact form at ``<MANAGING_NODE_URL>/accounts/contact/`` – for
-      example, http://metashare.dfki.de/accounts/contact/.
+-  Contact either the administrator at CNR, DFKI, ELDA, FBK or ILSP
+   (current META-SHARE Managing Node providers); never go to more
+   than one of these META-SHARE Managing Nodes. You can use the
+   contact form at ``<MANAGING_NODE_URL>/accounts/contact/`` – for
+   example, http://metashare.dfki.de/accounts/contact/.
 
-   -  The system administrator of the chosen META-SHARE Managing Node
-      will set up her node as a proxy for your resource descriptions.
+-  The system administrator of the chosen META-SHARE Managing Node
+   will set up her node as a proxy for your resource descriptions.
 
 -  If all went as expected, then the chosen META-SHARE Managing Node
    will automatically synchronize with your node and people will be able
@@ -739,7 +690,10 @@ files describing language resources into the system. To import, run
 
 ::
 
+    source venv/bin/activate
+    cd metashare
     python import_xml.py <file.xml|archive.zip> [<file.xml|archive.zip> …]
+    deactivate
 
 In other words, you can provide one or more individual XML files or zip
 files containing XML files. The script will print a summary count of
@@ -766,11 +720,14 @@ Exporting from the Command Line
 
 The script ``export_xml.py`` will export all entries from the database
 into a zip archive containing one XML file per resource. The script
-requires a valid META-SHARE V3.0 database. It can be run as follows:
+requires a valid META-SHARE V3.0.3 database. It can be run as follows:
 
 ::
 
+    source venv/bin/activate
+    cd metashare
     python export_xml.py <archive.zip>
+    deactivate
 
 The resulting archive is suitable for import in any META-SHARE V2.1 (or
 later) installation.
@@ -836,7 +793,7 @@ I Want to use MySQL and/or Apache
 
 It may be possible to get these to work, but we have not tested these
 configurations and therefore cannot provide any support for them. The
-recommended database and web server technologies are listed in `Software Dependencies <#software-dependencies>`__.
+recommended database and web server technologies are listed in `Software Dependencies`_.
 
 I Need Help Configuring lighttpd
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -846,8 +803,7 @@ The release includes a sample lighttpd.conf configuration file under
 ``metashare/lighttpd-ssl.conf.sample`` for the non-SSL variant) which
 you can use as the basis for your configuration. More information on how
 to properly setup lighttpd with FastCGI support can be found in the
-(Django
-documentation)[https://docs.djangoproject.com/en/1.3/howto/deployment/fastcgi/].
+`Django documentation <https://docs.djangoproject.com/en/1.4/howto/deployment/fastcgi/>`__.
 
 Also, look at the scripts ``start-server.sh`` and ``stop-server.sh``
 which should show you how to start up and shut down the production
@@ -858,11 +814,16 @@ I am Getting Storage Errors when Importing or Saving
 
 ::
 
-    File "/usr/local/MetaShareNode/metashare/../metashare/storage/models.py",=  line 254, in save     mkdir(self._storage_folder()) OSError: [Errno 2] No such file or directory: '/home/storage/b557040eff1d11= e09075080027fee6a9b7ffe41433e94b19844c6038a825a145'  File "/usr/local/MetaShareNode/metashare/../metashare/storage/models.py",= line 254, in save    mkdir(self._storage_folder())  OSError: [Errno 2] No such file or directory: '/home/storage/b557040eff1d11=e09075080027fee6a9b7ffe41433e94b19844c6038a825a145'
+    File "/usr/local/MetaShareNode/metashare/../metashare/storage/models.py",=  line 254, in save
+    mkdir(self._storage_folder()) OSError: [Errno 2] No such file or directory:
+    '/home/storage/b557040eff1d11= e09075080027fee6a9b7ffe41433e94b19844c6038a825a145'
+    File "/usr/local/MetaShareNode/metashare/../metashare/storage/models.py",= line 254, in save 
+    mkdir(self._storage_folder())  OSError: [Errno 2] No such file or directory:
+    '/home/storage/b557040eff1d11=e09075080027fee6a9b7ffe41433e94b19844c6038a825a145'
 
 The first thing to verify is whether the ``STORAGE_PATH`` setting in
 ``local_settings.py`` points to a valid and existing folder – see
-`Local Settings for META-SHARE Nodes <#local-settings-for-meta-share-nodes>`__ for details.
+`Local Settings for META-SHARE Nodes`_ for details.
 
 Why Can Django not Serve the Static Files?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -878,10 +839,12 @@ PostgreSQL Error Message
 
 ::
 
-    --- File "/usr/lib/python2.7/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 24, in <module>     raiseImproperlyConfigured("Error loading psycopg2 module: %s" % e) django.core.exceptions.ImproperlyConfigured: Error loading psycopg2 module: No module named psycopg2 ---
+    --- File "/usr/lib/python2.7/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 24, in <module>
+    raiseImproperlyConfigured("Error loading psycopg2 module: %s" % e) django.core.exceptions.ImproperlyConfigured:
+    Error loading psycopg2 module: No module named psycopg2 ---
 
 Seems like you are trying to use PostgreSQL but you have not installed
-the ``psycopg2`` dependency. See `How do I Install psycopg2 for using PostgreSQL? <#how-do-i-install-psycopg2-for-using-postgresql>`__ for how to install it.
+the ``psycopg2`` dependency. See `Python Modules`_ for how to install it.
 
 Problems with Importing XML Files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -892,7 +855,9 @@ but we get the following  error:
 
 ::
 
-    $ /usr2/MetaShareNode/software/bin/python import_xml.py  ApertiumLMFBasqueDictionary.xml
+    source venv/bin/activate
+    python import_xml.py  ApertiumLMFBasqueDictionary.xml
+    deactivate
 
     Importing XML file: "ApertiumLMFBasqueDictionary.xml"
     Could not import XML file into database!
@@ -920,29 +885,6 @@ following resource file (which is configurable in ``settings.py`` via
 the ``GEOIP_DATA_URL`` key):
 http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz
 
-How can I Correctly Build Python for META-SHARE?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Building and installing the Python version which comes with META-SHARE
-(see `Python Module Dependencies <#python-module-dependencies>`__), has a few dependencies. You need to have
-``libsqlite3-dev``, ``libssl-dev`` and ``zlib1g-dev`` installed. Please
-note that these packages may have different names depending on your
-Linux/Unix distribution. On an older Ubuntu without Python 2.7 you might
-also use the following command to get all required build dependencies:
-``apt-get build-dep python2.6``
-
-How do I Install psycopg2 for using PostgreSQL?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-We recommend installing ``psycopg2`` using the pip installer
-(``pip install psycopg2``). For this to work on Ubuntu, you have to
-first install the two packages ``libpq-dev`` and ``python-dev``
-(``apt-get install libpq-dev python-dev``). On some versions of Ubuntu,
-you may also have to use an older ``psycopg2`` version which you can
-install like this: ``pip install psycopg2==2.4.1``
-
-Otherwise ``psycopg2`` is available
-`here <http://pypi.python.org/pypi/psycopg2/>`__.
 
 Funding
 -------

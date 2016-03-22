@@ -363,16 +363,15 @@ class DownloadViewTest(TestCase):
         response = client.get(reverse(views.download, args=
                 (self.non_downloadable_resource.storage_object.identifier,)),
             follow = True)
-        self.assertContains(response, 'license terms for the download of the '
-                'selected resource are not available')
+
+        self.assertContains(response, 'license terms for the download of the selected resource are not')
         # make sure a normal user gets the information page, too:
         client = Client()
         client.login(username='normaluser', password='secret')
         response = client.get(reverse(views.download, args=
                 (self.non_downloadable_resource.storage_object.identifier,)),
             follow = True)
-        self.assertContains(response, 'license terms for the download of the '
-                'selected resource are not available')
+        self.assertContains(response, 'license terms for the download of the selected resource are not')
 
     def test_downloadable_resource_with_one_license(self):
         """
@@ -401,7 +400,7 @@ class DownloadViewTest(TestCase):
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
-        self.assertContains(response, 'licences/CC-BYNCSAv3.0.htm',
+        self.assertContains(response, 'licences/CC-BY-NC-SA.pdf',
                             msg_prefix="the correct license appears to not " \
                                 "be shown in an iframe")
         # make sure the license agreement page is shown again if the license was
@@ -413,7 +412,7 @@ class DownloadViewTest(TestCase):
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
-        self.assertContains(response, 'licences/CC-BYNCSAv3.0.htm',
+        self.assertContains(response, 'licences/CC-BY-NC-SA.pdf',
                             msg_prefix="the correct license appears to not " \
                                 "be shown in an iframe")
         # make sure the download was started after accepting the license:
@@ -490,7 +489,7 @@ class DownloadViewTest(TestCase):
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
-        self.assertContains(response, 'licences/GNU_gpl-3.0.htm',
+        self.assertContains(response, 'licences/GPL.pdf',
                             msg_prefix="the correct license appears to not " \
                                 "be shown in an iframe")           
         # make sure the license agreement page is shown again if the license was
@@ -502,7 +501,7 @@ class DownloadViewTest(TestCase):
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
-        self.assertContains(response, 'licences/GNU_gpl-3.0.htm',
+        self.assertContains(response, 'licences/GPL.pdf',
                             msg_prefix="the correct license appears to not " \
                                 "be shown in an iframe")
         # make sure the download was started after accepting the license
@@ -576,7 +575,7 @@ class DownloadViewTest(TestCase):
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
         self.assertContains(response,
-                            'licences/META-SHARE_COMMONS_BYNCSA_v1.0.htm',
+                            'licences/MSCommons-BY-NC-SA.pdf',
                             msg_prefix="the correct license appears to not " \
                                 "be shown in an iframe")
         response = client.post(reverse(views.download,
@@ -585,7 +584,7 @@ class DownloadViewTest(TestCase):
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
         self.assertContains(response,
-                            'licences/META-SHARE_COMMONS_BYNCSA_v1.0.htm',
+                            'licences/MSCommons-BY-NC-SA.pdf',
                             msg_prefix="the correct license appears to not " \
                                 "be shown in an iframe")
         # LR must not be downloadable via POST with just a selected license ...
@@ -596,7 +595,7 @@ class DownloadViewTest(TestCase):
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
         self.assertContains(response,
-                            'licences/META-SHARE_COMMONS_BYNCSA_v1.0.htm',
+                            'licences/MSCommons-BY-NC-SA.pdf',
                             msg_prefix="the correct license appears to not " \
                                 "be shown in an iframe")
         # ... nor via POST with an agreement to the license:
@@ -608,7 +607,7 @@ class DownloadViewTest(TestCase):
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
         self.assertContains(response,
-                            'licences/META-SHARE_COMMONS_BYNCSA_v1.0.htm',
+                            'licences/MSCommons-BY-NC-SA.pdf',
                             msg_prefix="the correct license appears to not " \
                                 "be shown in an iframe")
 
@@ -626,7 +625,7 @@ class DownloadViewTest(TestCase):
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
         self.assertContains(response,
-                            'licences/META-SHARE_COMMONS_BYNCSA_v1.0.htm',
+                            'licences/MSCommons-BY-NC-SA.pdf',
                             msg_prefix="the correct license appears to not " \
                                 "be shown in an iframe")
         # make sure the license agreement page is shown again if the license was
@@ -639,7 +638,7 @@ class DownloadViewTest(TestCase):
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
         self.assertContains(response,
-                            'licences/META-SHARE_COMMONS_BYNCSA_v1.0.htm',
+                            'licences/MSCommons-BY-NC-SA.pdf',
                             msg_prefix="the correct license appears to not " \
                                 "be shown in an iframe")
         # make sure the download was started after accepting the license:
@@ -655,7 +654,7 @@ class DownloadViewTest(TestCase):
         self.assertTemplateNotUsed(response, 'repository/lr_not_downloadable.html',
                             msg_prefix="a download should have been started")
 
-    def test_can_download_master_copy(self):        
+    def test_can_download_master_copy(self):
         client = Client()
         client.login(username='staffuser', password='secret')
         self.downloadable_resource_1.storage_object.master_copy = True
@@ -689,7 +688,7 @@ class DownloadViewTest(TestCase):
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
         self.assertContains(response,
-            'licences/META-SHARE_COMMONS_BYNCSA_v1.0.htm', msg_prefix="the " \
+            'licences/MSCommons-BY-NC-SA.pdf', msg_prefix="the " \
                 "correct license appears to not be shown in an iframe")
         # make sure the download is started after accepting the license:
         response = client.post(
@@ -727,7 +726,7 @@ class DownloadViewTest(TestCase):
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
         self.assertContains(response,
-            'licences/META-SHARE_COMMONS_BYNCSA_v1.0.htm', msg_prefix="the " \
+            'licences/MSCommons-BY-NC-SA.pdf', msg_prefix="the " \
                 "correct license appears to not be shown in an iframe")
         # make sure the download cannot be started:
         response = client.post(
@@ -887,7 +886,7 @@ def check_resource_view(queryset, test_case):
     count = 0
     for _res in queryset:
         parent_dict = {}
-        _res.export_to_elementtree(pretty=True, parent_dict=parent_dict)       
+        _res.export_to_elementtree(pretty=True, parent_dict=parent_dict)
 
         count += 1
         LOGGER.info("calling {}. resource at {}".format(
@@ -897,9 +896,9 @@ def check_resource_view(queryset, test_case):
         response = client.get(_res.get_absolute_url(), follow = True)
         test_case.assertEquals(200, response.status_code)
         test_case.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
-        
+
         for _ele in parent_dict:
-        
+
             if not _ele.text:
                 continue
         

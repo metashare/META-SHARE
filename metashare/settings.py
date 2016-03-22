@@ -9,6 +9,18 @@ from logging.handlers import RotatingFileHandler
 # DATABASE_* settings, ADMINS, etc.
 from local_settings import *
 
+
+# Absolute filesystem path to the directory that will hold user-uploaded files.
+# Example: "/home/media/media.lawrence.com/media/"
+# No user-uploaded media on META-SHARE
+MEDIA_ROOT = ''
+
+# URL that handles the media served from MEDIA_ROOT. Make sure to use a
+# trailing slash.
+# Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
+# No user-uploaded media on META-SHARE
+MEDIA_URL = ''
+
 # Logging settings for this Django project.
 LOG_LEVEL = logging.INFO
 LOG_FORMAT = "[%(asctime)s] %(name)s::%(levelname)s %(message)s"
@@ -43,7 +55,9 @@ SYNC_NEEDS_AUTHENTICATION = True
 
 
 # URL for the Metashare Knowledge Base
-KNOWLEDGE_BASE_URL = 'http://www.meta-share.org/portal/knowledgebase/'
+KNOWLEDGE_BASE_URL = 'http://www.meta-share.org/knowledgebase/'
+
+#TODO: KNOWLEDGE_BASE_URL = 'http://www.meta-share.org/knowledgebase/'
 
 # The URL for META-SHARE statistics server.
 STATS_SERVER_URL = "http://metastats.fbk.eu/"
@@ -90,30 +104,15 @@ MANAGERS = ADMINS
 
 SITE_ID = 1
 
-METASHARE_VERSION = '3.0'
+METASHARE_VERSION = '3.1'
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = True
 
-# Absolute path to the directory that holds media.
-# Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = '{0}/media/'.format(ROOT_PATH)
+STATIC_URL = '/static/'
 
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash if there is a path component (optional in other cases).
-# Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = '/{0}site_media/'.format(DJANGO_BASE)
-
-# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
-# trailing slash.
-# Examples: "http://foo.com/media/", "/media/".
-# ADMIN_MEDIA_PREFIX must use full URL or else our custom admin will not be used,
-# cf. http://stackoverflow.com/questions/1081596/django-serving-admin-media-files
-ADMIN_MEDIA_PREFIX = '{0}/site_media/admin/'.format(DJANGO_URL)
-
-
-#ADMIN_MEDIA_ROOT = '{0}/media/admin/'.format(ROOT_PATH)
+STATICFILES_DIRS = ( '{0}/static/'.format(ROOT_PATH),)
 
 TEMPLATE_LOADERS = (
     ('django.template.loaders.cached.Loader', (
@@ -141,6 +140,7 @@ TEMPLATE_DIRS = (
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.media',
+    'django.core.context_processors.static',
     'django.contrib.messages.context_processors.messages',
     "django.core.context_processors.request",
 )
@@ -162,6 +162,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.humanize',
     'django.contrib.sitemaps',
+    'django.contrib.staticfiles',
 
     'haystack',
     'analytical',
@@ -172,7 +173,15 @@ INSTALLED_APPS = (
     'metashare.stats',
     'metashare.recommendations',
     'metashare.repository',
+    'metashare.bcp47',
+    
+    # Other apps:
+    'selectable',
+    'south',
 )
+
+SOUTH_TESTS_MIGRATE = False # To disable migrations and use syncdb instead
+SKIP_SOUTH_TESTS = True # To disable South's own unit tests
 
 # add Kronos to installed apps if not running on Windows
 if os.name != 'nt':

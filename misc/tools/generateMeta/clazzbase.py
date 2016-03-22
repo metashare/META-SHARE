@@ -151,6 +151,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.db import models
 from django.template.defaultfilters import slugify
+from metashare.bcp47 import iana
 
 from metashare.accounts.models import EditorGroup
 # pylint: disable-msg=W0611
@@ -158,7 +159,7 @@ from {0}supermodel import SchemaModel, SubclassableModel, \\
   _make_choices_from_list, InvisibleStringModel, \\
   REQUIRED, OPTIONAL, RECOMMENDED, \\
   _make_choices_from_int_list
-from {0}editor.widgets import MultiFieldWidget
+from {0}editor.widgets import MultiFieldWidget, MultiChoiceWidget
 from {0}fields import MultiTextField, MetaBooleanField, \\
   MultiSelectField, DictField, XmlCharField, best_lang_value_retriever
 from {0}validators import validate_lang_code_keys, \\
@@ -218,6 +219,16 @@ def _compute_documentationInfoType_key():
         _k2_id = _k2[0].id
 
     return max(_k1_id, _k2_id) + 1
+
+def languagename_optgroup_choices():
+    '''
+    Group the choices in groups. The first group the EU languages
+    and the second group contains the rest.
+    '''
+    most_used_choices = ('', _make_choices_from_list(iana.get_most_used_languages())['choices'])
+    more_choices = ('More', _make_choices_from_list(sorted(iana.get_rest_of_languages()))['choices'])
+    optgroup = [most_used_choices, more_choices]
+    return optgroup
 
 """
 
@@ -347,9 +358,13 @@ TOP_LEVEL_TYPE_EXTRA_CODE_TEMPLATE = '''
         # calling storage_object.save() from resourceInfoType_model.save().
         # Should we ever change that, we must modify 
         # resourceInfoType_modelIndex._setup_save() accordingly!
-        
+
+        #get the resource description languages
+        resource_lang = list(self.identificationInfo.description.iterkeys())
+
         # Call save() method from super class with all arguments.
         super(resourceInfoType_model, self).save(*args, **kwargs)
+        self.metadataInfo.save(langs = resource_lang)
 
         # update statistics
         saveLRStats(self, UPDATE_STAT)
@@ -782,7 +797,7 @@ class Clazz(object):
         options += required
         
         if name == 'metaShareId':
-            options += 'default="NOT_DEFINED_FOR_V2", '
+            options += 'default="NOT_DEFINED", '
         
         # XmlCharField, MetaBooleanField and MultiSelectField don't need the
         # "models." prefix as they are custom fields imported from
@@ -860,6 +875,9 @@ class Clazz(object):
             fixed_value = member.get_fixed()
             if fixed_value:
                 options += 'default="{0}", editable=False, '.format(fixed_value)
+            elif member.get_name() in ["metadataLanguageName", "metadataLanguageId", "documentLanguageId",
+                                     "tagsetLanguageId", "countryId", "languageId", "fundingCountryId"]:
+                 options += 'editable=False, '
             if not member.is_required():
                 options += 'blank=True, '
             if isinstance(member.get_data_type_chain(), list) and \
@@ -886,7 +904,6 @@ class Clazz(object):
                     
                     self.generate_simple_field(name, 'MultiSelectField',
                       options + choice_options, '')
-
                 else:
                     self.generate_simple_field(name, 'CharField',
                       options + choice_options, '')
@@ -899,16 +916,57 @@ class Clazz(object):
                     maxlen = DEFAULT_MAXLENGTH
                 choice_options = "max_length={}, ".format(maxlen)
 
-                if not member.is_unbounded():
-                    self.generate_simple_field(name, 'XmlCharField',
+                # if member. in ["documentLanguageName", "languageName"]:
+                #     self.generate_simple_field(name, 'CharField',
+                #       options + choice_options, '')
+
+
+                if name in ["documentLanguageName", "tagsetLanguageName"] or \
+                        (name =="languageName" and self.name == "languageInfoType"):
+                    options += "choices=languagename_optgroup_choices(), "
+                    self.generate_simple_field(name, 'CharField',
+                      options + choice_options, '')
+
+                elif not member.is_unbounded():
+                    if name == "country" or (name == "region" and self.name == "languageInfoType"):
+                        options += "choices =_make_choices_from_list(sorted(iana.get_all_regions()))['choices'], "
+                    elif name == "languageScript":
+                        options += "choices =_make_choices_from_list(sorted(iana.get_all_scripts()))['choices'], "
+                    if self.name.startswith("durationOf") and \
+                            name == "size":
+                        self.generate_simple_field(name, 'BigIntegerField',
+                      options, '')
+                    else:
+                        self.generate_simple_field(name, 'XmlCharField',
                       options + choice_options, '')
                 else:
                     if not 'validators=' in options:
                         options += 'validators=[validate_matches_xml_char_production], '
-                    self.wrtmodels(
-                      '    %s = MultiTextField(%swidget=MultiFieldWidget('
-                      'widget_id=%d, max_length=%s), %s)\n' % (
-                        name, choice_options, multi_id, maxlen, options, ))
+                    if member.get_name() in ["metadataLanguageName", "languageName"]:
+                        self.wrtmodels(
+                      '    %s = MultiTextField(%swidget=MultiChoiceWidget('
+                      'widget_id=%d, ' \
+                      'choices= languagename_optgroup_choices()), %s)\n' % (
+                        name, choice_options, multi_id, options, ))
+                    elif member.get_name() == "variant":
+                        self.wrtmodels(
+                      '    %s = MultiTextField(%swidget=MultiChoiceWidget('
+                      'widget_id=%d, ' \
+                      'choices = _make_choices_from_list' \
+                      '(sorted(iana.get_all_variants()))[\'choices\']), %s)\n' % (
+                        name, choice_options, multi_id, options, ))
+                    elif member.get_name() == "fundingCountry":
+                        self.wrtmodels(
+                      '    %s = MultiTextField(%swidget=MultiChoiceWidget('
+                      'widget_id=%d, ' \
+                      'choices = _make_choices_from_list' \
+                      '(sorted(iana.get_all_regions()))[\'choices\']), %s)\n' % (
+                        name, choice_options, multi_id, options, ))
+                    else:
+                        self.wrtmodels(
+                          '    %s = MultiTextField(%swidget=MultiFieldWidget('
+                          'widget_id=%d, max_length=%s), %s)\n' % (
+                            name, choice_options, multi_id, maxlen, options, ))
                     self.wrtforms(
                       '    %s = forms.CharField(%s%s)### FIX_ME: MULTITEXT %d\n' % (
                         name, choice_options, options, multi_id, ))
@@ -1081,7 +1139,10 @@ class Clazz(object):
 
         verbose_name = self.schema_element.getAppInfo("label")
         if not verbose_name:
-            verbose_name = getVerboseName(self.name)
+            if self.name == "corpusMediaTypeType":
+                verbose_name = "Media type component of corpus"
+            else:
+                verbose_name = getVerboseName(self.name)
         verbose_name_plural = self.schema_element.getAppInfo("label-plural")
         plural_snippet  = ''
         if verbose_name_plural:
@@ -1211,7 +1272,103 @@ class Clazz(object):
         if not self.id:
             # pylint: disable-msg=W0201
             self.id = _compute_documentationInfoType_key()
+        if self.documentLanguageName:
+            self.documentLanguageId = iana.get_language_subtag(self.documentLanguageName)
         super(documentInfoType_model, self).save(*args, **kwargs)
+
+''')
+
+        if self.name == 'metadataInfoType':
+            self.wrtmodels('''    def save(self, *args, **kwargs):
+        """
+        Since this field is hidden, language information is drawn from
+        the resource description dictionary and are converted to bcp47 valid
+        values
+        """
+        self.metadataLanguageName[:] = []
+        self.metadataLanguageId[:] = []
+        if 'langs' in kwargs:
+            ls = kwargs.pop('langs')
+            for i in ls:
+                langName = iana.get_language_by_subtag(i)
+                self.metadataLanguageName.append(langName)
+                self.metadataLanguageId.append(iana.get_language_subtag(langName))
+        super(metadataInfoType_model, self).save(*args, **kwargs)
+
+''')
+
+        if self.name == 'annotationInfoType':
+            self.wrtmodels('''    def save(self, *args, **kwargs):
+        if self.tagsetLanguageName:
+            self.tagsetLanguageId = iana.get_language_subtag(self.tagsetLanguageName)
+        super(annotationInfoType_model, self).save(*args, **kwargs)
+
+''')
+
+        if self.name == 'communicationInfoType':
+            self.wrtmodels('''    def save(self, *args, **kwargs):
+        if self.country:
+            self.countryId = iana.get_region_subtag(self.country)
+        # Call save() method from super class with all arguments.
+        super(communicationInfoType_model, self).save(*args, **kwargs)
+
+''')
+
+        if self.name == 'licenceInfoType':
+            self.wrtmodels('''    def save(self, *args, **kwargs):
+        # for CC and MS licences, if version is not specified, assign default values
+        # 4.0 & 2.0 respectively
+        if self.licence and not self.version:
+            if self.licence.startswith(u"CC"):
+                self.version =  u'4.0'
+            if self.licence.startswith(u"MS"):
+                self.version = u'2.0'
+        # Call save() method from super class with all arguments.
+        super(licenceInfoType_model, self).save(*args, **kwargs)
+
+''')
+
+        if self.name == 'languageInfoType':
+            self.wrtmodels('''    def save(self, *args, **kwargs):
+        if self.languageName:
+            if not self.languageScript:
+                self.languageScript = \\
+                    iana.get_suppressed_script_description(self.languageName)
+            self.languageId = \\
+                iana.make_id(self.languageName, self.languageScript, self.region, self.variant)
+        # Call save() method from super class with all arguments.
+        super(languageInfoType_model, self).save(*args, **kwargs)
+
+''')
+
+        if self.name == 'projectInfoType':
+            self.wrtmodels('''    def save(self, *args, **kwargs):
+        if self.fundingCountry:
+            for fc in self.fundingCountry:
+                self.fundingCountryId.append(iana.get_region_subtag(fc))
+        elif self.fundingCountryId:
+            for fci in self.fundingCountryId:
+                self.fundingCountry.append(iana.get_language_by_subtag(fci))
+        # Call save() method from super class with all arguments.
+        super(projectInfoType_model, self).save(*args, **kwargs)
+
+''')
+
+        if self.name == 'inputInfoType':
+            self.wrtmodels('''    def save(self, *args, **kwargs):
+        if self.languageName:
+            for ln in self.languageName:
+                self.languageId.append(iana.get_language_subtag(ln))
+        super(inputInfoType_model, self).save(*args, **kwargs)
+
+''')
+
+        if self.name == 'outputInfoType':
+            self.wrtmodels('''    def save(self, *args, **kwargs):
+        if self.languageName:
+            for ln in self.languageName:
+                self.languageId.append(iana.get_language_subtag(ln))
+        super(outputInfoType_model, self).save(*args, **kwargs)
 
 ''')
 
