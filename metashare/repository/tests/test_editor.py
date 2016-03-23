@@ -26,6 +26,8 @@ from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, REMOTE, \
     StorageObject
 from selectable.views import get_lookup
 from django.contrib.contenttypes.models import ContentType
+from haystack.management.commands import update_index, rebuild_index
+from django.conf import settings
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -159,6 +161,7 @@ class EditorTest(TestCase):
             EditorTest.test_editor_group, TESTFIXTURE4_XML, pub_status=INTERNAL)
         EditorTest.testfixture4.owners.add(editoruser)
         EditorTest.testfixture4.save()
+        rebuild_index.Command().handle(using=[settings.TEST_MODE_NAME,])
 
     def tearDown(self):
         test_utils.clean_resources_db()
@@ -1603,6 +1606,7 @@ class DestructiveTests(TestCase):
         self.assertContains(response, '1 Language Resource')
         self.testfixture.storage_object.deleted = True
         self.testfixture.storage_object.save()
+        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
         response = client.get('/{0}repository/search/'.format(DJANGO_BASE))
         self.assertContains(response, '0 Language Resources')
         
