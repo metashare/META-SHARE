@@ -22,6 +22,7 @@ from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER, \
     TEST_MODE_NAME
 from metashare.test_utils import create_user
 from metashare.utils import prettify_camel_case_string
+from metashare.repository.templatetags import mimetype_label
 
 
 # Setup logging support.
@@ -940,11 +941,14 @@ def check_resource_view(queryset, test_case):
                     date_object = datetime.strptime(text, '%Y-%m-%d')
                     text = unicode(
                       date_format(date_object, format='SHORT_DATE_FORMAT', use_l10n=True)).encode("utf-8")
-
             real_count = response.content.count(text)
+            beauty_real_count = 0
             if real_count == 0:
                 # try with beautified string
                 beauty_real_count = response.content.count(
                   prettify_camel_case_string(text))
-            if real_count == 0 and beauty_real_count == 0:
+            if beauty_real_count == 0 and _ele.tag == u"mimeType":
+                # text may be a mime type, so try to get the label e.g. text/xml -> XML
+                mime_label_real_count = response.content.count(mimetype_label.mimetype_label(text))
+            if real_count == 0 and beauty_real_count == 0 and mime_label_real_count == 0:
                 test_case.fail(u"missing {}: {}".format(path, _ele.text))
