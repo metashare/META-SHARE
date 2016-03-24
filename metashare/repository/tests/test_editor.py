@@ -526,8 +526,8 @@ class EditorTest(TestCase):
         self.assertContains(response, '4 Resources')
         
     def test_myresources_list(self):
-        client = test_utils.get_client_with_user_logged_in(EditorTest.editor_login)            
-        response = client.get(ADMINROOT+'repository/resourceinfotype_model/my/')            
+        client = test_utils.get_client_with_user_logged_in(EditorTest.editor_login)
+        response = client.get(ADMINROOT+'repository/resourceinfotype_model/my/')
         self.assertContains(response, '2 Resource')
 
     def test_storage_object_is_hidden(self):

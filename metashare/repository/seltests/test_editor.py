@@ -36,7 +36,7 @@ class BasicEditorTests(SeleniumTestCase):
         self.manager_user = test_utils.create_manager_user('manageruser',
             'manager@example.com', 'secret',
             (self.test_editor_group, self.test_manager_group))
-        self.manager_user.get_profile().default_editor_groups \
+        self.manager_user.userprofile.default_editor_groups \
             .add(self.test_editor_group)
 
         # create an editor user
@@ -119,7 +119,7 @@ class BasicEditorTests(SeleniumTestCase):
     def test_LR_creation_tool(self):
         # set up the current manager user profile so that it doesn't have any
         # default editor groups
-        self.manager_user.get_profile().default_editor_groups.clear()
+        self.manager_user.userprofile.default_editor_groups.clear()
 
         driver = self.driver
         driver.get(self.base_url)

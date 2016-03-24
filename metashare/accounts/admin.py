@@ -718,7 +718,7 @@ class OrganizationApplicationAdmin(admin.ModelAdmin):
         The action to accept organization applications.
         """
         if not request.user.is_superuser and \
-                not request.user.get_profile().has_organization_manager_permission():
+                not request.user.userprofile.has_organization_manager_permission():
             messages.error(request,
                 _('You must be superuser or organization manager to accept applications.'))
             return HttpResponseRedirect(request.get_full_path())
@@ -730,7 +730,7 @@ class OrganizationApplicationAdmin(admin.ModelAdmin):
         for req in queryset:
             _total_groups += 1
 
-            if request.user.get_profile().has_organization_manager_permission(
+            if request.user.userprofile.has_organization_manager_permission(
                     req.organization) or request.user.is_superuser:
                 req.user.groups.add(req.organization)
                 req.delete()

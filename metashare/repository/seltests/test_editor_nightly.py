@@ -37,7 +37,7 @@ class NightlyEditorTests(SeleniumTestCase):
         self.manager_user = test_utils.create_manager_user('manageruser',
             'manager@example.com', 'secret',
             (self.test_editor_group, self.test_manager_group))
-        self.manager_user.get_profile().default_editor_groups \
+        self.manager_user.userprofile.default_editor_groups \
             .add(self.test_editor_group)
 
         # make sure the index does not contain any stale entries

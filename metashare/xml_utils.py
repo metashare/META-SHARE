@@ -93,7 +93,7 @@ def import_from_string(xml_string, targetstatus, copy_status, owner_id=None):
     resource.storage_object.deleted = False
     if owner_id:
         resource.owners.add(owner_id)
-        for edt_grp in User.objects.get(id=owner_id).get_profile() \
+        for edt_grp in User.objects.get(id=owner_id).userprofile \
                 .default_editor_groups.all():
             resource.editor_groups.add(edt_grp)
         # this also takes care of saving the storage_object
