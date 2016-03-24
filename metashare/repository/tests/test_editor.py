@@ -512,7 +512,7 @@ class EditorTest(TestCase):
     def test_validator_is_multiwidget(self):
         client = test_utils.get_client_with_user_logged_in(EditorTest.editor_login)
         response = client.get('{}repository/resourceinfotype_model/{}/'.format(ADMINROOT, EditorTest.testfixture.id))
-        self.assertContains(response, '<select onchange="javascript:createNewSubInstance($(this), &quot;add_id_validationinfotype_model_set',
+        self.assertContains(response, '<select name="subclass_select" onchange="javascript:createNewSubInstance($(this), &quot;add_id_validationinfotype_model_set',
                             msg_prefix='Validator is not rendered as a ChoiceTypeWidget')
 
     def test_resources_list(self):
