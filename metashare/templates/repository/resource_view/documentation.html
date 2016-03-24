@@ -128,15 +128,9 @@
 	
 	{% if documentation.Document_language %}
 		 <div class="dataline">
-			<label>
-				<strong>Document Language:</strong> 
-				{% if documentation.Document_language_identifier %}
-					<label title="{{documentation.Document_language_identifier}}">
-				{% endif %}
+			<label {% if documentation.Document_language_identifier %}title="{{documentation.Document_language_identifier}}"{% endif %}>
+				<strong>Document Language:</strong>
 				{{ documentation.Document_language }}
-				{% if documentation.Document_language_identifier %}
-					</label>
-				{% endif %}
 			</label>
 		</div>
 	{% endif %}
