@@ -161,7 +161,7 @@ class EditorTest(TestCase):
             EditorTest.test_editor_group, TESTFIXTURE4_XML, pub_status=INTERNAL)
         EditorTest.testfixture4.owners.add(editoruser)
         EditorTest.testfixture4.save()
-        rebuild_index.Command().handle(using=[settings.TEST_MODE_NAME,])
+        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
 
     def tearDown(self):
         test_utils.clean_resources_db()
@@ -501,7 +501,7 @@ class EditorTest(TestCase):
         client = test_utils.get_client_with_user_logged_in(EditorTest.editor_login)
         corpustextinfo = EditorTest.testfixture.resourceComponentType.corpusMediaType.corpustextinfotype_model_set.all()[0]
         response = client.get('{}repository/corpustextinfotype_model/{}/'.format(ADMINROOT, corpustextinfo.id))
-        self.assertContains(response, 'type="hidden" name="back_to_corpusmediatypetype_model"',
+        self.assertContains(response, 'name="back_to_corpusmediatypetype_model" type="hidden"',
                             msg_prefix='Back reference should have been hidden')
 
     def test_linguality_inline_is_present(self):
@@ -1858,7 +1858,6 @@ class OrganizationApplicationTests(TestCase):
     """
     Test case for the user application to one or several organization of various model instances.
     """
-
     @classmethod
     def setUpClass(cls):
         LOGGER.info("running '{}' tests...".format(cls.__name__))
