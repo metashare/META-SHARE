@@ -3,9 +3,6 @@
 {% spaceless %}
 
 <label class='component'>Distribution</label>
-
-<label class="title">Distribution Details</label>
-
 {% if distribution.Distribution.Availability %}
 	 <div class="dataline indented">
 		<label>
@@ -29,6 +26,19 @@
 		</label>
 	</div>
 {% endif %}
+
+{% if "Licences" in distribution.Distribution %}
+	<label class="title">Licences</label>
+	{% for key, value in distribution.Distribution.items %}
+		{% if "Licence" in key %}
+	    	{% include "repository/resource_view/licence.html" with licence=value %}
+		{% endif %}
+	{% endfor %}
+
+{% endif %}
+
+<label class="title">Distribution Details</label>
+
 {% for key1, value1 in distribution.Distribution.items %}
 		{% if "Distribution___Access_medium" in key1 %}
 			<div class="dataline indented">
@@ -111,15 +121,6 @@
 		{% endif %}
 	{% endfor %}
     </div>
-{% endif %}
-{% if "Licences" in distribution.Distribution %}
-	<label class="title">Licences</label>
-	{% for key, value in distribution.Distribution.items %}
-		{% if "Licence" in key %}
-	    	{% include "repository/resource_view/licence.html" with licence=value %}
-		{% endif %}
-	{% endfor %}
-
 {% endif %}
 
 {% endspaceless %}
