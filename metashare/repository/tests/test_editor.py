@@ -448,7 +448,7 @@ class EditorTest(TestCase):
         client = test_utils.get_client_with_user_logged_in(EditorTest.editor_login)
         response = client.get('{}repository/resourceinfotype_model/{}/' \
                               .format(ADMINROOT, EditorTest.testfixture.id))
-        self.assertContains(response, 'type="hidden" id="id_usageInfo"',
+        self.assertContains(response, 'id="id_usageInfo" name="usageInfo" type="text"',
                             msg_prefix='Recommended One-to-one field ' \
                                 '"usageInfo" should have been hidden.')
 
