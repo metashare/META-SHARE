@@ -533,7 +533,7 @@ class EditorTest(TestCase):
     def test_storage_object_is_hidden(self):
         client = test_utils.get_client_with_user_logged_in(EditorTest.editor_login)
         response = client.get('{}repository/resourceinfotype_model/{}/'.format(ADMINROOT, EditorTest.testfixture.id))
-        self.assertContains(response, 'type="hidden" name="storage_object"',
+        self.assertContains(response, 'id="id_storage_object" name="storage_object" type="hidden"',
                             msg_prefix='Expected a hidden storage object')
 
     def test_editor_can_delete_annotationInfo(self):
