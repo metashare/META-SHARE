@@ -476,7 +476,7 @@ class EditorTest(TestCase):
     def test_one2one_sizepervalidation_is_hidden(self):
         client = test_utils.get_client_with_user_logged_in(EditorTest.editor_login)
         response = client.get('{}repository/resourceinfotype_model/{}/'.format(ADMINROOT, EditorTest.testfixture.id))
-        self.assertContains(response, 'type="hidden" id="id_validationinfotype_model_set-0-sizePerValidation"',
+        self.assertContains(response, 'id="id_validationinfotype_model_set-0-sizePerValidation" name="validationinfotype_model_set-0-sizePerValidation" type="text"',
                              msg_prefix='One-to-one field "sizePerValidation" should have been hidden')
 
     def test_one2one_sizepervalidation_uses_related_widget(self):
