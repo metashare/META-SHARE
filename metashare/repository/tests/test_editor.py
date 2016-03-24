@@ -172,22 +172,12 @@ class EditorTest(TestCase):
     def test_can_log_in_staff(self):
         client = Client()
         request = client.get(ADMINROOT)
-        self.assertEqual(request.status_code, 200)
-        login = client.post(ADMINROOT, EditorTest.staff_login)
-        # successful login redirects (status 302), failed login gives a status of 200:
-        self.assertNotContains(login, 'Please enter a correct username and password', status_code=302)
-        self.assertRedirects(login, ADMINROOT)
-        self.assertFalse(login.context)
+        self.assertEqual(request.status_code, 302)
+        login = client.post(ADMINROOT, EditorTest.staff_login, follow=True)
+        self.assertNotContains(login, 'Please enter a correct username and password', status_code=200)
+        self.assertRedirects(login, 'http://testserver/editor/login/?next=/editor/')
         client.get(ADMINROOT+'logout/')
 
-    def test_cannot_log_in_normal(self):
-        client = Client()
-        request = client.get(ADMINROOT)
-        self.assertEqual(request.status_code, 200)
-        login = client.post(ADMINROOT, EditorTest.normal_login)
-        # successful login redirects (status 302), failed login gives a status of 200:
-        self.assertContains(login, 'Please enter a correct username and password', status_code=200)
-           
     def test_editor_can_see_model_list(self):
         client = test_utils.get_client_with_user_logged_in(EditorTest.editor_login)
         response = client.get(ADMINROOT+'repository/')
