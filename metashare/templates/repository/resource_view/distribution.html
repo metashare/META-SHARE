@@ -37,8 +37,8 @@
 
 {% endif %}
 
-<label class="title">Distribution Details</label>
-
+<label {% if count > 1 %}style="cursor: pointer" onclick="$(this).next().filter('.collapse').slideToggle(300)"{% endif %}class="title collapse">Distribution Details ...</label>
+<div class="collapse" {% if count > 1 %}style="display: none;"{% endif %}>
 {% for key1, value1 in distribution.Distribution.items %}
 		{% if "Distribution___Access_medium" in key1 %}
 			<div class="dataline indented">
@@ -122,5 +122,5 @@
 	{% endfor %}
     </div>
 {% endif %}
-
+</div>
 {% endspaceless %}
