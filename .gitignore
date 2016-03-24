@@ -26,4 +26,5 @@ lighttpd.pid
 lighttpd/
 opt/
 ._*
+test.html
 stockage/

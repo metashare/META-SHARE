@@ -422,7 +422,7 @@ class EditorTest(TestCase):
         client = test_utils.get_client_with_user_logged_in(EditorTest.editor_login)
         response = client.get('{}repository/resourceinfotype_model/{}/'
                               .format(ADMINROOT, EditorTest.testfixture.id))
-        self.assertContains(response, 'type="hidden" id="id_distributionInfo"',
+        self.assertContains(response, 'id="id_distributionInfo" name="distributionInfo" type="text"',
                             msg_prefix='Required One-to-one field ' \
                                 'distributionInfo" should have been hidden.')
 
