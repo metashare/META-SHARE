@@ -1,3 +1,4 @@
+{% load mimetype_label %}
 {% spaceless %}
 
 <label class='title'>{{ type }}</label>
@@ -36,7 +37,7 @@
 {% if data.Mime_type %}
 	 <div class="dataline indented">
 		<label>
-			<strong>Mime type: </strong>{{ data.Mime_type }}
+			<strong>Mime type: </strong>{{ data.Mime_type|mimetype_label }}
 		</label>
 	</div>
 {% endif %}
