@@ -367,9 +367,10 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                'key': escape(obj.storage_object.id)})
             zipfile.close()
 
-        response = http.HttpResponse(mimetype='application/zip')
+        response = http.HttpResponse()
         response['Content-Disposition'] = \
             'attachment; filename=%s' % (zipfilename)
+        response['mimetype'] = 'application/zip'
         in_memory.seek(0)
         response.write(in_memory.read())  
         return response
