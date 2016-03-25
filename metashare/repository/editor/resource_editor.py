@@ -862,7 +862,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
             xml_string = to_xml_string(root_node, encoding="utf-8").encode('utf-8')
             resource_filename = 'resource-{0}.xml'.format(object_id)
         
-            response = http.HttpResponse(xml_string, mimetype='text/xml')
+            response = http.HttpResponse(xml_string)
+            response["mimetype"] = 'text/xml'
             response['Content-Disposition'] = 'attachment; filename=%s' % (resource_filename)
             return response
 
