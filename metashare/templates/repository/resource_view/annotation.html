@@ -97,15 +97,18 @@
 	{% if "Annotation_manual" in annotations %}
 		<div>
 			<label class="dataline indented">
-				<strong>Annotation Manual:</strong>
+				<strong>Annotation Manual</strong>
 			</label>
-		</div><div class="subtitle"></div>
+		</div>
+{#        <div class="subtitle"></div>#}
 	{% endif %}
 	{% for key, value in annotations.items %}
 		{% if "Annotation_manual" in key %}
 			<div class="separation"><hr/></div>
 			{% if value.Annotation_manual.Title %}
-				{% include "repository/resource_view/documentation.html" with documentation=value.Annotation_manual level="simple" type="Documentation" %}	
+                <div style="padding-left: 8px">
+				{% include "repository/resource_view/documentation.html" with documentation=value.Annotation_manual level="simple" type="Documentation" %}
+                </div>
 			{% else %}
 				<div class="dataline indented">
 					<label>

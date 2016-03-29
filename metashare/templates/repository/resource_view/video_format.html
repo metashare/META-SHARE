@@ -1,9 +1,9 @@
 {# template used for video and image info #}
 {% load replace %}
-
+{% load mimetype_label %}
 {% spaceless %}
 
-<label class='title'>{{ video.Mime_type }}
+<label class='title'>{{ video.Mime_type|mimetype_label }}
 {% if video.Size_per_video_format %}
 	{% include "repository/resource_view/size.html" with size=video.Size_per_video_format type="sub" %} 
 {% else %}
