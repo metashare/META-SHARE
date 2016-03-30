@@ -15,7 +15,8 @@ from metashare.repository.models import resourceInfoType_model, \
     corpusInfoType_model, \
     toolServiceInfoType_model, lexicalConceptualResourceInfoType_model, \
     languageDescriptionInfoType_model
-from metashare.repository.search_fields import LabeledMultiValueField
+from metashare.repository.search_fields import LabeledMultiValueField, \
+    LabeledCharField
 from metashare.storage.models import StorageObject, INGESTED, PUBLISHED
 from metashare.settings import LOG_HANDLER
 from metashare.stats.model_utils import DOWNLOAD_STAT, VIEW_STAT
@@ -127,7 +128,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
     mediaTypeFilter = LabeledMultiValueField(
                                 label=_('Media Type'), facet_id=3, parent_id=0,
                                 faceted=True)
-    availabilityFilter = LabeledMultiValueField(
+    availabilityFilter = LabeledCharField(
                                 label=_('Availability'), facet_id=4, parent_id=0,
                                 faceted=True)
     licenceFilter = LabeledMultiValueField(
