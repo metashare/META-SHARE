@@ -63,12 +63,15 @@ class TogetherManager(models.Model):
         # collect resources; skip unpublished and deleted resource
         together_list = []
         for pair in pairs:
-            resource = resourceInfoType_model.objects.get(
-              storage_object__identifier=pair.lrid)
-            if resource.storage_object.publication_status != PUBLISHED\
-              or resource.storage_object.deleted:
+            try:
+                resource = resourceInfoType_model.objects.get(
+                  storage_object__identifier=pair.lrid)
+                if resource.storage_object.publication_status != PUBLISHED\
+                  or resource.storage_object.deleted:
+                    continue
+                together_list.append(resource)
+            except:
                 continue
-            together_list.append(resource)    
 
         return together_list
               
