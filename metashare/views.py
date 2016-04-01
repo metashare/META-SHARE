@@ -16,7 +16,7 @@ LOGGER.addHandler(LOG_HANDLER)
 
 def frontpage(request):
     """Renders the front page view."""
-    LOGGER.info('Rendering frontpage view for user "{0}".'
+    LOGGER.info(u'Rendering frontpage view for user "{0}".'
                 .format(request.user.username or "Anonymous"))
     lr_count = resourceInfoType_model.objects.filter(
         storage_object__publication_status=PUBLISHED,
