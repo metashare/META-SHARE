@@ -3025,7 +3025,7 @@ class licenceInfoType_model(SchemaModel):
         if self.licence and not self.version:
             if self.licence.startswith(u"CC"):
                 self.version =  u'4.0'
-            if self.licence.startswith(u"MS"):
+            if self.licence.startswith(u'MS') and u"NoReD" in self.licence:
                 self.version = u'2.0'
         # Call save() method from super class with all arguments.
         super(licenceInfoType_model, self).save(*args, **kwargs)
