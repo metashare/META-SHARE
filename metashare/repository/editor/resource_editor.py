@@ -82,8 +82,8 @@ class ResourceComponentInlineFormSet(ReverseInlineFormSet):
             if modelfieldname not in self.data:
                 continue
             value = self.data[modelfieldname]
-            if not value:        
-                error = error + format(modelfieldname) + ' error. '                
+            if not value:
+                error = error + format(modelfieldname) + ' error. '
         return error
 
     def clean_corpus_one2many(self, corpusmediatype):
@@ -100,7 +100,7 @@ class ResourceComponentInlineFormSet(ReverseInlineFormSet):
             num_infos = corpusmediatype.corpusvideoinfotype_model_set.all().count()
             if num_infos == 0:
                 error += media + ' error. '
-        return error    
+        return error
 
     def clean_corpus(self, corpus):
         return self.clean_corpus_one2many(corpus.corpusMediaType) \

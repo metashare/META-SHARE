@@ -14,6 +14,13 @@ from django.conf import settings
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(settings.LOG_HANDLER)
+# try to import the `fcntl` module for locking support through the `Lock` class
+# below
+try:
+    import fcntl
+except ImportError:
+    LOGGER.warn("Locking support is not available for your (non-Unix?) system. "
+            "Using multiple processes might not be safe.")
 
 
 def get_class_by_name(module_name, class_name):
@@ -70,6 +77,41 @@ def create_breadcrumb_template_params(model, action):
     
     return dictionary
 
+class Lock():
+    """
+    Each instance of this class can be used to acquire an exclusive, system-wide
+    (multi-process) lock on a particular name.
+    
+    This class will only work on Unix systems viz. systems that provide the
+    `fcntl` module. On other systems the class will silently do nothing.
+    """
+    def __init__(self, lock_name):
+        """
+        Create a `Lock` object which can create an exclusive lock on the given
+        name.
+        """
+        if 'fcntl' in sys.modules:
+            self.handle = open(os.path.join(settings.LOCK_DIR, lock_name), 'w')
+        else:
+            self.handle = None
+
+    def acquire(self):
+        """
+        Acquire a lock on the name for which this `Lock` was created.
+        """
+        if self.handle:
+            fcntl.flock(self.handle, fcntl.LOCK_EX)
+    
+    def release(self):
+        """
+        Release any lock on the name for which this `Lock` was created.
+        """
+        if self.handle:
+            fcntl.flock(self.handle, fcntl.LOCK_UN)
+
+    def __del__(self):
+        if self.handle:
+            self.handle.close()
 
 class SimpleTimezone(tzinfo):
     """
