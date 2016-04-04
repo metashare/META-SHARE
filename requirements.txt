@@ -1,9 +1,10 @@
-Django==1.8.9
+Django==1.7.11
 argparse==1.2.1
 django-analytical==0.22.0
 django-extensions==1.4.9
 django-haystack==2.4.1
 django-selectable==0.9.0
+django-selenium==0.9.8
 mongoengine==0.8.7
 pefile==1.2.10-114
 psycopg2==2.5.4
@@ -12,5 +13,6 @@ pygraphviz==1.2
 pymongo==2.7.2
 pyparsing==1.5.7
 python-ptrace==0.8.1
+selenium==2.52.0
 six==1.9.0
 wsgiref==0.1.2
