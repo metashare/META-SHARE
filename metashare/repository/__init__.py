@@ -1,3 +1,18 @@
+from haystack.query import SearchQuerySet
+
+def __len__(self):
+    if not self._result_count:
+        self._result_count = self.query.get_count()
+        # Some backends give weird, false-y values here. Convert to zero.
+        if not self._result_count:
+            self._result_count = 0
+
+    # This needs to return the actual number of hits, not what's in the
+    # cache.
+    return max(0, self._result_count - self._ignored_result_count)
+
+SearchQuerySet.__len__ = __len__
+
 def verify_at_startup():
     """
     A generic verification method called for certain commands directly from our custom manage.py.
@@ -16,7 +31,6 @@ def check_solr_running():
     try:
         import socket
         from pysolr import SolrError
-        from haystack.query import SearchQuerySet
         SearchQuerySet().count()
     except (SolrError, socket.error) as solr_error:
         _msg = """
@@ -44,4 +58,6 @@ def check_settings():
     url_path = '/' in url_path and url_path[url_path.find('/')+1:] or ''
     if base_path != url_path:
         fail(u"Based on DJANGO_URL '{}', expected DJANGO_BASE '{}/', but was '{}'".format(DJANGO_URL, url_path, DJANGO_BASE))
-    
+
+
+

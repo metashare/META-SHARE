@@ -135,7 +135,7 @@ class ResourceCountPair(models.Model):
     count = models.PositiveIntegerField(default=0)
 
     class Meta:
-        unique_together = (("container", "lrid"), )   
+        unique_together = (("container", "lrid"), )
         
     def increaseCount(self, inc=1):
         """
