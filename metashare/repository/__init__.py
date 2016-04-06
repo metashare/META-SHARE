@@ -1,4 +1,8 @@
 from haystack.query import SearchQuerySet
+from haystack import connection_router, connections
+from haystack.exceptions import NotHandled
+
+ignored_pk_list = []
 
 def __len__(self):
     if not self._result_count:
@@ -11,7 +15,87 @@ def __len__(self):
     # cache.
     return max(0, self._result_count - self._ignored_result_count)
 
+def _determine_backend(self):
+    global ignored_pk_list
+    ignored_pk_list = []
+    from haystack import connections
+    # A backend has been manually selected. Use it instead.
+    if self._using is not None:
+        self.query = connections[self._using].get_query()
+        return
+
+    # No backend, so rely on the routers to figure out what's right.
+    hints = {}
+
+    if self.query:
+        hints['models'] = self.query.models
+
+    backend_alias = connection_router.for_read(**hints)
+
+    if isinstance(backend_alias, (list, tuple)) and len(backend_alias):
+        # We can only effectively read from one engine.
+        backend_alias = backend_alias[0]
+
+    # The ``SearchQuery`` might swap itself out for a different variant
+    # here.
+    if self.query:
+        self.query = self.query.using(backend_alias)
+    else:
+        self.query = connections[backend_alias].get_query()
+            
+def post_process_results(self, results):
+    to_cache = []
+    global ignored_pk_list
+
+    # Check if we wish to load all objects.
+    if self._load_all:
+        models_pks = {}
+        loaded_objects = {}
+
+        # Remember the search position for each result so we don't have to resort later.
+        for result in results:
+            models_pks.setdefault(result.model, []).append(result.pk)
+
+        # Load the objects for each model in turn.
+        for model in models_pks:
+            try:
+                ui = connections[self.query._using].get_unified_index()
+                index = ui.get_index(model)
+                objects = index.read_queryset(using=self.query._using)
+                loaded_objects[model] = objects.in_bulk(models_pks[model])
+            except NotHandled:
+                self.log.warning("Model '%s' not handled by the routers", model)
+                # Revert to old behaviour
+                loaded_objects[model] = model._default_manager.in_bulk(models_pks[model])
+
+    for result in results:
+        if self._load_all:
+            # We have to deal with integer keys being cast from strings
+            model_objects = loaded_objects.get(result.model, {})
+            if result.pk not in model_objects:
+                try:
+                    result.pk = int(result.pk)
+                except ValueError:
+                    pass
+            try:
+                result._object = model_objects[result.pk]
+            except KeyError:
+                # The object was either deleted since we indexed or should
+                # be ignored; fail silently.
+                
+                if not result.pk in ignored_pk_list:
+                    ignored_pk_list.append(result.pk)
+                    self._ignored_result_count += 1
+                continue
+
+        to_cache.append(result)
+
+    return to_cache
+
+SearchQuerySet._determine_backend = _determine_backend
+SearchQuerySet.post_process_results = post_process_results
 SearchQuerySet.__len__ = __len__
+
 
 def verify_at_startup():
     """
