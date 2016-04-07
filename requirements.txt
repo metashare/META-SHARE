@@ -6,7 +6,7 @@ django-haystack==2.4.1
 django-selectable==0.9.0
 django-selenium==0.9.8
 mongoengine==0.8.7
-pefile==1.2.10-114
+pefile==2016.3.28
 psycopg2==2.5.4
 pydot==1.0.2
 pygraphviz==1.2
