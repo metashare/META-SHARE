@@ -501,6 +501,8 @@ class DictField(models.Field):
         """
         # before converting the value to Base64-encoded, pickle'd format, we
         # assert that we are treating a dictionary
+        if not value:
+            value = {}
         assert(isinstance(value, dict))
         # we convert the value list into a Base64-encoded String that contains
         # a pickle'd representation of value
