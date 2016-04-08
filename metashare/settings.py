@@ -245,7 +245,6 @@ MAX_VIEW_INTERVAL = 60 * 5
 # used in recommendations
 MAX_DOWNLOAD_INTERVAL = 60 * 10
 
-SECRET_KEY = '8lu*6g0lg)9z!ba+a$ehk)xt)x%rxgb$i1&amp;022shmi1jcgihb*'
 LOGGING_CONFIG = None
 LOGGING = {
     'version': 1,

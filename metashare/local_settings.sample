@@ -26,7 +26,7 @@ STORAGE_PATH = '/path/to/storage/path'
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 DEBUG_JS = DEBUG
-
+SECRET_KEY = ''
 LOG_FILENAME = join(tempfile.gettempdir(), "metashare.log")
 
 # Configure administrators for this django project.  If DEBUG=False, errors
