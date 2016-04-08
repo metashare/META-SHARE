@@ -195,10 +195,6 @@ class StorageObject(models.Model):
       help_text="text containing the JSON serialization of local attributes " \
       "for this storage object instance.")
     
-    def __init__(self, *args, **kwargs):
-        super(StorageObject, self).__init__(*args, **kwargs)
-        self.identifier = _create_uuid()
-        
     def get_digest_checksum(self):
         """
         Checks if the current digest is till up-to-date, recreates it if
@@ -257,6 +253,7 @@ class StorageObject(models.Model):
         """
         # Perform a full validation for this storage object instance.
         self.full_clean()
+        self.identifier = _create_uuid()
         # Call save() method from super class with all arguments.
         super(StorageObject, self).save(*args, **kwargs)
     

@@ -41,7 +41,6 @@ class RegistrationRequest(models.Model):
     
     def __init__(self, *args, **kwargs):
         super(RegistrationRequest, self).__init__(*args, **kwargs)
-        self.uuid = _create_uuid()
 
     @staticmethod
     def _delete_related_user(instance, **kwargs):
@@ -68,6 +67,10 @@ class RegistrationRequest(models.Model):
         """
         return u'<RegistrationRequest "{0}">'.format(self.user.username)
 
+    def save(self, *args, **kwargs):
+        self.uuid = _create_uuid()
+        super(RegistrationRequest, self).save(*args, **kwargs)
+        
 # make sure to delete the related `User` object of a deleted
 # `RegistrationRequest`, if necessary
 post_delete.connect(RegistrationRequest._delete_related_user,
@@ -83,9 +86,9 @@ class ResetRequest(models.Model):
       null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     
-    def __init__(self, *args, **kwargs):
-        super(ResetRequest, self).__init__(*args, **kwargs)
+    def save(self, *args, **kwargs):
         self.uuid = _create_uuid()
+        super(ResetRequest, self).save(*args, **kwargs)
     
     def __unicode__(self):
         """
@@ -226,9 +229,9 @@ class UserProfile(models.Model):
     __synchronized_fields__ = ('modified', 'birthdate',
       'affiliation', 'position', 'homepage')
     
-    def __init__(self, *args, **kwargs):
-        super(UserProfile, self).__init__(*args, **kwargs)
+    def save(self, *args, **kwargs):
         self.uuid = _create_uuid()
+        super(UserProfile, self).save(*args, **kwargs)
         
     def __unicode__(self):
         """
