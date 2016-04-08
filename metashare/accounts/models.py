@@ -36,11 +36,12 @@ class RegistrationRequest(models.Model):
     """
     user = models.OneToOneField(User)
     uuid = models.CharField(max_length=32, verbose_name="UUID",
-                            default=_create_uuid)
+                            null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     
     def __init__(self, *args, **kwargs):
         super(RegistrationRequest, self).__init__(*args, **kwargs)
+        self.uuid = _create_uuid()
 
     @staticmethod
     def _delete_related_user(instance, **kwargs):
@@ -79,8 +80,12 @@ class ResetRequest(models.Model):
     """
     user = models.ForeignKey(User)
     uuid = models.CharField(max_length=32, verbose_name="UUID",
-      default=_create_uuid)
+      null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
+    
+    def __init__(self, *args, **kwargs):
+        super(ResetRequest, self).__init__(*args, **kwargs)
+        self.uuid = _create_uuid()
     
     def __unicode__(self):
         """
@@ -205,8 +210,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     modified = models.DateTimeField(auto_now=True)
     uuid = models.CharField(max_length=32, verbose_name="UUID",
-      default=_create_uuid)
-    
+      blank=True, null=True)
     birthdate = models.DateField("Date of birth", blank=True,
       null=True)
     affiliation = models.TextField("Affiliation(s)", blank=True)
@@ -222,6 +226,10 @@ class UserProfile(models.Model):
     __synchronized_fields__ = ('modified', 'birthdate',
       'affiliation', 'position', 'homepage')
     
+    def __init__(self, *args, **kwargs):
+        super(UserProfile, self).__init__(*args, **kwargs)
+        self.uuid = _create_uuid()
+        
     def __unicode__(self):
         """
         Return Unicode representation for this instance.

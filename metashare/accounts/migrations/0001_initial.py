@@ -82,7 +82,7 @@ class Migration(migrations.Migration):
             name='RegistrationRequest',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('uuid', models.CharField(default=metashare.accounts.models._create_uuid, max_length=32, verbose_name=b'UUID')),
+                ('uuid', models.CharField(null=True, blank=True, max_length=32, verbose_name=b'UUID')),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
             ],
@@ -94,7 +94,7 @@ class Migration(migrations.Migration):
             name='ResetRequest',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('uuid', models.CharField(default=metashare.accounts.models._create_uuid, max_length=32, verbose_name=b'UUID')),
+                ('uuid', models.CharField(null=True, blank=True, max_length=32, verbose_name=b'UUID')),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
@@ -107,7 +107,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('modified', models.DateTimeField(auto_now=True)),
-                ('uuid', models.CharField(default=metashare.accounts.models._create_uuid, max_length=32, verbose_name=b'UUID')),
+                ('uuid', models.CharField(null=True, blank=True, max_length=32, verbose_name=b'UUID')),
                 ('birthdate', models.DateField(null=True, verbose_name=b'Date of birth', blank=True)),
                 ('affiliation', models.TextField(verbose_name=b'Affiliation(s)', blank=True)),
                 ('position', models.CharField(max_length=50, blank=True)),
