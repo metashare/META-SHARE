@@ -102,6 +102,7 @@ SELENIUM_TESTSERVER_PORT = 8000
 # code; see the Installation Manual for more information on this.
 # For the integration of other web analytics services' options, see
 # <http://packages.python.org/django-analytical/>.
+<<<<<<< HEAD
 
 PIWIK_DOMAIN_PATH = "stats.elda.org"
 PIWIK_SITE_ID = "3"
@@ -110,3 +111,5 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
     }
 }
+=======
+>>>>>>> parent of 04e7201... Integrate Piwik with the metashare-elda site.
