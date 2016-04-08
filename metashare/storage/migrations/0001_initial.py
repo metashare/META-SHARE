@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('source_url', models.URLField(default=b'http://127.0.0.1:8000', help_text=b'(Read-only) base URL for the server where the master copy of the associated language resource is located.', editable=False)),
-                ('identifier', models.CharField(default=metashare.storage.models._create_uuid, help_text=b'(Read-only) unique identifier for this storage object instance.', unique=True, max_length=64, editable=False)),
+                ('identifier', models.CharField(help_text=b'(Read-only) unique identifier for this storage object instance.', null=True, blank=True, max_length=64, editable=False)),
                 ('created', models.DateTimeField(help_text=b'(Read-only) creation date for this storage object instance.', auto_now_add=True)),
                 ('modified', models.DateTimeField(default=datetime.datetime(2016, 2, 24, 12, 13, 39, 199161), help_text=b'(Read-only) last modification date of the metadata XML for this storage object instance.', editable=False)),
                 ('checksum', models.CharField(help_text=b'(Read-only) MD5 checksum of the binary data for this storage object instance.', max_length=32, null=True, blank=True)),

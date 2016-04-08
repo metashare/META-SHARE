@@ -107,8 +107,8 @@ class StorageObject(models.Model):
       help_text="(Read-only) base URL for the server where the master copy of " \
       "the associated language resource is located.")
     
-    identifier = models.CharField(max_length=64, default=_create_uuid,
-      editable=False, unique=True, help_text="(Read-only) unique " \
+    identifier = models.CharField(max_length=64, null=True, blank=True,
+      editable=False, help_text="(Read-only) unique " \
       "identifier for this storage object instance.")
     
     created = models.DateTimeField(auto_now_add=True, editable=False,
@@ -195,6 +195,10 @@ class StorageObject(models.Model):
       help_text="text containing the JSON serialization of local attributes " \
       "for this storage object instance.")
     
+    def __init__(self, *args, **kwargs):
+        super(StorageObject, self).__init__(*args, **kwargs)
+        self.identifier = _create_uuid()
+        
     def get_digest_checksum(self):
         """
         Checks if the current digest is till up-to-date, recreates it if
