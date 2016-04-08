@@ -114,7 +114,7 @@ class StorageObject(models.Model):
     created = models.DateTimeField(auto_now_add=True, editable=False,
       help_text="(Read-only) creation date for this storage object instance.")
     
-    modified = models.DateTimeField(editable=False, default=datetime.now(),
+    modified = models.DateTimeField(editable=False, auto_now=True,
       help_text="(Read-only) last modification date of the metadata XML " \
       "for this storage object instance.")
     
