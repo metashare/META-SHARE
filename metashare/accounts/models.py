@@ -68,7 +68,8 @@ class RegistrationRequest(models.Model):
         return u'<RegistrationRequest "{0}">'.format(self.user.username)
 
     def save(self, *args, **kwargs):
-        self.uuid = _create_uuid()
+        if not self.uuid:
+            self.uuid = _create_uuid()
         super(RegistrationRequest, self).save(*args, **kwargs)
         
 # make sure to delete the related `User` object of a deleted
@@ -87,7 +88,8 @@ class ResetRequest(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     
     def save(self, *args, **kwargs):
-        self.uuid = _create_uuid()
+        if not self.uuid:
+            self.uuid = _create_uuid()
         super(ResetRequest, self).save(*args, **kwargs)
     
     def __unicode__(self):
