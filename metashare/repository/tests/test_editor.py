@@ -1572,16 +1572,16 @@ class DestructiveTests(TestCase):
     
     def _test_user_cannot_export_deleted_resource(self, client):
         response = client.get(
-          ADMINROOT+'repository/resourceinfotype_model/{}/export-xml/'.format(self.testfixture.id))
+          ADMINROOT+'repository/resourceinfotype_model/{}/export-xml/'.format(self.testfixture.id), follow=True)
         self.assertEquals(200, response.status_code)
-        self.assertEquals('text/xml', response.__getitem__('Content-Type'))
+        self.assertEquals('text/html; charset=utf-8', response.__getitem__('Content-Type'))
         self.assertEquals('attachment; filename=resource-{}.xml'.format(self.testfixture.id), 
           response.__getitem__('Content-Disposition'))
         self.testfixture.storage_object.deleted = True
         self.testfixture.storage_object.save()
         response = client.get(
-          ADMINROOT+'repository/resourceinfotype_model/{}/export-xml/'.format(self.testfixture.id))
-        self.assertContains(response, 'Page not Found', status_code=404)
+          ADMINROOT+'repository/resourceinfotype_model/{}/export-xml/'.format(self.testfixture.id), follow=True)
+        self.assertContains(response, 'Resource object with primary key 1 does not exist.', status_code=404)
 
     def test_editor_user_cannot_browse_deleted_resource(self):
         client = test_utils.get_client_with_user_logged_in(self.editor_login)
