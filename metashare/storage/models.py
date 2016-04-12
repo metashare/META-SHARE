@@ -253,7 +253,8 @@ class StorageObject(models.Model):
         """
         # Perform a full validation for this storage object instance.
         self.full_clean()
-        self.identifier = _create_uuid()
+        if not self.identifier:
+            self.identifier = _create_uuid()
         # Call save() method from super class with all arguments.
         super(StorageObject, self).save(*args, **kwargs)
     
