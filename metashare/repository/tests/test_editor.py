@@ -1610,11 +1610,13 @@ class DestructiveTests(TestCase):
         self._test_user_cannot_search_deleted_resource(client)
     
     def _test_user_cannot_search_deleted_resource(self, client):
+        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
         response = client.get('/{0}repository/search/'.format(DJANGO_BASE),
           follow=True, data={'q': 'italian'})
         self.assertContains(response, '1 Language Resource')
         self.testfixture.storage_object.deleted = True
         self.testfixture.storage_object.save()
+        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
         response = client.get('/{0}repository/search/'.format(DJANGO_BASE),
           follow=True, data={'q': 'reveal'})
         self.assertContains(response, 'No results were found')
