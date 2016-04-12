@@ -315,7 +315,7 @@ if 'test' in sys.argv[1:] or 'jenkins' in sys.argv[1:]:
         'django.contrib.auth.hashers.MD5PasswordHasher',
     )
     DEBUG = False
-    TEMPLATE_DEBUG = False
+    TEMPLATE_DEBUG = DEBUG
     TESTS_IN_PROGRESS = True
     MIGRATION_MODULES = DisableMigrations()
     
