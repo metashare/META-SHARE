@@ -38,7 +38,7 @@ from django.contrib.admin.utils import unquote
 from django.core.exceptions import PermissionDenied
 from django.utils.html import escape
 from django.utils.encoding import force_unicode
-from django.http import Http404
+from django.http import HttpResponseNotFound
 from django.utils.safestring import mark_safe
 from django.contrib.admin import helpers
 from django.utils.translation import ugettext as _
@@ -146,7 +146,7 @@ class DocumentUnstructuredStringModelAdmin(admin.ModelAdmin, RelatedAdminMixin):
         #### end modification ####
 
         if obj is None:
-            raise Http404(_('%(name)s object with primary key %(key)r does not exist.') % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
+            return HttpResponseNotFound(_('%(name)s object with primary key %(key)r does not exist.') % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
         if request.method == 'POST' and "_saveasnew" in request.POST:
             return self.add_view(request, form_url='../add/')

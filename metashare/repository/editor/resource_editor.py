@@ -7,7 +7,7 @@ from django.contrib.admin.views.main import ChangeList
 from django.contrib.auth.decorators import permission_required
 from django.core.exceptions import ValidationError, PermissionDenied
 from django.db.models import Q
-from django.http import Http404, HttpResponseRedirect
+from django.http import HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from django.utils.decorators import method_decorator
@@ -361,7 +361,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     zipfile.writestr(resource_filename, xml_string)
 
                 except Exception:
-                    raise Http404(_('Could not export resource "%(name)s" '
+                    return HttpResponseNotFound(_('Could not export resource "%(name)s" '
                         'with primary key %(key)s.') \
                             % {'name': force_unicode(obj),
                                'key': escape(obj.storage_object.id)})
@@ -753,16 +753,16 @@ class ResourceModelAdmin(SchemaModelAdmin):
             raise PermissionDenied
 
         if obj is None:
-            raise Http404(_('%(name)s object with primary key %(key)s does not exist.') \
+            return HttpResponseNotFound(_('%(name)s object with primary key %(key)s does not exist.') \
              % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
         storage_object = obj.storage_object
         if storage_object is None:
-            raise Http404(_('%(name)s object with primary key %(key)s does not have a StorageObject attached.') \
+            return HttpResponseNotFound(_('%(name)s object with primary key %(key)s does not have a StorageObject attached.') \
               % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
         if not storage_object.master_copy:
-            raise Http404(_('%(name)s object with primary key %(key)s is not a master-copy.') \
+            return HttpResponseNotFound(_('%(name)s object with primary key %(key)s is not a master-copy.') \
               % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
         existing_download = storage_object.get_download()
@@ -844,14 +844,14 @@ class ResourceModelAdmin(SchemaModelAdmin):
             raise PermissionDenied
 
         if obj is None:
-            raise Http404(_('%(name)s object with primary key %(key)s does not exist.') \
+            return HttpResponseNotFound(_('%(name)s object with primary key %(key)s does not exist.') \
              % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
         if obj.storage_object is None:
-            raise Http404(_('%(name)s object with primary key %(key)s does not have a StorageObject attached.') \
+            return HttpResponseNotFound(_('%(name)s object with primary key %(key)s does not have a StorageObject attached.') \
               % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
         elif obj.storage_object.deleted:
-            raise Http404(_('%(name)s object with primary key %(key)s does not exist anymore.') \
+            return HttpResponseNotFound(_('%(name)s object with primary key %(key)s does not exist anymore.') \
               % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
         from metashare.xml_utils import to_xml_string
@@ -868,7 +868,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
             return response
 
         except Exception:
-            raise Http404(_('Could not export resource "%(name)s" with primary key %(key)s.') \
+            return HttpResponseNotFound(_('Could not export resource "%(name)s" with primary key %(key)s.') \
               % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
 

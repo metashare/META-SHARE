@@ -20,6 +20,9 @@ from haystack import connections
 from haystack.query import RelatedSearchQuerySet
 from django.db.models import Q
 from django.core.exceptions import ImproperlyConfigured, SuspiciousOperation
+from django.contrib.admin.views.main import ERROR_FLAG
+from django.template.response import SimpleTemplateResponse
+from django.http import HttpResponseRedirect
 try:
     from django.contrib.admin.options import csrf_protect_m
 except ImportError:
@@ -206,10 +209,6 @@ class FilteredChangeList(ChangeList):
         self.multi_page = multi_page
         self.paginator = paginator
         
-from django.contrib.admin.views.main import ERROR_FLAG
-from django.template.response import SimpleTemplateResponse
-from django.http import HttpResponseRedirect
-
 class MetaShareSearchModelAdmin(ModelAdmin):
     """
     MetaShareSearchModelAdmin hooks up the Haystack search engine in the admin menus: 

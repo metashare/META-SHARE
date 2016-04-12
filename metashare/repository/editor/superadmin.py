@@ -12,7 +12,7 @@ from django.contrib.admin.utils import unquote, get_deleted_objects
 from django.core.exceptions import PermissionDenied
 from django.db import transaction, models, router
 from django.forms.formsets import all_valid
-from django.http import Http404, HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseNotFound
 from django.shortcuts import render_to_response
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_unicode
@@ -260,11 +260,10 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
     
             if not self.has_change_permission(request, obj):
                 raise PermissionDenied
-    
             if obj is None:
-                raise Http404(_('%(name)s object with primary key %(key)r does not exist.') % {
+                return HttpResponseNotFound(_('%(name)s object with primary key %(key)r does not exist.') % {
                     'name': force_text(opts.verbose_name), 'key': escape(object_id)})
-    
+            
             if request.method == 'POST' and "_saveasnew" in request.POST:
                 return self.add_view(request, form_url=reverse('admin:%s_%s_add' % (
                     opts.app_label, opts.model_name),
@@ -504,7 +503,7 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
             raise PermissionDenied
 
         if obj is None:
-            raise Http404(_('%(name)s object with primary key %(key)r does not exist.') % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
+            return HttpResponseNotFound(_('%(name)s object with primary key %(key)r does not exist.') % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
 
         using = router.db_for_write(self.model)
 
