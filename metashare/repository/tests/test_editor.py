@@ -1592,12 +1592,13 @@ class DestructiveTests(TestCase):
         self._test_user_cannot_browse_deleted_resource(client)
     
     def _test_user_cannot_browse_deleted_resource(self, client):
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE))
+        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True)
         self.assertContains(response, '1 Language Resource')
         self.testfixture.storage_object.deleted = True
         self.testfixture.storage_object.save()
         update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
-        response = client.get('/{0}repository/search/'.format(DJANGO_BASE))
+        response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True)
         self.assertContains(response, '0 Language Resources')
         
     def test_editor_user_cannot_search_deleted_resource(self):
