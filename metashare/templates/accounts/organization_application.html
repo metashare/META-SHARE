@@ -9,7 +9,7 @@
 {% block content %}
 <h2>Apply for organization membership</h2>
 <div class="content_box">
-<form class="form_helper" method="post" action="{% url metashare.accounts.views.organization_application %}">
+<form class="form_helper" method="post" action="{% url 'organization_application' %}">
 {% csrf_token %}
 <table>
   {{ form.as_table }}
