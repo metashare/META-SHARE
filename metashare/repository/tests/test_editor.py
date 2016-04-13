@@ -1560,7 +1560,7 @@ class DestructiveTests(TestCase):
         self.testfixture.storage_object.save()
         response = client.get(
           ADMINROOT+'repository/resourceinfotype_model/{}/'.format(self.testfixture.id))
-        self.assertContains(response, 'Page not Found', status_code=404)
+        self.assertContains(response, "Resource object with primary key u'1' does not exist.", status_code=404)
         
     def test_editor_user_cannot_export_deleted_resource(self):
         client = test_utils.get_client_with_user_logged_in(self.editor_login)
