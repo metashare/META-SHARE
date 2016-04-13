@@ -1,3 +1,4 @@
+{% load script_suppressed %}
 {% spaceless %}
 
 <label class='title'>Languages</label>
@@ -16,7 +17,7 @@
 					</label>
 					{% if "Language_script" in value %} 
 						{% if value.Language_script %}
-							<div class="dataline indented">
+							<div class="dataline indented" {% if value.Language_script == value1|script_suppressed %}style="display: none"{% endif %}>
 								<label class="dataline"><strong>Language Script: </strong>{{value.Language_script}}
 							</label> 
 						</div>
