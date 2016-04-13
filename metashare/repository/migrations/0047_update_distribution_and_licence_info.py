@@ -109,7 +109,7 @@ class Migration(DataMigration):
                 # Add version
                 if licence_info.licence.startswith(u"CC"):
                     licence_info.version =  u'4.0'
-                if licence_info.licence.startswith(u"MS"):
+                if licence_info.licence.startswith(u"MS") and u"NoReD" in self.licence:
                     licence_info.version = u'2.0'
 
                 # Assign restrictions of use
