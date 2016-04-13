@@ -1109,39 +1109,32 @@ class DestructiveTests(TestCase):
             'username': 'manageruser',
             'password': 'secret',
         }
-
-    @classmethod
-    def tearDownClass(cls):
-        LOGGER.info("finished '{}' tests".format(cls.__name__))
-
-    def setUp(self):
-        """
-        Sets up test users with and without staff permissions.
-        """
         test_utils.setup_test_storage()
 
-        self.test_editor_group = EditorGroup.objects.create(
+        DestructiveTests.test_editor_group = EditorGroup.objects.create(
                                                     name='test_editor_group')
-        self.test_editor_group_manager = \
+        DestructiveTests.test_editor_group_manager = \
             EditorGroupManagers.objects.create(name='test_editor_groupmanager',
-                                        managed_group=self.test_editor_group)
+                                        managed_group=DestructiveTests.test_editor_group)
 
-        self.test_editor = test_utils.create_editor_user('editoruser',
-            'editor@example.com', 'secret', (self.test_editor_group,))
-        self.test_manager = test_utils.create_manager_user(
+        DestructiveTests.test_editor = test_utils.create_editor_user('editoruser',
+            'editor@example.com', 'secret', (DestructiveTests.test_editor_group,))
+        DestructiveTests.test_manager = test_utils.create_manager_user(
             'manageruser', 'manager@example.com', 'secret',
-            (self.test_editor_group, self.test_editor_group_manager))
+            (DestructiveTests.test_editor_group, DestructiveTests.test_editor_group_manager))
 
         User.objects.create_superuser('superuser', 'su@example.com', 'secret')
 
-        self.testfixture = _import_test_resource(self.test_editor_group,
+        DestructiveTests.testfixture = _import_test_resource(DestructiveTests.test_editor_group,
                                                  pub_status=PUBLISHED)
 
-    def tearDown(self):
+    @classmethod
+    def tearDownClass(cls):
         test_utils.clean_resources_db()
         test_utils.clean_storage()
         test_utils.clean_user_db()
         ContentType.objects.clear_cache()
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
 
     def test_editor_user_can_add_editor_group_to_own_resources_only(self):
         """
@@ -1554,12 +1547,12 @@ class DestructiveTests(TestCase):
 
     def _test_user_cannot_edit_deleted_resource(self, client):
         response = client.get(
-          ADMINROOT+'repository/resourceinfotype_model/{}/'.format(self.testfixture.id))
+          ADMINROOT+'repository/resourceinfotype_model/{}/'.format(self.testfixture.id), follow=True)
         self.assertContains(response, 'Change Resource')
         self.testfixture.storage_object.deleted = True
         self.testfixture.storage_object.save()
         response = client.get(
-          ADMINROOT+'repository/resourceinfotype_model/{}/'.format(self.testfixture.id))
+          ADMINROOT+'repository/resourceinfotype_model/{}/'.format(self.testfixture.id), follow=True)
         self.assertContains(response, "Resource object with primary key u'1' does not exist.", status_code=404)
         
     def test_editor_user_cannot_export_deleted_resource(self):
