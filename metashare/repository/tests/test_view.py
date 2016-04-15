@@ -544,6 +544,9 @@ class DownloadViewTest(TestCase):
             follow = True)
         #Remove the redirect check to make the tests passed.
         #TODO, http://www.example.org is not a real address, so code status is 404, maybe use a mock of server later.
+        self.assertIn(("http://www.example.org/dl1", 302),
+                       response.redirect_chain,
+                       msg="There should be a redirect to example.org.")
 
     def test_download_button_is_correct_with_staff_user(self):
         """
