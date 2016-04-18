@@ -18,21 +18,21 @@
       <distributionAccessMedium>DVD-R</distributionAccessMedium>
       <distributionAccessMedium>CD-ROM</distributionAccessMedium>
       <distributionAccessMedium>downloadable</distributionAccessMedium>
-      <downloadLocation>http://www.example.org/dl1</downloadLocation>
+      <downloadLocation>http://www.example.org</downloadLocation>
     </licenceInfo>
     <licenceInfo>
       <licence>GPL</licence>
       <restrictionsOfUse>attribution</restrictionsOfUse>
       <restrictionsOfUse>shareAlike</restrictionsOfUse>
       <distributionAccessMedium>downloadable</distributionAccessMedium>
-      <downloadLocation>http://www.example.org/dl2</downloadLocation>
+      <downloadLocation>http://www.example.org</downloadLocation>
     </licenceInfo>
     <licenceInfo>
       <licence>CC-BY-SA</licence>
       <restrictionsOfUse>attribution</restrictionsOfUse>
       <restrictionsOfUse>shareAlike</restrictionsOfUse>
       <distributionAccessMedium>downloadable</distributionAccessMedium>
-      <downloadLocation>http://www.example.org/dl3</downloadLocation>
+      <downloadLocation>http://www.example.org</downloadLocation>
     </licenceInfo>
   </distributionInfo>
   <contactPerson>

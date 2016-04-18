@@ -19,7 +19,7 @@
       <distributionAccessMedium>DVD-R</distributionAccessMedium>
       <distributionAccessMedium>CD-ROM</distributionAccessMedium>
       <distributionAccessMedium>downloadable</distributionAccessMedium>
-      <downloadLocation>http://www.example.org/dl1</downloadLocation>
+      <downloadLocation>http://www.example.org</downloadLocation>
     </licenceInfo>
   </distributionInfo>
   <contactPerson>

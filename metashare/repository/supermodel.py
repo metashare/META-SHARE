@@ -246,8 +246,12 @@ class SchemaModel(models.Model):
             # contain escaped characters; unescape them again for the export
             if field and metashare.repository.models.HTTPURI_VALIDATOR in \
                     field.validators and value:
-                value = urllib.unquote(str(value)).decode('utf8')
-
+                try:
+                    value = urllib.unquote(str(value)).decode('utf8')
+                except UnicodeError:
+                    # if xs:anyURI value contains escaped characters, that 
+                    # are not to be unquoted, return them as they are
+                    return unicode(value)
             return unicode(value)
 
         # All other values are encoded as Strings.

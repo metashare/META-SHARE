@@ -286,6 +286,9 @@ def getcountry_coords(countrycode):
         
 def getcountry_code(ipaddress):
     if (ipaddress != "" and not is_privateIP(ipaddress)):
-        return geoip.country_code_by_addr(ipaddress)
+        try:
+            return geoip.country_code_by_addr(ipaddress)
+        except pygeoip.GeoIPError:
+            return ""
     return ""
     
