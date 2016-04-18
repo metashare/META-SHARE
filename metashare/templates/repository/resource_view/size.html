@@ -12,7 +12,7 @@
 
 {% if type == "sub" %}
 	{% if size.Size != "0" %}
-		({{ size.Size|intcomma }} {% if size.Size != "not available" and size.Size_unit != "Other" %}{{ size.Size_unit }}){% endif %}
+		({{ size.Size|intcomma }} {% if size.Size != "not available" and size.Size_unit != "Other" %}{{ size.Size_unit }}{% endif %})
 	{% endif %}
 {% else %}
 	{% if type == "component" %}

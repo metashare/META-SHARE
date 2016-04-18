@@ -13,6 +13,14 @@ def licence_icon(licence):
 
 register.tag('licence_icon', licence_icon)
 
+@register.filter("as_set")
+def as_set(licence_list):
+    ln = [l.licence for l in licence_list]
+    print set(ln)
+    return set(ln)
+
+register.tag('as_set', as_set)
+
 @register.filter("condition_icon")
 def condition_icon(condition):
     img_location = "{}metashare/images/licence_icons/conditions" \

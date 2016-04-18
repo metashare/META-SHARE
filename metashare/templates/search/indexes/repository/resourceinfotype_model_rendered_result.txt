@@ -25,12 +25,9 @@
 </div>
 <ul class= "licencing">
    {% for d in object.distributioninfotype_model_set.all %}
-        {% for l in d.licenceInfo.all %}
+        {% for licence in d.licenceInfo.all|as_set %}
             <li class="licence">
-                <!--{% for c in l.restrictionsOfUse %}
-                    {{ c|condition_icon|safe }}
-                {% endfor %}-->
-                {{ l.licence|licence_icon|safe }}
+                {{ licence|licence_icon|safe }}
             </li>
         {% endfor %}
    {% endfor %}
