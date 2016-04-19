@@ -28,12 +28,7 @@ def licence_set(dist_list):
 
     l_info =[]
     l_info.extend([li.licence for li in dl_info])
-    print "DIST", dist_list
-    print "DL_INFO", dl_info
-    print "L_INFO", l_info
-    print "SET L_INFO", set(l_info)
-    print
-    return set(l_info)
+    return sorted(set(l_info))
 
 register.tag('licence_set', licence_set)
 
