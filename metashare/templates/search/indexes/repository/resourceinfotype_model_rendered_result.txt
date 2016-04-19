@@ -24,12 +24,10 @@
     </ul>
 </div>
 <ul class= "licencing">
-   {% for d in object.distributioninfotype_model_set.all %}
-        {% for licence in d.licenceInfo.all|as_set %}
+   {% for licence in object.distributioninfotype_model_set.all|licence_set %}
             <li class="licence">
                 {{ licence|licence_icon|safe }}
             </li>
-        {% endfor %}
    {% endfor %}
 </ul>
 </div>

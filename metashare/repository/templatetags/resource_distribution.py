@@ -20,6 +20,23 @@ def as_set(licence_list):
 
 register.tag('as_set', as_set)
 
+@register.filter("licence_set")
+def licence_set(dist_list):
+    dl_info = []
+    for d in dist_list:
+        dl_info.extend(d.licenceInfo.all())
+
+    l_info =[]
+    l_info.extend([li.licence for li in dl_info])
+    print "DIST", dist_list
+    print "DL_INFO", dl_info
+    print "L_INFO", l_info
+    print "SET L_INFO", set(l_info)
+    print
+    return set(l_info)
+
+register.tag('licence_set', licence_set)
+
 @register.filter("condition_icon")
 def condition_icon(condition):
     img_location = "{}metashare/images/licence_icons/conditions" \
