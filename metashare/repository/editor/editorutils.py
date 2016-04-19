@@ -211,8 +211,9 @@ class FilteredChangeList(ChangeList):
         
 class MetaShareSearchModelAdmin(ModelAdmin):
     """
-    MetaShareSearchModelAdmin hooks up the Haystack search engine in the admin menus: 
-    "Manage your own resources" & "Manage all resources".
+    MetaShareSearchModelAdmin hooks up the Haystack search engine in the resources manager dashboard: 
+    "Manage your own resources" & "Manage all resources" resources can be filtered by status.
+    The searched results can be also filtered by status.
     """
     
     @csrf_protect_m
