@@ -4,6 +4,7 @@ from south.db import db
 from south.v2 import DataMigration
 from django.db import models
 
+from metashare.bcp47 import iana
 from metashare.repository.migrations import write_to_resources_to_be_modified_file
 from metashare.settings import ROOT_PATH
 
@@ -32,16 +33,13 @@ class Migration(DataMigration):
         _file.write(u"\n\nThe following resources had country or fundingCountry value that " \
             u"couldn't be matched to any choice, thus got the default value: 'Private use':\n")            
 
-        from metashare.repository.models import communicationInfoType_model, \
-            projectInfoType_model
-        from metashare.bcp47 import iana
         # Validate and update in communicationInfoType_model.country
-        country_choices = dict(communicationInfoType_model._meta.get_field('country').choices)
+        country_choices = iana.get_all_regions()
         for communication_info in orm.communicationInfoType_model.objects.iterator():
             country = communication_info.country
             if not country:
                 continue
-            elif country_choices.get(country):
+            elif country in country_choices:
                 pass
             elif COUNTRY_MAP.get(country):
                 communication_info.country = COUNTRY_MAP.get(country)
@@ -53,11 +51,11 @@ class Migration(DataMigration):
             communication_info.save()
         
         # Validate and update in projectInfoType_model.fundingCountry
-        fundingCountry_choices = dict(projectInfoType_model._meta.get_field('fundingCountry').choices)
+        fundingCountry_choices = iana.get_all_regions()
         for project_info in orm.projectInfoType_model.objects.iterator():
             countries = []
             for country in project_info.fundingCountry:
-                if fundingCountry_choices.get(country):
+                if country in fundingCountry_choices:
                     countries.append(country)
                 elif COUNTRY_MAP.get(country):
                     countries.append(COUNTRY_MAP.get(country))

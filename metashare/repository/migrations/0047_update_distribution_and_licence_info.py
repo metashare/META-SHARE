@@ -109,13 +109,13 @@ class Migration(DataMigration):
                 # Add version
                 if licence_info.licence.startswith(u"CC"):
                     licence_info.version =  u'4.0'
-                if licence_info.licence.startswith(u"MS") and u"NoReD" in self.licence:
+                if licence_info.licence.startswith(u"MS") and u"NoReD" in licence_info.licence:
                     licence_info.version = u'2.0'
 
                 # Assign restrictions of use
                 if LICENCES_TO_RESTRICTIONSOFUSE.get(licence):
-                    if licence_info.restrictionsOfUse != LICENCES_TO_RESTRICTIONSOFUSE.get(licence):
-                        invalid_value = u', '.join(licence_info.restrictionsOfUse)
+                    if licence_info.restrictionsOfUse_old != LICENCES_TO_RESTRICTIONSOFUSE.get(licence):
+                        invalid_value = u', '.join(licence_info.restrictionsOfUse_old)
                         valid_value = u', '.join(LICENCES_TO_RESTRICTIONSOFUSE.get(licence))
                         write_warning_to_resources_to_be_modified_file(_file, licence_info, invalid_value, valid_value,
                                                                        'licenceInfo -- > restrictionsOfUse')
@@ -156,7 +156,7 @@ class Migration(DataMigration):
                     # Assign restrictions of use
                     if LICENCES_TO_RESTRICTIONSOFUSE.get(licence):
                         if licence_info.restrictionsOfUse != LICENCES_TO_RESTRICTIONSOFUSE.get(licence):
-                            invalid_value = u', '.join(licence_info.restrictionsOfUse)
+                            invalid_value = u', '.join(licence_info.restrictionsOfUse_old)
                             valid_value = u', '.join(LICENCES_TO_RESTRICTIONSOFUSE.get(licence))
                             write_warning_to_resources_to_be_modified_file(_file, licence_info, invalid_value, valid_value,
                                                                            'licenceInfo -- > restrictionsOfUse')
