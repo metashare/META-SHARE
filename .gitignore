@@ -14,7 +14,7 @@ test-tmp
 .pydevproject
 .settings
 .deps
-Makefile
+venv
 *.o
 *.cache
 metashare/.metadata/

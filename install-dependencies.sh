@@ -9,7 +9,7 @@ echo "Checking python version..."
 EXPECTED_PYTHON_VERSION="Python 2.7"
 
 # Check which python version to use
-if [ "-e $BASEDIR/opt/bin/python" ] ; then
+if [ -e "$BASEDIR/opt/bin/python" ] ; then
   PYTHON="$BASEDIR/opt/bin/python"
   echo "Using locally installed python version $PYTHON"
 else
@@ -68,6 +68,4 @@ echo "Install metashare python dependencies"
 echo
 echo
 echo "Installation of META-SHARE dependencies complete."
-if [ "$PYTHON" != "python" ] ; then
-  echo "Python was installed locally -- make sure to include $BASEDIR/opt/bin at the beginning of your PATH!"
-fi
+

@@ -1,6 +1,9 @@
 META-SHARE SOFTWARE
 ===================
 
+[![Build Status](https://travis-ci.org/metashare/META-SHARE.svg?branch=master)](https://travis-ci.org/metashare/META-SHARE)
+[![Coverage Status](https://coveralls.io/repos/metashare/META-SHARE/badge.svg?branch=master)](https://coveralls.io/r/metashare/META-SHARE?branch=master)
+
 META-SHARE Software is the software powering META-SHARE.
 
 META-SHARE is a sustainable network of repositories of language data, tools and
