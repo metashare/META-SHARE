@@ -18,3 +18,4 @@ selenium==2.52.0
 six==1.9.0
 wsgiref==0.1.2
 python-dateutil==2.4.2
+pycountry==1.12

@@ -47,11 +47,11 @@
 
 	{% if dict.Validation.Validation_report %}
 		{% if dict.Validation.Validation_report.Validation_report.Title %}
-			{% include "repository/resource_view/documentation.html" with documentation=dict.Validation.Validation_report.Validation_report type="Validation Report" level="sub" %}
+			{% include "repository/resource_view/documentation.html" with documentation=dict.Validation.Validation_report.Validation_report type="Validation Reports" level="sub" %}
 		{% else %}
 			<div class="dataline indented">
 				<label>
-					<strong>Validation Report: </strong>{{ dict.Validation.Validation_report.Validation_report }}
+					<strong>Validation Reports: </strong>{{ dict.Validation.Validation_report.Validation_report }}
 				</label>
 			</div>
 		{% endif %}					
