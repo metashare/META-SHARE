@@ -56,7 +56,7 @@ def prettify_camel_case_string(cc_str):
     '''
     result = cc_str
     if len(result) > 1:
-        result = result.replace('-', ' - ')
+        result = result.replace('_', ' ')
         result = re.sub(r'(.)(?=[A-Z][a-z])', r'\1 ', result)
         result = ' '.join([(len(token) > 1 and (token[0].upper() + token[1:]))
                            or token[0].upper() for token in result.split()])

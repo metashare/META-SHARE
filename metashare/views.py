@@ -16,7 +16,7 @@ LOGGER.addHandler(LOG_HANDLER)
 
 def frontpage(request):
     """Renders the front page view."""
-    LOGGER.info('Rendering frontpage view for user "{0}".'
+    LOGGER.info(u'Rendering frontpage view for user "{0}".'
                 .format(request.user.username or "Anonymous"))
     lr_count = resourceInfoType_model.objects.filter(
         storage_object__publication_status=PUBLISHED,
@@ -28,7 +28,7 @@ def frontpage(request):
 
 def login(request, template_name):
     """Renders login view by connecting to django.contrib.auth.views."""
-    LOGGER.info('Rendering login view for user "{0}".'.format(
+    LOGGER.info(u'Rendering login view for user "{0}".'.format(
       request.user.username or "Anonymous"))
     
     return LOGIN(request, template_name)
@@ -36,7 +36,7 @@ def login(request, template_name):
 
 def logout(request, next_page):
     """Renders logout view by connecting to django.contrib.auth.views."""
-    LOGGER.info('Logging out user "{0}", redirecting to "{1}".'.format(
+    LOGGER.info(u'Logging out user "{0}", redirecting to "{1}".'.format(
       request.user.username or "Anonymous", next_page)) 
     
     return LOGOUT(request, next_page)
