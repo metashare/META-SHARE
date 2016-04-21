@@ -1,6 +1,6 @@
 {% spaceless %}
 
-	<label class='component'>{{ tool_service.Tool_service_type }} {{ tool_service.Tool_service_subtype }}</label>
+	<label class='component'>{{ tool_service.Tool___Service_type }} {{ tool_service.Subtype_of_tool___service }}</label>
 	{% if tool_service.Language_dependent %}			
 		 <div class="dataline">
 			<label>
@@ -18,22 +18,22 @@
 		{% include "repository/resource_view/input_output.html" with type="Output" data=tool_service.Output %}
 	{% endif %}
 	
-	{% if tool_service.Tool_service_operation %}
+	{% if tool_service.Tool___Service_operation %}
 		<label class='title'>Operation</label>
-		{% if tool_service.Tool_service_operation.Operating_system %}
+		{% if tool_service.Tool___Service_operation.Operating_system %}
 			 <div class="dataline indented">
 				<label>
-					<strong>Operating system: </strong>{{ tool_service.Tool_service_operation.Operating_system }}
+					<strong>Operating system: </strong>{{ tool_service.Tool___Service_operation.Operating_system }}
 				</label>
 			</div>
 		{% endif %}
 		
-		{% if tool_service.Tool_service_operation.Running_environment %}
-			 {% if "Required_software" in tool_service.Tool_service_operation.Running_environment %}
+		{% if tool_service.Tool___Service_operation.Running_environment %}
+			 {% if "Required_software" in tool_service.Tool___Service_operation.Running_environment %}
 			 	<label class='subtitle'>Required Software</label>
 			 	<div class="dataline indented">			 		
 			 		<ul>					 	
-						 {% for key, value in tool_service.Tool_service_operation.Running_environment.items %}
+						 {% for key, value in tool_service.Tool___Service_operation.Running_environment.items %}
 						 	{% if "Required_software" in key %}
 						 		{% include "repository/resource_view/target_resource.html" with target=value title="Required Software" level="list" %}
 						 	{% endif %}
@@ -42,22 +42,22 @@
 				</div>
 			{% endif %}			
 			
-			{% if tool_service.Tool_service_operation.Running_environment.Required_hardware %}
+			{% if tool_service.Tool___Service_operation.Running_environment.Required_hardware %}
 				 <div class="dataline indented">
 					<label>
-						<strong>Required hardware: </strong>{{ tool_service.Tool_service_operation.Running_environment.Required_hardware }}
+						<strong>Required hardware: </strong>{{ tool_service.Tool___Service_operation.Running_environment.Required_hardware }}
 					</label>
 				</div>
 			{% endif %}
 			
 			
 			
-		 	{% if "Required_lrs" in tool_service.Tool_service_operation.Running_environment %}
+		 	{% if "Required_language_resources" in tool_service.Tool___Service_operation.Running_environment %}
 			 	<label class='subtitle'>Required LRs</label>
 			 	<div class="dataline indented">			 		
 			 		<ul>					 	
-						 {% for key, value in tool_service.Tool_service_operation.Running_environment.items %}
-						 	{% if "Required_lrs" in key %}
+						 {% for key, value in tool_service.Tool___Service_operation.Running_environment.items %}
+						 	{% if "Required_language_resources" in key %}
 						 		{% include "repository/resource_view/target_resource.html" with target=value title="Required LRs" level="list" %}
 						 	{% endif %}
 						 {% endfor %}
@@ -67,67 +67,67 @@
 			
 			
 			
-			{% if tool_service.Tool_service_operation.Running_environment.Running_environment_details %}
+			{% if tool_service.Tool___Service_operation.Running_environment.Running_environment_details %}
 				 <div class="dataline indented">
 					<label>
-						<strong>Running environment details: </strong>{{ tool_service.Tool_service_operation.Running_environment.Running_environment_details }}
+						<strong>Running environment details: </strong>{{ tool_service.Tool___Service_operation.Running_environment.Running_environment_details }}
 					</label>
 				</div>
 			{% endif %}
 		{% endif %}
 
-		{% if tool_service.Tool_service_operation.Running_time %}
+		{% if tool_service.Tool___Service_operation.Running_time %}
 			 <div class="dataline indented">
 				<label>
-					<strong>Running time: </strong>{{ tool_service.Tool_service_operation.Running_time }}
+					<strong>Running time: </strong>{{ tool_service.Tool___Service_operation.Running_time }}
 				</label>
 			</div>
 		{% endif %}
 	{% endif %}
 
-	{% if tool_service.Tool_service_evaluation %}
+	{% if tool_service.Tool___Service_evaluation %}
 		<label class='title'>Evaluation</label>
-		{% if tool_service.Tool_service_evaluation.Evaluated %}
+		{% if tool_service.Tool___Service_evaluation.Evaluated %}
 			 <div class="dataline indented">
 				<label>
-					<strong>Evaluated: </strong>{{ tool_service.Tool_service_evaluation.Evaluated }}
+					<strong>Evaluated: </strong>{{ tool_service.Tool___Service_evaluation.Evaluated }}
 				</label>
 			</div>
 		{% endif %}
 
-		{% if tool_service.Tool_service_evaluation.Evaluation_level %}
+		{% if tool_service.Tool___Service_evaluation.Evaluation_level %}
 			 <div class="dataline indented">
 				<label>
-					<strong>Evaluation level: </strong>{{ tool_service.Tool_service_evaluation.Evaluation_level }}
+					<strong>Evaluation level: </strong>{{ tool_service.Tool___Service_evaluation.Evaluation_level }}
 				</label>
 			</div>
 		{% endif %}
 
-		{% if tool_service.Tool_service_evaluation.Evaluation_type %}
+		{% if tool_service.Tool___Service_evaluation.Evaluation_type %}
 			 <div class="dataline indented">
 				<label>
-					<strong>Evaluation type: </strong>{{ tool_service.Tool_service_evaluation.Evaluation_type }}
+					<strong>Evaluation type: </strong>{{ tool_service.Tool___Service_evaluation.Evaluation_type }}
 				</label>
 			</div>
 		{% endif %}
 
-		{% if tool_service.Tool_service_evaluation.Evaluation_criteria %}
+		{% if tool_service.Tool___Service_evaluation.Evaluation_criteria %}
 			 <div class="dataline indented">
 				<label>
-					<strong>Evaluation criteria: </strong>{{ tool_service.Tool_service_evaluation.Evaluation_criteria }}
+					<strong>Evaluation criteria: </strong>{{ tool_service.Tool___Service_evaluation.Evaluation_criteria }}
 				</label>
 			</div>
 		{% endif %}
 
-		{% if tool_service.Tool_service_evaluation.Evaluation_measure %}
+		{% if tool_service.Tool___Service_evaluation.Evaluation_measure %}
 			 <div class="dataline indented">
 				<label>
-					<strong>Evaluation measure: </strong>{{ tool_service.Tool_service_evaluation.Evaluation_measure }}
+					<strong>Evaluation measure: </strong>{{ tool_service.Tool___Service_evaluation.Evaluation_measure }}
 				</label>
 			</div>
 		{% endif %}				
 		
-		 {% for key, value in tool_service.Tool_service_evaluation.items %}
+		 {% for key, value in tool_service.Tool___Service_evaluation.items %}
 		 	{% if "Evaluation_report" in key %}		 	
 				{% if value.Evaluation_report.Title %}
 					{% include "repository/resource_view/documentation.html" with documentation=value.Evaluation_report type="Evaluation Report" level="sub" %}
@@ -141,11 +141,11 @@
 		 	{% endif %}
 		 {% endfor %}
 		 
- 		{% if "Evaluation_tool" in tool_service.Tool_service_evaluation %}
+ 		{% if "Evaluation_tool" in tool_service.Tool___Service_evaluation %}
 			<label class="subtitle">Evaluation Tool</label>
 		<div class="dataline indented">
 			<ul>		
-	 		 {% for key, value in tool_service.Tool_service_evaluation.items %}
+	 		 {% for key, value in tool_service.Tool___Service_evaluation.items %}
 			 	{% if "Evaluation_tool" in key %}
 					{% include "repository/resource_view/target_resource.html" with target=value level="list" %}
 			 	{% endif %}
@@ -154,16 +154,16 @@
 		</div>
 		{% endif %}
 		
-		{% if tool_service.Tool_service_evaluation.Evaluation_details %}
+		{% if tool_service.Tool___Service_evaluation.Evaluation_details %}
 			 <div class="dataline indented">
 				<label>
-					<strong>Evaluation details: </strong>{{ tool_service.Tool_service_evaluation.Evaluation_details }}
+					<strong>Evaluation details: </strong>{{ tool_service.Tool___Service_evaluation.Evaluation_details }}
 				</label>
 			</div>
 		{% endif %}
 	
 	
-		 {% for key, value in tool_service.Tool_service_evaluation.items %}
+		 {% for key, value in tool_service.Tool___Service_evaluation.items %}
 		 	{% if "Evaluator" in key %}		 	
 				{% if value.Organization %}
 					{% include "repository/resource_view/person.html" with person_dict=value.Organization type="Evaluator" level="sub" %}
@@ -175,29 +175,29 @@
 		
 	{% endif %}
 	
-	{% if tool_service.Tool_service_creation %}
+	{% if tool_service.Tool___Service_creation %}
 		<label class='title'>Creation</label>
-		{% if tool_service.Tool_service_creation.Implementation_language %}
+		{% if tool_service.Tool___Service_creation.Implementation_language %}
 			 <div class="dataline indented">
 				<label>
-					<strong>Programming language: </strong>{{ tool_service.Tool_service_creation.Implementation_language }}
+					<strong>Programming language: </strong>{{ tool_service.Tool___Service_creation.Implementation_language }}
 				</label>
 			</div>
 		{% endif %}
 
-		{% if tool_service.Tool_service_creation.Formalism %}
+		{% if tool_service.Tool___Service_creation.Formalism %}
 			 <div class="dataline indented">
 				<label>
-					<strong>Formalism: </strong>{{ tool_service.Tool_service_creation.Formalism }}
+					<strong>Formalism: </strong>{{ tool_service.Tool___Service_creation.Formalism }}
 				</label>
 			</div>
 		{% endif %}
 		
-		{% if "Original_source" in tool_service.Tool_service_creation %}
+		{% if "Original_source" in tool_service.Tool___Service_creation %}
 			<label class="subtitle">Original Source</label>
 			<div class="dataline indented">
 				<ul>
-					{% for key, value in tool_service.Tool_service_creation.items %}
+					{% for key, value in tool_service.Tool___Service_creation.items %}
 						{% if "Original_source" in key %}
 							{% include "repository/resource_view/target_resource.html" with target=value  title="Original Source" level="list" %}
 						{% endif %}
@@ -206,10 +206,10 @@
 			</div>
 		{% endif %}
 
-		{% if tool_service.Tool_service_creation.Creation_details %}
+		{% if tool_service.Tool___Service_creation.Creation_details %}
 			 <div class="dataline indented">
 				<label>
-					<strong>Details: </strong>{{ tool_service.Tool_service_creation.Creation_details }}
+					<strong>Details: </strong>{{ tool_service.Tool___Service_creation.Creation_details }}
 				</label>
 			</div>
 		{% endif %}
