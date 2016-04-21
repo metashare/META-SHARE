@@ -21,7 +21,23 @@ cache-size=500
 # R0915 Too many statements
 # R0913 Too many arguments
 # R0904 Too many public methods
-disable=C0111,I0011,I0012,W0704,W0142,W0212,W0232,W0613,W0702,R0201,W0614,R0914,R0912,R0915,R0913,R0904,R0801
+# added for META-SHARE 3.0.3, to get back to the pylint standard used for 3.0.2
+# C0113 unneeded-not
+# C0303 Trailing whitespace
+# C0304 Final newline missing
+# C0325 Unnecessary parens after %r keyword
+# C0326 Bad whitespace
+# C0330 Wrong continued indentation
+# C0411 Wrong import order
+# C0412 Ungrouped imports
+# C0413 Wrong import position
+# C1001 Old-style class defined.
+# E1101 %s %r has no %r member
+# I0022 Deprecated pragma "pylint:disable-msg" or "pylint:enable-msg"
+# R0101 Too many nested blocks
+# W0611 Unused import
+# W1202 Use % formatting in logging functions and pass the % parameters as arguments
+disable=C0111,I0011,I0012,W0704,W0142,W0212,W0232,W0613,W0702,R0201,W0614,R0914,R0912,R0915,R0913,R0904,R0801,C0113,C0303,C0304,C0325,C0326,C0330,C0411,C0412,C0413,C1001,E1101,I0022,R0101,W0611,W1202
 
 [REPORTS]
 #output-format=parseable
