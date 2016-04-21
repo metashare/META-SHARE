@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited by ILSP/Athena R.C. -->
+<xs:schema xmlns:ms="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.meta-share.org/META-SHARE_XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.1" xml:lang="en">
+	<xs:include schemaLocation="./META-SHARE-SimpleTypes.xsd"/>
+	<xs:include schemaLocation="./META-SHARE-RoleTypes.xsd"/>
+	<!-- definition of complex types -->
+	<!-- media type info TextInfo/imageInfo/AudioInfo/VideInfo etc-->
+	<xs:complexType name="distributionInfoType">
+		<xs:annotation>
+			<xs:appinfo>
+				<render-short>{availability}, licenses: {licenceInfo}</render-short>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="availability">
+				<xs:annotation>
+					<xs:documentation>Specifies the availability status of the resource; restrictionsOfUse can be further used to indicate the specific terms of availability</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Availability</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="40"/>
+						<xs:enumeration value="available">
+							<xs:annotation>
+								<xs:documentation>For resources that are available with restrictions of uses imposed by the type of licence</xs:documentation>
+								<xs:appinfo>
+									<label>Available</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="availableThroughOtherDistributor">
+							<xs:annotation>
+								<xs:documentation>For resources that are available but through other distribution channels</xs:documentation>
+								<xs:appinfo>
+									<label>Available through other distributor</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="underNegotiation">
+							<xs:annotation>
+								<xs:documentation>for resources that their availability is still pending</xs:documentation>
+								<xs:appinfo>
+									<label>Under negotiation</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:enumeration>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element ref="ms:licenceInfo" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information on licences for the resource; can be repeated to allow for different modes of access and restrictions of use (e.g. free for academic use, on-a-fee basis for commercial use, download of a sample for free use etc.)</xs:documentation>
+					<xs:appinfo>
+						<relation>many-to-many</relation>
+						<label>Licences</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="distributionAccessMedium" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the medium (channel) used for delivery or providing access to the resource</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-many</relation>
+						<label>Distribution / Access medium</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="webExecutable"/>
+						<xs:enumeration value="paperCopy"/>
+						<xs:enumeration value="hardDisk"/>
+						<xs:enumeration value="bluRay"/>
+						<xs:enumeration value="DVD-R"/>
+						<xs:enumeration value="CD-ROM"/>
+						<xs:enumeration value="downloadable"/>
+						<xs:enumeration value="accessibleThroughInterface"/>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="downloadLocation" type="ms:httpURI" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Any url where the resource can be downloaded from; please, use if the resource is "downloadable" and you have not uploaded the resource in the repository</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<label>Download location</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="executionLocation" type="ms:httpURI" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Any url where the service providing access to a resource is being executed; please use for resources that are "accessibleThroughInterface" or "webExecutable"</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<label>Execution location</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="attributionText" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The text that must be quoted for attribution purposes when using a resource - for cases where a resource is provided with a restriction on attribution; you can use a standard text such as "Resource A by Resource Creator/Owner B used under licence C as accessed at D"</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<label>Attribution text</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:restriction base="ms:myString">
+							<xs:maxLength value="1000"/>
+						</xs:restriction>
+					</xs:simpleContent>
+				</xs:complexType>
+				<xs:unique name="uniqueLang12">
+					<xs:selector xpath="."/>
+					<xs:field xpath="@lang"/>
+				</xs:unique>
+			</xs:element>
+			<xs:element name="fee" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies the costs that are required to access the resource, a fragment of the resource or to use a tool or service</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Fee</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="licensor" type="ms:actorInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information on the person who is legally eligible to licence and actually licenses the resource. The licensor could be different from the creator, the distributor or the IP rightsholder. The licensor has the necessary rights or licences to license the work and is the party that actually licenses the resource that enters the META-SHARE network. She will have obtained the necessary rights or licences from the IPR holder and she may have a distribution agreement with a distributor that disseminates the work under a set of conditions defined in the specific licence and collects revenue on the licensor's behalf. The attribution of the creator, separately from the attribution of the licensor, may be part of the licence under which the resource is distributed (as e.g. is the case with Creative Commons Licences)</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>many-to-many</relation>
+						<label>Licensor</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="distributionRightsHolder" type="ms:actorInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information on a person or an organization that holds the distribution rights. The range and scope of distribution rights is defined in the distribution agreement. The distributor in most cases only has a limited licence to distribute the work and collect royalties on behalf of the licensor or the IPR holder and cannot give to any recipient of the work permissions that exceed the scope of the distribution agreement (e.g. to allow uses of the work that are not defined in the distribution agreement)</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>many-to-many</relation>
+						<label>Distribution rights holder</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="iprHolder" type="ms:actorInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information on a person or an organization who holds the full Intellectual Property Rights (Copyright, trademark etc) that subsist in the resource. The IPR holder could be different from the creator that may have assigned the rights to the IPR holder (e.g. an author as a creator assigns her rights to the publisher who is the IPR holder) and the distributor that holds a specific licence (i.e. a permission) to distribute the work within the META-SHARE network.</xs:documentation>
+					<xs:appinfo>
+						<relation>many-to-many</relation>
+						<label>IPR holder</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="userNature" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The conditions imposed by the nature of the user (for instance, a research use may have different implications depending on this)</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<label>User nature</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+						<xs:enumeration value="academic">
+							<xs:annotation>
+								<xs:documentation>For academic institutions</xs:documentation>
+								<xs:appinfo>
+									<label>Academic</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="commercial">
+							<xs:annotation>
+								<xs:documentation>For commercial institutions</xs:documentation>
+								<xs:appinfo>
+									<label>Commercial</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:enumeration>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="membershipInfo" type="ms:membershipInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:appinfo>
+						<relation>many-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="availabilityEndDate" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies the end date of availability of a resource - only for cases where a resource is available for a restricted time period.</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Availability end date</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="availabilityStartDate" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies the start date of availability of a resource - only for cases where a resource is available for a restricted time period.</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Availability start date</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="membershipInfoType">
+		<xs:annotation>
+			<xs:appinfo>
+				<render-short>member:{member} {membershipInstitution}</render-short>
+				<label>Membership</label>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="member" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Whether the user is a member or not</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Member</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="membershipInstitution" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>This lists the different institutions releasing the resources and establishing membership conditions</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<label>Membership institution</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+						<xs:enumeration value="ELRA"/>
+						<xs:enumeration value="LDC"/>
+						<xs:enumeration value="TST-CENTRALE"/>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="licenceInfoType">
+		<xs:annotation>
+			<xs:appinfo>
+				<render-short>{licence}</render-short>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="licence">
+				<xs:annotation>
+					<xs:documentation>The licence of use for the resource; if possible, please use one of the recommended standard licences</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Licence</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+						<xs:enumeration value="CC-BY"/>
+						<xs:enumeration value="CC-BY-NC"/>
+						<xs:enumeration value="CC-BY-NC-ND"/>
+						<xs:enumeration value="CC-BY-NC-SA"/>
+						<xs:enumeration value="CC-BY-ND"/>
+						<xs:enumeration value="CC-BY-SA"/>
+						<xs:enumeration value="CC-ZERO"/>
+						<xs:enumeration value="PDDL"/>
+						<xs:enumeration value="ODC-BY"/>
+						<xs:enumeration value="ODbL"/>
+						<xs:enumeration value="MS-NoReD"/>
+						<xs:enumeration value="MS-NoReD-FF"/>
+						<xs:enumeration value="MS-NoReD-ND"/>
+						<xs:enumeration value="MS-NoReD-ND-FF"/>
+						<xs:enumeration value="MS-NC-NoReD"/>
+						<xs:enumeration value="MS-NC-NoReD-FF"/>
+						<xs:enumeration value="MS-NC-NoReD-ND"/>
+						<xs:enumeration value="MS-NC-NoReD-ND-FF"/>
+						<xs:enumeration value="MSCommons-BY"/>
+						<xs:enumeration value="MSCommons-BY-NC"/>
+						<xs:enumeration value="MSCommons-BY-NC-ND"/>
+						<xs:enumeration value="MSCommons-BY-NC-SA"/>
+						<xs:enumeration value="MSCommons-BY-ND"/>
+						<xs:enumeration value="MSCommons-BY-SA"/>
+						<xs:enumeration value="ELRA_END_USER"/>
+						<xs:enumeration value="ELRA_EVALUATION"/>
+						<xs:enumeration value="ELRA_VAR"/>
+						<xs:enumeration value="CLARIN_PUB"/>
+						<xs:enumeration value="CLARIN_ACA"/>
+						<xs:enumeration value="CLARIN_ACA-NC"/>
+						<xs:enumeration value="CLARIN_RES"/>
+						<xs:enumeration value="AGPL"/>
+						<xs:enumeration value="ApacheLicence_2.0"/>
+						<xs:enumeration value="BSD_4-clause"/>
+						<xs:enumeration value="BSD_3-clause"/>
+						<xs:enumeration value="FreeBSD"/>
+						<xs:enumeration value="GFDL"/>
+						<xs:enumeration value="GPL"/>
+						<xs:enumeration value="LGPL"/>
+						<xs:enumeration value="Princeton_Wordnet"/>
+						<xs:enumeration value="proprietary"/>
+						<xs:enumeration value="underNegotiation"/>
+						<xs:enumeration value="nonStandardLicenceTerms"/>
+						<!--
+						<xs:enumeration value="MSCommons-BY"/>
+						<xs:enumeration value="MSCommons-BY-NC"/>
+						<xs:enumeration value="MSCommons-BY-NC-ND"/>
+						<xs:enumeration value="MSCommons-BY-NC-SA"/>
+						<xs:enumeration value="MSCommons-BY-ND"/>
+						<xs:enumeration value="MSCommons-BY-SA"/>
+-->
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="version" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The version of the licence; the preferred options are "4.0" for all CC-licences and "2.0" for the META-SHARE-NoReD ones</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Version</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="nonStandardLicenceName" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The name with which a licence is known; to be used for licences not included in the pre-defined list of recommended licences</xs:documentation>
+					<xs:appinfo>
+						<label>Name (for non-standard licences)</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:restriction base="ms:myString">
+							<xs:maxLength value="100"/>
+						</xs:restriction>
+					</xs:simpleContent>
+				</xs:complexType>
+				<xs:unique name="uniqueLang23">
+					<xs:selector xpath="."/>
+					<xs:field xpath="@lang"/>
+				</xs:unique>
+			</xs:element>
+			<xs:element name="nonStandardLicenceTermsURL" type="ms:httpURI" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Used to provide a hyperlink to a url containing the text of a licence not included in the predefined list or describing the terms of use for a language resource or terms of service for web services</xs:documentation>
+					<xs:appinfo>
+						<label>URL for non-standard licences / terms of use / terms of service</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nonStandaradLicenceTermsText" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Used for inputting the text of licences (that are not included in the pre-defined list) and terms of use or terms of service (for web services)</xs:documentation>
+					<xs:appinfo>
+						<label>Text (for non-standard licences / terms of use / terms of service)</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:restriction base="ms:myString">
+							<xs:maxLength value="1000"/>
+						</xs:restriction>
+					</xs:simpleContent>
+				</xs:complexType>
+				<xs:unique name="uniqueLang22">
+					<xs:selector xpath="."/>
+					<xs:field xpath="@lang"/>
+				</xs:unique>
+			</xs:element>
+			<xs:element name="restrictionsOfUse" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the conditions and terms of use imposed by the licence. It is an optional element and only to be taken as providing brief human readable information on the fact that the LR is provided under a specific set of conditions. These correspond to the most frequently used conditions imposed by the licensor of the LR (via the specified licence). The proper exposition of all conditions and possible exceptions is to be found inside the licence text. LR depositors should, hence, carefully choose the values of this field to match the licence chosen and users should carefully read that licence before using the LR.</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<label>Conditions of use</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+						<xs:enumeration value="attribution"/>
+						<xs:enumeration value="nonCommercialUse"/>
+						<xs:enumeration value="commercialUse"/>
+						<xs:enumeration value="shareAlike"/>
+						<xs:enumeration value="noDerivatives"/>
+						<xs:enumeration value="noRedistribution"/>
+						<xs:enumeration value="evaluationUse"/>
+						<xs:enumeration value="research"/>
+						<xs:enumeration value="languageEngineeringResearch"/>
+						<xs:enumeration value="education"/>
+						<xs:enumeration value="informLicensor"/>
+						<xs:enumeration value="redeposit"/>
+						<xs:enumeration value="compensate"/>
+						<xs:enumeration value="personalDataIncluded"/>
+						<xs:enumeration value="sensitiveDataIncluded"/>
+						<xs:enumeration value="requestPlan"/>
+						<xs:enumeration value="spatialConstraint"/>
+						<xs:enumeration value="userIdentified"/>
+						<xs:enumeration value="onlyMSmembers"/>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<!-- to decide if they will be used
+			<xs:element name="licenceCategory" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A way of classifying licences according to their conditions of use (CLARIN recommendation, http://www.clarin.eu/content/license-categories)</xs:documentation>
+					<xs:appinfo>
+						<label>Licence category</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="ACA">
+							<xs:annotation>
+								<xs:documentation>For licences that allow the use of resources only by academic users (individuals affiliated with universities and/or research centers who are authenticated through a certified authentication system); other conditions of use may also apply</xs:documentation>
+							<xs:appinfo>
+								<label>ACA</label>
+							</xs:appinfo>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="PUB">
+							<xs:annotation>
+								<xs:documentation>For licences that allow public use (i.e. resources can be accessed by all users, although other conditions of use may apply)</xs:documentation>
+							<xs:appinfo>
+								<label>PUB</label>
+							</xs:appinfo>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="RES">
+							<xs:annotation>
+								<xs:documentation>For licences that allow restricted use of resources by users that are both authenticated and authorized; other conditions of use may also apply</xs:documentation>
+							<xs:appinfo>
+								<label>RES</label>
+							</xs:appinfo>
+							</xs:annotation>
+						</xs:enumeration>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+-->
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="distributionInfo" type="ms:distributionInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on the distribution of the resource</xs:documentation>
+			<xs:appinfo>
+				<relation>one-to-many</relation>
+				<label>Distribution</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="licenceInfo" type="ms:licenceInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on licences for the resource; can be repeated to allow for different modes of access and restrictions of use (e.g. free for academic use, on-a-fee basis for commercial use, download of a sample for free use etc.)</xs:documentation>
+			<xs:appinfo>
+				<label>Licence</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

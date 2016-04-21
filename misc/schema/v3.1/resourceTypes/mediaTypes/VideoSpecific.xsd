@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited by ILSP/Athena R.C. -->
+<xs:schema xmlns:ms="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.meta-share.org/META-SHARE_XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.1" xml:lang="en">
+	<xs:include schemaLocation="../../META-SHARE-SimpleTypes.xsd"/>
+	<xs:include schemaLocation="../../META-SHARE-BaseTypes.xsd"/>
+	<xs:complexType name="videoContentInfoType">
+		<xs:sequence>
+			<xs:element name="typeOfVideoContent" type="xs:string" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Main type of object or people represented in the video</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<label>Type of video content</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="textIncludedInVideo" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Indicates if text is present in or in conjunction with the video</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<label>Text included in video</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="captions"/>
+						<xs:enumeration value="subtitles"/>
+						<xs:enumeration value="none"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="dynamicElementInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Groups information on the dynamic elements that are represented in the video part of the resource</xs:documentation>
+					<xs:appinfo>
+						<label>Dynamic element</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="ms:typeOfElement" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>The type of objects or people that represented in the video or image part of the resource</xs:documentation>
+								<xs:appinfo>
+									<label>Type of element</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="ms:bodyParts" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>The body parts visible in the video or image part of the resource</xs:documentation>
+								<xs:appinfo>
+									<label>Body parts</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="distractors" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Any distractors visible in the resource</xs:documentation>
+								<xs:appinfo>
+									<label>Distractors</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="interactiveMedia" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Any interactive media visible in the resource</xs:documentation>
+								<xs:appinfo>
+									<label>Interactive media</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="ms:faceViews" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Indicates the view of the face(s) that appear in the video or on the image part of the resource</xs:documentation>
+								<xs:appinfo>
+									<label>Face views</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="ms:faceExpressions" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Indicates the facial expressions visible in the resource</xs:documentation>
+								<xs:appinfo>
+									<label>Face expressions</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="bodyMovement" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Indicates the body parts that move in the video part of the resource</xs:documentation>
+								<xs:appinfo>
+									<label>Body movement</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="gestures" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Indicates the type of gestures visible in the resource</xs:documentation>
+								<xs:appinfo>
+									<label>Gestures</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="handArmMovement" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Indicates the movement of hands and/or arms visible in the resource</xs:documentation>
+								<xs:appinfo>
+									<label>Hand / Arm movement</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="handManipulation" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Gives information on the manipulation of objects by hand</xs:documentation>
+								<xs:appinfo>
+									<label>Hand manipulation</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="headMovement" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Indicates the movements of the head visible in the resource</xs:documentation>
+								<xs:appinfo>
+									<label>Head movement</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="eyeMovement" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Indicates the movement of the eyes visible in the resource</xs:documentation>
+								<xs:appinfo>
+									<label>Eye movement</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="posesPerSubject" type="xs:int" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>The number of poses per subject that participates in the video part of the resource</xs:documentation>
+								<xs:appinfo>
+									<label>Poses per subject</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="videoFormatInfoType">
+		<xs:sequence>
+			<xs:element ref="ms:mimeType">
+				<xs:annotation>
+					<xs:documentation>The mime-type of the resource which is a formalized specifier for the format included or a mime-type that the tool/service accepts, in conformance with the values of the IANA (Internet Assigned Numbers Authority); you can select one of the pre-defined values or add a value, PREFERABLY FROM THE IANA MEDIA MIMETYPE RECOMMENDED VALUES (http://www.iana.org/assignments/media-types/media-types.xhtml)</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<label>Mime type</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:colourSpace" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Defines the colour space for the image and video</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-many</relation>
+						<label>Colour space</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:colourDepth" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The number of bits used to represent the colour of a single pixel</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<label>Colour depth</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="frameRate" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The number of frames per second</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Frame rate</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:resolutionInfo" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups together information on the image resolution</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>many-to-many</relation>
+						<inline-type>tabular</inline-type>
+						<label>Resolution</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:visualModelling" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The dimensional form applied on video or image corpus</xs:documentation>
+					<xs:appinfo>
+						<label>Visual modelling</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fidelity" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Defines whether blur is present in the moving sequences</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Fidelity</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:compressionInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Groups together information on the compression status and method of a resource</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Compression</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sizePerVideoFormat" type="ms:sizeInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Used to give info on size of parts of a resource that differ as to the format</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
+						<label>Size per video format</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="videoClassificationInfoType">
+		<xs:sequence>
+			<xs:element name="videoGenre" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A first indication of type of video recorded</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-one</relation>
+						<label>Video genre</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:subject_topic" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>For corpora that have already been using subject classification</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Subject / Topic</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:conformanceToClassificationScheme" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies the external classification schemes</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Conformance to classification scheme</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sizePerVideoClassification" type="ms:sizeInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Used to give info on size of parts with different video classification</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
+						<label>Size per video classification</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="videoFormatInfo" type="ms:videoFormatInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on the format(s) of a resource; repeated if parts of the resource are in different formats</xs:documentation>
+			<xs:appinfo>
+				<label>Video format</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="videoClassificationInfo" type="ms:videoClassificationInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on video genre of the resource</xs:documentation>
+			<xs:appinfo>
+				<label>Video classification</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="videoContentInfo" type="ms:videoContentInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on the contents of the video part of a resource</xs:documentation>
+			<xs:appinfo>
+				<label>Video content</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

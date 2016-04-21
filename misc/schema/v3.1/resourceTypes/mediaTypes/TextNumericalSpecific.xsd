@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited by ILSP/Athena R.C. -->
+<xs:schema xmlns:ms="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.meta-share.org/META-SHARE_XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.1" xml:lang="en">
+	<xs:include schemaLocation="../../META-SHARE-SimpleTypes.xsd"/>
+	<xs:include schemaLocation="../../META-SHARE-BaseTypes.xsd"/>
+	<xs:complexType name="textNumericalContentInfoType">
+		<xs:sequence>
+			<xs:element name="typeOfTextNumericalContent" type="xs:string" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the content that is represented in the textNumerical part of the resource</xs:documentation>
+					<xs:appinfo>
+						<label>Type of text numerical content</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="textNumericalFormatInfoType">
+		<xs:sequence>
+			<xs:element ref="ms:mimeType">
+				<xs:annotation>
+					<xs:documentation>The mime-type of the resource which is a formalized specifier for the format included or a mime-type that the tool/service accepts, in conformance with the values of the IANA (Internet Assigned Numbers Authority); you can select one of the pre-defined values or add a value, PREFERABLY FROM THE IANA MEDIA MIMETYPE RECOMMENDED VALUES (http://www.iana.org/assignments/media-types/media-types.xhtml)</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Mime type</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sizePerTextNumericalFormat" type="ms:sizeInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Gives information on the size of textNumerical resource parts with different format</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
+						<label>Size per text numerical format</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- elements -->
+	<xs:element name="textNumericalFormatInfo" type="ms:textNumericalFormatInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on the format(s) of the textNumerical part of the resource</xs:documentation>
+			<xs:appinfo>
+				<label>Text numerical format</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="textNumericalContentInfo" type="ms:textNumericalContentInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on the content of the textNumerical part of the resource</xs:documentation>
+			<xs:appinfo>
+				<label>Text numerical content</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

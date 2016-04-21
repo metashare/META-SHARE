@@ -1,16 +1,16 @@
 #!/bin/bash
 
-THIS_DIR=$(dirname "$0")
-. "${THIS_DIR}/setvars.sh"
-. "${THIS_DIR}/_meta_dir.sh"
-. "${THIS_DIR}/_python.sh"
-cd "$MSERV_DIR"
+# Assume it is being called from base metashare directory
+# MSERV_DIR is the directory where this script lives
+MSERV_DIR=$(readlink -f $(dirname "$0"))
+. "${MSERV_DIR}/setvars.sh"
+. "${MSERV_DIR}/_meta_dir.sh"
+. "${MSERV_DIR}/_python.sh"
 
 TESTSUITE_NAME="TwoNodesSync"
 
 setUp()
 {
-	cd "$MSERV_DIR"
 	"$MSERV_DIR"/mserv.sh start
 	local ret_val=$?
 	return $ret_val
@@ -18,7 +18,6 @@ setUp()
 
 tearDown()
 {
-	cd "$MSERV_DIR"
 	"$MSERV_DIR"/mserv.sh stop
 	local ret_val=$?
 
@@ -26,7 +25,6 @@ tearDown()
 		return $ret_val
 	fi
 
-	cd "$MSERV_DIR"
 	"$MSERV_DIR"/mserv.sh clean
 	local ret_val=$?
 
@@ -39,7 +37,6 @@ FILE3="$METASHARE_SW_DIR/misc/testdata/v3.0/METASHAREResources/ILC-CNR/SimpleOWL
 
 test_sync_inner()
 {
-	cd "$MSERV_DIR"
 	"$MSERV_DIR/test_import_s.sh" 1 0 "$FILE1"
 	local ret_val=$?
 	return $ret_val
@@ -47,7 +44,6 @@ test_sync_inner()
 
 test_sync_outer()
 {
-	cd "$MSERV_DIR"
 	"$MSERV_DIR/test_import_s.sh" 2 1 "$FILE2"
 	local ret_val=$?
 	return $ret_val
@@ -55,7 +51,6 @@ test_sync_outer()
 
 test_del_inner()
 {
-	cd "$MSERV_DIR"
 	"$MSERV_DIR/test_del_s.sh" 1 0
 	local ret_val=$?
 	return $ret_val
@@ -63,7 +58,6 @@ test_del_inner()
 
 test_del_outer()
 {
-	cd "$MSERV_DIR"
 	"$MSERV_DIR/test_del_s.sh" 2 1
 	local ret_val=$?
 	return $ret_val
@@ -73,15 +67,17 @@ TEST_LIST="test_sync_inner test_sync_outer test_del_inner test_del_outer"
 
 run_tests()
 {
-	REPORT="$REPORT_DIR/${TESTSUITE_NAME}_report.xml"
-	STDOUT="$REPORT_DIR/${TESTSUITE_NAME}_stdout.log"
-	STDERR="$REPORT_DIR/${TESTSUITE_NAME}_stderr.log"
-	DETAILS="$REPORT_DIR/${TESTSUITE_NAME}_details.log"
-	CLASSNAME="Sync"
+	REPORT="$REPORT_DIR/TEST-${TESTSUITE_NAME}_report.xml"
+	STDOUT="$REPORT_DIR/TEST-${TESTSUITE_NAME}_stdout.log"
+	STDERR="$REPORT_DIR/TEST-${TESTSUITE_NAME}_stderr.log"
+	DETAILS="$REPORT_DIR/TEST-${TESTSUITE_NAME}_details.log"
+	CLASSNAME="sync.${TESTSUITE_NAME}"
 
 	echo -n > "$STDOUT"
 	echo -n > "$STDERR"
-	echo "<testsuite name=\"$TESTSUITE_NAME\">" > "$REPORT"
+	echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>" > "$REPORT"
+	echo "<testsuites>" >> "$REPORT"
+	echo "<testsuite name=\"$TESTSUITE_NAME\">" >> "$REPORT"
 	TOTAL=0
 	SUCCESS=0
 	echo "Running tests."
@@ -116,8 +112,12 @@ run_tests()
 	cat "$STDERR" >> "$REPORT"
 	echo "]]></system-err>" >> "$REPORT"
 	echo "</testsuite>" >> "$REPORT"
+	echo "</testsuites>" >> "$REPORT"
 
 	tearDown 1>>"$STDOUT" 2>>"$STDERR"
+        if [ $TOTAL != $SUCCESS ]; then
+           exit 1
+        fi
 }
 
 METASHARE_DIR="$METASHARE_SW_DIR/metashare"

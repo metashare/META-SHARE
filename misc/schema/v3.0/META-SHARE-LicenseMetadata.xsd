@@ -161,7 +161,6 @@
 						<xs:enumeration value="ELRA_END_USER"/>
 						<xs:enumeration value="ELRA_EVALUATION"/>
 						<xs:enumeration value="ELRA_VAR"/>
-						<xs:enumeration value="ELRA_VAR_E"/>
 						<xs:enumeration value="AGPL"/>
 						<xs:enumeration value="ApacheLicence_2.0"/>
 						<xs:enumeration value="BSD"/>
