@@ -1,3 +1,4 @@
+{% load mimetype_label %}
 {% spaceless %}
 
 <label class='title'>Text Format</label>
@@ -8,7 +9,7 @@
 			{% if "Mime_type" in key1 %}
 				<div>
 					<label class="dataline indented">
-						{{ value1 }}
+						{{ value1|mimetype_label }}
 						{% if "Size_per_text_format" in value %}
 							{% include "repository/resource_view/size.html" with size=value.Size_per_text_format type="sub" %}
 						{% endif %}
