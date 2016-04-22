@@ -5,24 +5,23 @@
 	{% if level == "sub" %}
 		<div class='dataline indented'>
 			<label>
-				<strong><i>{{ project.Project_name }} </i></strong>{% if project.Project_short_name %}({{ project.Project_short_name }}{% if project.Project_id %} - {{ project.Project_id }}{% endif %}){% endif %}
+				<strong><i>{{ project.Project_name }} </i></strong>{% if project.Project_short_name %}({{ project.Project_short_name }}{% if project.Project_identifier %} - {{ project.Project_identifier }}{% endif %}){% endif %}
 			</label>
 		</div>
 	{% else %}
 	<div class="subtitle">
 		<label>
-			<strong>{{ project.Project_name }} </strong>{% if project.Project_short_name %}({{ project.Project_short_name }}{% if project.Project_id %} - {{ project.Project_id }}{% endif %}){% endif %}
+			<strong>{{ project.Project_name }} </strong>{% if project.Project_short_name %}({{ project.Project_short_name }}{% if project.Project_identifier %} - {{ project.Project_identifier }}{% endif %}){% endif %}
 		</label>
 	</div>
 	
 	
 	{% endif %}
-	
-	
-	{% if project.Url %}
+
+	{% if project.URL_Landing_page %}
 		<div class='dataline indented'>
 			<label>
-				<strong>URL{% if ", " in project.Url %}s{% endif %}: </strong>{{ project.Url|urlizetrunc:23 }} 
+				<strong>URL{% if ", " in project.URL_Landing_page %}s{% endif %}: </strong>{{ project.URL_Landing_page|urlizetrunc:23 }}
 			</label>
 		</div>
 	{% endif %}
@@ -44,7 +43,7 @@
 	<div class="dataline indented">
 		<label>
 			{% if project.Funding_country %}
-			<strong>Funding {% if "," in project.Funding_country%}Countries{% else %}Country{% endif %}: </strong>{{ project.Funding_country }}
+			<strong>Funding {% if "," in project.Funding_country%}Countries{% else %}Country{% endif %}: </strong>{{ project.Funding_country }} ({{ project.Funding_country_identifier }})
 			{% endif %}
 		</label>
 	</div>
