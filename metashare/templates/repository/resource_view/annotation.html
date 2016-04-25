@@ -5,7 +5,7 @@
 	{% if annotations.Tagset %}
 		<div>
 			<label class="dataline indented">
-				<strong>Tagset: </strong> {{ annotations.Tagset }} {% if annotations.Tagset_language_name %} <label {% if annotations.Tagset_language_id %}title="{{annotations.Tagset_language_id}}" {% endif %} class="dataline">({{ annotations.Tagset_language_name }})</label> {% endif %}
+				<strong>Tagset: </strong> {{ annotations.Tagset }} {% if annotations.Tagset_language %} <label {% if annotations.Tagset_language_identifier %}title="{{annotations.Tagset_language_identifier}}" {% endif %} class="dataline">({{ annotations.Tagset_language }})</label> {% endif %}
 			</label>
 		</div>
 	{% endif %}
@@ -38,10 +38,10 @@
 			</label>
 		</div>
 	{% endif %}
-	{% if annotations.Conformance_to_standards_best_practices %}
+	{% if annotations.Conformance_to_standards___best_practices %}
 		<div>
 			<label class="dataline indented">
-				<strong>Standard practices conformance: </strong> {{ annotations.Conformance_to_standards_best_practices }}
+				<strong>Standard practices conformance: </strong> {{ annotations.Conformance_to_standards___best_practices }}
 			</label>
 		</div>
 	{% endif %}
@@ -97,15 +97,18 @@
 	{% if "Annotation_manual" in annotations %}
 		<div>
 			<label class="dataline indented">
-				<strong>Annotation Manual:</strong>
+				<strong>Annotation Manual</strong>
 			</label>
-		</div><div class="subtitle"></div>
+		</div>
+{#        <div class="subtitle"></div>#}
 	{% endif %}
 	{% for key, value in annotations.items %}
 		{% if "Annotation_manual" in key %}
 			<div class="separation"><hr/></div>
 			{% if value.Annotation_manual.Title %}
-				{% include "repository/resource_view/documentation.html" with documentation=value.Annotation_manual level="simple" type="Documentation" %}	
+                <div style="padding-left: 8px">
+				{% include "repository/resource_view/documentation.html" with documentation=value.Annotation_manual level="simple" type="Documentation" %}
+                </div>
 			{% else %}
 				<div class="dataline indented">
 					<label>
