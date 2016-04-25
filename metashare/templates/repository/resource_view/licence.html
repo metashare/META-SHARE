@@ -7,101 +7,30 @@
 
 	{% for key1, value1 in value.items %}
 		{% if "Licence" in key1 %}
-			<div class="subtitle">
-				<label class="licence">
-					<strong><i>{{ value1|rep }}</i></strong>
-				</label>
-			</div>
-		{% endif %}
+                <div class="subtitle">
+                    <label class="licence">
+                        <strong><i>{{ value1|rep }}
+                        {% for key1, value1 in value.items %}
+                            {% if "Version" in key1 %}
+                                {{ value1 }}
+                            {% endif %}
+                        {% endfor %}</i>
+                        </strong>
+                    </label>
+                </div>
+        {% endif %}
 	{% endfor %}
 
 	{% for key1, value1 in value.items %}
-		{% if "Restrictions_of_use" in key1 %}
+		{% if "Conditions_of_use" in key1 %}
 			<div class="dataline indented">
 				<label>
-					<strong>Restrictions: </strong>{{ value1 }}
+					<strong>Conditions: </strong>{{ value1 }}
 				</label>
 			</div>
 		{% endif %}
 	{% endfor %}
 
-	{% for key1, value1 in value.items %}
-
-		{% if "Distribution_access_medium" in key1 %}
-			<div class="dataline indented">
-				<label>
-					<strong>Distribution Access/Medium: </strong>{{ value1 }}
-				</label>
-			</div>
-		{% endif %}
-
-		{% if "Download_location" in key1 %}
-			<div class="dataline indented">
-				<label>
-					<strong>Download location{% if ", " in value1 %}s{% endif %}: </strong><i>hidden</i>{# value1|urlizetrunc:23 #}
-				</label>
-			</div>
-		{% endif %}
-
-		{% if "Execution_location" in key1 %}
-			<div class="dataline indented">
-				<label>
-					<strong>Execution location{% if ", " in value1 %}s{% endif %}: </strong><i>hidden</i>{# value1|urlizetrunc:23 #}
-				</label>
-			</div>
-		{% endif %}
-
-		{% if "Fee" in key1 %}
-			<div class="dataline indented">
-				<label>
-					<strong>Fee: </strong>{{ value1|intcomma }}
-				</label>
-			</div>
-		{% endif %}
-
-		{% if "Attribution" in key1 %}
-			<div class="dataline indented">
-				<label>
-					<strong>Attribution Details: </strong>{{ value1 }}
-				</label>
-			</div>
-		{% endif %}
-
-		{% if "User_nature" in key1 %}
-			<div class="dataline indented">
-				<label>
-					<strong>User Nature: </strong>{{ value1 }}
-				</label>
-			</div>
-		{% endif %}
-
-		{% if "Membership" in key1 %}
-			{% include "repository/resource_view/membership.html" with membership=value1 %}
-		{% endif %}
-
-	{% endfor %}
-
-	<div class="dataline">
-		{% if "Licensor" in value %}
-			<label class="dataline indented"><strong>Licensors:</strong></label>
-		{% endif %}
-		{% for key1, value1 in value.items %}
-			{% if "Licensor" in key1 %}
-				{% include "repository/resource_view/person.html" with person_dict=value1.Licensor type="Licensor" %}
-			{% endif %}
-		{% endfor %}
-	</div>
-
-	<div class="dataline">
-		{% if "Distribution_rights_holder" in value %}
-			<label class="dataline indented"><strong>Distribution rights holders:</strong></label>
-		{% endif %}
-		{% for key1, value1 in value.items %}
-			{% if "Distribution_rights_holder" in key1 %}
-				{% include "repository/resource_view/person.html" with person_dict=value1.Distribution_rights_holder type="Distribution_rights_holder" %}
-			{% endif %}
-		{% endfor %}
-	</div>
 {% endif %}
 
 {% endspaceless %}

@@ -160,9 +160,33 @@
 				<div style="clear:both"></div>
 			{% endif %}
 			
+			{% if not attribution_details|join:"" == '' %}
+             <div class="attribution"><label>Attribution details:</label> {{ attribution_details|join:"<br /> " }}</div>
+            {% endif %}
+            {% for key, value in documentation_dict.items %}
+                {% for key1, value1 in value.items %}
+                    {% for key2, value2 in value1.items %}
+                        {% if "Citation" in key1 %}
+                            <div class="citation">
+                                <label>Please, acknowledge use of the resource with the following citation:</label><br/>
+                                {% if value2.Title %}
+                                      {% include "repository/resource_view/citation.html" with documentation=value2 type="Citation" %}
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            {% endfor %}
+
+            {% if islrn %}
+                <span style="font-size:14px;">
+                    <label>ISLRN: </label>{{ islrn }}
+                </span>
+            {% endif %}
+
 			{% if url %}
 			 	{% for address in url %}
-					<h3 style="font-size:14px;">
+			 	    <h3 style="font-size:14px; margin-top: 1%;">
 						<label>
 							{{ address|urlize }}{% if not forloop.last %},{% endif %}
 						</label>
@@ -180,7 +204,7 @@
 		 		</div>
 	 		{% endif %}
 	 		
-		<h4 style="text-align:justify" class="readmore desc">{{ description|linebreaksbr }}</h4>
+		<h4 style="text-align:justify; margin-top: 5px" class="readmore desc">{{ description|linebreaksbr }}</h4>
 		
 		{% ifnotequal other_descriptions|length 0 %}
 			<div class='more'>View resource description in all available languages</div>
@@ -203,8 +227,11 @@
 	</div>
 	
 	<div class="white_box column corner">
-		{% include "repository/resource_view/distribution.html" with distribution=distribution_dict %}
-
+        {% if distribution_dicts %}
+            {% for distribution in distribution_dicts %}
+                 {% include "repository/resource_view/distribution.html" with distribution_dict=distribution.Distribution count=distribution_dicts|length %}
+            {% endfor %}
+        {% endif %}
 		{% if contact_person_dicts %}
 			<label class='component'>Contact Person{{ contact_person_dicts|length|pluralize }}</label>
 			{% for contact_person in contact_person_dicts %}
@@ -279,7 +306,7 @@
 		{% if documentation_dict %}
 		<label class="component">Documentation</label>
 			{% for key, value in documentation_dict.items %}
-				{% for key1, value1 in value.items %}		
+				{% for key1, value1 in value.items %}
 					{% if "Samples_location" in key1 %}
 						 <div class="dataline">
 							<label>
@@ -287,7 +314,7 @@
 							</label>
 						</div>
 					{% endif %}
-					{% if "Tool_documentation" in key1 %}
+					{% if "Type_of_documentation_for_tools" in key1 %}
 						 <div class="dataline">
 							<label>
 								<strong>Tool Documentation: </strong>{{value1}}

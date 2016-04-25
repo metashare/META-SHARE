@@ -2,11 +2,11 @@
 
 {% spaceless %}
 
-{% with media_info=resource_component_dict.Resource_component %}
+{% with media_info=resource_component_dict.Resource_component_type %}
 	{% if type == "text" %}
-		{% for key, value in resource_component_dict.Resource_component.items %}
-			{% if "media" in key %}
-				{% if "Corpus" in key and text_counts|length > 1 %}
+        {% for key, value in resource_component_dict.Resource_component_type.items %}
+            {% if "Media" in key %}
+                 {% if "corpus" in key and text_counts|length > 1 %}
 				<div class="textsubfields subfields">
 					<ul class="my-list">
 						{% for text in text_counts %}
@@ -36,9 +36,9 @@
 			{% include "repository/resource_view/detailed_media_info.html" with resource_component=resource_component_dicts.audio %}
 		{% else %}
 			{% if type == "video" %}				
-				{% for key, value in resource_component_dict.Resource_component.items %}
-					{% if "media" in key %}
-						{% if "Corpus" in key and video_counts|length > 1 %}
+				{% for key, value in resource_component_dict.Resource_component_type.items %}
+					{% if "Media" in key %}
+						{% if "corpus" in key and video_counts|length > 1 %}
 							<div class="videosubfields subfields">
 								<ul class="my-list">
 									{% for video in video_counts %}
@@ -68,10 +68,10 @@
 					{% include "repository/resource_view/detailed_media_info.html" with resource_component=resource_component_dicts.image %}
 				{% else %}
 					{% if type == "textnumerical" %}
-						{% include "repository/resource_view/detailed_media_info.html" with resource_component=media_info.Corpus_media.Corpus_text_numerical %}
+						{% include "repository/resource_view/detailed_media_info.html" with resource_component=media_info.Media_type_component_of_corpus.Corpus_numerical_text_component %}
 					{% else %}
 						{% if type == "textngram" %}
-							{% include "repository/resource_view/detailed_media_info.html" with resource_component=media_info.Corpus_media.Corpus_text_ngram %}
+							{% include "repository/resource_view/detailed_media_info.html" with resource_component=media_info.Media_type_component_of_corpus.Corpus_n_gram_text_component %}
 						{% else %}
 							{% if type == "toolService" %}
 								{% include "repository/resource_view/detailed_media_info.html" with resource_component=resource_component_dicts.toolService %}
