@@ -24,7 +24,7 @@ from datetime import datetime, date
 from dateutil.relativedelta import relativedelta
 import urllib, urllib2
 from threading import Timer
-from metashare.settings import LOG_HANDLER, MEDIA_URL
+from metashare.settings import LOG_HANDLER
 from metashare.stats.geoip import getcountry_name
 
 try:
@@ -252,14 +252,31 @@ def _add_usage_meta(usage_fields, component_name, field, verbose_name, status, m
         usage_fields[component_name].append(metadata)
     return True
 
+def portalstats(request):
+    from django.contrib.auth.models import User
+
+    data = {}
+
+    # data to gather from the portal specified managing node
+    data['language resources'] = resourceInfoType_model.objects.filter(
+        storage_object__publication_status=PUBLISHED,
+        storage_object__deleted=False).count()
+    data['text corpora'] = UsageStats.objects.filter(elname = 'corpusTextInfo').count()
+
+    # data to gather from all partners including managing nodes
+    data['users'] = User.objects.all().count()
+    data['number of downloads'] = LRStats.objects.filter(action='d').count()
+    return HttpResponse(JSONEncoder().encode(data), mimetype="application/json")
 
 def topstats (request):
     """ viewing statistics about the top LR and latest queries. """    
     topdata = []
+    geovisits = []
+    visitstitle = "Unknown"
     view = request.GET.get('view', 'topviewed')
     last = request.GET.get('last', '')
     limit = int(request.GET.get('limit', '10'))
-    offset = int(request.GET.get('offset', '0'))    
+    offset = int(request.GET.get('offset', '0'))
     since = None
     if (last == "day"):
         since = date.today() + relativedelta(days = -1)
