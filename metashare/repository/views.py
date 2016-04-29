@@ -22,8 +22,7 @@ from metashare.repository.forms import LicenseSelectionForm, \
     LicenseAgreementForm, DownloadContactForm, MORE_FROM_SAME_CREATORS, \
     MORE_FROM_SAME_PROJECTS
 from metashare.repository import model_utils
-from metashare.repository.models import licenceInfoType_model, \
-    resourceInfoType_model
+from metashare.repository.models import resourceInfoType_model
 from metashare.repository.search_indexes import resourceInfoType_modelIndex, \
     update_lr_index_entry
 from metashare.settings import LOG_HANDLER, MEDIA_URL, DJANGO_URL
@@ -59,9 +58,9 @@ def _convert_to_template_tuples(element_tree):
     """
     # If we are dealing with a complex node containing children nodes, we have
     # to first recursively collect the data values from the sub components.
-    if len(element_tree.getchildren()):
+    if len(element_tree):
         values = []
-        for child in element_tree.getchildren():
+        for child in element_tree:
             values.append(_convert_to_template_tuples(child))
         # use pretty print name of element instead of tag; requires that 
         # element_tree is created using export_to_elementtree(pretty=True)
@@ -165,33 +164,34 @@ def _get_licences(resource, user_membership):
     is possible for the given user membership.
     
     The result is a dictionary mapping from licence names to pairs. Each pair
-    contains the corresponding `licenceInfoType_model` and a boolean denoting
-    whether the resource may (and can) be directly downloaded or if there need
-    to be further negotiations of some sort.
+    contains the corresponding `licenceInfoType_model`, the download location
+    URLs and a boolean denoting whether the resource may (and can) be directly
+    downloaded or if there need to be further negotiations of some sort.
     """
-    licence_infos = tuple(licenceInfoType_model.objects \
-        .filter(back_to_distributioninfotype_model__id=\
-                resource.distributionInfo.id))
-    
-    all_licenses = dict([(l_name, l_info) for l_info in licence_infos
-                         for l_name in l_info.licence])
+    distribution_infos = tuple(resource.distributioninfotype_model_set.all())
+
+    licence_infos = tuple([(l_info, d_info.downloadLocation) \
+        for d_info in distribution_infos  for l_info in d_info.licenceInfo.all()])
+
+    all_licenses = dict([(l_info.licence, (l_info, dl_link)) \
+                                        for l_info, dl_link in licence_infos])
     result = {}
     for name, info in all_licenses.items():
+        l_info, dl_link = info
         access = LICENCEINFOTYPE_URLS_LICENCE_CHOICES.get(name, None)
         if access == None:
             LOGGER.warn("Unknown license name discovered in the database for " \
                         "object #{}: {}".format(resource.id, name))
             del all_licenses[name]
         elif user_membership >= access[1] \
-                and (info.downloadLocation \
-                     or resource.storage_object.get_download()):
+                and (dl_link or resource.storage_object.get_download()):
             # the resource can be downloaded somewhere under the current license
             # terms and the user's membership allows her to immediately download
             # the resource
-            result[name] = (info, True)
+            result[name] = (l_info, dl_link, True)
         else:
             # further negotiations are required with the current license
-            result[name] = (info, False)
+            result[name] = (l_info, dl_link, False)
     return result
 
 
@@ -207,34 +207,40 @@ def download(request, object_id):
     resource = get_object_or_404(resourceInfoType_model,
                                  storage_object__identifier=object_id,
                                  storage_object__publication_status=PUBLISHED)
+    # Get a dictionary, where the values are triplets:
+    # (licenceInfo instance, download location, access)
     licences = _get_licences(resource, user_membership)
 
     # Check whether the resource is from the current node, or whether it must be
     # redirected to the master copy
     if not resource.storage_object.master_copy:
         return render_to_response('repository/redirect.html',
-                { 'resource': resource,
-                  'redirection_url': model_utils.get_lr_master_url(resource) },
-                context_instance=RequestContext(request))
+                {'resource': resource,
+                 'redirection_url': model_utils.get_lr_master_url(resource)},
+                  context_instance=RequestContext(request))
 
     licence_choice = None
     if request.method == "POST":
         licence_choice = request.POST.get('licence', None)
         if licence_choice and 'in_licence_agree_form' in request.POST:
             la_form = LicenseAgreementForm(licence_choice, data=request.POST)
+            l_info, dl_link, access = licences[licence_choice]
             if la_form.is_valid():
                 # before really providing the download, we have to make sure
                 # that the user hasn't tried to circumvent the permission system
-                if licences[licence_choice][1]:
-                    return _provide_download(request, resource,
-                                licences[licence_choice][0].downloadLocation)
+                if access:
+                    return _provide_download(request, resource, dl_link)
             else:
+                _dict = {'form': la_form,
+                         'resource': resource,
+                         'licence_name': licence_choice,
+                         'licence_path': LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
+                         'download_available': access,
+                         'l_name': l_info.nonStandardLicenceName,
+                         'l_url': l_info.nonStandardLicenceTermsURL,
+                         'l_text': l_info.nonStandaradLicenceTermsText.values()}
                 return render_to_response('repository/licence_agreement.html',
-                    { 'form': la_form, 'resource': resource,
-                      'licence_name': licence_choice, 'licence_path': \
-                      LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
-                      'download_available': licences[licence_choice][1] },
-                    context_instance=RequestContext(request))
+                    _dict, context_instance=RequestContext(request))
         elif licence_choice and not licence_choice in licences:
             licence_choice = None
 
@@ -243,23 +249,26 @@ def download(request, object_id):
         licence_choice = licences.iterkeys().next()
 
     if licence_choice:
+        l_info, dl_link, access = licences[licence_choice]
+        _dict = {'form': LicenseAgreementForm(licence_choice),
+               'resource': resource, 'licence_name': licence_choice,
+               'licence_path': LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
+               'download_available': access,
+               'l_name': l_info.nonStandardLicenceName,
+               'l_url': l_info.nonStandardLicenceTermsURL,
+               'l_text': l_info.nonStandaradLicenceTermsText.values()}
         return render_to_response('repository/licence_agreement.html',
-            { 'form': LicenseAgreementForm(licence_choice),
-              'resource': resource, 'licence_name': licence_choice, 
-              'licence_path': \
-                LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
-              'download_available': licences[licence_choice][1] },
-            context_instance=RequestContext(request))
+           _dict, context_instance=RequestContext(request))
     elif len(licences) > 1:
         return render_to_response('repository/licence_selection.html',
-            { 'form': LicenseSelectionForm(licences), 'resource': resource },
-            context_instance=RequestContext(request))
+            {'form': LicenseSelectionForm(licences),
+             'resource': resource},
+              context_instance=RequestContext(request))
     else:
         return render_to_response('repository/lr_not_downloadable.html',
-                                  { 'resource': resource,
-                                    'reason': 'no_suitable_license' },
+                                  {'resource': resource,
+                                   'reason': 'no_suitable_license'},
                                   context_instance=RequestContext(request))
-
 
 def _provide_download(request, resource, download_urls):
     """
@@ -339,15 +348,15 @@ def download_contact(request, object_id):
                                  storage_object__publication_status=PUBLISHED)
 
     default_message = "We are interested in using the above mentioned " \
-        "resource. Please provide us with all the relevant information (e.g.," \
-        " licensing provisions and restrictions, any fees required etc.) " \
-        "which is necessary for concluding a deal for getting a license. We " \
-        "are happy to provide any more information on our request and our " \
-        "envisaged usage of your resource.\n\n" \
-        "[Please include here any other request you may have regarding this " \
-        "resource or change this message altogether]\n\n" \
-        "Please kindly use the above mentioned e-mail address for any " \
-        "further communication."
+                      "resource. Please provide us with all the relevant information (e.g.," \
+                      " licensing provisions and restrictions, any fees required etc.) " \
+                      "which is necessary for concluding a deal for getting a license. We " \
+                      "are happy to provide any more information on our request and our " \
+                      "envisaged usage of your resource.\n\n" \
+                      "[Please include here any other request you may have regarding this " \
+                      "resource or change this message altogether]\n\n" \
+                      "Please kindly use the above mentioned e-mail address for any " \
+                      "further communication."
 
     # Find out the relevant resource contact emails and names
     resource_emails = []
@@ -435,6 +444,7 @@ def view(request, resource_name=None, object_id=None):
     url = resource.identificationInfo.url
     metashare_id = resource.identificationInfo.metaShareId
     identifier = resource.identificationInfo.identifier
+    islrn = resource.identificationInfo.ISLRN
     resource_type = resource.resourceComponentType.as_subclass().resourceType
     media_types = set(model_utils.get_resource_media_types(resource))
     linguality_infos = set(model_utils.get_resource_linguality_infos(resource))
@@ -442,6 +452,8 @@ def view(request, resource_name=None, object_id=None):
 
     
     distribution_info_tuple = None
+    attribution_details = model_utils.get_resource_attribution_texts(resource)
+    distribution_info_tuples = []
     contact_person_tuples = []
     metadata_info_tuple = None
     version_info_tuple = None
@@ -453,7 +465,7 @@ def view(request, resource_name=None, object_id=None):
     resource_component_tuple = None
     for _tuple in lr_content[1]:
         if _tuple[0] == "Distribution":
-            distribution_info_tuple = _tuple
+            distribution_info_tuples.append( _tuple)
         elif _tuple[0] == "Contact person":
             contact_person_tuples.append(_tuple)
         elif _tuple[0] == "Metadata":
@@ -465,12 +477,12 @@ def view(request, resource_name=None, object_id=None):
         elif _tuple[0] == "Usage":
             usage_info_tuple = _tuple
         elif _tuple[0] == "Resource documentation":
-            documentation_info_tuple = _tuple            
+            documentation_info_tuple = _tuple
         elif _tuple[0] == "Resource creation":
             resource_creation_info_tuple = _tuple
         elif _tuple[0] == "Relation":
             relation_info_tuples.append(_tuple)
-        elif _tuple[0] == "Resource component":
+        elif _tuple[0] == "Resource component type":
             resource_component_tuple = _tuple[1]
     
     # Convert resource_component_tuple to nested dictionaries
@@ -481,9 +493,11 @@ def view(request, resource_name=None, object_id=None):
     # Convert several tuples to dictionaries to facilitate rendering
     # the templates.
     contact_person_dicts = []
+    distribution_dicts = []
     for item in contact_person_tuples:
         contact_person_dicts.append(tuple2dict([item]))
-    distribution_dict = tuple2dict([distribution_info_tuple])
+    for item in distribution_info_tuples:
+        distribution_dicts.append(tuple2dict([item]))
     resource_component_dict = tuple2dict(resource_component_tuple)
     resource_creation_dict = tuple2dict([resource_creation_info_tuple])
     metadata_dict = tuple2dict([metadata_info_tuple])
@@ -499,7 +513,7 @@ def view(request, resource_name=None, object_id=None):
     text_counts = []
     video_counts = []
     if resource_type == "corpus":
-        for key, value in resource_component_dict['Resource_component']['Corpus_media'].items():
+        for key, value in resource_component_dict['Resource_component_type']['Media_type_component_of_corpus'].items():
             if "Corpus_text" in key and not "numerical" in key and not "ngram" in key:
                 text_counts.append(value)
             elif "Corpus_video" in key:
@@ -507,83 +521,79 @@ def view(request, resource_name=None, object_id=None):
               
     # Create a list of resource components dictionaries
     if resource_type == "corpus":
-#         import pprint
-#         pp = pprint.PrettyPrinter(indent=4)
-#         pp.pprint(resource_component_dict['Resource_component'])
         for media_type in media_types:
             if media_type == "text":
                 resource_component_dicts['text'] = \
-                  resource_component_dict['Resource_component'] \
-                    ['Corpus_media']['Corpus_text']
+                  resource_component_dict['Resource_component_type'] \
+                      ['Media_type_component_of_corpus']['Corpus_text']
             if media_type == "audio":
                 resource_component_dicts['audio'] = \
-                  resource_component_dict['Resource_component'] \
-                    ['Corpus_media']['Corpus_audio']
+                  resource_component_dict['Resource_component_type'] \
+                      ['Media_type_component_of_corpus']['Corpus_audio_component']
             if media_type == "video":
                 resource_component_dicts['video'] = \
-                  resource_component_dict['Resource_component'] \
-                    ['Corpus_media']['Corpus_video']
+                  resource_component_dict['Resource_component_type'] \
+                      ['Media_type_component_of_corpus']['Corpus_video']
             if media_type == "image":
                 resource_component_dicts['image'] = \
-                  resource_component_dict['Resource_component'] \
-                    ['Corpus_media']['Corpus_image']
+                  resource_component_dict['Resource_component_type'] \
+                      ['Media_type_component_of_corpus']['Corpus_image_component']
             if media_type == "textNgram":
                 resource_component_dicts['textNgram'] = \
-                  resource_component_dict['Resource_component'] \
-                     ['Corpus_media']['Corpus_textNgram']
+                  resource_component_dict['Resource_component_type'] \
+                      ['Media_type_component_of_corpus']['Corpus_textNgram']
             if media_type == "textNumerical":
                 resource_component_dicts['textNumerical'] = \
-                  resource_component_dict['Resource_component'] \
-                     ['Corpus_media']['Corpus_textNumerical']
+                  resource_component_dict['Resource_component_type'] \
+                      ['Media_type_component_of_corpus']['Corpus_textNumerical']
           
     elif resource_type == "languageDescription":
         for media_type in media_types:
             if media_type == "text":
                 resource_component_dicts['text'] = \
-                  resource_component_dict['Resource_component'] \
-                    ['Language_description_media']['Language_description_text']
+                  resource_component_dict['Resource_component_type'] \
+                    ['Media_type_component_of_language_description']['Language_description_text_component']
             if media_type == "image":
                 resource_component_dicts['image'] = \
-                  resource_component_dict['Resource_component'] \
-                    ['Language_description_media']['Language_description_image']
+                  resource_component_dict['Resource_component_type'] \
+                    ['Media_type_component_of_language_description']['Language_description_image_component']
             if media_type == "video":
                 resource_component_dicts['video'] = \
-                  resource_component_dict['Resource_component'] \
-                    ['Language_description_media']['Language_description_video']
-      
+                  resource_component_dict['Resource_component_type'] \
+                    ['Media_type_component_of_language_description']['Language_description_video_component']
             
     elif resource_type == "lexicalConceptualResource":
         for media_type in media_types:
             if media_type == "text":
                 resource_component_dicts['text'] = \
-                  resource_component_dict['Resource_component'] \
-                    ['Lexical_conceptual_resource_media'] \
-                    ['Lexical_conceptual_resource_text']
+                  resource_component_dict['Resource_component_type'] \
+                        ['Media_type_component_of_lexical___conceptual_resource'] \
+                        ['Lexical___Conceptual_resource_text_component']
             if media_type == "audio":
                 resource_component_dicts['audio'] = \
-                  resource_component_dict['Resource_component'] \
-                  ['Lexical_conceptual_resource_media'] \
-                  ['Lexical_conceptual_resource_audio']
+                  resource_component_dict['Resource_component_type'] \
+                        ['Media_type_component_of_lexical___conceptual_resource'] \
+                        ['Lexical___Conceptual_resource_audio_component']
             if media_type == "video":
                 resource_component_dicts['video'] = \
-                  resource_component_dict['Resource_component'] \
-                  ['Lexical_conceptual_resource_media'] \
-                  ['Lexical_conceptual_resource_video']
+                  resource_component_dict['Resource_component_type'] \
+                        ['Media_type_component_of_lexical___conceptual_resource'] \
+                        ['Lexical___Conceptual_resource_video_component']
             if media_type == "image":
                 resource_component_dicts['image'] = \
-                  resource_component_dict['Resource_component'] \
-                  ['Lexical_conceptual_resource_media'] \
-                  ['Lexical_conceptual_resource_image']
+                  resource_component_dict['Resource_component_type'] \
+                        ['Media_type_component_of_lexical___conceptual_resource'] \
+                        ['Lexical___Conceptual_resource_image_component']
 
     elif resource_type == "toolService":
         resource_component_dicts['toolService'] = \
-          resource_component_dict['Resource_component']
+          resource_component_dict['Resource_component_type']
    
     # Define context for template rendering.
     context = {
                 'contact_person_dicts': contact_person_dicts,
                 'description': description,
-                'distribution_dict': distribution_dict,
+                'distribution_dicts': distribution_dicts,
                 'documentation_dict': documentation_dict,
                 'license_types': license_types,
                 'linguality_infos': linguality_infos,
@@ -591,6 +601,7 @@ def view(request, resource_name=None, object_id=None):
                 'metadata_dict': metadata_dict,
                 'metaShareId': metashare_id,
                 'identifier': identifier,
+                'islrn': islrn,
                 'other_res_names': other_res_names,
                 'other_descriptions': other_descriptions,
                 'relation_dicts': relation_dicts,
@@ -599,11 +610,12 @@ def view(request, resource_name=None, object_id=None):
                 'resource_component_dicts': resource_component_dicts,
                 'resource_component_dict': resource_component_dict,
                 'resourceName': resource_name,
+                'attribution_details': attribution_details,
                 'resourceType': resource_type,
                 'resource_creation_dict': resource_creation_dict,
                 'url': url,
                 'usage_dict': usage_dict,
-                'validation_dicts': validation_dicts,                
+                'validation_dicts': validation_dicts,
                 'version_dict': version_dict,
                 'text_counts': text_counts,
                 'video_counts': video_counts,
@@ -662,7 +674,7 @@ def tuple2dict(_tuple):
             if isinstance(item[0], basestring):
                 # Replace spaces by underscores for component names.
                 if item[0].find(" "):
-                    _key = item[0].replace(" ", "_")
+                    _key = item[0].replace(" ", "_").replace("/", "_")
                 else: 
                     _key = item[0]
                 if _key in _dict:
@@ -683,8 +695,10 @@ def tuple2dict(_tuple):
                 if isinstance(item[0], tuple):
                     # Replace spaces by underscores for element names.
                     if item[0][0].find(" "):
-                        _key = item[0][0].replace(" ", "_")
-                    else: _key = item[0][0]
+                        _key = item[0][0].replace(" ", "_").replace('(', "").replace(")", "").replace("/", "_").replace(
+                            "-", "_")
+                    else: 
+                        _key = item[0][0]
 
                     # If the item is a date, convert it to real datetime
                     if _key.find("_date") != -1:
@@ -763,8 +777,8 @@ class MetashareFacetedSearchView(FacetedSearchView):
         if self.query:
             saveQueryStats(self.query, \
                 str(sorted(self.request.GET.getlist("selected_facets"))), \
-                results_count, \
-                (datetime.now() - starttime).microseconds, self.request)
+                           results_count, \
+                           (datetime.now() - starttime).microseconds, self.request)
         return sqs
     
     def _get_selected_facets(self):
@@ -816,7 +830,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
                         # only items with a count > 0 are shown
                         for item in [i for i in items if i[1] > 0]:
                             subfacets = [f for f in filter_labels if (f[3] == \
-                              facet_id and item[0] in f[0]) ]
+                              facet_id and item[0] in f[0])]
                             subfacets_exactname_list = []
                             subfacets_exactname_list.extend( \
                               [u'{0}_exact'.format(subfacet[0]) \

@@ -40,7 +40,9 @@ logging.basicConfig(format=LOG_FORMAT, datefmt=LOG_DATE, level=LOG_LEVEL)
 MAXIMUM_UPLOAD_SIZE = 10 * 1024 * 1024
 
 # URL for the Metashare Knowledge Base
-KNOWLEDGE_BASE_URL = 'http://www.meta-share.org/portal/knowledgebase/'
+KNOWLEDGE_BASE_URL = 'http://www.meta-share.org/knowledgebase/'
+
+#TODO: KNOWLEDGE_BASE_URL = 'http://www.meta-share.org/knowledgebase/'
 
 # The URL for META-SHARE statistics server.
 STATS_SERVER_URL = "http://metastats.fbk.eu/"
@@ -87,7 +89,7 @@ MANAGERS = ADMINS
 
 SITE_ID = 1
 
-METASHARE_VERSION = '3.0'
+METASHARE_VERSION = '3.1'
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -138,6 +140,7 @@ TEMPLATE_DIRS = (
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.media',
+    #'django.core.context_processors.static', not sure if it is necessary.
     'django.contrib.messages.context_processors.messages',
     "django.core.context_processors.request",
 )
@@ -169,6 +172,7 @@ INSTALLED_APPS = (
     'metashare.stats',
     'metashare.recommendations',
     'metashare.repository',
+    'metashare.bcp47',
 )
 
 # add Kronos to installed apps if not running on Windows
