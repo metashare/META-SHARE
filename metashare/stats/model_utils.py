@@ -306,7 +306,7 @@ def _get_ipaddress(request):
 
 
 def update_usage_stats(lrid, element_tree):
-    element_children = element_tree.getchildren()
+    element_children = list(element_tree)
     if len(element_children):
         for child in element_children:
             item = update_usage_stats(lrid, child)
