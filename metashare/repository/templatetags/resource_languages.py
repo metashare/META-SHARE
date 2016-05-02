@@ -79,7 +79,7 @@ class ResourceLanguages(template.Node):
         result = list(set(result))
         result.sort()
 
-        return u"".join(u"<li>{}</li>".format(lang) for lang in result)
+        return u"".join(u"<li class=\"languages\">{}</li>".format(lang) for lang in result)
 
 def resource_languages(parser, token):
     """
