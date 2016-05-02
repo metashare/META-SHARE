@@ -9,6 +9,7 @@ from django.db.models import OneToOneField, Sum
 from metashare.repository.models import resourceInfoType_model, \
     corpusInfoType_model, lexicalConceptualResourceInfoType_model, \
     languageDescriptionInfoType_model, toolServiceInfoType_model
+from metashare.repository.templatetags.replace import pretty_camel
 from metashare.settings import LOG_HANDLER
 from metashare.stats.models import LRStats
 
@@ -80,7 +81,7 @@ def _get_root_resources(ignore, *instances):
         ignore.add(instance)
 
         # `resourceInfoType_model` instances are our actual results
-        if isinstance(instance, resourceInfoType_model):
+        if instance.__class__.__name__  ==  u'resourceInfoType_model':
             result.add(instance)
         # an instance may be None, in which case we ignore it
         elif hasattr(instance, '_meta'):
@@ -188,16 +189,23 @@ def get_resource_linguality_infos(res_obj):
 
     return result
 
-
 def get_resource_license_types(res_obj):
     """
     Returns a list of license under which the given language resource is
     available.
     """
-    return [licence for licence_info in
-            res_obj.distributionInfo.licenceinfotype_model_set.all()
-            for licence in licence_info.get_licence_display_list()]
-
+    return [pretty_camel(licence_info.licence) for distributionInfo in
+            res_obj.distributioninfotype_model_set.all()
+            for licence_info in
+            distributionInfo.licenceInfo.all()]
+ 
+def get_resource_attribution_texts(res_obj):
+    """
+    Returns a list of attribution texts for the given resource. The attribution
+    texts that are collected, are only in the default language
+    """
+    return [distributionInfo.get_default_attributionText() for distributionInfo in
+            res_obj.distributioninfotype_model_set.all()]
 
 def get_resource_media_types(res_obj):
     """

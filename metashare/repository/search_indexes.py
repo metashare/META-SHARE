@@ -15,8 +15,7 @@ from metashare.repository.models import resourceInfoType_model, \
     corpusInfoType_model, \
     toolServiceInfoType_model, lexicalConceptualResourceInfoType_model, \
     languageDescriptionInfoType_model
-from metashare.repository.search_fields import LabeledCharField, \
-    LabeledMultiValueField
+from metashare.repository.search_fields import LabeledMultiValueField
 from metashare.storage.models import StorageObject, INGESTED, PUBLISHED
 from metashare.settings import LOG_HANDLER
 from metashare.stats.model_utils import DOWNLOAD_STAT, VIEW_STAT
@@ -131,7 +130,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
     mediaTypeFilter = LabeledMultiValueField(
                                 label=_('Media Type'), facet_id=3, parent_id=0,
                                 faceted=True)
-    availabilityFilter = LabeledCharField(
+    availabilityFilter = LabeledMultiValueField(
                                 label=_('Availability'), facet_id=4, parent_id=0,
                                 faceted=True)
     licenceFilter = LabeledMultiValueField(
@@ -587,7 +586,8 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         """
         Collect the data to filter the resources on Availability
         """
-        return obj.distributionInfo.get_availability_display()
+        return [distributionInfo.get_availability_display()
+                for distributionInfo in obj.distributioninfotype_model_set.all()]
 
     def prepare_licenceFilter(self, obj):
         """
@@ -599,8 +599,9 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         """
         Collect the data to filter the resources on Restrictions Of USe
         """
-        return [restr for licence_info in
-                obj.distributionInfo.licenceinfotype_model_set.all()
+        return [restr for distributionInfo in obj.distributioninfotype_model_set.all()
+                for licence_info in
+                distributionInfo.licenceInfo.all()
                 for restr in licence_info.get_restrictionsOfUse_display_list()]
 
     def prepare_validatedFilter(self, obj):
@@ -741,9 +742,9 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
                         media_type.corpusAudioInfo.modalityinfotype_model_set.all()
                         for mt in modalityInfo.get_modalityType_display_list()])
             for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-                if corpus_info.modalityInfo:
-                    result.extend(corpus_info.modalityInfo \
-                                  .get_modalityType_display_list())
+                result.extend([mt for modalityInfo in
+                        corpus_info.modalityinfotype_model_set.all() for mt in
+                        modalityInfo.get_modalityType_display_list()])
             if media_type.corpusTextNgramInfo and \
                     media_type.corpusTextNgramInfo.modalityInfo:
                 result.extend(media_type.corpusTextNgramInfo.modalityInfo \
