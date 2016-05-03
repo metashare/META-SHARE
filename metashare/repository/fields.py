@@ -10,7 +10,7 @@ from django import forms
 from django.core import exceptions, validators
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.utils.encoding import force_unicode
+from django.utils.encoding import force_unicode, smart_unicode
 from django.utils.functional import curry
 from django.utils.text import capfirst
 from django.utils.translation import ugettext_lazy as _
@@ -106,9 +106,26 @@ class MultiTextField(models.Field):
         Validates value and throws `ValidationError`.
         """
         super(MultiTextField, self).validate(value, model_instance)
+        if hasattr(self.widget, 'choices') and not self.valid_value(value):
+            raise exceptions.ValidationError(
+                    self.error_messages['invalid_choice'] % {'value': value})
+
         if self.max_length and len(value) > self.max_length:
             raise exceptions.ValidationError(self.error_messages['too_long']
                                     .format(self.max_length, len(value)))
+
+    def valid_value(self, value):
+        "Check to see if the provided value is a valid choice"
+        for k, v in self.widget.choices:
+            if isinstance(v, (list, tuple)):
+                # This is an optgroup, so look inside the group for options
+                for k2, v2 in v:
+                    if value == smart_unicode(k2):
+                        return True
+            else:
+                if value == smart_unicode(k):
+                    return True
+        return False
 
     def clean(self, value, model_instance):
         """
@@ -189,7 +206,6 @@ class MultiTextField(models.Field):
         # the exception we have encountered. This is useful for debugging.
         except  :
             return [u'Exception for value {} ({})'.format(value, type(value))]
-
 
 # pylint: disable-msg=W0201
 class MultiSelectField(models.Field):
@@ -292,7 +308,6 @@ class MultiSelectField(models.Field):
         # If the value is empty or None, we return an empty String for it.
         if not value:
             return ''
-
         # If the value is already a String, we simply return the value.
         if isinstance(value, basestring):
             return value
@@ -365,7 +380,6 @@ class MultiSelectField(models.Field):
         for index, choice in enumerate(self.choices):
             if index in indices:
                 values.append(choice[0])
-
         # Finally, we return the list of selected choice values.
         return values
 
@@ -391,7 +405,6 @@ class MultiSelectField(models.Field):
         Used by the serialisers to convert the field into a string for output.
         """
         return self.get_prep_value(self._get_val_from_obj(obj))
-
 
 class DictField(models.Field):
     """
@@ -542,7 +555,6 @@ class DictField(models.Field):
         cls._meta.add_field(self)
         setattr(cls, 'get_default_%s' % self.name,
                 curry(self._get_default_FIELD, field=self))
-
 
 class XmlCharField(models.CharField):
     """
