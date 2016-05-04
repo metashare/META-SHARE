@@ -153,8 +153,6 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
         if self.is_x_to_many_relation(db_field):
             return self.formfield_for_relation(db_field, **kwargs)
         self.use_hidden_widget_for_one2one(db_field, kwargs)
-        lang_widget = self.add_lang_widget(db_field)
-        kwargs.update(lang_widget)
         formfield = super(SchemaModelAdmin, self).formfield_for_dbfield(db_field, **kwargs)
         self.use_related_widget_where_appropriate(db_field, kwargs, formfield)
         return formfield
@@ -241,7 +239,11 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
     @csrf_protect_m
     @transaction.atomic
     def changeform_view(self, request, object_id=None, form_url='', extra_context=None):
-    
+        """
+        This follows closely the base implementation from Django 1.7's
+        django.contrib.admin.options.ModelAdmin,
+        with the explicitly marked modifications.
+        """
         to_field = request.POST.get(TO_FIELD_VAR, request.GET.get(TO_FIELD_VAR))
         if to_field and not self.to_field_allowed(request, to_field):
             raise DisallowedModelAdminToField("The field %s cannot be referenced." % to_field)
@@ -490,7 +492,7 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
     def delete_view(self, request, object_id, extra_context=None):
         """
         The 'delete' admin view for this model.
-        This follows closely the base implementation from Django 1.3's
+        This follows closely the base implementation from Django 1.7's
         django.contrib.admin.options.ModelAdmin,
         with the explicitly marked modifications.
         """
