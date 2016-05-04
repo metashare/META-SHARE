@@ -199,7 +199,10 @@ class SchemaModelLookup(object):
         - append '_model_inline'.
         '''
         suffix_length = len("Type_model")
-        modelname_without_suffix = model_class_name[:-suffix_length]
+        if model_class_name == 'documentUnstructuredString_model':
+            modelname_without_suffix = model_class_name[:-len("_model")]
+        else:
+            modelname_without_suffix = model_class_name[:-suffix_length]
         inline_class_name = modelname_without_suffix + "_model_inline"
         if parent_model_class_name:
             context_specific_name = inline_class_name + "_" + parent_model_class_name
