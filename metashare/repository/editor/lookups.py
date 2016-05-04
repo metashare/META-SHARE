@@ -12,7 +12,7 @@ from metashare.repository.models import personInfoType_model, \
     targetResourceInfoType_model, languageVarietyInfoType_model, \
     sizeInfoType_model, annotationInfoType_model, videoFormatInfoType_model, \
     imageFormatInfoType_model, resolutionInfoType_model, \
-    audioSizeInfoType_model
+    audioSizeInfoType_model, licenceInfoType_model
 from metashare.storage.models import MASTER
 import logging
 from metashare.settings import LOG_HANDLER
@@ -34,6 +34,9 @@ def print_query_results(results):
         else:
             LOGGER.debug(u'No results')
     return
+
+class LicenceInfoDummyLookup(ModelLookup):
+    model = licenceInfoType_model
 
 class PersonLookup(ModelLookup):
     model = personInfoType_model
