@@ -123,10 +123,10 @@ class DocumentUnstructuredStringModelAdmin(admin.ModelAdmin, RelatedAdminMixin):
 
     @csrf_protect_m
     @transaction.atomic
-    def change_view(self, request, object_id, extra_context=None):
+    def change_view(self, request, object_id, form_url='', extra_context=None):
         """
         The 'change' admin view for this model.
-        This follows closely the base implementation from Django 1.3's
+        This follows closely the base implementation from Django 1.7's
         django.contrib.admin.options.ModelAdmin,
         with the explicitly marked modifications.
         """
@@ -202,7 +202,7 @@ class DocumentUnstructuredStringModelAdmin(admin.ModelAdmin, RelatedAdminMixin):
             'comp_name': _('%s') % force_unicode(opts.verbose_name),
         }
         context.update(extra_context or {})
-        return self.render_change_form(request, context, change=True, obj=obj)
+        return self.render_change_form(request, context, change=True, obj=obj, form_url=form_url)
 
 # Models which are always rendered inline so they don't need their own admin form:
 purely_inline_models = (
