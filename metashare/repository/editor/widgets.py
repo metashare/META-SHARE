@@ -7,6 +7,7 @@ except:
     import pickle
 from django import forms
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
+from django.contrib.admin.widgets import AdminTextInputWidget
 from django.forms import widgets, TextInput, Textarea, Media, Select
 from django.forms.util import flatatt
 from django.template.loader import render_to_string
@@ -686,7 +687,91 @@ class OneToManyWidget(SelectableMultiWidget, SelectableMediaMixin):
     
     def decompress(self, value):
         pass
+    
+class ComboWidget(AdminTextInputWidget):
+    class Media:
+        """
+        Media sub class to inject custom CSS and JavaScript code.
+        """
+        css = {
+          'all': ('{}css/themes/smoothness/jquery-ui.css'
+                    .format(settings.ADMIN_MEDIA_PREFIX),
+                  '{}css/combo.css'.format(settings.ADMIN_MEDIA_PREFIX))
+        }
+        js = ('js/jquery-ui.min.js',
+              '{}js/pycountry.js'.format(settings.ADMIN_MEDIA_PREFIX),
+              '{}js/autocomp.js'.format(settings.ADMIN_MEDIA_PREFIX),)
 
+    def __init__(self, field_type=None, attrs=None):
+        self.field_type = field_type
+        self.id_field = attrs.pop('id_field')
+        self.name_field = attrs.pop('name_field')
+        if not attrs:
+            attrs = {}
+        super(ComboWidget, self).__init__(attrs)
+        
+    def render(self, name, value, attrs=None):
+        val = super(ComboWidget, self).render(name, value, attrs)
+        if 'id' in attrs:
+            id1 = attrs['id']
+            if self.field_type == 'id':
+                linked_to = attrs['id'].replace(self.id_field, self.name_field)
+                js_script = u'<script>autocomp_single("id", "{0}", "{1}");</script>'.format(id1, linked_to)
+            elif self.field_type == 'name':
+                linked_to = attrs['id'].replace(self.name_field, self.id_field)
+                js_script = u'<script>autocomp_single("name", "{0}", "{1}");</script>'.format(id1, linked_to)
+            val = val + js_script
+
+        return mark_safe(val)
+
+class MultiComboWidget(MultiFieldWidget):
+    class Media:
+        """
+        Media sub class to inject custom CSS and JavaScript code.
+        """
+        css = {
+          'all': ('{}css/themes/smoothness/jquery-ui.css'
+                    .format(settings.ADMIN_MEDIA_PREFIX),
+                  '{}css/combo.css'.format(settings.ADMIN_MEDIA_PREFIX))
+        }
+        js = ('js/jquery-ui.min.js',
+              '{}js/pycountry.js'.format(settings.ADMIN_MEDIA_PREFIX),
+              '{}js/autocomp.js'.format(settings.ADMIN_MEDIA_PREFIX),)
+
+    def __init__(self, field_type=None, attrs=None, widget_id=None, max_length=None, **kwargs):
+        self.field_type = field_type
+        self.id_field = attrs.pop('id_field')
+        self.name_field = attrs.pop('name_field')
+        super(MultiComboWidget, self).__init__(widget_id, max_length, **kwargs)
+        
+    def _render_container(self, _context):
+        if self.field_type == 'name':
+            _context.update({'autocomp_name': True})
+            linked_field_name = _context['field_name']
+            linked_field_name = linked_field_name.replace(self.name_field, self.id_field)
+            _context.update({'linked_field_name': linked_field_name})
+        elif self.field_type == 'id':
+            _context.update({'autocomp_id': True})
+            linked_field_name = _context['field_name']
+            linked_field_name = linked_field_name.replace(self.id_field, self.name_field)
+            _context.update({'linked_field_name': linked_field_name})
+        val = super(MultiComboWidget, self)._render_container(_context)
+        return val
+    
+    def _render_multifield(self, _context):
+        if self.field_type == 'name':
+            _context.update({'autocomp_name': True})
+            linked_field_name = _context['field_name']
+            linked_field_name = linked_field_name.replace(self.name_field, self.id_field)
+            _context.update({'linked_field_name': linked_field_name})
+        elif self.field_type == 'id':
+            _context.update({'autocomp_id': True})
+            linked_field_name = _context['field_name']
+            linked_field_name = linked_field_name.replace(self.id_field, self.name_field)
+            _context.update({'linked_field_name': linked_field_name})
+        val = super(MultiComboWidget, self)._render_multifield(_context)
+        return val
+    
 class LangAutoCompleteWidget(widgets.Widget):
     class Media:
         js = ('js/jquery-ui.min.js',
