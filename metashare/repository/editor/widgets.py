@@ -1,24 +1,22 @@
 import base64
 import logging
+import urlparse
 try:
     import cPickle as pickle
 except:
     import pickle
-
+from django import forms
 from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
-from django.contrib.admin.widgets import AdminTextInputWidget
-from django.forms import widgets, TextInput, Textarea, Media
+from django.forms import widgets, TextInput, Textarea, Media, Select
+from django.forms.util import flatatt
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
-from selectable.forms.widgets import SelectableMediaMixin, SelectableMultiWidget, \
-    LookupMultipleHiddenInput
 from django.utils.http import urlencode
-from metashare import settings
-from selectable.forms.widgets import AutoCompleteWidget, AutoCompleteSelectWidget        
-from django.forms.utils import flatatt
 from django.utils.encoding import force_unicode
-from django import forms
+from selectable.forms.widgets import AutoCompleteWidget, AutoCompleteSelectWidget, \
+    SelectableMediaMixin, SelectableMultiWidget, LookupMultipleHiddenInput 
 
+from metashare import settings
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(settings.LOG_HANDLER)
@@ -27,6 +25,31 @@ LOGGER.addHandler(settings.LOG_HANDLER)
 # used; for larger sizes we use `Textarea` widgets
 _MAX_TEXT_INPUT_SIZE = 150
 
+class MetaShareAutoCompleteWidget(AutoCompleteWidget):
+    """ This class extends AutoCompleteWidget to provide a render
+        method that includes a search icon
+    """
+    def render(self, name, value, attrs=None):
+        icon = u'<img src="{0}img/admin/selector-search.gif" width="16" height="16" title="Type to search" />'.format(settings.ADMIN_MEDIA_PREFIX)
+        return mark_safe(icon + super(MetaShareAutoCompleteWidget, self).render(name, value, attrs))
+
+class MetaShareAutoCompleteSelectWidget(AutoCompleteSelectWidget):
+    """ This class replaces the __init__ method of AutoCompleteSelectWidget
+        to use the custom MetaShareAutoCompleteWidget instead of AutoCompleteWidget
+    """
+    def __init__(self, lookup_class, *args, **kwargs):
+        self.lookup_class = lookup_class
+        self.allow_new = kwargs.pop('allow_new', False)
+        self.limit = kwargs.pop('limit', None)
+        query_params = kwargs.pop('query_params', {})
+        widgets = [
+            MetaShareAutoCompleteWidget(
+                lookup_class, allow_new=self.allow_new,
+                limit=self.limit, query_params=query_params
+            ),
+            forms.HiddenInput(attrs={u'data-selectable-type': 'hidden'})
+        ]
+        super(MetaShareAutoCompleteSelectWidget, self).__init__(widgets, *args, **kwargs)
 
 class DictWidget(widgets.Widget):
     """
@@ -433,6 +456,177 @@ class MultiFieldWidget(widgets.Widget):
         
         return initial != _data
 
+class MultiChoiceWidget(widgets.Widget):
+    """
+    A MultiChoiceWidget allows to enter lists of data using a certain widget.
+
+    Attributes:
+    - widget: input widget, defaults to TextInput.
+    - style: CSS style settings for the input widget.
+    """
+    class Media:
+        """
+        Media sub class to inject custom CSS and JavaScript code.
+        """        
+        css = {
+            'all': ('{}css/repository.css' \
+                    .format(settings.ADMIN_MEDIA_PREFIX),)
+        }
+        js = ('{}js/multi-field-widget.js' \
+              .format(settings.ADMIN_MEDIA_PREFIX),)
+
+    def __init__(self, widget_id, max_length=None, choices=(), **kwargs):
+        """
+        Initialises a new MultiChoiceWidget instance.
+
+        This saves the given, required widget_id, clears the errors dictionary
+        and then calls the super class constructor with any remaining args.
+        Any max_length argument is used to determine the appropriate size for
+        the input fields.
+        """
+        self.choices = [('','--------')]
+        self.choices.extend(choices)
+        self.widget_id = widget_id
+        self.max_length = max_length
+        self.errors = {}
+        super(MultiChoiceWidget, self).__init__(**kwargs)
+
+    def _render_input_widget(self, name, value, attrs):
+        """
+        Renders and returns the most suitable widget for inputting a single
+        field in this `MultiChoiceWidget`.
+        """
+        return Select(choices=self.choices).render(name, value, attrs)
+
+    def _render_container(self, _context):
+        return render_to_string('repository/container.html', _context)
+
+    def _render_multifield(self, _context):
+        return render_to_string('repository/multi_field_widget.html', _context)
+
+
+    def render(self, name, value, attrs=None):
+        """
+        Renders the MultiChoiceWidget with the given name and value.
+        """
+        LOGGER.debug('render({0}, {1} [{2}])'.format(name, value, type(value)))
+        LOGGER.debug('attrs: {0} errors: {1}'.format(self.attrs, self.errors))
+
+        # If no value is given, we set it to an empty list.
+        if not value:
+            value = []
+
+        # If we get a String object instead of the expected list-typed value,
+        # there has been a validation problem.  This means that the value is
+        # not yet converted from its serialised form into a list of values.
+        if isinstance(value, basestring):
+            # Try converting the String to list type.
+            try:
+                value = pickle.loads(base64.b64decode(value))
+
+            #
+            except:
+                LOGGER.error('Error converting value to list!')
+                value = []
+
+        # We collect all rendered widgets inside _field_widgets.
+        _field_widgets = []
+        _field_attrs = {'id': 'id_{0}'.format(name), 'class': 'input',
+                        'style': self.attrs.get('style', 'width:480px')
+                        }
+
+        # Iterate over all sub values for this MultiChoiceWidget instance,
+        # adding an index number 0..n-1 to support container id generation.
+        for _id, _value in enumerate(value):
+            # Render input_widget instance as HTML.
+            _field_widget = self._render_input_widget(name, _value,
+                                                      _field_attrs)
+
+            # Define context for container template rendering.
+            _context = {'id': _id, 'field_widget': _field_widget,
+                        'widget_id': self.widget_id,
+                        'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX,
+                        'field_name': name}
+
+            # If there have been any validation errors, add the message.
+            if _value in self.errors.keys():
+                _context.update({'error_msg': self.errors[_value]})
+
+            # Render container for this sub value's widget and append to list.
+            _container = self._render_container(_context)
+            _field_widgets.append(_container)
+
+        # If list of values is empty, render an empty container instead.
+        _id = len(value)
+        if not _id:
+            # Note that value='' as values is empty.
+            _field_widget = self._render_input_widget(name, '', _field_attrs)
+            _context = {'id': _id, 'field_widget': _field_widget,
+                        'widget_id': self.widget_id,
+                        'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX,
+                        'field_name': name}
+
+            _container = self._render_container(_context)
+            _field_widgets.append(_container)
+
+            _field_widget = self._render_input_widget(name, '', _field_attrs)
+            _context = {'id': _id,
+                        'field_widget': _field_widget,
+                        'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX,}
+
+        # The JavaScript code needs an empty "template" to create new input
+        # widgets dynamically; this is pre-rendered and added to the template
+        # for the MultiChoiceWidget instance here.
+        _empty_widget = self._render_input_widget(name, '', _field_attrs)
+        _context = {'empty_widget': _empty_widget,
+                    'field_widgets': mark_safe(u'\n'.join(_field_widgets)),
+                    'widget_id': self.widget_id,
+                    'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX,
+                    'field_name': name}
+
+        # Render final HTML for this MultiChoiceWidget instance.
+        _html = self._render_multifield(_context)
+        return mark_safe(_html)
+
+    def value_from_datadict(self, data, files, name):
+        """
+        Encodes the data for this MultiChoiceWidget instance as base64 String.
+        """
+        _value = [v for v in data.getlist(name) if v]
+        if not len(_value):
+            return None
+        return base64.b64encode(pickle.dumps(_value))
+
+    def _has_changed(self, initial, data):
+        """
+        Checks whether the field values have changed.  As data is already an
+        pickled, base64 encoded String, we have to de-serialise it first!
+        """
+        _data = data
+
+        if isinstance(data, basestring):
+            # Try converting the String to list type.
+            try:
+                _data = pickle.loads(base64.b64decode(data))
+
+            #
+            except:
+                LOGGER.error('Error converting value to list!')
+                _data = []
+
+        elif data is None:
+            # Salvatore: If the user leaves the field empty assigning
+            # an empty list will result in a comparison between
+            # None (the value of initial) and [] (the value of _data),
+            # yielding a True value as if the user changed the value
+            # of the field. Check if in other cases this should really
+            # be the empty list.
+
+            # _data = []
+            pass
+
+        return initial != _data
+    
 class TestHiddenWidget(TextInput, SelectableMediaMixin):
     def __init__(self, lookup_class, *args, **kwargs):
         self.lookup_class = lookup_class
@@ -493,90 +687,6 @@ class OneToManyWidget(SelectableMultiWidget, SelectableMediaMixin):
     def decompress(self, value):
         pass
 
-class ComboWidget(AdminTextInputWidget):
-    class Media:
-        """
-        Media sub class to inject custom CSS and JavaScript code.
-        """
-        css = {
-          'all': ('{}css/themes/smoothness/jquery-ui.css'
-                    .format(settings.ADMIN_MEDIA_PREFIX),
-                  '{}css/combo.css'.format(settings.ADMIN_MEDIA_PREFIX))
-        }
-        js = ('js/jquery-ui.min.js',
-              '{}js/pycountry.js'.format(settings.ADMIN_MEDIA_PREFIX),
-              '{}js/autocomp.js'.format(settings.ADMIN_MEDIA_PREFIX),)
-
-    def __init__(self, field_type=None, attrs=None):
-        self.field_type = field_type
-        self.id_field = attrs.pop('id_field')
-        self.name_field = attrs.pop('name_field')
-        if not attrs:
-            attrs = {}
-        super(ComboWidget, self).__init__(attrs)
-        
-    def render(self, name, value, attrs=None):
-        val = super(ComboWidget, self).render(name, value, attrs)
-        if 'id' in attrs:
-            id1 = attrs['id']
-            if self.field_type == 'id':
-                linked_to = attrs['id'].replace(self.id_field, self.name_field)
-                js_script = u'<script>autocomp_single("id", "{0}", "{1}");</script>'.format(id1, linked_to)
-            elif self.field_type == 'name':
-                linked_to = attrs['id'].replace(self.name_field, self.id_field)
-                js_script = u'<script>autocomp_single("name", "{0}", "{1}");</script>'.format(id1, linked_to)
-            val = val + js_script
-
-        return mark_safe(val)
-
-class MultiComboWidget(MultiFieldWidget):
-    class Media:
-        """
-        Media sub class to inject custom CSS and JavaScript code.
-        """
-        css = {
-          'all': ('{}css/themes/smoothness/jquery-ui.css'
-                    .format(settings.ADMIN_MEDIA_PREFIX),
-                  '{}css/combo.css'.format(settings.ADMIN_MEDIA_PREFIX))
-        }
-        js = ('js/jquery-ui.min.js',
-              '{}js/pycountry.js'.format(settings.ADMIN_MEDIA_PREFIX),
-              '{}js/autocomp.js'.format(settings.ADMIN_MEDIA_PREFIX),)
-
-    def __init__(self, field_type=None, attrs=None, widget_id=None, max_length=None, **kwargs):
-        self.field_type = field_type
-        self.id_field = attrs.pop('id_field')
-        self.name_field = attrs.pop('name_field')
-        super(MultiComboWidget, self).__init__(widget_id, max_length, **kwargs)
-        
-    def _render_container(self, _context):
-        if self.field_type == 'name':
-            _context.update({'autocomp_name': True})
-            linked_field_name = _context['field_name']
-            linked_field_name = linked_field_name.replace(self.name_field, self.id_field)
-            _context.update({'linked_field_name': linked_field_name})
-        elif self.field_type == 'id':
-            _context.update({'autocomp_id': True})
-            linked_field_name = _context['field_name']
-            linked_field_name = linked_field_name.replace(self.id_field, self.name_field)
-            _context.update({'linked_field_name': linked_field_name})
-        val = super(MultiComboWidget, self)._render_container(_context)
-        return val
-    
-    def _render_multifield(self, _context):
-        if self.field_type == 'name':
-            _context.update({'autocomp_name': True})
-            linked_field_name = _context['field_name']
-            linked_field_name = linked_field_name.replace(self.name_field, self.id_field)
-            _context.update({'linked_field_name': linked_field_name})
-        elif self.field_type == 'id':
-            _context.update({'autocomp_id': True})
-            linked_field_name = _context['field_name']
-            linked_field_name = linked_field_name.replace(self.id_field, self.name_field)
-            _context.update({'linked_field_name': linked_field_name})
-        val = super(MultiComboWidget, self)._render_multifield(_context)
-        return val
-
 class LangAutoCompleteWidget(widgets.Widget):
     class Media:
         js = ('js/jquery-ui.min.js',
@@ -621,7 +731,7 @@ class AutoCompleteSelectMultipleEditWidget(SelectableMultiWidget, SelectableMedi
             attrs.update(more_attrs)
         query_params = kwargs.pop('query_params', {})
         widget_list = [
-            AutoCompleteWidget(
+            MetaShareAutoCompleteWidget(
                 lookup_class, allow_new=False,
                 limit=self.limit, query_params=query_params, attrs=attrs
             ),
@@ -691,7 +801,7 @@ class LookupMultipleHiddenInputMS(LookupMultipleHiddenInput):
             inputs.append(u'<input%s />' % flatatt(input_attrs))
         return mark_safe(u'\n'.join(inputs))
 
-class AutoCompleteSelectSingleWidget(AutoCompleteSelectWidget):
+class AutoCompleteSelectSingleWidget(MetaShareAutoCompleteSelectWidget):
 
     def __init__(self, lookup_class, *args, **kwargs):
         self.lookup_class = lookup_class
@@ -709,6 +819,6 @@ class AutoCompleteSelectSingleWidget(AutoCompleteSelectWidget):
         # and replaces it.
         # pylint: disable-msg=E1003
         # All of the texts are not true in django-selectable==0.9.0, so we don't need dirty modifications in lib
-        super(AutoCompleteSelectWidget, self).__init__(lookup_class, allow_new=self.allow_new,
+        super(AutoCompleteSelectSingleWidget, self).__init__(lookup_class, allow_new=self.allow_new,
                 limit=self.limit, query_params=query_params, attrs=attrs)
     
