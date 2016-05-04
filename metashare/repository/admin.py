@@ -217,11 +217,14 @@ class corpusVideoInfo_model_inline(SchemaModelInline):
     model = corpusVideoInfoType_model
     collapse = True
 
+# pylint: disable-msg=C0103
+class distributionInfo_model_inline(SchemaModelInline):
+    model = distributionInfoType_model
+    extra = 1
 
 # pylint: disable-msg=C0103
 class documentInfo_model_inline(SchemaModelInline):
     model = documentInfoType_model
-
 
 # pylint: disable-msg=C0103
 class domainInfo_model_inline_corpusAudioInfoType_model(SchemaModelInline):
@@ -584,6 +587,11 @@ class linkToOtherMediaInfo_model_inline_languageDescriptionVideoInfoType_model(S
     model = linkToOtherMediaInfoType_model
     fk_name = 'back_to_languagedescriptionvideoinfotype_model'
 
+# pylint: disable-msg=C0103
+class modalityInfo_model_inline_corpusVideoInfoType_model(SchemaModelInline):
+    model = modalityInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_corpusvideoinfotype_model'
 
 # pylint: disable-msg=C0103
 class modalityInfo_model_inline_corpusAudioInfoType_model(SchemaModelInline):
