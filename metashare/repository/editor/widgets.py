@@ -50,7 +50,7 @@ class MetaShareAutoCompleteSelectWidget(AutoCompleteSelectWidget):
             ),
             forms.HiddenInput(attrs={u'data-selectable-type': 'hidden'})
         ]
-        super(MetaShareAutoCompleteSelectWidget, self).__init__(widgets, *args, **kwargs)
+        super(AutoCompleteSelectWidget, self).__init__(widgets, *args, **kwargs)
 
 class DictWidget(widgets.Widget):
     """
@@ -904,6 +904,6 @@ class AutoCompleteSelectSingleWidget(MetaShareAutoCompleteSelectWidget):
         # and replaces it.
         # pylint: disable-msg=E1003
         # All of the texts are not true in django-selectable==0.9.0, so we don't need dirty modifications in lib
-        super(AutoCompleteSelectSingleWidget, self).__init__(lookup_class, allow_new=self.allow_new,
+        super(MetaShareAutoCompleteSelectWidget, self).__init__(lookup_class, allow_new=self.allow_new,
                 limit=self.limit, query_params=query_params, attrs=attrs)
     
