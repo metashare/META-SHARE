@@ -20,3 +20,9 @@ wsgiref==0.1.2
 python-dateutil==2.4.2
 pycountry==1.12
 lxml==3.4.2
+Unidecode==0.04.18
+git+git://github.com/zeehio/django-kronos.git@f22f638120920b722edd7619d6a037289edc678e
+git+git://github.com/jsteffen/django-jenkins.git@e84f76ee7c940f35f761ced65ed7c97aa00b4acb
+httplib2==0.9.1
+pygeoip==0.3.2
+pysolr==2.1.0-beta
