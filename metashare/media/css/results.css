@@ -62,15 +62,19 @@ div.content_box{
 
 div.resourceName{
 	width: 95%;
-	background-color: #EFF;
+	background-color: #f8f8f8;
 	padding: 4px 4px 4px 4px;
 	margin: .9em 0 .3em 0;
 	color: #777;
-	border-radius: 10px 10px 10px 10px;
+	border-radius: 5px;
 	border: 2px solid #dde;  
 	font-size: 10pt;
 	font-weight: bold;
 	display: inline-block;
+}
+
+div.resourceName a:hover {
+    color: #FF7E27 !important;
 }
 
 div.resourceName>div.accessStats {
@@ -82,17 +86,63 @@ div.resourceName>div.accessStats>img {
     margin: 0 0.25em 0 0.3em;
 }
 
-div.resourceName ul li {
-	list-style-type: none;
-	margin: 2px 2px 2px 2px;
-	padding: 1px 1px 1px 1px;
-	font-size: 7pt;
-	font-weight: bold;
-	color: #889;
-	background-color: #F5ECCE;
-	float: left;
-	border-radius: 5px 5px 5px 5px;
-	border:1px solid #bbc; 
+div.resourceName a:active, div.resourceName a:visited, div.resourceName a:link {
+    text-decoration: none;
+	color: #438085;
+}
+
+div.resourceName ul li.languages {
+    list-style-type: none;
+    /*margin: 2px 2px 2px 2px;*/
+    padding: 3px;
+    font-size: 0.9em;
+    font-weight: 500;
+    color: #333;
+    /*background-color: #ebebeb;*/
+    float: left;
+    /*border-radius: 5px 5px 5px 5px;*/
+    border-right: 1px solid #bbc;
+}
+
+div.resourceName ul li:last-child { border: none; }
+
+div.resourceName div.languages {
+    /*margin: 0.2em 0.5em 0.5em 0;*/
+    /*padding: 5px;*/
+    border: 1px solid #f8f8f8;
+    width: 84%;
+    display: inline-block;
+}
+
+div.resourceName .languages ul {
+    list-style-type: none;
+    /*margin: 0.2em 0.5em 0.5em 0;*/
+    /*padding: 5px;*/
+    /*border: 2px solid;*/
+    /*width: 84%;*/
+    /*display: block;*/
+}
+
+div.resourceName .languages ul li {
+    /*display: table-cell;*/
+    float: left;
+    /*border: 2px solid;*/
+    /*width: 84%;*/
+    /*display: block;*/
+}
+
+div.resourceName ul.licencing {
+    margin: 0.5em 0.5em 0.5em 0;
+    display: block;
+    float: right;
+}
+
+div.resourceName ul li.licence {
+    /*display:block;*/
+    /*padding: 2px;*/
+    list-style-type: none;
+    text-align: right;
+    /*float: right;*/
 }
 
 div.results {
