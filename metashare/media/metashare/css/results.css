@@ -1,0 +1,161 @@
+/*override container size*/
+div#content{
+	width: 900px;
+	position: relative;
+}
+
+div.searchbox{		
+	position: relative;
+	width:827px;
+	margin-bottom:10px;
+	background-color: white;
+	padding: 5% 2% 2% 5%;	
+	-webkit-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
+	-moz-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
+	box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
+}
+
+div.searchbox table{
+	width:40%;
+	padding-left:20px;	
+	padding-top:20px;	
+}
+
+#search_button{
+    width: 6em;
+}
+
+#searchbox img{
+    width: 200px;
+    margin-right: 20px;
+}
+
+div.filters{
+	position: relative;
+	background-color: white;
+	padding: 20px 20px 20px 20px;	
+	-webkit-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
+	-moz-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
+	box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
+    	
+}
+
+div.explanation_box{	
+	margin-top: 10px;	
+	background-color: white;
+	padding-top: 25px;
+	padding-left: 25px;
+	-webkit-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
+	-moz-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
+	box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
+}
+
+div.explanation{
+
+	padding: 3% 3% 3% 3%;	
+}
+
+div.content_box{	
+	width: 541px;
+	margin-right:10px;
+}
+
+div.resourceName{
+	width: 95%;
+	background-color: #f8f8f8;
+	padding: 4px 4px 4px 4px;
+	margin: .9em 0 .3em 0;
+	color: #777;
+	border-radius: 5px;
+	border: 2px solid #dde;  
+	font-size: 10pt;
+	font-weight: bold;
+	display: inline-block;
+}
+
+div.resourceName a:hover {
+    color: #FF7E27 !important;
+}
+
+div.resourceName>div.accessStats {
+    float: right;
+}
+
+div.resourceName>div.accessStats>img {
+    vertical-align: middle;
+    margin: 0 0.25em 0 0.3em;
+}
+
+div.resourceName a:active, div.resourceName a:visited, div.resourceName a:link {
+    text-decoration: none;
+	color: #438085;
+}
+
+div.resourceName ul li.languages {
+    list-style-type: none;
+    /*margin: 2px 2px 2px 2px;*/
+    padding: 3px;
+    font-size: 0.9em;
+    font-weight: 500;
+    color: #333;
+    /*background-color: #ebebeb;*/
+    float: left;
+    /*border-radius: 5px 5px 5px 5px;*/
+    border-right: 1px solid #bbc;
+}
+
+div.resourceName ul li:last-child { border: none; }
+
+div.resourceName div.languages {
+    /*margin: 0.2em 0.5em 0.5em 0;*/
+    /*padding: 5px;*/
+    border: 1px solid #f8f8f8;
+    width: 84%;
+    display: inline-block;
+}
+
+div.resourceName .languages ul {
+    list-style-type: none;
+    /*margin: 0.2em 0.5em 0.5em 0;*/
+    /*padding: 5px;*/
+    /*border: 2px solid;*/
+    /*width: 84%;*/
+    /*display: block;*/
+}
+
+div.resourceName .languages ul li {
+    /*display: table-cell;*/
+    float: left;
+    /*border: 2px solid;*/
+    /*width: 84%;*/
+    /*display: block;*/
+}
+
+div.resourceName ul.licencing {
+    margin: 0.5em 0.5em 0.5em 0;
+    display: block;
+    float: right;
+}
+
+div.resourceName ul li.licence {
+    /*display:block;*/
+    /*padding: 2px;*/
+    list-style-type: none;
+    text-align: right;
+    /*float: right;*/
+}
+
+div.results {
+    margin-bottom: 1.5em;
+}
+
+/*end override container size*/
+
+ul.errorlist {
+	background:#ffcb00;
+	border:1px solid #ffaa00;
+	padding:2px;
+	list-style-type:none;
+	margin:0em;
+}
+ul.errorlist li { padding:0px; }
