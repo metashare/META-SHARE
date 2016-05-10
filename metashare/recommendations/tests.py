@@ -516,10 +516,10 @@ class SessionTest(django.test.TestCase):
         saveLRStats(self.res_3, UPDATE_STAT)
         saveLRStats(self.res_4, UPDATE_STAT)
         self.assertEquals(9, len(LRStats.objects.all()))
-        self.assertEquals(219, len(UsageStats.objects.all()))
+        self.assertEquals(247, len(UsageStats.objects.all()))
         remove_resource(self.res_1.storage_object)
         self.assertEquals(7, len(LRStats.objects.all()))
-        self.assertEquals(163, len(UsageStats.objects.all()))
+        self.assertEquals(184, len(UsageStats.objects.all()))
         
     def test_downloads(self):
         # client 1 downloads all 4 resources
