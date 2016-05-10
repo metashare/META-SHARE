@@ -54,7 +54,8 @@ class PersistenceTest(TestCase):
     
     def setUp(self):
         # make sure the index does not contain any stale entries
-        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
+        call_command('update_index', interactive=False,
+                 using=settings.TEST_MODE_NAME)
         
     def tearDown(self):
         test_utils.clean_resources_db()
@@ -133,7 +134,9 @@ class RestoreTest(TestCase):
     
     def setUp(self):
         # make sure the index does not contain any stale entries
-        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
+        call_command('update_index', interactive=False,
+                 using=settings.TEST_MODE_NAME)
+        
 
     def tearDown(self):
         test_utils.clean_resources_db()
