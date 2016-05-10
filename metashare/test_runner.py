@@ -3,7 +3,6 @@ import logging
 from django_selenium.selenium_runner import SeleniumTestRunner
 from django.core.management import call_command
 from metashare import settings
-from haystack.management.commands import clear_index
 from metashare.haystack_routers import MetashareRouter
 
 # set up logging support
@@ -18,8 +17,8 @@ def _run_custom_test_db_setup():
     # from now on, redirect any search index access to the test index
     MetashareRouter.in_test_mode = True
     # clear the test index
-    clear_index.Command().handle()
-
+    call_command('clear_index', interactive=False,
+                 using=settings.TEST_MODE_NAME)
 
 class MetashareTestRunner(SeleniumTestRunner):
     """
