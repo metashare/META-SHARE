@@ -168,7 +168,7 @@ class SearchTest(test_utils.IndexAwareTestCase):
         Set up the view
         """
         test_utils.setup_test_storage()
-        normaluser =  create_user('normaluser', 'normal@example.com', 'secret')
+        normaluser = create_user('normaluser', 'normal@example.com', 'secret')
         normaluser.save()
 
     def tearDown(self):
@@ -238,7 +238,7 @@ class SearchTest(test_utils.IndexAwareTestCase):
             { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
               'licence': 'CC-BY-NC-SA' })
         response = client.get(_SEARCH_PAGE_PATH)
-        self.assertContains(response, 'title="Number of downloads" />&nbsp;0')
+        self.assertContains(response, 'title="Number of downloads" />&nbsp;1')
         self.assertContains(response, 'title="Number of views" />&nbsp;1')
 
     def test_case_insensitive_search(self):
@@ -301,15 +301,7 @@ class SearchTest(test_utils.IndexAwareTestCase):
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
 
-    def testBrowse(self):  
-        """
-        Tries to load the Browse page
-        """
-        client = Client()
-        response = client.get('/{0}repository/browse/'.format(DJANGO_BASE))
-        self.assertEqual(response.status_code, 404)
-
-    def testSearch(self):        
+    def testSearch(self):
         client = Client()
         self.importOneFixture()
         response = client.get(_SEARCH_PAGE_PATH, follow=True,
@@ -317,7 +309,7 @@ class SearchTest(test_utils.IndexAwareTestCase):
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
 
-    def testSearchForNoResults(self):        
+    def testSearchForNoResults(self):
         client = Client()
         self.importOneFixture()
         response = client.get(_SEARCH_PAGE_PATH, follow=True,
@@ -400,31 +392,29 @@ class SearchTestPublishedResources(TestCase):
         client = Client()
         response = client.get(_SEARCH_PAGE_PATH, follow=True, 
           data={'selected_facets':
-                'availabilityFilter_exact:Available - Unrestricted Use'})
+                'availabilityFilter_exact:Available'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
               
     def testLicenceFacet(self):   
         client = Client()
         response = client.get(_SEARCH_PAGE_PATH,
-            data={'selected_facets':'licenceFilter_exact:ELRA_END_USER'})
+            data={'selected_facets':'licenceFilter_exact:ELRA END USER'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "2 Language Resources", status_code=200)
     
-    
-    #def testLicenceFacetForTwoLicences(self):   
-    #   client = Client()
-    #   response = client.get(_SEARCH_PAGE_PATH, follow=True, 
-    #     data={'selected_facets':'licenceFilter_exact:ELRA_END_USER', 'selected_facets':'licenceFilter_exact:ELRA_VAR'})
-    #   self.assertEqual('repository/search.html', response.templates[0].name)
-    #   self.assertContains(response, "1 Language Resource", status_code=200)
-    
+#     def testLicenceFacetForTwoLicences(self):   
+#         client = Client()
+#         response = client.get(_SEARCH_PAGE_PATH, follow=True, 
+#           data={'selected_facets':'licenceFilter_exact:ELRA_END_USER', 'selected_facets':'licenceFilter_exact:ELRA_VAR'})
+#         self.assertEqual('repository/search.html', response.templates[0].name)
+#         self.assertContains(response, "1 Language Resource", status_code=200)
     
     def testRestrictionsOfUseFacet(self):   
         client = Client()
         response = client.get(_SEARCH_PAGE_PATH, follow=True, 
           data={'selected_facets':
-                'restrictionsOfUseFilter_exact:Academic - Non Commercial Use'})
+                'restrictionsOfUseFilter_exact:Non Commercial Use'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "2 Language Resources", status_code=200)
       
@@ -474,7 +464,7 @@ class SearchTestPublishedResources(TestCase):
     def testMimeTypeFacet(self):   
         client = Client()
         response = client.get(_SEARCH_PAGE_PATH, follow=True, 
-          data={'selected_facets':'mimeTypeFilter_exact:audio mime type'})
+          data={'selected_facets':'mimeTypeFilter_exact:audio/mpeg'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
     
