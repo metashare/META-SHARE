@@ -293,7 +293,7 @@ class StorageObject(models.Model):
         global_updated = self.check_global_storage_object()
         
         # create new digest zip-archive if required
-        if force_digest or metadata_updated or global_updated:
+        if force_digest or metadata_updated:
             self.create_digest()
             
         # check local storage object serialization
@@ -302,7 +302,7 @@ class StorageObject(models.Model):
         # save storage object if required; this should always happen since
         # at least self.digest_last_checked in the local storage object 
         # has changed
-        if source_url_updated or metadata_updated or global_updated \
+        if source_url_updated or metadata_updated \
                 or local_updated:
             self.save()
 
