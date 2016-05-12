@@ -283,7 +283,6 @@ STATIC_URL = '/site_static/'
 STATIC_ROOT = '{0}/static/'.format(ROOT_PATH)
 LOCALE_PATHS = ()
 SILENCED_SYSTEM_CHECKS= ["models.E005"]
-HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',

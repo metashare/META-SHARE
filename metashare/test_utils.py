@@ -195,10 +195,12 @@ class IndexAwareTestCase(TestCase):
     """
     def _fixture_setup(self):
         result = super(IndexAwareTestCase, self)._fixture_setup()
-        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
+        call_command('rebuild_index', interactive=False,
+                     using=settings.TEST_MODE_NAME)
         return result
 
     def _fixture_teardown(self):
         result = super(IndexAwareTestCase, self)._fixture_teardown()
-        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
+        call_command('rebuild_index', interactive=False,
+                     using=settings.TEST_MODE_NAME)
         return result
