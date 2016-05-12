@@ -102,7 +102,8 @@ MANAGERS = ADMINS
 
 SITE_ID = 1
 
-METASHARE_VERSION = '3.0'
+# The version of the META-SHARE software
+METASHARE_VERSION = '3.0.3'
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
