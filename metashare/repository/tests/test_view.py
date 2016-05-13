@@ -22,7 +22,8 @@ from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER, \
     TEST_MODE_NAME
 from metashare.test_utils import create_user
 from metashare.utils import prettify_camel_case_string
-
+from metashare.repository.templatetags import mimetype_label
+from django.core.management import call_command
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -363,16 +364,14 @@ class DownloadViewTest(TestCase):
         response = client.get(reverse(views.download, args=
                 (self.non_downloadable_resource.storage_object.identifier,)),
             follow = True)
-        self.assertContains(response, 'license terms for the download of the '
-                'selected resource are not available')
+        self.assertContains(response, 'license terms for the download of the selected resource are not')
         # make sure a normal user gets the information page, too:
         client = Client()
         client.login(username='normaluser', password='secret')
         response = client.get(reverse(views.download, args=
                 (self.non_downloadable_resource.storage_object.identifier,)),
             follow = True)
-        self.assertContains(response, 'license terms for the download of the '
-                'selected resource are not available')
+        self.assertContains(response, 'license terms for the download of the selected resource are not')
 
     def test_downloadable_resource_with_one_license(self):
         """
@@ -401,7 +400,7 @@ class DownloadViewTest(TestCase):
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
-        self.assertContains(response, 'licences/CC-BYNCSAv3.0.htm',
+        self.assertContains(response, 'licences/CC-BY-NC-SA.pdf',
                             msg_prefix="the correct license appears to not " \
                                 "be shown in an iframe")
         # make sure the license agreement page is shown again if the license was
@@ -413,7 +412,7 @@ class DownloadViewTest(TestCase):
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
-        self.assertContains(response, 'licences/CC-BYNCSAv3.0.htm',
+        self.assertContains(response, 'licences/CC-BY-NC-SA.pdf',
                             msg_prefix="the correct license appears to not " \
                                 "be shown in an iframe")
         # make sure the download was started after accepting the license:
@@ -488,7 +487,7 @@ class DownloadViewTest(TestCase):
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
-        self.assertContains(response, 'licences/GNU_gpl-3.0.htm',
+        self.assertContains(response, 'licences/GPL.pdf',
                             msg_prefix="the correct license appears to not " \
                                 "be shown in an iframe")           
         # make sure the license agreement page is shown again if the license was
@@ -500,7 +499,7 @@ class DownloadViewTest(TestCase):
             follow = True)
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
-        self.assertContains(response, 'licences/GNU_gpl-3.0.htm',
+        self.assertContains(response, 'licences/GPL.pdf',
                             msg_prefix="the correct license appears to not " \
                                 "be shown in an iframe")
         # make sure the download was started after accepting the license
@@ -574,7 +573,7 @@ class DownloadViewTest(TestCase):
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
         self.assertContains(response,
-                            'licences/META-SHARE_COMMONS_BYNCSA_v1.0.htm',
+                            'licences/MSCommons-BY-NC-SA.pdf',
                             msg_prefix="the correct license appears to not " \
                                 "be shown in an iframe")
         response = client.post(reverse(views.download,
@@ -594,7 +593,7 @@ class DownloadViewTest(TestCase):
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
         self.assertContains(response,
-                            'licences/META-SHARE_COMMONS_BYNCSA_v1.0.htm',
+                            'licences/MSCommons-BY-NC-SA.pdf',
                             msg_prefix="the correct license appears to not " \
                                 "be shown in an iframe")
         # ... nor via POST with an agreement to the license:
@@ -606,7 +605,7 @@ class DownloadViewTest(TestCase):
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
         self.assertContains(response,
-                            'licences/META-SHARE_COMMONS_BYNCSA_v1.0.htm',
+                            'licences/MSCommons-BY-NC-SA.pdf',
                             msg_prefix="the correct license appears to not " \
                                 "be shown in an iframe")
 
@@ -624,7 +623,7 @@ class DownloadViewTest(TestCase):
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
         self.assertContains(response,
-                            'licences/META-SHARE_COMMONS_BYNCSA_v1.0.htm',
+                            'licences/MSCommons-BY-NC-SA.pdf',
                             msg_prefix="the correct license appears to not " \
                                 "be shown in an iframe")
         # make sure the license agreement page is shown again if the license was
@@ -637,7 +636,7 @@ class DownloadViewTest(TestCase):
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
         self.assertContains(response,
-                            'licences/META-SHARE_COMMONS_BYNCSA_v1.0.htm',
+                            'licences/MSCommons-BY-NC-SA.pdf',
                             msg_prefix="the correct license appears to not " \
                                 "be shown in an iframe")
         # make sure the download was started after accepting the license:
@@ -658,7 +657,7 @@ class DownloadViewTest(TestCase):
         self.downloadable_resource_1.storage_object.save()
         response = client.get('/{0}repository/download/{1}/'
                               .format(DJANGO_BASE, self.downloadable_resource_1.storage_object.identifier))
-        self.assertContains(response, "I agree to these licence terms")        
+        self.assertContains(response, "I agree to these licence terms")
         
     def test_cannot_download_not_master_copy(self):
         client = Client()
@@ -685,7 +684,7 @@ class DownloadViewTest(TestCase):
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
         self.assertContains(response,
-            'licences/META-SHARE_COMMONS_BYNCSA_v1.0.htm', msg_prefix="the " \
+            'licences/MSCommons-BY-NC-SA.pdf', msg_prefix="the " \
                 "correct license appears to not be shown in an iframe")
         # make sure the download is started after accepting the license:
         response = client.post(
@@ -720,7 +719,7 @@ class DownloadViewTest(TestCase):
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
         self.assertContains(response,
-            'licences/META-SHARE_COMMONS_BYNCSA_v1.0.htm', msg_prefix="the " \
+            'licences/MSCommons-BY-NC-SA.pdf', msg_prefix="the " \
                 "correct license appears to not be shown in an iframe")
         # make sure the download cannot be started:
         response = client.post(
@@ -776,8 +775,7 @@ class FullViewTest(TestCase):
         test_utils.set_index_active(True)
     
         # update index
-        from haystack.management.commands import update_index
-        update_index.Command().handle(using=[TEST_MODE_NAME,])
+        call_command('update_index', interactive=False, using=settings.TEST_MODE_NAME)
         
     
     @classmethod
@@ -798,8 +796,7 @@ class FullViewTest(TestCase):
         test_utils.set_index_active(True)
     
         # update index
-        from haystack.management.commands import update_index
-        update_index.Command().handle(using=[TEST_MODE_NAME,])
+        call_command('update_index', interactive=False, using=settings.TEST_MODE_NAME)
     
     def testSingleResourceView(self):
         """
@@ -879,7 +876,7 @@ def check_resource_view(queryset, test_case):
     count = 0
     for _res in queryset:
         parent_dict = {}
-        _res.export_to_elementtree(pretty=True, parent_dict=parent_dict)       
+        _res.export_to_elementtree(pretty=True, parent_dict=parent_dict)
 
         count += 1
         LOGGER.info("calling {}. resource at {}".format(
@@ -935,9 +932,13 @@ def check_resource_view(queryset, test_case):
                       date_format(date_object, format='SHORT_DATE_FORMAT', use_l10n=True)).encode("utf-8")
 
             real_count = response.content.count(text)
+            beauty_real_count = 0
             if real_count == 0:
                 # try with beautified string
                 beauty_real_count = response.content.count(
                   prettify_camel_case_string(text))
-            if real_count == 0 and beauty_real_count == 0:
+            if beauty_real_count == 0 and _ele.tag == u"mimeType":
+                # text may be a mime type, so try to get the label e.g. text/xml -> XML
+                mime_label_real_count = response.content.count(mimetype_label.mimetype_label(text))
+            if real_count == 0 and beauty_real_count == 0 and mime_label_real_count == 0:
                 test_case.fail(u"missing {}: {}".format(path, _ele.text))
