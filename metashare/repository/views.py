@@ -1,8 +1,8 @@
 import logging
+import requests
 
 from datetime import datetime
 from os.path import split, getsize
-from urllib import urlopen
 from mimetypes import guess_type
 
 from django.contrib.auth.decorators import login_required
@@ -161,29 +161,29 @@ def _get_licences(resource, user_membership):
     """
     distribution_infos = tuple(resource.distributioninfotype_model_set.all())
 
-    licence_infos = tuple([(l_info, d_info.downloadLocation) \
+    licence_infos = tuple([(l_info, d_info.downloadLocation + d_info.executionLocation) \
         for d_info in distribution_infos  for l_info in d_info.licenceInfo.all()])
 
-    all_licenses = dict([(l_info.licence, (l_info, dl_link)) \
-                                        for l_info, dl_link in licence_infos])
+    all_licenses = dict([(l_info.licence, (l_info, access_links)) \
+                                        for l_info, access_links in licence_infos])
 
     result = {}
     for name, info in all_licenses.items():
-        l_info, dl_link = info
+        l_info, access_links = info
         access = LICENCEINFOTYPE_URLS_LICENCE_CHOICES.get(name, None)
         if access == None:
             LOGGER.warn("Unknown license name discovered in the database for " \
                         "object #{}: {}".format(resource.id, name))
             del all_licenses[name]
         elif user_membership >= access[1] \
-                and (dl_link or resource.storage_object.get_download()):
+                and (len(access_links) or resource.storage_object.get_download()):
             # the resource can be downloaded somewhere under the current license
             # terms and the user's membership allows her to immediately download
             # the resource
-            result[name] = (l_info, dl_link, True)
+            result[name] = (l_info, access_links, True)
         else:
             # further negotiations are required with the current license
-            result[name] = (l_info, dl_link, False)
+            result[name] = (l_info, access_links, False)
 
     return result
 
@@ -218,12 +218,12 @@ def download(request, object_id):
 
         if licence_choice and 'in_licence_agree_form' in request.POST:
             la_form = LicenseAgreementForm(licence_choice, data=request.POST)
-            l_info, dl_link, access = licences[licence_choice]
+            l_info, access_links, access = licences[licence_choice]
             if la_form.is_valid():
                 # before really providing the download, we have to make sure
                 # that the user hasn't tried to circumvent the permission system
                 if access:
-                    return _provide_download(request, resource, dl_link)
+                    return _provide_download(request, resource, access_links)
             else:
                 _dict = {'form': la_form,
                          'resource': resource,
@@ -243,7 +243,7 @@ def download(request, object_id):
         licence_choice = licences.iterkeys().next()
 
     if licence_choice:
-        l_info, dl_link, access = licences[licence_choice]
+        l_info, access_links, access = licences[licence_choice]
         _dict = {'form': LicenseAgreementForm(licence_choice),
                'resource': resource, 'licence_name': licence_choice,
                'licence_path': LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
@@ -266,7 +266,7 @@ def download(request, object_id):
                                   context_instance=RequestContext(request))
 
 
-def _provide_download(request, resource, download_urls):
+def _provide_download(request, resource, access_links):
     """
     Returns an HTTP response with a download of the given resource.
     """
@@ -297,16 +297,21 @@ def _provide_download(request, resource, download_urls):
                         "local download copy of resource #{0}." \
                         .format(resource.id))
     # redirect to a download location, if available
-    elif download_urls:
-        for url in download_urls:
-            status_code = urlopen(url).getcode()
-            if not status_code or status_code < 400:
+    elif access_links:
+        for url in access_links:
+            try:
+                req = requests.request('GET', url)
+            except:
+                LOGGER.warn("No download could be offered for resource #{0}. The " \
+                    "URL {1} was tried: {1}".format(resource.id, url), exc_info=True)
+                continue
+            if req.status_code == requests.codes.ok:
                 _update_download_stats(resource, request)
                 LOGGER.info("Redirecting to {0} for the download of resource " \
                             "#{1}.".format(url, resource.id))
                 return redirect(url)
         LOGGER.warn("No download could be offered for resource #{0}. These " \
-                    "URLs were tried: {1}".format(resource.id, download_urls))
+                    "URLs were tried: {1}".format(resource.id, access_links))
     else:
         LOGGER.error("No download could be offered for resource #{0} with " \
                      "storage object identifier #{1} although our code " \
