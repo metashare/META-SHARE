@@ -40,5 +40,7 @@ def write_warning_to_resources_to_be_modified_file(curation_file, component,
     master_resources = get_master_resources(component)
     if len(master_resources) > 0:
         resources_str = u', '.join(master_resources)
-        curation_file.write(u'{} has invalid value {} in resources: {}. This should be modified to {}.\n' \
-                    .format(field_name, invalid_value, resources_str, valid_value).encode('utf8'))
+        curation_file.write(u'{} has invalid value {} in resources: {}. ' \
+                    u'The restrictionsOfUse values for licence {} are: {}.\n' \
+                    .format(field_name, invalid_value, resources_str,
+                            getattr(component, 'licence'), valid_value).encode('utf8'))
