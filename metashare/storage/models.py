@@ -284,7 +284,7 @@ class StorageObject(models.Model):
                 self.save()
             return
 
-        self.digest_last_checked = datetime.now()        
+        self.digest_last_checked = datetime.now()
 
         # check metadata serialization
         metadata_updated = self.check_metadata()

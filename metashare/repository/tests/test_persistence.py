@@ -190,47 +190,6 @@ class RestoreTest(TestCase):
         self.assertEqual(len(StorageObject.objects.all()), 0)
         self.assertEqual(len(resourceInfoType_model.objects.all()), 0)
         
-    def test_missing_global(self):
-        """
-        Tests restoring from storage folder with missing storage-global.json.
-        """
-        # keep copy of old storage-local.json as it will be overwritten 
-        # during the test
-        storage_folder = os.path.join(
-          settings.STORAGE_PATH,
-          '1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef')
-        with open('{0}/storage-local.json'.format(storage_folder), 'rb') as _in:
-            json_string = _in.read()
-        
-        resource = restore_from_folder(
-          '1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef'
-          )
-        # importing successful, but is imported as new
-        self.assertEquals(resource.storage_object.copy_status, MASTER)
-        self.assertEquals(resource.storage_object.publication_status, INTERNAL)
-        # revision is only increased when the resource is ingested
-        self.assertEquals(resource.storage_object.revision, 1)
-        # ingest resource
-        resource.storage_object.publication_status = INGESTED
-        resource.storage_object.save()
-        resource.storage_object.update_storage()
-        # delete newly created storage-local.json and resource.zip
-        # and restore storage-local.json
-        os.remove('{0}/storage-global.json'.format(storage_folder))
-        os.remove('{0}/resource.zip'.format(storage_folder))
-        with open('{0}/storage-local.json'.format(storage_folder), 'wb') as _out:
-            _out.write(json_string)
-
-        self.assertEquals(resource.storage_object.publication_status, INGESTED)
-        self.assertEquals(resource.storage_object.revision, 1)
-        self.assertEqual(len(StorageObject.objects.all()), 1)
-        self.assertEqual(len(resourceInfoType_model.objects.all()), 1)
-        
-        # delete storage object; this also deletes the resource
-        resource.storage_object.delete()
-        self.assertEqual(len(StorageObject.objects.all()), 0)
-        self.assertEqual(len(resourceInfoType_model.objects.all()), 0)
-
     def test_missing_local(self):
         """
         Tests restoring from storage folder with missing storage-local.json.
