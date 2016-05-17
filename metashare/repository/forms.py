@@ -130,6 +130,7 @@ def _process_special_query(query):
         LOGGER.info('Ignoring unknown storage identifier "%s" in "%s" query.',
             resource_id, query_type)
         return []
+    
     # get related resources
     if query_type == MORE_FROM_SAME_CREATORS:
         rel_res = get_more_from_same_creators(res)

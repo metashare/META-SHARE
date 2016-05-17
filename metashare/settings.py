@@ -304,6 +304,7 @@ SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 STATICFILES_DIRS = (
     os.path.join(ROOT_PATH, 'media'),
 )
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 class DisableMigrations(object):
 
     def __contains__(self, item):

@@ -2,7 +2,7 @@ import logging
 import os
 import re
 
-from haystack.indexes import CharField, IntegerField, RealTimeSearchIndex
+from haystack.indexes import CharField, IntegerField, SearchIndex
 from haystack import indexes, connections as haystack_connections, \
     connection_router as haystack_connection_router
 
@@ -41,7 +41,7 @@ def update_lr_index_entry(res_obj):
         .update_object(res_obj)
 
 
-class PatchedRealTimeSearchIndex(RealTimeSearchIndex):
+class PatchedRealTimeSearchIndex(SearchIndex):
     """
     A patched version of the `RealTimeSearchIndex` which works around Haystack
     issue #548.

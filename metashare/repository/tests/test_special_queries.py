@@ -7,8 +7,7 @@ import django.test
 from django.test.client import Client
 from metashare.settings import DJANGO_BASE, LOG_HANDLER
 from django.conf import settings
-from django.core.management import call_command
-
+from haystack.management.commands import update_index
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -39,7 +38,7 @@ class SpecialQueryTest(django.test.TestCase):
         self.res_2 = _import_resource('creators-projects-2.xml')
         self.res_3 = _import_resource('creators-projects-3.xml')
         self.res_4 = _import_resource('creators-projects-4.xml')
-        call_command('rebuild_index', interactive=False, using=settings.TEST_MODE_NAME)
+        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
     
     def tearDown(self):
         """
