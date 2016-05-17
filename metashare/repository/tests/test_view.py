@@ -582,7 +582,7 @@ class DownloadViewTest(TestCase):
         self.assertTemplateUsed(response, 'repository/licence_agreement.html',
                                 "license agreement page expected")
         self.assertContains(response,
-                            'licences/META-SHARE_COMMONS_BYNCSA_v1.0.htm',
+                            'licences/MSCommons-BY-NC-SA.pdf',
                             msg_prefix="the correct license appears to not " \
                                 "be shown in an iframe")
         # LR must not be downloadable via POST with just a selected license ...
