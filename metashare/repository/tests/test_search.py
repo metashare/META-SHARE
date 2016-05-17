@@ -1,7 +1,6 @@
 import os
 import logging
 
-from django.core.management import call_command
 from django.core.urlresolvers import reverse
 from django.test.client import Client
 from django.test.testcases import TestCase
@@ -14,6 +13,7 @@ from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER
 from metashare.stats.models import LRStats
 from metashare.storage.models import INGESTED, PUBLISHED
 from metashare.test_utils import create_user
+from haystack.management.commands import update_index
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -348,7 +348,7 @@ class SearchTestPublishedResources(TestCase):
         test_utils.setup_test_storage()
         cls.importPublishedFixtures()
         # Make sure the index does not contain any stale entries:
-        call_command('rebuild_index', interactive=False, using=settings.TEST_MODE_NAME)
+        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
 
     @classmethod
     def tearDownClass(cls):

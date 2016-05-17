@@ -23,7 +23,7 @@ from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER, \
 from metashare.test_utils import create_user
 from metashare.utils import prettify_camel_case_string
 from metashare.repository.templatetags import mimetype_label
-from django.core.management import call_command
+from haystack.management.commands import update_index
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -775,7 +775,7 @@ class FullViewTest(TestCase):
         test_utils.set_index_active(True)
     
         # update index
-        call_command('update_index', interactive=False, using=settings.TEST_MODE_NAME)
+        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
         
     
     @classmethod
@@ -796,7 +796,7 @@ class FullViewTest(TestCase):
         test_utils.set_index_active(True)
     
         # update index
-        call_command('update_index', interactive=False, using=settings.TEST_MODE_NAME)
+        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
     
     def testSingleResourceView(self):
         """

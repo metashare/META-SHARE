@@ -1,4 +1,3 @@
-from django.core.management import call_command
 from django.test.testcases import TestCase
 from metashare import settings, test_utils
 from metashare.repository.models import resourceInfoType_model
@@ -54,8 +53,7 @@ class PersistenceTest(TestCase):
     
     def setUp(self):
         # make sure the index does not contain any stale entries
-        call_command('update_index', interactive=False,
-                 using=settings.TEST_MODE_NAME)
+        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
         
     def tearDown(self):
         test_utils.clean_resources_db()
@@ -134,9 +132,7 @@ class RestoreTest(TestCase):
     
     def setUp(self):
         # make sure the index does not contain any stale entries
-        call_command('update_index', interactive=False,
-                 using=settings.TEST_MODE_NAME)
-        
+        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
 
     def tearDown(self):
         test_utils.clean_resources_db()
@@ -275,7 +271,7 @@ class UpdateTest(TestCase):
     
     def setUp(self):
         # make sure the index does not contain any stale entries
-        call_command('rebuild_index', interactive=False, using=settings.TEST_MODE_NAME)
+        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
         
     def tearDown(self):
         test_utils.clean_resources_db()

@@ -106,5 +106,5 @@ if __name__ == "__main__":
     OBJECT_XML_CACHE.clear()
     print "Cleared OBJECT_XML_CACHE ({} bytes)".format(_cache_size)
     
-    from django.core.management import call_command
-    call_command('rebuild_index', interactive=False)
+    from haystack.management.commands import rebuild_index
+    rebuild_index.Command().handle()
