@@ -44,7 +44,8 @@ if len(settings.CORE_NODES) or len(settings.PROXIED_NODES):
     @kronos.register(sync_interval_settings)
     def run_synchronization():
         call_command('synchronize', interactive=False)
-
+        LOGGER.info("Will now repair recommendations.")
+        call_command('repair_recommendations', interactive=False)
 
 update_interval_settings = ""
 # Get update interval settings
