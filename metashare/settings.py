@@ -166,7 +166,7 @@ INSTALLED_APPS = (
     'selectable',
     'haystack',
     'analytical',
-
+    
     'metashare.accounts',
     'metashare.storage',
     'metashare.stats',
@@ -307,7 +307,11 @@ STATICFILES_DIRS = (
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 MIGRATION_MODULES = {
-    'repository': 'repository.south_migrations',
+    'accounts': 'accounts.django_migrations',
+    'repository': 'repository.django_migrations',
+    'stats': 'stats.django_migrations',
+    'recommendations': 'recommendations.django_migrations',
+    'storage': 'storage.django_migrations',
 }
 
 class DisableMigrations(object):
