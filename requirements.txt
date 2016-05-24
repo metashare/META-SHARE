@@ -26,3 +26,4 @@ git+git://github.com/jsteffen/django-jenkins.git@e84f76ee7c940f35f761ced65ed7c97
 httplib2==0.9.1
 pygeoip==0.3.2
 pysolr==2.1.0-beta
+South==1.0.2
