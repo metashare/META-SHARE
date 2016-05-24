@@ -313,6 +313,7 @@ MIGRATION_MODULES = {
     'recommendations': 'recommendations.django_migrations',
     'storage': 'storage.django_migrations',
 }
+DJANGO_SETTINGS_MODULE = 'metashare.settings'
 
 class DisableMigrations(object):
 
