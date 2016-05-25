@@ -1,6 +1,6 @@
 import pip
 import sys
-from os.path import abspath, dirname, join
+from os.path import abspath, dirname
 parentdir = dirname(dirname(abspath(__file__)))
 
 # Insert our parent directory (the one containing the folder metashare/):
