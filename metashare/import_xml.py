@@ -2,12 +2,11 @@
 
 import os
 import sys
-
+import django
 # Magic python path, based on http://djangosnippets.org/snippets/281/
-from os.path import abspath, dirname, join
+from os.path import abspath, dirname
 parentdir = dirname(dirname(abspath(__file__)))
 # Insert our dependencies:
-sys.path.insert(0, join(parentdir, 'lib', 'python2.7', 'site-packages'))
 # Insert our parent directory (the one containing the folder metashare/):
 sys.path.insert(0, parentdir)
 
@@ -32,7 +31,8 @@ def print_usage():
     return
 
 if __name__ == "__main__":
-    os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "metashare.settings")
+    django.setup()
     PROJECT_HOME = os.path.normpath(os.getcwd() + "/..")
     sys.path.append(PROJECT_HOME)
     

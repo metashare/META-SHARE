@@ -4,12 +4,11 @@ import os
 import sys
 import traceback
 from zipfile import ZipFile
-
+import django
 # Magic python path, based on http://djangosnippets.org/snippets/281/
-from os.path import abspath, dirname, join
+from os.path import abspath, dirname
 parentdir = dirname(dirname(abspath(__file__)))
 # Insert our dependencies:
-sys.path.insert(0, join(parentdir, 'lib', 'python2.7', 'site-packages'))
 # Insert our parent directory (the one containing the folder metashare/):
 sys.path.insert(0, parentdir)
 
@@ -26,7 +25,9 @@ except ImportError:
     sys.exit(1)
 
 if __name__ == "__main__":
-    os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "metashare.settings")
+    django.setup()
+
     PROJECT_HOME = os.path.normpath(os.getcwd() + "/..")
     sys.path.append(PROJECT_HOME)
     
@@ -70,7 +71,7 @@ if __name__ == "__main__":
         conn.close()
     
     # Disable verbose debug output for the import process...
-    settings.DEBUG = False
+    settings.DEBUG = True
     
     SUCCESSFUL_EXPORTS = 0
     ERRONEOUS_EXPORTS = 0
