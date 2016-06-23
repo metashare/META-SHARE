@@ -3,7 +3,12 @@
 import os
 import sys
 import traceback
-
+import django
+from os.path import abspath, dirname
+parentdir = dirname(dirname(abspath(__file__)))
+# Insert our dependencies:
+# Insert our parent directory (the one containing the folder metashare/):
+sys.path.insert(0, parentdir)
 try:
     import settings 
 
@@ -16,7 +21,8 @@ except ImportError:
     sys.exit(1)
 
 if __name__ == "__main__":
-    os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "metashare.settings")
+    django.setup()
     PROJECT_HOME = os.path.normpath(os.getcwd() + "/..")
     sys.path.append(PROJECT_HOME)
     
@@ -37,11 +43,9 @@ if __name__ == "__main__":
     
     for path, dirs, files in os.walk(PATH):
         for filename in files:
-            fullpath = os.path.join(path, filename)  
+            fullpath = os.path.join(path, filename)
             temp_file = open(fullpath, 'rb')
             temp_file.seek(0)
-
-       
             try:
                 print 'Importing XML file: "{0}"'.format(filename)
                 tree = fromstring(temp_file.read())
@@ -61,12 +65,10 @@ if __name__ == "__main__":
                     SUCCESSFUL_IMPORTS += 1
 
                     saveLRStats(resource, UPDATE_STAT)
-    
             except:
                 ERRONEOUS_IMPORTS += 1
                 print 'Could not import XML file into database!'
                 print traceback.format_exc()
-
             
             temp_file.close()
     
