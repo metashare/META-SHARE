@@ -7,13 +7,12 @@ from django.test.testcases import TestCase
 
 from haystack.query import SearchQuerySet
 
-from metashare import test_utils, settings
+from metashare import test_utils
 from metashare.repository import views
 from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER
 from metashare.stats.models import LRStats
 from metashare.storage.models import INGESTED, PUBLISHED
 from metashare.test_utils import create_user
-from haystack.management.commands import update_index, rebuild_index
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -107,7 +106,6 @@ class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
         resource.storage_object.deleted = True
         resource.storage_object.save()
         # make sure the deletion has automatically changed the search index
-        rebuild_index.Command().handle(using=[settings.TEST_MODE_NAME,]) #For the sake of removal of RealTimeSearchIndex
         self.assertEqual(SearchQuerySet().count(), 0,
             "After a resource is flagged to be deleted in the storage object," \
             " the index must automatically change.")
@@ -115,7 +113,6 @@ class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
         resource.storage_object.deleted = False
         resource.storage_object.save()
         # make sure the undeletion has automatically changed the search index
-        update_index.Command().handle(using=[settings.TEST_MODE_NAME,]) #For the sake of removal of RealTimeSearchIndex
         self.assertEqual(SearchQuerySet().count(), 1,
             "After a resource is flagged to not be deleted in the storage " \
             "object, the index must automatically change.")
@@ -184,7 +181,6 @@ class SearchTest(test_utils.IndexAwareTestCase):
     def importOneFixture(self):
         _currfile = '{}/repository/fixtures/testfixture.xml'.format(ROOT_PATH)
         test_utils.import_xml_or_zip(_currfile)
-        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
 
     def test_view_count_visible_and_updated_in_search_results(self):
         """
@@ -195,7 +191,6 @@ class SearchTest(test_utils.IndexAwareTestCase):
                         'internal-corpus-Text-EngPers.xml'.format(ROOT_PATH))
         test_res.storage_object.published = True
         test_res.storage_object.save()
-        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
         client = Client()
         # to be on the safe side, clear any existing stats
         LRStats.objects.all().delete()
@@ -226,7 +221,6 @@ class SearchTest(test_utils.IndexAwareTestCase):
                 'downloadable_1_license.xml'.format(ROOT_PATH))
         test_res.storage_object.published = True
         test_res.storage_object.save()
-        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
         client = Client()
         client.login(username='normaluser', password='secret')
         # to be on the safe side, clear any existing stats
@@ -254,7 +248,6 @@ class SearchTest(test_utils.IndexAwareTestCase):
                         'internal-corpus-Text-EngPers.xml'.format(ROOT_PATH))
         imported_res.storage_object.published = True
         imported_res.storage_object.save()
-        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
         client = Client()
         # assert that a lower case search for an upper case term succeeds:
         response = client.get(_SEARCH_PAGE_PATH,
@@ -295,7 +288,6 @@ class SearchTest(test_utils.IndexAwareTestCase):
                         'internal-corpus-Text-EngPers.xml'.format(ROOT_PATH))
         imported_res.storage_object.published = True
         imported_res.storage_object.save()
-        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
         client = Client()
         # assert that a three-token search finds a camelCase term:
         response = client.get(_SEARCH_PAGE_PATH,
@@ -355,7 +347,6 @@ class SearchTestPublishedResources(TestCase):
         test_utils.setup_test_storage()
         cls.importPublishedFixtures()
         # Make sure the index does not contain any stale entries:
-        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
 
     @classmethod
     def tearDownClass(cls):
@@ -487,7 +478,7 @@ class SearchTestPublishedResources(TestCase):
         response = client.get(_SEARCH_PAGE_PATH, follow=True, 
           data={'selected_facets':'geographicCoverageFilter_exact:European Union'})
         self.assertEqual('repository/search.html', response.templates[0].name)
-        self.assertContains(response, "1 Language Resource", status_code=200)          
+        self.assertContains(response, "1 Language Resource", status_code=200)
          
     def testCombinedSearchAndFacet(self):   
         client = Client()
