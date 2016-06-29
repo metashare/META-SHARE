@@ -336,7 +336,6 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         """
         if os.environ.get('DISABLE_INDEXING_DURING_IMPORT', False) == 'True':
             return
-
         # have we been called from a post_save signal dispatcher?
         if "sender" in kwargs:
             # explicitly set `using` to None in order to let our Haystack router
@@ -365,6 +364,10 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             elif not kwargs["sender"] == self.get_model():
                 assert False, "Unexpected sender: {0}".format(kwargs["sender"])
                 LOGGER.error("Unexpected sender: {0}".format(kwargs["sender"]))
+                return
+        else:
+            if instance.storage_object.deleted:
+                self.remove_object(instance, using=using)
                 return
         # we better recreate our resource instance from the DB as otherwise it
         # has happened for some reason that the instance was not up-to-date

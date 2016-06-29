@@ -105,6 +105,7 @@ class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
         # now flag the resource as deleted
         resource.storage_object.deleted = True
         resource.storage_object.save()
+        resource.save()
         # make sure the deletion has automatically changed the search index
         self.assertEqual(SearchQuerySet().count(), 0,
             "After a resource is flagged to be deleted in the storage object," \
@@ -112,6 +113,7 @@ class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
         # remove the deletion flag from the resource
         resource.storage_object.deleted = False
         resource.storage_object.save()
+        resource.save()
         # make sure the undeletion has automatically changed the search index
         self.assertEqual(SearchQuerySet().count(), 1,
             "After a resource is flagged to not be deleted in the storage " \

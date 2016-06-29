@@ -1195,6 +1195,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
     def delete_model(self, request, obj):
         obj.storage_object.deleted = True
         obj.storage_object.save()
+        obj.save()
         # explicitly write metadata XML and storage object to the storage folder
         obj.storage_object.update_storage()
         # update statistics
