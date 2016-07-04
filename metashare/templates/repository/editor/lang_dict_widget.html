@@ -1,0 +1,7 @@
+<ul class="keyLangValuePairs{% if not blank %} pairsRequired{% endif %}">
+  {% for entry in entries %}
+  <li><a href="javascript:void(0)" class="kvLangPairDeleteButton">Delete Field</a>{{ entry.1 }}<div>Language of this entry (<a href="http://tools.ietf.org/html/rfc3066#section-2" target="_blank">RFC 3066 code</a>, preferably from <a href="http://www.loc.gov/standards/iso639-2/php/code_list.php" target="_blank">ISO 639-1</a>): </br>{{ entry.0 }}</div></li>
+  {% endfor %}
+  <li><a href="javascript:void(0)" class="kvLangPairAddButton addlink">Add Another Field</a></li>
+</ul>
+<div style="display: none;"><a href="javascript:void(0)" class="kvLangPairDeleteButton">Delete Field</a>{{ new_entry_tpl.1 }}<div>Language of this entry (<a href="http://tools.ietf.org/html/rfc3066#section-2" target="_blank">RFC 3066 code</a>, preferably from <a href="http://www.loc.gov/standards/iso639-2/php/code_list.php" target="_blank">ISO 639-1</a>): </br>{{ new_entry_tpl.0 }}</div></div>

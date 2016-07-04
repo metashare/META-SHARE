@@ -1,0 +1,1 @@
+from metashare.repository.templatetags import email_protection

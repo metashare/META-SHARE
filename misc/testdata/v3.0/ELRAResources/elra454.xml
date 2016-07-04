@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">Offensive Word Filter 2</resourceName>
+      <resourceName lang="fr">Liste de mots « injurieux » 2</resourceName>
+      <description lang="en">Oxford University Press has developed two lists of offensive words and expressions, specifically developed for filter applications in the contexts of web pages and email. Each list features a grading system describing vocabulary type and offensive strength for each term, plus collocational information to help identify the terms in context.Coverage: over 2000 words and expressions;  13-category classification system;  US and UK usage coveredFeatures: graded by category/subcategory (eg abusive/sexist etc); rated by strength (extreme/moderate/mild); collocational information included; regional usage/source labelling; glosses for obscure sensesFormat: Excel spreadsheetFile Size: 237 kB</description>
+      <description lang="fr">Oxford University Press a développé deux listes de mots et expressions « injurieux », développés spécialement pour des applications de filtrage dans le contexte de pages web et de méls.  Chaque liste présente un système de graduation décrivant le type de vocabulaire et l’intensité d’offense pour chaque terme, ainsi que des informations sur les collocations afin d’aider à identifier les termes en contexte.Couverture : plus de 2000 mots et expressions ;  système de classification en 13 catégories ; couverture de l’anglais britannique et anglais américainType d’information : graduation par catégorie/sous-catégorie (abusif/sexiste, etc) ; notation par intensité (extrême/modéré/faible) ; information sur les collocations ; étiquetage de l’usage ou la source régional ; commentaires des sens peu clairsFormat: feuille ExcelTaille du fichier : 237 ko</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=836</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-L0060</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>2500.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>2000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <availabilityStartDate>2006-03-13</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Valérie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <lastDateUpdated>2006-04-03</lastDateUpdated>
+   </versionInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>eng</languageId>
+                  <languageName>English</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>237</size>
+                  <sizeUnit>kb</sizeUnit>
+               </sizeInfo>
+               <textFormatInfo>
+                  <mimeType>MS Excel</mimeType>
+               </textFormatInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

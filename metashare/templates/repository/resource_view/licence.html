@@ -1,0 +1,36 @@
+{% load replace %}
+{% load humanize %}
+
+{% spaceless %}
+
+{% if "Licence" in key %}
+
+	{% for key1, value1 in value.items %}
+		{% if "Licence" in key1 %}
+                <div class="subtitle">
+                    <label class="licence">
+                        <strong><i>{{ value1|rep }}
+                        {% for key1, value1 in value.items %}
+                            {% if "Version" in key1 %}
+                                {{ value1 }}
+                            {% endif %}
+                        {% endfor %}</i>
+                        </strong>
+                    </label>
+                </div>
+        {% endif %}
+	{% endfor %}
+
+	{% for key1, value1 in value.items %}
+		{% if "Conditions_of_use" in key1 %}
+			<div class="dataline indented">
+				<label>
+					<strong>Conditions: </strong>{{ value1 }}
+				</label>
+			</div>
+		{% endif %}
+	{% endfor %}
+
+{% endif %}
+
+{% endspaceless %}

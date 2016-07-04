@@ -1,0 +1,180 @@
+{% spaceless %}
+
+{% if type == "toolService" %}
+	{% include "repository/resource_view/tool_service.html" with tool_service=resource_component %}
+{% else %}
+	{# Type info #}
+	<label class='component'><strong>{% if resource_component.Linguality.Linguality_type %}{{ resource_component.Linguality.Linguality_type }}{% endif %} {{ type }} {{ resourceType }}</strong></label>
+
+	{# Language Information #}
+	{% if "Language" in resource_component %}
+		{% include "repository/resource_view/language.html" with languages=resource_component %}
+	{% endif %}
+
+	{# Linguality Information #}
+	{% if "Linguality" in resource_component %}
+		{% include "repository/resource_view/linguality.html" with linguality=resource_component.Linguality %}
+	{% endif %}
+	
+	{# Text type Information #}
+	{% if "Text_format" in resource_component %}
+		{% include "repository/resource_view/text_type.html" with text_types=resource_component %}
+	{% endif %}
+
+	{# Size Information #}
+	{% if "Size" in resource_component %}
+		{% include "repository/resource_view/size.html" with size=resource_component %}
+	{% endif %}
+	
+	{% for key, value in resource_component.items %}		
+		{% if "Audio_size" in key %}
+			{% include "repository/resource_view/size.html" with size=value %}
+		{% endif %}
+	{% endfor %}
+	{% if "Video_size" in resource_component %}
+		{% include "repository/resource_view/size.html" with size=resource_component.Video_size %}
+	{% endif %}
+	{% if "Image_size" in resource_component %}
+		{% include "repository/resource_view/size.html" with size=resource_component.Image_size %}
+	{% endif %}
+
+	{# Character Encoding Information #}
+	{% if "Character_encoding" in resource_component %}
+		<label class='title'>Character encoding</label>
+		{% for key, value in resource_component.items %}		
+			{% if "Character_encoding" in key %}
+				<div class="separation"><hr/></div>
+				{% include "repository/resource_view/character_encoding.html" with encodings=value %}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+	
+	{# Domain Information #}
+	{% if "Domain" in resource_component %}
+		{% include "repository/resource_view/domain.html" with domains=resource_component %}
+	{% endif %}
+	
+	{# Modality Information #}
+	{% if "Modality" in resource_component %}
+		{% include "repository/resource_view/modality.html" with modalities=resource_component %}
+	{% endif %}
+
+	{# Classification Information #}
+	 {% if "Text_classification" in resource_component or "Audio_classification" in resource_component or "Video_classification" in resource_component or "Image_classification" in resource_component %}
+		{% include "repository/resource_view/classification.html" with classifications=resource_component %}
+	{% endif %}
+
+	{# Annotation Information #}
+	{% if "Annotation" in resource_component %}
+		<label class='title'>Annotation</label>
+		{% for key, value in resource_component.items %}
+			{% if "Annotation" in key %}
+				{% include "repository/resource_view/annotation.html" with annotations=value %}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+
+	{# Audio Content Information #}
+	{% if "Audio_content" in resource_component %}
+		{% include "repository/resource_view/content.html" with content=resource_component %}
+	{% endif %}
+	
+	{# Setting Information #}
+	{% if "Setting" in resource_component %}
+		{% include "repository/resource_view/setting.html" with setting=resource_component %}
+	{% endif %}
+	
+	{# Audio Format Information #}
+	{% if "Audio_format" in resource_component %}
+		<label class='title'>Audio Formats</label>
+		{% for key, value in resource_component.items %}
+			{% if "Audio_format" in key %}
+				{% include "repository/resource_view/audio_format.html" with audio_format=value %}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+	
+	{% if "Time_coverage" in resource_component %}
+		<label class='title'>Time Coverage</label>
+		{% for key, value in resource_component.items %}
+			{% if "Time_coverage" in key %}
+				{% include "repository/resource_view/time_coverage.html" with time_coverage=value %}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+	
+	{% if "Geographic_coverage" in resource_component %}
+		<label class='title'>Geographic coverage</label>
+		{% for key, value in resource_component.items %}
+			{% if "Geographic_coverage" in key %}
+				{% include "repository/resource_view/geographic_coverage.html" with geographic_coverage=value %}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+	
+	{# Video Content Information #}
+	{% if "Video_content" in resource_component %}
+		{% include "repository/resource_view/video_content.html" with video=resource_component.Video_content %}
+	{% endif %}
+	
+	{# Image Content Information #}
+	{% if "Image_content" in resource_component %}
+		{% include "repository/resource_view/image_content.html" with image=resource_component.Image_content %}
+	{% endif %}
+	
+	{# Text Ngram Information #}
+	{% if "N_gram" in resource_component %}
+        {% include "repository/resource_view/ngram.html" with ngram=resource_component.N_gram title="N-Gram" %}
+	{% endif %}
+	
+	{# Text Numerical Content Information #}
+	{% if "Text_numerical_content" in resource_component %}
+		{% include "repository/resource_view/ngram.html" with ngram=resource_component.Text_numerical_content title="Text Numerical Content" %}
+	{% endif %}
+	
+	{# Text Numerical Format Information #}
+	{% for key, value in resource_component.items %}		
+		{% if "Text_numerical_format" in key %}
+			{% include "repository/resource_view/video_format.html" with video=value %}
+		{% endif %}
+	{% endfor %}
+	
+	{# Video Format Information #}
+	{% for key, value in resource_component.items %}		
+		{% if "Video_format" in key %}
+			{% include "repository/resource_view/video_format.html" with video=value %}
+		{% endif %}
+	{% endfor %}
+	
+	{# Image Format Information #}
+	{% for key, value in resource_component.items %}		
+		{% if "Image_format" in key %}
+			{% include "repository/resource_view/video_format.html" with video=value %}
+		{% endif %}
+	{% endfor %}
+	
+	{# Recording Information #}
+	{% if "Recording" in resource_component %}
+		{% include "repository/resource_view/recording.html" with recording=resource_component.Recording %}
+	{% endif %}
+	
+	{# Capture Information #}
+	{% if "Capture" in resource_component %}
+		{% include "repository/resource_view/capture.html" with capture=resource_component.Capture %}
+	{% endif %}
+	
+	{# Creation Information #}
+	{% if "Creation" in resource_component %}
+		{% include "repository/resource_view/creation.html" with creation=resource_component.Creation %}
+	{% endif %}
+	
+	{# Link to Other Media Information #}
+	{% for key, value in resource_component.items %}		
+		{% if "Link_to_other_media" in key %}
+			{% include "repository/resource_view/linktoothermedia.html" with link=value %}
+		{% endif %}
+	{% endfor %}
+	
+{% endif %}
+
+{% endspaceless %}

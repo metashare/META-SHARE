@@ -1,0 +1,12 @@
+User-agent: *
+
+Disallow: /login/
+Disallow: /logout/
+Disallow: /admin/
+Disallow: /editor/
+Disallow: /accounts/
+Disallow: /storage/
+Disallow: /sync/
+Disallow: /selectable/
+
+Sitemap: {{ sitemap_url }}

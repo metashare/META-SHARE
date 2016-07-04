@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+      <identificationInfo>
+        <resourceName lang="en">Travel NE Corpus</resourceName>
+        <description lang="en">Monolingual written corpus of travel documentaries. It amounts to 71.780 tokens; XML format (sources &amp; gold NE annotations  for person, organization, location according to the ACE guidelines).</description>
+          <metaShareId>
+            NOT_DEFINED_FOR_V2
+          </metaShareId>
+      </identificationInfo>
+      <distributionInfo>
+        <availability>available-restrictedUse</availability>
+          <licenceInfo>
+            <licence>proprietary</licence>
+            <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+          </licenceInfo>
+      </distributionInfo>
+      <contactPerson>
+        <surname lang="en">Papageorgiou</surname>
+        <givenName lang="en">Harris</givenName>
+        <sex>male</sex>
+          <communicationInfo>
+            <email>xaris@ilsp.athena-innovation.gr</email>
+            <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=49&amp;Itemid=156</url>
+            <telephoneNumber>+302106875426</telephoneNumber>
+            <faxNumber>+302106854270</faxNumber>
+          </communicationInfo>
+        <position>Principal Researcher</position>
+          <affiliation>
+            <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+            <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+              <communicationInfo>
+                <email>www@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/</url>
+                <address>Artemidos 6 &amp; Epidavrou</address>
+                <zipCode>GR-15125</zipCode>
+                <city>Maroussi</city>
+                <country>GR</country>
+                <telephoneNumber>+302106875300</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+                <faxNumber>+302106856794</faxNumber>
+              </communicationInfo>
+          </affiliation>
+      </contactPerson>
+      <metadataInfo>
+        <metadataCreationDate>2012-02-02</metadataCreationDate>
+          <metadataCreator>
+            <surname lang="en">Desipri</surname>
+            <givenName lang="en">Elina</givenName>
+            <sex>female</sex>
+              <communicationInfo>
+                <email>elina@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=23&amp;Itemid=156</url>
+                <telephoneNumber>+302106875442</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+                <faxNumber>+302106856794</faxNumber>
+              </communicationInfo>
+            <position>Scientific Associate</position>
+              <affiliation>
+                <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                  <communicationInfo>
+                    <email>www@ilsp.athena-innovation.gr</email>
+                    <url>http://www.ilsp.gr/</url>
+                    <address>Artemidos 6 &amp; Epidavrou</address>
+                    <zipCode>GR-15125</zipCode>
+                    <city>Maroussi</city>
+                    <country>GR</country>
+                    <telephoneNumber>+302106875300</telephoneNumber>
+                    <faxNumber>+302106854270</faxNumber>
+                    <faxNumber>+302106856794</faxNumber>
+                  </communicationInfo>
+              </affiliation>
+          </metadataCreator>
+        <source>META-SHARE/ILSP</source>
+        <metadataLastDateUpdated>2012-06-14</metadataLastDateUpdated>
+      </metadataInfo>
+      <validationInfo>
+        <validated>true</validated>
+        <validationType>content</validationType>
+        <validationMode>manual</validationMode>
+        <validationModeDetails>validation of the NE annotations</validationModeDetails>
+        <validationExtent>full</validationExtent>
+      </validationInfo>
+      <usageInfo>
+          <foreseenUseInfo>
+            <foreseenUse>nlpApplications</foreseenUse>
+            <useNLPSpecific>namedEntityRecognition</useNLPSpecific>
+          </foreseenUseInfo>
+          <actualUseInfo>
+            <actualUse>nlpApplications</actualUse>
+            <useNLPSpecific>namedEntityRecognition</useNLPSpecific>
+          </actualUseInfo>
+      </usageInfo>
+      <resourceCreationInfo>
+          <fundingProject>
+            <projectName lang="en">Retrieval of Video And Language for The Home user in an Information Society</projectName>
+            <projectShortName lang="en">REVEAL THIS</projectShortName>
+            <projectID>FP6-IST-511689</projectID>
+            <url>http://sifnos.ilsp.gr/RevealThis/</url>
+            <fundingType>euFunds</fundingType>
+            <funder>IST</funder>
+            <projectStartDate>2004-11-01</projectStartDate>
+            <projectEndDate>2007-04-20</projectEndDate>
+          </fundingProject>
+      </resourceCreationInfo>
+      <resourceComponentType>
+          <corpusInfo>
+            <resourceType>corpus</resourceType>
+              <corpusMediaType>
+                  <corpusTextInfo>
+                    <mediaType>text</mediaType>
+                      <lingualityInfo>
+                        <lingualityType>monolingual</lingualityType>
+                      </lingualityInfo>
+                      <languageInfo>
+                        <languageId>el</languageId>
+                        <languageName>Modern Greek (1453-)</languageName>
+                      </languageInfo>
+                      <sizeInfo>
+                        <size>71780</size>
+                        <sizeUnit>tokens</sizeUnit>
+                      </sizeInfo>
+                      <textFormatInfo>
+                        <mimeType>txt/xml</mimeType>
+                      </textFormatInfo>
+                      <annotationInfo>
+                        <annotationType>semanticAnnotation-namedEntities</annotationType>
+                        <conformanceToStandardsBestPractices>other</conformanceToStandardsBestPractices>
+                      </annotationInfo>
+                      <domainInfo>
+                        <domain>travel</domain>
+                      </domainInfo>
+                      <textClassificationInfo>
+                        <textGenre>documentary</textGenre>
+                      </textClassificationInfo>
+                      <creationInfo>
+                        <creationMode>mixed</creationMode>
+                      </creationInfo>
+                  </corpusTextInfo>
+              </corpusMediaType>
+          </corpusInfo>
+      </resourceComponentType>
+  </resourceInfo>

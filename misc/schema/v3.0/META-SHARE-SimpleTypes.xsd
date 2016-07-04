@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited by ILSP/Athena R.C. -->
+<xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0" xml:lang="en">
+	<!-- definition of global attributes -->
+	<!--
+	<xs:attribute name="lang">
+		<xs:simpleType>
+			<xs:restriction base="xs:language"/>
+		</xs:simpleType>
+	</xs:attribute>
+	-->
+	<!-- definition of global types -->
+	<xs:simpleType name="httpURI">
+		<xs:restriction base="xs:anyURI">
+			<xs:pattern value="http://.*"/>
+			<xs:pattern value="https://.*"/>
+			<xs:pattern value="ftp://.*"/>
+			<xs:pattern value="www.*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="emailAddress">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="100"/>
+			<xs:pattern value="[^@]+@[^\.]+\..+|"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="sizeInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on the size of the resource or of resource parts</xs:documentation>
+			<xs:appinfo>
+				<render-short>{size} {sizeUnit}</render-short>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="size">
+				<xs:annotation>
+					<xs:documentation>Specifies the size of the resource with regard to the SizeUnit measurement in form of a number</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="sizeUnit">
+				<xs:annotation>
+					<xs:documentation>Specifies the unit that is used when providing information on the size of the resource or of resource parts</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="terms"/>
+						<xs:enumeration value="entries"/>
+						<xs:enumeration value="turns"/>
+						<xs:enumeration value="utterances"/>
+						<xs:enumeration value="articles"/>
+						<xs:enumeration value="files"/>
+						<xs:enumeration value="items"/>
+						<xs:enumeration value="seconds"/>
+						<xs:enumeration value="elements"/>
+						<xs:enumeration value="units"/>
+						<xs:enumeration value="minutes"/>
+						<xs:enumeration value="hours"/>
+						<xs:enumeration value="texts"/>
+						<xs:enumeration value="sentences"/>
+						<xs:enumeration value="bytes"/>
+						<xs:enumeration value="tokens"/>
+						<xs:enumeration value="words"/>
+						<xs:enumeration value="keywords"/>
+						<xs:enumeration value="idiomaticExpressions"/>
+						<xs:enumeration value="neologisms"/>
+						<xs:enumeration value="multiWordUnits"/>
+						<xs:enumeration value="expressions"/>
+						<xs:enumeration value="synsets"/>
+						<xs:enumeration value="classes"/>
+						<xs:enumeration value="concepts"/>
+						<xs:enumeration value="lexicalTypes"/>
+						<xs:enumeration value="phoneticUnits"/>
+						<xs:enumeration value="syntacticUnits"/>
+						<xs:enumeration value="semanticUnits"/>
+						<xs:enumeration value="predicates"/>
+						<xs:enumeration value="phonemes"/>
+						<xs:enumeration value="diphones"/>
+						<xs:enumeration value="T-HPairs"/>
+						<xs:enumeration value="syllables"/>
+						<xs:enumeration value="frames"/>
+						<xs:enumeration value="images"/>
+						<xs:enumeration value="kb"/>
+						<xs:enumeration value="mb"/>
+						<xs:enumeration value="gb"/>
+						<xs:enumeration value="rb"/>
+						<xs:enumeration value="shots"/>
+						<xs:enumeration value="unigrams"/>
+						<xs:enumeration value="bigrams"/>
+						<xs:enumeration value="trigrams"/>
+						<xs:enumeration value="4-grams"/>
+						<xs:enumeration value="5-grams"/>
+						<xs:enumeration value="rules"/>
+						<xs:enumeration value="questions"/>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="myString">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="lang" type="xs:language"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:element name="modalityType">
+		<xs:annotation>
+			<xs:documentation>Specifies the type of the modality represented in the resource or processed by a tool/service</xs:documentation>
+			<xs:appinfo>
+				<label>Modality type</label>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="30"/>
+				<xs:enumeration value="bodyGesture"/>
+				<xs:enumeration value="facialExpression"/>
+				<xs:enumeration value="voice"/>
+				<xs:enumeration value="combinationOfModalities"/>
+				<xs:enumeration value="signLanguage"/>
+				<xs:enumeration value="spokenLanguage"/>
+				<xs:enumeration value="writtenLanguage"/>
+				<xs:enumeration value="other"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="mediaType">
+		<xs:annotation>
+			<xs:documentation>Specifies the media type of the resource and basically corresponds to the physical medium of the content representation. Each media type is described through a 				distinctive set of features. A resource may consist of parts attributed to different types of media.</xs:documentation>
+			<xs:appinfo>
+				<relation>one-to-many</relation>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="30"/>
+				<xs:enumeration value="text"/>
+				<xs:enumeration value="audio"/>
+				<xs:enumeration value="video"/>
+				<xs:enumeration value="image"/>
+				<xs:enumeration value="textNumerical"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="characterEncoding">
+		<xs:annotation>
+			<xs:documentation>The name of the character encoding used in the resource or accepted by the tool/service</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="100"/>
+				<xs:enumeration value="US-ASCII"/>
+				<xs:enumeration value="windows-1250"/>
+				<xs:enumeration value="windows-1251"/>
+				<xs:enumeration value="windows-1252"/>
+				<xs:enumeration value="windows-1253"/>
+				<xs:enumeration value="windows-1254"/>
+				<xs:enumeration value="windows-1257"/>
+				<xs:enumeration value="ISO-8859-1"/>
+				<xs:enumeration value="ISO-8859-2"/>
+				<xs:enumeration value="ISO-8859-4"/>
+				<xs:enumeration value="ISO-8859-5"/>
+				<xs:enumeration value="ISO-8859-7"/>
+				<xs:enumeration value="ISO-8859-9"/>
+				<xs:enumeration value="ISO-8859-13"/>
+				<xs:enumeration value="ISO-8859-15"/>
+				<xs:enumeration value="KOI8-R"/>
+				<xs:enumeration value="UTF-8"/>
+				<xs:enumeration value="UTF-16"/>
+				<xs:enumeration value="UTF-16BE"/>
+				<xs:enumeration value="UTF-16LE"/>
+				<xs:enumeration value="windows-1255"/>
+				<xs:enumeration value="windows-1256"/>
+				<xs:enumeration value="windows-1258"/>
+				<xs:enumeration value="ISO-8859-3"/>
+				<xs:enumeration value="ISO-8859-6"/>
+				<xs:enumeration value="ISO-8859-8"/>
+				<xs:enumeration value="windows-31j"/>
+				<xs:enumeration value="EUC-JP"/>
+				<xs:enumeration value="x-EUC-JP-LINUX"/>
+				<xs:enumeration value="Shift_JIS"/>
+				<xs:enumeration value="ISO-2022-JP"/>
+				<xs:enumeration value="x-mswin-936"/>
+				<xs:enumeration value="GB18030"/>
+				<xs:enumeration value="x-EUC-CN"/>
+				<xs:enumeration value="GBK"/>
+				<xs:enumeration value="ISCII91"/>
+				<xs:enumeration value="x-windows-949"/>
+				<xs:enumeration value="EUC-KR"/>
+				<xs:enumeration value="ISO-2022-KR"/>
+				<xs:enumeration value="x-windows-950"/>
+				<xs:enumeration value="x-MS950-HKSCS"/>
+				<xs:enumeration value="x-EUC-TW"/>
+				<xs:enumeration value="Big5"/>
+				<xs:enumeration value="Big5-HKSCS"/>
+				<xs:enumeration value="TIS-620"/>
+				<xs:enumeration value="Big5_Solaris"/>
+				<xs:enumeration value="Cp037"/>
+				<xs:enumeration value="Cp273"/>
+				<xs:enumeration value="Cp277"/>
+				<xs:enumeration value="Cp278"/>
+				<xs:enumeration value="Cp280"/>
+				<xs:enumeration value="Cp284"/>
+				<xs:enumeration value="Cp285"/>
+				<xs:enumeration value="Cp297"/>
+				<xs:enumeration value="Cp420"/>
+				<xs:enumeration value="Cp424"/>
+				<xs:enumeration value="Cp437"/>
+				<xs:enumeration value="Cp500"/>
+				<xs:enumeration value="Cp737"/>
+				<xs:enumeration value="Cp775"/>
+				<xs:enumeration value="Cp838"/>
+				<xs:enumeration value="Cp850"/>
+				<xs:enumeration value="Cp852"/>
+				<xs:enumeration value="Cp855"/>
+				<xs:enumeration value="Cp856"/>
+				<xs:enumeration value="Cp857"/>
+				<xs:enumeration value="Cp858"/>
+				<xs:enumeration value="Cp860"/>
+				<xs:enumeration value="Cp861"/>
+				<xs:enumeration value="Cp862"/>
+				<xs:enumeration value="Cp863"/>
+				<xs:enumeration value="Cp864"/>
+				<xs:enumeration value="Cp865"/>
+				<xs:enumeration value="Cp866"/>
+				<xs:enumeration value="Cp868"/>
+				<xs:enumeration value="Cp869"/>
+				<xs:enumeration value="Cp870"/>
+				<xs:enumeration value="Cp871"/>
+				<xs:enumeration value="Cp874"/>
+				<xs:enumeration value="Cp875"/>
+				<xs:enumeration value="Cp918"/>
+				<xs:enumeration value="Cp921"/>
+				<xs:enumeration value="Cp922"/>
+				<xs:enumeration value="Cp930"/>
+				<xs:enumeration value="Cp933"/>
+				<xs:enumeration value="Cp935"/>
+				<xs:enumeration value="Cp937"/>
+				<xs:enumeration value="Cp939"/>
+				<xs:enumeration value="Cp942"/>
+				<xs:enumeration value="Cp942C"/>
+				<xs:enumeration value="Cp943"/>
+				<xs:enumeration value="Cp943C"/>
+				<xs:enumeration value="Cp948"/>
+				<xs:enumeration value="Cp949"/>
+				<xs:enumeration value="Cp949C"/>
+				<xs:enumeration value="Cp950"/>
+				<xs:enumeration value="Cp964"/>
+				<xs:enumeration value="Cp970"/>
+				<xs:enumeration value="Cp1006"/>
+				<xs:enumeration value="Cp1025"/>
+				<xs:enumeration value="Cp1026"/>
+				<xs:enumeration value="Cp1046"/>
+				<xs:enumeration value="Cp1047"/>
+				<xs:enumeration value="Cp1097"/>
+				<xs:enumeration value="Cp1098"/>
+				<xs:enumeration value="Cp1112"/>
+				<xs:enumeration value="Cp1122"/>
+				<xs:enumeration value="Cp1123"/>
+				<xs:enumeration value="Cp1124"/>
+				<xs:enumeration value="Cp1140"/>
+				<xs:enumeration value="Cp1141"/>
+				<xs:enumeration value="Cp1142"/>
+				<xs:enumeration value="Cp1143"/>
+				<xs:enumeration value="Cp1144"/>
+				<xs:enumeration value="Cp1145"/>
+				<xs:enumeration value="Cp1146"/>
+				<xs:enumeration value="Cp1147"/>
+				<xs:enumeration value="Cp1148"/>
+				<xs:enumeration value="Cp1149"/>
+				<xs:enumeration value="Cp1381"/>
+				<xs:enumeration value="Cp1383"/>
+				<xs:enumeration value="Cp33722"/>
+				<xs:enumeration value="ISO2022_CN_CNS"/>
+				<xs:enumeration value="ISO2022_CN_GB"/>
+				<xs:enumeration value="JISAutoDetect"/>
+				<xs:enumeration value="MS874"/>
+				<xs:enumeration value="MacArabic"/>
+				<xs:enumeration value="MacCentralEurope"/>
+				<xs:enumeration value="MacCroatian"/>
+				<xs:enumeration value="MacCyrillic"/>
+				<xs:enumeration value="MacDingbat"/>
+				<xs:enumeration value="MacGreek"/>
+				<xs:enumeration value="MacHebrew"/>
+				<xs:enumeration value="MacIceland"/>
+				<xs:enumeration value="MacRoman"/>
+				<xs:enumeration value="MacRomania"/>
+				<xs:enumeration value="MacSymbol"/>
+				<xs:enumeration value="MacThai"/>
+				<xs:enumeration value="MacTurkish"/>
+				<xs:enumeration value="MacUkraine"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!-- definition of re-usable elements -->
+	<xs:element name="documentUnstructured">
+		<xs:annotation>
+			<xs:documentation>Used either as a free text description or as an unstructured (free form) presentation of a bibliographic record; alternative to the structured presentation of a document (cf. documentInfo)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="500"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="annotationType">
+		<xs:annotation>
+			<xs:documentation>Specifies the annotation level of the resource or the annotation type a tool/ service requires or produces as an output</xs:documentation>
+			<xs:appinfo>
+				<label>Annotation type</label>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="150"/>
+				<xs:enumeration value="alignment"/>
+				<xs:enumeration value="discourseAnnotation"/>
+				<xs:enumeration value="discourseAnnotation-audienceReactions"/>
+				<xs:enumeration value="discourseAnnotation-coreference"/>
+				<xs:enumeration value="discourseAnnotation-dialogueActs"/>
+				<xs:enumeration value="discourseAnnotation-discourseRelations"/>
+				<xs:enumeration value="lemmatization"/>
+				<xs:enumeration value="morphosyntacticAnnotation-bPosTagging"/>
+				<xs:enumeration value="morphosyntacticAnnotation-posTagging"/>
+				<xs:enumeration value="segmentation"/>
+				<xs:enumeration value="semanticAnnotation"/>
+				<xs:enumeration value="semanticAnnotation-certaintyLevel"/>
+				<xs:enumeration value="semanticAnnotation-emotions"/>
+				<xs:enumeration value="semanticAnnotation-entityMentions"/>
+				<xs:enumeration value="semanticAnnotation-events"/>
+				<xs:enumeration value="semanticAnnotation-namedEntities"/>
+				<xs:enumeration value="semanticAnnotation-polarity"/>
+				<xs:enumeration value="semanticAnnotation-questionTopicalTarget"/>
+				<xs:enumeration value="semanticAnnotation-semanticClasses"/>
+				<xs:enumeration value="semanticAnnotation-semanticRelations"/>
+				<xs:enumeration value="semanticAnnotation-semanticRoles"/>
+				<xs:enumeration value="semanticAnnotation-speechActs"/>
+				<xs:enumeration value="semanticAnnotation-temporalExpressions"/>
+				<xs:enumeration value="semanticAnnotation-textualEntailment"/>
+				<xs:enumeration value="semanticAnnotation-wordSenses"/>
+				<xs:enumeration value="speechAnnotation"/>
+				<xs:enumeration value="speechAnnotation-orthographicTranscription"/>
+				<xs:enumeration value="speechAnnotation-paralanguageAnnotation"/>
+				<xs:enumeration value="speechAnnotation-phoneticTranscription"/>
+				<xs:enumeration value="speechAnnotation-prosodicAnnotation"/>
+				<xs:enumeration value="speechAnnotation-soundEvents"/>
+				<xs:enumeration value="speechAnnotation-soundToTextAlignment"/>
+				<xs:enumeration value="speechAnnotation-speakerIdentification"/>
+				<xs:enumeration value="speechAnnotation-speakerTurns"/>
+				<xs:enumeration value="speechAnnotation"/>
+				<xs:enumeration value="stemming"/>
+				<xs:enumeration value="structuralAnnotation"/>
+				<xs:enumeration value="syntacticAnnotation-shallowParsing"/>
+				<xs:enumeration value="syntacticAnnotation-subcategorizationFrames"/>
+				<xs:enumeration value="syntacticAnnotation-treebanks"/>
+				<xs:enumeration value="syntacticosemanticAnnotation-links"/>
+				<xs:enumeration value="translation"/>
+				<xs:enumeration value="transliteration"/>
+				<xs:enumeration value="discourseAnnotation-dialogueActs"/>
+				<xs:enumeration value="modalityAnnotation-bodyMovements"/>
+				<xs:enumeration value="modalityAnnotation-facialExpressions"/>
+				<xs:enumeration value="modalityAnnotation-gazeEyeMovements"/>
+				<xs:enumeration value="modalityAnnotation-handArmGestures"/>
+				<xs:enumeration value="modalityAnnotation-handManipulationOfObjects"/>
+				<xs:enumeration value="modalityAnnotation-headMovements"/>
+				<xs:enumeration value="modalityAnnotation-lipMovements"/>
+				<xs:enumeration value="semanticAnnotation-emotions"/>
+				<xs:enumeration value="other"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="useNLPSpecific">
+		<xs:annotation>
+			<xs:documentation>Specifies the NLP application for which the resource iscreated or the application in which it has actually been used.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="100"/>
+				<xs:enumeration value="parsing"/>
+				<xs:enumeration value="contradictionDetection"/>
+				<xs:enumeration value="opinionMining"/>
+				<xs:enumeration value="wordSenseDisambiguation"/>
+				<xs:enumeration value="voiceControl"/>
+				<xs:enumeration value="topicDetection_Tracking"/>
+				<xs:enumeration value="textualEntailment"/>
+				<xs:enumeration value="textMining"/>
+				<xs:enumeration value="textCategorisation"/>
+				<xs:enumeration value="terminologyExtraction"/>
+				<xs:enumeration value="summarisation"/>
+				<xs:enumeration value="spellChecking"/>
+				<xs:enumeration value="speechUnderstanding"/>
+				<xs:enumeration value="speechToSpeechTranslation"/>
+				<xs:enumeration value="speechSynthesis"/>
+				<xs:enumeration value="speechRecognition"/>
+				<xs:enumeration value="signLanguageRecognition"/>
+				<xs:enumeration value="signLanguageGeneration"/>
+				<xs:enumeration value="semanticWeb"/>
+				<xs:enumeration value="questionAnswering"/>
+				<xs:enumeration value="informationExtraction"/>
+				<xs:enumeration value="posTagging"/>
+				<xs:enumeration value="personIdentification"/>
+				<xs:enumeration value="naturalLanguageUnderstanding"/>
+				<xs:enumeration value="naturalLanguageGeneration"/>
+				<xs:enumeration value="namedEntityRecognition"/>
+				<xs:enumeration value="multimediaDocumentProcessing"/>
+				<xs:enumeration value="morphosyntacticTagging"/>
+				<xs:enumeration value="morphologicalAnalysis"/>
+				<xs:enumeration value="linguisticResearch"/>
+				<xs:enumeration value="lexiconEnhancement"/>
+				<xs:enumeration value="lemmatization"/>
+				<xs:enumeration value="languageModelsTraining"/>
+				<xs:enumeration value="languageModelling"/>
+				<xs:enumeration value="languageIdentification"/>
+				<xs:enumeration value="knowledgeRepresentation"/>
+				<xs:enumeration value="knowledgeDiscovery"/>
+				<xs:enumeration value="emotionRecognition"/>
+				<xs:enumeration value="emotionGeneration"/>
+				<xs:enumeration value="documentClassification"/>
+				<xs:enumeration value="derivationalMorphologicalAnalysis"/>
+				<xs:enumeration value="coreferenceResolution"/>
+				<xs:enumeration value="bilingualLexiconInduction"/>
+				<xs:enumeration value="annotation"/>
+				<xs:enumeration value="webServices"/>
+				<xs:enumeration value="eventExtraction"/>
+				<xs:enumeration value="semanticRoleLabelling"/>
+				<xs:enumeration value="readingAndWritingAidApplications"/>
+				<xs:enumeration value="temporalExpressionRecognition"/>
+				<xs:enumeration value="intra-documentCoreferenceResolution"/>
+				<xs:enumeration value="visualSceneUnderstanding"/>
+				<xs:enumeration value="entityMentionRecognition"/>
+				<xs:enumeration value="sentimentAnalysis"/>
+				<xs:enumeration value="machineTranslation"/>
+				<xs:enumeration value="persuasiveExpressionMining"/>
+				<xs:enumeration value="qualitativeAnalysis"/>
+				<xs:enumeration value="texToSpeechSynthesis"/>
+				<xs:enumeration value="personRecognition"/>
+				<xs:enumeration value="textGeneration"/>
+				<xs:enumeration value="avatarSynthesis"/>
+				<xs:enumeration value="discourseAnalysis"/>
+				<xs:enumeration value="expressionRecognition"/>
+				<xs:enumeration value="faceRecognition"/>
+				<xs:enumeration value="faceVerification"/>
+				<xs:enumeration value="humanoidAgentSynthesis"/>
+				<xs:enumeration value="informationRetrieval"/>
+				<xs:enumeration value="lexiconAccess"/>
+				<xs:enumeration value="lexiconAcquisitionFromCorpora"/>
+				<xs:enumeration value="lexiconExtractionFromLexica"/>
+				<xs:enumeration value="lexiconFormatConversion"/>
+				<xs:enumeration value="lexiconMerging"/>
+				<xs:enumeration value="lexiconVisualization"/>
+				<xs:enumeration value="lipTrackingAnalysis"/>
+				<xs:enumeration value="multimediaDevelopment"/>
+				<xs:enumeration value="speakerIdentification"/>
+				<xs:enumeration value="speakerVerification"/>
+				<xs:enumeration value="speechLipsCorrelationAnalysis"/>
+				<xs:enumeration value="speechAnalysis"/>
+				<xs:enumeration value="speechAssistedVideoControl"/>
+				<xs:enumeration value="speechVerification"/>
+				<xs:enumeration value="spokenDialogueSystems"/>
+				<xs:enumeration value="talkingHeadSynthesis"/>
+				<xs:enumeration value="userAuthentication"/>
+				<xs:enumeration value="other"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="conformanceToClassificationScheme">
+		<xs:annotation>
+			<xs:documentation>Specifies the external classification schemes</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="100"/>
+				<xs:enumeration value="ANC_domainClassification"/>
+				<xs:enumeration value="ANC_genreClassification"/>
+				<xs:enumeration value="BNC_domainClassification"/>
+				<xs:enumeration value="BNC_textTypeClassification"/>
+				<xs:enumeration value="DDC_classification"/>
+				<xs:enumeration value="libraryOfCongress_domainClassification"/>
+				<xs:enumeration value="libraryofCongressSubjectHeadings_classification"/>
+				<xs:enumeration value="MeSH_classification"/>
+				<xs:enumeration value="NLK_classification"/>
+				<xs:enumeration value="PAROLE_topicClassification"/>
+				<xs:enumeration value="PAROLE_genreClassification"/>
+				<xs:enumeration value="UDC_classification"/>
+				<xs:enumeration value="other"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="segmentationLevel">
+		<xs:annotation>
+			<xs:documentation>Specifies the segmentation unit in terms of which the resource has been segmented or the level of segmentation a tool/service requires/outputs</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="50"/>
+				<xs:enumeration value="paragraph"/>
+				<xs:enumeration value="sentence"/>
+				<xs:enumeration value="clause"/>
+				<xs:enumeration value="word"/>
+				<xs:enumeration value="wordGroup"/>
+				<xs:enumeration value="utterance"/>
+				<xs:enumeration value="topic"/>
+				<xs:enumeration value="signal"/>
+				<xs:enumeration value="phoneme"/>
+				<xs:enumeration value="syllable"/>
+				<xs:enumeration value="phrase"/>
+				<xs:enumeration value="diphone"/>
+				<xs:enumeration value="prosodicBoundaries"/>
+				<xs:enumeration value="frame"/>
+				<xs:enumeration value="scene"/>
+				<xs:enumeration value="shot"/>
+				<xs:enumeration value="other"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="tagset">
+		<xs:annotation>
+			<xs:documentation>A name or a url reference to the tagset used in the annotation of the resource or used by the tool/service</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="500"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="annotationFormat">
+		<xs:annotation>
+			<xs:documentation>Specifies the format that is used in the annotation process since often the mime type will not be sufficient for machine processing</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="100"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="mimeType">
+		<xs:annotation>
+			<xs:documentation>The mime-type of the resource which is a formalized specifier for the format included or a mime-type that the tool/service accepts; value to be taken from a subset of the official mime types of the Internet Assigned Numbers Authority (http://www.iana.org/)</xs:documentation>
+			<xs:appinfo>
+				<label>Mime type</label>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="50"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="sizeInfo" type="ms:sizeInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on the size of the resource or of resource parts</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,348 @@
+{% extends "base.html" %}
+{% load get_icon %}
+
+{% block title %}
+  {{ resourceName }} &ndash; META-SHARE
+{% endblock %}
+
+{% block links %}
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/resource_view.css" />
+<link type="text/css" rel="stylesheet" href="{{ MEDIA_URL }}js/jquery.hoverscroll-0.2.4/jquery.hoverscroll.css" />
+{% endblock %}
+
+{% block description %}{{ description|truncatewords:30 }}{% endblock %}
+
+{% block keywords %}{{ resourceType }}, {{ mediaTypes|join:", " }}, {{ linguality_infos|join:", " }}, {{ resource.distributionInfo.get_availability_display }}, {{ license_types|join:", " }}{% endblock %}
+
+{% block content %}
+{% spaceless %}
+	<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.hoverscroll-0.2.4/jquery.hoverscroll.js"></script>
+	<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.expander.min.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			$('.readmore').expander({
+				slicePoint: 300,
+				expandText: 'Read More',
+				userCollapseText: 'Read Less',
+				expandEffect: 'show',
+				expandSpeed: 0,
+				collapseEffect: 'hide',
+				collapseSpeed: 0,
+                afterExpand: function() {
+                    $(this).find('.details').css({display: 'inline'});
+                } 
+			});
+		});
+	
+		$(document).ready(function(){  
+		
+			$('.my-list').hoverscroll({
+				vertical: false,
+	            fixedArrows: false,
+	            arrowsOpacity: 0.8,
+	            width: 273,
+	            height:24,
+        	});	
+		
+			$(".tab_content").hide();
+			$(".fields li:first-child").addClass("active");
+			var selected_tab = $(".fields li.active").find("a").attr("href");
+			$(selected_tab).fadeIn();
+			$(".fields li").click(function() {
+				$(".fields li").removeClass("active");
+				$(this).addClass("active");
+				$(".tab_content").hide();
+				var selected_tab = $(this).find("a").attr("href");
+				$(selected_tab).fadeIn();
+				return false;
+	  		});
+	  		
+			$(".textsubtab").hide();
+			$(".textsubfields li:first-child").addClass("active");
+			var selected_tab = $(".textsubfields li.active").find("a").attr("href");
+			$(selected_tab).fadeIn();
+			$(".textsubfields li").click(function() {
+				$(".textsubfields li").removeClass("active");
+				$(this).addClass("active");
+				$(".textsubtab").hide();
+				var selected_tab = $(this).find("a").attr("href");
+				$(selected_tab).fadeIn();
+				return false;
+	  		});
+	  		
+			$(".videosubtab").hide();
+			$(".videosubfields li:first-child").addClass("active");
+			var selected_tab = $(".videosubfields li.active").find("a").attr("href");
+			$(selected_tab).fadeIn();
+			$(".videosubfields li").click(function() {
+				$(".videosubfields li").removeClass("active");
+				$(this).addClass("active");
+				$(".videosubtab").hide();
+				var selected_tab = $(this).find("a").attr("href");
+				$(selected_tab).fadeIn();
+				return false;
+	  		});
+	  		
+	  		
+			$(".dataline.optional").hide();
+				$(".expandable").addClass("collapsed");
+				$(".expandable").click(function() {
+				if($(this).hasClass("collapsed")){
+				$(this).removeClass('collapsed');
+				$(this).addClass('expanded');
+				$(this).nextUntil(".title.component").show();
+				}
+				else{
+					$(this).removeClass('expanded');
+					$(this).addClass('collapsed');	
+					$(this).nextAll().each( function() {
+					if ($(this).filter('.title').length) {
+					return false;
+					}
+					$(this).filter('.optional').hide();
+					});
+				
+				}
+				});
+				
+				$(".more").addClass("collapsed");
+				$(".otherlang").hide();
+				$(".more").click(function() {
+					if($(this).hasClass("collapsed")){
+					$(this).removeClass('collapsed');
+					$(this).addClass('expanded');
+				}
+				else{
+					$(this).removeClass('expanded');
+					$(this).addClass('collapsed');	
+				}
+				
+				
+				$(this).next().toggle();
+			
+			});
+			
+			$(".contactcard").click(function() {				
+				$(this).next().toggle();
+				return false;				
+			});
+		});
+	</script>
+
+	<div class="top_box white_box">
+		<div id="stats" align="right">
+            {% for stat in LR_STATS %}
+                {%if "updated" in stat.action %}
+                    &nbsp;<div align=right style="float: right"><i>(Last modified: {{ stat.last }})</i>&nbsp;</div>
+                {% else %}
+                	<a href="#" class="tip">
+                    <img src="{{ MEDIA_URL }}stats/img/{{ stat.action }}_icon.gif"
+                    alt="Last {{ stat.action }}: {{ stat.last }}"/>
+                    <strong>{{ stat.count }}</strong>&nbsp;
+                    <span>Last {{ stat.action }}: {{ stat.last }}</span>
+                    </a>
+                    
+                {% endif %}
+            {% endfor %}
+        </div>        
+		
+		<h2>{{ resourceName }}{% get_icon resourceType %}</h2>
+	 			
+		{% ifnotequal other_res_names|length 0 %}
+			<div class='more'>View resource name in all available languages</div>
+			<div class='otherlang'>
+			{% for name in other_res_names %}<h3>{{ name }}</h3>{% endfor %} 
+			</div>
+		{% endifnotequal %}
+			
+			{% if res_short_names %}
+				<h3 class="shortnames"><i>{% for name in res_short_names %}{{ name }}<img src="{{ MEDIA_URL }}images/trenner.png" class="trenner" />{% endfor %}</i></h3> 
+				<div style="clear:both"></div>
+			{% endif %}
+			
+			{% if not attribution_details|join:"" == '' %}
+             <div class="attribution"><label>Attribution details:</label> {{ attribution_details|join:"<br /> " }}</div>
+            {% endif %}
+            {% for key, value in documentation_dict.items %}
+                {% for key1, value1 in value.items %}
+                    {% for key2, value2 in value1.items %}
+                        {% if "Citation" in key1 %}
+                            <div class="citation">
+                                <label>Please, acknowledge use of the resource with the following citation:</label><br/>
+                                {% if value2.Title %}
+                                      {% include "repository/resource_view/citation.html" with documentation=value2 type="Citation" %}
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            {% endfor %}
+
+            {% if islrn %}
+                <span style="font-size:14px;">
+                    <label>ISLRN: </label>{{ islrn }}
+                </span>
+            {% endif %}
+
+			{% if url %}
+			 	{% for address in url %}
+			 	    <h3 style="font-size:14px; margin-top: 1%;">
+						<label>
+							{{ address|urlize }}{% if not forloop.last %},{% endif %}
+						</label>
+					</h3>
+				{% endfor %}
+			{% endif %}
+			
+			{% if not 'NOT_DEFINED' in metaShareId %}<h4 class="identifier">{{ metaShareId }}</h4>{% endif %}
+			{% if identifier %}
+				<div style="display:block;">
+				<h4 style="float:left; padding:3px;">ID: </h4>
+				{% for id in identifier %}
+					<h4 class="identifier">{{ id }}</h4>
+		 		{% endfor %}
+		 		</div>
+	 		{% endif %}
+	 		
+		<h4 style="text-align:justify; margin-top: 5px" class="readmore desc">{{ description|linebreaksbr }}</h4>
+		
+		{% ifnotequal other_descriptions|length 0 %}
+			<div class='more'>View resource description in all available languages</div>
+			<div class='otherlang'>
+			{% for desc in other_descriptions %}<h4 style="text-align:justify" class="readmore">{{ desc|linebreaksbr }}</h4>{% endfor %} 
+			</div> 
+		{% endifnotequal %}
+		
+		<div style="clear: both;">
+			<a href="javascript:history.back();"><button class="span-12 button middle_button">&laquo; Back</button></a>
+		    <a href="{% url 'download' resource.storage_object.identifier %}">
+		       	<button class="span-4 button middle_button">Download</button>
+		    </a>
+		  	<a {% if LR_EDIT %} href="{{ LR_EDIT }}" {% else %} href="#" class="tip" {% endif %}>
+				<span class="edit">You don&rsquo;t have the permission to edit this resource.</span>
+		       	<button class="span-4 button {% if LR_EDIT %}middle_button{% else %}middle_gray_button{% endif %}">Edit Resource</button>
+		    </a>
+			<div style="clear: both;"></div>
+		</div>
+	</div>
+	
+	<div class="white_box column corner">
+        {% if distribution_dicts %}
+            {% for distribution in distribution_dicts %}
+                 {% include "repository/resource_view/distribution.html" with distribution_dict=distribution.Distribution count=distribution_dicts|length %}
+            {% endfor %}
+        {% endif %}
+		{% if contact_person_dicts %}
+			<label class='component'>Contact Person{{ contact_person_dicts|length|pluralize }}</label>
+			{% for contact_person in contact_person_dicts %}
+				 {% include "repository/resource_view/person.html" with person_dict=contact_person.Contact_person type="Contact Person" %}
+			{% endfor %}
+		{% endif %}
+	</div>
+		
+	<div class="column middle">
+		<div class="fields">
+				<ul>
+					{% ifequal resourceType "toolService" %}
+						<li><a href="#1">toolService{% get_icon "toolService" %}</a></li>
+					{% else %}
+						{% if resourceType == "lexicalConceptualResource" or resourceType == "languageDescription" %}
+							<li><a href="#0">{% get_icon resourceType %}</a></li>
+						{% endif %}
+						{% for type in mediaTypes %}
+							<li><a href="#{{forloop.counter}}">{% if mediaTypes|length < 4 %}{{type}}{% endif %}{% get_icon type %}</a></li>
+						{% endfor %}
+					{% endifequal %}
+				</ul>
+			</div>
+		<div class="white_box middle_box">
+		{% ifequal resourceType "toolService" %}
+			<div id="tabs_content_container">
+				<div id="1" class="tab_content">
+					{% include "repository/resource_view/media_info.html" with type='toolService' %}
+				</div>
+			</div>
+		{% else %}
+			<div id="tabs_content_container">
+			{% if resourceType == "lexicalConceptualResource" or resourceType == "languageDescription" %}
+				<div id="0" class="tab_content">
+					{% include "repository/resource_view/resource_type.html" with type=resourceType %}
+				</div>
+			{% endif %}
+			{% for type in mediaTypes %}				
+					<div id="{{forloop.counter}}" class="tab_content">
+						{% include "repository/resource_view/media_info.html" with type=type %}
+					</div>
+			{% endfor %}
+			</div>
+		{% endifequal %}
+		</div>
+	</div>
+
+	<div class="white_box column corner right-corner">
+
+		{% if resource_creation_dict %}
+			{% include "repository/resource_view/resource_creation.html" %}
+		{% endif %}
+		  
+		{% include "repository/resource_view/metadata.html" %}
+		
+		{% if version_dict %}
+			{% include "repository/resource_view/version.html" %}
+		{% endif %}
+		
+		{% if validation_dicts %}
+			{% include "repository/resource_view/validation.html" %}
+		{% endif %}
+		
+		{% if usage_dict %}
+			{% include "repository/resource_view/usage.html" %}
+		{% endif %}
+		
+		{% if relation_dicts %}
+			{% include "repository/resource_view/relation.html" %}
+		{% endif %}
+		
+		{% if documentation_dict %}
+		<label class="component">Documentation</label>
+			{% for key, value in documentation_dict.items %}
+				{% for key1, value1 in value.items %}
+					{% if "Samples_location" in key1 %}
+						 <div class="dataline">
+							<label>
+								<strong>Samples Location: </strong>{{ value1|urlizetrunc:23 }}
+							</label>
+						</div>
+					{% endif %}
+					{% if "Type_of_documentation_for_tools" in key1 %}
+						 <div class="dataline">
+							<label>
+								<strong>Tool Documentation: </strong>{{value1}}
+							</label>
+						</div>
+					{% endif %}						
+				{% endfor %}
+				{% for key1, value1 in value.items %}
+					{% for key2, value2 in value1.items %}				
+						{% if "Documentation" in key2 %}
+							<div class="separation"><hr/></div>
+							{% if value2.Title %}
+								{% include "repository/resource_view/documentation.html" with documentation=value2 type="Documentation" %}
+							{% else %}
+								<div class="dataline">
+									<label>
+										{{value2|urlizetrunc:23}}
+									</label>
+								</div>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				{% endfor %}
+			{% endfor %}
+		{% endif %}
+	
+	</div>
+
+{% include "repository/resource_view/recomm_view.html" %}
+{% endspaceless %}
+{% endblock %}

@@ -1,0 +1,34 @@
+{% spaceless %}
+
+{% if also_viewed or also_downloaded or search_rel_projects or search_rel_creators %}
+<div class="recommendations content_box" style="float: left">
+    {% if also_viewed %}
+	<div>
+		<span>People who looked at this resource also viewed the following:</span>
+		<ul>
+		{% for res in also_viewed %}
+			<li><a href="{{ res.url }}">{{ res.name }}</a></li>
+		{% endfor %}
+		</ul>
+	</div>
+    {% endif %}
+    {% if also_downloaded %}
+	<div>
+		<span>People who downloaded this resource also downloaded the following:</span>
+		<ul>
+		{% for res in also_downloaded %}
+			<li><a href="{{ res.url }}">{{ res.name }}</a></li>
+		{% endfor %}
+		</ul>
+	</div>
+    {% endif %}
+    {% if search_rel_projects %}
+	<div><a href="{{ search_rel_projects }}">Resources from the same project</a></div>
+    {% endif %}
+    {% if search_rel_creators %}
+	<div><a href="{{ search_rel_creators }}">Resources from the same creators</a></div>
+    {% endif %}
+</div>
+{% endif %}
+
+{% endspaceless %}

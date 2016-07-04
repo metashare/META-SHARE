@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">LexIn 2:e Swedish Lexicon</resourceName>
+      <resourceName lang="fr">LexIn 2:e (lexique suédois)</resourceName>
+      <description lang="en">The second edition of LEXin 2:e, a Swedish database used as the basis for a lexicon for immigrants, is now available via ELRA. Produced by Språkdata in Göteborg, Sweden, it consists of approximately 28,000 headwords and 21,000 senses, and contains explicit morphological information for every headword and syntactical information for all verbs and many adjectives. Each sense is illustrated by a paraphrase, as opposed to a formal definition. Derivational forms, phrases and idioms are also included. The format is flexible and can be customised to individual wishes within reasonable limits.</description>
+      <description lang="fr">La deuxième édition de LEXin 2:e est une base de données suédoise utilisée pour générer un lexique pour les étrangers résidents en Suède. Elle consiste en 28000 entrées principales (mots clés), 21000 signifiants et comporte de façon explicite des informations morphologiques pour chaque entrée. Elle comporte aussi des informations syntaxiques pour tous les verbes et de nombreux adjectifs. Chaque sens est illustré par des paraphrases et non pas par une simple définition formelle. Des formes dérivées, des phrases idiomatiques sont aussi incluses. Enfin, le format est suffisamment flexible pour permettre des adaptations à différents besoins.</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=702</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-L0007</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>ELRA_VAR</licence>
+         <restrictionsOfUse>commercialUse</restrictionsOfUse>
+         <fee>22000.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_VAR</licence>
+         <restrictionsOfUse>commercialUse</restrictionsOfUse>
+         <fee>22000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_VAR</licence>
+         <restrictionsOfUse>commercialUse</restrictionsOfUse>
+         <fee>15400.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_VAR</licence>
+         <restrictionsOfUse>commercialUse</restrictionsOfUse>
+         <fee>15400.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <availabilityStartDate>2000-10-10</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Valérie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <lastDateUpdated>2005-05-13</lastDateUpdated>
+   </versionInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>swe</languageId>
+                  <languageName>Swedish</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>no size available</size>
+                  <sizeUnit>other</sizeUnit>
+               </sizeInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

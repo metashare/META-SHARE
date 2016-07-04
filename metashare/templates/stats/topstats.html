@@ -1,0 +1,294 @@
+{% extends "base.html" %}
+
+{% block content %}
+<noscript><b>It seems JavaScript is either disabled or not supported by your browser.</b>
+    JavaScript should be enabled in order to support all functionalities.
+    Enable JavaScript by changing your browser options, and then try again.
+</noscript>
+{% if geovisits|length > 0 %}
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    try {
+        google.load('visualization', '1', {packages: ['geochart']});
+        google.setOnLoadCallback(drawVisualization);
+    } catch ( e ) {
+        // error calling Google occured
+    }
+    var data; 
+    var setOn = 0;
+    function drawVisualization() {
+        var data = google.visualization.arrayToDataTable([
+                ['Country', 'Count'],
+                {% for geoinfo in geovisits %}
+                    {% if geoinfo.0|length > 0 %}
+                        ['{{ geoinfo.0 }}', {{ geoinfo.1 }}],
+                    {% endif %}
+                {% endfor %}
+                ]);
+        var options = {width: 300, legend: false, colorAxis: {colors: ['#FF6600']}}; 
+        options["datalessRegionColor"] = 'efefef'; 
+
+        var geochart = new google.visualization.GeoChart(
+            document.getElementById('googlemap'));
+            google.visualization.events.addListener(geochart, 'select',
+            function () {
+               var selection = geochart.getSelection()[0];
+               var countrycode = data.getValue(selection.row, 0);
+               window.location.replace("{% url 'frontpage' %}stats/top/?view={{ view }}&country="+countrycode);
+            });
+      
+        geochart.draw(data, options);
+        
+    }
+</script>
+{% endif %}
+
+<script language="javascript">
+$(document).ready(function(){
+  $("div.filter").each(function() {
+    var allDds = $(this).children("div").not('.subresult').nextUntil("div.accordion");
+    if (allDds.length > 4) {
+	var hideableDds = allDds.has("a.addableFacet");
+	if (hideableDds.length > 1) {
+        hiddenDds = hideableDds.slice(
+          Math.max(0, 4 - (allDds.length - hideableDds.length))).hide();
+        var moreTxt = 'more', lessTxt = 'less';
+        hiddenDds.last().after($("<div><a href='#'>" + moreTxt + "</a></div>")
+            .children().first().click({hiddenDds: hiddenDds}, function(e) {
+                e.preventDefault();
+                $(this).text($(this).text() == moreTxt ? lessTxt : moreTxt);
+                e.data.hiddenDds.slideToggle();
+              }).parent());
+      }
+    }
+  });
+  $("div.filter").hide();
+  $("div.accordion").each(function(){
+      $(this).next("div.filter").find("a.removableFacet").parents("div.filter").show();
+      addStatus($(this));
+      $(this).next("div.filter").find("a.addFilter").parents("div.filter").show();
+      addStatus($(this));
+  });
+
+  $("div.accordion.expanded").each(function(){
+ 	if( $(this).next("div.filter").find("a.removableFacet").length > 0 ){
+ 		$(this).addClass("selected");
+ 	}
+ 	if( $(this).next("div.filter").find("a.addFilter").length > 0 ){
+ 		$(this).addClass("selected");
+ 	}
+  });
+
+  $("div.accordion").click(function() {
+      if($(this).next("div.filter").attr("style") == "display: none;" ){
+          $(this).addClass('expanded');
+          $(this).removeClass('collapsed');}
+      else {
+          $(this).addClass('collapsed');
+          $(this).removeClass('expanded');
+      }
+      $(this).next("div.filter").slideToggle();
+  });
+});
+
+function addStatus(filter){
+  if(filter.next("div.filter").attr("style") == "display: none;" ){
+    filter.addClass('collapsed');
+    filter.removeClass('expanded');
+  }
+  else{
+    filter.addClass('expanded');
+    filter.removeClass('collapsed');
+  }
+}
+</script>
+
+<link rel="stylesheet" href="{{ MEDIA_URL }}/css/view_stats.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="{{ MEDIA_URL }}/css/results.css" type="text/css" media="screen" />
+
+<div class='tab-container'>
+ <ul class='etabs'>
+   <li class='tab tab-nobr'>META-SHARE node visits statistics</li>
+    <li class='tab'><a href="{% url 'frontpage' %}stats/usage/">Statistics on resource metadata</a></li>
+   {% if user.username and myres %}
+        <li class='tab'><a href="{% url 'frontpage' %}stats/mystats/">My resources</a></li>
+   {% endif %}   
+ </ul>
+</div>
+
+<div class="content_tab"> 
+	<div style="margin-left: 20px; padding-top: 10px;">
+	    <form class="form_helper" name="topform" id="topform" action="{% url 'frontpage' %}stats/top/" method="get">
+            <h4>Show the <select style="color: #000; background: #eee" name='view' onchange="topform.submit();">
+            
+            <option value='topviewed' style="background-image: url({{ MEDIA_URL }}stats/img/view_icon.gif); background-repeat: no-repeat; padding-left: 20px;"
+            > Most Viewed Resources
+            
+            <option value='topqueries' style="background-image: url({{ MEDIA_URL }}stats/img/retrieve_icon.gif); background-repeat: no-repeat; padding-left: 20px;"
+            {% ifequal view "topqueries" %}
+                    selected
+            {% endifequal %}
+            > Top Queries
+            
+            <option value='latestqueries' style="background-image: url({{ MEDIA_URL }}stats/img/retrieve_icon.gif); background-repeat: no-repeat; padding-left: 20px;"
+            {% ifequal view "latestqueries" %} 
+                selected
+            {% endifequal %}
+            > Latest Queries
+            
+            <option value='topdownloaded' style="background-image: url({{ MEDIA_URL }}stats/img/download_icon.gif); background-repeat: no-repeat; padding-left: 20px;"
+            {% ifequal view "topdownloaded" %}
+                    selected
+            {% endifequal %}
+            > Top Downloaded Resources
+            
+            <option value='latestupdated' style="background-image: url({{ MEDIA_URL }}stats/img/update_icon.gif); background-repeat: no-repeat; padding-left: 20px;"
+            {% ifequal view "latestupdated" %}
+                    selected
+            {% endifequal %}
+            > Latest Updated Resources
+            </select>
+            </h4>
+	</form>       
+    </div>
+
+   <div id=content>
+   {% if topdata|length <= 0 and countrycode == '' and last == '' %}
+       <ul class=errorlist>No data found</ul>
+   {% else %}
+     {% if not "late" in view or geovisits|length > 0 %}
+      <div class="left_box">
+	  <div class="filters">
+	  <h4>Filter by:</h4>
+	  <div id="searchFilters">
+	    {% if not "late" in view %}
+	        <div class="accordion"><a href="#" onclick="return false">Date</a></div>
+            <div class="filter">
+                {% with "day week month year" as list %}
+                    {% for date in list.split %} 
+                        <div>
+                        {% ifequal date last %}
+                            <a style="vertical-align: top" href="?view={{ view }}&country={{ countrycode }}" class="addFilter">
+                        {% else %}
+                            <a style="vertical-align: top" href="?view={{ view }}&last={{ date }}&country={{ countrycode }}" class="deleteFilter">
+                        {% endifequal %}
+                        last {{ date }}</a></div>
+                    {% endfor %}
+                {% endwith %}
+            </div>
+	    {% endif %}
+	    
+	    {% if geovisits|length > 0 %}
+	        <div class="accordion"><a href="#" onclick="return false">Provenance of {{ visitstitle }}</a></div>
+            <div class="filter">
+                {% for geoinfo in geovisits %}
+                <div style="vertical-align: top">
+                        {% ifequal geoinfo.0 countrycode %}
+                            <a style="vertical-align: top" href="?view={{ view }}&last={{ last }}" class="addFilter">
+                        {% else %}
+                            <a style="vertical-align: top" href="?view={{ view }}&country={{ geoinfo.0 }}&last={{ last }}" class="deleteFilter">
+                        {% endifequal %}
+                        {{ geoinfo.2 }} 
+                        <img height=20 src="{{ MEDIA_URL }}css/international_flags/iso/32x32/flag-{{ geoinfo.0|lower }}.png"></a>
+                        &nbsp;({{ geoinfo.1 }})
+                                      
+                </div>
+                {% endfor %}
+            </div>
+            <div id="googlemap" style="margin-left: -20px"></div>
+            <div style="font-size:7pt;text-align:left">* This product includes GeoLite data created by MaxMind, available from http://maxmind.com/ and a Google Maps chart.</div>
+        {% endif %}  
+       </div>{# end searchFilters #}
+      </div>{# end filters #}
+     </div>{# end left_box #}
+     
+     {% if topdata|length <= 0 %}
+        <ul class=errorlist>No data matched</ul>
+     {% endif %}
+    {% endif %}
+   	
+    <div class="content_box">  	     
+    <div class="results"> 
+    {% if offset != 0 or has_next %}
+        <p>
+	     {% if offset != 0 %}
+	         <a href="?view={{ view }}&offset={{ offset|add:-10 }}&last={{ last }}&country={{ countrycode }}">&laquo;&nbsp;Previous</a>
+	     {% else %}
+	         &laquo;&nbsp;Previous
+	     {% endif %}
+            |
+         {% if has_next %}
+            <a href="?view={{ view }}&offset={{ offset|add:10 }}&last={{ last }}&country={{ countrycode }}">Next&nbsp;&raquo;</a>
+	     {% else %}
+	         Next&nbsp;&raquo;
+	     {% endif %}
+	    </p>
+	{% endif %}
+    
+    {% spaceless %}
+{% load resource_languages %}
+{% load resource_media_types %}
+{% load resource_access_stats %}
+{% load get_media_url %}
+{% load get_icon %}
+
+{% for object in topdata %}
+    <div>
+    <div class="itemcounter">{{ forloop.counter|add:offset }}.</div>
+    {% if "quer" in view %}
+         {% ifnotequal object.2 "" %}  
+             <div class=lasttime>{{ object.2 }}</div>
+         {% endifnotequal %}           
+ 
+         <div class="resourceName">
+         <a href="{% url 'frontpage' %}repository/search/?{{ object.4 }}"><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/zoom.png"> {{ object.0 }}</a>
+            {% ifnotequal object.1 "" %}  
+                &nbsp;&nbsp;filter by: <div style="display: inline; font-size: 8pt; color: #000">{{ object.1 }}</div>
+            {% endifnotequal %}
+            <div class="accessStats">
+                <div style="display: inline; font-size: 12pt; color: #000">&nbsp;{{ object.3 }}</div> 
+                {% ifequal view "latestqueries" %}
+                    result{{object.3|pluralize}}
+                {% endifequal %}
+                {% ifequal view "topqueries" %}
+                    time{{object.3|pluralize}}
+                {% endifequal %}
+            </div>
+        </div>
+     
+    {% else %}   
+        {% ifnotequal object.1 "" %}
+            <div class=lasttime>{{ object.1 }}</div>
+        {% endifnotequal %}
+        
+        <div class="resourceName">
+        {% get_icon object.0.resourceComponentType.as_subclass.resourceType %}
+        &nbsp;<a href="{{ object.0.get_absolute_url }}"{% ifnotequal object.0.identificationInfo.get_default_description "METASHARE_NULL" %} title="{{ object.0.identificationInfo.get_default_description|escape }}"{% endifnotequal %}>{{ object.0 }}</a>
+        
+        &nbsp;{% resource_media_types object.0.resourceComponentType.as_subclass %} 
+        
+        <div class="accessStats">
+          <img src="{% get_media_url %}stats/img/download_icon.gif" alt="Number of downloads" title="Number of downloads" />&nbsp;{{ object.0.storage_object.identifier|get_download_count }}
+          <img src="{% get_media_url %}stats/img/view_icon.gif" alt="Number of views" title="Number of views" />&nbsp;{{ object.0.storage_object.identifier|get_view_count }}
+        </div>
+        <ul>
+          {% resource_languages object.0.resourceComponentType.as_subclass %}  
+        </ul>
+        </div>
+     
+     {% endif %}  
+     </div>
+{% endfor %}
+{% endspaceless %}
+
+    </div> {# end results #}
+  </div>{# end content_box #}
+</div>{# end id=content #}
+</div>
+
+{% endif %} 
+{% endblock %}
+
+  
+  
+

@@ -1,0 +1,30 @@
+{% extends "admin/base_site.html" %}
+
+{% block breadcrumbs %}
+{% include "breadcrumbs.html" %}
+{% endblock %}
+
+{% block content %}
+<h3>Remove a user from the following editor group{{ selected_editorgroups|pluralize }}:</h3>
+
+<div class="content_box">
+<table class='editor-group'>
+  <tr><th>Editor Group{{ selected_editorgroups|pluralize }}</th><th>Members</th><th>Managers</th></tr>
+  {% for editor_group in selected_editorgroups %}
+  <tr><td>{{ editor_group }}</td><td>{{ editor_group.get_members|join:", "}}</td><td>{{ editor_group.get_managers|join:", "}}</td></tr>
+  {% endfor %}
+<table>
+</div>
+
+<div class="content_box">
+<form method="post" action="{{ path }}">{% csrf_token %}
+<table>
+{{ form }}
+</table>
+
+<input type="hidden" name="action" value="remove_user_from_editor_group"/>
+<input type="submit" name="remove_user_profile_from_editor_group" value="Remove"/>
+<input type="submit" name="cancel" value="Cancel"/>
+</form>
+</div>
+{% endblock content %}

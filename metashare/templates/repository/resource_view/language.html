@@ -1,0 +1,65 @@
+{% load script_suppressed %}
+{% spaceless %}
+
+<label class='title'>Languages</label>
+<div class="dataline">
+	{% for key, value in languages.items %}
+		{% for key1, value1 in value.items %}
+				{% if key1 == "Language_name" %}
+					<label class="subtitle" title="{{value.Language_identifier}}">
+						{{ value1 }}
+						{# Take care of size #}
+						{% if "Size_per_language" in value %} 
+							{% if value.Size_per_language %}
+								{% include "repository/resource_view/size.html" with size=value.Size_per_language type="sub" %}
+							{% endif %}
+						{% endif %}						
+					</label>
+					{% if "Language_script" in value %} 
+						{% if value.Language_script %}
+							<div class="dataline indented" {% if value.Language_script == value1|script_suppressed %}style="display: none"{% endif %}>
+								<label class="dataline"><strong>Language Script: </strong>{{value.Language_script}}
+							     </label> 
+						    </div>
+						{% endif %}
+					{% endif %}
+					{% if "Region" in value %}
+                          {% if value.Region %}
+                                  <div class="dataline indented">
+                                          <label class="dataline"><strong>Region: </strong>{{value.Region}}
+                                  </label>
+                          </div>
+                          {% endif %}
+                   {% endif %}
+                   {% if "Variants" in value %}
+                         {% if value.Variants %}
+                                 <div class="dataline indented">
+                                         <label class="dataline"><strong>Variants: </strong>{{value.Variants}}
+                                 </label>
+                         </div>
+                         {% endif %}
+                   {% endif %}
+					{# Take care of language variety #}
+					{% if "Language_variety" in value %}
+						{% for key1, value1 in value.items %}
+							{% if "Language_variety" in key1 %}
+								<div class="dataline indented">
+									<label class="dataline"><strong>Variety: </strong>
+									{{ value1.Language_variety_name }}
+									{% if value1.Language_variety_type %}							
+										(Type: {{ value1.Language_variety_type }})							
+									{% endif %} 
+									{% if value1.Size_per_language_variety %}
+										{% include "repository/resource_view/size.html" with size=value1.Size_per_language_variety type="sub" %}
+									{% endif %}
+									</label> 
+								</div>
+							{% endif %}
+						{% endfor %}						
+					{% endif %} 
+				{% endif %}
+		{% endfor %}
+	{% endfor %}
+</div>
+
+{% endspaceless %}

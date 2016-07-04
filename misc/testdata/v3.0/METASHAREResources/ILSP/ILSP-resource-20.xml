@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+      <identificationInfo>
+        <resourceName lang="en">Database of Bulgarian speech recordings</resourceName>
+        <description lang="en">Database of recordings of Bulgarian language annotated in phoneme level. Manual validation.</description>
+        <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      </identificationInfo>
+      <distributionInfo>
+        <availability>available-restrictedUse</availability>
+          <licenceInfo>
+            <licence>proprietary</licence>
+            <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+          </licenceInfo>
+      </distributionInfo>
+      <contactPerson>
+        <surname lang="en">Chalamandaris</surname>
+        <givenName lang="en">Aimilios</givenName>
+        <sex>male</sex>
+          <communicationInfo>
+            <email>achalam@ilsp.athena-innovation.gr</email>
+            <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=69&amp;Itemid=156</url>
+            <telephoneNumber>+302106875406</telephoneNumber>
+            <faxNumber>+302106854270</faxNumber>
+          </communicationInfo>
+        <position>Scientific Associate</position>
+          <affiliation>
+            <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+            <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+              <communicationInfo>
+                <email>www@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/</url>
+                <address>Artemidos 6 &amp; Epidavrou</address>
+                <zipCode>GR-15125</zipCode>
+                <city>Maroussi</city>
+                <country>GR</country>
+                <telephoneNumber>+302106875300</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+                <faxNumber>+302106856794</faxNumber>
+              </communicationInfo>
+          </affiliation>
+      </contactPerson>
+      <metadataInfo>
+        <metadataCreationDate>2012-05-16</metadataCreationDate>
+          <metadataCreator>
+            <surname lang="en">Desipri</surname>
+            <givenName lang="en">Elina</givenName>
+            <sex>female</sex>
+              <communicationInfo>
+                <email>elina@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=23&amp;Itemid=156</url>
+                <telephoneNumber>+302106875442</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+                <faxNumber>+302106856794</faxNumber>
+              </communicationInfo>
+            <position>Scientific Associate</position>
+              <affiliation>
+                <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                  <communicationInfo>
+                    <email>www@ilsp.athena-innovation.gr</email>
+                    <url>http://www.ilsp.gr/</url>
+                    <address>Artemidos 6 &amp; Epidavrou</address>
+                    <zipCode>GR-15125</zipCode>
+                    <city>Maroussi</city>
+                    <country>GR</country>
+                    <telephoneNumber>+302106875300</telephoneNumber>
+                    <faxNumber>+302106854270</faxNumber>
+                    <faxNumber>+302106856794</faxNumber>
+                  </communicationInfo>
+              </affiliation>
+          </metadataCreator>
+        <source>META-SHARE/ILSP</source>
+        <metadataLastDateUpdated>2012-05-17</metadataLastDateUpdated>
+      </metadataInfo>
+      <validationInfo>
+        <validated>true</validated>
+        <validationType>content</validationType>
+        <validationMode>mixed</validationMode>
+        <validationExtent>full</validationExtent>
+          <validator>
+              <organizationInfo>
+                <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                  <communicationInfo>
+                    <email>www@ilsp.athena-innovation.gr</email>
+                    <url>http://www.ilsp.gr/</url>
+                    <address>Artemidos 6 &amp; Epidavrou</address>
+                    <zipCode>GR-15125</zipCode>
+                    <city>Maroussi</city>
+                    <country>GR</country>
+                    <telephoneNumber>+302106875300</telephoneNumber>
+                    <faxNumber>+302106854270</faxNumber>
+                    <faxNumber>+302106856794</faxNumber>
+                  </communicationInfo>
+              </organizationInfo>
+          </validator>
+      </validationInfo>
+      <usageInfo>
+          <foreseenUseInfo>
+            <foreseenUse>nlpApplications</foreseenUse>
+            <useNLPSpecific>texToSpeechSynthesis</useNLPSpecific>
+          </foreseenUseInfo>
+          <actualUseInfo>
+            <actualUse>nlpApplications</actualUse>
+            <useNLPSpecific>texToSpeechSynthesis</useNLPSpecific>
+          </actualUseInfo>
+      </usageInfo>
+      <resourceCreationInfo>
+          <resourceCreator>
+              <organizationInfo>
+                <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                  <communicationInfo>
+                    <email>www@ilsp.athena-innovation.gr</email>
+                    <url>http://www.ilsp.gr/</url>
+                    <address>Artemidos 6 &amp; Epidavrou</address>
+                    <zipCode>GR-15125</zipCode>
+                    <city>Maroussi</city>
+                    <country>GR</country>
+                    <telephoneNumber>+302106875300</telephoneNumber>
+                    <faxNumber>+302106854270</faxNumber>
+                    <faxNumber>+302106856794</faxNumber>
+                  </communicationInfo>
+              </organizationInfo>
+          </resourceCreator>
+          <fundingProject>
+            <projectName lang="und">Transfer and Adaptation of Text-to-Speech Technology to the Bulgarian Language and its Application in Cultural Tools with Emphasis on Accessibility</projectName>
+            <fundingType>euFunds</fundingType>
+            <funder>	INTERREG IIIA / PHARE CBC GREECE – BULGARIA </funder>
+            <fundingCountry>Greece</fundingCountry>
+            <projectStartDate>2005-10-01</projectStartDate>
+            <projectEndDate>2007-09-30</projectEndDate>
+          </fundingProject>
+      </resourceCreationInfo>
+      <relationInfo>
+        <relationType>isSpokenVersionOf</relationType>
+          <relatedResource>
+            <targetResourceNameURI>Database of Bulgarian sentences</targetResourceNameURI>
+          </relatedResource>
+      </relationInfo>
+      <resourceComponentType>
+          <corpusInfo>
+            <resourceType>corpus</resourceType>
+              <corpusMediaType>
+                  <corpusAudioInfo>
+                    <mediaType>audio</mediaType>
+                      <lingualityInfo>
+                        <lingualityType>monolingual</lingualityType>
+                      </lingualityInfo>
+                      <languageInfo>
+                        <languageId>bg</languageId>
+                        <languageName>Bulgarian</languageName>
+                      </languageInfo>
+                      <modalityInfo>
+                        <modalityType>spokenLanguage</modalityType>
+                      </modalityInfo>
+                      <audioSizeInfo>
+                          <sizeInfo>
+                            <size>6</size>
+                            <sizeUnit>hours</sizeUnit>
+                          </sizeInfo>
+                      </audioSizeInfo>
+                      <audioContentInfo>
+                        <speechItems>phoneticallyRichSentences</speechItems>
+                        <speechItems>phoneticallyRichWords</speechItems>
+                      </audioContentInfo>
+                      <settingInfo>
+                        <naturality>prompted</naturality>
+                        <conversationalType>monologue</conversationalType>
+                        <audience>no</audience>
+                        <interactivity>nonInteractive</interactivity>
+                      </settingInfo>
+                      <audioFormatInfo>
+                        <mimeType>audio/PCMA</mimeType>
+                        <signalEncoding>ADPCM</signalEncoding>
+                        <samplingRate>44100</samplingRate>
+                        <quantization>16</quantization>
+                        <byteOrder>littleEndian</byteOrder>
+                        <signConvention>unsignedInteger</signConvention>
+                        <numberOfTracks>1</numberOfTracks>
+                        <recordingQuality>veryHigh</recordingQuality>
+                      </audioFormatInfo>
+                      <domainInfo>
+                        <domain>general</domain>
+                      </domainInfo>
+                      <recordingInfo>
+                        <recordingDeviceType>hardDisk</recordingDeviceType>
+                        <recordingPlatformSoftware>CUBASE</recordingPlatformSoftware>
+                        <recordingEnvironment>anechoicChamber</recordingEnvironment>
+                        <sourceChannel>airflow</sourceChannel>
+                          <recorder>
+                              <organizationInfo>
+                                <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                                <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                                  <communicationInfo>
+                                    <email>www@ilsp.athena-innovation.gr</email>
+                                    <url>http://www.ilsp.gr/</url>
+                                    <address>Artemidos 6 &amp; Epidavrou</address>
+                                    <zipCode>GR-15125</zipCode>
+                                    <city>Maroussi</city>
+                                    <country>GR</country>
+                                    <telephoneNumber>+302106875300</telephoneNumber>
+                                    <faxNumber>+302106854270</faxNumber>
+                                    <faxNumber>+302106856794</faxNumber>
+                                  </communicationInfo>
+                              </organizationInfo>
+                          </recorder>
+                      </recordingInfo>
+                      <captureInfo>
+                        <capturingDeviceType>closeTalkMicrophone</capturingDeviceType>
+                        <capturingEnvironment>complex</capturingEnvironment>
+                      </captureInfo>
+                      <creationInfo>
+                          <originalSource>
+                            <targetResourceNameURI>Database of Bulgarian sentences</targetResourceNameURI>
+                          </originalSource>
+                        <creationMode>mixed</creationMode>
+                      </creationInfo>
+                  </corpusAudioInfo>
+              </corpusMediaType>
+          </corpusInfo>
+      </resourceComponentType>
+  </resourceInfo>

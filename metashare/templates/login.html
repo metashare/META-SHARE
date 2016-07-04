@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}{% if title %}{{ title }}{% else %}Log in{% endif %} &ndash; META-SHARE{% endblock %}
+
+{% block messages %}
+{% if form.errors %}
+<p class="error">Your username and password didn't match. Please try again.</p>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<h2>User Authentication</h2>
+<div class="content_box">
+<form class="form_helper" method="post" action="{% url 'login' %}">
+  {% csrf_token %}
+  <table>
+    {{ form.as_table }}
+    <tr>
+      <td></td>
+      <td>
+        <input class="button middle_button" type="submit" value="Login" />
+      </td>
+    </tr>
+  </table>
+  <input type="hidden" name="next" value="{{ next }}" />  
+</form>
+<p><a href="{% url 'reset' %}">Forgotten your username or password? Click here to reset your password.</a></p>
+<p><a href="{% url 'create' %}">Don&rsquo;t have an account, yet? Click here to create one.</a></p>
+</div>
+{% endblock %}

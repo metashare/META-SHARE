@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if not myres %}
+    <script>window.location.replace("{% url 'frontpage' %}stats/top/");</script>
+{% endif %}
+<link rel="stylesheet" href="{{ MEDIA_URL }}/css/view_stats.css" type="text/css" media="screen" />
+
+<div class='tab-container'>
+ <ul class='etabs'>
+    <li class='tab'><a href="{% url 'frontpage' %}stats/top/">META-SHARE node visits statistics</a></li>
+    <li class='tab'><a href="{% url 'frontpage' %}stats/usage/">Statistics on resource metadata</a></li>
+    <li class='tab tab-nobr'>My resources</li>
+ </ul>
+</div>
+
+
+<div class="content_tab"> 
+{% if data|length <= 0 %}
+ 	<div class="content_box">No data found</div>
+{% else %}
+<div class="results">
+<table align=middle class="result_table"  cellspacing=0 cellpadding=0 style="width: 100%">
+    <tr class="result_table_head">
+        <th width="60%" nowrap>Resource name</th>
+        <th width="5%">Published</th>
+        <th width="15%">Actions</th>
+        <th width="5%" nowrap>Seen by users</th>
+        <th width="20%" nowrap>Last access</th>
+    </tr>
+{% spaceless %}
+{% load get_icon %}
+
+   {% for lr in data %} 
+    <tr class="{% cycle odd,even %}">
+        <td class=resourceName>
+        <a href="{% url 'frontpage' %}editor/repository/resourceinfotype_model/{{ lr.0 }}/"><img src="{{ MEDIA_URL }}admin/img/admin/icon_changelink.gif"></a>&nbsp;
+        {% get_icon lr.2.resourceComponentType.as_subclass.resourceType %}&nbsp;
+        
+        {% if lr.3 == 'p' %}
+            <a href="{{ lr.1 }}">{{ lr.2 }}</a></td><td>YES
+        {% else %}
+            {{ lr.2 }}</td><td>NO
+        {% endif %}           
+        </td>
+        <td align=right nowrap>
+            {% for stat in lr.4 %}
+                <img src="{{ MEDIA_URL }}stats/img/{{ stat.action }}_icon.gif"
+                    alt="Last {{ stat.action }}: {{ stat.last }}" title="Last {{ stat.action }}: {{ stat.last }}" />
+                    <b>{{  stat.count }}</b>&nbsp;
+            {% endfor %}
+        </td>
+        <td valign=bottom align=right nowrap>
+            {{ lr.5 }}
+        </td>
+        <td valign=bottom align=right nowrap>
+            {{ lr.6 }}
+        </td>
+        
+    <tr>
+{%endfor%}
+{% endspaceless %}
+
+</table>
+</div>
+</div>
+{% endif %}
+
+{% endblock %}
+

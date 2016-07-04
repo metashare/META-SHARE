@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">French Source Lexicon</resourceName>
+      <resourceName lang="fr">Lexique source du français</resourceName>
+      <description lang="en">Oxford University Press currently holds extensive databases of morphological and phonetic data for Spanish, French, and Italian. Each headword lemma is provided with a full listing of its possible syntactic forms and spelling variants, along with information on their relationship to the headword form. In addition, a representation of the IPA pronunciation is given for every form. There is also information on domains in which the headwords are used, e.g. Computing, Engineering, Zoology. The lexicon is provided in SGML.Coverage:	- over 90,000 headwords/lemmas- over 400,000 wordforms- over 1,000 abbreviations- over 35,000 proper nounsFeatures:- clear indication of preferred orthographic forms, with cross-references from variants- exceptional coverage of place names, both French and worldwide- high-profile French sourcesFormat: Available in SGML</description>
+      <description lang="fr">Oxford University Press dispose de bases étendues de données morphologiques et phonétiques pour l’espagnol, le français et l’italien. Chaque entrée de lemme est fournie avec une liste complète des ses formes syntaxiques possibles et variantes d’épellation, ainsi que l’information en relation avec la forme en entrée. De plus, une représentation phonétique en IPA est donnée pour chaque forme. Une information sur les domaines d’usage est également donnée (par exemple, Informatique, Ingénierie, Zoologie, etc). Ce lexique est fourni en SGML.Couverture :	- plus de 90 000 entrées/lemmes- plus de 400 000 formes- plus de 1 000 abréviations- plus de 35 000 noms propresType d’information :- indication claire des formes orthographiques de prédilection, avec références croisées entre les variantes- couverture exceptionnelle des noms de lieux, à la fois en France et dans le monde- sources françaises hautement reconnuesFormat : disponible en SGML</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=838</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-L0062</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>10000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>7000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <availabilityStartDate>2006-03-13</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Valérie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <lastDateUpdated>2006-04-03</lastDateUpdated>
+   </versionInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>fre/fra</languageId>
+                  <languageName>French</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>no size available</size>
+                  <sizeUnit>other</sizeUnit>
+               </sizeInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

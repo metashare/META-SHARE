@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">Olympic Sports (Termcat)</resourceName>
+      <resourceName lang="fr">Sports olympiques (Termcat)</resourceName>
+      <description lang="en">Official terminology of Olympic GamesCards available: 14 300Languages: Catalan, Spanish, French, EnglishFormat: ASCIIMedium: floppy diskCard Description: 29 thematic domains are proposed (boxing, swimming, athletics, football...). Each card in this terminological database contains a definition, abbreviations, notes, grammatical labels (category, gender and number), synonyms.</description>
+      <description lang="fr">Terminologie officielle des Jeux Olympiques.Fiches disponibles : 14300Langues : Catalan, Espagnol, Français, AnglaisFormat: ASCIISupport : disquetteDescription de la fiche : 29 domaines thématiques sont proposés (boxe, natation, athlétisme, football...). Chaque fiche de cette base terminologique contient une définition, des abréviations, des notes, des étiquettes grammaticales (catégorie, genre et nombre), synonymes.</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=72</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-T0093</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>Please contact us for further information</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>Please contact us for further information</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>Please contact us for further information</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>Please contact us for further information</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_VAR</licence>
+         <restrictionsOfUse>commercialUse</restrictionsOfUse>
+         <fee>Please contact us for further information</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_VAR</licence>
+         <restrictionsOfUse>commercialUse</restrictionsOfUse>
+         <fee>Please contact us for further information</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_VAR</licence>
+         <restrictionsOfUse>commercialUse</restrictionsOfUse>
+         <fee>Please contact us for further information</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_VAR</licence>
+         <restrictionsOfUse>commercialUse</restrictionsOfUse>
+         <fee>Please contact us for further information</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <availabilityStartDate>1997-01-23</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Valérie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <lastDateUpdated>2010-06-08</lastDateUpdated>
+   </versionInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>terminologicalResource</lexicalConceptualResourceType>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>cat</languageId>
+                  <languageName>Catalan</languageName>
+                  <languageVarietyInfo>
+                     <languageVarietyType>dialect</languageVarietyType>
+                     <languageVarietyName>Valencian</languageVarietyName>
+                     <sizePerLanguageVariety>
+                        <size>2</size>
+                        <sizeUnit>gb</sizeUnit>
+                     </sizePerLanguageVariety>
+                  </languageVarietyInfo>
+               </languageInfo>
+               <languageInfo>
+                  <languageId>eng</languageId>
+                  <languageName>English</languageName>
+               </languageInfo>
+               <languageInfo>
+                  <languageId>fre/fra</languageId>
+                  <languageName>French</languageName>
+               </languageInfo>
+               <languageInfo>
+                  <languageId>spa</languageId>
+                  <languageName>Spanish</languageName>
+                  <languageVarietyInfo>
+                     <languageVarietyType>dialect</languageVarietyType>
+                     <languageVarietyName>Valencian</languageVarietyName>
+                     <sizePerLanguageVariety>
+                        <size>2</size>
+                        <sizeUnit>gb</sizeUnit>
+                     </sizePerLanguageVariety>
+                  </languageVarietyInfo>
+               </languageInfo>
+               <sizeInfo>
+                  <size>no size available</size>
+                  <sizeUnit>other</sizeUnit>
+               </sizeInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

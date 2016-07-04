@@ -1,0 +1,38 @@
+{% load replace %}
+
+{% spaceless %}
+
+<label class='title'>Content</label>
+
+{% for key, value in image.items %}
+	{% if "Type_of_image_content" in key %}
+			 <div class="dataline indented">
+				<label>
+					<strong>Content Type: </strong> {{ value }}
+				</label>
+			</div>
+	{% endif %}
+	
+	{% if "Text_included_in_image" in key %}
+			 <div class="dataline indented">
+				<label>
+					<strong>Text included: </strong> {{ value }}
+				</label>
+			</div>
+	{% endif %}	
+{% endfor %}		
+
+{% for key, value in image.items %}
+		{% if key == "Static_element" %}
+			<label class='subtitle'>Static Element</label>
+			{% for key1, value1 in value.items %}
+				<div class="dataline indented">
+					<label>
+						<strong>{{ key1|rep }}:</strong> {{ value1 }}
+					</label>
+				</div>
+			{% endfor %}
+		{% endif %}
+{% endfor %}
+
+{% endspaceless %}

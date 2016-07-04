@@ -1,0 +1,39 @@
+{% spaceless %}
+
+<label class='title'>Content</label>
+
+{% for key, value in content.items %}	
+	{% if "Speech_items" in value %}
+		 <div class="dataline indented">
+			<label>
+				<strong>Speech items:</strong> {{ value.Speech_items }}
+			</label>
+		</div>
+	{% endif %}
+	{% if "Non_speech_items" in value %}
+		 <div class="dataline indented">
+			<label>
+				<strong>Non-speech items:</strong> {{ value.Non_speech_items }}
+			</label>
+		</div>
+	{% endif %}
+
+	{% if "Textual_description" in value %}
+		 <div class="dataline indented">
+			<label>
+				<strong>Description:</strong> {{ value.Textual_description }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if "Noise_level" in value %}
+		 <div class="dataline indented">
+			<label>
+				<strong>Noise Level:</strong> {{ value.Noise_level }}
+			</label>
+		</div>
+	{% endif %}
+	
+{% endfor %}
+
+{% endspaceless %}

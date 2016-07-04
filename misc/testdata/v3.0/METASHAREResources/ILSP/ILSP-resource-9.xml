@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+      <identificationInfo>
+        <resourceName lang="en">MUSE-NE corpus</resourceName>
+        <description lang="en">Written corpus, general domain (news-politics-economics), monolingual; 97.775 tokens; XML (sources &amp; gold NE annotations [person, organization, location], ACE guidelines)</description>
+          <metaShareId>
+            NOT_DEFINED_FOR_V2
+          </metaShareId>
+      </identificationInfo>
+      <distributionInfo>
+        <availability>available-restrictedUse</availability>
+          <licenceInfo>
+            <licence>proprietary</licence>
+            <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+          </licenceInfo>
+      </distributionInfo>
+      <contactPerson>
+        <surname lang="en">Papageorgiou</surname>
+        <givenName lang="en">Harris</givenName>
+        <sex>male</sex>
+          <communicationInfo>
+            <email>xaris@ilsp.athena-innovation.gr</email>
+            <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=49&amp;Itemid=156</url>
+            <telephoneNumber>+302106875426</telephoneNumber>
+            <faxNumber>+302106854270</faxNumber>
+          </communicationInfo>
+        <position>Principal Researcher</position>
+          <affiliation>
+            <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+            <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+              <communicationInfo>
+                <email>www@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/</url>
+                <address>Artemidos 6 &amp; Epidavrou</address>
+                <zipCode>GR-15125</zipCode>
+                <city>Maroussi</city>
+                <country>GR</country>
+                <telephoneNumber>+302106875300</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+                <faxNumber>+302106856794</faxNumber>
+              </communicationInfo>
+          </affiliation>
+      </contactPerson>
+      <metadataInfo>
+        <metadataCreationDate>2012-02-02</metadataCreationDate>
+          <metadataCreator>
+            <surname lang="en">Labropoulou</surname>
+            <givenName lang="en">Penny</givenName>
+            <sex>female</sex>
+              <communicationInfo>
+                <email>penny@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=37&amp;Itemid=156</url>
+                <telephoneNumber>+302106875445</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+              </communicationInfo>
+            <position>Senior Research Fellow</position>
+              <affiliation>
+                <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                  <communicationInfo>
+                    <email>www@ilsp.athena-innovation.gr</email>
+                    <url>http://www.ilsp.gr/</url>
+                    <address>Artemidos 6 &amp; Epidavrou</address>
+                    <zipCode>GR-15125</zipCode>
+                    <city>Maroussi</city>
+                    <country>GR</country>
+                    <telephoneNumber>+302106875300</telephoneNumber>
+                    <faxNumber>+302106854270</faxNumber>
+                    <faxNumber>+302106856794</faxNumber>
+                  </communicationInfo>
+              </affiliation>
+          </metadataCreator>
+        <source>META-SHARE/ILSP</source>
+        <metadataLastDateUpdated>2012-05-14</metadataLastDateUpdated>
+      </metadataInfo>
+      <usageInfo>
+          <foreseenUseInfo>
+            <foreseenUse>nlpApplications</foreseenUse>
+            <useNLPSpecific>machineTranslation</useNLPSpecific>
+            <useNLPSpecific>namedEntityRecognition</useNLPSpecific>
+          </foreseenUseInfo>
+          <actualUseInfo>
+            <actualUse>nlpApplications</actualUse>
+            <useNLPSpecific>machineTranslation</useNLPSpecific>
+            <useNLPSpecific>namedEntityRecognition</useNLPSpecific>
+          </actualUseInfo>
+      </usageInfo>
+      <resourceCreationInfo>
+          <resourceCreator>
+              <organizationInfo>
+                <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                  <communicationInfo>
+                    <email>www@ilsp.athena-innovation.gr</email>
+                    <url>http://www.ilsp.gr/</url>
+                    <address>Artemidos 6 &amp; Epidavrou</address>
+                    <zipCode>GR-15125</zipCode>
+                    <city>Maroussi</city>
+                    <country>GR</country>
+                    <telephoneNumber>+302106875300</telephoneNumber>
+                    <faxNumber>+302106854270</faxNumber>
+                    <faxNumber>+302106856794</faxNumber>
+                  </communicationInfo>
+              </organizationInfo>
+          </resourceCreator>
+          <fundingProject>
+            <projectName lang="en">Multimedia Content Management System</projectName>
+            <projectShortName lang="en">MUSE</projectShortName>
+            <url>http://www.ilsp.gr/en/infoprojects/meta?view=project&amp;task=show&amp;id=89</url>
+            <fundingType>nationalFunds</fundingType>
+            <funder>GSRT/eBusiness</funder>
+            <fundingCountry>GR</fundingCountry>
+            <projectStartDate>2004-02-01</projectStartDate>
+            <projectEndDate>2005-07-31</projectEndDate>
+          </fundingProject>
+      </resourceCreationInfo>
+      <resourceComponentType>
+          <corpusInfo>
+            <resourceType>corpus</resourceType>
+              <corpusMediaType>
+                  <corpusTextInfo>
+                    <mediaType>text</mediaType>
+                      <lingualityInfo>
+                        <lingualityType>monolingual</lingualityType>
+                      </lingualityInfo>
+                      <languageInfo>
+                        <languageId>el</languageId>
+                        <languageName>Modern Greek (1453-)</languageName>
+                      </languageInfo>
+                      <modalityInfo>
+                        <modalityType>writtenLanguage</modalityType>
+                      </modalityInfo>
+                      <sizeInfo>
+                        <size>97775</size>
+                        <sizeUnit>tokens</sizeUnit>
+                      </sizeInfo>
+                      <textFormatInfo>
+                        <mimeType>text/xml</mimeType>
+                      </textFormatInfo>
+                      <annotationInfo>
+                        <annotationType>semanticAnnotation-namedEntities</annotationType>
+                      </annotationInfo>
+                      <domainInfo>
+                        <domain>politics</domain>
+                      </domainInfo>
+                      <domainInfo>
+                        <domain>economics</domain>
+                      </domainInfo>
+                      <textClassificationInfo>
+                        <textGenre>news</textGenre>
+                      </textClassificationInfo>
+                  </corpusTextInfo>
+              </corpusMediaType>
+          </corpusInfo>
+      </resourceComponentType>
+  </resourceInfo>

@@ -1,0 +1,26 @@
+{% load replace %}
+{% load mimetype_label %}
+{% spaceless %}
+
+<label class='subtitle'>{{ audio_format.Mime_type|mimetype_label }}{% if audio_format.Size_per_audio_format %}{% include "repository/resource_view/size.html" with size=audio_format.Size_per_audio_format type="sub" %} {% endif %}</label>
+{% for key, value in audio_format.items %}
+	{% if key == "Compression" %}
+		{% for key1, value1 in value.items %}
+			 <div class="dataline indented">
+				<label>
+					<strong>{{ key1|rep }}:</strong> {{ value1 }}
+				</label>
+			</div>
+		{% endfor %}
+	{% else %}		
+		{% if key != "Mime_type" and key != "Size_per_audio_format" %}
+			 <div class="dataline indented">
+				<label>
+					<strong>{{ key|rep }}:</strong> {{ value }}
+				</label>
+			</div>
+		{% endif %}
+	{% endif %}
+{% endfor %}
+
+{% endspaceless %}

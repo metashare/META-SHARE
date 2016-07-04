@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+      <identificationInfo>
+        <resourceName lang="en">TPC_Freeling_token_split_POSTagger_it</resourceName>
+        <description lang="en">This is a freeling web service for Italian Language. </description>
+        <resourceShortName lang="en">freeling_it</resourceShortName>
+        <url>http://registry.elda.org/services/214</url>
+        <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      </identificationInfo>
+      <distributionInfo>
+        <availability>available-unrestrictedUse</availability>
+          <iprHolder>
+              <organizationInfo>
+                <organizationName lang="en">Universitat Politècnica de Catalunya</organizationName>
+                  <communicationInfo>
+                    <email>padro@lsi.upc.edu </email>
+                  </communicationInfo>
+              </organizationInfo>
+          </iprHolder>
+      </distributionInfo>
+      <contactPerson>
+        <surname lang="en">Frontini</surname>
+        <givenName lang="en">Francesca</givenName>
+        <sex>female</sex>
+          <communicationInfo>
+            <email>francesca.frontini@ilc.cnr.it</email>
+            <url>http://www.ilc.cnr.it</url>
+            <address>via Moruzzi 1</address>
+            <zipCode>56124</zipCode>
+            <city>Pisa</city>
+            <country>Italy</country>
+          </communicationInfo>
+        <position>post-doc</position>
+          <affiliation>
+            <organizationName lang="en">Istituto di Linguistica Computazionale</organizationName>
+            <organizationShortName lang="en">ILC CNR</organizationShortName>
+              <communicationInfo>
+                <email>francesca.frontini@ilc.cnr.it</email>
+              </communicationInfo>
+          </affiliation>
+      </contactPerson>
+      <metadataInfo>
+        <metadataCreationDate>2012-05-17</metadataCreationDate>
+          <metadataCreator>
+            <surname lang="en">Frontini</surname>
+            <givenName lang="en">Francesca</givenName>
+            <sex>female</sex>
+              <communicationInfo>
+                <email>francesca.frontini@ilc.cnr.it</email>
+                <url>http://www.ilc.cnr.it</url>
+                <address>via Moruzzi 1</address>
+                <zipCode>56124</zipCode>
+                <city>Pisa</city>
+                <country>Italy</country>
+              </communicationInfo>
+            <position>post-doc</position>
+              <affiliation>
+                <organizationName lang="en">Istituto di Linguistica Computazionale</organizationName>
+                <organizationShortName lang="en">ILC CNR</organizationShortName>
+                  <communicationInfo>
+                    <email>francesca.frontini@ilc.cnr.it</email>
+                  </communicationInfo>
+              </affiliation>
+          </metadataCreator>
+        <source>PANACEA</source>
+        <originalMetadataSchema>PANACEA Metadata</originalMetadataSchema>
+        <originalMetadataLink>http://registry.elda.org/services/214</originalMetadataLink>
+        <metadataLanguageName>English</metadataLanguageName>
+        <metadataLastDateUpdated>2012-05-17</metadataLastDateUpdated>
+      </metadataInfo>
+      <versionInfo>
+        <version>1.0</version>
+        <lastDateUpdated>2012-03-15</lastDateUpdated>
+      </versionInfo>
+      <usageInfo>
+          <accessTool>
+            <targetResourceNameURI>Taverna</targetResourceNameURI>
+          </accessTool>
+          <resourceAssociatedWith>
+            <targetResourceNameURI>Freeling</targetResourceNameURI>
+          </resourceAssociatedWith>
+          <foreseenUseInfo>
+            <foreseenUse>nlpApplications</foreseenUse>
+            <useNLPSpecific>posTagging</useNLPSpecific>
+          </foreseenUseInfo>
+          <actualUseInfo>
+            <actualUse>nlpApplications</actualUse>
+            <useNLPSpecific>posTagging</useNLPSpecific>
+              <usageProject>
+                <projectName lang="en">Panacea</projectName>
+                <url>http://www.panacea-lr.eu/</url>
+                <fundingType>euFunds</fundingType>
+                <funder>EU - Grant Agreement 248064</funder>
+                <projectStartDate>2010-01-01</projectStartDate>
+                <projectEndDate>2013-01-01</projectEndDate>
+              </usageProject>
+            <actualUseDetails>The service can be used by any workflow manager to build a pipeline with other services.</actualUseDetails>
+          </actualUseInfo>
+      </usageInfo>
+      <resourceDocumentationInfo>
+        <toolDocumentationType>online</toolDocumentationType>
+      </resourceDocumentationInfo>
+      <resourceCreationInfo>
+          <resourceCreator>
+              <organizationInfo>
+                <organizationName lang="en">Istituto di Linguistica Computazionale</organizationName>
+                <organizationShortName lang="en">ILC CNR</organizationShortName>
+                  <communicationInfo>
+                    <email>francesca.frontini@ilc.cnr.it</email>
+                  </communicationInfo>
+              </organizationInfo>
+          </resourceCreator>
+          <fundingProject>
+            <projectName lang="en">Platform for Automatic, Normalized Annotation and Cost-Effective Acquisition of Language Resources for Human Language </projectName>
+            <projectShortName lang="en">PANACEA</projectShortName>
+            <projectID>ICT-248064</projectID>
+            <url>http://www.panacea-lr.eu</url>
+            <fundingType>euFunds</fundingType>
+            <funder>ICT</funder>
+            <projectStartDate>2010-01-01</projectStartDate>
+            <projectEndDate>2012-12-31</projectEndDate>
+          </fundingProject>
+      </resourceCreationInfo>
+      <resourceComponentType>
+          <toolServiceInfo>
+            <resourceType>toolService</resourceType>
+            <toolServiceType>service</toolServiceType>
+            <toolServiceSubtype>soap-service</toolServiceSubtype>
+            <languageDependent>true</languageDependent>
+              <inputInfo>
+                <mediaType>text</mediaType>
+                <resourceType>corpus</resourceType>
+                <modalityType>writtenLanguage</modalityType>
+                <languageName>Italian</languageName>
+                <characterEncoding>UTF-8</characterEncoding>
+                <annotationType>morphosyntacticAnnotation-posTagging</annotationType>
+                <annotationFormat>plain text</annotationFormat>
+              </inputInfo>
+              <outputInfo>
+                <mediaType>text</mediaType>
+                <resourceType>corpus</resourceType>
+                <modalityType>writtenLanguage</modalityType>
+                <languageName>Italian</languageName>
+                <characterEncoding>UTF-8</characterEncoding>
+                <annotationType>morphosyntacticAnnotation-posTagging</annotationType>
+                <annotationFormat>tab separated</annotationFormat>
+                <tagset>Eagles</tagset>
+                <segmentationLevel>word</segmentationLevel>
+                <conformanceToStandardsBestPractices>EAGLES</conformanceToStandardsBestPractices>
+              </outputInfo>
+              <toolServiceOperationInfo>
+                <operatingSystem>os-independent</operatingSystem>
+                  <runningEnvironmentInfo>
+                      <requiredSoftware>
+                        <targetResourceNameURI>Taverna</targetResourceNameURI>
+                      </requiredSoftware>
+                    <requiredHardware>none</requiredHardware>
+                  </runningEnvironmentInfo>
+              </toolServiceOperationInfo>
+              <toolServiceCreationInfo>
+                  <originalSource>
+                    <targetResourceNameURI>Freeling</targetResourceNameURI>
+                  </originalSource>
+                <creationDetails>The tool was deployed within the PANACEA project by transforming the existing Freeling PoS-tagger  into a webservice to be used within workflows</creationDetails>
+              </toolServiceCreationInfo>
+          </toolServiceInfo>
+      </resourceComponentType>
+  </resourceInfo>

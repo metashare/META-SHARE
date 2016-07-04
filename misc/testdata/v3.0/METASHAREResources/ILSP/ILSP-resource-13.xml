@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+      <identificationInfo>
+        <resourceName lang="en">ACCURAT Bilingual Comparable Corpora for under-resourced languages</resourceName>
+        <description lang="en">Bilingual comparable corpora for 9 language pairs: Estonian-English, Latvian-English, Lithuanian-English, Greek-English, Greek-Romanian, Croatian-English, Romanian-English, Romanian-German and Slovenian-English. The objective of this work was to gather texts from the same domains and genres and with a similar level of comparability in order to use them as a starting point in defining criteria and metrics of comparability. These criteria and metrics will be applied to comparable texts to determine their suitability for use in Statistical Machine Translation, particularly in the case where translation is performed from or into under-resourced languages for which substantial parallel corpora are unavailable.</description>
+        <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      </identificationInfo>
+      <distributionInfo>
+        <availability>available-restrictedUse</availability>
+          <licenceInfo>
+            <licence>proprietary</licence>
+            <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+          </licenceInfo>
+      </distributionInfo>
+      <contactPerson>
+        <surname lang="en">Giouli</surname>
+        <givenName lang="en">Voula</givenName>
+        <sex>female</sex>
+          <communicationInfo>
+            <email>voula@ilsp.athena-innovation.gr</email>
+            <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=19&amp;Itemid=156</url>
+            <telephoneNumber>+302106875448</telephoneNumber>
+            <faxNumber>+302106854270</faxNumber>
+          </communicationInfo>
+        <position>Scientific Associate</position>
+          <affiliation>
+            <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+            <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+              <communicationInfo>
+                <email>www@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/</url>
+                <address>Artemidos 6 &amp; Epidavrou</address>
+                <zipCode>GR-15125</zipCode>
+                <city>Maroussi</city>
+                <country>GR</country>
+                <telephoneNumber>+302106875300</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+                <faxNumber>+302106856794</faxNumber>
+              </communicationInfo>
+          </affiliation>
+      </contactPerson>
+      <contactPerson>
+        <surname lang="en">Glaros</surname>
+        <givenName lang="en">Nikos</givenName>
+        <sex>male</sex>
+          <communicationInfo>
+            <email>nglaros@ilsp.athena-innovation.gr</email>
+            <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=21&amp;Itemid=156</url>
+            <telephoneNumber>+302106875451</telephoneNumber>
+            <faxNumber>+302106854270</faxNumber>
+          </communicationInfo>
+        <position>Senior Research Fellow</position>
+          <affiliation>
+            <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+            <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+              <communicationInfo>
+                <email>www@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/</url>
+                <address>Artemidos 6 &amp; Epidavrou</address>
+                <zipCode>GR-15125</zipCode>
+                <city>Maroussi</city>
+                <country>GR</country>
+                <telephoneNumber>+302106875300</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+                <faxNumber>+302106856794</faxNumber>
+              </communicationInfo>
+          </affiliation>
+      </contactPerson>
+      <metadataInfo>
+        <metadataCreationDate>2012-02-02</metadataCreationDate>
+          <metadataCreator>
+            <surname lang="en">Labropoulou</surname>
+            <givenName lang="en">Penny</givenName>
+            <sex>female</sex>
+              <communicationInfo>
+                <email>penny@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=37&amp;Itemid=156</url>
+                <telephoneNumber>+302106875445</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+              </communicationInfo>
+            <position>Senior Research Fellow</position>
+              <affiliation>
+                <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                  <communicationInfo>
+                    <email>www@ilsp.athena-innovation.gr</email>
+                    <url>http://www.ilsp.gr/</url>
+                    <address>Artemidos 6 &amp; Epidavrou</address>
+                    <zipCode>GR-15125</zipCode>
+                    <city>Maroussi</city>
+                    <country>GR</country>
+                    <telephoneNumber>+302106875300</telephoneNumber>
+                    <faxNumber>+302106854270</faxNumber>
+                    <faxNumber>+302106856794</faxNumber>
+                  </communicationInfo>
+              </affiliation>
+          </metadataCreator>
+        <source>META-SHARE/ILSP</source>
+        <metadataLastDateUpdated>2012-05-15</metadataLastDateUpdated>
+      </metadataInfo>
+      <usageInfo>
+          <foreseenUseInfo>
+            <foreseenUse>nlpApplications</foreseenUse>
+          </foreseenUseInfo>
+          <actualUseInfo>
+            <actualUse>nlpApplications</actualUse>
+            <useNLPSpecific>machineTranslation</useNLPSpecific>
+          </actualUseInfo>
+      </usageInfo>
+      <resourceDocumentationInfo>
+          <documentation>
+              <documentInfo>
+                <documentType>inProceedings</documentType>
+                <title lang="en">Collection of comparable corpora for under-resourced languages</title>
+                <author>I. Skadina and A. Aker and Voula Giouli and D. Tufis et al</author>
+                <year>2010</year>
+                <bookTitle>Proceedings of the Fourth International Conference Baltic HLT 2010</bookTitle>
+                <pages>161-168</pages>
+                <conference>Fourth International Conference Baltic HLT 2010</conference>
+              </documentInfo>
+          </documentation>
+          <documentation>
+              <documentInfo>
+                <documentType>techReport</documentType>
+                <title lang="en">Deliverable D2.4 - Aligned comparable corpora</title>
+                <author>Radu Ion and Nikos Glaros and Mārcis Pinnis and Mateja Verlic and Ahmet Aker et al</author>
+                <year>2011</year>
+                <url>http://www.accurat-project.eu/uploads/Deliverables/D2.4_Aligned%20comparable%20corpora_v1.0_final.pdf</url>
+              </documentInfo>
+          </documentation>
+      </resourceDocumentationInfo>
+      <resourceCreationInfo>
+          <resourceCreator>
+              <organizationInfo>
+                <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                  <communicationInfo>
+                    <email>www@ilsp.athena-innovation.gr</email>
+                    <url>http://www.ilsp.gr/</url>
+                    <address>Artemidos 6 &amp; Epidavrou</address>
+                    <zipCode>GR-15125</zipCode>
+                    <city>Maroussi</city>
+                    <country>GR</country>
+                    <telephoneNumber>+302106875300</telephoneNumber>
+                    <faxNumber>+302106854270</faxNumber>
+                    <faxNumber>+302106856794</faxNumber>
+                  </communicationInfo>
+              </organizationInfo>
+          </resourceCreator>
+          <fundingProject>
+            <projectName lang="en">ACCURAT: Analysis and evaluation of Comparable Corpora for Under Resourced Areas of machine Translation</projectName>
+            <projectShortName lang="en">ACCURAT</projectShortName>
+            <projectID>FP7-ICT-248347</projectID>
+            <url>http://www.accurat-project.eu</url>
+            <fundingType>euFunds</fundingType>
+            <funder>FP7-ICT</funder>
+            <projectStartDate>2010-01-01</projectStartDate>
+            <projectEndDate>2012-06-30</projectEndDate>
+          </fundingProject>
+      </resourceCreationInfo>
+      <resourceComponentType>
+          <corpusInfo>
+            <resourceType>corpus</resourceType>
+              <corpusMediaType>
+                  <corpusTextInfo>
+                    <mediaType>text</mediaType>
+                      <lingualityInfo>
+                        <lingualityType>multilingual</lingualityType>
+                        <multilingualityType>comparable</multilingualityType>
+                        <multilingualityTypeDetails>Bilingual comparable corpora for 9 language pairs: Estonian-English, Latvian-English, Lithuanian-English, Greek-English, Greek-Romanian, Croatian-English, Romanian-English, Romanian-German and Slovenian-English</multilingualityTypeDetails>
+                      </lingualityInfo>
+                      <languageInfo>
+                        <languageId>el</languageId>
+                        <languageName>Modern Greek (1453-)</languageName>
+                      </languageInfo>
+                      <languageInfo>
+                        <languageId>en</languageId>
+                        <languageName>English</languageName>
+                      </languageInfo>
+                      <languageInfo>
+                        <languageId>ro</languageId>
+                        <languageName>Romanian</languageName>
+                      </languageInfo>
+                      <languageInfo>
+                        <languageId>et</languageId>
+                        <languageName>Estonian</languageName>
+                      </languageInfo>
+                      <languageInfo>
+                        <languageId>sl</languageId>
+                        <languageName>Slovenian</languageName>
+                      </languageInfo>
+                      <languageInfo>
+                        <languageId>it</languageId>
+                        <languageName>Italian</languageName>
+                      </languageInfo>
+                      <languageInfo>
+                        <languageId>lv</languageId>
+                        <languageName>Latvian</languageName>
+                      </languageInfo>
+                      <languageInfo>
+                        <languageId>de</languageId>
+                        <languageName>German</languageName>
+                      </languageInfo>
+                      <languageInfo>
+                        <languageId>hr</languageId>
+                        <languageName>Croatian</languageName>
+                      </languageInfo>
+                      <sizeInfo>
+                        <size>18000000</size>
+                        <sizeUnit>words</sizeUnit>
+                      </sizeInfo>
+                      <annotationInfo>
+                        <annotationType>lemmatization</annotationType>
+                      </annotationInfo>
+                      <annotationInfo>
+                        <annotationType>morphosyntacticAnnotation-posTagging</annotationType>
+                      </annotationInfo>
+                      <annotationInfo>
+                        <annotationType>syntacticAnnotation-shallowParsing</annotationType>
+                      </annotationInfo>
+                      <annotationInfo>
+                        <annotationType>semanticAnnotation-namedEntities</annotationType>
+                      </annotationInfo>
+                      <annotationInfo>
+                        <annotationType>syntacticAnnotation-treebanks</annotationType>
+                      </annotationInfo>
+                      <annotationInfo>
+                        <annotationType>semanticAnnotation-events</annotationType>
+                      </annotationInfo>
+                      <annotationInfo>
+                        <annotationType>alignment</annotationType>
+                      </annotationInfo>
+                  </corpusTextInfo>
+              </corpusMediaType>
+          </corpusInfo>
+      </resourceComponentType>
+  </resourceInfo>

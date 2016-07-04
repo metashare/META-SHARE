@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">Multilingual Wordbank</resourceName>
+      <resourceName lang="fr">Banque de mots multilingue</resourceName>
+      <description lang="en">Alongside its world-renowned range of Bilingual Dictionaries, Oxford University Press holds both word and phrase translation glossaries designed for the travel/handy-reference market. These feature translations of core vocabulary from English into French, German, Italian, Spanish, and Portuguese, plus full coverage of local variations in American English, Latin American Spanish, and Brazilian Portuguese.Every word and phrase is given a frequency ranking, which can be used as a guide to user levels. In addition, all translations in the Wordbank are provided along with appropriate part of speech and gender information, while the Phrasebank also has gender information where relevant to the syntax.Coverage:- 17,500 core terms (per language)- 9 languages covered (including regional variants): UK English, US English, French, German, Italian, European Spanish, Latin American Spanish, European Portuguese, Brazilian PortugueseFeatures:- frequency rating for user level- gender + part of speech informationFormat: tab-delimited text</description>
+      <description lang="fr">En parallèle avec sa gamme de dictionnaires bilingues renommés, Oxford University Press dispose de glossaires de traduction de mots et d’expressions conçus pour le marché du voyage (usage pratique). Ces glossaires présentent des traductions du vocabulaire de base de l’anglais vers le français, l’allemand, l’italien, l’espagnol et le portugais, ainsi qu’une couverture complète des variantes locales en anglais américain, espagnol d’Amérique latine et portugais brésilien.Chaque mot et expression sont fournis avec leur taux de répétition, qui peut être utilisé comme référence sur les niveaux d’utilisateur. De plus, toutes les traductions de cette banque de mots sont fournies avec l’information sur la partie du discours et le genre, tandis que la banque d’expressions (T0368) comporte l’information du genre uniquement lorsqu’elle est jugée nécessaire pour la syntaxe.Couverture :- 17 500 termes de base (par langue)- 9 langues couvertes (variantes régionales comprises): anglais britannique, anglais américain, français, allemand, italien, espagnol européen, espagnol d’Amérique latine, portugais européen, portugais brésilienType d’information :- taux de répétition pour le niveau d’utilisateur- genre + partie du discoursFormat: texte délimité par des tabulations</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=841</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-T0368</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>5000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>4000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <availabilityStartDate>2006-03-13</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Valérie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <lastDateUpdated>2006-04-03</lastDateUpdated>
+   </versionInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>terminologicalResource</lexicalConceptualResourceType>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>eng</languageId>
+                  <languageName>English</languageName>
+               </languageInfo>
+               <languageInfo>
+                  <languageId>fre/fra</languageId>
+                  <languageName>French</languageName>
+               </languageInfo>
+               <languageInfo>
+                  <languageId>eng</languageId>
+                  <languageName>English</languageName>
+               </languageInfo>
+               <languageInfo>
+                  <languageId>ger/deu</languageId>
+                  <languageName>German</languageName>
+               </languageInfo>
+               <languageInfo>
+                  <languageId>eng</languageId>
+                  <languageName>English</languageName>
+               </languageInfo>
+               <languageInfo>
+                  <languageId>ita</languageId>
+                  <languageName>Italian</languageName>
+               </languageInfo>
+               <languageInfo>
+                  <languageId>eng</languageId>
+                  <languageName>English</languageName>
+               </languageInfo>
+               <languageInfo>
+                  <languageId>spa</languageId>
+                  <languageName>Spanish</languageName>
+                  <languageVarietyInfo>
+                     <languageVarietyType>dialect</languageVarietyType>
+                     <languageVarietyName>Castilian</languageVarietyName>
+                     <sizePerLanguageVariety>
+                        <size>2</size>
+                        <sizeUnit>gb</sizeUnit>
+                     </sizePerLanguageVariety>
+                  </languageVarietyInfo>
+               </languageInfo>
+               <languageInfo>
+                  <languageId>eng</languageId>
+                  <languageName>English</languageName>
+               </languageInfo>
+               <languageInfo>
+                  <languageId>por</languageId>
+                  <languageName>Portuguese</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>no size available</size>
+                  <sizeUnit>other</sizeUnit>
+               </sizeInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

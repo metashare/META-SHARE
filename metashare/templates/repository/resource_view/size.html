@@ -1,0 +1,75 @@
+{% load humanize %}
+{% spaceless %}
+
+{% if type == "component" %}
+	<label class='indented'><strong>Size:</strong></label>
+{% else %}
+	{% if type == "sub" %}
+	{% else %}
+		<label class='title'>Size </label>
+	{% endif %}
+{% endif %}
+
+{% if type == "sub" %}
+	{% if size.Size != "0" %}
+		({{ size.Size|intcomma }} {% if size.Size != "not available" and size.Size_unit != "Other" %}{{ size.Size_unit }}{% endif %})
+	{% endif %}
+{% else %}
+	{% if type == "component" %}
+		{% for key, value in size.items %}
+			{% for key1, value1 in value.items %}
+				{% if key1 == "Size_unit" %}
+					<label class='dataline indented'">
+						{% if value.Size != "0" %}
+							{{ value.Size|intcomma }} {% if value.Size != "not available" and value.Size_unit != "Other" %}{{ value.Size_unit }}{% endif %}
+						{% endif %}
+					</label>
+				{% endif %}
+			{% endfor %}
+		{% endfor %}
+	{% else %}
+		<div class='dataline'>
+		{% for key, value in size.items %}
+			{% for key1, value1 in value.items %}
+				{% if key1 == "Size_unit" %}
+				<div>
+					<label class='dataline indented'>
+						{% if value.Size != "0" %}
+							{{ value.Size|intcomma }} {% if value.Size != "not available" and value.Size_unit != "Other" %}{{ value.Size_unit }}{% endif %}
+						{% endif %}
+					</label>
+				</div>
+				{% endif %}
+			{% endfor %}
+		{% endfor %}
+		</div>
+	{% endif %}
+{% endif %}
+
+{% if "Duration_of_effective_speech" in size %}
+	<label class='subtitle'>Effective speech duration</label>
+	{% for key, value in size.items %}
+		{% if "Duration_of_effective_speech" in key %}
+			<div class='dataline indented'>
+				<label>
+					{{ value.Size|intcomma }} {% if value.Size != "not available" and value.Duration_unit != "Other" %}{{ value.Duration_unit }}{% endif %}
+				</label>
+			</div>
+		{% endif %}
+	{% endfor %}
+{% endif %}
+
+{% if "Duration_of_audio" in size %}
+	<label class='subtitle'>Audio duration</label>
+	{% for key, value in size.items %}
+		{% if "Duration_of_audio" in key %}
+			<div class='dataline indented'>
+				<label>
+					{{ value.Size|intcomma }} {% if value.Size != "not available" and value.Duration_unit != "Other" %}{{ value.Duration_unit }}{% endif %}
+				</label>
+			</div>
+		{% endif %}
+	{% endfor %}
+{% endif %}
+
+{% endspaceless %}

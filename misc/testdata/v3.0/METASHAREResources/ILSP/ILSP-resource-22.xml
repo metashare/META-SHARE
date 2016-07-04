@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+      <identificationInfo>
+        <resourceName lang="und">Greek-English lexicon</resourceName>
+        <description lang="und">Computational lexicon of general language</description>
+          <metaShareId>
+            NOT_DEFINED_FOR_V2
+          </metaShareId>
+      </identificationInfo>
+      <distributionInfo>
+        <availability>available-restrictedUse</availability>
+      </distributionInfo>
+      <contactPerson>
+        <surname lang="und">Tambouratzis</surname>
+        <givenName lang="und">Georgos</givenName>
+          <communicationInfo>
+            <email>giorg_t@ilsp.athena-innovation.gr</email>
+          </communicationInfo>
+      </contactPerson>
+      <contactPerson>
+        <surname lang="und">Giannoutsou</surname>
+        <givenName lang="und">Olga</givenName>
+          <communicationInfo>
+            <email>olga@ilsp.gr</email>
+          </communicationInfo>
+      </contactPerson>
+      <metadataInfo>
+        <metadataCreationDate>2012-02-02</metadataCreationDate>
+        <source>META</source>
+      </metadataInfo>
+      <usageInfo>
+          <foreseenUseInfo>
+            <foreseenUse>nlpApplications</foreseenUse>
+          </foreseenUseInfo>
+          <foreseenUseInfo>
+            <foreseenUse>humanUse</foreseenUse>
+          </foreseenUseInfo>
+      </usageInfo>
+      <resourceComponentType>
+          <lexicalConceptualResourceInfo>
+            <resourceType>lexicalConceptualResource</resourceType>
+            <lexicalConceptualResourceType>computationalLexicon</lexicalConceptualResourceType>
+              <lexicalConceptualResourceMediaType>
+                  <lexicalConceptualResourceTextInfo>
+                    <mediaType>text</mediaType>
+                      <lingualityInfo>
+                        <lingualityType>bilingual</lingualityType>
+                      </lingualityInfo>
+                      <languageInfo>
+                        <languageId>ell</languageId>
+                        <languageName>Modern Greek (1453-)</languageName>
+                      </languageInfo>
+                      <languageInfo>
+                        <languageId>eng</languageId>
+                        <languageName>English</languageName>
+                      </languageInfo>
+                      <sizeInfo>
+                        <size>37000</size>
+                        <sizeUnit>entries</sizeUnit>
+                      </sizeInfo>
+                  </lexicalConceptualResourceTextInfo>
+              </lexicalConceptualResourceMediaType>
+          </lexicalConceptualResourceInfo>
+      </resourceComponentType>
+  </resourceInfo>

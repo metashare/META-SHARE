@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+      <identificationInfo>
+        <resourceName lang="en">Greek PAROLE corpus</resourceName>
+        <description lang="en">General language corpus of 20 million words of modern Greek based on common specifications for the 14 languages of the european project. The selection of texts was based on common parameters of time production (after 1970) and of proportionate distribution of the textual material along the publication medium (Book, Newspaper, Magazine and Various) - all the texts are structurally annotated and a subset of 250K words is linguistically annotated at belowPoS level.</description>
+          <metaShareId>
+            NOT_DEFINED_FOR_V2
+          </metaShareId>
+      </identificationInfo>
+      <distributionInfo>
+        <availability>available-restrictedUse</availability>
+          <licenceInfo>
+            <licence>ELRA_END_USER</licence>
+            <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+            <distributionAccessMedium>CD-ROM</distributionAccessMedium>
+            <downloadLocation>http://lrt.ilsp.gr:8081/data/PAROLE.zip</downloadLocation>
+          </licenceInfo>
+      </distributionInfo>
+      <contactPerson>
+        <surname lang="en">Gavrilidou</surname>
+        <givenName lang="en">Maria</givenName>
+        <sex>female</sex>
+          <communicationInfo>
+            <email>maria@ilsp.athena-innovation.gr</email>
+            <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=15&amp;Itemid=156</url>
+            <address>Artemidos 6</address>
+            <zipCode>GR-151 25</zipCode>
+            <city>Maroussi</city>
+            <country>GR</country>
+            <telephoneNumber>+302106875441</telephoneNumber>
+            <faxNumber>+302106854270</faxNumber>
+          </communicationInfo>
+        <position>Senior Research Fellow</position>
+          <affiliation>
+            <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+            <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+              <communicationInfo>
+                <email>www@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/</url>
+                <address>Artemidos 6 &amp; Epidavrou</address>
+                <zipCode>GR-15125</zipCode>
+                <city>Maroussi</city>
+                <country>GR</country>
+                <telephoneNumber>+302106875300</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+                <faxNumber>+302106856794</faxNumber>
+              </communicationInfo>
+          </affiliation>
+      </contactPerson>
+      <metadataInfo>
+        <metadataCreationDate>2012-02-02</metadataCreationDate>
+          <metadataCreator>
+            <surname lang="en">Labropoulou</surname>
+            <givenName lang="en">Penny</givenName>
+            <sex>female</sex>
+              <communicationInfo>
+                <email>penny@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=37&amp;Itemid=156</url>
+                <telephoneNumber>+302106875445</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+              </communicationInfo>
+            <position>Senior Research Fellow</position>
+              <affiliation>
+                <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                  <communicationInfo>
+                    <email>www@ilsp.athena-innovation.gr</email>
+                    <url>http://www.ilsp.gr/</url>
+                    <address>Artemidos 6 &amp; Epidavrou</address>
+                    <zipCode>GR-15125</zipCode>
+                    <city>Maroussi</city>
+                    <country>GR</country>
+                    <telephoneNumber>+302106875300</telephoneNumber>
+                    <faxNumber>+302106854270</faxNumber>
+                    <faxNumber>+302106856794</faxNumber>
+                  </communicationInfo>
+              </affiliation>
+          </metadataCreator>
+        <source>META-SHARE/ILSP</source>
+        <metadataLastDateUpdated>2012-05-15</metadataLastDateUpdated>
+      </metadataInfo>
+      <validationInfo>
+        <validated>true</validated>
+        <validationType>content</validationType>
+        <validationMode>automatic</validationMode>
+        <validationModeDetails>Validated for conformance to the PAROLE dtd (SGML)</validationModeDetails>
+        <validationExtent>full</validationExtent>
+          <validator>
+              <organizationInfo>
+                <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                  <communicationInfo>
+                    <email>www@ilsp.athena-innovation.gr</email>
+                    <url>http://www.ilsp.gr/</url>
+                    <address>Artemidos 6 &amp; Epidavrou</address>
+                    <zipCode>GR-15125</zipCode>
+                    <city>Maroussi</city>
+                    <country>GR</country>
+                    <telephoneNumber>+302106875300</telephoneNumber>
+                    <faxNumber>+302106854270</faxNumber>
+                    <faxNumber>+302106856794</faxNumber>
+                  </communicationInfo>
+              </organizationInfo>
+          </validator>
+      </validationInfo>
+      <usageInfo>
+          <foreseenUseInfo>
+            <foreseenUse>humanUse</foreseenUse>
+          </foreseenUseInfo>
+          <foreseenUseInfo>
+            <foreseenUse>nlpApplications</foreseenUse>
+          </foreseenUseInfo>
+      </usageInfo>
+      <resourceDocumentationInfo>
+          <documentation>
+              <documentInfo>
+                <documentType>techReport</documentType>
+                <title lang="en">P-WP2.9-MEMO-ATH-1 - Greek Corpus Documentation</title>
+                <author>Maria Gavrilidou and Penny Labropoulou and Natassa Papakostopoulou and Sia Spiliotopoulou et al</author>
+                <year>1998</year>
+              </documentInfo>
+          </documentation>
+      </resourceDocumentationInfo>
+      <resourceCreationInfo>
+          <resourceCreator>
+              <organizationInfo>
+                <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                  <communicationInfo>
+                    <email>www@ilsp.athena-innovation.gr</email>
+                    <url>http://www.ilsp.gr/</url>
+                    <address>Artemidos 6 &amp; Epidavrou</address>
+                    <zipCode>GR-15125</zipCode>
+                    <city>Maroussi</city>
+                    <country>GR</country>
+                    <telephoneNumber>+302106875300</telephoneNumber>
+                    <faxNumber>+302106854270</faxNumber>
+                    <faxNumber>+302106856794</faxNumber>
+                  </communicationInfo>
+              </organizationInfo>
+          </resourceCreator>
+        <creationStartDate>1996-04-01</creationStartDate>
+        <creationEndDate>1998-04-30</creationEndDate>
+      </resourceCreationInfo>
+      <resourceComponentType>
+          <corpusInfo>
+            <resourceType>corpus</resourceType>
+              <corpusMediaType>
+                  <corpusTextInfo>
+                    <mediaType>text</mediaType>
+                      <lingualityInfo>
+                        <lingualityType>monolingual</lingualityType>
+                      </lingualityInfo>
+                      <languageInfo>
+                        <languageId>el</languageId>
+                        <languageName>Modern Greek (1453-)</languageName>
+                      </languageInfo>
+                      <modalityInfo>
+                        <modalityType>writtenLanguage</modalityType>
+                      </modalityInfo>
+                      <sizeInfo>
+                        <size>20000000</size>
+                        <sizeUnit>words</sizeUnit>
+                      </sizeInfo>
+                      <textFormatInfo>
+                        <mimeType>text/sgml</mimeType>
+                      </textFormatInfo>
+                      <annotationInfo>
+                        <annotationType>lemmatization</annotationType>
+                      </annotationInfo>
+                      <annotationInfo>
+                        <annotationType>morphosyntacticAnnotation-bPosTagging</annotationType>
+                      </annotationInfo>
+                      <annotationInfo>
+                        <annotationType>segmentation</annotationType>
+                      </annotationInfo>
+                      <annotationInfo>
+                        <annotationType>structuralAnnotation</annotationType>
+                      </annotationInfo>
+                      <domainInfo>
+                        <domain>leisure</domain>
+                        <conformanceToClassificationScheme>PAROLE_topicClassification</conformanceToClassificationScheme>
+                      </domainInfo>
+                      <domainInfo>
+                        <domain>geography</domain>
+                        <conformanceToClassificationScheme>PAROLE_topicClassification</conformanceToClassificationScheme>
+                      </domainInfo>
+                      <domainInfo>
+                        <domain>science</domain>
+                        <conformanceToClassificationScheme>PAROLE_topicClassification</conformanceToClassificationScheme>
+                      </domainInfo>
+                      <domainInfo>
+                        <domain>business</domain>
+                        <conformanceToClassificationScheme>PAROLE_topicClassification</conformanceToClassificationScheme>
+                      </domainInfo>
+                      <domainInfo>
+                        <domain>history</domain>
+                        <conformanceToClassificationScheme>PAROLE_topicClassification</conformanceToClassificationScheme>
+                      </domainInfo>
+                      <domainInfo>
+                        <domain>society</domain>
+                        <conformanceToClassificationScheme>PAROLE_topicClassification</conformanceToClassificationScheme>
+                      </domainInfo>
+                      <domainInfo>
+                        <domain>humanities</domain>
+                        <conformanceToClassificationScheme>PAROLE_topicClassification</conformanceToClassificationScheme>
+                      </domainInfo>
+                      <domainInfo>
+                        <domain>health</domain>
+                        <conformanceToClassificationScheme>PAROLE_topicClassification</conformanceToClassificationScheme>
+                      </domainInfo>
+                      <textClassificationInfo>
+                        <textGenre>non-fiction</textGenre>
+                        <conformanceToClassificationScheme>PAROLE_genreClassification</conformanceToClassificationScheme>
+                      </textClassificationInfo>
+                      <textClassificationInfo>
+                        <textGenre>feature</textGenre>
+                        <conformanceToClassificationScheme>PAROLE_genreClassification</conformanceToClassificationScheme>
+                      </textClassificationInfo>
+                      <textClassificationInfo>
+                        <textGenre>advertising</textGenre>
+                        <conformanceToClassificationScheme>PAROLE_genreClassification</conformanceToClassificationScheme>
+                      </textClassificationInfo>
+                      <textClassificationInfo>
+                        <textGenre>official</textGenre>
+                        <conformanceToClassificationScheme>PAROLE_genreClassification</conformanceToClassificationScheme>
+                      </textClassificationInfo>
+                      <textClassificationInfo>
+                        <textGenre>private</textGenre>
+                        <conformanceToClassificationScheme>PAROLE_genreClassification</conformanceToClassificationScheme>
+                      </textClassificationInfo>
+                      <textClassificationInfo>
+                        <textGenre>fiction</textGenre>
+                        <conformanceToClassificationScheme>PAROLE_genreClassification</conformanceToClassificationScheme>
+                      </textClassificationInfo>
+                      <textClassificationInfo>
+                        <textGenre>information</textGenre>
+                        <conformanceToClassificationScheme>PAROLE_genreClassification</conformanceToClassificationScheme>
+                      </textClassificationInfo>
+                      <textClassificationInfo>
+                        <textGenre>discussion</textGenre>
+                        <conformanceToClassificationScheme>PAROLE_genreClassification</conformanceToClassificationScheme>
+                      </textClassificationInfo>
+                      <creationInfo>
+                        <creationMode>mixed</creationMode>
+                        <creationModeDetails>Various methods have been used depending on the source: scanning &amp; OCRing of various texts, conversion from typesetting material, web crawling etc.</creationModeDetails>
+                          <creationTool>
+                            <targetResourceNameURI>HNCedit</targetResourceNameURI>
+                          </creationTool>
+                      </creationInfo>
+                  </corpusTextInfo>
+              </corpusMediaType>
+          </corpusInfo>
+      </resourceComponentType>
+  </resourceInfo>

@@ -1,0 +1,154 @@
+{% spaceless %}
+
+<label class="subtitle"><strong>{{ annotations.Annotation_type }}</strong></label>
+<div class="dataline">
+	{% if annotations.Tagset %}
+		<div>
+			<label class="dataline indented">
+				<strong>Tagset: </strong> {{ annotations.Tagset }} {% if annotations.Tagset_language %} <label {% if annotations.Tagset_language_identifier %}title="{{annotations.Tagset_language_identifier}}" {% endif %} class="dataline">({{ annotations.Tagset_language }})</label> {% endif %}
+			</label>
+		</div>
+	{% endif %}
+	{% if annotations.Annotated_elements %}		
+		<div>
+			<label class="dataline indented">
+				<strong>Annotated elements: </strong>{{ annotations.Annotated_elements }}
+			</label>
+		</div>
+	{% endif %}
+	{% if annotations.Annotation_standoff %}
+		<div>
+			<label class="dataline indented">
+				<strong>StandOff: </strong>{{ annotations.Annotation_standoff }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if annotations.Segmentation_level %}
+		<div>
+			<label class="dataline indented">
+				<strong>Segmentation level: </strong>{{ annotations.Segmentation_level }}
+			</label>
+		</div>
+	{% endif %}
+	{% if annotations.Annotation_format %}
+		<div>
+			<label class="dataline indented">
+				<strong>Format: </strong>{{ annotations.Annotation_format }}
+			</label>
+		</div>
+	{% endif %}
+	{% if annotations.Conformance_to_standards___best_practices %}
+		<div>
+			<label class="dataline indented">
+				<strong>Standard practices conformance: </strong> {{ annotations.Conformance_to_standards___best_practices }}
+			</label>
+		</div>
+	{% endif %}
+	{% if annotations.Theoretic_model %}
+		<div>
+			<label class="dataline indented">
+				<strong>Theoretic Model: </strong> {{ annotations.Theoretic_model }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if annotations.Annotation_mode %}
+		<div>
+			<label class="dataline indented">
+				<strong>Annotation Mode: </strong> {{ annotations.Annotation_mode }} {% if annotations.Annotation_mode_details %} ({{ annotations.Annotation_mode_details }}) {% endif %}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if "Annotation_tool" in annotations %}
+		<div class="dataline indented">
+		<label><strong>Annotation Tools:</strong></label>
+			<ul>
+				{% for key1, value1 in annotations.items %}
+					{% if "Annotation_tool" in key1 %}
+						{% include "repository/resource_view/target_resource.html" with target=value1 level="list" %}
+					{% endif %}
+				{% endfor %}
+			</ul>
+		</div>
+	{% endif %}
+	
+	{% if annotations.Annotation_start_date %}
+		<div>
+			<label class="dataline indented">
+				<strong>Start date:</strong> {{ annotations.Annotation_start_date|date:"SHORT_DATE_FORMAT" }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if annotations.Annotation_end_date %}
+		<div>
+			<label class="dataline indented">
+				<strong>End date:</strong> {{ annotations.Annotation_end_date|date:"SHORT_DATE_FORMAT" }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if annotations.Size_per_annotation %}
+		{% include "repository/resource_view/size.html" with size=annotations type="component" %}
+	{% endif %}
+
+	{% if "Annotation_manual" in annotations %}
+		<div>
+			<label class="dataline indented">
+				<strong>Annotation Manual</strong>
+			</label>
+		</div>
+{#        <div class="subtitle"></div>#}
+	{% endif %}
+	{% for key, value in annotations.items %}
+		{% if "Annotation_manual" in key %}
+			<div class="separation"><hr/></div>
+			{% if value.Annotation_manual.Title %}
+                <div style="padding-left: 8px">
+				{% include "repository/resource_view/documentation.html" with documentation=value.Annotation_manual level="simple" type="Documentation" %}
+                </div>
+			{% else %}
+				<div class="dataline indented">
+					<label>
+						{{value.Annotation_manual}}
+					</label>
+				</div>
+			{% endif %}
+		{% endif %}
+	{% endfor %}
+	
+	{% if annotations.Interannotator_agreement %}
+		<div>
+			<label class="dataline indented">
+				<strong>Interannotator Agreement:</strong> {{ annotations.Interannotator_agreement }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if annotations.Intraannotator_agreement %}
+		<div>
+			<label class="dataline indented">
+				<strong>Intraannotator Agreement:</strong> {{ annotations.Intraannotator_agreement }}
+			</label>
+		</div>
+	{% endif %}
+	
+		
+	<div class="dataline">
+		{% if "Annotator" in value %}
+			<label class="dataline indented"><strong>Annotators:</strong></label>
+		{% endif %}
+		{% for key, value in annotations.items %}
+			{% for key1, value1 in value.items %}
+				{% if "Annotator" in key1 %}
+			    	{% include "repository/resource_view/person.html" with person_dict=value1 type="Annotator" %}
+				{% endif %}
+			{% endfor %}
+		{% endfor %}
+	</div>
+	
+</div>
+
+{% endspaceless %}

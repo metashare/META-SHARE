@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ resource }} &ndash; Download Licence Agreement &ndash; META-SHARE
+{% endblock %}
+
+{% block content %}
+
+  <h2>{{ resource }}</h2>
+  <div class="content_box">
+    {% if licence_path %}
+      <h3>Licence Agreement &ndash; {{ licence_name }}</h3>
+      <iframe src="{{ licence_path }}" width="100%" height="400"><a href="{{ licence_path }}">View licence</a></iframe>
+      <table style="margin:15px;">
+        <tr><td>
+          {% if not download_available %}
+            <p>Please contact the resource maintainer for more information on how to obtain the selected resource under these license terms.</p>
+          {% else %}
+            <form action="{% url 'download' resource.storage_object.identifier %}" method="post">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <input class="span-8 button middle_button" style="margin-left:150px;" type="submit" value="Download" />
+            </form>
+          {% endif %}
+    {% else %}
+     {% if l_url %}
+                <h3>Licence Agreement {% for key, value in l_name.items %} &ndash; {{ value }}{% endfor %}</h3>
+                <iframe src="{{ l_url }}" width="850" height="400"><a href="{{ l_url }}">View licence</a>
+                </iframe>
+                <table style="margin:15px;">
+                <tr>
+                <td>
+                {% if not download_available %}
+                    <p>Please contact the resource maintainer for more information on how to obtain the selected
+                        resource
+                        under these license terms.</p>
+                {% else %}
+                    <form action="{% url 'download' resource.storage_object.identifier %}"
+                          method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <input class="span-8 button middle_button" style="margin-left:150px;" type="submit"
+                               value="Download"/>
+                    </form>
+                {% endif %}
+            {% else %}
+                {% if l_text %}
+                    <h3>Licence Agreement {% for key, value in l_name.items %} &ndash; {{ value }}{% endfor %}</h3>
+                    <div style="border: thin solid; padding: 5px; border-radius: 5px">
+                        {% for t in l_text %}
+                            <p>{{ t|linebreaksbr }}</p>
+                        {% endfor %}
+                    </div>
+                    <table style="margin:15px;">
+                    <tr>
+                    <td>
+                    {% if not download_available %}
+                        <p>Please contact the resource maintainer for more information on how to obtain the selected
+                            resource
+                            under these license terms.</p>
+                    {% else %}
+                        <form action="{% url 'download' resource.storage_object.identifier %}"
+                              method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <input class="span-8 button middle_button" style="margin-left:150px;" type="submit"
+                                   value="Download"/>
+                        </form>
+                    {% endif %}
+                {% else %}
+                    <h3>No Licence Terms Available</h3>
+                    <table style="margin:15px;">
+                    <tr>
+                    <td>
+                    <p>We&rsquo;re afraid, license terms for the download of the selected resource are not
+                        available.</p>
+                    <p>Please contact the resource maintainer for more information on how to obtain the resource.</p>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+        </td></tr>
+      <tr><td>
+        <a href="{{ resource.get_absolute_url }}"><input type="button" class="span-6 button middle_button" value="&laquo;&nbsp;Resource View" /></a>
+        <a href="{% url 'download_contact' resource.storage_object.identifier %}"><input type="button" class="span-8 button middle_button" value="Contact Resource Maintainer" /></a>
+      </td></tr>
+    </table>
+  </div>
+
+{% endblock %}

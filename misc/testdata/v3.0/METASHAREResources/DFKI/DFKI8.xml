@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+  <identificationInfo>
+    <resourceName>SILO</resourceName>
+    <description>Similarity-Based Finite-State Lookup. Error-tolerant lookup of words in large vocabularies has many potential uses, both within and beyond natural language processing (NLP). SILO is a generic library for finite-state-based lexical lookup, originally designed for NLP-related applications, that can be adapted to application-specific error metrics. Among other things, this tool can be used for searching existing trademarks in a database, using orthographic and phonetic similarity.</description>
+    <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+  </identificationInfo>
+  <distributionInfo>
+    <availability>underNegotiation</availability>
+  </distributionInfo>
+  <contactPerson>
+    <surname>Busemann</surname>
+    <givenName>Stephan</givenName>
+    <sex>male</sex>
+    <communicationInfo>
+      <email>busemann@dfki.de</email>
+      <url>http://www.dfki.de/~busemann/</url>
+    </communicationInfo>
+    <affiliation>
+      <organizationName>Deutsches Forschungszentrum für Künstliche Intelligenz</organizationName>
+      <organizationShortName>DFKI</organizationShortName>
+      <departmentName>Language Technology Lab</departmentName>
+      <communicationInfo>
+        <email>sek-hu@dfki.de</email>
+        <url>http://www.dfki.de/lt</url>
+        <address>Stuhlsatzenhausweg 3</address>
+        <zipCode>66123</zipCode>
+        <city>Saarbrücken</city>
+        <country>DE</country>
+        <telephoneNumber>+49_681_857755282</telephoneNumber>
+        <faxNumber>+49_681_857755338</faxNumber>
+      </communicationInfo>
+    </affiliation>
+  </contactPerson>
+  <metadataInfo>
+    <metadataCreationDate>2012-05-15</metadataCreationDate>
+  </metadataInfo>
+  <usageInfo>
+    <foreseenUseInfo>
+      <foreseenUse>nlpApplications</foreseenUse>
+    </foreseenUseInfo>
+  </usageInfo>
+  <resourceComponentType>
+    <toolServiceInfo>
+      <resourceType>toolService</resourceType>
+      <toolServiceType>other</toolServiceType>
+      <languageDependent>false</languageDependent>
+    </toolServiceInfo>
+  </resourceComponentType>
+</resourceInfo>

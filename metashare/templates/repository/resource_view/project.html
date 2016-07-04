@@ -1,0 +1,76 @@
+{% spaceless %}
+
+<div class="dataline">	
+	
+	{% if level == "sub" %}
+		<div class='dataline indented'>
+			<label>
+				<strong><i>{{ project.Project_name }} </i></strong>{% if project.Project_short_name %}({{ project.Project_short_name }}{% if project.Project_identifier %} - {{ project.Project_identifier }}{% endif %}){% endif %}
+			</label>
+		</div>
+	{% else %}
+	<div class="subtitle">
+		<label>
+			<strong>{{ project.Project_name }} </strong>{% if project.Project_short_name %}({{ project.Project_short_name }}{% if project.Project_identifier %} - {{ project.Project_identifier }}{% endif %}){% endif %}
+		</label>
+	</div>
+	
+	
+	{% endif %}
+
+	{% if project.URL_Landing_page %}
+		<div class='dataline indented'>
+			<label>
+				<strong>URL{% if ", " in project.URL_Landing_page %}s{% endif %}: </strong>{{ project.URL_Landing_page|urlizetrunc:23 }}
+			</label>
+		</div>
+	{% endif %}
+	
+	<div class="dataline indented">
+		<label>
+			<strong>Funding Type{% if ", " in project.Funding_type%}s{% endif %}: </strong>{{ project.Funding_type }}
+		</label>
+	</div>
+
+	{% if project.Funder %}
+	<div class="dataline indented">
+		<label>
+			<strong>Funder{% if ", " in project.Funder%}s{% endif %}: </strong>{{ project.Funder }}
+		</label>
+	</div>
+	{% endif %}
+
+	<div class="dataline indented">
+		<label>
+			{% if project.Funding_country %}
+			<strong>Funding {% if "," in project.Funding_country%}Countries{% else %}Country{% endif %}: </strong>{{ project.Funding_country }} ({{ project.Funding_country_identifier }})
+			{% endif %}
+		</label>
+	</div>
+		
+	{% if project.Project_start_date and project.Project_end_date %}
+		<div class="dataline indented">
+			<label>
+				<strong>Project duration:</strong> {{ project.Project_start_date|date:"SHORT_DATE_FORMAT" }} - {{ project.Project_end_date|date:"SHORT_DATE_FORMAT" }}
+			</label>
+		</div>
+	{% else %}
+		{% if project.Project_start_date %}
+			<div class="dataline indented">
+				<label>					
+					<strong>Project started: </strong>{{ project.Project_start_date|date:"SHORT_DATE_FORMAT" }}					
+				</label>
+			</div>
+		{% endif %}
+		
+		{% if project.Project_end_date %}
+			<div class="dataline indented">
+				<label>				
+					<strong>Project ended: </strong>{{ project.Project_end_date|date:"SHORT_DATE_FORMAT" }}
+				</label>
+			</div>
+		{% endif %}
+	{% endif %}		
+</div>
+
+{% endspaceless %}

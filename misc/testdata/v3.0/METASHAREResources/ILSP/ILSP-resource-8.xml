@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+      <identificationInfo>
+        <resourceName lang="en">INTERA Corpus</resourceName>
+        <description lang="en">Greek-English, Serbian-English, Bulgarian-English, Slovene-English; multilingual, written, domain specific (law, education, environment, tourism, health), parallel corpora; Total 12 MWs: Greek-English 4MWs (2 MWs per language), Serbian-English 2MWs (1 MWs per language), Bulgarian-English 2MWs (1 MWs per language), Slovene-English 4MWs (2 MWs per language); TMX format, XCES-compatible annotation in XML format; POS-tagged and lemmatised in XML format; IMDI metadata elements in XML format </description>
+          <metaShareId>
+            NOT_DEFINED_FOR_V2
+          </metaShareId>
+      </identificationInfo>
+      <distributionInfo>
+        <availability>available-restrictedUse</availability>
+          <licenceInfo>
+            <licence>proprietary</licence>
+            <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+            <downloadLocation>http://lrt.ilsp.gr:8081/data/Intera.zip</downloadLocation>
+          </licenceInfo>
+      </distributionInfo>
+      <contactPerson>
+        <surname lang="en">Gavrilidou</surname>
+        <givenName lang="en">Maria</givenName>
+        <sex>female</sex>
+          <communicationInfo>
+            <email>maria@ilsp.athena-innovation.gr</email>
+            <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=15&amp;Itemid=156</url>
+            <address>Artemidos 6</address>
+            <zipCode>GR-151 25</zipCode>
+            <city>Maroussi</city>
+            <country>GR</country>
+            <telephoneNumber>+302106875441</telephoneNumber>
+            <faxNumber>+302106854270</faxNumber>
+          </communicationInfo>
+        <position>Senior Research Fellow</position>
+          <affiliation>
+            <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+            <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+              <communicationInfo>
+                <email>www@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/</url>
+                <address>Artemidos 6 &amp; Epidavrou</address>
+                <zipCode>GR-15125</zipCode>
+                <city>Maroussi</city>
+                <country>GR</country>
+                <telephoneNumber>+302106875300</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+                <faxNumber>+302106856794</faxNumber>
+              </communicationInfo>
+          </affiliation>
+      </contactPerson>
+      <metadataInfo>
+        <metadataCreationDate>2012-02-02</metadataCreationDate>
+          <metadataCreator>
+            <surname lang="en">Labropoulou</surname>
+            <givenName lang="en">Penny</givenName>
+            <sex>female</sex>
+              <communicationInfo>
+                <email>penny@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=37&amp;Itemid=156</url>
+                <telephoneNumber>+302106875445</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+              </communicationInfo>
+            <position>Senior Research Fellow</position>
+              <affiliation>
+                <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                  <communicationInfo>
+                    <email>www@ilsp.athena-innovation.gr</email>
+                    <url>http://www.ilsp.gr/</url>
+                    <address>Artemidos 6 &amp; Epidavrou</address>
+                    <zipCode>GR-15125</zipCode>
+                    <city>Maroussi</city>
+                    <country>GR</country>
+                    <telephoneNumber>+302106875300</telephoneNumber>
+                    <faxNumber>+302106854270</faxNumber>
+                    <faxNumber>+302106856794</faxNumber>
+                  </communicationInfo>
+              </affiliation>
+          </metadataCreator>
+        <source>META-SHARE/ILSP</source>
+      </metadataInfo>
+      <usageInfo>
+          <foreseenUseInfo>
+            <foreseenUse>nlpApplications</foreseenUse>
+            <useNLPSpecific>machineTranslation</useNLPSpecific>
+          </foreseenUseInfo>
+          <actualUseInfo>
+            <actualUse>nlpApplications</actualUse>
+            <useNLPSpecific>terminologyExtraction</useNLPSpecific>
+          </actualUseInfo>
+      </usageInfo>
+      <resourceDocumentationInfo>
+          <documentation>
+              <documentInfo>
+                <documentType>inProceedings</documentType>
+                <title lang="en">Building Multilingual Terminological Resources</title>
+                <author>Maria Gavrilidou and Penny Labropoulou and Monica Monachini and Stelios Piperidis and Claudia Soria</author>
+                <year>2005</year>
+                <bookTitle>Proceedings of the RANLP 2005 International Workshop on Language and Speech Infrastructure for Information Access in the Balkan Countries</bookTitle>
+                <conference>RANLP 2005 International Workshop on Language and Speech Infrastructure for Information Access in the Balkan Countries</conference>
+              </documentInfo>
+          </documentation>
+          <documentation>
+              <documentInfo>
+                <documentType>inProceedings</documentType>
+                <title lang="en">Building parallel corpora for eContent professionals</title>
+                <author>Maria Gavrilidou and Penny Labropoulou and Elina Desipri and Voula Giouli et al</author>
+                <year>2004</year>
+                <bookTitle>Proceedings of COLING 2004</bookTitle>
+                <conference>COLING 2004</conference>
+              </documentInfo>
+          </documentation>
+          <documentation>
+              <documentInfo>
+                <documentType>inProceedings</documentType>
+                <title lang="und">Language resources production models: the case of INTERA multilingual corpus and terminology</title>
+                <author>Maria Gavrilidou and Penny Labropoulou and Stelios Piperidis et al</author>
+                <year>2006</year>
+                <bookTitle>Porceedings of the 5th International Conference on Language Resources and Evaluation (LREC-2006)</bookTitle>
+                <conference>5th International Conference on Language Resources and Evaluation (LREC-2006)</conference>
+              </documentInfo>
+          </documentation>
+          <documentation>
+              <documentInfo>
+                <documentType>techReport</documentType>
+                <title lang="und">D5.2 - Report on the multilingual resources production</title>
+                <author>Maria Gavrilidou and Voula Giouli and Elina Desipri and Penny Labropoulou and Monica Monachini et al</author>
+                <year>2004</year>
+                <url>http://www.elda.org/article176.html</url>
+              </documentInfo>
+          </documentation>
+      </resourceDocumentationInfo>
+      <resourceCreationInfo>
+          <resourceCreator>
+              <organizationInfo>
+                <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                  <communicationInfo>
+                    <email>www@ilsp.athena-innovation.gr</email>
+                    <url>http://www.ilsp.gr/</url>
+                    <address>Artemidos 6 &amp; Epidavrou</address>
+                    <zipCode>GR-15125</zipCode>
+                    <city>Maroussi</city>
+                    <country>GR</country>
+                    <telephoneNumber>+302106875300</telephoneNumber>
+                    <faxNumber>+302106854270</faxNumber>
+                    <faxNumber>+302106856794</faxNumber>
+                  </communicationInfo>
+              </organizationInfo>
+          </resourceCreator>
+          <fundingProject>
+            <projectName lang="en">Integrated European language data Repository Area</projectName>
+            <projectShortName lang="en">INTERA</projectShortName>
+            <projectID>e-content EDC-22076 INTERA / 27924</projectID>
+            <url>http://www.elda.org/intera</url>
+            <fundingType>euFunds</fundingType>
+            <funder>eContent</funder>
+            <projectStartDate>2003-01-01</projectStartDate>
+            <projectEndDate>2004-12-31</projectEndDate>
+          </fundingProject>
+        <creationStartDate>2003-01-01</creationStartDate>
+        <creationEndDate>2004-12-31</creationEndDate>
+      </resourceCreationInfo>
+      <resourceComponentType>
+          <corpusInfo>
+            <resourceType>corpus</resourceType>
+              <corpusMediaType>
+                  <corpusTextInfo>
+                    <mediaType>text</mediaType>
+                      <lingualityInfo>
+                        <lingualityType>multilingual</lingualityType>
+                        <multilingualityType>parallel</multilingualityType>
+                        <multilingualityTypeDetails>The corpus consists of four bilingual corpora, all with English as the pivot language.</multilingualityTypeDetails>
+                      </lingualityInfo>
+                      <languageInfo>
+                        <languageId>el</languageId>
+                        <languageName>Modern Greek (1453-)</languageName>
+                          <sizePerLanguage>
+                            <size>2000000</size>
+                            <sizeUnit>words</sizeUnit>
+                          </sizePerLanguage>
+                      </languageInfo>
+                      <languageInfo>
+                        <languageId>en</languageId>
+                        <languageName>English</languageName>
+                          <sizePerLanguage>
+                            <size>6000000</size>
+                            <sizeUnit>words</sizeUnit>
+                          </sizePerLanguage>
+                      </languageInfo>
+                      <languageInfo>
+                        <languageId>sl</languageId>
+                        <languageName>Slovenian</languageName>
+                          <sizePerLanguage>
+                            <size>2000000</size>
+                            <sizeUnit>words</sizeUnit>
+                          </sizePerLanguage>
+                      </languageInfo>
+                      <languageInfo>
+                        <languageId>bg</languageId>
+                        <languageName>Bulgarian</languageName>
+                          <sizePerLanguage>
+                            <size>1000000</size>
+                            <sizeUnit>words</sizeUnit>
+                          </sizePerLanguage>
+                      </languageInfo>
+                      <languageInfo>
+                        <languageId>sr</languageId>
+                        <languageName>Serbian</languageName>
+                          <sizePerLanguage>
+                            <size>1000000</size>
+                            <sizeUnit>words</sizeUnit>
+                          </sizePerLanguage>
+                      </languageInfo>
+                      <modalityInfo>
+                        <modalityType>writtenLanguage</modalityType>
+                      </modalityInfo>
+                      <sizeInfo>
+                        <size>12000000</size>
+                        <sizeUnit>words</sizeUnit>
+                      </sizeInfo>
+                      <textFormatInfo>
+                        <mimeType>text/xml</mimeType>
+                      </textFormatInfo>
+                      <characterEncodingInfo>
+                        <characterEncoding>UTF-8</characterEncoding>
+                      </characterEncodingInfo>
+                      <annotationInfo>
+                        <annotationType>lemmatization</annotationType>
+                      </annotationInfo>
+                      <annotationInfo>
+                        <annotationType>morphosyntacticAnnotation-bPosTagging</annotationType>
+                      </annotationInfo>
+                      <annotationInfo>
+                        <annotationType>alignment</annotationType>
+                      </annotationInfo>
+                      <annotationInfo>
+                        <annotationType>structuralAnnotation</annotationType>
+                      </annotationInfo>
+                      <domainInfo>
+                        <domain>tourism</domain>
+                      </domainInfo>
+                      <domainInfo>
+                        <domain>health</domain>
+                      </domainInfo>
+                      <domainInfo>
+                        <domain>education</domain>
+                      </domainInfo>
+                      <domainInfo>
+                        <domain>environment</domain>
+                      </domainInfo>
+                      <domainInfo>
+                        <domain>law</domain>
+                      </domainInfo>
+                      <creationInfo>
+                          <originalSource>
+                            <targetResourceNameURI>various texts found mainly over the internet</targetResourceNameURI>
+                          </originalSource>
+                        <creationMode>mixed</creationMode>
+                        <creationModeDetails>web crawling; manual selection; semi-automatic conversion to the desired formats</creationModeDetails>
+                      </creationInfo>
+                  </corpusTextInfo>
+              </corpusMediaType>
+          </corpusInfo>
+      </resourceComponentType>
+  </resourceInfo>

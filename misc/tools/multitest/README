@@ -1,0 +1,54 @@
+
+
+usage:
+	./mserv.sh [start|stop|clean]
+	
+	start: starts all the configured nodes
+	stop: stop all the configured nodes but leaves the node specific directories
+			for inspection purposes
+	clean: cleans the node specific directories
+	
+note: before running mserv.sh it is necessary to set the
+environment variable METASHARE_SW_DIR. This must contain the directory
+in which the Metashare software has been downloaded.
+
+It is also necessary to set the environment variable TEST_DIR that
+will contain all the data related to the servers. If this variable
+is not set it will be used a 'test_dir' directory under the current
+directory.
+
+
+So, the typical use will be:
+export METASHARE_SW_DIR=/path/to/dir
+export TEST_DIR=/tmp  (or any other)
+cd $METASHARE_SW_DIR/misc/multitest
+./mserv.sh start
+"run the tests"
+./mserv.sh stop
+./mserv.sh clean
+
+
+The configuration of nodes is specified in the mconfig.py file.
+This file contains a class that should hold information for
+the nodes to be activated and the actual list of the nodes
+that must be started. For each node it is possible to define
+if it is an 'inner' or 'outer' node. If it is a 'outer' node
+it is possible to specify the 'proxy' node to which
+it will be connected.
+
+It could be necessary to tune some parameter before running the mserv.sh.
+The main problem could be to set the ports that will be used by the servers.
+The default values are:
+The port on which django servers listen for requests: 18001, 18002, 18003, etc
+The port on which solr servers listen for requests: 4445, 4446, 4447, etc
+The prot on which solr servers wait the stop command: 3334, 3335, 3336, etc
+If the machine running the tests already uses some of these ports, the base value
+of each of this set of ports must be changed:
+django_port: after the end of the 'mconfig' class declaration, before
+	the instantiation of nodes
+solr_port_base, solr_stop_port_base: declared as class variables at the beginning of 'mconfig' class
+Note: for each of this port the first actually used (for the first node) will be 'p + 1'.
+
+The set of nodes is obtained by:
+creating each node by 'cnf1 = mconfig()'
+adding the node to the list by 'CONFIGS.append(cnf1)

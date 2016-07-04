@@ -1,0 +1,32 @@
+<label class='component'>Version</label>
+<div>
+		 <div class="dataline">
+			<label>
+				<strong>Version: </strong>{{ version_dict.Version.Version }}
+			</label>
+		</div>
+		
+		{% if version_dict.Version.Revision %}			
+			 <div class="dataline">
+				<label>
+					<strong>Revision: </strong>{{ version_dict.Version.Revision }}
+				</label>
+			</div>
+		{% endif %}
+		
+		{% if version_dict.Version.Last_date_updated %}			
+			 <div class="dataline">
+				<label>
+					<strong>Last Updated: </strong>{{ version_dict.Version.Last_date_updated|date:"SHORT_DATE_FORMAT" }}
+				</label>
+			</div>
+		{% endif %}
+		
+		{% if version_dict.Version.Update_frequency %}			
+		 	<div class="dataline">
+				<label>
+					<strong>Update Frequency: </strong>{{ version_dict.Version.Update_frequency }}
+				</label>
+			</div>
+		{% endif %}		
+</div>

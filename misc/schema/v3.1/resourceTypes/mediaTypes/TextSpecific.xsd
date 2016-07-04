@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited by ILSP/Athena R.C. -->
+<xs:schema xmlns:ms="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.meta-share.org/META-SHARE_XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.1" xml:lang="en">
+	<xs:include schemaLocation="../../META-SHARE-SimpleTypes.xsd"/>
+	<xs:include schemaLocation="../../META-SHARE-BaseTypes.xsd"/>
+	<xs:complexType name="textFormatInfoType">
+		<xs:annotation/>
+		<xs:sequence>
+			<xs:element ref="ms:mimeType">
+				<xs:annotation>
+					<xs:documentation>The mime-type of the resource which is a formalized specifier for the format included or a mime-type that the tool/service accepts, in conformance with the values of the IANA (Internet Assigned Numbers Authority); you can select one of the pre-defined values or add a value, PREFERABLY FROM THE IANA MEDIA MIMETYPE RECOMMENDED VALUES (http://www.iana.org/assignments/media-types/media-types.xhtml)</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Mime type</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sizePerTextFormat" type="ms:sizeInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides information on the size of the resource parts with different format</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
+						<label>Size per text format</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="textClassificationInfoType">
+		<xs:sequence>
+			<xs:element ref="ms:textGenre" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Genre: The conventionalized discourse or text types of the content of the resource, based on extra-linguistic and internal linguistic criteria</xs:documentation>
+					<xs:appinfo>
+						<label>Text genre</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:textType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies the type of the text according to a text type classification</xs:documentation>
+					<xs:appinfo>
+						<label>Text type</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:register" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>For corpora that have already been using register classification</xs:documentation>
+					<xs:appinfo>
+						<label>Register</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:subject_topic" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>For corpora that have already been using subject classification</xs:documentation>
+					<xs:appinfo>
+						<label>Subject / Topic</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:conformanceToClassificationScheme" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies the external classification schemes</xs:documentation>
+					<xs:appinfo>
+						<label>Conformance to classification scheme</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sizePerTextClassification" type="ms:sizeInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides information on size of resource parts with different text classification</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
+						<label>Size per text classification</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- elements -->
+	<xs:element name="textFormatInfo" type="ms:textFormatInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on the text format(s) of a resource</xs:documentation>
+			<xs:appinfo>
+				<label>Text format</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="textGenre">
+		<xs:annotation>
+			<xs:documentation>Genre: The conventionalized discourse or text types of the content of the resource, based on extra-linguistic and internal linguistic criteria</xs:documentation>
+			<xs:appinfo>
+				<label>Text genre</label>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="50"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="textType">
+		<xs:annotation>
+			<xs:documentation>Specifies the type of the text according to a text type classification</xs:documentation>
+			<xs:appinfo>
+				<label>Text type</label>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="50"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="textClassificationInfo" type="ms:textClassificationInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on text type/genre of the resource</xs:documentation>
+			<xs:appinfo>
+				<label>Text classification</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

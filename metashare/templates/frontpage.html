@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block content %}
+{% spaceless %}
+<div class="span-24">
+  <div style="text-align:center;margin-top: 20px;margin-bottom: 20px;">
+    <p><img src="{{ MEDIA_URL }}meta-share-logo.png" style="border: 1px solid #cccccc;width: 850px;padding:10px;background-color:white;" /></p>
+    <p>{{resources|intcomma}} language resource{{resources|pluralize}} at your disposal</p>
+  </div>
+  <form method="get" action="{% url 'frontpage' %}repository/search/" class="form_helper">
+    <div id="search">
+      <div id="search_input"><input class="big_input span-14" type="text" name="q" defaultText="Type in your keywords, please..." /></div>
+      <div id="search_button"><button type="submit" class="big_button button">Search</button></div>
+    </div>
+  </form>
+</div>
+
+<div class="span-24" style="vertical-align: middle; margin-top:30px;">
+<table>
+  <tr>
+    <td>
+      <span class="span-7 append-1" style="vertical-align: middle;"><img src="{{ MEDIA_URL }}images/teaser02.png" /></span>
+    </td>
+    <td>
+      <span class="span-15 last" style="">
+        <h2>What is it? - About the project</h2>
+        <p>META-SHARE, the open language resource exchange facility, is devoted to the sustainable sharing and dissemination of language resources (LRs) and aims at increasing access to such resources in a global scale.</p>
+        <p>META-SHARE is an open, integrated, secure and interoperable sharing and exchange facility for LRs (datasets and tools) for the Human Language Technologies domain and other applicative domains where language plays a critical role.</p>
+        <p>META-SHARE is implemented in the framework of the <a href="http://www.meta-net.eu/">META-NET Network of Excellence</a>. It is designed as a network of distributed repositories of LRs, including language data and basic language processing tools (e.g., morphological analysers, PoS taggers, speech recognisers, etc.).</p>
+      </span>
+    </td>
+  </tr>
+</table>
+</div>
+
+<div class="split span-24">
+  <div class="navigation_box push-18 last">
+    <a href="#content" class="scroll"><img src="{{ MEDIA_URL }}images/gototop.png" /></a>
+  </div>
+</div>
+
+<div class="span-24" style="vertical-align: middle; margin-top:35px;">
+<table>
+  <tr>
+    <td>
+      <span class="span-15 append-1" style="">
+        <h2>The META-SHARE Infrastructure</h2>
+        <p>META-SHARE aims to provide a multi-layer infrastructure that:</p>
+        <ul>
+          <li>makes available quality LRs and related metadata over the META-SHARE network;</li>
+          <li>ensures that such LRs and metadata are properly preserved and maintained;</li>
+          <li>makes a set of services available to all META-SHARE members and users;</li>
+          <li>promotes the use of widely acceptable standards for language resource building which ensures the maximum possible interoperability of LRs;</li>
+          <li>allows associated third parties to easily index their LRs over the META-SHARE network;</li>
+          <li>allows any potential user of the LRs to easily and legally acquire the requested high quality LRs.</li>
+        </ul>
+      </span>
+    </td>
+    <td>
+      <span class="span-7 last" style="vertical-align: middle;"><img src="{{ MEDIA_URL }}images/teaser03.png" /></span>
+    </td>
+  </tr>
+</table>
+</div>
+
+<div class="split span-24">
+  <div class="navigation_box push-18 last">
+    <a href="#content" class="scroll"><img src="{{ MEDIA_URL }}images/gototop.png" /></a>
+  </div>
+</div>
+
+<div class="span-24" style="vertical-align: middle; margin-top:35px;">
+<table>
+  <tr>
+    <td>
+      <span class="span-7 append-1" style="vertical-align: middle;"><img src="{{ MEDIA_URL }}images/teaser04.png" /></span>
+    </td>
+    <td>
+      <span class="span-15 last" style="">
+        <h2>Connect and Share! - Our vision</h2>
+        <p><a href="info/#META-SHARE_Members">META-SHARE Members</a> set up and maintain their own <a href="info/#META-SHARE_Repositories">Language Resource Repositories</a>, the META-SHARE Network Nodes, acting as Repository Service Providers. They can do so by using the open source META-SHARE software which is <a href="https://github.com/metashare/META-SHARE">freely available at GitHub</a>.
+        <p>META-SHARE Members who do not wish to set up their own language resource repository can deposit their language resources to META-SHARE repositories maintained by other META-SHARE Network Members who undertake to host and/or be responsible for those LRs (hosting repositories).</p>
+        <p>META-SHARE Managing Nodes are META-SHARE Network Members that provide core services to all META-SHARE Network Members, acting as <a href="info/#META-SHARE_Core_Services">Core Service</a> and <a href="info/#META-SHARE_User_Support_Services">User Support Service</a> providers.</p>
+        <p>Third Parties are able to use the search services and easily acquire LRs from the META-SHARE network in accordance with the relevant <a href="info/#Licensing_LRs_through_META-SHARE">licensing terms and conditions</a>.</p>
+      </span>
+    </td>
+  </tr>
+</table>
+</div>
+{% endspaceless %}
+{% endblock %}

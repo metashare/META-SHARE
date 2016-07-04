@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}{{ title }} &ndash; META-SHARE{% endblock %}
+{% block content %}
+<form class="form_helper" action="{% url 'edit_profile' %}" method="post">
+<table>
+  <tr>
+    <th> <label>First name</label></th><td class="readonly"> {{ user.first_name }} </td>
+  </tr>
+  <tr>
+    <th> <label>Last name</label></th><td class="readonly"> {{ user.last_name }} </td>
+  </tr>
+  <tr>
+    <th> <label>Email</label></th><td class="readonly"> {{ user.email }} </td>
+  </tr>
+  {% if metashare_membership %}
+  <tr><th><label>META-SHARE Membership</label></th><td class="readonly">{{ metashare_membership }}</td></tr>
+  {% endif %}
+  <tr><td colspan="2" style="text-align:center; height:40px;">If you would like to change any of the above details, please <a href="{% url 'contact' %}">contact the maintainers of this META-SHARE node</a>.</td></tr>
+  {{ form.as_table }}
+
+  {% if editor_group_managers_member_of %}
+  <tr>
+    <th> <label>Editor Group Manager Group{{ editor_group_managers_member_of|pluralize }}</label></th>
+    <td>{{ editor_group_managers_member_of|join:", " }}</td>
+  </tr>
+  {% endif %}
+
+  {% if editor_groups_member_of %}
+  <tr>
+    <th> <label title="Displays all the editor groups you belong in. Editor groups that are applied by default to your resources, are shown in italic.">Editor Group{{ editor_groups_member_of|pluralize }}</label></th>
+    {% regroup editor_groups_member_of by default as edt_grp_list %}
+    <td>
+	{% for edt_grp in edt_grp_list %}
+      {% if not forloop.first %}, {% endif %} 
+	  {% if edt_grp.grouper %}
+	    {% for e in edt_grp.list %}
+	      {% if forloop.first %}{% else %}, {% endif %} 
+	      <i title="This editor group is set by default to your resources.">{{ e.name }}</i>
+	    {% endfor %}
+      {% else %}
+	    {% for e in edt_grp.list %}
+	      {% if not forloop.first %}, {% endif %} 
+	      {{ e.name }}
+	    {% endfor %}
+      {% endif %}
+	{% endfor %}
+    </td>
+  </tr>
+  {% endif %}
+  {% if groups_applied_for %}
+  <tr><td colspan="2" style="text-align:center; height:40px;">You already applied for a membership of the following editor group{{ groups_applied_for|pluralize }}: {{ groups_applied_for|join:", " }}</td></tr>
+  {% endif %}
+
+  {% if organization_managers_member_of %}
+  <tr>
+    <th> <label>Organization Manager Group{{ organization_managers_member_of|pluralize }}</label></th>
+    <td>{{ organization_managers_member_of|join:", " }}</td>
+  </tr>
+  {% endif %}
+  {% if organizations_member_of %}
+  <tr>
+    <th> <label>Organization{{ organizations_member_of|pluralize }}</label> </th>
+    <td>{{ organizations_member_of|join:", " }}</td>
+  </tr>
+  {% endif %}
+  {% if organizations_applied_for %}
+  <tr><td colspan="2" style="text-align:center; height:40px;">You already applied for a membership of the following organization{{ organizations_applied_for|pluralize }}: {{ organizations_applied_for|join:", " }}</td></tr>
+  {% endif %}
+  
+<tr><th></th><td><input class="button middle_button" type="submit" value="Edit Profile" /></td></tr>
+</table>
+</form>
+{% endblock %}
+
+

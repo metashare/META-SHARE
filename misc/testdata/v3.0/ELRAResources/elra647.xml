@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">New Oxford Thesaurus of English</resourceName>
+      <resourceName lang="fr">NOTE (New Oxford Thesaurus of English - nouveau thésaurus d'anglais Oxford)</resourceName>
+      <description lang="en">The New Oxford Thesaurus of English is a completely new top-of-the-range thesaurus offering more alternative and opposite words than any of its competitors. The synonyms are arranged in order of ?relevance? to the look-up word, starting with an individually tagged core synonym, and followed by labelled groups with limited currency, such as informal, regional, and technical terms. NOTE also contains a corpus-based example for the vast majority of senses ? a total of nearly 38,000. It contains 628,000 alternative words, including 573,000 synonyms, the rest being antonyms, related terms, combining forms, and hyponyms, and is available in SGML.</description>
+      <description lang="fr">Le nouveau thésaurus anglais d'Oxford (NOTE, New Oxford Thesaurus of English) offre un très large choix de termes équivalents et opposés (du type synonymes et antonymes). Pour chaque entrée, les synonymes sont classés par ordre de pertinence. Le premier de la liste est marqué individuellement, puis suivi d'autres synonymes qui portent une étiquette précisant leur valeur (termes informels, régionaux, techniques). NOTE présente également des exemples en contexte pour la majorité des sens - presque 38 000 au total. Ce thésaurus contient 628 000 mots alternatifs, dont 573 000 synonymes, les autres étant des antonymes, des termes apparentés, des compositions ou des hyponymes. Le thésaurus est disponible au format SGML.</description>
+      <resourceShortName>NOTE</resourceShortName>
+      <url>http://catalog.elra.info/product_info.php?products_id=681</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-L0047</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>7000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>4900.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <availabilityStartDate>2002-10-25</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Valérie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <lastDateUpdated>2005-06-13</lastDateUpdated>
+   </versionInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>eng</languageId>
+                  <languageName>English</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>no size available</size>
+                  <sizeUnit>other</sizeUnit>
+               </sizeInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

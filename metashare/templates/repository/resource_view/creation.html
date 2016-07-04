@@ -1,0 +1,42 @@
+{% load replace %}
+
+{% spaceless %}
+
+<label class='title'>Creation</label>
+{% for key, value in creation.items %}
+	{% if not "Original_source" in key and not "Creation_tool" in key %}
+		 <div class="dataline indented">
+			<label>
+				<strong>{{ key|rep }}:</strong> {{ value }}
+			</label>
+		</div>
+	{% endif %}
+{% endfor %}
+
+{% if "Original_source" in creation %}
+	<label class='subtitle'>Original Sources</label>
+{% endif %}
+ <div class="dataline indented">
+	 <ul>
+		{% for key, value in creation.items %}
+			{% if "Original_source" in key %}
+				{% include "repository/resource_view/target_resource.html" with target=value title="Original Source" level="list" %}
+			{% endif %}
+		{% endfor %}
+	</ul>
+</div>
+
+{% if "Creation_tool" in creation %}
+	<label class='subtitle'>Creation Tools</label>
+{% endif %}
+ <div class="dataline indented">
+	 <ul>
+		{% for key, value in creation.items %}
+			{% if "Creation_tool" in key %}
+				{% include "repository/resource_view/target_resource.html" with target=value title="Creation Tool" level="list" %}
+			{% endif %}
+		{% endfor %}
+	</ul>
+</div>
+
+{% endspaceless %}

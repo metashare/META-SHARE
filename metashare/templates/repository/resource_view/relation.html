@@ -1,0 +1,15 @@
+{% spaceless %}
+
+<label class='component'>Relation</label>
+
+{% for dict in relation_dicts %}
+	<div class="separation"><hr/></div>
+	{% include "repository/resource_view/target_resource.html" with target=dict.Relation.Related_resource title="Related Resource" level="top" %}
+     <div class="dataline">
+		<label>
+			<strong>Relation Type:</strong> {{ dict.Relation.Relation_type }}
+		</label>
+	</div>
+{% endfor %}
+
+{% endspaceless %}

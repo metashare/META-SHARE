@@ -1,0 +1,234 @@
+{% load email_protection %}
+{% load get_icon %}
+{% spaceless %}
+
+<div class="dataline" style="margin-bottom:3px;">
+	{% if level == "sub" %}
+		<label class='subtitle'>{{type}}</label>
+	{% else %}	
+		{% if type != "Contact Person" and type != "Metadata Creator" and type != "Resource Creator" and type != "IPR Holder" and type != "Evaluator" and type != "Validator" and type != "Annotator" and type != "Licensor" and type != "Distribution_rights_holder" and type != "Validator" and type != "Recorder" %}
+			<span class='title'>{{type}}</span>
+		{% endif %}
+	{% endif %}
+	
+	<a href='#' class="contactcard" title="Click to view contact card">
+		<label class="dataline indented" style="float:left;">
+			{{ person_dict.Given_name }}
+			{{ person_dict.Surname }}
+			{{ person_dict.Organization_name }}	
+			<img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/vcard.png" />
+		</label>
+	</a>
+
+	<div class="contact hidden">
+		{# Name, Surname and sex #}
+		<div style="clear:both;"></div>
+		<div>
+			<label class="dataline">
+				{% if person_dict.Sex == "Male" %}
+					{% get_icon "male" %}
+				{% else %}
+					{% if person_dict.Sex == "Female" %}
+						{% get_icon "female" %}
+					{% endif %}
+				{% endif %}
+			</label>
+		</div>
+		
+		{% if "URL_Landing_page" in person_dict.Communication %}
+			<div>
+				{% for key, value in person_dict.Communication.items %}
+					{% if "URL_Landing_page" in key %}
+						<label class="dataline" style="clear:both;">
+							<a>{{ value|urlizetrunc:23 }}</a>
+						</label>
+					{% endif %}
+				{% endfor %}
+			</div>
+		{% endif %}
+	
+		
+		<div>
+			<label class="dataline">
+				{{ person_dict.Department_name }}
+			</label>
+		</div>
+		
+		<div>
+			<label class="dataline">
+				{{ person_dict.Organization_name }}	
+			</label>
+		</div>
+		
+		
+		<div>
+			<label class="dataline">
+				{{ person_dict.Organization_short_name }}		
+			</label>
+		</div>
+		
+		<div>
+			<label class="dataline">
+				{{ person_dict.Affiliation.Organization_name }}	
+			</label>
+		</div>
+		
+		<div>
+			<label class="dataline">
+				{{ person_dict.Affiliation.Organization_short_name }}		
+			</label>
+		</div>
+
+		<div>
+			<label class="dataline">
+				{{ person_dict.Position }}
+			</label>
+		</div>
+		
+		{% if "Department_name" in person_dict.Affiliation %}
+		<div>
+			{% for key, value in person_dict.Affiliation %}
+				{% if "Department_name" in key %}
+					<label class="dataline">
+						{{ value.Department_name }}
+					</label>
+				{% endif %}
+			{% endfor %}
+		</div>
+		{% endif %}
+		
+		{% if person_dict.Communication.Email %}
+		<div>
+			<label class="dataline">
+				{% for item in person_dict.Communication.Email.split %}
+					{% encrypt_email item %} {% if not forloop.last %}, {% endif %} 
+				{% endfor %}
+			</label>
+		</div>
+		{% endif %}
+		
+		<div>
+			<label class="dataline">
+				{{ person_dict.Communication.Address }}
+			</label>
+		</div>
+		<div>
+			<label class="dataline">
+				{{ person_dict.Communication.Zip_code }}
+				{{ person_dict.Communication.City }}
+			</label>
+		</div>
+		<div>
+			<label class="dataline">
+				{{ person_dict.Communication.Region }}
+			</label>
+		</div>
+		<div>
+			<label class="dataline">
+				{% if person_dict.Communication.Country %}
+                     {{ person_dict.Communication.Country }} ({{ person_dict.Communication.Country_identifier }})
+                {% endif %}
+			</label>
+		</div>
+		
+		{% if person_dict.Communication.Telephone_number %}
+		<div>
+			<label class="dataline">
+				Tel.: {{ person_dict.Communication.Telephone_number }}
+			</label>
+		</div>
+		{% endif %}
+		{% if person_dict.Communication.Fax_number %}
+		<div>
+			<label class="dataline">
+				Fax: {{ person_dict.Communication.Fax_number }}
+			</label>
+		</div>
+		{% endif %}
+		
+		{% if person_dict.Affiliation %}
+			<div class="separation"><hr/></div>
+		{% endif %}
+	
+		<div>
+			<label class="dataline">
+				{{ person_dict.Affiliation.Department_name }}
+			</label>
+		</div>
+		<div>
+			<label class="dataline">
+				{% if person_dict.Affiliation.Communication.URL_Landing_page %}
+                    {{ person_dict.Affiliation.Communication.URL_Landing_page|urlizetrunc:23 }}
+				{% endif %}
+			</label>
+		</div>
+		{% if person_dict.Affiliation.Communication.Affiliation.Organization_name %}
+			<div>
+				<label class="dataline">
+					{{ person_dict.Affiliation.Organization_name }}
+				</label>
+			</div>
+		{% endif %}
+		<div>
+			<label class="dataline">
+				{{ person_dict.Affiliation.Organization_short_name }}
+			</label>
+		</div>
+		
+		{% if person_dict.Affiliation.Email %}
+		<div>
+			<label class="dataline">
+				{% for item in person_dict.Affiliation.Email.split %}
+					{% encrypt_email item %} {% if not forloop.last %}, {% endif %} 
+				{% endfor %}
+			</label>
+		</div>
+		{% endif %}
+		
+		<div>
+			<label class="dataline">
+				{{ person_dict.Affiliation.Communication.Address }}
+			</label>
+		</div>
+		<div>
+			<label class="dataline">
+				{{ person_dict.Affiliation.Communication.Zip_code }}
+				{{ person_dict.Affiliation.Communication.City }}
+			</label>
+		</div>
+		<div>
+			<label class="dataline">
+				{{ person_dict.Affiliation.Communication.Region }}
+			</label>
+		</div>
+		<div>
+			<label class="dataline">
+				{{ person_dict.Affiliation.Communication.Country }}
+			</label>
+		</div>
+		<div>
+			<label class="dataline">
+	            {% if person_dict.Affiliation.Communication.Email %}
+					{% encrypt_email person_dict.Affiliation.Communication.Email %}
+				{% endif %}
+			</label>
+		</div>
+		{% if person_dict.Affiliation.Communication.Telephone_number %}
+		<div>
+			<label class="dataline">
+				Tel.: {{ person_dict.Affiliation.Communication.Telephone_number }}
+			</label>
+		</div>
+		{% endif %}
+		{% if person_dict.Affiliation.Communication.Fax_number %}
+		<div>
+			<label class="dataline">
+				Fax: {{ person_dict.Affiliation.Communication.Fax_number }}
+			</label>
+		</div>
+		{% endif %}	
+	</div>
+</div>
+<div style="clear:both;"></div>
+		
+{% endspaceless %}

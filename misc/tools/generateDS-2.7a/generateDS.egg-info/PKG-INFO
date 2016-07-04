@@ -1,0 +1,17 @@
+Metadata-Version: 1.0
+Name: generateDS
+Version: 2.7a
+Summary: Generate Python data structures and XML parser from Xschema
+Home-page: http://www.rexx.com/~dkuhlman/generateDS.html
+Author: Dave Kuhlman
+Author-email: dkuhlman@rexx.com
+License: http://www.opensource.org/licenses/mit-license.php
+Description: generateDS.py generates Python data structures (for example, class
+        definitions) from an XML Schema document.  These data structures
+        represent the elements in an XML document described by the XML
+        Schema.  It also generates parsers that load an XML document into
+        those data structures.  In addition, a separate file containing
+        subclasses (stubs) is optionally generated.  The user can add
+        methods to the subclasses in order to process the contents of an
+        XML document.
+Platform: platform-independent

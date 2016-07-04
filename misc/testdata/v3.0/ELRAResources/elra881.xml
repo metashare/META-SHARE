@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">FBK-Irst database of isolated meeting-room acoustic events</resourceName>
+      <resourceName lang="fr">Base de données d’événements acoustiques isolés enregistrés en salle de réunion (FBK-Irst)</resourceName>
+      <description lang="en">This database was produced within the CHIL Project (Computers in the Human Interaction Loop), in the framework of an Integrated Project (IP 506909) under the European Commission's Sixth Framework Programme. It contains a set of isolated acoustic events that occur in a meeting room environment and that were recorded for the CHIL Acoustic Event Detection (AED) task. The recorded sounds do not have temporal overlapping. The database can be used as training material for AED algorithms in quiet environments without temporal sound overlapping.The database contains 16 semantic classes of acoustic events: door knock; door open; door slam; steps; chair moving; cough; paper wrapping; falling object; laugh; keyboard clicking; key jingle; spoon, cup jingle; phone ring; phone vibration; MIMIO pen buzz; applause.9 people participated at the recordings. 3 experiments were recorded in different days, each one composed by 4 sessions and executed by 4 persons. During each session, every person reproduced a complete set of acoustic events. After every session, people swapped their positions.There are 3 DVDs containing 3 sessions each. In every session there are 32 audio files + one text file containing the segmentation.The database is made available freely via FTP.</description>
+      <description lang="fr">Cette base de données a été produite dans le cadre du projet CHIL (Computers in the Human Interaction Loop), issu d’un projet intégré (IP 506909) du sixième programme-cadre de la Commission européenne. Il contient un ensemble d’événements acoustiques isolés qui ont été enregistrés dans une salle de réunion pour la tâche de détection d’événement acoustique CHIL (AED). Les sons ont été enregistrés sans chevauchement temporel. La base de données peut être utilisée pour l’évaluation des algorithmes AED en milieu calme sans chevauchement temporel des sons.Cette base de données contient 16 classes sémantiques d’événements acoustiques (en anglais): "door knock"; "door open"; "door slam"; "steps"; "chair moving"; "cough"; "paper wrapping"; "falling object"; "laugh"; "keyboard clicking"; "key jingle"; "spoon, cup jingle"; "phone ring"; "phone vibration"; "MIMIO pen buzz"; "applause".9 personnes ont participé aux enregistrements. 3 enregistrements ont été réalisés à différents jours d’intervalle, chaque enregistrement comprenant 4 sessions effectuées par 4 personnes. Pendant chaque session, chaque personne a reproduit un ensemble complet d’événements acoustiques. Après chaque session, les personnes ont interverti leur place.La base de données comprend 3 DVDs de 3 sessions chacun. Chaque session comprend 32 fichiers audio + un fichier texte contenant la segmentation.La base de données est fournie gratuitement par FTP uniquement.</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=1093</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-S0296</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>0.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>0.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>0.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>0.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <availabilityStartDate>2009-02-12</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Valérie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <lastDateUpdated>2009-03-03</lastDateUpdated>
+   </versionInfo>
+   <resourceCreationInfo>
+      <fundingProject>
+         <projectName>CHIL (Computers in the Human Interaction Loop)</projectName>
+         <fundingType>euFunds</fundingType>
+      </fundingProject>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusAudioInfo>
+               <mediaType>audio</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>N/A</languageId>
+                  <languageName>No Language</languageName>
+               </languageInfo>
+               <audioSizeInfo>
+                  <sizeInfo>
+                     <size>no size available</size>
+                     <sizeUnit>other</sizeUnit>
+                  </sizeInfo>
+               </audioSizeInfo>
+            </corpusAudioInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

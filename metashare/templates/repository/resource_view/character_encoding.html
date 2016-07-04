@@ -1,0 +1,12 @@
+{% spaceless %}
+
+<div class="dataline">
+	<label class="dataline indented">
+		{{encodings.Character_encoding}}
+		{% if encodings.Size_per_character_encoding %}
+			{% include "repository/resource_view/size.html" with size=encodings.Size_per_character_encoding type="sub" %}
+		{% endif %}
+	</label>
+</div>
+
+{% endspaceless %}

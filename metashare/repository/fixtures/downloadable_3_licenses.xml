@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.meta-share.org/META-SHARE_XMLSchema http://www.meta-share.org/META-SHARE_XMLSchema/v3.1/META-SHARE-Resource.xsd">
+	<identificationInfo>
+		<resourceName lang="en-us">Test Resource 2</resourceName>
+		<description lang="en-us">another resource for testing</description>
+		<metaShareId>String</metaShareId>
+		<identifier>S0148000</identifier>
+	</identificationInfo>
+	<distributionInfo>
+		<availability>available</availability>
+		<licenceInfo>
+			<licence>CC-BY-NC-SA</licence>
+			<version>4.0</version>
+			<restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+			<restrictionsOfUse>shareAlike</restrictionsOfUse>
+			<restrictionsOfUse>attribution</restrictionsOfUse>
+		</licenceInfo>
+		<licenceInfo>
+			<licence>GPL</licence>
+			<version>4.0</version>
+			<restrictionsOfUse>attribution</restrictionsOfUse>
+			<restrictionsOfUse>shareAlike</restrictionsOfUse>
+		</licenceInfo>
+		<licenceInfo>
+			<licence>CC-BY-SA</licence>
+			<version>4.0</version>
+			<restrictionsOfUse>attribution</restrictionsOfUse>
+			<restrictionsOfUse>shareAlike</restrictionsOfUse>
+		</licenceInfo>
+		<distributionAccessMedium>DVD-R</distributionAccessMedium>
+		<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+		<distributionAccessMedium>downloadable</distributionAccessMedium>
+		<distributionAccessMedium>downloadable</distributionAccessMedium>
+		<distributionAccessMedium>downloadable</distributionAccessMedium>
+		<downloadLocation>http://www.example.org</downloadLocation>
+		<downloadLocation>http://www.example.org</downloadLocation>
+		<downloadLocation>http://www.example.org</downloadLocation>
+	</distributionInfo>
+	<contactPerson>
+		<surname>Doe</surname>
+		<communicationInfo>
+			<email>ctc@example.org</email>
+			<address>Planet Mars, Cosmos</address>
+			<zipCode>12345</zipCode>
+			<city>Marstown</city>
+			<region>Space</region>
+			<country>France</country>
+			<countryId>FR</countryId>
+		</communicationInfo>
+		<position>Chief Testing Clown</position>
+	</contactPerson>
+	<metadataInfo>
+		<metadataCreationDate>2005-05-12</metadataCreationDate>
+	</metadataInfo>
+	<versionInfo>
+		<version>1.0</version>
+		<lastDateUpdated>2005-05-12</lastDateUpdated>
+	</versionInfo>
+	<resourceComponentType>
+		<toolServiceInfo>
+			<resourceType>toolService</resourceType>
+			<toolServiceType>other</toolServiceType>
+			<languageDependent>false</languageDependent>
+		</toolServiceInfo>
+	</resourceComponentType>
+</resourceInfo>

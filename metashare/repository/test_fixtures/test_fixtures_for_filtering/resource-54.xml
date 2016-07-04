@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.meta-share.org/META-SHARE_XMLSchema http://www.meta-share.org/META-SHARE_XMLSchema/v3.1/META-SHARE-Resource.xsd">
+	<identificationInfo>
+		<resourceName lang="en">testGrammar2</resourceName>
+		<description lang="en">testGrammar2</description>
+		<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+	</identificationInfo>
+	<distributionInfo>
+		<availability>available</availability>
+		<licenceInfo>
+			<licence>CC-BY-NC-ND</licence>
+			<version>4.0</version>
+		</licenceInfo>
+		<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+	</distributionInfo>
+	<contactPerson>
+		<surname lang="en">Contact Test</surname>
+		<communicationInfo>
+			<email>test@test.gr</email>
+		</communicationInfo>
+	</contactPerson>
+	<contactPerson>
+		<surname lang="en">Papageorgiou</surname>
+		<givenName lang="en">Harris</givenName>
+		<sex>male</sex>
+		<communicationInfo>
+			<email>xaris@ilsp.athena-innovation.gr</email>
+			<url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=49&amp;Itemid=156</url>
+			<telephoneNumber>+302106875426</telephoneNumber>
+			<faxNumber>+302106854270</faxNumber>
+		</communicationInfo>
+		<position>Principal Researcher</position>
+		<affiliation>
+			<organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+			<organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+			<communicationInfo>
+				<email>www@ilsp.athena-innovation.gr</email>
+				<url>http://www.ilsp.gr/</url>
+				<address>Artemidos 6 &amp; Epidavrou</address>
+				<zipCode>GR-15125</zipCode>
+				<city>Maroussi</city>
+				<country>Greece</country>
+				<countryId>GR</countryId>
+				<telephoneNumber>+302106875300</telephoneNumber>
+				<faxNumber>+302106854270</faxNumber>
+				<faxNumber>+302106856794</faxNumber>
+			</communicationInfo>
+		</affiliation>
+	</contactPerson>
+	<metadataInfo>
+		<metadataCreationDate>2012-09-14</metadataCreationDate>
+		<metadataCreator>
+			<surname lang="en">Papageorgiou</surname>
+			<givenName lang="en">Harris</givenName>
+			<sex>male</sex>
+			<communicationInfo>
+				<email>xaris@ilsp.athena-innovation.gr</email>
+				<url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=49&amp;Itemid=156</url>
+				<telephoneNumber>+302106875426</telephoneNumber>
+				<faxNumber>+302106854270</faxNumber>
+			</communicationInfo>
+			<position>Principal Researcher</position>
+			<affiliation>
+				<organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+				<organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+				<communicationInfo>
+					<email>www@ilsp.athena-innovation.gr</email>
+					<url>http://www.ilsp.gr/</url>
+					<address>Artemidos 6 &amp; Epidavrou</address>
+					<zipCode>GR-15125</zipCode>
+					<city>Maroussi</city>
+					<country>Greece</country>
+					<countryId>GR</countryId>
+					<telephoneNumber>+302106875300</telephoneNumber>
+					<faxNumber>+302106854270</faxNumber>
+					<faxNumber>+302106856794</faxNumber>
+				</communicationInfo>
+			</affiliation>
+		</metadataCreator>
+		<metadataLastDateUpdated>2012-09-14</metadataLastDateUpdated>
+	</metadataInfo>
+	<resourceComponentType>
+		<languageDescriptionInfo>
+			<resourceType>languageDescription</resourceType>
+			<languageDescriptionType>other</languageDescriptionType>
+			<languageDescriptionEncodingInfo>
+				<encodingLevel>phonetics</encodingLevel>
+				<encodingLevel>semantics</encodingLevel>
+				<encodingLevel>syntax</encodingLevel>
+				<conformanceToStandardsBestPractices>BML</conformanceToStandardsBestPractices>
+				<conformanceToStandardsBestPractices>EAGLES</conformanceToStandardsBestPractices>
+				<task>anaphoraResolution</task>
+				<task>definitionsParsing</task>
+				<grammaticalPhenomenaCoverage>anaphora</grammaticalPhenomenaCoverage>
+				<grammaticalPhenomenaCoverage>clauseStructure</grammaticalPhenomenaCoverage>
+				<grammaticalPhenomenaCoverage>coordination</grammaticalPhenomenaCoverage>
+			</languageDescriptionEncodingInfo>
+			<languageDescriptionMediaType>
+				<languageDescriptionTextInfo>
+					<mediaType>text</mediaType>
+					<lingualityInfo>
+						<lingualityType>monolingual</lingualityType>
+					</lingualityInfo>
+					<languageInfo>
+						<languageId>en</languageId>
+						<languageName>English</languageName>
+					</languageInfo>
+				</languageDescriptionTextInfo>
+				<languageDescriptionImageInfo>
+					<mediaType>image</mediaType>
+					<linkToOtherMediaInfo>
+						<otherMedia>text</otherMedia>
+					</linkToOtherMediaInfo>
+					<modalityInfo>
+						<modalityType>combinationOfModalities</modalityType>
+					</modalityInfo>
+					<imageContentInfo>
+						<typeOfImageContent>face</typeOfImageContent>
+						<typeOfImageContent>cartoons</typeOfImageContent>
+						<typeOfImageContent>nature</typeOfImageContent>
+					</imageContentInfo>
+				</languageDescriptionImageInfo>
+			</languageDescriptionMediaType>
+		</languageDescriptionInfo>
+	</resourceComponentType>
+</resourceInfo>

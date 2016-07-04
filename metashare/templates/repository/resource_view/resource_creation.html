@@ -1,0 +1,56 @@
+{% spaceless %}
+
+<label class='component'>Resource Creation</label>
+
+<div class="dataline">
+{% for key, value in resource_creation_dict.items %}
+	{% if "Resource_creator" in value %}
+		<label class="title">Resource Creator</label>
+	{% endif %}
+	{% for key1, value1 in value.items %}
+		{% if "Resource_creator" in key1 %}		
+			{% for key2, value2 in value1.items %}
+				{% include "repository/resource_view/person.html" with person_dict=value2 type="Resource Creator" %}
+			{% endfor %}
+		{% endif %}
+	{% endfor %}
+{% endfor %}
+</div>
+
+<div class="dataline">
+	{% if resource_creation_dict.Resource_creation.Creation_start_date and resource_creation_dict.Resource_creation.Creation_end_date %}
+		<div class="dataline indented">
+			<label>
+				<strong>Creation lasted:</strong> {{resource_creation_dict.Resource_creation.Creation_start_date|date:"SHORT_DATE_FORMAT"}} - {{resource_creation_dict.Resource_creation.Creation_end_date|date:"SHORT_DATE_FORMAT"}}
+			</label>
+		</div>
+	{% else %}
+		{% if resource_creation_dict.Resource_creation.Creation_start_date %}
+			<div class="dataline">
+				<label>					
+					<strong>Creation started:</strong> {{resource_creation_dict.Resource_creation.Creation_start_date|date:"SHORT_DATE_FORMAT"}}
+				</label>
+			</div>
+		{% endif %}
+		{% if resource_creation_dict.Resource_creation.Creation_end_date %}
+			<div class="dataline">
+				<label>				
+					<strong>Creation ended:</strong> {{resource_creation_dict.Resource_creation.Creation_end_date|date:"SHORT_DATE_FORMAT"}}
+				</label>
+			</div>
+		{% endif %}
+	{% endif %}
+	<div class="dataline">
+		{% for key, value in resource_creation_dict.items %}
+			{% if "Funding_project" in value %}
+				<label class="title">Funding Project</label>
+			{% endif %}
+				{% for key1, value1 in value.items %}
+					{% if "Funding_project" in key1 %}
+						{% include "repository/resource_view/project.html" with project=value1 %}						
+					{% endif %}
+				{% endfor %}
+		{% endfor %}
+	</div>
+</div>
+{% endspaceless %}

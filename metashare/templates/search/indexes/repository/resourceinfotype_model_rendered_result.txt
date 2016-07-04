@@ -1,0 +1,35 @@
+{% spaceless %}
+{% load resource_distribution %}
+{% load resource_languages %}
+{% load resource_media_types %}
+{% load resource_access_stats %}
+{% load get_media_url %}
+{% load get_icon %}
+
+<div class="resourceName">
+
+{% get_icon object.resourceComponentType.as_subclass.resourceType %}
+
+&nbsp;<a href="{{ object.get_absolute_url }}"{% ifnotequal object.identificationInfo.get_default_description "METASHARE_NULL" %} 
+    title="{{ object.identificationInfo.get_default_description|escape }}"{% endifnotequal %}>{{ object }}</a>
+
+&nbsp;{% resource_media_types object.resourceComponentType.as_subclass %} 
+
+<div class="accessStats">
+  <img src="{% get_media_url %}stats/img/download_icon.gif" alt="Number of downloads" title="Number of downloads" />&nbsp;{{ object.storage_object.identifier|get_download_count }}
+  <img src="{% get_media_url %}stats/img/view_icon.gif" alt="Number of views" title="Number of views" />&nbsp;{{ object.storage_object.identifier|get_view_count }}
+</div>
+<div class= "languages">
+    <ul>
+      {% resource_languages object.resourceComponentType.as_subclass %}
+    </ul>
+</div>
+<ul class= "licencing">
+    {% for licence in object.distributioninfotype_model_set.all|licence_set %}
+            <li class="licence">
+                {{ licence|licence_icon|safe }}
+            </li>
+    {% endfor %}
+</ul>
+</div>
+{% endspaceless %}

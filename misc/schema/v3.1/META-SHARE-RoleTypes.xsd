@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited by ILSP/Athena R.C. -->
+<xs:schema xmlns:ms="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.meta-share.org/META-SHARE_XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.1" xml:lang="en">
+	<xs:include schemaLocation="./META-SHARE-SimpleTypes.xsd"/>
+	<xs:include schemaLocation="./META-SHARE-BaseTypes.xsd"/>
+	<xs:include schemaLocation="./META-SHARE-ISOVocabularies.xsd"/>
+	<!-- definition of complex types -->
+	<!-- media type info TextInfo/imageInfo/AudioInfo/VideInfo etc-->
+	<xs:complexType name="communicationInfoType">
+		<xs:annotation>
+			<xs:appinfo>
+				<render-short>{email} {telephoneNumber}</render-short>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="email" type="ms:emailAddress" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The email address of a person or an organization</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<label>Email</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:url" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A URL used as homepage of an entity (e.g. of a person, organization, resource etc.); it provides general information (for instance in the case of a resource, it may present a description of the resource, its creators and possibly include links to the URL where it can be accessed from)</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<label>URL (Landing page)</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="address" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The street and the number of the postal address of a person or organization</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Address</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="200"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="zipCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The zip code of the postal address of a person or organization </xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Zip code</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="city" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The name of the city, town or village as mentioned in the postal address of a person or organization </xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>City</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="region" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The name of the region, county or department as mentioned in the postal address of a person or organization</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Region</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="country" type="ms:regionNameType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The name of the country mentioned in the postal address of a person or organization as defined in the list of values of ISO 3166</xs:documentation>
+					<xs:appinfo>
+						<iso>ISO3166</iso>
+						<relation>one-to-one</relation>
+						<label>Country</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="countryId" type="ms:regionIdType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The identifier of the country mentioned in the postal address of a person or organization as defined in the list of values of ISO 3166</xs:documentation>
+					<xs:appinfo>
+						<iso>ISO3166</iso>
+						<relation>one-to-one</relation>
+						<label>Country identifier</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="telephoneNumber" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The telephone number of a person or an organization; recommended format: +_international code_city code_number</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<label>Telephone number</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="faxNumber" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The fax number of a person or an organization; recommended format: +_international code_city code_number</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<label>Fax number</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="communicationInfo" type="ms:communicationInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on communication details of a person or an organization</xs:documentation>
+			<xs:appinfo>
+				<relation>one-to-one</relation>
+				<label>Communication</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="organizationInfoType">
+		<xs:annotation>
+			<xs:appinfo>
+				<render-short>{organizationName} – department: {departmentName}</render-short>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="organizationName" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The full name of an organization</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<label>Organization name</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:restriction base="ms:myString">
+							<xs:maxLength value="100"/>
+						</xs:restriction>
+					</xs:simpleContent>
+				</xs:complexType>
+				<xs:unique name="uniqueLang13">
+					<xs:selector xpath="."/>
+					<xs:field xpath="@lang"/>
+				</xs:unique>
+			</xs:element>
+			<xs:element name="organizationShortName" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The short name (abbreviation, acronym etc.) used for an organization</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<label>Organization short name</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:restriction base="ms:myString">
+							<xs:maxLength value="100"/>
+						</xs:restriction>
+					</xs:simpleContent>
+				</xs:complexType>
+				<xs:unique name="uniqueLang9">
+					<xs:selector xpath="."/>
+					<xs:field xpath="@lang"/>
+				</xs:unique>
+			</xs:element>
+			<xs:element name="departmentName" type="ms:myString" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The name of the department or unit (e.g. specific university faculty/department, department/unit of a research organization or private company etc.)</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<label>Department name</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:unique name="uniqueLang8">
+					<xs:selector xpath="."/>
+					<xs:field xpath="@lang"/>
+				</xs:unique>
+			</xs:element>
+			<xs:element ref="ms:communicationInfo">
+				<xs:annotation>
+					<xs:documentation>Groups information on communication details of a person or an organization</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Communication</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="personListType">
+		<xs:sequence>
+			<xs:element ref="ms:personInfo" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information relevant to persons related to the resource; to be used mainly for contact persons, resource creators, validators, annotators etc. for whom personal data can be provided</xs:documentation>
+					<xs:appinfo>
+						<relation>many-to-many</relation>
+						<label>Person</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="organizationListType">
+		<xs:sequence>
+			<xs:element ref="ms:organizationInfo" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information on organizations related to the resource</xs:documentation>
+					<xs:appinfo>
+						<relation>many-to-many</relation>
+						<label>Organization</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="personList" type="ms:personListType">
+		<xs:annotation>
+			<xs:documentation>List of persons</xs:documentation>
+			<xs:appinfo>
+				<label>List of persons</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="organizationList" type="ms:organizationListType">
+		<xs:annotation>
+			<xs:documentation>List of organizations</xs:documentation>
+			<xs:appinfo>
+				<label>List of organizations</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="organizationInfo" type="ms:organizationInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on organizations related to the resource</xs:documentation>
+			<xs:appinfo>
+				<relation>one-to-one</relation>
+				<label>Organization</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="personInfoType">
+		<xs:annotation>
+			<xs:appinfo>
+				<render-short>{surname} {givenName} {communicationInfo/email} {affiliation}</render-short>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="surname" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The surname (family name) of a person related to the resource</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<label>Surname</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:restriction base="ms:myString">
+							<xs:maxLength value="100"/>
+						</xs:restriction>
+					</xs:simpleContent>
+				</xs:complexType>
+				<xs:unique name="uniqueLang7">
+					<xs:selector xpath="."/>
+					<xs:field xpath="@lang"/>
+				</xs:unique>
+			</xs:element>
+			<xs:element name="givenName" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The given name (first name) of a person related to the resource; initials can also be used</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-many</relation>
+						<label>Given name</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:restriction base="ms:myString">
+							<xs:maxLength value="100"/>
+						</xs:restriction>
+					</xs:simpleContent>
+				</xs:complexType>
+				<xs:unique name="uniqueLang6">
+					<xs:selector xpath="."/>
+					<xs:field xpath="@lang"/>
+				</xs:unique>
+			</xs:element>
+			<xs:element ref="ms:sex" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The gender of a person related to or participating in the resource</xs:documentation>
+					<xs:appinfo>
+						<label>Sex</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:communicationInfo">
+				<xs:annotation>
+					<xs:documentation>Groups information on communication details of a person or an organization</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Communication</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="position" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The position or the title of a person if affiliated to an organization </xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Position</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="affiliation" type="ms:organizationInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information on organization to whomtheperson is affiliated</xs:documentation>
+					<xs:appinfo>
+						<relation>many-to-many</relation>
+						<label>Affiliation</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="personInfo" type="ms:personInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information relevant to personsrelated to the resource; to be used mainly for contact persons, resource creators, validators, annotators etc. for whom personal data can be provided</xs:documentation>
+			<xs:appinfo>
+				<relation>one-to-one</relation>
+				<label>Person</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="actorInfoType">
+		<xs:annotation>
+			<xs:appinfo>
+				<relation>one-to-one</relation>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element ref="ms:personInfo">
+				<xs:annotation>
+					<xs:documentation>Groups information relevant to personsrelated to the resource; to be used mainly for contact persons, resource creators, validators, annotators etc. for whom personal data can be provided</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Person</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:organizationInfo">
+				<xs:annotation>
+					<xs:documentation>Groups information on organizations related to the resource</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Organization</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+</xs:schema>

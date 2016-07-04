@@ -1,0 +1,24 @@
+{% spaceless %}
+
+<div class="accordion"><a href="#" onclick="return false">{{ filter.label }}</a></div>
+<div class="filter">
+{% for item in filter.removable %}
+
+  <div><a href="?q={{ query|urlencode }}{% for target in item.targets %}&amp;selected_facets={{ target|urlencode }}{% endfor %}{% for key, values in request.GET.iterlists %}{% if key = 'sort' %}&amp;sort={{values.0}}{% endif %}{% endfor %}" class="removableFacet{% if filter.subresults %} subfacet{% endif %}">{{ item.label }}</a>&nbsp;({{ item.count }})</div>
+	{% for subresult in item.subresults %}
+      <div class="subresult accordion"><a href="#">{{ subresult.label }}</a></div>
+      <div class="filter sub">
+      {% for subitem in subresult.removable %}
+  	    <div class="subitem"><a href="?q={{ query|urlencode }}{% for target in subitem.targets %}&amp;selected_facets={{ target|urlencode }}{% endfor %}{% for key, values in request.GET.iterlists %}{% if key = 'sort' %}&amp;sort={{values.0}}{% endif %}{% endfor %}" class="removableFacet">{{ subitem.label }}</a>&nbsp;({{ subitem.count }})</div>
+	  {% endfor %}
+	  {% for subitem in subresult.addable %}
+	    <div class="subitem"><a href="?q={{ query|urlencode }}{% for target in subitem.targets %}&amp;selected_facets={{ target|urlencode }}{% endfor %}{% for key, values in request.GET.iterlists %}{% if key = 'sort' %}&amp;sort={{values.0}}{% endif %}{% endfor %}" class="addableFacet">{{ subitem.label }}</a>&nbsp;({{ subitem.count }})</div>
+      {% endfor %}
+      </div>
+    {% endfor %}
+{% endfor %}
+{% for item in filter.addable %}
+  <div><a href="?q={{ query|urlencode }}{% for target in item.targets %}&amp;selected_facets={{ target|urlencode }}{% endfor %}{% for key, values in request.GET.iterlists %}{% if key = 'sort' %}&amp;sort={{values.0}}{% endif %}{% endfor %}" class="addableFacet{% if filter.subresults %} subfacet{% endif %}">{{ item.label }}</a>&nbsp;({{ item.count }})</div>
+{% endfor %}
+</div>
+{% endspaceless %}

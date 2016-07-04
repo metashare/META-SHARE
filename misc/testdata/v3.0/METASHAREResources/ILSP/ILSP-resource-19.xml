@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+      <identificationInfo>
+        <resourceName lang="en">Cultural Parallels: Study and promotion of the cultural inheritance of the neighbouring areas in Greece and Bulgaria through internet technology</resourceName>
+        <description lang="en">Collection of Greek and Bulgarian literary texts for the promotion of the common cultural inheritance of the neighbouring areas in Greee and Bulgaria.</description>
+        <resourceShortName lang="en">Cultural Parallels corpus</resourceShortName>
+          <metaShareId>
+            NOT_DEFINED_FOR_V2
+          </metaShareId>
+      </identificationInfo>
+      <distributionInfo>
+        <availability>available-restrictedUse</availability>
+          <licenceInfo>
+            <licence>proprietary</licence>
+            <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+            <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
+          </licenceInfo>
+      </distributionInfo>
+      <contactPerson>
+        <surname lang="en">Giouli</surname>
+        <givenName lang="en">Voula</givenName>
+        <sex>female</sex>
+          <communicationInfo>
+            <email>voula@ilsp.athena-innovation.gr</email>
+            <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=19&amp;Itemid=156</url>
+            <telephoneNumber>+302106875448</telephoneNumber>
+            <faxNumber>+302106854270</faxNumber>
+          </communicationInfo>
+        <position>Scientific Associate</position>
+          <affiliation>
+            <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+            <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+              <communicationInfo>
+                <email>www@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/</url>
+                <address>Artemidos 6 &amp; Epidavrou</address>
+                <zipCode>GR-15125</zipCode>
+                <city>Maroussi</city>
+                <country>GR</country>
+                <telephoneNumber>+302106875300</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+                <faxNumber>+302106856794</faxNumber>
+              </communicationInfo>
+          </affiliation>
+      </contactPerson>
+      <metadataInfo>
+        <metadataCreationDate>2012-02-02</metadataCreationDate>
+          <metadataCreator>
+            <surname lang="en">Labropoulou</surname>
+            <givenName lang="en">Penny</givenName>
+            <sex>female</sex>
+              <communicationInfo>
+                <email>penny@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=37&amp;Itemid=156</url>
+                <telephoneNumber>+302106875445</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+              </communicationInfo>
+            <position>Senior Research Fellow</position>
+              <affiliation>
+                <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                  <communicationInfo>
+                    <email>www@ilsp.athena-innovation.gr</email>
+                    <url>http://www.ilsp.gr/</url>
+                    <address>Artemidos 6 &amp; Epidavrou</address>
+                    <zipCode>GR-15125</zipCode>
+                    <city>Maroussi</city>
+                    <country>GR</country>
+                    <telephoneNumber>+302106875300</telephoneNumber>
+                    <faxNumber>+302106854270</faxNumber>
+                    <faxNumber>+302106856794</faxNumber>
+                  </communicationInfo>
+              </affiliation>
+          </metadataCreator>
+        <source>META-SHARE/ILSP</source>
+        <metadataLastDateUpdated>2012-05-17</metadataLastDateUpdated>
+      </metadataInfo>
+      <validationInfo>
+        <validated>true</validated>
+        <validationType>content</validationType>
+        <validationMode>mixed</validationMode>
+        <validationModeDetails>Manual correction of the annotations, mainly of the mixed language texts</validationModeDetails>
+      </validationInfo>
+      <usageInfo>
+          <foreseenUseInfo>
+            <foreseenUse>humanUse</foreseenUse>
+          </foreseenUseInfo>
+          <foreseenUseInfo>
+            <foreseenUse>nlpApplications</foreseenUse>
+          </foreseenUseInfo>
+          <actualUseInfo>
+            <actualUse>humanUse</actualUse>
+          </actualUseInfo>
+      </usageInfo>
+      <resourceDocumentationInfo>
+          <documentation>
+              <documentInfo>
+                <documentType>inBook</documentType>
+                <title lang="en">Linguistic Resources for CH/SSH. A parallel Greek-Bulgarian corpus: a digital resource of the shared Cultural Heritage</title>
+                <author>Voula Giouli and K. Simov and P. Osenova</author>
+                <editor>Sporlender, C. and van de Bosch, A., and Zervanou, K.</editor>
+                <year>2011</year>
+                <publisher>Springer</publisher>
+                <bookTitle>	Language Technology for Cultural Heritage: Selected papers from the LaTeCH Workshop Series</bookTitle>
+              </documentInfo>
+          </documentation>
+          <documentation>
+              <documentInfo>
+                <documentType>inProceedings</documentType>
+                <title lang="en">Language Technologies for Processing Greek textual Cultural Heritage data</title>
+                <author>Voula Giouli and E. Marzelou and Prokopis Prokopidis and M. Zourari</author>
+                <year>2009</year>
+                <bookTitle>Proceedings of the 9th International Conference on Greek Linguistics</bookTitle>
+                <conference>9th International Conference on Greek Linguistics</conference>
+              </documentInfo>
+          </documentation>
+          <documentation>
+              <documentInfo>
+                <documentType>inProceedings</documentType>
+                <title lang="en">A web-enabled and speech-enhanced parallel corpus of Greek - Bulgarian cultural texts</title>
+                <author>Voula Giouli and Nick Glaros and K. Simov and P. Osenova</author>
+                <year>2009</year>
+                <bookTitle>Proceedings of the EACL 2009 Workshop on Language Technology and Resources for Cultural Heritage, Social Sciences, Humanities and Education - LaTeCH - SHELT&amp;R 2009</bookTitle>
+                <conference>EACL 2009 Workshop on Language Technology and Resources for Cultural Heritage, Social Sciences, Humanities and Education - LaTeCH - SHELT&amp;R 2009</conference>
+              </documentInfo>
+          </documentation>
+      </resourceDocumentationInfo>
+      <resourceCreationInfo>
+          <resourceCreator>
+              <organizationInfo>
+                <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                  <communicationInfo>
+                    <email>www@ilsp.athena-innovation.gr</email>
+                    <url>http://www.ilsp.gr/</url>
+                    <address>Artemidos 6 &amp; Epidavrou</address>
+                    <zipCode>GR-15125</zipCode>
+                    <city>Maroussi</city>
+                    <country>GR</country>
+                    <telephoneNumber>+302106875300</telephoneNumber>
+                    <faxNumber>+302106854270</faxNumber>
+                    <faxNumber>+302106856794</faxNumber>
+                  </communicationInfo>
+              </organizationInfo>
+          </resourceCreator>
+          <fundingProject>
+            <projectName lang="en">Cultural Parallels: Study and promotion of the cultural inheritance of the neighbouring areas in Greece and Bulgaria through internet technology</projectName>
+            <projectShortName lang="en">Cultural Parallels</projectShortName>
+            <fundingType>nationalFunds</fundingType>
+            <funder>INTERREG IIIA / PHARE CBC GREECE – BULGARIA</funder>
+            <fundingCountry>GR</fundingCountry>
+            <projectStartDate>2005-10-01</projectStartDate>
+            <projectEndDate>2007-09-30</projectEndDate>
+          </fundingProject>
+        <creationStartDate>2005-10-01</creationStartDate>
+        <creationEndDate>2007-09-30</creationEndDate>
+      </resourceCreationInfo>
+      <resourceComponentType>
+          <corpusInfo>
+            <resourceType>corpus</resourceType>
+              <corpusMediaType>
+                  <corpusTextInfo>
+                    <mediaType>text</mediaType>
+                      <lingualityInfo>
+                        <lingualityType>bilingual</lingualityType>
+                        <multilingualityType>comparable</multilingualityType>
+                        <multilingualityTypeDetails>The corpus consists of a subset of Greek texts (fairy tales) and their translation into Bulgarian, a subset of Bulgarian (fairy tales) with their translation into Greek and a subset of Greek and Bulgarian comparable texts (in the same domain)</multilingualityTypeDetails>
+                      </lingualityInfo>
+                      <languageInfo>
+                        <languageId>el</languageId>
+                        <languageName>Modern Greek (1453-)</languageName>
+                      </languageInfo>
+                      <languageInfo>
+                        <languageId>bg</languageId>
+                        <languageName>Bulgarian</languageName>
+                      </languageInfo>
+                      <modalityInfo>
+                        <modalityType>writtenLanguage</modalityType>
+                      </modalityInfo>
+                      <sizeInfo>
+                        <size>700000</size>
+                        <sizeUnit>words</sizeUnit>
+                      </sizeInfo>
+                      <textFormatInfo>
+                        <mimeType>text/txt</mimeType>
+                      </textFormatInfo>
+                      <characterEncodingInfo>
+                        <characterEncoding>ISO-8859-7</characterEncoding>
+                      </characterEncodingInfo>
+                      <characterEncodingInfo>
+                        <characterEncoding>UTF-8</characterEncoding>
+                      </characterEncodingInfo>
+                      <annotationInfo>
+                        <annotationType>lemmatization</annotationType>
+                        <annotationStandoff>false</annotationStandoff>
+                        <annotationFormat>XML</annotationFormat>
+                        <tagset>ILSP tagset</tagset>
+                        <conformanceToStandardsBestPractices>XCES</conformanceToStandardsBestPractices>
+                        <annotationMode>mixed</annotationMode>
+                      </annotationInfo>
+                      <annotationInfo>
+                        <annotationType>morphosyntacticAnnotation-bPosTagging</annotationType>
+                        <annotationStandoff>false</annotationStandoff>
+                        <annotationFormat>XML</annotationFormat>
+                        <tagset>ILSP tagset</tagset>
+                        <conformanceToStandardsBestPractices>XCES</conformanceToStandardsBestPractices>
+                      </annotationInfo>
+                      <annotationInfo>
+                        <annotationType>semanticAnnotation-namedEntities</annotationType>
+                        <annotationStandoff>false</annotationStandoff>
+                        <annotationFormat>XML</annotationFormat>
+                        <tagset>ACE-extended</tagset>
+                        <conformanceToStandardsBestPractices>other</conformanceToStandardsBestPractices>
+                          <annotationTool>
+                            <targetResourceNameURI>MENER</targetResourceNameURI>
+                          </annotationTool>
+                      </annotationInfo>
+                      <annotationInfo>
+                        <annotationType>segmentation</annotationType>
+                        <annotationStandoff>false</annotationStandoff>
+                        <segmentationLevel>sentence</segmentationLevel>
+                        <annotationFormat>TIPSTER</annotationFormat>
+                        <annotationMode>automatic</annotationMode>
+                      </annotationInfo>
+                      <domainInfo>
+                        <domain>fiction</domain>
+                      </domainInfo>
+                      <textClassificationInfo>
+                        <textType>Fairy tales</textType>
+                        <conformanceToClassificationScheme>other</conformanceToClassificationScheme>
+                      </textClassificationInfo>
+                      <textClassificationInfo>
+                        <textType>Poems</textType>
+                        <conformanceToClassificationScheme>other</conformanceToClassificationScheme>
+                      </textClassificationInfo>
+                      <textClassificationInfo>
+                        <textType>Fiction</textType>
+                        <conformanceToClassificationScheme>other</conformanceToClassificationScheme>
+                      </textClassificationInfo>
+                      <geographicCoverageInfo>
+                        <geographicCoverage>Thrace</geographicCoverage>
+                      </geographicCoverageInfo>
+                      <creationInfo>
+                          <originalSource>
+                            <targetResourceNameURI>Scanned texts</targetResourceNameURI>
+                          </originalSource>
+                        <creationMode>mixed</creationMode>
+                        <creationModeDetails>Scanning &amp; OCR followed by manual checks</creationModeDetails>
+                      </creationInfo>
+                  </corpusTextInfo>
+              </corpusMediaType>
+          </corpusInfo>
+      </resourceComponentType>
+  </resourceInfo>

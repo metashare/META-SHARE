@@ -1,0 +1,62 @@
+server.document-root = "/PATH/TO/METANODE/metashare"
+
+server.port = 9191
+server.username = "lighttpd"
+server.groupname = "lighttpd"
+server.bind = "134.96.187.245"
+server.tag = "lighttpd"
+server.pid-file = "/PATH/TO/METANODE/metashare/lighttpd.pid"
+
+fastcgi.server = (
+  "/metashare.fcgi" => (
+    "main" => (
+      "host" => "134.96.187.245",
+      "port" => 9190,
+      "check-local" => "disable",
+    )
+  ),
+)
+
+url.rewrite-once = (
+    "^(/media.*)$" => "$1",
+    "^/site_(media.*)$" => "/$1",
+    "^/favicon\.ico$" => "/media/images/favicon.ico",
+    "^(/.*)$" => "/metashare.fcgi$1",
+)
+
+server.errorlog = "/PATH/TO/METANODE/lighttpd/var/log/metashare-error.log"
+accesslog.filename = "/PATH/TO/METANODE/lighttpd/var/log/metashare-access.log"
+
+server.modules = (
+  "mod_rewrite",
+  "mod_access",
+  "mod_fastcgi",
+  "mod_accesslog",
+  "mod_auth",
+  "mod_alias"
+)
+
+# mimetype mapping
+mimetype.assign = (
+  ".pdf"          =>      "application/pdf",
+  ".sig"          =>      "application/pgp-signature",
+  ".gz"           =>      "application/x-gzip",
+  ".tar.gz"       =>      "application/x-tgz",
+  ".tgz"          =>      "application/x-tgz",
+  ".tar"          =>      "application/x-tar",
+  ".zip"          =>      "application/zip",
+  ".gif"          =>      "image/gif",
+  ".jpg"          =>      "image/jpeg",
+  ".jpeg"         =>      "image/jpeg",
+  ".png"          =>      "image/png",
+  ".css"          =>      "text/css",
+  ".html"         =>      "text/html",
+  ".htm"          =>      "text/html",
+  ".js"           =>      "text/javascript",
+  ".txt"          =>      "text/plain",
+  ".dtd"          =>      "text/xml",
+  ".xml"          =>      "text/xml",
+  ".bz2"          =>      "application/x-bzip",
+  ".tar.bz2"      =>      "application/x-bzip-compressed-tar"
+ )
+index-file.names = ( "index.html", )

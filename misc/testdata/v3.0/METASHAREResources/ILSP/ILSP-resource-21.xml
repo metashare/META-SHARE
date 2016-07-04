@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+      <identificationInfo>
+        <resourceName lang="en">Greek Interview Multimodal Corpus</resourceName>
+        <description lang="en">169 minutes from three TV interviews annotated with non verbal expressions related values (e.g. gestures, facial expressions etc.)</description>
+        <resourceShortName lang="en">GIMC</resourceShortName>
+        <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      </identificationInfo>
+      <distributionInfo>
+        <availability>available-restrictedUse</availability>
+          <licenceInfo>
+            <licence>proprietary</licence>
+            <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+          </licenceInfo>
+      </distributionInfo>
+      <contactPerson>
+        <surname lang="en">Papageorgiou</surname>
+        <givenName lang="en">Harris</givenName>
+        <sex>male</sex>
+          <communicationInfo>
+            <email>xaris@ilsp.athena-innovation.gr</email>
+            <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=49&amp;Itemid=156</url>
+            <telephoneNumber>+302106875426</telephoneNumber>
+            <faxNumber>+302106854270</faxNumber>
+          </communicationInfo>
+        <position>Principal Researcher</position>
+          <affiliation>
+            <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+            <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+              <communicationInfo>
+                <email>www@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/</url>
+                <address>Artemidos 6 &amp; Epidavrou</address>
+                <zipCode>GR-15125</zipCode>
+                <city>Maroussi</city>
+                <country>GR</country>
+                <telephoneNumber>+302106875300</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+                <faxNumber>+302106856794</faxNumber>
+              </communicationInfo>
+          </affiliation>
+      </contactPerson>
+      <contactPerson>
+        <surname lang="en">Koutsombogera</surname>
+        <givenName lang="en">Maria</givenName>
+        <sex>female</sex>
+          <communicationInfo>
+            <email>mkouts@ilsp.athena-innovation.gr</email>
+            <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=35&amp;Itemid=156</url>
+            <telephoneNumber>+302106875444</telephoneNumber>
+            <faxNumber>+302106854270</faxNumber>
+            <faxNumber>+302106856794</faxNumber>
+          </communicationInfo>
+        <position>Scientific Associate</position>
+          <affiliation>
+            <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+            <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+              <communicationInfo>
+                <email>www@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/</url>
+                <address>Artemidos 6 &amp; Epidavrou</address>
+                <zipCode>GR-15125</zipCode>
+                <city>Maroussi</city>
+                <country>GR</country>
+                <telephoneNumber>+302106875300</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+                <faxNumber>+302106856794</faxNumber>
+              </communicationInfo>
+          </affiliation>
+      </contactPerson>
+      <metadataInfo>
+        <metadataCreationDate>2012-02-02</metadataCreationDate>
+          <metadataCreator>
+            <surname lang="en">Desipri</surname>
+            <givenName lang="en">Elina</givenName>
+            <sex>female</sex>
+              <communicationInfo>
+                <email>elina@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=23&amp;Itemid=156</url>
+                <telephoneNumber>+302106875442</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+                <faxNumber>+302106856794</faxNumber>
+              </communicationInfo>
+            <position>Scientific Associate</position>
+              <affiliation>
+                <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                  <communicationInfo>
+                    <email>www@ilsp.athena-innovation.gr</email>
+                    <url>http://www.ilsp.gr/</url>
+                    <address>Artemidos 6 &amp; Epidavrou</address>
+                    <zipCode>GR-15125</zipCode>
+                    <city>Maroussi</city>
+                    <country>GR</country>
+                    <telephoneNumber>+302106875300</telephoneNumber>
+                    <faxNumber>+302106854270</faxNumber>
+                    <faxNumber>+302106856794</faxNumber>
+                  </communicationInfo>
+              </affiliation>
+          </metadataCreator>
+        <source>META-SHARE/ILSP</source>
+        <metadataLastDateUpdated>2012-05-17</metadataLastDateUpdated>
+      </metadataInfo>
+      <versionInfo>
+        <version>1.1</version>
+        <lastDateUpdated>2011-12-31</lastDateUpdated>
+      </versionInfo>
+      <validationInfo>
+        <validated>true</validated>
+        <validationType>content</validationType>
+        <validationMode>manual</validationMode>
+        <validationExtent>partial</validationExtent>
+          <validator>
+              <personInfo>
+                <surname lang="en">Koutsombogera</surname>
+                <givenName lang="en">Maria</givenName>
+                <sex>female</sex>
+                  <communicationInfo>
+                    <email>mkouts@ilsp.athena-innovation.gr</email>
+                    <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=35&amp;Itemid=156</url>
+                    <telephoneNumber>+302106875444</telephoneNumber>
+                    <faxNumber>+302106854270</faxNumber>
+                    <faxNumber>+302106856794</faxNumber>
+                  </communicationInfo>
+                <position>Scientific Associate</position>
+                  <affiliation>
+                    <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                    <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                      <communicationInfo>
+                        <email>www@ilsp.athena-innovation.gr</email>
+                        <url>http://www.ilsp.gr/</url>
+                        <address>Artemidos 6 &amp; Epidavrou</address>
+                        <zipCode>GR-15125</zipCode>
+                        <city>Maroussi</city>
+                        <country>GR</country>
+                        <telephoneNumber>+302106875300</telephoneNumber>
+                        <faxNumber>+302106854270</faxNumber>
+                        <faxNumber>+302106856794</faxNumber>
+                      </communicationInfo>
+                  </affiliation>
+              </personInfo>
+          </validator>
+      </validationInfo>
+      <usageInfo>
+          <accessTool>
+            <targetResourceNameURI>EUDICO Linguistic Annotator (ELAN)</targetResourceNameURI>
+          </accessTool>
+          <foreseenUseInfo>
+            <foreseenUse>nlpApplications</foreseenUse>
+            <useNLPSpecific>emotionRecognition</useNLPSpecific>
+            <useNLPSpecific>expressionRecognition</useNLPSpecific>
+            <useNLPSpecific>faceRecognition</useNLPSpecific>
+            <useNLPSpecific>linguisticResearch</useNLPSpecific>
+            <useNLPSpecific>other</useNLPSpecific>
+            <useNLPSpecific>spokenDialogueSystems</useNLPSpecific>
+          </foreseenUseInfo>
+          <actualUseInfo>
+            <actualUse>humanUse</actualUse>
+            <useNLPSpecific>linguisticResearch</useNLPSpecific>
+          </actualUseInfo>
+      </usageInfo>
+      <resourceDocumentationInfo>
+          <documentation>
+              <documentInfo>
+                <documentType>inCollection</documentType>
+                <title lang="en">Non?verbal expressions of turn management in TV interviews: a cross?cultural study between Greek and Icelandic</title>
+                <author>Maria Koutsombogera and S.M. Ammendrup and H. Vilhjalmsson and Harris Papageorgiou</author>
+                <editor>Esposito, A.; Esposito, A.M.; Martone, R.; Muller, V.; Scarpetta, G.</editor>
+                <year>2011</year>
+                <publisher>Springer</publisher>
+                <bookTitle>Toward Autonomous, Adaptive, and Context-Aware Multimodal Interfaces. Theoretical and Practical Issues</bookTitle>
+                <pages>207-213</pages>
+                <doi>10.1007/978-3-642-18184-9_18</doi>
+                <url>http://www.springerlink.com/content/32657pj737401103/</url>
+                <ISBN>978-3-642-18183-2</ISBN>
+              </documentInfo>
+          </documentation>
+          <documentation>
+              <documentInfo>
+                <documentType>inCollection</documentType>
+                <title lang="en">Linguistic and Non-verbal Cues for the Induction of Silent Feedback</title>
+                <author>Maria Koutsombogera and Harris Papageorgiou</author>
+                <editor>Esposito, A.; Campbell, N.; Vogel, C., Hussain, A.; Nijholt, A.</editor>
+                <year>2010</year>
+                <publisher>Springer</publisher>
+                <bookTitle>Development of Multimodal Interfaces: Active Listening and Synchrony</bookTitle>
+                <pages>327-336</pages>
+                <doi>10.1007/978-3-642-12397-9_28</doi>
+                <url>http://www.springerlink.com/content/c8135481287g1645/</url>
+                <ISBN>978-3-642-12397-9</ISBN>
+              </documentInfo>
+          </documentation>
+      </resourceDocumentationInfo>
+      <resourceCreationInfo>
+          <resourceCreator>
+              <personInfo>
+                <surname lang="en">Koutsombogera</surname>
+                <givenName lang="en">Maria</givenName>
+                <sex>female</sex>
+                  <communicationInfo>
+                    <email>mkouts@ilsp.athena-innovation.gr</email>
+                    <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=35&amp;Itemid=156</url>
+                    <telephoneNumber>+302106875444</telephoneNumber>
+                    <faxNumber>+302106854270</faxNumber>
+                    <faxNumber>+302106856794</faxNumber>
+                  </communicationInfo>
+                <position>Scientific Associate</position>
+                  <affiliation>
+                    <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                    <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                      <communicationInfo>
+                        <email>www@ilsp.athena-innovation.gr</email>
+                        <url>http://www.ilsp.gr/</url>
+                        <address>Artemidos 6 &amp; Epidavrou</address>
+                        <zipCode>GR-15125</zipCode>
+                        <city>Maroussi</city>
+                        <country>GR</country>
+                        <telephoneNumber>+302106875300</telephoneNumber>
+                        <faxNumber>+302106854270</faxNumber>
+                        <faxNumber>+302106856794</faxNumber>
+                      </communicationInfo>
+                  </affiliation>
+              </personInfo>
+          </resourceCreator>
+        <creationStartDate>2006-01-31</creationStartDate>
+      </resourceCreationInfo>
+      <resourceComponentType>
+          <corpusInfo>
+            <resourceType>corpus</resourceType>
+              <corpusMediaType>
+                  <corpusTextInfo>
+                    <mediaType>text</mediaType>
+                      <lingualityInfo>
+                        <lingualityType>monolingual</lingualityType>
+                      </lingualityInfo>
+                      <languageInfo>
+                        <languageId>el</languageId>
+                        <languageName>Modern Greek (1453-)</languageName>
+                      </languageInfo>
+                      <modalityInfo>
+                        <modalityType>spokenLanguage</modalityType>
+                      </modalityInfo>
+                      <sizeInfo>
+                        <size>0</size>
+                        <sizeUnit>other</sizeUnit>
+                      </sizeInfo>
+                      <textFormatInfo>
+                        <mimeType>txt/xml</mimeType>
+                      </textFormatInfo>
+                      <characterEncodingInfo>
+                        <characterEncoding>UTF-8</characterEncoding>
+                      </characterEncodingInfo>
+                      <annotationInfo>
+                        <annotationType>speechAnnotation-orthographicTranscription</annotationType>
+                        <annotationStandoff>false</annotationStandoff>
+                        <annotationFormat>trs</annotationFormat>
+                          <annotationTool>
+                            <targetResourceNameURI>Transcriber</targetResourceNameURI>
+                          </annotationTool>
+                          <annotator>
+                              <personInfo>
+                                <surname lang="en">Koutsombogera</surname>
+                                <givenName lang="en">Maria</givenName>
+                                <sex>female</sex>
+                                  <communicationInfo>
+                                    <email>mkouts@ilsp.athena-innovation.gr</email>
+                                    <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=35&amp;Itemid=156</url>
+                                    <telephoneNumber>+302106875444</telephoneNumber>
+                                    <faxNumber>+302106854270</faxNumber>
+                                    <faxNumber>+302106856794</faxNumber>
+                                  </communicationInfo>
+                                <position>Scientific Associate</position>
+                                  <affiliation>
+                                    <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                                    <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                                      <communicationInfo>
+                                        <email>www@ilsp.athena-innovation.gr</email>
+                                        <url>http://www.ilsp.gr/</url>
+                                        <address>Artemidos 6 &amp; Epidavrou</address>
+                                        <zipCode>GR-15125</zipCode>
+                                        <city>Maroussi</city>
+                                        <country>GR</country>
+                                        <telephoneNumber>+302106875300</telephoneNumber>
+                                        <faxNumber>+302106854270</faxNumber>
+                                        <faxNumber>+302106856794</faxNumber>
+                                      </communicationInfo>
+                                  </affiliation>
+                              </personInfo>
+                          </annotator>
+                      </annotationInfo>
+                      <annotationInfo>
+                        <annotationType>speechAnnotation-phoneticTranscription</annotationType>
+                      </annotationInfo>
+                      <domainInfo>
+                        <domain>general</domain>
+                      </domainInfo>
+                      <textClassificationInfo>
+                        <textGenre>interviews</textGenre>
+                      </textClassificationInfo>
+                      <creationInfo>
+                        <creationMode>manual</creationMode>
+                          <creationTool>
+                            <targetResourceNameURI>Transcriber</targetResourceNameURI>
+                          </creationTool>
+                      </creationInfo>
+                  </corpusTextInfo>
+                  <corpusAudioInfo>
+                    <mediaType>audio</mediaType>
+                      <lingualityInfo>
+                        <lingualityType>monolingual</lingualityType>
+                      </lingualityInfo>
+                      <languageInfo>
+                        <languageId>el</languageId>
+                        <languageName>Modern Greek (1453-)</languageName>
+                      </languageInfo>
+                      <modalityInfo>
+                        <modalityType>spokenLanguage</modalityType>
+                      </modalityInfo>
+                      <audioSizeInfo>
+                          <sizeInfo>
+                            <size>169</size>
+                            <sizeUnit>minutes</sizeUnit>
+                          </sizeInfo>
+                      </audioSizeInfo>
+                      <audioContentInfo>
+                        <speechItems>freeSpeech</speechItems>
+                      </audioContentInfo>
+                      <settingInfo>
+                        <naturality>natural</naturality>
+                        <conversationalType>dialogue</conversationalType>
+                        <scenarioType>other</scenarioType>
+                        <audience>no</audience>
+                        <interactivity>interactive</interactivity>
+                      </settingInfo>
+                      <audioFormatInfo>
+                        <mimeType>audio/PCMA</mimeType>
+                        <quantization>16</quantization>
+                        <numberOfTracks>1</numberOfTracks>
+                      </audioFormatInfo>
+                      <domainInfo>
+                        <domain>general</domain>
+                      </domainInfo>
+                      <audioClassificationInfo>
+                        <audioGenre>speech</audioGenre>
+                        <speechGenre>interview</speechGenre>
+                      </audioClassificationInfo>
+                      <recordingInfo>
+                        <recordingDeviceType>hardDisk</recordingDeviceType>
+                      </recordingInfo>
+                      <linkToOtherMediaInfo>
+                        <otherMedia>video</otherMedia>
+                        <synchronizedWithVideo>true</synchronizedWithVideo>
+                      </linkToOtherMediaInfo>
+                      <linkToOtherMediaInfo>
+                        <otherMedia>text</otherMedia>
+                        <synchronizedWithText>true</synchronizedWithText>
+                      </linkToOtherMediaInfo>
+                  </corpusAudioInfo>
+                  <corpusVideoInfo>
+                    <mediaType>video</mediaType>
+                      <lingualityInfo>
+                        <lingualityType>monolingual</lingualityType>
+                      </lingualityInfo>
+                      <languageInfo>
+                        <languageId>el</languageId>
+                        <languageName>Modern Greek (1453-)</languageName>
+                      </languageInfo>
+                      <modalityInfo>
+                        <modalityType>bodyGesture</modalityType>
+                        <modalityType>combinationOfModalities</modalityType>
+                        <modalityType>facialExpression</modalityType>
+                      </modalityInfo>
+                      <sizeInfo>
+                        <size>169</size>
+                        <sizeUnit>minutes</sizeUnit>
+                      </sizeInfo>
+                      <videoContentInfo>
+                        <typeOfVideoContent>11 face to face TV interviews</typeOfVideoContent>
+                        <textIncludedInVideo>none</textIncludedInVideo>
+                          <dynamicElementInfo>
+                            <typeOfElement>people</typeOfElement>
+                            <bodyParts>arms</bodyParts>
+                            <bodyParts>face</bodyParts>
+                            <bodyParts>hands</bodyParts>
+                            <bodyParts>head</bodyParts>
+                            <bodyParts>mouth</bodyParts>
+                            <faceViews>frontal, side view</faceViews>
+                            <faceExpressions>emotions, attitudes, feedback, turn management</faceExpressions>
+                            <bodyMovement>emotions, attitudes, feedback, turn management</bodyMovement>
+                            <gestures>emotions, attitudes, feedback, turn management</gestures>
+                            <headMovement>emotions, attitudes, feedback, turn management</headMovement>
+                            <eyeMovement>emotions, attitudes, feedback, turn management</eyeMovement>
+                          </dynamicElementInfo>
+                      </videoContentInfo>
+                      <settingInfo>
+                        <naturality>natural</naturality>
+                        <conversationalType>dialogue</conversationalType>
+                        <scenarioType>other</scenarioType>
+                        <audience>no</audience>
+                        <interactivity>interactive</interactivity>
+                      </settingInfo>
+                      <videoFormatInfo>
+                        <mimeType>video/mpeg</mimeType>
+                        <visualModelling>3D</visualModelling>
+                          <compressionInfo>
+                            <compression>true</compression>
+                            <compressionName>mpeg</compressionName>
+                          </compressionInfo>
+                      </videoFormatInfo>
+                      <annotationInfo>
+                        <annotationType>modalityAnnotation-facialExpressions</annotationType>
+                        <annotationStandoff>false</annotationStandoff>
+                        <annotationFormat>eaf</annotationFormat>
+                        <conformanceToStandardsBestPractices>EML</conformanceToStandardsBestPractices>
+                        <conformanceToStandardsBestPractices>MUMIN</conformanceToStandardsBestPractices>
+                        <conformanceToStandardsBestPractices>other</conformanceToStandardsBestPractices>
+                        <annotationMode>manual</annotationMode>
+                          <annotationTool>
+                            <targetResourceNameURI>EUDICO Linguistic Annotator (ELAN)</targetResourceNameURI>
+                          </annotationTool>
+                          <annotator>
+                              <personInfo>
+                                <surname lang="en">Koutsombogera</surname>
+                                <givenName lang="en">Maria</givenName>
+                                <sex>female</sex>
+                                  <communicationInfo>
+                                    <email>mkouts@ilsp.athena-innovation.gr</email>
+                                    <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=35&amp;Itemid=156</url>
+                                    <telephoneNumber>+302106875444</telephoneNumber>
+                                    <faxNumber>+302106854270</faxNumber>
+                                    <faxNumber>+302106856794</faxNumber>
+                                  </communicationInfo>
+                                <position>Scientific Associate</position>
+                                  <affiliation>
+                                    <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                                    <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                                      <communicationInfo>
+                                        <email>www@ilsp.athena-innovation.gr</email>
+                                        <url>http://www.ilsp.gr/</url>
+                                        <address>Artemidos 6 &amp; Epidavrou</address>
+                                        <zipCode>GR-15125</zipCode>
+                                        <city>Maroussi</city>
+                                        <country>GR</country>
+                                        <telephoneNumber>+302106875300</telephoneNumber>
+                                        <faxNumber>+302106854270</faxNumber>
+                                        <faxNumber>+302106856794</faxNumber>
+                                      </communicationInfo>
+                                  </affiliation>
+                              </personInfo>
+                          </annotator>
+                      </annotationInfo>
+                      <annotationInfo>
+                        <annotationType>modalityAnnotation-bodyMovements</annotationType>
+                        <annotationStandoff>false</annotationStandoff>
+                        <annotationFormat>eaf</annotationFormat>
+                        <conformanceToStandardsBestPractices>EML</conformanceToStandardsBestPractices>
+                        <conformanceToStandardsBestPractices>MUMIN</conformanceToStandardsBestPractices>
+                        <conformanceToStandardsBestPractices>other</conformanceToStandardsBestPractices>
+                        <annotationMode>manual</annotationMode>
+                          <annotationTool>
+                            <targetResourceNameURI>EUDICO Linguistic Annotator (ELAN)</targetResourceNameURI>
+                          </annotationTool>
+                          <annotator>
+                              <personInfo>
+                                <surname lang="en">Koutsombogera</surname>
+                                <givenName lang="en">Maria</givenName>
+                                <sex>female</sex>
+                                  <communicationInfo>
+                                    <email>mkouts@ilsp.athena-innovation.gr</email>
+                                    <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=35&amp;Itemid=156</url>
+                                    <telephoneNumber>+302106875444</telephoneNumber>
+                                    <faxNumber>+302106854270</faxNumber>
+                                    <faxNumber>+302106856794</faxNumber>
+                                  </communicationInfo>
+                                <position>Scientific Associate</position>
+                                  <affiliation>
+                                    <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                                    <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                                      <communicationInfo>
+                                        <email>www@ilsp.athena-innovation.gr</email>
+                                        <url>http://www.ilsp.gr/</url>
+                                        <address>Artemidos 6 &amp; Epidavrou</address>
+                                        <zipCode>GR-15125</zipCode>
+                                        <city>Maroussi</city>
+                                        <country>GR</country>
+                                        <telephoneNumber>+302106875300</telephoneNumber>
+                                        <faxNumber>+302106854270</faxNumber>
+                                        <faxNumber>+302106856794</faxNumber>
+                                      </communicationInfo>
+                                  </affiliation>
+                              </personInfo>
+                          </annotator>
+                      </annotationInfo>
+                      <annotationInfo>
+                        <annotationType>other</annotationType>
+                        <annotationStandoff>false</annotationStandoff>
+                        <annotationFormat>eaf</annotationFormat>
+                        <conformanceToStandardsBestPractices>EML</conformanceToStandardsBestPractices>
+                        <conformanceToStandardsBestPractices>MUMIN</conformanceToStandardsBestPractices>
+                        <conformanceToStandardsBestPractices>other</conformanceToStandardsBestPractices>
+                        <annotationMode>manual</annotationMode>
+                          <annotationTool>
+                            <targetResourceNameURI>EUDICO Linguistic Annotator (ELAN)</targetResourceNameURI>
+                          </annotationTool>
+                          <annotator>
+                              <personInfo>
+                                <surname lang="en">Koutsombogera</surname>
+                                <givenName lang="en">Maria</givenName>
+                                <sex>female</sex>
+                                  <communicationInfo>
+                                    <email>mkouts@ilsp.athena-innovation.gr</email>
+                                    <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=35&amp;Itemid=156</url>
+                                    <telephoneNumber>+302106875444</telephoneNumber>
+                                    <faxNumber>+302106854270</faxNumber>
+                                    <faxNumber>+302106856794</faxNumber>
+                                  </communicationInfo>
+                                <position>Scientific Associate</position>
+                                  <affiliation>
+                                    <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                                    <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                                      <communicationInfo>
+                                        <email>www@ilsp.athena-innovation.gr</email>
+                                        <url>http://www.ilsp.gr/</url>
+                                        <address>Artemidos 6 &amp; Epidavrou</address>
+                                        <zipCode>GR-15125</zipCode>
+                                        <city>Maroussi</city>
+                                        <country>GR</country>
+                                        <telephoneNumber>+302106875300</telephoneNumber>
+                                        <faxNumber>+302106854270</faxNumber>
+                                        <faxNumber>+302106856794</faxNumber>
+                                      </communicationInfo>
+                                  </affiliation>
+                              </personInfo>
+                          </annotator>
+                      </annotationInfo>
+                      <domainInfo>
+                        <domain>general</domain>
+                      </domainInfo>
+                      <videoClassificationInfo>
+                        <videoGenre>interview</videoGenre>
+                      </videoClassificationInfo>
+                      <recordingInfo>
+                        <recordingDeviceType>hardDisk</recordingDeviceType>
+                        <recordingEnvironment>other</recordingEnvironment>
+                        <sourceChannel>tv</sourceChannel>
+                          <recorder>
+                              <personInfo>
+                                <surname lang="en">Papageorgiou</surname>
+                                <givenName lang="en">Harris</givenName>
+                                <sex>male</sex>
+                                  <communicationInfo>
+                                    <email>xaris@ilsp.athena-innovation.gr</email>
+                                    <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=49&amp;Itemid=156</url>
+                                    <telephoneNumber>+302106875426</telephoneNumber>
+                                    <faxNumber>+302106854270</faxNumber>
+                                  </communicationInfo>
+                                <position>Principal Researcher</position>
+                                  <affiliation>
+                                    <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                                    <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                                      <communicationInfo>
+                                        <email>www@ilsp.athena-innovation.gr</email>
+                                        <url>http://www.ilsp.gr/</url>
+                                        <address>Artemidos 6 &amp; Epidavrou</address>
+                                        <zipCode>GR-15125</zipCode>
+                                        <city>Maroussi</city>
+                                        <country>GR</country>
+                                        <telephoneNumber>+302106875300</telephoneNumber>
+                                        <faxNumber>+302106854270</faxNumber>
+                                        <faxNumber>+302106856794</faxNumber>
+                                      </communicationInfo>
+                                  </affiliation>
+                              </personInfo>
+                          </recorder>
+                          <recorder>
+                              <personInfo>
+                                <surname lang="en">Koutsombogera</surname>
+                                <givenName lang="en">Maria</givenName>
+                                <sex>female</sex>
+                                  <communicationInfo>
+                                    <email>mkouts@ilsp.athena-innovation.gr</email>
+                                    <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=35&amp;Itemid=156</url>
+                                    <telephoneNumber>+302106875444</telephoneNumber>
+                                    <faxNumber>+302106854270</faxNumber>
+                                    <faxNumber>+302106856794</faxNumber>
+                                  </communicationInfo>
+                                <position>Scientific Associate</position>
+                                  <affiliation>
+                                    <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                                    <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                                      <communicationInfo>
+                                        <email>www@ilsp.athena-innovation.gr</email>
+                                        <url>http://www.ilsp.gr/</url>
+                                        <address>Artemidos 6 &amp; Epidavrou</address>
+                                        <zipCode>GR-15125</zipCode>
+                                        <city>Maroussi</city>
+                                        <country>GR</country>
+                                        <telephoneNumber>+302106875300</telephoneNumber>
+                                        <faxNumber>+302106854270</faxNumber>
+                                        <faxNumber>+302106856794</faxNumber>
+                                      </communicationInfo>
+                                  </affiliation>
+                              </personInfo>
+                          </recorder>
+                      </recordingInfo>
+                      <creationInfo>
+                        <creationMode>mixed</creationMode>
+                      </creationInfo>
+                      <linkToOtherMediaInfo>
+                        <otherMedia>audio</otherMedia>
+                        <synchronizedWithAudio>true</synchronizedWithAudio>
+                      </linkToOtherMediaInfo>
+                  </corpusVideoInfo>
+              </corpusMediaType>
+          </corpusInfo>
+      </resourceComponentType>
+  </resourceInfo>

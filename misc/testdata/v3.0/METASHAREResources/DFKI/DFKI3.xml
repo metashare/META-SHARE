@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+  <identificationInfo>
+    <resourceName>Heart of Gold</resourceName>
+    <description>XML-based middleware for the integration of shallow and deep natural language processing components.</description>
+    <resourceShortName>HoG</resourceShortName>
+    <url>http://heartofgold.opendfki.de/</url>
+    <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+  </identificationInfo>
+  <distributionInfo>
+    <availability>available-unrestrictedUse</availability>
+    <licenceInfo>
+      <licence>LGPL</licence>
+    </licenceInfo>
+  </distributionInfo>
+  <contactPerson>
+    <surname>Schäfer</surname>
+    <givenName>Ulrich</givenName>
+    <sex>male</sex>
+    <communicationInfo>
+      <email>ulrich.schaefer@dfki.de</email>
+      <url>http://www.dfki.de/~uschaefer</url>
+      <address>Campus D 3 1</address>
+      <zipCode>66123</zipCode>
+      <city>Saarbrücken</city>
+      <country>Germany</country>
+      <telephoneNumber>+49681857755154</telephoneNumber>
+      <faxNumber>+49681857755338</faxNumber>
+    </communicationInfo>
+    <affiliation>
+      <organizationName>Deutsches Forschungszentrum für Künstliche Intelligenz</organizationName>
+      <organizationShortName>DFKI</organizationShortName>
+      <departmentName>Language Technology Lab</departmentName>
+      <communicationInfo>
+        <email>sek-hu@dfki.de</email>
+        <url>http://www.dfki.de/lt</url>
+        <address>Stuhlsatzenhausweg 3</address>
+        <zipCode>66123</zipCode>
+        <city>Saarbrücken</city>
+        <country>DE</country>
+        <telephoneNumber>+49_681_857755282</telephoneNumber>
+        <faxNumber>+49_681_857755338</faxNumber>
+      </communicationInfo>
+    </affiliation>
+  </contactPerson>
+  <metadataInfo>
+    <metadataCreationDate>2011-12-31</metadataCreationDate>
+  </metadataInfo>
+  <resourceComponentType>
+    <toolServiceInfo>
+      <resourceType>toolService</resourceType>
+      <toolServiceType>other</toolServiceType>
+      <languageDependent>false</languageDependent>
+    </toolServiceInfo>
+  </resourceComponentType>
+</resourceInfo>

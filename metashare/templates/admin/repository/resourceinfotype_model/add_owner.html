@@ -1,0 +1,39 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_modify %}
+{% load url from future %}
+
+{% block extrahead %}{{ block.super }}
+{% url 'admin:jsi18n' as jsi18nurl %}
+<script type="text/javascript" src="{{ jsi18nurl|default:"../../../jsi18n/" }}"></script>
+
+{{ media }}
+{% endblock %}
+
+{% block breadcrumbs %}
+{% include "breadcrumbs.html" %}
+{% endblock %}
+
+{% block content %}
+<h3>Add owners to the following resource{{ selected_resources|pluralize }}:</h3>
+
+<div class='distance-div'>
+	<table class='resource-group'>
+		<tr><th>Resource Name</th><th>Owners</th></tr>
+	    {% for resource in selected_resources %}	    	
+	        <tr><td>{{ resource }}</td><td>{% if resource.owners.count != 0 %}{% for owner in resource.owners.all %} {{ owner }}, {% endfor %}{% else %}None{% endif %}</td></tr>
+	    {% endfor %}
+	<table>
+</div>
+<div class='distance-div'>
+	<form method="post" action="{{ path }}">{% csrf_token %}
+	    <table>
+	        {{ form }}	        
+	    </table>
+	    <div class='distance-div'>
+	        <input type="hidden" name="action" value="add_owner"/>
+	        <input type="submit" name="add_owner" value="Add"/>
+	        <input type="submit" name="cancel" value="Cancel"/>
+        </div>
+	</form>
+</div>
+{% endblock content %}

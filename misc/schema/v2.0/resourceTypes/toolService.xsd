@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 sp1 (http://www.altova.com) by End User (free.org) -->
+<!-- edited by Kostas Perifanos, HARRIS PAPAGEORGIOU & Penny Labropoulou (Institute for Language and Speech Processing (ILSP)) -->
+<xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" xml:lang="en">
+	<xs:include schemaLocation="../META-SHARE-SimpleTypes.xsd"/>
+	<xs:include schemaLocation="../META-SHARE-BaseTypes.xsd"/>
+	<xs:complexType name="toolServiceInfoType">
+		<xs:annotation>
+			<xs:appinfo>
+				<render-short>toolService ({toolServiceType})</render-short>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="resourceType" type="xs:string" fixed="toolService">
+				<xs:annotation>
+					<xs:documentation>The type of the resource that a tool or service takes as input or produces as output</xs:documentation>
+					<xs:appinfo>
+						<maxlen>30</maxlen>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="toolServiceType">
+				<xs:annotation>
+					<xs:documentation>Specifies the type of the tool or service</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<maxlen>100</maxlen>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="tool">
+							<xs:annotation>
+								<xs:documentation>A device that performs one or more of the tasks listed in the ForeseenUseInfo component</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="service">
+							<xs:annotation>
+								<xs:documentation>A form in which NLP taks are realized and delivered to a user, without the need of acquiring and installing the corresponding tools</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="platform">
+							<xs:annotation>
+								<xs:documentation>A technology that eases the development of new tools and services in the NLP field</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="suiteOfTools">
+							<xs:annotation>
+								<xs:documentation>A more of less fixed integrated organisation of tools applied for solving a combinaton of tasks</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="infrastructure">
+							<xs:annotation>
+								<xs:documentation/>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="architecture">
+							<xs:annotation>
+								<xs:documentation>A technology that supports the flexible development of NLP applications, together with all the requested resources</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="nlpDevelopmentEnvironment">
+							<xs:annotation>
+								<xs:documentation>A technology that supports the development of data resources, like lexicons, grammars, corpora, etc. Can be included in an Architecture or in a Platform</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="toolServiceSubtype" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the subtype of tool or service</xs:documentation>
+					<xs:appinfo>
+						<maxlen>100</maxlen>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="languageDependent" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Indicates whether the operation of the tool or service is language dependent or not</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:inputInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Groups together information on the requirements set on the input resource of a tool or service</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:outputInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Groups together information on the requirements set on the output of a tool or service</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:toolServiceOperationInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Groups together information on the operation of a tool or service</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:toolServiceEvaluationInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Groups together information on the evaluation status of a tool or service</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:toolServiceCreationInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Groups together information on the creation of a tool or service</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="inputInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on the requirements set on the input resource of a tool or service</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="ms:mediaType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the media type of the resource and basically corresponds to the physical medium of the content representation. Each media type is described through a distinctive set of features. A resource may consist of parts attributed to different types of media. A tool/service may take as input/output more than one different media types.</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="resourceType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The type of the resource that a tool or service takes as input or produces as output</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-many</relation>
+						<maxlen>30</maxlen>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="corpus"/>
+						<xs:enumeration value="lexicalConceptualResource"/>
+						<xs:enumeration value="languageDescription"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element ref="ms:modalityType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the type of the modality represented in the resource or processed by a tool/service</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:languageName" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A human understandable name of the language that is used in the resource or supported by the tool/service according to the IETF BCP47 standard</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:languageId" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The identifier of the language that is included in the resource or supported by the tool/service according to the IETF BCP47 standard</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:languageVarietyName" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the type of the language variety that occurs in the resource or is supported by a tool/service</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:mimeType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The mime-type of the resource which is a formalized specifier for the format included or a mime-type that the tool/service accepts; value to be taken from a subset of the official mime types of the Internet Assigned Numbers Authority (http://www.iana.org/)</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:characterEncoding" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The name of the character encoding used in the resource or accepted by the tool/service</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<!--
+			<xs:element name="characterSet" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			-->
+			<xs:element ref="ms:annotationType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the annotation level of the resource or the annotation type a tool/ service requires or produces as an output</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:annotationFormat" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the format that is used in the annotation process since often the mime type will not be sufficient for machine processing</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:tagset" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A name or a url reference to the tagset used in the annotation of the resource or used by the tool/service</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:segmentationLevel" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the segmentation unit in terms of which the resource has been segmented or the level of segmentation a tool/service requires/outputs</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:conformanceToStandardsBestPractices" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the standards or the best practices to which the tagset used for the annotation conforms </xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="outputInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on the requirements set on the output of a tool or service</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="ms:mediaType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the media type of the resource and basically corresponds to the physical medium of the content representation. Each media type is described through a distinctive set of features. A resource may consist of parts attributed to different types of media. A tool/service may take as input/output more than one different media types.</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="resourceType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The type of the resource that a tool or service takes as input or produces as output</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-many</relation>
+						<maxlen>30</maxlen>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="corpus"/>
+						<xs:enumeration value="lexicalConceptualResource"/>
+						<xs:enumeration value="languageDescription"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element ref="ms:modalityType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the type of the modality represented in the resource or processed by a tool/service</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:languageName" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A human understandable name of the language that is used in the resource or supported by the tool/service according to the IETF BCP47 standard</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:languageId" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The identifier of the language that is included in the resource or supported by the tool/service according to the IETF BCP47 standard</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:languageVarietyName" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the type of the language variety that occurs in the resource or is supported by a tool/service</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:mimeType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The mime-type of the resource which is a formalized specifier for the format included or a mime-type that the tool/service accepts; value to be taken from a subset of the official mime types of the Internet Assigned Numbers Authority (http://www.iana.org/)</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:characterEncoding" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The name of the character encoding used in the resource or accepted by the tool/service</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<!--
+			<xs:element name="characterSet" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			-->
+			<xs:element ref="ms:annotationType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the annotation level of the resource or the annotation type a tool/ service requires or produces as an output</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:annotationFormat" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the format that is used in the annotation process since often the mime type will not be sufficient for machine processing</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:tagset" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A name or a url reference to the tagset used in the annotation of the resource or used by the tool/service</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:segmentationLevel" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the segmentation unit in terms of which the resource has been segmented or the level of segmentation a tool/service requires/outputs</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:conformanceToStandardsBestPractices" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the standards or the best practices to which the tagset used for the annotation conforms</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="toolServiceEvaluationInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on the evaluation status of a tool or service</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="evaluated" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Indicates whether the tool or service has been evaluated</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="evaluationLevel" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Indicates the evaluation level</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<maxlen>30</maxlen>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="technological"/>
+						<xs:enumeration value="usage"/>
+						<xs:enumeration value="impact"/>
+						<xs:enumeration value="diagnostic"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="evaluationType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Indicates the evaluation type</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<maxlen>20</maxlen>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="glassBox"/>
+						<xs:enumeration value="blackBox"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="evaluationCriteria" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Defines the criteria of the evaluation of a tool</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<maxlen>30</maxlen>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="extrinsic"/>
+						<xs:enumeration value="intrinsic"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<!-- mandatory under conditions if evaluated=yes -->
+			<xs:element name="evaluationMeasure" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Defines whether the evaluation measure is human or automatic</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<maxlen>30</maxlen>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="human"/>
+						<xs:enumeration value="automatic"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="evaluationReport" type="ms:documentationInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A bibliographical record of or link to a report describing the evaluation process, tool, method etc. of the tool or service</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>many-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="evaluationTool" type="ms:targetResourceInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The name or id or url of the tool used for the evaluation of the tool or service</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>many-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="evaluationDetails" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides further information on the evaluation process of a tool or service</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<maxlen>500</maxlen>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="evaluator" type="ms:actorInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information on person or organization that evaluated the tool or service</xs:documentation>
+					<xs:appinfo>
+						<relation>many-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="toolServiceOperationInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on the operation of a tool or service</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="operatingSystem" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The operating system on which the tool will be running</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<maxlen>50</maxlen>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="os-independent"/>
+						<xs:enumeration value="windows"/>
+						<xs:enumeration value="linux"/>
+						<xs:enumeration value="unix"/>
+						<xs:enumeration value="mac-OS"/>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element ref="ms:runningEnvironmentInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Groups together information on the running environment of a tool or a language description</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="runningTime" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Gives information on the running time of a tool or service</xs:documentation>
+					<xs:appinfo>
+						<maxlen>100</maxlen>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="toolServiceCreationInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on the creation of a tool or service</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="implementationLanguage" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The programming languages needed for allowing user contributions, or for running the tools, in case no executables are available</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<maxlen>100</maxlen>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="formalism" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Reference (name, bibliographic reference or link to url) for the formalism used for the creation/enrichment of the resource (grammar or tool/service)</xs:documentation>
+					<xs:appinfo>
+						<maxlen>100</maxlen>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="originalSource" type="ms:targetResourceInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The name, the identifier or the url of thethe original resources that were at the base of the creation process of the resource</xs:documentation>
+					<xs:appinfo>
+						<relation>many-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="creationDetails" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides additional information on the creation of a tool or service</xs:documentation>
+					<xs:appinfo>
+						<maxlen>500</maxlen>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- elements -->
+	<xs:element name="toolServiceInfo" type="ms:toolServiceInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together elements required for the description of tools and services</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="inputInfo" type="ms:inputInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on the requirements set on the input resource of a tool or service</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="outputInfo" type="ms:outputInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on the requirements set on the output of a tool or service</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="toolServiceEvaluationInfo" type="ms:toolServiceEvaluationInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on the evaluation status of a tool or service</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="toolServiceOperationInfo" type="ms:toolServiceOperationInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on the operation of a tool or service</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="toolServiceCreationInfo" type="ms:toolServiceCreationInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on the creation of a tool or service</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

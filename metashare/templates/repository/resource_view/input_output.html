@@ -1,0 +1,100 @@
+{% load mimetype_label %}
+{% spaceless %}
+
+<label class='title'>{{ type }}</label>
+{% if data.Media_type %}
+	 <div class="dataline indented">
+		<label>
+			<strong>Media type: </strong>{{ data.Media_type }}
+		</label>
+	</div>
+{% endif %}
+
+{% if data.Resource_type %}
+	 <div class="dataline indented">
+		<label>
+			<strong>Resource type: </strong>{{ data.Resource_type }}
+		</label>
+	</div>
+{% endif %}
+
+{% if data.Modality_type %}
+	 <div class="dataline indented">
+		<label>
+			<strong>Modality: </strong>{{ data.Modality_type }}
+		</label>
+	</div>
+{% endif %}
+
+{% if data.Language_name %}
+	 <div class="dataline indented">
+		<label title="{{ data.Language_identifier }}">
+			<strong>Language: </strong>{{ data.Language_name }} {% if data.Language_variety_name %} &mdash; <strong>variety:</strong> {{ data.Language_variety_name }} {% endif %}
+		</label>
+	</div>
+{% endif %}
+
+{% if data.Mime_type %}
+	 <div class="dataline indented">
+		<label>
+			<strong>Mime type: </strong>{{ data.Mime_type|mimetype_label }}
+		</label>
+	</div>
+{% endif %}
+
+{% if data.Character_encoding %}
+	 <div class="dataline indented">
+		<label>
+			<strong>Character encoding: </strong>{{ data.Character_encoding }}
+		</label>
+	</div>
+{% endif %}
+
+{% if data.Annotation_type %}
+	 <div class="dataline indented">
+		<label>
+			<strong>Annotation type: </strong>{{ data.Annotation_type }}
+		</label>
+	</div>
+{% endif %}
+
+{% if data.Annotation_format %}
+	 <div class="dataline indented">
+		<label>
+			<strong>Annotation format: </strong>{{ data.Annotation_format }}
+		</label>
+	</div>
+{% endif %}
+
+{% if data.Tagset %}
+	 <div class="dataline indented">
+		<label>
+			<strong>Tagset: </strong>{{ data.Tagset }}
+		</label>
+	</div>
+{% endif %}
+
+{% if data.Segmentation_level %}
+	 <div class="dataline indented">
+		<label>
+			<strong>Segmentation level: </strong>{{ data.Segmentation_level }}
+		</label>
+	</div>
+{% endif %}
+
+{% if data.Domain %}
+	 <div class="dataline indented">
+		<label>
+			<strong>Domain: </strong>{{ data.Domain }}
+		</label>
+	</div>
+{% endif %}
+
+{% if data.Conformance_to_standards___best_practices %}
+   <div class="dataline indented">
+      <label>
+          <strong>Conformance to standards best practices:</strong> {{ data.Conformance_to_standards___best_practices }}
+       </label>
+   </div>
+{% endif %}
+{% endspaceless %}

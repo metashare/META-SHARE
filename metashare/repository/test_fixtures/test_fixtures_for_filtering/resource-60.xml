@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.meta-share.org/META-SHARE_XMLSchema http://www.meta-share.org/META-SHARE_XMLSchema/v3.1/META-SHARE-Resource.xsd">
+	<identificationInfo>
+		<resourceName lang="en">textnum3</resourceName>
+		<description lang="en">sw</description>
+		<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+	</identificationInfo>
+	<distributionInfo>
+		<availability>available</availability>
+		<licenceInfo>
+			<licence>CC-BY-ND</licence>
+		</licenceInfo>
+	</distributionInfo>
+	<contactPerson>
+		<surname lang="en">Contact Test</surname>
+		<communicationInfo>
+			<email>test@test.gr</email>
+		</communicationInfo>
+	</contactPerson>
+	<metadataInfo>
+		<metadataCreationDate>2012-09-14</metadataCreationDate>
+		<metadataLastDateUpdated>2012-09-14</metadataLastDateUpdated>
+	</metadataInfo>
+	<resourceComponentType>
+		<corpusInfo>
+			<resourceType>corpus</resourceType>
+			<corpusMediaType>
+				<corpusTextNumericalInfo>
+					<mediaType>textNumerical</mediaType>
+				</corpusTextNumericalInfo>
+			</corpusMediaType>
+		</corpusInfo>
+	</resourceComponentType>
+</resourceInfo>

@@ -1,0 +1,50 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_modify %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}admin/css/forms.css" />{% endblock %}
+
+{% block breadcrumbs %}{% if not is_popup %}
+<div class="breadcrumbs">
+     <a href="../../../../">{% trans "Home" %}</a> &rsaquo;
+     <a href="../../../">{{ app_label|capfirst|escape }}</a> &rsaquo;
+     <a href="../">{{ original }}</a> &rsaquo;
+     Upload resource
+</div>
+{% endif %}{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block content %}<div id="content-main">
+<form enctype="multipart/form-data" action="{{ form_url }}" method="post" id="{{ opts.module_name }}_form">{% csrf_token %}{% block form_top %}{% endblock %}
+<div>
+
+<fieldset class="module aligned">
+<h2>Current Resource</h2>
+<div class="form-row">
+<table>
+<tr><th><label for="id_storageFolder">Folder:</label></th><td>{{storage_folder}}</td></tr>
+{% if existing_download %}
+<tr><th><label for="id_existingDownload">Path:</label></th><td>{{existing_download}}</td></tr>
+{% endif %}
+</table>
+</div>
+</fieldset>
+
+<fieldset class="module aligned">
+<h2>Upload</h2>
+<div class="form-row">
+
+<table>
+{{form.as_table}}
+</table>
+</div>
+</fieldset>
+
+<div class="submit-row" >
+<input type="submit" value="Upload" class="default" name="_save" />
+{# <p class="deletelink-box"><a href="delete/" class="deletelink">Delete</a></p> #}
+</div>
+
+</div>
+</form></div>
+{% endblock %}

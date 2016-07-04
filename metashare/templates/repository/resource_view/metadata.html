@@ -1,0 +1,84 @@
+{% spaceless %}
+
+<label class='component'>Metadata</label>
+<div>
+	{% if metadata_dict.Metadata.Metadata_creation_date %}
+		 <div class="dataline">
+			<label>
+				<strong>Created: </strong>{{ metadata_dict.Metadata.Metadata_creation_date|date:"SHORT_DATE_FORMAT" }}
+			</label>
+		</div>
+	{% endif %}
+
+	{% if metadata_dict.Metadata.Metadata_last_date_updated %}
+		 <div class="dataline">
+			<label>
+				<strong>Last Updated: </strong>{{ metadata_dict.Metadata.Metadata_last_date_updated|date:"SHORT_DATE_FORMAT" }}
+			</label>
+		</div>
+	{% endif %}
+
+
+	{% if metadata_dict.Metadata.Source %}
+		<div class="dataline">
+			<label>
+			<strong>Source: </strong>{{ metadata_dict.Metadata.Source }}
+			</label>
+		</div>
+	{% endif %}
+	
+    {% if metadata_dict.Metadata.Source_repository_URL %}
+        <div class="dataline">
+            <label>
+                <strong>Source Repository: </strong>{{ metadata_dict.Metadata.Source_repository_URL }}
+            </label>
+        </div>
+    {% endif %}
+
+	{% if metadata_dict.Metadata.Original_metadata_schema %}
+		<div class="dataline">
+			<label>
+				{% if metadata_dict.Metadata.Original_metadata_record_link %}
+                     <a href="{{metadata_dict.Metadata.Original_metadata_record_link}}" target='_blank'>
+				{% endif %}
+						{{ metadata_dict.Metadata.Original_metadata_schema }}
+				{% if metadata_dict.Metadata.Original_metadata_record_link %}
+					</a>
+				{% endif %}
+			</label>
+		</div>
+	{% endif %}
+
+	{% if metadata_dict.Metadata.Metadata_language %}
+		 <div class="dataline">
+			<label>
+				<strong>Metadata Language:</strong>
+				{{ metadata_dict.Metadata.Metadata_language }}
+				{% if metadata_dict.Metadata.Metadata_language_identifier %}({{ metadata_dict.Metadata.Metadata_language_identifier }}){% endif %}
+			</label>
+		</div>
+	{% endif %}
+
+	{% if metadata_dict.Metadata.Revision %}
+		<div class="dataline">
+			<label>
+				<strong>Revision: </strong>{{ metadata_dict.Metadata.Revision }}
+			</label>
+		</div>
+	{% endif %}
+</div>
+
+<div class="dataline">
+	{% for key, value in metadata_dict.items %}
+		{% if "Metadata_creator" in value %}
+			<label class="title">Metadata Creator</label>
+		{% endif %}
+		{% for key1, value1 in value.items %}
+			{% if "Metadata_creator" in key1 %}
+				 {% include "repository/resource_view/person.html" with person_dict=value1 type="Metadata Creator" %}
+			{% endif %}
+		{% endfor %}
+	{% endfor %}
+</div>
+
+{% endspaceless %}

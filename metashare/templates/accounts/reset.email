@@ -1,0 +1,11 @@
+Dear {{firstname}} {{lastname}},
+
+We have received a reset request for your META-SHARE user
+account "{{shortname}}". You can confirm that request and
+reset your account by clicking the following link:
+- {{confirmation_url}}
+
+If you don't want to reset your account password, just
+ignore this email.
+
+Thank you for using META-SHARE!

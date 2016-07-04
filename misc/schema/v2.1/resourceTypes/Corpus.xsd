@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited by ILSP/Athena R.C. -->
+<xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.1" xml:lang="en">
+	<xs:include schemaLocation="../META-SHARE-SimpleTypes.xsd"/>
+	<xs:include schemaLocation="../META-SHARE-BaseTypes.xsd"/>
+	<!-- media type possible choices -->
+	<xs:include schemaLocation="./mediaTypes/Corpus/corpusAudioInfo.xsd"/>
+	<xs:include schemaLocation="./mediaTypes/Corpus/corpusTextInfo.xsd"/>
+	<xs:include schemaLocation="./mediaTypes/Corpus/corpusVideoInfo.xsd"/>
+	<xs:include schemaLocation="./mediaTypes/Corpus/corpusImageInfo.xsd"/>
+	<xs:include schemaLocation="./mediaTypes/Corpus/corpusTextNumericalInfo.xsd"/>
+	<xs:include schemaLocation="./mediaTypes/Corpus/corpusTextNgramInfo.xsd"/>
+	<xs:complexType name="corpusInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on corpora of all media types </xs:documentation>
+			<xs:appinfo>
+				<render-short>corpus ({corpusMediaType/corpusTextInfo} {corpusMediaType/corpusAudioInfo} {corpusMediaType/corpusVideoInfo} {corpusMediaType/corpusImageInfo} {corpusMediaType/corpusTextNumericalInfo} {corpusMediaType/corpusTextNgramInfo})</render-short>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="resourceType" type="xs:string" fixed="corpus">
+				<xs:annotation>
+					<xs:documentation>Specifies the type of the resource being described</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<maxlen>30</maxlen>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="corpusMediaType">
+				<xs:annotation>
+					<xs:documentation>Used to specify the media type specific to corpora and group together the relevant information</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="ms:corpusTextInfo" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Groups together information on the text component of a resource</xs:documentation>
+								<xs:appinfo>
+									<recommended>true</recommended>
+									<relation>one-to-many</relation>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="ms:corpusAudioInfo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Groups together information on the audio module of a corpus</xs:documentation>
+								<xs:appinfo>
+									<recommended>true</recommended>
+									<relation>one-to-one</relation>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="ms:corpusVideoInfo" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Groups together information on the video component of a corpus</xs:documentation>
+								<xs:appinfo>
+									<recommended>true</recommended>
+									<relation>one-to-many</relation>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="ms:corpusImageInfo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Groups together information on the image component of a resource</xs:documentation>
+								<xs:appinfo>
+									<recommended>true</recommended>
+									<relation>one-to-one</relation>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="ms:corpusTextNumericalInfo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Groups together information on the textNumerical component of a corpus. It is used basically for the textual representation of measurements and observations linked to sensorimotor recordings</xs:documentation>
+								<xs:appinfo>
+									<recommended>true</recommended>
+									<relation>one-to-one</relation>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="ms:corpusTextNgramInfo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Groups together information required for n-gram resources; information can be provided both as regards features drawn from the source corpus (e.g. language coverage, size, format, domains etc.) and features pertaining to the n-gram output itself (e.g. range of n-grams, type of item included, etc.)</xs:documentation>
+								<xs:appinfo>
+									<recommended>true</recommended>
+									<relation>one-to-one</relation>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- elements -->
+	<xs:element name="corpusInfo" type="ms:corpusInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on corpora of all media types</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

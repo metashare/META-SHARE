@@ -1,0 +1,37 @@
+{% for node in nodeset.all %}
+<input type="hidden" id="id_{{name}}-{{forloop.counter0}}" name="{{prefix}}{{name}}-{{forloop.counter0}}" value="{{node.pk}}"/>
+<h1 style="display:{% if not node %}none{% endif %};">
+  <a id="edit_id_{{name}}-{{forloop.counter0}}" 
+     proto-href="/{{DJANGO_BASE}}{{baseurl}}"
+     href="/{{DJANGO_BASE}}{{baseurl}}{{node.pk}}/" 
+     onclick="return showAddAnotherPopup(this);">Edit {{prettyname}}</a>
+</h1>
+{% endfor %}
+
+
+{% with len=nodeset.all|length %}
+<input type="hidden" id="id_{{name}}-{{len}}" name="{{prefix}}{{name}}-{{len}}" value=""/>
+<h1>
+  <a id="add_id_{{name}}-{{len}}"
+     href="/{{DJANGO_BASE}}{{baseurl}}add/{% if parent %}?back_to_corpusmediatypetype_model={{ parent.pk }}{% endif %}"
+     onclick="return showAddAnotherPopup(this);">Add {{prettyname}}</a>
+  <a id="edit_id_{{name}}-{{len}}" 
+     proto-href="/{{DJANGO_BASE}}{{baseurl}}"
+     onclick="return showAddAnotherPopup(this);" 
+     style="display:none;">Edit {{prettyname}}</a><br />
+</h1>
+{% endwith %}
+
+<div id="id_{{name}}-protodiv" style="display: none;">
+  <input type="hidden" name="{{prefix}}{{name}}-proto" value=""/>
+  <h1>
+    <a class="protoadd"
+       href="/{{DJANGO_BASE}}{{baseurl}}add/{% if parent %}?back_to_corpusmediatypetype_model={{ parent.pk }}{% endif %}"
+       onclick="return showAddAnotherPopup(this);">Add {{prettyname}}</a>
+    <a class="protoedit"
+       proto-href="/{{DJANGO_BASE}}{{baseurl}}"
+       onclick="return showAddAnotherPopup(this);"
+       style="display:none;">Edit {{prettyname}}</a>
+  </h1>
+</div>
+

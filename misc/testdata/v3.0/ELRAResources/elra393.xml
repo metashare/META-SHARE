@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">Speecon manually pitch-marked reference database for Spanish</resourceName>
+      <resourceName lang="fr">Base de données Speecon des mesures de la fréquence fondamentale (pitch marking) de l’espagnol</resourceName>
+      <description lang="en">This database is intended for the development and the evaluation of noise robust pitch marking (PMA) and/or pitch determination (PDA) algorithms. The audio data used for the construction of the database was selected as a subset of the Speecon Spanish database (see ELRA-S0160)The acoustical environments found in this database comprise those of the car interior, the office, and living rooms. The office environment is mostly quiet, and slightly affected by stationary and white noises from computer fans or air-conditioning devices. However, in some of the offices the recordings contain also background voices. The living room recordings (entertainment environment) contain a wider range of noises, less stationary and more colored than the office noises. In some utterances, the radio or TV set is on; consequently, voices can be found in the recordings, as well as music, etc. The reverberations are mostly present in office and entertainment environments. The Speecon Spanish database was recorded at 16 kHz sampling frequency and quantized using 16-bit linear coding. From this database the recordings of 60 speakers was selected (30 male and 30 female speakers, speaker age from 19 to 79 years). In order to manually construct the reference pitch-marked database under low noise conditions and without reverberation the close talking microphone recordings in the amount of 1 minute per speaker were selected. Thus the reference database comprises 60 minutes of pitch-marked speech signal. In the first step, the 60 minutes of selected close-talking channel speech signal were automatically pitch-marked (epoch marked). In the next step accurate manual rechecking and correcting of pitch marks is performed thus resulting in reference pitch-marked database. Each session consists of 17 utterances:•	1 isolated digit sequence•	1 money amount•	10 phonetically rich sentences•	5 phonetically rich isolated wordsThe following age distribution has been obtained: 40 speakers are between 15 and 30, 11 speakers are between 31 and 45, 8 speakers are between 46 and 60, and 1 speaker is over 60.</description>
+      <description lang="fr">Cette base de données a été conçue pour le développement et l’évaluation d’algorithmes pour les mesures de la fréquence fondamentale robustes au bruit (Pitch Marking Algorithm, PMA) et/ou pour la détermination de la fréquence fondamentale (Pith Determination Algorithm, PDA). Les données audio utilisées pour la construction de la base sont extraites de la base de données Speecon de l’espagnol (voir ELRA-S0160)Les environnements acoustiques extraits de cette base correspondent aux environnements « voiture », « bureau » et « pièce à vivre ». L’environnement « bureau » est principalement calme, légèrement altéré par des bruits de petit matériel de bureau et des bruits « blancs » tels que les ventilateurs d’ordinateurs ou le matériel d’air conditionné. Cependant, pour certains bureaux, les enregistrements contiennent également des voix de fond.  Les enregistrements en « pièce à vivre » (environnement « divertissement ») contiennent une plus large gamme de bruits, moins de bruits de petit matériel, et plus de bruits colorés qu’en bureau. Dans quelques occurrences, la radio ou la télé est allumée ; par conséquent, des voix, ainsi que de la musique, peuvent être trouvés dans les enregistrements. Des réverbérations sont principalement présentes dans les environnements « bureau » et « divertissement ». La base de données Speecon a été enregistrée à une fréquence d’échantillonnage de 16 kHz et à une quantisation de 16-bit linéaire. Les enregistrements de 60 locuteurs ont été sélectionnés à partir de cette base de données (30 hommes et 30 femmes, de 19 à 79 ans). Afin de construire manuellement la base de référence avec des mesures de la fréquence fondamentale dans des conditions de bruits peu élevés et sans réverbération, les enregistrements au micro-casque ont été sélectionnés avec un total d’une minute par locuteur. Ainsi, la base de référence comprend 60 minutes de signal de parole avec des mesures de la fréquence fondamentale. Dans un premier temps, les 60 minutes de signal de parole au micro-casque ont été automatiquement marquées au niveau de la fréquence fondamentale (instant de fermeture glottique). Puis, dans un deuxième temps, une vérification manuelle précise et une correction des mesures de la fréquence fondamentale ont été réalisées pour obtenir la base de référence. Chaque session est composée de 17 occurrences:•	1 séquence de chiffres isolés•	1 montant en monnaie•	10 phrases phonétiquement riches•	5 mots isolés phonétiquement richesLes classes d'âge sont réparties comme suit : 40 locuteurs ont entre 15 et 30 ans, 11 entre 31 et 45, 8 entre 46 et 60, et 1 a plus de 60 ans.</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=872</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-S0218</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>2000.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>900.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>300.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>150.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <availabilityStartDate>2006-06-21</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Valérie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <lastDateUpdated>2006-06-21</lastDateUpdated>
+   </versionInfo>
+   <resourceCreationInfo>
+      <fundingProject>
+         <projectName>Speecon</projectName>
+         <fundingType>euFunds</fundingType>
+      </fundingProject>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusAudioInfo>
+               <mediaType>audio</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>spa</languageId>
+                  <languageName>Spanish</languageName>
+                  <languageVarietyInfo>
+                     <languageVarietyType>dialect</languageVarietyType>
+                     <languageVarietyName>Castilian</languageVarietyName>
+                     <sizePerLanguageVariety>
+                        <size>2</size>
+                        <sizeUnit>gb</sizeUnit>
+                     </sizePerLanguageVariety>
+                  </languageVarietyInfo>
+               </languageInfo>
+               <audioSizeInfo>
+                  <sizeInfo>
+                     <size>no size available</size>
+                     <sizeUnit>other</sizeUnit>
+                  </sizeInfo>
+               </audioSizeInfo>
+            </corpusAudioInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

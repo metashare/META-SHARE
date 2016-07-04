@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+      <identificationInfo>
+        <resourceName lang="en">Greeklish Database from actual users</resourceName>
+        <description lang="en">Database of Greeklish words from real life users. Greeklish words and their automatically generated transcriptions in Greek.</description>
+          <metaShareId>
+            NOT_DEFINED_FOR_V2
+          </metaShareId>
+      </identificationInfo>
+      <distributionInfo>
+        <availability>available-restrictedUse</availability>
+          <licenceInfo>
+            <licence>proprietary</licence>
+          </licenceInfo>
+      </distributionInfo>
+      <contactPerson>
+        <surname lang="en">Raptis</surname>
+        <givenName lang="en">Spyros</givenName>
+        <sex>male</sex>
+          <communicationInfo>
+            <email>spy@ilsp.athena-innovation.gr</email>
+            <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=53&amp;Itemid=156</url>
+            <telephoneNumber>+302106875407</telephoneNumber>
+            <faxNumber>+302106854270</faxNumber>
+          </communicationInfo>
+        <position>Principal Researcher</position>
+          <affiliation>
+            <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+            <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+              <communicationInfo>
+                <email>www@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/</url>
+                <address>Artemidos 6 &amp; Epidavrou</address>
+                <zipCode>GR-15125</zipCode>
+                <city>Maroussi</city>
+                <country>GR</country>
+                <telephoneNumber>+302106875300</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+                <faxNumber>+302106856794</faxNumber>
+              </communicationInfo>
+          </affiliation>
+      </contactPerson>
+      <contactPerson>
+        <surname lang="en">Chalamandaris</surname>
+        <givenName lang="en">Aimilios</givenName>
+        <sex>male</sex>
+          <communicationInfo>
+            <email>achalam@ilsp.athena-innovation.gr</email>
+            <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=69&amp;Itemid=156</url>
+            <telephoneNumber>+302106875406</telephoneNumber>
+            <faxNumber>+302106854270</faxNumber>
+          </communicationInfo>
+        <position>Scientific Associate</position>
+          <affiliation>
+            <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+            <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+              <communicationInfo>
+                <email>www@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/</url>
+                <address>Artemidos 6 &amp; Epidavrou</address>
+                <zipCode>GR-15125</zipCode>
+                <city>Maroussi</city>
+                <country>GR</country>
+                <telephoneNumber>+302106875300</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+                <faxNumber>+302106856794</faxNumber>
+              </communicationInfo>
+          </affiliation>
+      </contactPerson>
+      <metadataInfo>
+        <metadataCreationDate>2012-02-02</metadataCreationDate>
+          <metadataCreator>
+            <surname lang="en">Desipri</surname>
+            <givenName lang="en">Elina</givenName>
+            <sex>female</sex>
+              <communicationInfo>
+                <email>elina@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=23&amp;Itemid=156</url>
+                <telephoneNumber>+302106875442</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+                <faxNumber>+302106856794</faxNumber>
+              </communicationInfo>
+            <position>Scientific Associate</position>
+              <affiliation>
+                <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                  <communicationInfo>
+                    <email>www@ilsp.athena-innovation.gr</email>
+                    <url>http://www.ilsp.gr/</url>
+                    <address>Artemidos 6 &amp; Epidavrou</address>
+                    <zipCode>GR-15125</zipCode>
+                    <city>Maroussi</city>
+                    <country>GR</country>
+                    <telephoneNumber>+302106875300</telephoneNumber>
+                    <faxNumber>+302106854270</faxNumber>
+                    <faxNumber>+302106856794</faxNumber>
+                  </communicationInfo>
+              </affiliation>
+          </metadataCreator>
+        <source>META-SHARE/ILSP</source>
+        <metadataLastDateUpdated>2012-06-14</metadataLastDateUpdated>
+      </metadataInfo>
+      <versionInfo>
+        <version>1</version>
+        <lastDateUpdated>2010-12-31</lastDateUpdated>
+      </versionInfo>
+      <validationInfo>
+        <validated>false</validated>
+      </validationInfo>
+      <usageInfo>
+          <foreseenUseInfo>
+            <foreseenUse>nlpApplications</foreseenUse>
+            <useNLPSpecific>texToSpeechSynthesis</useNLPSpecific>
+          </foreseenUseInfo>
+          <actualUseInfo>
+            <actualUse>nlpApplications</actualUse>
+            <useNLPSpecific>texToSpeechSynthesis</useNLPSpecific>
+              <usageReport>
+                  <documentInfo>
+                    <documentType>inProceedings</documentType>
+                    <title lang="en">All Greek to me! An automatic Greeklish to Greek Transliteration System</title>
+                    <author>Χαλαμανδάρης, Α., Πρωτόπαπας, Α., Τσιάκουλης, Π. &amp; Ράπτης, Σ.</author>
+                    <year>2006</year>
+                    <conference>Language Resources and Evaluation Conference (LREC-2006)</conference>
+                  </documentInfo>
+              </usageReport>
+          </actualUseInfo>
+          <actualUseInfo>
+            <actualUse>nlpApplications</actualUse>
+              <usageReport>
+                  <documentInfo>
+                    <documentType>inProceedings</documentType>
+                    <title lang="en">All Greek to me! An automatic Greeklish to Greek Transliteration System</title>
+                    <author>Χαλαμανδάρης, Α., Πρωτόπαπας, Α., Τσιάκουλης, Π. &amp; Ράπτης, Σ.</author>
+                    <year>2006</year>
+                    <conference>Language Resources and Evaluation Conference (LREC-2006)</conference>
+                  </documentInfo>
+              </usageReport>
+              <derivedResource>
+                <targetResourceNameURI>speech.ilsp.gr/greeklish/</targetResourceNameURI>
+              </derivedResource>
+          </actualUseInfo>
+      </usageInfo>
+      <resourceCreationInfo>
+          <resourceCreator>
+              <organizationInfo>
+                <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                  <communicationInfo>
+                    <email>www@ilsp.athena-innovation.gr</email>
+                    <url>http://www.ilsp.gr/</url>
+                    <address>Artemidos 6 &amp; Epidavrou</address>
+                    <zipCode>GR-15125</zipCode>
+                    <city>Maroussi</city>
+                    <country>GR</country>
+                    <telephoneNumber>+302106875300</telephoneNumber>
+                    <faxNumber>+302106854270</faxNumber>
+                    <faxNumber>+302106856794</faxNumber>
+                  </communicationInfo>
+              </organizationInfo>
+          </resourceCreator>
+          <fundingProject>
+            <projectName lang="en">Greeklish to Greek transliteration</projectName>
+            <fundingType>nationalFunds</fundingType>
+            <funder>Information Society Programme</funder>
+            <fundingCountry>Greece</fundingCountry>
+          </fundingProject>
+      </resourceCreationInfo>
+      <resourceComponentType>
+          <corpusInfo>
+            <resourceType>corpus</resourceType>
+              <corpusMediaType>
+                  <corpusTextInfo>
+                    <mediaType>text</mediaType>
+                      <lingualityInfo>
+                        <lingualityType>monolingual</lingualityType>
+                      </lingualityInfo>
+                      <languageInfo>
+                        <languageId>el</languageId>
+                        <languageName>Modern Greek (1453-)</languageName>
+                      </languageInfo>
+                      <modalityInfo>
+                        <modalityType>writtenLanguage</modalityType>
+                      </modalityInfo>
+                      <sizeInfo>
+                        <size>40000000</size>
+                        <sizeUnit>words</sizeUnit>
+                      </sizeInfo>
+                      <textFormatInfo>
+                        <mimeType>txt/plain</mimeType>
+                      </textFormatInfo>
+                      <characterEncodingInfo>
+                        <characterEncoding>windows-1254</characterEncoding>
+                      </characterEncodingInfo>
+                      <domainInfo>
+                        <domain>general</domain>
+                      </domainInfo>
+                      <timeCoverageInfo>
+                        <timeCoverage>2004-2009</timeCoverage>
+                      </timeCoverageInfo>
+                      <creationInfo>
+                          <originalSource>
+                            <targetResourceNameURI>speech.ilsp.gr/greeklish/</targetResourceNameURI>
+                          </originalSource>
+                        <creationMode>mixed</creationMode>
+                          <creationTool>
+                            <targetResourceNameURI>speech.ilsp.gr/greeklish/</targetResourceNameURI>
+                          </creationTool>
+                      </creationInfo>
+                  </corpusTextInfo>
+              </corpusMediaType>
+          </corpusInfo>
+      </resourceComponentType>
+  </resourceInfo>

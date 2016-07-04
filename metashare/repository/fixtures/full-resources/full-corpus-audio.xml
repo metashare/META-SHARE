@@ -1,0 +1,1359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.meta-share.org/META-SHARE_XMLSchema http://www.meta-share.org/META-SHARE_XMLSchema/v3.1/META-SHARE-Resource.xsd">
+	<identificationInfo>
+		<resourceName lang="el">DBSC</resourceName>
+		<resourceName lang="en">full-corpus-audio</resourceName>
+		<description lang="en">Database of recordings of Bulgarian language annotated in phoneme level. Manual validation.</description>
+		<description lang="bg">DBSCd</description>
+		<resourceShortName lang="el">ΜΙΚΡΗ</resourceShortName>
+		<resourceShortName lang="en">SHORT</resourceShortName>
+		<url>http://www.aueb.gr</url>
+		<url>http://www.google.com</url>
+		<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+		<identifier>1002</identifier>
+		<identifier>1003</identifier>
+	</identificationInfo>
+	<distributionInfo>
+		<availability>available</availability>
+		<licenceInfo>
+			<licence>CC-BY</licence>
+			<version>4.0</version>
+			<restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+			<restrictionsOfUse>commercialUse</restrictionsOfUse>
+			<restrictionsOfUse>evaluationUse</restrictionsOfUse>
+		</licenceInfo>
+		<licenceInfo>
+			<licence>AGPL</licence>
+		</licenceInfo>
+		<licenceInfo>
+			<licence>ApacheLicence_2.0</licence>
+		</licenceInfo>
+		<licenceInfo>
+			<licence>CC-BY</licence>
+		</licenceInfo>
+		<licenceInfo>
+			<licence>CC-BY-NC</licence>
+		</licenceInfo>
+		<licenceInfo>
+			<licence>CC-BY-NC-ND</licence>
+			<restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+			<restrictionsOfUse>attribution</restrictionsOfUse>
+			<restrictionsOfUse>commercialUse</restrictionsOfUse>
+			<restrictionsOfUse>evaluationUse</restrictionsOfUse>
+			<restrictionsOfUse>informLicensor</restrictionsOfUse>
+			<restrictionsOfUse>noDerivatives</restrictionsOfUse>
+			<restrictionsOfUse>noRedistribution</restrictionsOfUse>
+			<restrictionsOfUse>other</restrictionsOfUse>
+			<restrictionsOfUse>other</restrictionsOfUse>
+			<restrictionsOfUse>redeposit</restrictionsOfUse>
+			<restrictionsOfUse>shareAlike</restrictionsOfUse>
+		</licenceInfo>
+		<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+		<distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
+		<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+		<distributionAccessMedium>DVD-R</distributionAccessMedium>
+		<distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
+		<distributionAccessMedium>bluRay</distributionAccessMedium>
+		<distributionAccessMedium>downloadable</distributionAccessMedium>
+		<distributionAccessMedium>hardDisk</distributionAccessMedium>
+		<distributionAccessMedium>other</distributionAccessMedium>
+		<distributionAccessMedium>paperCopy</distributionAccessMedium>
+		<distributionAccessMedium>webExecutable</distributionAccessMedium>
+		<downloadLocation>http://www.aueb.gr</downloadLocation>
+		<downloadLocation>http://www.yahoo.gr</downloadLocation>
+		<executionLocation>http://www.execute.gr</executionLocation>
+		<executionLocation>http://www.execute.com</executionLocation>
+		<attributionText lang="en">afgsdfg</attributionText>
+		<fee>500000 euro</fee>
+		<licensor>
+			<personInfo>
+				<surname lang="en">Gavrilidou</surname>
+				<givenName lang="en">Maria</givenName>
+				<sex>female</sex>
+				<communicationInfo>
+					<email>maria@ilsp.athena-innovation.gr</email>
+					<url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=15&amp;Itemid=156</url>
+					<address>Artemidos 6</address>
+					<zipCode>GR-151 25</zipCode>
+					<city>Maroussi</city>
+					<country>Greece</country>
+					<countryId>GR</countryId>
+					<telephoneNumber>+302106875441</telephoneNumber>
+					<faxNumber>+302106854270</faxNumber>
+				</communicationInfo>
+				<position>Senior Research Fellow</position>
+				<affiliation>
+					<organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+					<organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+					<communicationInfo>
+						<email>www@ilsp.athena-innovation.gr</email>
+						<url>http://www.ilsp.gr/</url>
+						<address>Artemidos 6 &amp; Epidavrou</address>
+						<zipCode>GR-15125</zipCode>
+						<city>Maroussi</city>
+						<country>Greece</country>
+						<countryId>GR</countryId>
+						<telephoneNumber>+302106875300</telephoneNumber>
+						<faxNumber>+302106854270</faxNumber>
+						<faxNumber>+302106856794</faxNumber>
+					</communicationInfo>
+				</affiliation>
+			</personInfo>
+		</licensor>
+		<licensor>
+			<organizationInfo>
+				<organizationName lang="en">OrgTest</organizationName>
+				<communicationInfo>
+					<email>orgtest@test.gr</email>
+					<url>http://www.org.gr</url>
+				</communicationInfo>
+			</organizationInfo>
+		</licensor>
+		<distributionRightsHolder>
+			<personInfo>
+				<surname lang="en">Yannoutsou</surname>
+				<givenName lang="en">Olga</givenName>
+				<sex>female</sex>
+				<communicationInfo>
+					<email>olga@ilsp.athena-innovation.gr</email>
+					<url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=18&amp;Itemid=171</url>
+					<telephoneNumber>+302106875322</telephoneNumber>
+					<faxNumber>+302106854270</faxNumber>
+				</communicationInfo>
+				<position>Scientific Associate</position>
+				<affiliation>
+					<organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+					<organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+					<communicationInfo>
+						<email>www@ilsp.athena-innovation.gr</email>
+						<url>http://www.ilsp.gr/</url>
+						<address>Artemidos 6 &amp; Epidavrou</address>
+						<zipCode>GR-15125</zipCode>
+						<city>Maroussi</city>
+						<country>Greece</country>
+						<countryId>GR</countryId>
+						<telephoneNumber>+302106875300</telephoneNumber>
+						<faxNumber>+302106854270</faxNumber>
+						<faxNumber>+302106856794</faxNumber>
+					</communicationInfo>
+				</affiliation>
+			</personInfo>
+		</distributionRightsHolder>
+		<distributionRightsHolder>
+			<organizationInfo>
+				<organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+				<organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+				<communicationInfo>
+					<email>www@ilsp.athena-innovation.gr</email>
+					<url>http://www.ilsp.gr/</url>
+					<address>Artemidos 6 &amp; Epidavrou</address>
+					<zipCode>GR-15125</zipCode>
+					<city>Maroussi</city>
+					<country>Greece</country>
+					<countryId>GR</countryId>
+					<telephoneNumber>+302106875300</telephoneNumber>
+					<faxNumber>+302106854270</faxNumber>
+					<faxNumber>+302106856794</faxNumber>
+				</communicationInfo>
+			</organizationInfo>
+		</distributionRightsHolder>
+		<iprHolder>
+			<personInfo>
+				<surname lang="en">Desipri</surname>
+				<givenName lang="en">Elina</givenName>
+				<sex>female</sex>
+				<communicationInfo>
+					<email>elina@ilsp.athena-innovation.gr</email>
+					<url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=23&amp;Itemid=156</url>
+					<telephoneNumber>+302106875442</telephoneNumber>
+					<faxNumber>+302106854270</faxNumber>
+					<faxNumber>+302106856794</faxNumber>
+				</communicationInfo>
+				<position>Scientific Associate</position>
+				<affiliation>
+					<organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+					<organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+					<communicationInfo>
+						<email>www@ilsp.athena-innovation.gr</email>
+						<url>http://www.ilsp.gr/</url>
+						<address>Artemidos 6 &amp; Epidavrou</address>
+						<zipCode>GR-15125</zipCode>
+						<city>Maroussi</city>
+						<country>Greece</country>
+						<countryId>GR</countryId>
+						<telephoneNumber>+302106875300</telephoneNumber>
+						<faxNumber>+302106854270</faxNumber>
+						<faxNumber>+302106856794</faxNumber>
+					</communicationInfo>
+				</affiliation>
+			</personInfo>
+		</iprHolder>
+		<iprHolder>
+			<personInfo>
+				<surname lang="en">Chalamandaris</surname>
+				<givenName lang="en">Aimilios</givenName>
+				<sex>male</sex>
+				<communicationInfo>
+					<email>achalam@ilsp.athena-innovation.gr</email>
+					<url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=69&amp;Itemid=156</url>
+					<telephoneNumber>+302106875406</telephoneNumber>
+					<faxNumber>+302106854270</faxNumber>
+				</communicationInfo>
+				<position>Scientific Associate</position>
+				<affiliation>
+					<organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+					<organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+					<communicationInfo>
+						<email>www@ilsp.athena-innovation.gr</email>
+						<url>http://www.ilsp.gr/</url>
+						<address>Artemidos 6 &amp; Epidavrou</address>
+						<zipCode>GR-15125</zipCode>
+						<city>Maroussi</city>
+						<country>Greece</country>
+						<countryId>GR</countryId>
+						<telephoneNumber>+302106875300</telephoneNumber>
+						<faxNumber>+302106854270</faxNumber>
+						<faxNumber>+302106856794</faxNumber>
+					</communicationInfo>
+				</affiliation>
+			</personInfo>
+		</iprHolder>
+		<iprHolder>
+			<organizationInfo>
+				<organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+				<organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+				<communicationInfo>
+					<email>www@ilsp.athena-innovation.gr</email>
+					<url>http://www.ilsp.gr/</url>
+					<address>Artemidos 6 &amp; Epidavrou</address>
+					<zipCode>GR-15125</zipCode>
+					<city>Maroussi</city>
+					<country>Greece</country>
+					<countryId>GR</countryId>
+					<telephoneNumber>+302106875300</telephoneNumber>
+					<faxNumber>+302106854270</faxNumber>
+					<faxNumber>+302106856794</faxNumber>
+				</communicationInfo>
+			</organizationInfo>
+		</iprHolder>
+		<userNature>academic</userNature>
+		<userNature>commercial</userNature>
+		<availabilityEndDate>2012-09-27</availabilityEndDate>
+		<availabilityStartDate>2012-09-27</availabilityStartDate>
+	</distributionInfo>
+	<contactPerson>
+		<surname lang="en">Raptis</surname>
+		<givenName lang="en">Spyros</givenName>
+		<sex>male</sex>
+		<communicationInfo>
+			<email>spy@ilsp.athena-innovation.gr</email>
+			<url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=53&amp;Itemid=156</url>
+			<telephoneNumber>+302106875407</telephoneNumber>
+			<faxNumber>+302106854270</faxNumber>
+		</communicationInfo>
+		<position>Principal Researcher</position>
+		<affiliation>
+			<organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+			<organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+			<communicationInfo>
+				<email>www@ilsp.athena-innovation.gr</email>
+				<url>http://www.ilsp.gr/</url>
+				<address>Artemidos 6 &amp; Epidavrou</address>
+				<zipCode>GR-15125</zipCode>
+				<city>Maroussi</city>
+				<country>Greece</country>
+				<countryId>GR</countryId>
+				<telephoneNumber>+302106875300</telephoneNumber>
+				<faxNumber>+302106854270</faxNumber>
+				<faxNumber>+302106856794</faxNumber>
+			</communicationInfo>
+		</affiliation>
+	</contactPerson>
+	<contactPerson>
+		<surname lang="en">Chalamandaris</surname>
+		<givenName lang="en">Aimilios</givenName>
+		<sex>male</sex>
+		<communicationInfo>
+			<email>achalam@ilsp.athena-innovation.gr</email>
+			<url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=69&amp;Itemid=156</url>
+			<telephoneNumber>+302106875406</telephoneNumber>
+			<faxNumber>+302106854270</faxNumber>
+		</communicationInfo>
+		<position>Scientific Associate</position>
+		<affiliation>
+			<organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+			<organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+			<communicationInfo>
+				<email>www@ilsp.athena-innovation.gr</email>
+				<url>http://www.ilsp.gr/</url>
+				<address>Artemidos 6 &amp; Epidavrou</address>
+				<zipCode>GR-15125</zipCode>
+				<city>Maroussi</city>
+				<country>Greece</country>
+				<countryId>GR</countryId>
+				<telephoneNumber>+302106875300</telephoneNumber>
+				<faxNumber>+302106854270</faxNumber>
+				<faxNumber>+302106856794</faxNumber>
+			</communicationInfo>
+		</affiliation>
+	</contactPerson>
+	<metadataInfo>
+		<metadataCreationDate>2012-05-16</metadataCreationDate>
+		<metadataCreator>
+			<surname lang="en">Desipri</surname>
+			<givenName lang="en">Elina</givenName>
+			<sex>female</sex>
+			<communicationInfo>
+				<email>elina@ilsp.athena-innovation.gr</email>
+				<url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=23&amp;Itemid=156</url>
+				<telephoneNumber>+302106875442</telephoneNumber>
+				<faxNumber>+302106854270</faxNumber>
+				<faxNumber>+302106856794</faxNumber>
+			</communicationInfo>
+			<position>Scientific Associate</position>
+			<affiliation>
+				<organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+				<organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+				<communicationInfo>
+					<email>www@ilsp.athena-innovation.gr</email>
+					<url>http://www.ilsp.gr/</url>
+					<address>Artemidos 6 &amp; Epidavrou</address>
+					<zipCode>GR-15125</zipCode>
+					<city>Maroussi</city>
+					<country>Greece</country>
+					<countryId>GR</countryId>
+					<telephoneNumber>+302106875300</telephoneNumber>
+					<faxNumber>+302106854270</faxNumber>
+					<faxNumber>+302106856794</faxNumber>
+				</communicationInfo>
+			</affiliation>
+		</metadataCreator>
+		<metadataCreator>
+			<surname lang="en">Labropoulou</surname>
+			<givenName lang="en">Penny</givenName>
+			<sex>female</sex>
+			<communicationInfo>
+				<email>penny@ilsp.athena-innovation.gr</email>
+				<url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=37&amp;Itemid=171</url>
+				<telephoneNumber>+302106875445</telephoneNumber>
+				<faxNumber>+302106854270</faxNumber>
+			</communicationInfo>
+			<position>Senior Research Fellow</position>
+			<affiliation>
+				<organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+				<organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+				<communicationInfo>
+					<email>www@ilsp.athena-innovation.gr</email>
+					<url>http://www.ilsp.gr/</url>
+					<address>Artemidos 6 &amp; Epidavrou</address>
+					<zipCode>GR-15125</zipCode>
+					<city>Maroussi</city>
+					<country>Greece</country>
+					<countryId>GR</countryId>
+					<telephoneNumber>+302106875300</telephoneNumber>
+					<faxNumber>+302106854270</faxNumber>
+					<faxNumber>+302106856794</faxNumber>
+				</communicationInfo>
+			</affiliation>
+		</metadataCreator>
+		<source>META-SHARE/ILSP</source>
+		<originalMetadataSchema>CLARIN</originalMetadataSchema>
+		<originalMetadataLink>http://www.meta-share.org</originalMetadataLink>
+		<metadataLanguageName>English</metadataLanguageName>
+		<metadataLanguageName>Bulgarian</metadataLanguageName>
+		<metadataLanguageId>en</metadataLanguageId>
+		<metadataLanguageId>bg</metadataLanguageId>
+		<metadataLastDateUpdated>2012-09-28</metadataLastDateUpdated>
+		<revision>5</revision>
+	</metadataInfo>
+	<versionInfo>
+		<version>1.3</version>
+		<revision>4555</revision>
+		<lastDateUpdated>2012-09-26</lastDateUpdated>
+		<updateFrequency>monthly</updateFrequency>
+	</versionInfo>
+	<validationInfo>
+		<validated>true</validated>
+		<validationType>content</validationType>
+		<validationMode>mixed</validationMode>
+		<validationExtent>full</validationExtent>
+		<validator>
+			<organizationInfo>
+				<organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+				<organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+				<communicationInfo>
+					<email>www@ilsp.athena-innovation.gr</email>
+					<url>http://www.ilsp.gr/</url>
+					<address>Artemidos 6 &amp; Epidavrou</address>
+					<zipCode>GR-15125</zipCode>
+					<city>Maroussi</city>
+					<country>Greece</country>
+					<countryId>GR</countryId>
+					<telephoneNumber>+302106875300</telephoneNumber>
+					<faxNumber>+302106854270</faxNumber>
+					<faxNumber>+302106856794</faxNumber>
+				</communicationInfo>
+			</organizationInfo>
+		</validator>
+	</validationInfo>
+	<usageInfo>
+		<accessTool>
+			<targetResourceNameURI>Europarliament Sessions in Greek Language</targetResourceNameURI>
+		</accessTool>
+		<accessTool>
+			<targetResourceNameURI>Greek Dependency Treebank</targetResourceNameURI>
+		</accessTool>
+		<resourceAssociatedWith>
+			<targetResourceNameURI>Taverna</targetResourceNameURI>
+		</resourceAssociatedWith>
+		<resourceAssociatedWith>
+			<targetResourceNameURI>Freeling</targetResourceNameURI>
+		</resourceAssociatedWith>
+		<foreseenUseInfo>
+			<foreseenUse>nlpApplications</foreseenUse>
+			<useNLPSpecific>discourseAnalysis</useNLPSpecific>
+			<useNLPSpecific>textToSpeechSynthesis</useNLPSpecific>
+		</foreseenUseInfo>
+		<foreseenUseInfo>
+			<foreseenUse>humanUse</foreseenUse>
+			<useNLPSpecific>annotation</useNLPSpecific>
+			<useNLPSpecific>contradictionDetection</useNLPSpecific>
+			<useNLPSpecific>derivationalMorphologicalAnalysis</useNLPSpecific>
+			<useNLPSpecific>documentClassification</useNLPSpecific>
+			<useNLPSpecific>eventExtraction</useNLPSpecific>
+		</foreseenUseInfo>
+		<actualUseInfo>
+			<actualUse>nlpApplications</actualUse>
+			<useNLPSpecific>annotation</useNLPSpecific>
+			<useNLPSpecific>avatarSynthesis</useNLPSpecific>
+			<useNLPSpecific>bilingualLexiconInduction</useNLPSpecific>
+			<useNLPSpecific>contradictionDetection</useNLPSpecific>
+			<useNLPSpecific>coreferenceResolution</useNLPSpecific>
+			<useNLPSpecific>derivationalMorphologicalAnalysis</useNLPSpecific>
+			<useNLPSpecific>discourseAnalysis</useNLPSpecific>
+			<useNLPSpecific>documentClassification</useNLPSpecific>
+			<useNLPSpecific>emotionGeneration</useNLPSpecific>
+			<useNLPSpecific>emotionRecognition</useNLPSpecific>
+			<useNLPSpecific>entityMentionRecognition</useNLPSpecific>
+			<useNLPSpecific>eventExtraction</useNLPSpecific>
+			<useNLPSpecific>expressionRecognition</useNLPSpecific>
+			<useNLPSpecific>faceRecognition</useNLPSpecific>
+			<useNLPSpecific>faceVerification</useNLPSpecific>
+			<useNLPSpecific>humanoidAgentSynthesis</useNLPSpecific>
+			<useNLPSpecific>informationExtraction</useNLPSpecific>
+			<useNLPSpecific>informationRetrieval</useNLPSpecific>
+			<useNLPSpecific>intra-documentCoreferenceResolution</useNLPSpecific>
+			<useNLPSpecific>knowledgeDiscovery</useNLPSpecific>
+			<useNLPSpecific>knowledgeRepresentation</useNLPSpecific>
+			<useNLPSpecific>languageIdentification</useNLPSpecific>
+			<useNLPSpecific>languageModelling</useNLPSpecific>
+			<useNLPSpecific>languageModelsTraining</useNLPSpecific>
+			<useNLPSpecific>lemmatization</useNLPSpecific>
+			<useNLPSpecific>lexiconAccess</useNLPSpecific>
+			<useNLPSpecific>lexiconAcquisitionFromCorpora</useNLPSpecific>
+			<useNLPSpecific>lexiconEnhancement</useNLPSpecific>
+			<useNLPSpecific>lexiconExtractionFromLexica</useNLPSpecific>
+			<useNLPSpecific>lexiconFormatConversion</useNLPSpecific>
+			<useNLPSpecific>lexiconMerging</useNLPSpecific>
+			<useNLPSpecific>lexiconVisualization</useNLPSpecific>
+			<useNLPSpecific>linguisticResearch</useNLPSpecific>
+			<useNLPSpecific>lipTrackingAnalysis</useNLPSpecific>
+			<useNLPSpecific>machineTranslation</useNLPSpecific>
+			<useNLPSpecific>morphologicalAnalysis</useNLPSpecific>
+			<useNLPSpecific>morphosyntacticAnnotation-posTagging</useNLPSpecific>
+			<useNLPSpecific>multimediaDevelopment</useNLPSpecific>
+			<useNLPSpecific>multimediaDocumentProcessing</useNLPSpecific>
+			<useNLPSpecific>namedEntityRecognition</useNLPSpecific>
+			<useNLPSpecific>naturalLanguageGeneration</useNLPSpecific>
+			<useNLPSpecific>naturalLanguageUnderstanding</useNLPSpecific>
+			<useNLPSpecific>opinionMining</useNLPSpecific>
+			<useNLPSpecific>other</useNLPSpecific>
+			<useNLPSpecific>shallowParsing</useNLPSpecific>
+			<useNLPSpecific>personIdentification</useNLPSpecific>
+			<useNLPSpecific>personRecognition</useNLPSpecific>
+			<useNLPSpecific>persuasiveExpressionMining</useNLPSpecific>
+			<useNLPSpecific>other</useNLPSpecific>
+			<useNLPSpecific>qualitativeAnalysis</useNLPSpecific>
+			<useNLPSpecific>questionAnswering</useNLPSpecific>
+			<useNLPSpecific>readingAndWritingAidApplications</useNLPSpecific>
+			<useNLPSpecific>semanticRoleLabelling</useNLPSpecific>
+			<useNLPSpecific>semanticWeb</useNLPSpecific>
+			<useNLPSpecific>sentimentAnalysis</useNLPSpecific>
+			<useNLPSpecific>signLanguageGeneration</useNLPSpecific>
+			<useNLPSpecific>signLanguageRecognition</useNLPSpecific>
+			<useNLPSpecific>speakerIdentification</useNLPSpecific>
+			<useNLPSpecific>speakerVerification</useNLPSpecific>
+			<useNLPSpecific>speechAnalysis</useNLPSpecific>
+			<useNLPSpecific>speechAssistedVideoControl</useNLPSpecific>
+			<useNLPSpecific>speechLipsCorrelationAnalysis</useNLPSpecific>
+			<useNLPSpecific>speechRecognition</useNLPSpecific>
+			<useNLPSpecific>speechSynthesis</useNLPSpecific>
+			<useNLPSpecific>speechToSpeechTranslation</useNLPSpecific>
+			<useNLPSpecific>speechUnderstanding</useNLPSpecific>
+			<useNLPSpecific>speechVerification</useNLPSpecific>
+			<useNLPSpecific>spellChecking</useNLPSpecific>
+			<useNLPSpecific>spokenDialogueSystems</useNLPSpecific>
+			<useNLPSpecific>summarization</useNLPSpecific>
+			<useNLPSpecific>talkingHeadSynthesis</useNLPSpecific>
+			<useNLPSpecific>temporalExpressionRecognition</useNLPSpecific>
+			<useNLPSpecific>terminologyExtraction</useNLPSpecific>
+			<useNLPSpecific>textToSpeechSynthesis</useNLPSpecific>
+			<useNLPSpecific>textCategorisation</useNLPSpecific>
+			<useNLPSpecific>textGeneration</useNLPSpecific>
+			<useNLPSpecific>textMining</useNLPSpecific>
+			<useNLPSpecific>textualEntailment</useNLPSpecific>
+			<useNLPSpecific>topicDetection_Tracking</useNLPSpecific>
+			<useNLPSpecific>userAuthentication</useNLPSpecific>
+			<useNLPSpecific>visualSceneUnderstanding</useNLPSpecific>
+			<useNLPSpecific>voiceControl</useNLPSpecific>
+			<useNLPSpecific>tokenization</useNLPSpecific>
+			<useNLPSpecific>wordSenseDisambiguation</useNLPSpecific>
+			<usageReport>
+				<documentInfo>
+					<documentType>inProceedings</documentType>
+					<title lang="en">Language Technologies for Processing Greek textual Cultural Heritage data</title>
+					<author>Voula Giouli and E. Marzelou and Prokopis Prokopidis and M. Zourari</author>
+					<year>2009</year>
+					<bookTitle>Proceedings of the 9th International Conference on Greek Linguistics</bookTitle>
+					<conference>9th International Conference on Greek Linguistics</conference>
+				</documentInfo>
+			</usageReport>
+			<usageReport>
+				<documentInfo>
+					<documentType>inProceedings</documentType>
+					<title lang="en">Collection of comparable corpora for under-resourced languages</title>
+					<author>I. Skadina and A. Aker and Voula Giouli and D. Tufis et al</author>
+					<year>2010</year>
+					<bookTitle>Proceedings of the Fourth International Conference Baltic HLT 2010</bookTitle>
+					<pages>161-168</pages>
+					<conference>Fourth International Conference Baltic HLT 2010</conference>
+				</documentInfo>
+			</usageReport>
+			<derivedResource>
+				<targetResourceNameURI>web documents pertaining the politics, health, and travel domains</targetResourceNameURI>
+			</derivedResource>
+			<derivedResource>
+				<targetResourceNameURI>ILSP FBT POS tagger</targetResourceNameURI>
+			</derivedResource>
+			<usageProject>
+				<projectName lang="en">Integrated European language data Repository Area</projectName>
+				<projectShortName lang="en">INTERA</projectShortName>
+				<projectID>e-content EDC-22076 INTERA / 27924</projectID>
+				<url>http://www.elda.org/intera</url>
+				<fundingType>euFunds</fundingType>
+				<funder>eContent</funder>
+				<projectStartDate>2003-01-01</projectStartDate>
+				<projectEndDate>2004-12-31</projectEndDate>
+			</usageProject>
+			<usageProject>
+				<projectName lang="en">Retrieval of Video And Language for The Home user in an Information Society</projectName>
+				<projectShortName lang="en">REVEAL THIS</projectShortName>
+				<projectID>FP6-IST-511689</projectID>
+				<url>http://sifnos.ilsp.gr/RevealThis/</url>
+				<fundingType>euFunds</fundingType>
+				<funder>IST</funder>
+				<projectStartDate>2004-11-01</projectStartDate>
+				<projectEndDate>2007-04-20</projectEndDate>
+			</usageProject>
+			<actualUseDetails>vbvb</actualUseDetails>
+		</actualUseInfo>
+		<actualUseInfo>
+			<actualUse>humanUse</actualUse>
+			<useNLPSpecific>annotation</useNLPSpecific>
+			<useNLPSpecific>avatarSynthesis</useNLPSpecific>
+			<useNLPSpecific>bilingualLexiconInduction</useNLPSpecific>
+			<useNLPSpecific>contradictionDetection</useNLPSpecific>
+			<useNLPSpecific>coreferenceResolution</useNLPSpecific>
+			<useNLPSpecific>derivationalMorphologicalAnalysis</useNLPSpecific>
+			<useNLPSpecific>discourseAnalysis</useNLPSpecific>
+			<useNLPSpecific>documentClassification</useNLPSpecific>
+			<useNLPSpecific>emotionGeneration</useNLPSpecific>
+			<useNLPSpecific>emotionRecognition</useNLPSpecific>
+			<useNLPSpecific>entityMentionRecognition</useNLPSpecific>
+			<useNLPSpecific>eventExtraction</useNLPSpecific>
+			<useNLPSpecific>expressionRecognition</useNLPSpecific>
+			<useNLPSpecific>faceRecognition</useNLPSpecific>
+			<useNLPSpecific>faceVerification</useNLPSpecific>
+			<useNLPSpecific>humanoidAgentSynthesis</useNLPSpecific>
+			<useNLPSpecific>informationExtraction</useNLPSpecific>
+			<useNLPSpecific>informationRetrieval</useNLPSpecific>
+			<useNLPSpecific>intra-documentCoreferenceResolution</useNLPSpecific>
+			<useNLPSpecific>knowledgeDiscovery</useNLPSpecific>
+			<useNLPSpecific>knowledgeRepresentation</useNLPSpecific>
+			<useNLPSpecific>languageIdentification</useNLPSpecific>
+			<useNLPSpecific>languageModelling</useNLPSpecific>
+			<useNLPSpecific>languageModelsTraining</useNLPSpecific>
+			<useNLPSpecific>lemmatization</useNLPSpecific>
+			<useNLPSpecific>lexiconAccess</useNLPSpecific>
+			<useNLPSpecific>lexiconAcquisitionFromCorpora</useNLPSpecific>
+			<useNLPSpecific>lexiconEnhancement</useNLPSpecific>
+			<useNLPSpecific>lexiconExtractionFromLexica</useNLPSpecific>
+			<useNLPSpecific>lexiconFormatConversion</useNLPSpecific>
+			<useNLPSpecific>lexiconMerging</useNLPSpecific>
+			<useNLPSpecific>lexiconVisualization</useNLPSpecific>
+			<useNLPSpecific>linguisticResearch</useNLPSpecific>
+			<useNLPSpecific>lipTrackingAnalysis</useNLPSpecific>
+			<useNLPSpecific>machineTranslation</useNLPSpecific>
+			<useNLPSpecific>morphologicalAnalysis</useNLPSpecific>
+			<useNLPSpecific>morphologicalAnalysis</useNLPSpecific>
+			<useNLPSpecific>multimediaDevelopment</useNLPSpecific>
+			<useNLPSpecific>multimediaDocumentProcessing</useNLPSpecific>
+			<useNLPSpecific>namedEntityRecognition</useNLPSpecific>
+			<useNLPSpecific>naturalLanguageGeneration</useNLPSpecific>
+			<useNLPSpecific>naturalLanguageUnderstanding</useNLPSpecific>
+			<useNLPSpecific>opinionMining</useNLPSpecific>
+			<useNLPSpecific>other</useNLPSpecific>
+			<useNLPSpecific>shallowParsing</useNLPSpecific>
+			<useNLPSpecific>personIdentification</useNLPSpecific>
+			<useNLPSpecific>personRecognition</useNLPSpecific>
+			<useNLPSpecific>persuasiveExpressionMining</useNLPSpecific>
+			<useNLPSpecific>annotation</useNLPSpecific>
+			<useNLPSpecific>qualitativeAnalysis</useNLPSpecific>
+			<useNLPSpecific>questionAnswering</useNLPSpecific>
+			<useNLPSpecific>readingAndWritingAidApplications</useNLPSpecific>
+			<useNLPSpecific>semanticRoleLabelling</useNLPSpecific>
+			<useNLPSpecific>semanticWeb</useNLPSpecific>
+			<useNLPSpecific>sentimentAnalysis</useNLPSpecific>
+			<useNLPSpecific>signLanguageGeneration</useNLPSpecific>
+			<useNLPSpecific>signLanguageRecognition</useNLPSpecific>
+			<useNLPSpecific>speakerIdentification</useNLPSpecific>
+			<useNLPSpecific>speakerVerification</useNLPSpecific>
+			<useNLPSpecific>speechAnalysis</useNLPSpecific>
+			<useNLPSpecific>speechAssistedVideoControl</useNLPSpecific>
+			<useNLPSpecific>speechLipsCorrelationAnalysis</useNLPSpecific>
+			<useNLPSpecific>speechRecognition</useNLPSpecific>
+			<useNLPSpecific>speechSynthesis</useNLPSpecific>
+			<useNLPSpecific>speechToSpeechTranslation</useNLPSpecific>
+			<useNLPSpecific>speechUnderstanding</useNLPSpecific>
+			<useNLPSpecific>speechVerification</useNLPSpecific>
+			<useNLPSpecific>spellChecking</useNLPSpecific>
+			<useNLPSpecific>spokenDialogueSystems</useNLPSpecific>
+			<useNLPSpecific>tokenization</useNLPSpecific>
+			<useNLPSpecific>talkingHeadSynthesis</useNLPSpecific>
+			<useNLPSpecific>temporalExpressionRecognition</useNLPSpecific>
+			<useNLPSpecific>terminologyExtraction</useNLPSpecific>
+			<useNLPSpecific>textToSpeechSynthesis</useNLPSpecific>
+			<useNLPSpecific>textCategorisation</useNLPSpecific>
+			<useNLPSpecific>textGeneration</useNLPSpecific>
+			<useNLPSpecific>textMining</useNLPSpecific>
+			<useNLPSpecific>textualEntailment</useNLPSpecific>
+			<useNLPSpecific>topicDetection_Tracking</useNLPSpecific>
+			<useNLPSpecific>userAuthentication</useNLPSpecific>
+			<useNLPSpecific>visualSceneUnderstanding</useNLPSpecific>
+			<useNLPSpecific>voiceControl</useNLPSpecific>
+			<useNLPSpecific>other</useNLPSpecific>
+			<useNLPSpecific>wordSenseDisambiguation</useNLPSpecific>
+			<usageReport>
+				<documentInfo>
+					<documentType>inProceedings</documentType>
+					<title lang="und">Language resources production models: the case of INTERA multilingual corpus and terminology</title>
+					<author>Maria Gavrilidou and Penny Labropoulou and Stelios Piperidis et al</author>
+					<year>2006</year>
+					<bookTitle>Porceedings of the 5th International Conference on Language Resources and Evaluation (LREC-2006)</bookTitle>
+					<conference>5th International Conference on Language Resources and Evaluation (LREC-2006)</conference>
+				</documentInfo>
+			</usageReport>
+			<usageReport>
+				<documentInfo>
+					<documentType>inCollection</documentType>
+					<title lang="en">Non?verbal expressions of turn management in TV interviews: a cross?cultural study between Greek and Icelandic</title>
+					<author>Maria Koutsombogera and S.M. Ammendrup and H. Vilhjalmsson and Harris Papageorgiou</author>
+					<editor>Esposito, A.; Esposito, A.M.; Martone, R.; Muller, V.; Scarpetta, G.</editor>
+					<year>2011</year>
+					<publisher>Springer</publisher>
+					<bookTitle>Toward Autonomous, Adaptive, and Context-Aware Multimodal Interfaces. Theoretical and Practical Issues</bookTitle>
+					<pages>207-213</pages>
+					<doi>10.1007/978-3-642-18184-9_18</doi>
+					<url>http://www.springerlink.com/content/32657pj737401103/</url>
+					<ISBN>978-3-642-18183-2</ISBN>
+				</documentInfo>
+			</usageReport>
+			<derivedResource>
+				<targetResourceNameURI>textbooks from public schools</targetResourceNameURI>
+			</derivedResource>
+			<derivedResource>
+				<targetResourceNameURI>manually normalized transcripts of European parliamentary sessions</targetResourceNameURI>
+			</derivedResource>
+			<usageProject>
+				<projectName lang="und">Transfer and Adaptation of Text-to-Speech Technology to the Bulgarian Language and its Application in Cultural Tools with Emphasis on Accessibility</projectName>
+				<fundingType>euFunds</fundingType>
+				<funder>INTERREG IIIA / PHARE CBC GREECE – BULGARIA</funder>
+				<fundingCountry>Greece</fundingCountry>
+				<fundingCountryId>GR</fundingCountryId>
+				<projectStartDate>2005-10-01</projectStartDate>
+				<projectEndDate>2007-09-30</projectEndDate>
+			</usageProject>
+			<usageProject>
+				<projectName lang="en">Platform for Automatic, Normalized Annotation and Cost-Effective Acquisition of Language Resources for Human Language</projectName>
+				<projectShortName lang="en">PANACEA</projectShortName>
+				<projectID>ICT-248064</projectID>
+				<url>http://www.panacea-lr.eu</url>
+				<fundingType>euFunds</fundingType>
+				<funder>ICT</funder>
+				<projectStartDate>2010-01-01</projectStartDate>
+				<projectEndDate>2012-12-31</projectEndDate>
+			</usageProject>
+			<actualUseDetails>dddfsdfsfsfsfsfs</actualUseDetails>
+		</actualUseInfo>
+	</usageInfo>
+	<resourceDocumentationInfo>
+		<documentation>
+			<documentInfo>
+				<documentType>techReport</documentType>
+				<title lang="en">P-WP2.9-MEMO-ATH-1 - Greek Corpus Documentation</title>
+				<author>Maria Gavrilidou and Penny Labropoulou and Natassa Papakostopoulou and Sia Spiliotopoulou et al</author>
+				<year>1998</year>
+			</documentInfo>
+		</documentation>
+		<documentation>
+			<documentInfo>
+				<documentType>inProceedings</documentType>
+				<title lang="en">A web-enabled and speech-enhanced parallel corpus of Greek - Bulgarian cultural texts</title>
+				<author>Voula Giouli and Nick Glaros and K. Simov and P. Osenova</author>
+				<year>2009</year>
+				<bookTitle>Proceedings of the EACL 2009 Workshop on Language Technology and Resources for Cultural Heritage, Social Sciences, Humanities and Education - LaTeCH - SHELT&amp;R 2009</bookTitle>
+				<conference>EACL 2009 Workshop on Language Technology and Resources for Cultural Heritage, Social Sciences, Humanities and Education - LaTeCH - SHELT&amp;R 2009</conference>
+			</documentInfo>
+		</documentation>
+		<samplesLocation>http://www.yahoo.gr</samplesLocation>
+		<samplesLocation>http://www.google.com</samplesLocation>
+		<toolDocumentationType>helpFunctions</toolDocumentationType>
+		<toolDocumentationType>manual</toolDocumentationType>
+		<toolDocumentationType>none</toolDocumentationType>
+		<toolDocumentationType>online</toolDocumentationType>
+		<toolDocumentationType>other</toolDocumentationType>
+	</resourceDocumentationInfo>
+	<resourceCreationInfo>
+		<resourceCreator>
+			<personInfo>
+				<surname lang="en">Chalamandaris</surname>
+				<givenName lang="en">Aimilios</givenName>
+				<sex>male</sex>
+				<communicationInfo>
+					<email>achalam@ilsp.athena-innovation.gr</email>
+					<url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=69&amp;Itemid=156</url>
+					<telephoneNumber>+302106875406</telephoneNumber>
+					<faxNumber>+302106854270</faxNumber>
+				</communicationInfo>
+				<position>Scientific Associate</position>
+				<affiliation>
+					<organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+					<organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+					<communicationInfo>
+						<email>www@ilsp.athena-innovation.gr</email>
+						<url>http://www.ilsp.gr/</url>
+						<address>Artemidos 6 &amp; Epidavrou</address>
+						<zipCode>GR-15125</zipCode>
+						<city>Maroussi</city>
+						<country>Greece</country>
+						<countryId>GR</countryId>
+						<telephoneNumber>+302106875300</telephoneNumber>
+						<faxNumber>+302106854270</faxNumber>
+						<faxNumber>+302106856794</faxNumber>
+					</communicationInfo>
+				</affiliation>
+			</personInfo>
+		</resourceCreator>
+		<resourceCreator>
+			<organizationInfo>
+				<organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+				<organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+				<communicationInfo>
+					<email>www@ilsp.athena-innovation.gr</email>
+					<url>http://www.ilsp.gr/</url>
+					<address>Artemidos 6 &amp; Epidavrou</address>
+					<zipCode>GR-15125</zipCode>
+					<city>Maroussi</city>
+					<country>Greece</country>
+					<countryId>GR</countryId>
+					<telephoneNumber>+302106875300</telephoneNumber>
+					<faxNumber>+302106854270</faxNumber>
+					<faxNumber>+302106856794</faxNumber>
+				</communicationInfo>
+			</organizationInfo>
+		</resourceCreator>
+		<fundingProject>
+			<projectName lang="und">Transfer and Adaptation of Text-to-Speech Technology to the Bulgarian Language and its Application in Cultural Tools with Emphasis on Accessibility</projectName>
+			<fundingType>euFunds</fundingType>
+			<funder>INTERREG IIIA / PHARE CBC GREECE – BULGARIA</funder>
+			<fundingCountry>Greece</fundingCountry>
+			<fundingCountryId>GR</fundingCountryId>
+			<projectStartDate>2005-10-01</projectStartDate>
+			<projectEndDate>2007-09-30</projectEndDate>
+		</fundingProject>
+		<fundingProject>
+			<projectName lang="en">ACCURAT: Analysis and evaluation of Comparable Corpora for Under Resourced Areas of machine Translation</projectName>
+			<projectShortName lang="en">ACCURAT</projectShortName>
+			<projectID>FP7-ICT-248347</projectID>
+			<url>http://www.accurat-project.eu</url>
+			<fundingType>euFunds</fundingType>
+			<funder>FP7-ICT</funder>
+			<projectStartDate>2010-01-01</projectStartDate>
+			<projectEndDate>2012-06-30</projectEndDate>
+		</fundingProject>
+		<creationStartDate>2012-09-27</creationStartDate>
+		<creationEndDate>2012-09-27</creationEndDate>
+	</resourceCreationInfo>
+	<relationInfo>
+		<relationType>isSpokenVersionOf</relationType>
+		<relatedResource>
+			<targetResourceNameURI>Database of Bulgarian sentences</targetResourceNameURI>
+		</relatedResource>
+	</relationInfo>
+	<relationInfo>
+		<relationType>isTextVersionOf</relationType>
+		<relatedResource>
+			<targetResourceNameURI>EUDICO Linguistic Annotator (ELAN)</targetResourceNameURI>
+		</relatedResource>
+	</relationInfo>
+	<resourceComponentType>
+		<corpusInfo>
+			<resourceType>corpus</resourceType>
+			<corpusMediaType>
+				<corpusAudioInfo>
+					<mediaType>audio</mediaType>
+					<lingualityInfo>
+						<lingualityType>monolingual</lingualityType>
+						<multilingualityType>other</multilingualityType>
+						<multilingualityTypeDetails>monolingual other type detail</multilingualityTypeDetails>
+					</lingualityInfo>
+					<languageInfo>
+						<languageId>bg</languageId>
+						<languageName>Bulgarian</languageName>
+						<languageScript>Latin</languageScript>
+						<sizePerLanguage>
+							<size>45</size>
+							<sizeUnit>entries</sizeUnit>
+						</sizePerLanguage>
+						<languageVarietyInfo>
+							<languageVarietyType>dialect</languageVarietyType>
+							<languageVarietyName>bulgaratics</languageVarietyName>
+							<sizePerLanguageVariety>
+								<size>4567878787</size>
+								<sizeUnit>kb</sizeUnit>
+							</sizePerLanguageVariety>
+						</languageVarietyInfo>
+						<languageVarietyInfo>
+							<languageVarietyType>jargon</languageVarietyType>
+							<languageVarietyName>balgurian</languageVarietyName>
+							<sizePerLanguageVariety>
+								<size>5</size>
+								<sizeUnit>images</sizeUnit>
+							</sizePerLanguageVariety>
+						</languageVarietyInfo>
+					</languageInfo>
+					<languageInfo>
+						<languageId>enm</languageId>
+						<languageName>Old English (ca. 450-1100)</languageName>
+						<languageScript>Latin</languageScript>
+						<sizePerLanguage>
+							<size>4545</size>
+							<sizeUnit>frames</sizeUnit>
+						</sizePerLanguage>
+						<languageVarietyInfo>
+							<languageVarietyType>jargon</languageVarietyType>
+							<languageVarietyName>balgrian</languageVarietyName>
+							<sizePerLanguageVariety>
+								<size>09876543215678</size>
+								<sizeUnit>hours</sizeUnit>
+							</sizePerLanguageVariety>
+						</languageVarietyInfo>
+						<languageVarietyInfo>
+							<languageVarietyType>dialect</languageVarietyType>
+							<languageVarietyName>33</languageVarietyName>
+							<sizePerLanguageVariety>
+								<size>3434343</size>
+								<sizeUnit>bytes</sizeUnit>
+							</sizePerLanguageVariety>
+						</languageVarietyInfo>
+					</languageInfo>
+					<modalityInfo>
+						<modalityType>bodyGesture</modalityType>
+						<modalityType>combinationOfModalities</modalityType>
+						<modalityType>facialExpression</modalityType>
+						<modalityType>other</modalityType>
+						<modalityType>signLanguage</modalityType>
+						<modalityType>spokenLanguage</modalityType>
+						<modalityType>voice</modalityType>
+						<modalityType>writtenLanguage</modalityType>
+						<sizePerModality>
+							<size>2345</size>
+							<sizeUnit>diphones</sizeUnit>
+						</sizePerModality>
+					</modalityInfo>
+					<modalityInfo>
+						<modalityType>bodyGesture</modalityType>
+						<modalityType>combinationOfModalities</modalityType>
+						<modalityType>facialExpression</modalityType>
+						<modalityType>other</modalityType>
+						<modalityType>signLanguage</modalityType>
+						<modalityType>spokenLanguage</modalityType>
+						<modalityType>voice</modalityType>
+						<modalityType>writtenLanguage</modalityType>
+						<sizePerModality>
+							<size>666</size>
+							<sizeUnit>gb</sizeUnit>
+						</sizePerModality>
+					</modalityInfo>
+					<modalityInfo>
+						<modalityType>bodyGesture</modalityType>
+						<modalityType>combinationOfModalities</modalityType>
+						<modalityType>facialExpression</modalityType>
+						<modalityType>other</modalityType>
+						<modalityType>signLanguage</modalityType>
+						<modalityType>spokenLanguage</modalityType>
+						<modalityType>voice</modalityType>
+						<modalityType>writtenLanguage</modalityType>
+						<modalityTypeDetails>gsdfgv</modalityTypeDetails>
+						<sizePerModality>
+							<size>8893</size>
+							<sizeUnit>concepts</sizeUnit>
+						</sizePerModality>
+					</modalityInfo>
+					<modalityInfo>
+						<modalityType>combinationOfModalities</modalityType>
+						<modalityType>facialExpression</modalityType>
+						<sizePerModality>
+							<size>678995</size>
+							<sizeUnit>concepts</sizeUnit>
+						</sizePerModality>
+					</modalityInfo>
+					<modalityInfo>
+						<modalityType>combinationOfModalities</modalityType>
+						<modalityType>facialExpression</modalityType>
+						<modalityType>other</modalityType>
+					</modalityInfo>
+					<audioSizeInfo>
+						<sizeInfo>
+							<size>6</size>
+							<sizeUnit>hours</sizeUnit>
+						</sizeInfo>
+					</audioSizeInfo>
+					<audioSizeInfo>
+						<sizeInfo>
+							<size>15</size>
+							<sizeUnit>diphones</sizeUnit>
+						</sizeInfo>
+						<sizeInfo>
+							<size>27</size>
+							<sizeUnit>entries</sizeUnit>
+						</sizeInfo>
+						<durationOfEffectiveSpeechInfo>
+							<size>16</size>
+							<durationUnit>hours</durationUnit>
+						</durationOfEffectiveSpeechInfo>
+						<durationOfEffectiveSpeechInfo>
+							<size>5656</size>
+							<durationUnit>seconds</durationUnit>
+						</durationOfEffectiveSpeechInfo>
+						<durationOfAudioInfo>
+							<size>54735673456345</size>
+							<durationUnit>seconds</durationUnit>
+						</durationOfAudioInfo>
+						<durationOfAudioInfo>
+							<size>6777777777777777</size>
+							<durationUnit>minutes</durationUnit>
+						</durationOfAudioInfo>
+					</audioSizeInfo>
+					<audioContentInfo>
+						<speechItems>phoneticallyRichSentences</speechItems>
+						<speechItems>phoneticallyRichWords</speechItems>
+						<nonSpeechItems>commercial</nonSpeechItems>
+						<nonSpeechItems>noise</nonSpeechItems>
+						<textualDescription>blabla</textualDescription>
+						<noiseLevel>low</noiseLevel>
+					</audioContentInfo>
+					<settingInfo>
+						<naturality>prompted</naturality>
+						<conversationalType>monologue</conversationalType>
+						<scenarioType>pearStory</scenarioType>
+						<audience>no</audience>
+						<interactivity>nonInteractive</interactivity>
+					</settingInfo>
+					<audioFormatInfo>
+						<mimeType>audio/PCMA</mimeType>
+						<signalEncoding>ADPCM</signalEncoding>
+						<signalEncoding>linearPCM</signalEncoding>
+						<samplingRate>44100</samplingRate>
+						<quantization>16</quantization>
+						<byteOrder>littleEndian</byteOrder>
+						<signConvention>unsignedInteger</signConvention>
+						<compressionInfo>
+							<compression>true</compression>
+							<compressionName>avi</compressionName>
+							<compressionName>mpg</compressionName>
+							<compressionLoss>true</compressionLoss>
+						</compressionInfo>
+						<audioQualityMeasuresIncluded>clippingRate</audioQualityMeasuresIncluded>
+						<numberOfTracks>1</numberOfTracks>
+						<recordingQuality>veryHigh</recordingQuality>
+					</audioFormatInfo>
+					<audioFormatInfo>
+						<mimeType>audio/speex</mimeType>
+						<signalEncoding>ADPCM</signalEncoding>
+						<signalEncoding>aLaw</signalEncoding>
+						<signalEncoding>linearPCM</signalEncoding>
+						<signalEncoding>other</signalEncoding>
+						<signalEncoding>μ-law</signalEncoding>
+						<samplingRate>44100</samplingRate>
+						<quantization>64</quantization>
+						<byteOrder>bigEndian</byteOrder>
+						<signConvention>unsignedInteger</signConvention>
+						<compressionInfo>
+							<compression>true</compression>
+							<compressionName>aac</compressionName>
+							<compressionName>atrac</compressionName>
+							<compressionName>avi</compressionName>
+							<compressionName>flac</compressionName>
+							<compressionName>mov</compressionName>
+							<compressionName>mp3</compressionName>
+							<compressionName>mpeg</compressionName>
+							<compressionName>mpg</compressionName>
+							<compressionName>oggVorbis</compressionName>
+							<compressionName>other</compressionName>
+							<compressionName>realAudio</compressionName>
+							<compressionName>shorten</compressionName>
+							<compressionLoss>true</compressionLoss>
+						</compressionInfo>
+						<audioQualityMeasuresIncluded>crossTalk</audioQualityMeasuresIncluded>
+						<numberOfTracks>4</numberOfTracks>
+						<recordingQuality>veryHigh</recordingQuality>
+						<sizePerAudioFormat>
+							<size>600000000000000000000</size>
+							<sizeUnit>diphones</sizeUnit>
+						</sizePerAudioFormat>
+					</audioFormatInfo>
+					<annotationInfo>
+						<annotationType>speechAnnotation-speakerTurns</annotationType>
+						<annotatedElements>speakerNoise</annotatedElements>
+						<annotatedElements>truncation</annotatedElements>
+						<annotationStandoff>true</annotationStandoff>
+						<segmentationLevel>diphone</segmentationLevel>
+						<segmentationLevel>other</segmentationLevel>
+						<annotationFormat>format_annotation</annotationFormat>
+						<tagset>set_tag</tagset>
+						<tagsetLanguageId>en</tagsetLanguageId>
+						<tagsetLanguageName>English</tagsetLanguageName>
+						<conformanceToStandardsBestPractices>GMX</conformanceToStandardsBestPractices>
+						<conformanceToStandardsBestPractices>GrAF</conformanceToStandardsBestPractices>
+						<theoreticModel>asdf</theoreticModel>
+						<annotationManual>
+							<documentInfo>
+								<documentType>techReport</documentType>
+								<title lang="und">D5.2 - Report on the multilingual resources production</title>
+								<author>Maria Gavrilidou and Voula Giouli and Elina Desipri and Penny Labropoulou and Monica Monachini et al</author>
+								<year>2004</year>
+								<url>http://www.elda.org/article176.html</url>
+							</documentInfo>
+						</annotationManual>
+						<annotationMode>interactive</annotationMode>
+						<annotationModeDetails>asdf</annotationModeDetails>
+						<annotationTool>
+							<targetResourceNameURI>HNCedit</targetResourceNameURI>
+						</annotationTool>
+						<annotationTool>
+							<targetResourceNameURI>EUDICO Linguistic Annotator (ELAN)</targetResourceNameURI>
+						</annotationTool>
+						<annotationStartDate>2012-09-27</annotationStartDate>
+						<annotationEndDate>2012-09-27</annotationEndDate>
+						<sizePerAnnotation>
+							<size>5</size>
+							<sizeUnit>entries</sizeUnit>
+						</sizePerAnnotation>
+						<interannotatorAgreement>gfd</interannotatorAgreement>
+						<intraannotatorAgreement>gfd</intraannotatorAgreement>
+						<annotator>
+							<personInfo>
+								<surname lang="en">Desipri</surname>
+								<givenName lang="en">Elina</givenName>
+								<sex>female</sex>
+								<communicationInfo>
+									<email>elina@ilsp.athena-innovation.gr</email>
+									<url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=23&amp;Itemid=156</url>
+									<telephoneNumber>+302106875442</telephoneNumber>
+									<faxNumber>+302106854270</faxNumber>
+									<faxNumber>+302106856794</faxNumber>
+								</communicationInfo>
+								<position>Scientific Associate</position>
+								<affiliation>
+									<organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+									<organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+									<communicationInfo>
+										<email>www@ilsp.athena-innovation.gr</email>
+										<url>http://www.ilsp.gr/</url>
+										<address>Artemidos 6 &amp; Epidavrou</address>
+										<zipCode>GR-15125</zipCode>
+										<city>Maroussi</city>
+										<country>Greece</country>
+										<countryId>GR</countryId>
+										<telephoneNumber>+302106875300</telephoneNumber>
+										<faxNumber>+302106854270</faxNumber>
+										<faxNumber>+302106856794</faxNumber>
+									</communicationInfo>
+								</affiliation>
+							</personInfo>
+						</annotator>
+						<annotator>
+							<personInfo>
+								<surname lang="en">test</surname>
+								<sex>female</sex>
+								<communicationInfo>
+									<email>test@example.com</email>
+								</communicationInfo>
+								<affiliation>
+									<organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+									<organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+									<communicationInfo>
+										<email>www@ilsp.athena-innovation.gr</email>
+										<url>http://www.ilsp.gr/</url>
+										<address>Artemidos 6 &amp; Epidavrou</address>
+										<zipCode>GR-15125</zipCode>
+										<city>Maroussi</city>
+										<country>Greece</country>
+										<countryId>GR</countryId>
+										<telephoneNumber>+302106875300</telephoneNumber>
+										<faxNumber>+302106854270</faxNumber>
+										<faxNumber>+302106856794</faxNumber>
+									</communicationInfo>
+								</affiliation>
+							</personInfo>
+						</annotator>
+					</annotationInfo>
+					<annotationInfo>
+						<annotationType>discourseAnnotation</annotationType>
+					</annotationInfo>
+					<domainInfo>
+						<domain>general</domain>
+						<sizePerDomain>
+							<size>555555555555</size>
+							<sizeUnit>seconds</sizeUnit>
+						</sizePerDomain>
+						<conformanceToClassificationScheme>MeSH_classification</conformanceToClassificationScheme>
+					</domainInfo>
+					<domainInfo>
+						<domain>politics</domain>
+						<sizePerDomain>
+							<size>66666666666666666666</size>
+							<sizeUnit>images</sizeUnit>
+						</sizePerDomain>
+						<conformanceToClassificationScheme>other</conformanceToClassificationScheme>
+					</domainInfo>
+					<timeCoverageInfo>
+						<timeCoverage>1900-1950</timeCoverage>
+						<sizePerTimeCoverage>
+							<size>1</size>
+							<sizeUnit>kb</sizeUnit>
+						</sizePerTimeCoverage>
+					</timeCoverageInfo>
+					<timeCoverageInfo>
+						<timeCoverage>1950-1960</timeCoverage>
+						<sizePerTimeCoverage>
+							<size>45</size>
+							<sizeUnit>hours</sizeUnit>
+						</sizePerTimeCoverage>
+					</timeCoverageInfo>
+					<geographicCoverageInfo>
+						<geographicCoverage>Greece</geographicCoverage>
+						<sizePerGeographicCoverage>
+							<size>458</size>
+							<sizeUnit>5-grams</sizeUnit>
+						</sizePerGeographicCoverage>
+					</geographicCoverageInfo>
+					<geographicCoverageInfo>
+						<geographicCoverage>Holland</geographicCoverage>
+						<sizePerGeographicCoverage>
+							<size>545676</size>
+							<sizeUnit>images</sizeUnit>
+						</sizePerGeographicCoverage>
+					</geographicCoverageInfo>
+					<recordingInfo>
+						<recordingDeviceType>flash</recordingDeviceType>
+						<recordingDeviceType>hardDisk</recordingDeviceType>
+						<recordingDeviceTypeDetails>HDD</recordingDeviceTypeDetails>
+						<recordingPlatformSoftware>CUBASE</recordingPlatformSoftware>
+						<recordingPlatformSoftware>MYBASE</recordingPlatformSoftware>
+						<recordingEnvironment>anechoicChamber</recordingEnvironment>
+						<recordingEnvironment>closedPublicPlace</recordingEnvironment>
+						<recordingEnvironment>conferenceRoom</recordingEnvironment>
+						<recordingEnvironment>inCar</recordingEnvironment>
+						<recordingEnvironment>industrial</recordingEnvironment>
+						<recordingEnvironment>lectureRoom</recordingEnvironment>
+						<recordingEnvironment>office</recordingEnvironment>
+						<recordingEnvironment>openPublicPlace</recordingEnvironment>
+						<recordingEnvironment>other</recordingEnvironment>
+						<recordingEnvironment>studio</recordingEnvironment>
+						<recordingEnvironment>transport</recordingEnvironment>
+						<sourceChannel>EMA</sourceChannel>
+						<sourceChannel>airflow</sourceChannel>
+						<sourceChannel>camcorder</sourceChannel>
+						<sourceChannel>internet</sourceChannel>
+						<sourceChannel>laryngograph</sourceChannel>
+						<sourceChannel>other</sourceChannel>
+						<sourceChannel>radio</sourceChannel>
+						<sourceChannel>telephone</sourceChannel>
+						<sourceChannel>tv</sourceChannel>
+						<sourceChannel>webCam</sourceChannel>
+						<sourceChannelType>3G</sourceChannelType>
+						<sourceChannelType>CDMA</sourceChannelType>
+						<sourceChannelType>DVB-C</sourceChannelType>
+						<sourceChannelType>DVB-S</sourceChannelType>
+						<sourceChannelType>DVB-T</sourceChannelType>
+						<sourceChannelType>GSM</sourceChannelType>
+						<sourceChannelType>ISDN</sourceChannelType>
+						<sourceChannelType>VOIP</sourceChannelType>
+						<sourceChannelType>other</sourceChannelType>
+						<sourceChannelName>1</sourceChannelName>
+						<sourceChannelName>2</sourceChannelName>
+						<sourceChannelName>3</sourceChannelName>
+						<sourceChannelName>4</sourceChannelName>
+						<sourceChannelDetails>CHANNEL_SOURCE</sourceChannelDetails>
+						<recorder>
+							<personInfo>
+								<surname lang="en">Gavrilidou</surname>
+								<givenName lang="en">Maria</givenName>
+								<sex>female</sex>
+								<communicationInfo>
+									<email>maria@ilsp.athena-innovation.gr</email>
+									<url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=15&amp;Itemid=156</url>
+									<address>Artemidos 6</address>
+									<zipCode>GR-151 25</zipCode>
+									<city>Maroussi</city>
+									<country>Greece</country>
+									<countryId>GR</countryId>
+									<telephoneNumber>+302106875441</telephoneNumber>
+									<faxNumber>+302106854270</faxNumber>
+								</communicationInfo>
+								<position>Senior Research Fellow</position>
+								<affiliation>
+									<organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+									<organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+									<communicationInfo>
+										<email>www@ilsp.athena-innovation.gr</email>
+										<url>http://www.ilsp.gr/</url>
+										<address>Artemidos 6 &amp; Epidavrou</address>
+										<zipCode>GR-15125</zipCode>
+										<city>Maroussi</city>
+										<country>Greece</country>
+										<countryId>GR</countryId>
+										<telephoneNumber>+302106875300</telephoneNumber>
+										<faxNumber>+302106854270</faxNumber>
+										<faxNumber>+302106856794</faxNumber>
+									</communicationInfo>
+								</affiliation>
+							</personInfo>
+						</recorder>
+						<recorder>
+							<organizationInfo>
+								<organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+								<organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+								<communicationInfo>
+									<email>www@ilsp.athena-innovation.gr</email>
+									<url>http://www.ilsp.gr/</url>
+									<address>Artemidos 6 &amp; Epidavrou</address>
+									<zipCode>GR-15125</zipCode>
+									<city>Maroussi</city>
+									<country>Greece</country>
+									<countryId>GR</countryId>
+									<telephoneNumber>+302106875300</telephoneNumber>
+									<faxNumber>+302106854270</faxNumber>
+									<faxNumber>+302106856794</faxNumber>
+								</communicationInfo>
+							</organizationInfo>
+						</recorder>
+					</recordingInfo>
+					<captureInfo>
+						<capturingDeviceType>camera</capturingDeviceType>
+						<capturingDeviceType>closeTalkMicrophone</capturingDeviceType>
+						<capturingDeviceType>embeddedMicrophone</capturingDeviceType>
+						<capturingDeviceType>farfieldMicrophone</capturingDeviceType>
+						<capturingDeviceType>largeMembraneMicrophone</capturingDeviceType>
+						<capturingDeviceType>laryngograph</capturingDeviceType>
+						<capturingDeviceType>lavalierMicrophone</capturingDeviceType>
+						<capturingDeviceType>microphone</capturingDeviceType>
+						<capturingDeviceType>microphoneArray</capturingDeviceType>
+						<capturingDeviceType>other</capturingDeviceType>
+						<capturingDeviceType>studioEquipment</capturingDeviceType>
+						<capturingDeviceType>telephoneFixed</capturingDeviceType>
+						<capturingDeviceType>telephoneIP</capturingDeviceType>
+						<capturingDeviceType>telephoneMobile</capturingDeviceType>
+						<capturingDeviceType>webcam</capturingDeviceType>
+						<capturingDeviceTypeDetails>TYPE_DEVICE_DETAILS</capturingDeviceTypeDetails>
+						<capturingDetails>DETAILS_CAPTURING</capturingDetails>
+						<capturingEnvironment>complex</capturingEnvironment>
+						<sensorTechnology>monolithic</sensorTechnology>
+						<sensorTechnology>interconnected</sensorTechnology>
+						<sceneIllumination>singleSource</sceneIllumination>
+						<personSourceSetInfo>
+							<numberOfPersons>50</numberOfPersons>
+							<ageOfPersons>adult</ageOfPersons>
+							<ageOfPersons>child</ageOfPersons>
+							<ageRangeStart>10</ageRangeStart>
+							<ageRangeEnd>145</ageRangeEnd>
+							<sexOfPersons>male</sexOfPersons>
+							<originOfPersons>native</originOfPersons>
+							<dialectAccentOfPersons>bulgaratics</dialectAccentOfPersons>
+							<dialectAccentOfPersons>balgurians</dialectAccentOfPersons>
+							<geographicDistributionOfPersons>Bullgaria</geographicDistributionOfPersons>
+							<hearingImpairmentOfPersons>no</hearingImpairmentOfPersons>
+							<speakingImpairmentOfPersons>no</speakingImpairmentOfPersons>
+							<numberOfTrainedSpeakers>40</numberOfTrainedSpeakers>
+							<speechInfluences>alcohol</speechInfluences>
+							<speechInfluences>medication</speechInfluences>
+							<speechInfluences>other</speechInfluences>
+							<participantInfo>
+								<alias lang="el">jerry</alias>
+								<alias lang="en">mary</alias>
+								<ageGroup>elderly</ageGroup>
+								<age>45</age>
+								<sex>unknown</sex>
+								<origin>unknown</origin>
+								<placeOfLiving>sofia</placeOfLiving>
+								<placeOfBirth>sofia</placeOfBirth>
+								<placeOfChildhood>sofia</placeOfChildhood>
+								<dialectAccent lang="en">burgalics</dialectAccent>
+								<dialectAccent lang="bg">garbulics</dialectAccent>
+								<speakingImpairment>yes</speakingImpairment>
+								<hearingImpairment>yes</hearingImpairment>
+								<smokingHabits>asdf</smokingHabits>
+								<vocalTractConditions>dentalProsthesis</vocalTractConditions>
+								<profession>asdf</profession>
+								<height>45</height>
+								<weight>34</weight>
+								<trainedSpeaker>true</trainedSpeaker>
+								<placeOfSecondEducation>sofia</placeOfSecondEducation>
+								<educationLevel>undergad</educationLevel>
+							</participantInfo>
+							<participantInfo>
+								<alias lang="en">haris</alias>
+								<ageGroup>child</ageGroup>
+								<age>43</age>
+								<sex>female</sex>
+								<origin>native</origin>
+								<placeOfLiving>asdfg</placeOfLiving>
+								<placeOfBirth>oiuy</placeOfBirth>
+								<placeOfChildhood>hlk</placeOfChildhood>
+								<dialectAccent lang="en">gghh</dialectAccent>
+								<speakingImpairment>joij</speakingImpairment>
+								<hearingImpairment>;ji</hearingImpairment>
+								<smokingHabits>;oij</smokingHabits>
+								<vocalTractConditions>other</vocalTractConditions>
+								<profession>hlkjh</profession>
+								<height>578</height>
+								<weight>8798</weight>
+								<trainedSpeaker>false</trainedSpeaker>
+								<placeOfSecondEducation>lkjh</placeOfSecondEducation>
+								<educationLevel>hjkl</educationLevel>
+							</participantInfo>
+						</personSourceSetInfo>
+					</captureInfo>
+					<creationInfo>
+						<originalSource>
+							<targetResourceNameURI>Database of Bulgarian sentences</targetResourceNameURI>
+						</originalSource>
+						<creationMode>mixed</creationMode>
+					</creationInfo>
+				</corpusAudioInfo>
+			</corpusMediaType>
+		</corpusInfo>
+	</resourceComponentType>
+</resourceInfo>

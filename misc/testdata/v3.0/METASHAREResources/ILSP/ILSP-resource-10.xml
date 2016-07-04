@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+      <identificationInfo>
+        <resourceName lang="el">Πολιτιστικός Θησαυρός της Ελληνικής Γλώσσας</resourceName>
+        <resourceName lang="en">Cultural Thesaurus of the Greek Language</resourceName>
+        <description lang="und">Anthology of Greek literature texts (prose, poetry, drama, essays) from 18th century onwards</description>
+        <resourceShortName lang="el">ΠΟΘΕΓ</resourceShortName>
+        <resourceShortName lang="en">POTHEG</resourceShortName>
+        <url>http://www.ilsp.gr/el/infoprojects/meta?view=project&amp;task=show&amp;id=73</url>
+        <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      </identificationInfo>
+      <distributionInfo>
+        <availability>available-restrictedUse</availability>
+          <licenceInfo>
+            <licence>proprietary</licence>
+            <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+            <distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
+          </licenceInfo>
+      </distributionInfo>
+      <contactPerson>
+        <surname lang="en">Glaros</surname>
+        <givenName lang="en">Nikos</givenName>
+        <sex>male</sex>
+          <communicationInfo>
+            <email>nglaros@ilsp.athena-innovation.gr</email>
+            <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=21&amp;Itemid=156</url>
+            <telephoneNumber>+302106875451</telephoneNumber>
+            <faxNumber>+302106854270</faxNumber>
+          </communicationInfo>
+        <position>Senior Research Fellow</position>
+          <affiliation>
+            <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+            <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+              <communicationInfo>
+                <email>www@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/</url>
+                <address>Artemidos 6 &amp; Epidavrou</address>
+                <zipCode>GR-15125</zipCode>
+                <city>Maroussi</city>
+                <country>GR</country>
+                <telephoneNumber>+302106875300</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+                <faxNumber>+302106856794</faxNumber>
+              </communicationInfo>
+          </affiliation>
+      </contactPerson>
+      <metadataInfo>
+        <metadataCreationDate>2012-02-02</metadataCreationDate>
+          <metadataCreator>
+            <surname lang="en">Labropoulou</surname>
+            <givenName lang="en">Penny</givenName>
+            <sex>female</sex>
+              <communicationInfo>
+                <email>penny@ilsp.athena-innovation.gr</email>
+                <url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=37&amp;Itemid=156</url>
+                <telephoneNumber>+302106875445</telephoneNumber>
+                <faxNumber>+302106854270</faxNumber>
+              </communicationInfo>
+            <position>Senior Research Fellow</position>
+              <affiliation>
+                <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                  <communicationInfo>
+                    <email>www@ilsp.athena-innovation.gr</email>
+                    <url>http://www.ilsp.gr/</url>
+                    <address>Artemidos 6 &amp; Epidavrou</address>
+                    <zipCode>GR-15125</zipCode>
+                    <city>Maroussi</city>
+                    <country>GR</country>
+                    <telephoneNumber>+302106875300</telephoneNumber>
+                    <faxNumber>+302106854270</faxNumber>
+                    <faxNumber>+302106856794</faxNumber>
+                  </communicationInfo>
+              </affiliation>
+          </metadataCreator>
+        <source>META-SHARE/ILSP</source>
+        <metadataLastDateUpdated>2012-05-14</metadataLastDateUpdated>
+      </metadataInfo>
+      <usageInfo>
+          <foreseenUseInfo>
+            <foreseenUse>humanUse</foreseenUse>
+          </foreseenUseInfo>
+      </usageInfo>
+      <resourceCreationInfo>
+          <resourceCreator>
+              <organizationInfo>
+                <organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+                <organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+                  <communicationInfo>
+                    <email>www@ilsp.athena-innovation.gr</email>
+                    <url>http://www.ilsp.gr/</url>
+                    <address>Artemidos 6 &amp; Epidavrou</address>
+                    <zipCode>GR-15125</zipCode>
+                    <city>Maroussi</city>
+                    <country>GR</country>
+                    <telephoneNumber>+302106875300</telephoneNumber>
+                    <faxNumber>+302106854270</faxNumber>
+                    <faxNumber>+302106856794</faxNumber>
+                  </communicationInfo>
+              </organizationInfo>
+          </resourceCreator>
+          <fundingProject>
+            <projectName lang="el">Ανάδειξη της νεοελληνικής γλωσσικής πολιτιστικής κληρονομιάς μέσω διαδικτυακού τόπου</projectName>
+            <projectName lang="en">Internet-mediated promotion of the modern Greek cultural heritage</projectName>
+            <projectShortName lang="el">ΠΟΘΕΓ</projectShortName>
+            <projectShortName lang="en">POTHEG</projectShortName>
+            <url>http://www.ilsp.gr/el/infoprojects/meta?view=project&amp;task=show&amp;id=73</url>
+            <fundingType>nationalFunds</fundingType>
+            <funder>Information Society Programme</funder>
+            <fundingCountry>GR</fundingCountry>
+            <projectStartDate>2005-10-01</projectStartDate>
+            <projectEndDate>2008-06-30</projectEndDate>
+          </fundingProject>
+          <fundingProject>
+            <projectName lang="el">Εμπλουτισμός του διαδικτυακού τόπου "Πολιτιστικός θησαυρός της ελληνικής γλώσσας"</projectName>
+            <projectName lang="en">Enrichment of the web site "Cultural thesaurus of the Greek language"</projectName>
+            <projectShortName lang="el">ΠΟΘΕΓ+</projectShortName>
+            <projectShortName lang="en">POTHEG+</projectShortName>
+            <url>http://www.ilsp.gr/el/infoprojects/meta?view=project&amp;task=show&amp;id=26</url>
+            <fundingType>nationalFunds</fundingType>
+            <funder>Information Society Programme</funder>
+            <fundingCountry>GR</fundingCountry>
+            <projectStartDate>2008-07-01</projectStartDate>
+            <projectEndDate>2009-06-30</projectEndDate>
+          </fundingProject>
+        <creationStartDate>2005-10-01</creationStartDate>
+        <creationEndDate>2009-06-30</creationEndDate>
+      </resourceCreationInfo>
+      <resourceComponentType>
+          <corpusInfo>
+            <resourceType>corpus</resourceType>
+              <corpusMediaType>
+                  <corpusTextInfo>
+                    <mediaType>text</mediaType>
+                      <lingualityInfo>
+                        <lingualityType>monolingual</lingualityType>
+                      </lingualityInfo>
+                      <languageInfo>
+                        <languageId>el</languageId>
+                        <languageName>Modern Greek (1453-)</languageName>
+                      </languageInfo>
+                      <modalityInfo>
+                        <modalityType>writtenLanguage</modalityType>
+                      </modalityInfo>
+                      <sizeInfo>
+                        <size>0</size>
+                        <sizeUnit>other</sizeUnit>
+                      </sizeInfo>
+                      <domainInfo>
+                        <domain>fiction</domain>
+                      </domainInfo>
+                      <timeCoverageInfo>
+                        <timeCoverage>18th century onwards</timeCoverage>
+                      </timeCoverageInfo>
+                  </corpusTextInfo>
+              </corpusMediaType>
+          </corpusInfo>
+      </resourceComponentType>
+  </resourceInfo>

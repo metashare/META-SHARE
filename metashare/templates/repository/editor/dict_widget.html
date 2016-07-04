@@ -1,0 +1,7 @@
+<ul class="keyValuePairs{% if not blank %} pairsRequired{% endif %}">
+  {% for entry in entries %}
+  <li><a href="javascript:void(0)" class="kvPairDeleteButton">Delete Field</a> {{ entry.0 }}, {{ entry.1 }}</li>
+  {% endfor %}
+  <li><a href="javascript:void(0)" class="kvPairAddButton addlink">Add Another Field</a></li>
+</ul>
+<div style="display: none;"><a href="javascript:void(0)" class="kvPairDeleteButton">Delete Field</a> {{ new_entry_tpl.0 }}, {{ new_entry_tpl.1 }}</div>

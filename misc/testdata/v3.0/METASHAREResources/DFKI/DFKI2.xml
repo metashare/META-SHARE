@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+  <identificationInfo>
+    <resourceName>Mary TTS</resourceName>
+    <description>MARY is an open-source, multilingual Text-to-Speech Synthesis platform written in Java. It was originally developed as a collaborative project of DFKI's Language Technology lab and the Institute of Phonetics at Saarland University and is now being maintained by DFKI. As of version 4.3.1, MARY TTS supports German, British and American English, Telugu, Turkish, Italian, and Russian; more languages are in preparation. MARY TTS comes with toolkits for quickly adding support for new languages and for building unit selection and HMM-based synthesis voices.</description>
+    <resourceShortName>Mary  TTS</resourceShortName>
+    <url>http://mary.dfki.de/</url>
+    <url>http://github.com/marytts/marytts</url>
+    <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+  </identificationInfo>
+  <distributionInfo>
+    <availability>available-unrestrictedUse</availability>
+    <licenceInfo>
+      <licence>LGPL</licence>
+      <distributionAccessMedium>downloadable</distributionAccessMedium>
+      <downloadLocation>http://mary.dfki.de/download</downloadLocation>
+      <executionLocation>http://mary.dfki.de:59125</executionLocation>
+    </licenceInfo>
+  </distributionInfo>
+  <contactPerson>
+    <surname>Schröder</surname>
+    <givenName>Marc</givenName>
+    <sex>male</sex>
+    <communicationInfo>
+      <email>marc.schroeder@dfki.de</email>
+    </communicationInfo>
+    <affiliation>
+      <organizationName>Deutsches Forschungszentrum für Künstliche Intelligenz</organizationName>
+      <organizationShortName>DFKI</organizationShortName>
+      <departmentName>Language Technology Lab</departmentName>
+      <communicationInfo>
+        <email>sek-hu@dfki.de</email>
+        <url>http://www.dfki.de/lt</url>
+        <address>Stuhlsatzenhausweg 3</address>
+        <zipCode>66123</zipCode>
+        <city>Saarbrücken</city>
+        <country>DE</country>
+        <telephoneNumber>+49_681_857755282</telephoneNumber>
+        <faxNumber>+49_681_857755338</faxNumber>
+      </communicationInfo>
+    </affiliation>
+  </contactPerson>
+  <contactPerson>
+    <surname>Charfuelan</surname>
+    <givenName>Marcela</givenName>
+    <sex>female</sex>
+    <communicationInfo>
+      <email>marcela.charfuelan@dfki.de</email>
+    </communicationInfo>
+    <affiliation>
+      <organizationName>Deutsches Forschungszentrum für Künstliche Intelligenz</organizationName>
+      <organizationShortName>DFKI</organizationShortName>
+      <departmentName>Language Technology Lab</departmentName>
+      <communicationInfo>
+        <email>sek-hu@dfki.de</email>
+        <url>http://www.dfki.de/lt</url>
+        <address>Stuhlsatzenhausweg 3</address>
+        <zipCode>66123</zipCode>
+        <city>Saarbrücken</city>
+        <country>DE</country>
+        <telephoneNumber>+49_681_857755282</telephoneNumber>
+        <faxNumber>+49_681_857755338</faxNumber>
+      </communicationInfo>
+    </affiliation>
+  </contactPerson>
+  <metadataInfo>
+    <metadataCreationDate>2011-12-31</metadataCreationDate>
+  </metadataInfo>
+  <versionInfo>
+    <version>4.3.1</version>
+    <lastDateUpdated>2011-12-01</lastDateUpdated>
+  </versionInfo>
+  <resourceDocumentationInfo>
+    <samplesLocation>http://mary.dfki.de:59125</samplesLocation>
+    <toolDocumentationType>online</toolDocumentationType>
+  </resourceDocumentationInfo>
+  <resourceComponentType>
+    <toolServiceInfo>
+      <resourceType>toolService</resourceType>
+      <toolServiceType>platform</toolServiceType>
+      <toolServiceSubtype>Text-To-Speech server</toolServiceSubtype>
+      <languageDependent>false</languageDependent>
+      <inputInfo>
+        <mediaType>text</mediaType>
+        <characterEncoding>UTF-8</characterEncoding>
+        <ms:conformanceToStandardsBestPractices xmlns:ms="http://www.ilsp.gr/META-XMLSchema">other</ms:conformanceToStandardsBestPractices>
+      </inputInfo>
+      <outputInfo>
+        <mediaType>audio</mediaType>
+        <modalityType>spokenLanguage</modalityType>
+        <modalityType>voice</modalityType>
+      </outputInfo>
+      <toolServiceOperationInfo>
+        <operatingSystem>os-independent</operatingSystem>
+      </toolServiceOperationInfo>
+      <toolServiceEvaluationInfo>
+        <evaluated>true</evaluated>
+        <evaluationReport>
+          <documentInfo>
+            <documentType>inProceedings</documentType>
+            <title>Multilingual MARY TTS participation in the Blizzard Challenge 2009</title>
+            <author>Schröder, M.</author>
+            <author>Pammi, S.</author>
+            <author>Türk, O.</author>
+            <ms:year xmlns:ms="http://www.ilsp.gr/META-XMLSchema">2009</ms:year>
+            <bookTitle>Proc. Blizzard Challenge 2009</bookTitle>
+            <conference>Blizzard Challenge 2009, Edinburgh, UK</conference>
+            <url>http://dfki.de/~schroed/articles/schroeder_etal2009a.pdf</url>
+          </documentInfo>
+        </evaluationReport>
+      </toolServiceEvaluationInfo>
+      <toolServiceCreationInfo>
+        <implementationLanguage>Java</implementationLanguage>
+      </toolServiceCreationInfo>
+    </toolServiceInfo>
+  </resourceComponentType>
+</resourceInfo>

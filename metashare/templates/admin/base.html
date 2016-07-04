@@ -1,0 +1,45 @@
+{% load url from future %}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+{% load string_utils %}
+<html xmlns="http://www.w3.org/1999/xhtml" lang="{{ LANGUAGE_CODE|default:"en-us" }}" xml:lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<head>
+<title>{% block title %}{% endblock %}</title> 
+<link rel="shortcut icon" href="{{ MEDIA_URL }}images/favicon.ico" />
+<link rel="stylesheet" type="text/css" href="{% block stylesheet %}{{ MEDIA_URL }}admin/css/base.css{% endblock %}" />
+{% block extrastyle %}{% endblock %}
+{% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{{ MEDIA_URL }}admin/css/rtl.css{% endblock %}" />{% endif %}
+<script type="text/javascript">window.__admin_media_prefix__ = "{% filter escapejs %}{{ MEDIA_URL }}admin/{% endfilter %}";</script>
+{% block extrahead %}{% endblock %}
+{% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
+</head>
+{% load i18n %}
+<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}">
+<!-- Container -->
+<div id="container">
+  {% if not is_popup %}
+  <!-- Header -->
+  {% block header %}{% endblock %}
+  <!-- END Header -->
+  {% block breadcrumbs %}<div class="breadcrumbs"><a href="/">{% trans 'Home' %}</a>{% if title %} &rsaquo; {{ title }}{% endif %}</div>{% endblock %}
+  {% endif %}
+  {% if messages %}
+  <ul class="messagelist">{% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+  {% endfor %}</ul>
+  {% endif %}
+  {# Content #}{% with help_icon_url=MEDIA_URL|add:"css/sexybuttons/images/icons/silk/help.png" %}
+  <div id="content" class="{% block coltype %}colM{% endblock %}">
+    {% block pretitle %}{% endblock %}
+    {% block content_title %}{% if title %}<h1 class="customtitle">{{ title }}</h1>{% if kb_link and comp_name %}<span class="helpLink" kbbase="{{ kb_link }}" kbcomp="{{ comp_name|to_field_name }}"><img class="help_icon" src="{{ help_icon_url }}" kbbase="{{ kb_link }}" kbcomp="{{ comp_name|to_field_name }}"></img></span>{% endif %}<div style="clear: both"></div>{% endif %}{% endblock %}
+    {% block content %}
+    {% block object-tools %}{% endblock %}
+    {{ content }}
+    {% endblock %}
+    {% block sidebar %}{% endblock %}
+    <br class="clear" />
+  </div>
+  {# END Content #}{% endwith %}
+</div>
+<!-- END Container -->
+{% include "footer.html" %}
+</body>
+</html>

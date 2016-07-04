@@ -1,0 +1,93 @@
+{% spaceless %}
+
+<label class='component'>Validation</label>
+
+{% for dict in validation_dicts %}
+	<label class='title'>{% ifequal dict.Validation.Validated "True" %}Validated{% else %}Not Validated{% endifequal %} {% if dict.Validation.Size_per_validation %}{% include "repository/resource_view/size.html" with size=dict.Validation.Size_per_validation type="sub" %}{% endif %}</label> 
+		
+	{% if dict.Validation.Validation_type %}
+	     <div class="dataline indented">
+			<label>
+				<strong>Type of Validation:</strong> {{ dict.Validation.Validation_type }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if dict.Validation.Validation_mode %}
+	     <div class="dataline indented">
+			<label>
+				<strong>Validation Mode:</strong> {{ dict.Validation.Validation_mode }}
+			</label>
+		</div>	
+	{% endif %}
+	
+	{% if dict.Validation.Validation_mode_details %}
+	     <div class="dataline indented">
+			<label>
+				<strong>Mode Details:</strong> {{ dict.Validation.Validation_mode_details }}
+			</label>
+		</div>	
+	{% endif %}
+	
+	{% if dict.Validation.Validation_extent %}
+	     <div class="dataline indented">
+			<label>
+				<strong>Extent:</strong> {{ dict.Validation.Validation_extent }}
+			</label>
+		</div>	
+	{% endif %}
+
+	{% if dict.Validation.Validation_extent_details %}
+	     <div class="dataline indented">
+			<label>
+				<strong>Extent Details:</strong> {{ dict.Validation.Validation_extent_details }}
+			</label>
+		</div>	
+	{% endif %}
+
+	{% if dict.Validation.Validation_report %}
+		{% if dict.Validation.Validation_report.Validation_report.Title %}
+			{% include "repository/resource_view/documentation.html" with documentation=dict.Validation.Validation_report.Validation_report type="Validation Reports" level="sub" %}
+		{% else %}
+			<div class="dataline indented">
+				<label>
+					<strong>Validation Reports: </strong>{{ dict.Validation.Validation_report.Validation_report }}
+				</label>
+			</div>
+		{% endif %}					
+	{% endif %}
+	
+	 {% if "Validation_tool" in  dict.Validation %}	 	
+	 	<div class="dataline indented">
+	 		<label><strong>Validation Tools:</strong></label>
+	 		<ul>					 	
+				 {% for key, value in dict.Validation.items %}
+				 	{% if "Validation_tool" in key %}
+				 		{% include "repository/resource_view/target_resource.html" with target=value title="Validation Tool" level="list" %}
+				 	{% endif %}
+				 {% endfor %}
+			 </ul>
+		</div>
+	{% endif %}			
+	
+	<div class="dataline">
+		{% for key, value in dict.items %}
+			{% if "Validator" in value %}
+				<label class="subtitle">Validator</label>
+			{% endif %}
+			{% for key1, value1 in value.items %}
+				{% if "Validator" in key1 %}
+					{% if value1.Organization %}
+				    	{% include "repository/resource_view/person.html" with person_dict=value1.Organization type="Validator" %}
+				    {% else %}
+				    	{% include "repository/resource_view/person.html" with person_dict=value1.Validator type="Validator" %}
+				    {% endif %}
+				{% endif %}
+			{% endfor %}
+		{% endfor %}
+	</div>
+	{% if not forloop.last %}
+	{% endif %}
+{% endfor %}
+
+{% endspaceless %}

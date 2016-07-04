@@ -1,0 +1,309 @@
+{% extends "base.html" %}
+  
+{% block content %}
+
+<link rel="stylesheet" href="{{ MEDIA_URL }}/css/view_stats.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="{{ MEDIA_URL }}/css/results.css" type="text/css" media="screen" />
+
+<script>
+function showdiv (id) {
+    obj = document.getElementById(id)
+    if (obj.style.visibility == 'hidden') {
+        obj.style.visibility = 'visible';
+        obj.style.display = '';
+    } else {
+        obj.style.visibility = 'hidden'; 
+        obj.style.display = 'none';
+    }
+    return
+}
+
+function closetabvals( id ) { 
+    document.getElementById(id).style.visibility = 'hidden';
+    document.getElementById(id).style.display = 'none';
+    document.getElementById('classname').value='';
+    document.getElementById('fieldname').value='';
+}
+
+function getvalues(modelname, classname, fieldname) {
+    document.getElementById('modelname').value=modelname;
+    document.getElementById('classname').value=classname;
+    document.getElementById('fieldname').value=fieldname;
+    
+    document.forms["getusagestats"].submit(); 
+}
+
+function expandOne (classname) {
+    obj = document.getElementById(classname);
+    obj.style.visibility = 'visible';
+    obj.style.display = '';
+    return false;
+}
+
+function expandAll () {
+    $("div.accordion").each(function(){
+            $(this).next("div.filter").show(); 
+    });
+    obj = document.getElementById('expandall');
+    obj.value="yes";
+}
+function collapseAll () {
+    $("div.accordion").each(function(){
+            $(this).next("div.filter").hide(); 
+    });
+    obj = document.getElementById('expandall');
+    obj.value="no";
+
+}
+</script>
+
+<script language="javascript">
+$(document).ready(function(){
+  $("div.filter").each(function() {
+    var allDds = $(this).children("div").not('.subresult').nextUntil("div.accordion");
+    if (allDds.length > 4) {
+	var hideableDds = allDds.has("a.addableFacet");
+	if (hideableDds.length > 1) {
+        hiddenDds = hideableDds.slice(
+          Math.max(0, 4 - (allDds.length - hideableDds.length))).hide();
+        var moreTxt = 'more', lessTxt = 'less';
+        hiddenDds.last().after($("<div><a href='#'>" + moreTxt + "</a></div>")
+            .children().first().click({hiddenDds: hiddenDds}, function(e) {
+                e.preventDefault();
+                $(this).text($(this).text() == moreTxt ? lessTxt : moreTxt);
+                e.data.hiddenDds.slideToggle();
+              }).parent());
+      }
+    }
+  });
+  $("div.filter").hide();
+  $("div.accordion").each(function(){
+      $(this).next("div.filter").find("a.removableFacet").parents("div.filter").show();
+      addStatus($(this));
+      $(this).next("div.filter").find("a.addFilter").parents("div.filter").show();
+      addStatus($(this));
+  });
+
+  $("div.accordion.expanded").each(function(){
+ 	if( $(this).next("div.filter").find("a.removableFacet").length > 0 ){
+ 		$(this).addClass("selected");
+ 	}
+ 	if( $(this).next("div.filter").find("a.addFilter").length > 0 ){
+ 		$(this).addClass("selected");
+ 	}
+  });
+
+  $("div.accordion").click(function() {
+      if($(this).next("div.filter").attr("style") == "display: none;" ){
+          $(this).addClass('expanded');
+          $(this).removeClass('collapsed');}
+      else {
+          $(this).addClass('collapsed');
+          $(this).removeClass('expanded');
+      }
+      $(this).next("div.filter").slideToggle();
+  });
+});
+
+function addStatus(filter){
+  if(filter.next("div.filter").attr("style") == "display: none;" ){
+    filter.addClass('collapsed');
+    filter.removeClass('expanded');
+  }
+  else{
+    filter.addClass('expanded');
+    filter.removeClass('collapsed');
+  }
+}
+</script>
+
+
+<div class='tab-container'>
+ <ul class='etabs'>
+   <li class='tab'><a href="{% url 'frontpage' %}stats/top/">META-SHARE node visits statistics</a></li>
+   <li class='tab tab-nobr'>Statistics on resource metadata</li>
+   {% if user.username and myres %}
+        <li class='tab'><a href="{% url 'frontpage' %}stats/mystats/">My resources</a></li>
+   {% endif %}
+ </ul>
+</div>
+
+<div class="content_tab">
+    <form id="getusagestats" action="." method="POST">           
+      <input type="hidden" name="model" id="modelname" value="{{ selected_model }}">
+      <input type="hidden" name="class" id="classname" value="{{ selected_class }}">
+      <input type="hidden" name="field" id="fieldname" value="{{ selected_field }}">
+      <input type="hidden" name="expandall" id="expandall" value="{{ expand_all }}">
+      <div id="subtab">
+        <div id="section">
+          <div id="colsubtab">
+            <h4>Filter by: <img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/help.png" class=pointer onclick="showdiv('filtershelp')"></h4>
+          </div>  
+          <div id="filtershelp" class="warning" style="visibility: hidden; display: none">
+                This panel shows which metadata have been used to describe the META-SHARE linguistic resources.
+                Each metadata defined in the <a href="http://www.meta-share.org/knowledgebase/DetailedPresentationOfTheModel" target="metamodel">META-SHARE model</a> can be either "required", "recommended" or "optional".
+                The metadata usage statistics reports two counters. The first counter says how many times a metadata has been 
+                filled in with a certain value, while the second counter says the number of resources for which the metadata has been used.
+                For instance <div class="coverage required"> 28/12 </div> means that the corresponding required metadata has been filled in 28 times (possibly with 
+                redundant values), and that 12 different resources have been described with that metadata.
+                You can click on a metadata name to see a table with all the actual values used to fill in that metadata.
+          </div>
+          
+          <div id="colsubtab"><div class="accordion">Metadata status</div>
+          {% for filter, counter in usage_filter.items %}
+            {% if filter in "required optional recommended" %}
+                <div class=indent>
+                    <input type="checkbox" name=filter value="{{ filter }}" onClick="submit()"
+                    {% if filter in selected_filters or selected_filters|length == 0 %} checked{% endif %}                  
+                    ><div class="coverage {{ filter }}"> {{ filter }} </div>({{ counter }})
+                </div>
+            {% endif %}
+          {% endfor %}
+          </div>
+          <div id="colsubtab"><div class="accordion">Metadata usage in {{ lr_count }} resource{{ lr_count|pluralize }}</div>
+          {% for filter, counter in usage_filter.items %}
+            {% if filter in "never used at least one" %}
+                <div class=indent>
+                    <input type="checkbox" name=filter value="{{ filter }}" onClick="submit()"
+                    {% if filter in selected_filters or selected_filters|length == 0 %} checked{% endif %}     
+                    ><div class="coverage">{{ filter }} 
+                    {% if filter == "at least one" %}
+                        [#value/#resources]
+                    {% endif %}
+                    </div> ({{ counter }})
+                </div>
+            {% endif %}
+          {% endfor %}
+          </div>
+        </div>{# and section #}
+      </div>{# and subtab #}
+  </form>  
+ 
+      <h3>Found {{ fields_count }} metadata</h3>
+      {% if errors != None %}
+       <ul class=errorlist>
+            &nbsp; <img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/error.png"> &nbsp; {{ errors }} &nbsp;
+       </ul>
+      {% endif %}
+
+      (the following lines are the metadata components and elements included in the <a href="http://www.meta-share.org/portal/knowledgebase/DetailedPresentationOfTheModel" target="metamodel">META-SHARE model</a> grouped by different roles and alphabetically sorted)       
+         
+<div style="float: right; padding: 5px; margin: 0px">[ <a href="javascript:expandAll();">Expand all</a>
+            | <a href="javascript:collapseAll();">Collapse all</a> ]</div>
+</div>
+
+{% if usage_fields != None %}
+<div class=results>
+    
+     {% for class, fields in usage_fields %}
+        {% if selected_model == fields.0.7 %}
+           {% if textvalues != None and textvalues|length > 0 %}
+            <!-- used values table -->
+            <div id=fieldvalues class=fieldvalues>
+             <a name="fieldvalues"></a>
+             <table cellspacing=0 cellpadding=0 border=0 valign=top>
+                <tr bgcolor=lightgray>
+                    <td width=100%><div style="display: inline; border: solid 1px #999; padding-top: 5px;"><a href="javascript:closetabvals('fieldvalues');" title="Close"><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/cross.png"></a></div> used values for <h4>{{ selected_class }}/{{ selected_field }}</h4></td>
+                    <td style="text-align: right">value counter</td>
+                    <td style="text-align: right">resources counter</td>                    
+                </tr>
+                 
+            {% for field in textvalues %}
+                <tr>
+                <th>{{ field.0 }}</th>
+                <th style="text-align: right">{{ field.2 }}</th>
+                <th style="text-align: right">{{ field.1 }}</th>
+                </tr>
+            {% endfor %}
+            </table>
+            </div>
+            <!-- end table -->
+           {% endif %} 
+         {% endif %}
+            
+            <div class="accordion"><a href="#" onclick="return false"><label class='component'> {{ class }} </label></a></div> 
+            <div id="{{ fields.0.7 }}" class="filter">
+            <a name="{{ fields.0.7 }}"></a>
+            {% for field in fields %}
+                {% if field.6 == "component" %}
+                    <div class="tab_content" style="width:100%">
+                    <a href="javascript:scrollToAnchor('{{ field.1.split|join:"_" }}')"><label class='component indent'><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/bullet_arrow_right.png">
+                     {{ field.2 }}</label></a>
+                {% else %}
+                    <div class="dataline mandatory" style="width:100%">
+                        {% if field.6 == "ifield" %}
+                            <label class='indent'>
+                        {% endif %}   
+                        {% if field.5 > 0 %}
+                            <a href="javascript:getvalues('{{ fields.0.7 }}','{{ field.7 }}','{{ field.1 }}')"
+                            {% if selected_class == field.7 or selected_class == fields.0.7 %}
+                               {% if selected_field == field.1 %}
+                                    class="addFilter">
+                               {% else %}
+                                    class="deleteFilter"> 
+                               {% endif %}
+                            {% else %}
+                                class="deleteFilter"> 
+                            {% endif %}
+                            <label class="title pointer" style="margin-left: 4px"> {{ field.2 }} </label></a>
+                        {% else %}
+                            <label class="title indent"> {{ field.2 }} </label>
+                        {% endif %}
+                        {% if field.6 == "ifield" %}
+                            </label>
+                        {% endif %}   
+                {% endif %}
+                
+                
+                {% if field.3 == 1 %}
+                      <div class="coverage required">
+                {% else %}
+                    {% if field.3 == 2 %}
+                         <div class="coverage optional">
+                    {% else %}
+                        {% if field.3 == 3 %}
+                            <div class="coverage recommended">
+                        {% else %}
+                            <div class="coverage never">
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+                {% if field.4 == 0 %}
+                    <i>never used</i>
+                {% else %}
+                    {{ field.4 }}/{{ field.5 }}
+                {% endif %}
+                </div>
+                
+                </div>                
+            {% endfor %}
+             </div> <!-- end filter -->
+            
+  {% endfor %}
+</div>{# end results #}
+    <script>
+    function scrollToAnchor(name) {
+        //document.getElementById(name).click();
+        expandOne(name);
+        window.location.href = "#"+name;
+        setTimeout("window.scrollBy(0, -130);", 0);
+    }
+    
+    function gotofiedsvalues() {
+        window.location.href = "#fieldvalues";
+        setTimeout("window.scrollBy(0, -90);", 20);
+    }
+    
+    {% if expand_all == "yes" %}
+        setTimeout( "expandAll();", 400);
+    {% endif %}
+    {% if selected_field != "" %}
+        setTimeout( "gotofiedsvalues();", 500);
+    {% endif %}
+    
+    </script>
+{% else %}
+    <ul class=errorlist>No data found</ul>
+{% endif %}
+</div>{# end content_tab #}
+{% endblock %}

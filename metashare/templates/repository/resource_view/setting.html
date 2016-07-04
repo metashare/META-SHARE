@@ -1,0 +1,54 @@
+{% spaceless %}
+
+<label class='title'>Setting</label>
+{% for key, value in setting.items %}	
+	{% if "Naturality" in value %}
+		 <div class="dataline indented">
+			<label>
+				<strong>Naturality:</strong> {{ value.Naturality }}
+			</label>
+		</div>
+	{% endif %}
+	{% if "Conversational_type" in value %}
+		 <div class="dataline indented">
+			<label>
+				<strong>Conversational type:</strong> {{ value.Conversational_type }}
+			</label>
+		</div>
+	{% endif %}
+
+	{% if "Scenario_type" in value %}
+		 <div class="dataline indented">
+			<label>
+				<strong>Scenario:</strong> {{ value.Scenario_type }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if "Audience" in value %}
+		 <div class="dataline indented">
+			<label>
+				<strong>Audience:</strong> {{ value.Audience }}
+			</label>
+		</div>
+	{% endif %}
+
+	{% if "Interactivity" in value %}
+		 <div class="dataline indented">
+			<label>
+				<strong>Interactivity:</strong> {{ value.Interactivity }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if "Interaction" in value %}
+		 <div class="dataline indented">
+			<label>
+				<strong>Interaction:</strong> {{ value.Interaction }}
+			</label>
+		</div>
+	{% endif %}
+	
+{% endfor %}
+
+{% endspaceless %}

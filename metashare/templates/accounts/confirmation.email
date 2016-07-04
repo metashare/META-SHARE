@@ -1,0 +1,11 @@
+Dear {{firstname}} {{lastname}},
+
+we have received a registration request for a new META-SHARE user account "{{shortname}}" at [1]. You can confirm that registration request and create your account by clicking the following link:
+
+  {{confirmation_url}}
+
+Please make sure to follow the link within three days. If you do not wish to create an account with this e-mail address, then please simply disregard this message.
+
+Welcome to META-SHARE!
+
+[1] {{ node_url }}

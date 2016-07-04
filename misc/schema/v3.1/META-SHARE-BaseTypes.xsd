@@ -1,0 +1,2597 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited by ILSP/Athena R.C. -->
+<xs:schema xmlns:ms="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.meta-share.org/META-SHARE_XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.1" xml:lang="en">
+	<xs:include schemaLocation="./META-SHARE-SimpleTypes.xsd"/>
+	<xs:include schemaLocation="./META-SHARE-RoleTypes.xsd"/>
+	<xs:include schemaLocation="./META-SHARE-LicenseMetadata.xsd"/>
+	<xs:include schemaLocation="./META-SHARE-LanguageMetadata.xsd"/>
+	<xs:include schemaLocation="./META-SHARE-UsageMetadata.xsd"/>
+	<xs:include schemaLocation="./META-SHARE-LanguageMetadata.xsd"/>
+	<xs:include schemaLocation="./META-SHARE-ISOVocabularies.xsd"/>
+	<!-- definition of complex types -->
+	<xs:complexType name="identificationInfoType">
+		<xs:sequence>
+			<xs:element name="resourceName" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The full name by which the resource is known; the element can be repeated for the different language versions using the "lang" attribute to specify the language.</xs:documentation>
+					<xs:appinfo>
+						<label>Resource name</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:restriction base="ms:myString">
+							<xs:maxLength value="500"/>
+						</xs:restriction>
+					</xs:simpleContent>
+				</xs:complexType>
+				<xs:unique name="uniqueLang2">
+					<xs:selector xpath="."/>
+					<xs:field xpath="@lang"/>
+				</xs:unique>
+			</xs:element>
+			<xs:element name="description" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Provides the description of the resource in prose; the element can be repeated for the different language versions using the "lang" attribute to specify the language.</xs:documentation>
+					<xs:appinfo>
+						<label>Description</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:restriction base="ms:myString">
+							<xs:maxLength value="10000"/>
+						</xs:restriction>
+					</xs:simpleContent>
+				</xs:complexType>
+				<xs:unique name="uniqueLang3">
+					<xs:selector xpath="."/>
+					<xs:field xpath="@lang"/>
+				</xs:unique>
+			</xs:element>
+			<xs:element name="resourceShortName" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The short form (abbreviation, acronym etc.) used to identify the resource; the element can be repeated for the different language versions using the "lang" attribute to specify the language.</xs:documentation>
+					<xs:appinfo>
+						<label>Resource short name</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:restriction base="ms:myString">
+							<xs:maxLength value="500"/>
+						</xs:restriction>
+					</xs:simpleContent>
+				</xs:complexType>
+				<xs:unique name="uniqueLang">
+					<xs:selector xpath="."/>
+					<xs:field xpath="@lang"/>
+				</xs:unique>
+			</xs:element>
+			<xs:element ref="ms:url" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A URL used as homepage of an entity (e.g. of a person, organization, resource etc.); it provides general information (for instance in the case of a resource, it may present a description of the resource, its creators and possibly include links to the URL where it can be accessed from)</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<label>URL (Landing page)</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<!-- metashare id reflects to the UNIQUE system id provided by metashare software-->
+			<xs:element name="metaShareId">
+				<xs:annotation>
+					<xs:documentation>An unambiguous referent to the resource within META-SHARE; it reflects to the unique system id provided automatically by the MetaShare software</xs:documentation>
+					<xs:appinfo>
+						<label>Meta-Share ID</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ISLRN" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Reference to the unique ISLRN number of the resource; if the resource has not been assigned an ISLRN yet, you may request for one at: http://www.islrn.org/</xs:documentation>
+					<xs:appinfo>
+						<label>ISLRN</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="17"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="identifier" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Reference to a PID, DOI or an internal identifier used by the resource provider for the resource</xs:documentation>
+					<xs:appinfo>
+						<label>Identifier</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="versionInfoType">
+		<xs:annotation>
+			<xs:appinfo>
+				<render-short>{version} {revision} {lastDateUpdated}</render-short>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="version">
+				<xs:annotation>
+					<xs:documentation>Any string, usually a number, that identifies the version of a resource </xs:documentation>
+					<xs:appinfo>
+						<label>Version</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="revision" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides an account of the revisions in free text or a link to a document with revisions</xs:documentation>
+					<xs:appinfo>
+						<label>Revision</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lastDateUpdated" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Date of the last update of the version of the resource</xs:documentation>
+					<xs:appinfo>
+						<label>Last date updated</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="updateFrequency" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies the frequency with which the resource is updated</xs:documentation>
+					<xs:appinfo>
+						<label>Update frequency</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="validationInfoType">
+		<xs:sequence>
+			<xs:element name="validated" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Specifies the validation status of the resource</xs:documentation>
+					<xs:appinfo>
+						<label>Validated</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="validationType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies the type of the validation that have been performed </xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Validation type</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="20"/>
+						<xs:enumeration value="formal">
+							<xs:annotation>
+								<xs:appinfo>
+									<label>Formal</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="content">
+							<xs:annotation>
+								<xs:appinfo>
+									<label>Content</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:enumeration>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="validationMode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies the validation methodology applied</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="20"/>
+						<xs:enumeration value="manual"/>
+						<xs:enumeration value="automatic"/>
+						<xs:enumeration value="mixed"/>
+						<xs:enumeration value="interactive"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="validationModeDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Textual field for additional information on validation</xs:documentation>
+					<xs:appinfo>
+						<label>Validation mode details</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="validationExtent" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The resource coverage in terms of validated data</xs:documentation>
+					<xs:appinfo>
+						<label>Validation extent</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="20"/>
+						<xs:enumeration value="full"/>
+						<xs:enumeration value="partial"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="validationExtentDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides information on size or other details of partially validated data; to be used if only part of the resource has been validated and as an alternative to SizeInfo if the validated part cannot be counted otherwise</xs:documentation>
+					<xs:appinfo>
+						<label>Validation extent details</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="sizePerValidation" type="ms:sizeInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies the size of the validated part of a resource</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
+						<label>Size per validation</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="validationReport" type="ms:documentationInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A short account of the validation details or a bibliographic reference to a document with detailed information on the validation process and results</xs:documentation>
+					<xs:appinfo>
+						<relation>many-to-many</relation>
+						<label>Validation report</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="validationTool" type="ms:targetResourceInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The name, the identifier or the url of the tool used for the validation of the resource</xs:documentation>
+					<xs:appinfo>
+						<relation>many-to-many</relation>
+						<label>Validation tool</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="validator" type="ms:actorInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information on the person(s) or the organization(s) that validated the resource</xs:documentation>
+					<xs:appinfo>
+						<relation>many-to-many</relation>
+						<label>Validator</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="resourceCreationInfoType">
+		<xs:annotation>
+			<xs:appinfo>
+				<render-short>{resourceCreator} {fundingProject} {creationStartDate}-{creationEndDate}</render-short>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="resourceCreator" type="ms:actorInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information on the person or the organization that has created the resource</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>many-to-many</relation>
+						<label>Resource creator</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fundingProject" type="ms:projectInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information on the project that has funded the resource</xs:documentation>
+					<xs:appinfo>
+						<relation>many-to-many</relation>
+						<label>Funding project</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="creationStartDate" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The date in which the creation process was started</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<label>Creation start date</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="creationEndDate" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The date in which the creation process was completed</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<label>Creation end date</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="creationInfoType">
+		<xs:sequence>
+			<xs:element ref="ms:originalSource" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The name, the identifier or the url of thethe original resources that were at the base of the creation process of the resource</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>many-to-many</relation>
+						<label>Original source</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="creationMode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies whether the resource is created automatically or in a manual or interactive mode </xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="automatic"/>
+						<xs:enumeration value="manual"/>
+						<xs:enumeration value="mixed"/>
+						<xs:enumeration value="interactive"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="creationModeDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides further information on the creation methods and processes</xs:documentation>
+					<xs:appinfo>
+						<label>Creation mode details</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="200"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="creationTool" type="ms:targetResourceInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The name, the identifier or the url of the tool used in the creation process</xs:documentation>
+					<xs:appinfo>
+						<relation>many-to-many</relation>
+						<label>Creation tool</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="metadataInfoType">
+		<xs:sequence>
+			<xs:element name="metadataCreationDate" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>The date of creation of this metadata description (automatically inserted by the MetaShare software)</xs:documentation>
+					<xs:appinfo>
+						<label>Metadata creation date</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="metadataCreator" type="ms:personInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information on the person that has created the metadata record</xs:documentation>
+					<xs:appinfo>
+						<relation>many-to-many</relation>
+						<label>Metadata creator</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="source" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Refers to the catalogue or repository from which the metadata has been originated</xs:documentation>
+					<xs:appinfo>
+						<label>Source</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="sourceRepository" type="ms:httpURI" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Refers to the repository from which the metadata record has been harvested</xs:documentation>
+					<xs:appinfo>
+						<label>Source repository (URL)</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="originalMetadataSchema" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Refers to the metadata schema originally used for the description of the resource</xs:documentation>
+					<xs:appinfo>
+						<label>Original metadata schema</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="originalMetadataLink" type="ms:httpURI" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A link to the original metadata record, in cases of harvesting</xs:documentation>
+					<xs:appinfo>
+						<label>Original metadata record link</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="metadataLanguageName" type="ms:languageNameType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The language in which the metadata description is written according to IETF BCP47 (ISO 639-1 or ISO 639-3 for languages not covered by the first standard)</xs:documentation>
+					<xs:appinfo>
+						<label>Metadata language</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="metadataLanguageId" type="ms:languageTagType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The id of the language in which the metadata description is written, as specified by BCP47</xs:documentation>
+					<xs:appinfo>
+						<label>Metadata language identifier</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="metadataLastDateUpdated" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The date of the last updating of the metadata record (automatically inserted by the MetaShare software)</xs:documentation>
+					<xs:appinfo>
+						<label>Metadata last date updated</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="revision" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides an account of the revisions in free text or a link to a document with revisions</xs:documentation>
+					<xs:appinfo>
+						<label>Revision</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="documentInfoType">
+		<xs:annotation>
+			<xs:appinfo>
+				<render-short>{author}: {title}</render-short>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="documentType">
+				<xs:annotation>
+					<xs:documentation>Specifies the type of the document provided with or related to the resource</xs:documentation>
+					<xs:appinfo>
+						<label>Document type</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="article">
+							<xs:annotation>
+								<xs:documentation>An article from a journal or magazine</xs:documentation>
+								<xs:appinfo>
+									<label>Article</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="book">
+							<xs:annotation>
+								<xs:documentation>A book with an explicit publisher</xs:documentation>
+								<xs:appinfo>
+									<label>Book</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="booklet">
+							<xs:annotation>
+								<xs:documentation>A work that is printed and bound, but without a named  publisher or sponsoring institution</xs:documentation>
+								<xs:appinfo>
+									<label>Booklet</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="manual">
+							<xs:annotation>
+								<xs:documentation>Technical documentation</xs:documentation>
+								<xs:appinfo>
+									<label>Manual</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="techReport">
+							<xs:annotation>
+								<xs:documentation>A report published by a school or other institution</xs:documentation>
+								<xs:appinfo>
+									<label>Technical report</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="mastersThesis">
+							<xs:annotation>
+								<xs:documentation>A Master's thesis</xs:documentation>
+								<xs:appinfo>
+									<label>Master's thesis</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="phdThesis">
+							<xs:annotation>
+								<xs:documentation>A PhD thesis</xs:documentation>
+								<xs:appinfo>
+									<label>PhD thesis</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="inBook">
+							<xs:annotation>
+								<xs:documentation>A part of a book, which may be a chapter (or section) and/or a range of pages</xs:documentation>
+								<xs:appinfo>
+									<label>In book</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="inCollection">
+							<xs:annotation>
+								<xs:documentation>A part of a book having its own title</xs:documentation>
+								<xs:appinfo>
+									<label>In collection</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="proceedings">
+							<xs:annotation>
+								<xs:documentation>The proceedings of a conference</xs:documentation>
+								<xs:appinfo>
+									<label>Proceedings</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="inProceedings">
+							<xs:annotation>
+								<xs:documentation>An article in a conference proceedings</xs:documentation>
+								<xs:appinfo>
+									<label>In proceedings</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="unpublished">
+							<xs:annotation>
+								<xs:documentation>A document having an author and title, but not formally published</xs:documentation>
+								<xs:appinfo>
+									<label>Unpublished</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="other">
+							<xs:annotation>
+								<xs:documentation>Use this type when nothing else fits</xs:documentation>
+								<xs:appinfo>
+									<label>Other</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:enumeration>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="title" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The title of the document reporting on the resource</xs:documentation>
+					<xs:appinfo>
+						<label>Title</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:restriction base="ms:myString">
+							<xs:maxLength value="500"/>
+						</xs:restriction>
+					</xs:simpleContent>
+				</xs:complexType>
+				<xs:unique name="uniqueLang10">
+					<xs:selector xpath="."/>
+					<xs:field xpath="@lang"/>
+				</xs:unique>
+			</xs:element>
+			<xs:element name="author" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The name(s) of the author(s), in the format described in the document</xs:documentation>
+					<xs:appinfo>
+						<label>Author</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="editor" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The name of the editor as mentioned in the document</xs:documentation>
+					<xs:appinfo>
+						<label>Editor</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="200"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="year" type="xs:gYear" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The year of publication or, for an unpublished work, the year it was written</xs:documentation>
+					<xs:appinfo>
+						<label>Year (of publication)</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="publisher" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The name of the publisher</xs:documentation>
+					<xs:appinfo>
+						<label>Publisher</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="200"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="bookTitle" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The title of a book, part of which is being cited</xs:documentation>
+					<xs:appinfo>
+						<label>Book title</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="200"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="journal" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A journal name. Abbreviations could also be provided</xs:documentation>
+					<xs:appinfo>
+						<label>Journal</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="200"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="volume" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies the volume of a journal or multivolume book</xs:documentation>
+					<xs:appinfo>
+						<label>Volume</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="series" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The name of a series or set of books. When citing an entire book, the title field gives its title and an optional series field gives the name of a series or multi-volume set in which the book is published</xs:documentation>
+					<xs:appinfo>
+						<label>Series</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="200"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="pages" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>One or more page numbers or range of page numbers</xs:documentation>
+					<xs:appinfo>
+						<label>Pages</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="edition" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The edition of a book</xs:documentation>
+					<xs:appinfo>
+						<label>Edition</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="conference" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The name of the conference in which the document has been presented</xs:documentation>
+					<xs:appinfo>
+						<label>Conference</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="300"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="doi" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A digital object identifier assigned to the document</xs:documentation>
+					<xs:appinfo>
+						<label>DOI</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element ref="ms:url" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A URL used as homepage of an entity (e.g. of a person, organization, resource etc.); it provides general information (for instance in the case of a resource, it may present a description of the resource, its creators and possibly include links to the URL where it can be accessed from)</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<label>URL (Landing page)</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ISSN" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The International Standard Serial Number used to identify a journal</xs:documentation>
+					<xs:appinfo>
+						<label>ISSN</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ISBN" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The International Standard Book Number</xs:documentation>
+					<xs:appinfo>
+						<label>ISBN</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="keywords" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The keyword(s) for indexing and classification of the document</xs:documentation>
+					<xs:appinfo>
+						<label>Keywords</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="250"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="documentLanguageName" type="ms:languageNameType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The language the document is written in (according to the IETF BCP47 guidelines)</xs:documentation>
+					<xs:appinfo>
+						<label>Document language</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="documentLanguageId" type="ms:languageTagType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The id of the language the document is written in (according to the IETF BCP47 guidelines)</xs:documentation>
+					<xs:appinfo>
+						<label>Document language identifier</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="documentationInfoType">
+		<xs:choice>
+			<xs:element ref="ms:documentUnstructured">
+				<xs:annotation>
+					<xs:documentation>Used either as a free text description or as an unstructured (free form) presentation of a bibliographic record; alternative to the structured presentation of a document (cf. documentInfo)</xs:documentation>
+					<xs:appinfo>
+						<label>Unstructured document</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:documentInfo">
+				<xs:annotation>
+					<xs:documentation>Groups information on a document in a structured format; it can be used both for published or unpublished documents; depending on the role of the document (e.g. usage report, validation report, annotation manual etc.), it can be found at various places of the metadata</xs:documentation>
+					<xs:appinfo>
+						<label>Document</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="resourceDocumentationInfoType">
+		<xs:annotation>
+			<xs:appinfo>
+				<render-short>{documentation}</render-short>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="citation" type="ms:documentationInfoType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Publication to be used for citation purposes</xs:documentation>
+					<xs:appinfo>
+						<relation>many-to-one</relation>
+						<recommended>true</recommended>
+						<label>Citation</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="documentation" type="ms:documentationInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Refers to papers, manuals, reports etc. describing the resource</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>many-to-many</relation>
+						<label>Documentation</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="samplesLocation" type="ms:httpURI" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A url with samples of the resource or, in the case of tools, of samples of the output</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<label>Samples location</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="toolDocumentationType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the type of documentation for tool or service</xs:documentation>
+					<xs:appinfo>
+						<label>Type of documentation for tools</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="200"/>
+						<xs:enumeration value="online"/>
+						<xs:enumeration value="manual"/>
+						<xs:enumeration value="helpFunctions"/>
+						<xs:enumeration value="none"/>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="domainInfoType">
+		<xs:sequence>
+			<xs:element ref="ms:domain">
+				<xs:annotation>
+					<xs:documentation>Specifies the application domain of the resource or the tool/service</xs:documentation>
+					<xs:appinfo>
+						<inline-type>tabular</inline-type>
+						<label>Domain</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sizePerDomain" type="ms:sizeInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies the size of resource parts per domain</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
+						<label>Size per domain</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:conformanceToClassificationScheme" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies the external classification schemes</xs:documentation>
+					<xs:appinfo>
+						<label>Conformance to classification scheme</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="annotationInfoType">
+		<xs:sequence>
+			<xs:element ref="ms:annotationType">
+				<xs:annotation>
+					<xs:documentation>Specifies the annotation level of the resource or the annotation type a tool/ service requires or produces as an output</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<label>Annotation type</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="annotatedElements" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the elements annotated in each annotation level</xs:documentation>
+					<xs:appinfo>
+						<label>Annotated elements</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="speakerNoise"/>
+						<xs:enumeration value="backgroundNoise"/>
+						<xs:enumeration value="mispronunciations"/>
+						<xs:enumeration value="truncation"/>
+						<xs:enumeration value="discourseMarkers"/>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="annotationStandoff" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates whether the annotation is created inline or in a stand-off fashion</xs:documentation>
+					<xs:appinfo>
+						<label>Annotation standoff</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<!-- segmentationLevel is mandatory if annotationType=segmentation -->
+			<xs:element ref="ms:segmentationLevel" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the segmentation unit in terms of which the resource has been segmented or the level of segmentation a tool/service requires/outputs</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Segmentation level</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:annotationFormat" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies the format that is used in the annotation process since often the mime type will not be sufficient for machine processing</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-one</relation>
+						<label>Annotation format</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:tagset" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A name or a url reference to the tagset used in the annotation of the resource or used by the tool/service</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-one</relation>
+						<label>Tagset</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tagsetLanguageId" type="ms:languageTagType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The identifier of the tagset language (according to the IETF BCP47 guidelines)</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Tagset language identifier</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tagsetLanguageName" type="ms:languageNameType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The name of the tagset language (according to the IETF BCP47 guidelines)</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Tagset language</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:conformanceToStandardsBestPractices" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the standards or the best practices to which the tagset used for the annotation conforms </xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<label>Conformance to standards / best practices</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:theoreticModel" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Name of the theoretic model applied for the creation or enrichment of the resource, and/or a reference (URL or bibliographic reference) to informative material about the theoretic model used</xs:documentation>
+					<xs:appinfo>
+						<label>Theoretic model</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="annotationManual" type="ms:documentationInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A bibliographic reference or ms:httpURI link to the annotation manual</xs:documentation>
+					<xs:appinfo>
+						<relation>many-to-many</relation>
+						<label>Annotation manual</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="annotationMode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates whether the resource is annotated manually or by automatic processes</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+						<xs:enumeration value="automatic"/>
+						<xs:enumeration value="manual"/>
+						<xs:enumeration value="mixed"/>
+						<xs:enumeration value="interactive"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="annotationModeDetails" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides further information on annotation process </xs:documentation>
+					<xs:appinfo>
+						<label>Annotation mode details</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="annotationTool" type="ms:targetResourceInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The name, the identifier or the url of the tool used for the annotation of the resource</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>many-to-many</relation>
+						<label>Annotation tool</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="annotationStartDate" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The date in which the annotation process has started</xs:documentation>
+					<xs:appinfo>
+						<label>Annotation start date</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="annotationEndDate" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The date in which the annotation process has ended</xs:documentation>
+					<xs:appinfo>
+						<label>Annotation end date</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sizePerAnnotation" type="ms:sizeInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides information on size for the annotated parts of the resource</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
+						<label>Size per annotation</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="interannotatorAgreement" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides information on the interannotator agreement and the methods/metrics applied </xs:documentation>
+					<xs:appinfo>
+						<label>Interannotator agreement</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="intraannotatorAgreement" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides information on the intra-annotator agreement and the methods/metrics applied  </xs:documentation>
+					<xs:appinfo>
+						<label>Intraannotator agreement</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="annotator" type="ms:actorInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information on the annotators of the specific annotation type</xs:documentation>
+					<xs:appinfo>
+						<relation>many-to-many</relation>
+						<label>Annotator</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="targetResourceInfoType">
+		<xs:annotation>
+			<xs:appinfo>
+				<relation>one-to-one</relation>
+				<render-short>{targetResourceNameURI}</render-short>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<!--TODO ID: ref to ResourceInfoType-->
+			<!--
+            <xs:element name="relatedResourceID">
+                <xs:annotation>
+                	<xs:documentation>A (unique) identifier of a resource related to the resource being described</xs:documentation>
+                    </xs:annotation>
+                    <xs:simpleType>
+                    	<xs:restriction base="xs:string">
+                    		<xs:maxLength value="100"/>
+                    	</xs:restriction>
+                    </xs:simpleType>
+            </xs:element>
+            -->
+			<xs:element name="targetResourceNameURI">
+				<xs:annotation>
+					<xs:documentation>The full name or a url to a resource related to the one being described; to be used for identifiers also for this version</xs:documentation>
+					<xs:appinfo>
+						<label>Target resource</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="4500"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="relationInfoType">
+		<xs:sequence>
+			<xs:element name="relationType">
+				<xs:annotation>
+					<xs:documentation>Specifies the type of relation not covered by the ones proposed by META-SHARE</xs:documentation>
+					<xs:appinfo>
+						<label>Relation type</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="relatedResource" type="ms:targetResourceInfoType">
+				<xs:annotation>
+					<xs:documentation>The full name, the identifier or the url of the related resource</xs:documentation>
+					<xs:appinfo>
+						<relation>many-to-one</relation>
+						<label>Related resource</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="modalityInfoType">
+		<xs:annotation>
+			<xs:appinfo>
+				<render-short>{modalityType} {modalityTypeDetails}</render-short>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="ms:modalityType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the type of the modality represented in the resource or processed by a tool/service</xs:documentation>
+					<xs:appinfo>
+						<label>Modality type</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="modalityTypeDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides further information on modalities</xs:documentation>
+					<xs:appinfo>
+						<label>Modality type details</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="sizePerModality" type="ms:sizeInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides information on the size per modality component</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
+						<label>Size per modality</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="participantInfoType">
+		<xs:sequence>
+			<xs:element name="alias" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The name of the person used instead of the real one</xs:documentation>
+					<xs:appinfo>
+						<label>Alias</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:restriction base="ms:myString">
+							<xs:maxLength value="500"/>
+						</xs:restriction>
+					</xs:simpleContent>
+				</xs:complexType>
+				<xs:unique name="uniqueLang11">
+					<xs:selector xpath="."/>
+					<xs:field xpath="@lang"/>
+				</xs:unique>
+			</xs:element>
+			<xs:element name="ageGroup" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The age group to which the participant belongs</xs:documentation>
+					<xs:appinfo>
+						<label>Age group</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="child"/>
+						<xs:enumeration value="teenager"/>
+						<xs:enumeration value="adult"/>
+						<xs:enumeration value="elderly"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="age" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The age of the participant</xs:documentation>
+					<xs:appinfo>
+						<label>Age</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element ref="ms:sex" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The gender of a person related to or participating in the resource</xs:documentation>
+					<xs:appinfo>
+						<label>Sex</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="origin" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The language origin of the participant</xs:documentation>
+					<xs:appinfo>
+						<label>Origin (for language)</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="native"/>
+						<xs:enumeration value="nonNative"/>
+						<xs:enumeration value="unknown"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="placeOfLiving" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The participant's place of living</xs:documentation>
+					<xs:appinfo>
+						<label>Place  of living</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="placeOfBirth" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The place in which the participant has been born</xs:documentation>
+					<xs:appinfo>
+						<label>Place of birth</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="placeOfChildhood" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The place in which the participant lived as a child</xs:documentation>
+					<xs:appinfo>
+						<label>Place of childhood</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="dialectAccent" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Provides information on the dialect of the participant</xs:documentation>
+					<xs:appinfo>
+						<label>Dialect accent</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:restriction base="ms:myString">
+							<xs:maxLength value="500"/>
+						</xs:restriction>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="speakingImpairment" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides information on any speaking impairment the participant may have</xs:documentation>
+					<xs:appinfo>
+						<label>Speaking impairment</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="200"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="hearingImpairment" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides information on any hearing impairment the participant may have</xs:documentation>
+					<xs:appinfo>
+						<label>Hearing impairment</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="200"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="smokingHabits" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides information on whether the participants smokes and on his/her smoking habits in general</xs:documentation>
+					<xs:appinfo>
+						<label>Smoking habits</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="vocalTractConditions" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides information on the vocal tract conditions that may influence the speech of the participant</xs:documentation>
+					<xs:appinfo>
+						<label>Vocal tract conditions</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="dentalProsthesis"/>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="profession" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides information on the participant's profession</xs:documentation>
+					<xs:appinfo>
+						<label>Profession</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="height" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides information on the height of the participant in cm</xs:documentation>
+					<xs:appinfo>
+						<label>Height</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="weight" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides information on the weight of the participant</xs:documentation>
+					<xs:appinfo>
+						<label>Weight</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="trainedSpeaker" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides information on whether the participant is trained in a specific task</xs:documentation>
+					<xs:appinfo>
+						<label>Trained speaker</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="placeOfSecondEducation" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies the place of the secondary education of the participant</xs:documentation>
+					<xs:appinfo>
+						<label>Place of second education</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="educationLevel" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides information on the education level of the participant</xs:documentation>
+					<xs:appinfo>
+						<label>Education level</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="captureInfoType">
+		<xs:sequence>
+			<xs:element name="capturingDeviceType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The transducers through which the data is captured</xs:documentation>
+					<xs:appinfo>
+						<label>Capturing device type</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="studioEquipment"/>
+						<xs:enumeration value="microphone"/>
+						<xs:enumeration value="closeTalkMicrophone"/>
+						<xs:enumeration value="farfieldMicrophone"/>
+						<xs:enumeration value="lavalierMicrophone"/>
+						<xs:enumeration value="microphoneArray"/>
+						<xs:enumeration value="embeddedMicrophone"/>
+						<xs:enumeration value="largeMembraneMicrophone"/>
+						<xs:enumeration value="laryngograph"/>
+						<xs:enumeration value="telephoneFixed"/>
+						<xs:enumeration value="telephoneMobile"/>
+						<xs:enumeration value="telephoneIP"/>
+						<xs:enumeration value="camera"/>
+						<xs:enumeration value="webcam"/>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="capturingDeviceTypeDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides further information on the capturing device</xs:documentation>
+					<xs:appinfo>
+						<label>Capturing device type details</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="400"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="capturingDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<label>Capturing details</label>
+					</xs:appinfo>
+					<xs:documentation>Provides further information on the capturing method and procedure</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="400"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="capturingEnvironment" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Type of capturing environment</xs:documentation>
+					<xs:appinfo>
+						<label>Capturing environment</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="complex"/>
+						<xs:enumeration value="plain"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="sensorTechnology" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies either the type of image sensor or the sensing method used in the camera or the image-capture device</xs:documentation>
+					<xs:appinfo>
+						<label>Sensor technology</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="200"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="sceneIllumination" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Information on the illumination of the scene</xs:documentation>
+					<xs:appinfo>
+						<label>Scene illumination</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="daylight"/>
+						<xs:enumeration value="fix"/>
+						<xs:enumeration value="multipleSources"/>
+						<xs:enumeration value="singleSource"/>
+						<xs:enumeration value="variable"/>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element ref="ms:personSourceSetInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Groups information on the persons (speakers, video participants, etc.) in the audio and video parts of the resource</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-one</relation>
+						<label>Person source set</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="personSourceSetInfoType">
+		<xs:sequence>
+			<xs:element name="numberOfPersons" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The number of the persons participating in the audio or video part of the resource</xs:documentation>
+					<xs:appinfo>
+						<label>Number of persons</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ageOfPersons" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The age range of the group of participants; repeat the element if needed</xs:documentation>
+					<xs:appinfo>
+						<label>Age of persons</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="child"/>
+						<xs:enumeration value="teenager"/>
+						<xs:enumeration value="adult"/>
+						<xs:enumeration value="elderly"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ageRangeStart" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Start of age range of the group of participants</xs:documentation>
+					<xs:appinfo>
+						<label>Age range start</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ageRangeEnd" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>End of age range of the group of participants</xs:documentation>
+					<xs:appinfo>
+						<label>Age range end</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sexOfPersons" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The gender of the group of participants</xs:documentation>
+					<xs:appinfo>
+						<label>Sex of persons</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="male"/>
+						<xs:enumeration value="female"/>
+						<xs:enumeration value="mixed"/>
+						<xs:enumeration value="unknown"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="originOfPersons" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The language origin of the group of participants</xs:documentation>
+					<xs:appinfo>
+						<label>Origin of persons</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="native"/>
+						<xs:enumeration value="nonNative"/>
+						<xs:enumeration value="mixed"/>
+						<xs:enumeration value="unknown"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="dialectAccentOfPersons" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Provides information on the dialect of the group of participants</xs:documentation>
+					<xs:appinfo>
+						<label>Dialect accent of persons</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="geographicDistributionOfPersons" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Gives information on the geographic distribution of the participants</xs:documentation>
+					<xs:appinfo>
+						<label>Geographic distribution of persons</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="200"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="hearingImpairmentOfPersons" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Whether the group of participants contains persons with hearing impairments</xs:documentation>
+					<xs:appinfo>
+						<label>Hearing impairment of persons</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="yes"/>
+						<xs:enumeration value="no"/>
+						<xs:enumeration value="mixed"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="speakingImpairmentOfPersons" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Whether the group of participants contains persons withwith speakingimpairments</xs:documentation>
+					<xs:appinfo>
+						<label>Speaking impairment of persons</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="yes"/>
+						<xs:enumeration value="no"/>
+						<xs:enumeration value="mixed"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="numberOfTrainedSpeakers" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The number of participants that have been trained for the specific task</xs:documentation>
+					<xs:appinfo>
+						<label>Number of trained speakers</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="speechInfluences" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the factors influencing speech</xs:documentation>
+					<xs:appinfo>
+						<label>Speech influences</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="alcohol"/>
+						<xs:enumeration value="sleepDeprivation"/>
+						<xs:enumeration value="hyperbaric"/>
+						<xs:enumeration value="medication"/>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="participantInfo" type="ms:participantInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information on the individual person(s) participating in the audio, video, sensorimotor (textNumerical) part of the resource</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<label>Participant</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="settingInfoType">
+		<xs:annotation>
+			<xs:appinfo>
+				<render-short>{naturality} {conversationalType} {scenarioType} {audience} {interactivity}</render-short>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="naturality" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies the level of naturality for multimodal/multimedia resources</xs:documentation>
+					<xs:appinfo>
+						<label>Naturality</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="natural"/>
+						<xs:enumeration value="planned"/>
+						<xs:enumeration value="semiPlanned"/>
+						<xs:enumeration value="readSpeech"/>
+						<xs:enumeration value="spontaneous"/>
+						<xs:enumeration value="elicited"/>
+						<xs:enumeration value="assisted"/>
+						<xs:enumeration value="prompted"/>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="conversationalType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the conversational type of the resource</xs:documentation>
+					<xs:appinfo>
+						<label>Conversational type</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="monologue"/>
+						<xs:enumeration value="dialogue"/>
+						<xs:enumeration value="multilogue"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="scenarioType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Indicates the task defined for the conversation or the interaction of participants</xs:documentation>
+					<xs:appinfo>
+						<label>Scenario type</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="frogStory"/>
+						<xs:enumeration value="mapTask"/>
+						<xs:enumeration value="onlineEducationalGame"/>
+						<xs:enumeration value="pearStory"/>
+						<xs:enumeration value="rolePlay"/>
+						<xs:enumeration value="wordGame"/>
+						<xs:enumeration value="wizardOfOz"/>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="audience" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indication of the intended audience size</xs:documentation>
+					<xs:appinfo>
+						<label>Audience</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="no"/>
+						<xs:enumeration value="few"/>
+						<xs:enumeration value="some"/>
+						<xs:enumeration value="largePublic"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="interactivity" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates the level of conversational interaction between speakers (for audio component) or participants (for video component)</xs:documentation>
+					<xs:appinfo>
+						<label>Interactivity</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="interactive"/>
+						<xs:enumeration value="nonInteractive"/>
+						<xs:enumeration value="semiInteractive"/>
+						<xs:enumeration value="overlapping"/>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="interaction" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies the parts that interact in an audio or video component</xs:documentation>
+					<xs:appinfo>
+						<label>Interaction</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="runningEnvironmentInfoType">
+		<xs:sequence>
+			<xs:element name="requiredSoftware" type="ms:targetResourceInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Additional software required for running a tool and/or computational grammar</xs:documentation>
+					<xs:appinfo>
+						<relation>many-to-many</relation>
+						<label>Required software</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="requiredHardware" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Hardware required for running a tool and/or computational grammar</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<label>Required hardware</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+						<xs:enumeration value="graphicCard"/>
+						<xs:enumeration value="microphone"/>
+						<xs:enumeration value="ocrSystem"/>
+						<xs:enumeration value="specialHardwareEquipment"/>
+						<xs:enumeration value="none"/>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="requiredLRs" type="ms:targetResourceInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>If for running a tool and/or computational grammar, specific LRs (e.g. a grammar, a list of words etc.) are required</xs:documentation>
+					<xs:appinfo>
+						<relation>many-to-many</relation>
+						<label>Required language resources</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="runningEnvironmentDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides further information on the running environment</xs:documentation>
+					<xs:appinfo>
+						<label>Running environment details</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="200"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="recordingInfoType">
+		<xs:sequence>
+			<xs:element name="recordingDeviceType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The nature of the recording platform hardware and the storage medium</xs:documentation>
+					<xs:appinfo>
+						<label>Recording device type</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="hardDisk"/>
+						<xs:enumeration value="dv"/>
+						<xs:enumeration value="tapeVHS"/>
+						<xs:enumeration value="flash"/>
+						<xs:enumeration value="DAT"/>
+						<xs:enumeration value="soundBlasterCard"/>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="recordingDeviceTypeDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Free text description of the recoding device</xs:documentation>
+					<xs:appinfo>
+						<label>Recording device type details</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="recordingPlatformSoftware" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The software used for the recording platform</xs:documentation>
+					<xs:appinfo>
+						<label>Recording platform software</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="recordingEnvironment" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Where the recording took place</xs:documentation>
+					<xs:appinfo>
+						<label>Recording environment</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="office"/>
+						<xs:enumeration value="inCar"/>
+						<xs:enumeration value="studio"/>
+						<xs:enumeration value="conferenceRoom"/>
+						<xs:enumeration value="lectureRoom"/>
+						<xs:enumeration value="industrial"/>
+						<xs:enumeration value="transport"/>
+						<xs:enumeration value="openPublicPlace"/>
+						<xs:enumeration value="closedPublicPlace"/>
+						<xs:enumeration value="anechoicChamber"/>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="sourceChannel" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Information on the source channel</xs:documentation>
+					<xs:appinfo>
+						<label>Source channel</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="internet"/>
+						<xs:enumeration value="radio"/>
+						<xs:enumeration value="tv"/>
+						<xs:enumeration value="telephone"/>
+						<xs:enumeration value="laryngograph"/>
+						<xs:enumeration value="airflow"/>
+						<xs:enumeration value="EMA"/>
+						<xs:enumeration value="webCam"/>
+						<xs:enumeration value="camcorder"/>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="sourceChannelType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Type of the source channel</xs:documentation>
+					<xs:appinfo>
+						<label>Source channel type</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="ISDN"/>
+						<xs:enumeration value="GSM"/>
+						<xs:enumeration value="3G"/>
+						<xs:enumeration value="CDMA"/>
+						<xs:enumeration value="DVB-T"/>
+						<xs:enumeration value="DVB-S"/>
+						<xs:enumeration value="DVB-C"/>
+						<xs:enumeration value="VOIP"/>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="sourceChannelName" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The name of the specific source recorded</xs:documentation>
+					<xs:appinfo>
+						<label>Source channel name</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="sourceChannelDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The details of the channel equipment used (brand, type etc.)</xs:documentation>
+					<xs:appinfo>
+						<label>Source channel details</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="200"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="recorder" type="ms:actorInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Information on the recorder(s) of the audio or video part of the resource</xs:documentation>
+					<xs:appinfo>
+						<relation>many-to-many</relation>
+						<label>Recorder</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="resolutionInfoType">
+		<xs:annotation>
+			<xs:appinfo>
+				<render-short>{sizeWidth} {sizeHeight} {resolutionStandard}</render-short>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="sizeWidth" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The frame width in pixels</xs:documentation>
+					<xs:appinfo>
+						<label>Size width</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sizeHeight" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The frame height in pixels</xs:documentation>
+					<xs:appinfo>
+						<label>Size height</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="resolutionStandard" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The standard to which  the resolution conforms</xs:documentation>
+					<xs:appinfo>
+						<label>Resolution standard</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+						<xs:enumeration value="VGA"/>
+						<xs:enumeration value="HD.720"/>
+						<xs:enumeration value="HD.1080"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="compressionInfoType">
+		<xs:sequence>
+			<xs:element name="compression" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Whether the audio, video or image is compressed or not</xs:documentation>
+					<xs:appinfo>
+						<label>Compression</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="compressionName" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The name of the compression applied</xs:documentation>
+					<xs:appinfo>
+						<label>Compression name</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+						<xs:enumeration value="mpg"/>
+						<xs:enumeration value="avi"/>
+						<xs:enumeration value="mov"/>
+						<xs:enumeration value="flac"/>
+						<xs:enumeration value="shorten"/>
+						<xs:enumeration value="mp3"/>
+						<xs:enumeration value="oggVorbis"/>
+						<xs:enumeration value="atrac"/>
+						<xs:enumeration value="aac"/>
+						<xs:enumeration value="mpeg"/>
+						<xs:enumeration value="realAudio"/>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="compressionLoss" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Whether there is loss due to compression</xs:documentation>
+					<xs:appinfo>
+						<label>Compression loss</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="linkToOtherMediaInfoType">
+		<xs:sequence>
+			<xs:element name="otherMedia">
+				<xs:annotation>
+					<xs:documentation>Specifies the media types that are linked to the media type described within the same resource</xs:documentation>
+					<xs:appinfo>
+						<label>Other media</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="text"/>
+						<xs:enumeration value="textNumerical"/>
+						<xs:enumeration value="video"/>
+						<xs:enumeration value="audio"/>
+						<xs:enumeration value="image"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="mediaTypeDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides further information on the way the media types are linked and/or synchronized with each other within the same resource</xs:documentation>
+					<xs:appinfo>
+						<label>Media type details</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="synchronizedWithText" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Whether video, text and textNumerical media type is synchronized with text within the same resource</xs:documentation>
+					<xs:appinfo>
+						<label>Synchronized with text</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="synchronizedWithAudio" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Whether text, video or textNumerical media type is synchronized with audio within the same resource</xs:documentation>
+					<xs:appinfo>
+						<label>Synchronized with audio</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="synchronizedWithVideo" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Whether text or textNumerical media type is synchronized with video within the same resource</xs:documentation>
+					<xs:appinfo>
+						<label>Synchronized with video</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="synchronizedWithImage" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Whether text or textNumerical media type is synchronized with image within the same resource</xs:documentation>
+					<xs:appinfo>
+						<label>Synchronized with image</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="synchronizedWithTextNumerical" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Whether video or audio media type is synchronized with the textNumerical (representation of sensorimotor measurements) within the same resource </xs:documentation>
+					<xs:appinfo>
+						<label>Synchronized with text numerical</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="documentListType">
+		<xs:sequence>
+			<xs:element ref="ms:documentInfo" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information on a document in a structured format; it can be used both for published or unpublished documents; depending on the role of the document (e.g. usage report, validation report, annotation manual etc.), it can be found at various places of the metadata</xs:documentation>
+					<xs:appinfo>
+						<label>Document</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- defintion of elements -->
+	<xs:element name="documentList" type="ms:documentListType">
+		<xs:annotation>
+			<xs:documentation>METASHARE core element</xs:documentation>
+			<xs:appinfo>
+				<label>Document list</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="relationInfo" type="ms:relationInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on the relations of the resource being described with other resources</xs:documentation>
+			<xs:appinfo>
+				<label>Relation</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="identificationInfo" type="ms:identificationInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information needed to identify the resource</xs:documentation>
+			<xs:appinfo>
+				<label>Identification</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="versionInfo" type="ms:versionInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on a specific version or release of the resource</xs:documentation>
+			<xs:appinfo>
+				<label>Version</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="validationInfo" type="ms:validationInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on validation of a resource; it can be repeated to allow for different validations (e.g. formal validation of the whole resource; content validation of one part of the resource etc.). </xs:documentation>
+			<xs:appinfo>
+				<label>Validation</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="resourceCreationInfo" type="ms:resourceCreationInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on the creation procedure of a resource</xs:documentation>
+			<xs:appinfo>
+				<label>Resource creation</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="metadataInfo" type="ms:metadataInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on the metadata record itself</xs:documentation>
+			<xs:appinfo>
+				<label>Metadata</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="resourceDocumentationInfo" type="ms:resourceDocumentationInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on any document describing the resource</xs:documentation>
+			<xs:appinfo>
+				<label>Resource documentation</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="domainInfo" type="ms:domainInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on domains represented in the resource; can be repeated for parts of the resource with distinct domain</xs:documentation>
+			<xs:appinfo>
+				<label>Domain</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="annotationInfo" type="ms:annotationInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on the annotated part(s) of a resource</xs:documentation>
+			<xs:appinfo>
+				<label>Annotation</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="documentInfo" type="ms:documentInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on a document in a structured format; it can be used both for published or unpublished documents; depending on the role of the document (e.g. usage report, validation report, annotation manual etc.), it can be found at various places of the metadata</xs:documentation>
+			<xs:appinfo>
+				<label>Document</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="domain">
+		<xs:annotation>
+			<xs:documentation>Specifies the application domain of the resource or the tool/service</xs:documentation>
+			<xs:appinfo>
+				<inline-type>tabular</inline-type>
+				<label>Domain</label>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="100"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="conformanceToStandardsBestPractices">
+		<xs:annotation>
+			<xs:documentation>Specifies the standards or the best practices to which the tagset used for the annotation conforms </xs:documentation>
+			<xs:appinfo>
+				<label>Conformance to standards / best practices</label>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="100"/>
+				<xs:enumeration value="BML"/>
+				<xs:enumeration value="CES"/>
+				<xs:enumeration value="EAGLES"/>
+				<xs:enumeration value="EML"/>
+				<xs:enumeration value="EMMA"/>
+				<xs:enumeration value="GMX"/>
+				<xs:enumeration value="GrAF"/>
+				<xs:enumeration value="HamNoSys"/>
+				<xs:enumeration value="InkML"/>
+				<xs:enumeration value="ILSP_NLP"/>
+				<xs:enumeration value="ISO12620"/>
+				<xs:enumeration value="ISO16642"/>
+				<xs:enumeration value="ISO1987"/>
+				<xs:enumeration value="ISO26162"/>
+				<xs:enumeration value="ISO30042"/>
+				<xs:enumeration value="ISO704"/>
+				<xs:enumeration value="LAF"/>
+				<xs:enumeration value="LMF"/>
+				<xs:enumeration value="MAF"/>
+				<xs:enumeration value="MLIF"/>
+				<xs:enumeration value="MOSES"/>
+				<xs:enumeration value="MULTEXT"/>
+				<xs:enumeration value="MUMIN"/>
+				<xs:enumeration value="multimodalInteractionFramework"/>
+				<xs:enumeration value="OAXAL"/>
+				<xs:enumeration value="OWL"/>
+				<xs:enumeration value="PANACEA"/>
+				<xs:enumeration value="pennTreeBank"/>
+				<xs:enumeration value="pragueTreebank"/>
+				<xs:enumeration value="RDF"/>
+				<xs:enumeration value="SemAF"/>
+				<xs:enumeration value="SemAF_DA"/>
+				<xs:enumeration value="SemAF_NE"/>
+				<xs:enumeration value="SemAF_SRL"/>
+				<xs:enumeration value="SemAF_DS"/>
+				<xs:enumeration value="SKOS"/>
+				<xs:enumeration value="SRX"/>
+				<xs:enumeration value="SynAF"/>
+				<xs:enumeration value="TBX"/>
+				<xs:enumeration value="TMX"/>
+				<xs:enumeration value="TEI"/>
+				<xs:enumeration value="TEI_P3"/>
+				<xs:enumeration value="TEI_P4"/>
+				<xs:enumeration value="TEI_P5"/>
+				<xs:enumeration value="TimeML"/>
+				<xs:enumeration value="XCES"/>
+				<xs:enumeration value="XLIFF"/>
+				<xs:enumeration value="WordNet"/>
+				<xs:enumeration value="other"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="modalityInfo" type="ms:modalityInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on the modalities represented in the resource</xs:documentation>
+			<xs:appinfo>
+				<label>Modality</label>
+				<label-plural>Modalities</label-plural>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="creationInfo" type="ms:creationInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on the resource creation (e.g. for corpora, selection of texts/audio files/ video files etc. and structural encoding thereof; for lexica, construction of lemma list etc.)</xs:documentation>
+			<xs:appinfo>
+				<label>Creation</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="personSourceSetInfo" type="ms:personSourceSetInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on the persons (speakers, video participants, etc.) in the audio and video parts of the resource</xs:documentation>
+			<xs:appinfo>
+				<label>Person source set</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="captureInfo" type="ms:captureInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on the capture of the audio or video part of a corpus</xs:documentation>
+			<xs:appinfo>
+				<label>Capture</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="compressionInfo" type="ms:compressionInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on the compression status and method of a resource</xs:documentation>
+			<xs:appinfo>
+				<label>Compression</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="resolutionInfo" type="ms:resolutionInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on the image resolution</xs:documentation>
+			<xs:appinfo>
+				<label>Resolution</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="documentationInfo" type="ms:documentationInfoType">
+		<xs:annotation>
+			<xs:documentation>Used to bring together information on documents (as a structured bibliographic record or in an unstructured format) and free text descriptions</xs:documentation>
+			<xs:appinfo>
+				<label>Documentation</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="recordingInfo" type="ms:recordingInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on the recording of the audio or video part of a resource</xs:documentation>
+			<xs:appinfo>
+				<label>Recording</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="linkToOtherMediaInfo" type="ms:linkToOtherMediaInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on the way different media of the resource interact with or link to each other. To be used for multimodal resources or for resources representing sensorimotor data</xs:documentation>
+			<xs:appinfo>
+				<label>Link to other media</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="settingInfo" type="ms:settingInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on the setting of the audio and/or video part of a resource</xs:documentation>
+			<xs:appinfo>
+				<label>Setting</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="runningEnvironmentInfo" type="ms:runningEnvironmentInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on the running environment of a tool or a language description</xs:documentation>
+			<xs:appinfo>
+				<label>Running environment</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="sex">
+		<xs:annotation>
+			<xs:documentation>The gender of a person related to or participating in the resource</xs:documentation>
+			<xs:appinfo>
+				<label>Sex</label>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="30"/>
+				<xs:enumeration value="male"/>
+				<xs:enumeration value="female"/>
+				<xs:enumeration value="unknown"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="theoreticModel">
+		<xs:annotation>
+			<xs:documentation>Name of the theoretic model applied for the creation or enrichment of the resource, and/or a reference (URL or bibliographic reference) to informative material about the theoretic model used</xs:documentation>
+			<xs:appinfo>
+				<label>Theoretic model</label>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="500"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="originalSource" type="ms:targetResourceInfoType">
+		<xs:annotation>
+			<xs:documentation>The name, the identifier or the url of thethe original resources that were at the base of the creation process of the resource</xs:documentation>
+			<xs:appinfo>
+				<label>Original source</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

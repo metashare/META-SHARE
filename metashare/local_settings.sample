@@ -1,0 +1,104 @@
+from os.path import abspath, dirname, join
+import tempfile
+ROOT_PATH = abspath(dirname(__file__))
+
+# The URL for this META-SHARE node django application.  Do not use trailing /.
+# This URL has to include DJANGO_BASE (without its trailing /)!
+DJANGO_URL = 'http://www.example.com/path/to/metashare'
+
+# The base path under which django is deployed at DJANGO_URL.  Use trailing /.
+# Do not use leading / though.  Leave empty if META-SHARE is deployed directly
+# under the given DJANGO_URL.
+DJANGO_BASE = 'path/to/metashare/'
+
+# Required if deployed with lighttpd.
+# FORCE_SCRIPT_NAME = ""
+
+# Language code for this installation. All choices can be found here:
+# http://www.i18nguy.com/unicode/language-identifiers.html
+USE_L10N = True
+LANGUAGE_CODE = 'en-us'
+
+# Path to the local storage layer path used for persistent object storage.
+STORAGE_PATH = '/path/to/storage/path'
+
+# Debug settings, setting DEBUG=True will give exception stacktraces.
+DEBUG = False
+TEMPLATE_DEBUG = DEBUG
+DEBUG_JS = DEBUG
+SECRET_KEY = ''
+LOG_FILENAME = join(tempfile.gettempdir(), "metashare.log")
+
+# Configure administrators for this django project.  If DEBUG=False, errors
+# will be reported as emails to these persons...
+ADMINS = (
+    # ('Your Name', 'your_email@domain.com'),
+)
+LOCK_DIR = join(tempfile.gettempdir(), 'metashare-locks')
+MAX_DIGEST_AGE = 60 * 60 * 24
+
+# configure the database to use (see
+# https://docs.djangoproject.com/en/1.3/ref/settings/#databases for details)
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql',
+                                         # 'sqlite3', 'oracle'.
+        'NAME': '',                      # database name -- or path to file if
+                                         # using sqlite3, e.g.
+                                         # '{0}/testing.db'.format(ROOT_PATH)
+        'TEST_NAME': '',                 # test database name -- or path to file
+                                         # if using sqlite3, e.g.
+                                         # '{0}/testing2.db'.format(ROOT_PATH)
+                                         # mandatory when using Selenium tests
+        'USER': '',                      # Not used with sqlite3.
+        'PASSWORD': '',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to 'localhost' for localhost.
+                                         # Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default.
+                                         # Not used with sqlite3.
+        # Use the following for PostgreSQL.
+       'AUTOCOMMIT': True,
+    }
+}
+
+# the URL of the Solr server (or server core) which is used as a search backend
+SOLR_URL = 'http://127.0.0.1:8983/solr/main'
+# the URL of the Solr server (or server core) which is used as a search backend
+# when running tests
+TESTING_SOLR_URL = 'http://127.0.0.1:8983/solr/testing'
+
+# Instead of using an email server, print emails to server console:
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# For testing, use a builtin email server (not for production use):
+EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
+
+# For production use, you have to configure a proper mail server:
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#
+# See the Django documentation for more details:
+# - https://docs.djangoproject.com/en/1.3/topics/email/#smtp-backend
+
+# Local time zone for this installation. Choices can be found here:
+# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
+# although not all choices may be available on all operating systems.
+# If running in a Windows environment this must be set to the same as your
+# system time zone.
+TIME_ZONE = 'Europe/Berlin'
+
+# The location of the xdiff tool to compare XML files.
+XDIFF_LOCATION = "{0}/../misc/tools/xdiff-src/xdiff".format(ROOT_PATH)
+
+# The web browser to use for the Selenium tests; possible values are:
+# Firefox, Ie, Opera, Chrome
+SELENIUM_DRIVER = 'Firefox'
+
+# The port of the Selenium test server;
+# this must be the same port as used in DJANGO_URL
+SELENIUM_TESTSERVER_PORT = 8000
+
+# You cann add custom web analytics application settings here through the Django
+# Analytical framework which is integrated in META-SHARE. By default, all
+# META-SHARE services are monitored with a common Google Analytics tracking
+# code; see the Installation Manual for more information on this.
+# For the integration of other web analytics services' options, see
+# <http://packages.python.org/django-analytical/>.

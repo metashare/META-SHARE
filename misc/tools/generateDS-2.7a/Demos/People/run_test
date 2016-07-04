@@ -1,0 +1,17 @@
+#!/bin/sh -x
+
+if [ $# -ne 1 ]; then
+    echo
+    echo Usage: run_full_test out_file_name_stem
+    echo
+    exit 0
+fi
+
+generateDS.py -f -m \
+  --namespacedef='xmlns:pl="http://kuhlman.com/people.xsd"' \
+  --super=$1sup -o $1sup.py -s $1sub.py \
+  --member-specs=dict \
+  -m \
+  people.xsd
+
+python $1sub.py people.xml | tee $1.xml

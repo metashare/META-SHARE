@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load email_protection %}
+
+{% block content %}
+<h2>Internal Server Error (500)</h2>
+<div class="content_box">
+<p>We&rsquo;re sorry, but an internal error occurred when processing your request.</p>
+<p>Please try again and, if the error persists, either contact <a href="{% url metashare.accounts.views.contact %}">the node maintainers</a> or the the META-SHARE Helpdesk ({% encrypt_email 'helpdesk-technical@meta-share.eu' %}).</p>
+</div>
+{% endblock %}

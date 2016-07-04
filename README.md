@@ -1,4 +1,3 @@
-# META-SHARE-3.1.1
 META-SHARE SOFTWARE
 ===================
 
@@ -11,7 +10,8 @@ META-SHARE 3.1, which uses Django 1.4.19 and is available from
 https://github.com/JuliBakagianni/META-SHARE/tree/metashare-3.1.
 
 The commits from e86b32637d8767269c06af2dcc635019edca0e76 to
-4eca912fab7cb2816d8e47ddc8295299a8a167ac are:
+
+585a2934deed7191113db526b73eec6928912640 are:
 
 - Django 1.7.11 ports and merges of the ILSP-developed updates to META-SHARE, as
   available from

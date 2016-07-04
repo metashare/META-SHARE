@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">LABEL-LEX (MW)</resourceName>
+      <resourceName lang="fr">LABEL-LEX (MW)</resourceName>
+      <description lang="en">LABEL-LEX (MW) is a Portuguese formalized lexicon, containing 88 619 inflected multiword lexical units (formally, sequences of simple words). The units are distributed as follows:-	85,881 nouns, with information about type, gender, number, inflected forms, irregular inflected forms and subcategorisation frames-	2,204 adverbs-	409 adjectives, with information about degree, gender, number, comparison, position, inflected forms, irregular inflected forms and subcategorisation frames -	125 pronouns, prepositions/postpositions and conjunctionsFrom a linguistic point of view, multiword lexical units exhibit distributional and selectional constraints; they lack compositionality, and have, most of the time, idiomatic interpretations.MWUs occur frequently in both everyday language and technical and scientific texts to express ideas and concepts that in general cannot be stated by "free" linguistic structures.So it is impossible to envisage automatic text analysis without adequate identification and treatment of multiword lexical units. The meaning of a text is mostly supplied by frequent occurrence of multiword units, especially by compound nouns.Other formats and other services may be supplied by the data owner upon request (e.g. conversion into buyer's formalism, selection of subsets of the words missing from your own dictionary).</description>
+      <description lang="fr">Ce lexique de portugais formalisé contient 88 619 unités lexicales fléchies constituées d'expressions composées (des séquences de mots simples). Les unités sont réparties comme suit :-	85 881 noms, avec des informations sur le type, genre, nombre, les formes fléchies, les formes irrégulières non fléchies et les cadres de sous-catégorisation-	2 204 adverbes-	409 adjectifs, avec des informations sur le degré, genre, nombre, comparaison, position, les formes fléchies, les formes irrégulières non fléchies et les cadres de sous-catégorisation-	125 pronoms, prépositions/postpositions et conjonctionsD'un point de vue linguistique, les unités lexicales constituées d'expressions composées (ou unités MWU) présentent des contraintes en termes de distribution et de sélection, elles manquent de compositionnalité et sont sujettes, la plupart du temps, à des interprétations idiomatiques.Les unités MWU sont fréquentes dans le langage courant comme dans la littérature scientifique et technique car elles permettent d'exprimer des idées et des concepts que les périphrases ne peuvent généralement traduire.Par conséquent, il est impossible d'envisager une analyse automatique de texte sans identification et traitement adaptés des unités lexicales MWU. En effet, les expressions composées, et les mots composés, notamment, sont fréquemment les éléments porteurs de sens d'un texte.</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=700</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-L0054</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>15000.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_VAR</licence>
+         <restrictionsOfUse>commercialUse</restrictionsOfUse>
+         <fee>15000.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>5000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_VAR</licence>
+         <restrictionsOfUse>commercialUse</restrictionsOfUse>
+         <fee>15000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>10000.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_VAR</licence>
+         <restrictionsOfUse>commercialUse</restrictionsOfUse>
+         <fee>10000.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>3000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_VAR</licence>
+         <restrictionsOfUse>commercialUse</restrictionsOfUse>
+         <fee>10000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <availabilityStartDate>2005-02-01</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Valérie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <revision>Creation date: 1995Update frequency: annuallyLast update: 2004</revision>
+      <lastDateUpdated>2010-10-21</lastDateUpdated>
+   </versionInfo>
+   <resourceCreationInfo>
+      <creationEndDate>1995-01-01</creationEndDate>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>por</languageId>
+                  <languageName>Portuguese</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>no size available</size>
+                  <sizeUnit>other</sizeUnit>
+               </sizeInfo>
+               <textFormatInfo>
+                  <mimeType>Plain text</mimeType>
+               </textFormatInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

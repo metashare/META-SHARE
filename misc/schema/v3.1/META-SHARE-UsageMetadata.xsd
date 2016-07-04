@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited by ILSP/Athena R.C. -->
+<xs:schema xmlns:ms="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.meta-share.org/META-SHARE_XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.1" xml:lang="en">
+	<xs:include schemaLocation="./META-SHARE-SimpleTypes.xsd"/>
+	<xs:include schemaLocation="./META-SHARE-RoleTypes.xsd"/>
+	<xs:include schemaLocation="./META-SHARE-LicenseMetadata.xsd"/>
+	<xs:include schemaLocation="./META-SHARE-LanguageMetadata.xsd"/>
+	<xs:include schemaLocation="./META-SHARE-BaseTypes.xsd"/>
+	<xs:include schemaLocation="./META-SHARE-ISOVocabularies.xsd"/>
+	<!-- definition of complex types -->
+	<!-- media type info TextInfo/imageInfo/AudioInfo/VideInfo etc-->
+	<!--
+	<xs:complexType name="ResourceBaseType" abstract="true"/>
+	-->
+	<xs:complexType name="projectInfoType">
+		<xs:annotation>
+			<xs:appinfo>
+				<render-short>{projectName} ({projectShortName})</render-short>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="projectName" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The full name of a project related to the resource</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<label>Project name</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:restriction base="ms:myString">
+							<xs:maxLength value="500"/>
+						</xs:restriction>
+					</xs:simpleContent>
+				</xs:complexType>
+				<xs:unique name="uniqueLang5">
+					<xs:selector xpath="."/>
+					<xs:field xpath="@lang"/>
+				</xs:unique>
+			</xs:element>
+			<xs:element name="projectShortName" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A short name or abbreviation of a project related to the resource</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<label>Project short name</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:restriction base="ms:myString">
+							<xs:maxLength value="500"/>
+						</xs:restriction>
+					</xs:simpleContent>
+				</xs:complexType>
+				<xs:unique name="uniqueLang4">
+					<xs:selector xpath="."/>
+					<xs:field xpath="@lang"/>
+				</xs:unique>
+			</xs:element>
+			<xs:element name="projectID" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<xs:documentation>An unambiguous referent to a project related to the resource</xs:documentation>
+						<relation>one-to-one</relation>
+						<label>Project identifier</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element ref="ms:url" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A URL used as homepage of an entity (e.g. of a person, organization, resource etc.); it provides general information (for instance in the case of a resource, it may present a description of the resource, its creators and possibly include links to the URL where it can be accessed from)</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<label>URL (Landing page)</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fundingType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the type of funding of the project</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<label>Funding type</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="other">
+							<xs:annotation>
+								<xs:documentation>When none of the above is applicable</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="ownFunds">
+							<xs:annotation>
+								<xs:documentation>Funding from the resource creators’s own sources</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="nationalFunds">
+							<xs:annotation>
+								<xs:documentation>Funding coming from national sources</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="euFunds">
+							<xs:annotation>
+								<xs:documentation>Funding coming from EU sources</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="funder" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The full name of the funder of the project </xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-many</relation>
+						<label>Funder</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="fundingCountry" type="ms:regionNameType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The name of the funding country, in case of national funding as mentioned in ISO3166</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-many</relation>
+						<label>Funding country</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fundingCountryId" type="ms:regionIdType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The identifier of the funding country, in case of national funding as mentioned in ISO3166</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-many</relation>
+						<label>Funding country identifier</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="projectStartDate" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The starting date of a project related to the resource</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Project start date</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="projectEndDate" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The end date of a project related to the resources</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Project end date</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="usageInfoType">
+		<xs:annotation>
+			<xs:appinfo>
+				<render-short>foreseen uses: {foreseenUseInfo} / actual uses: {actualUseInfo}</render-short>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="accessTool" type="ms:targetResourceInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The name or the identifier or the url of the tool used to access a resource (e.g. a corpus workbench)</xs:documentation>
+					<xs:appinfo>
+						<relation>many-to-many</relation>
+						<label>Access tool</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="resourceAssociatedWith" type="ms:targetResourceInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Refers to another resource that the resource described uses for its operation</xs:documentation>
+					<xs:appinfo>
+						<relation>many-to-many</relation>
+						<label>Resource associated with</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:foreseenUseInfo" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information on the use for which the resource is created</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-many</relation>
+						<label>Foreseen use</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:actualUseInfo" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information on how the resource has already been used</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-many</relation>
+						<label>Actual use</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="foreseenUseInfoType">
+		<xs:annotation>
+			<xs:appinfo>
+				<render-short>{foreseenUse}, NLP specific: {useNLPSpecific}</render-short>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="foreseenUse">
+				<xs:annotation>
+					<xs:documentation>Classification of the intended use of the resource</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Foreseen use</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="humanUse"/>
+						<xs:enumeration value="nlpApplications"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element ref="ms:useNLPSpecific" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the NLP application for which the resource iscreated or the application in which it has actually been used</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-many</relation>
+						<label>Use specific to NLP</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="actualUseInfoType">
+		<xs:annotation>
+			<xs:appinfo>
+				<render-short>{actualUse}, NLP specific: {useNLPSpecific}</render-short>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="actualUse">
+				<xs:annotation>
+					<xs:documentation>Classification of the actual use of the resource</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Actual use</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="humanUse"/>
+						<xs:enumeration value="nlpApplications"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element ref="ms:useNLPSpecific" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the NLP application for which the resource iscreated or the application in which it has actually been used.</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-many</relation>
+						<label>Use specific to NLP</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="usageReport" type="ms:documentationInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Reports on the research papers documenting the usage of a resource, either in a structured form or in free text</xs:documentation>
+					<xs:appinfo>
+						<relation>many-to-many</relation>
+						<label>Usage report</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="derivedResource" type="ms:targetResourceInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The name, the identifier or the url of the outcome or product of the resource.</xs:documentation>
+					<xs:appinfo>
+						<relation>many-to-many</relation>
+						<label>Derived resource</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="usageProject" type="ms:projectInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information on the project in which the resource has been used</xs:documentation>
+					<xs:appinfo>
+						<relation>many-to-many</relation>
+						<label>Usage project</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="actualUseDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Reports on the usage of the resource in free text</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Actual use details</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="250"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="usageInfo" type="ms:usageInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on usage of the resource (both intended and actual use)</xs:documentation>
+			<xs:appinfo>
+				<label>Usage</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="foreseenUseInfo" type="ms:foreseenUseInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on the use for which the resource is created</xs:documentation>
+			<xs:appinfo>
+				<label>Foreseen use</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="actualUseInfo" type="ms:actualUseInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on how the resource has already been used</xs:documentation>
+			<xs:appinfo>
+				<label>Actual use</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="projectListType">
+		<xs:sequence>
+			<xs:element ref="ms:projectInfo" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information on a project related to the resource(e.g. a project the resource has been used in; a funded project that led to the resource creation etc.)</xs:documentation>
+					<xs:appinfo>
+						<label>Project</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="projectInfo" type="ms:projectInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on a project related to the resource(e.g. a project the resource has been used in; a funded project that led to the resource creation etc.)</xs:documentation>
+			<xs:appinfo>
+				<label>Project</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="projectInfoList" type="ms:projectListType">
+		<xs:annotation>
+			<xs:documentation>List of projects</xs:documentation>
+			<xs:appinfo>
+				<label>Project list</label>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

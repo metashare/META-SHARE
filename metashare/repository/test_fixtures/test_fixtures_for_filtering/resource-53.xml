@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.meta-share.org/META-SHARE_XMLSchema http://www.meta-share.org/META-SHARE_XMLSchema/v3.1/META-SHARE-Resource.xsd">
+	<identificationInfo>
+		<resourceName lang="en">testGrammar</resourceName>
+		<description lang="en">description of textGrammar</description>
+		<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+	</identificationInfo>
+	<distributionInfo>
+		<availability>available</availability>
+		<licenceInfo>
+			<licence>CC-BY-NC-SA</licence>
+			<version>4.0</version>
+			<restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+		</licenceInfo>
+	</distributionInfo>
+	<contactPerson>
+		<surname lang="en">Labropoulou</surname>
+		<givenName lang="en">Penny</givenName>
+		<sex>female</sex>
+		<communicationInfo>
+			<email>penny@ilsp.athena-innovation.gr</email>
+			<url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=37&amp;Itemid=171</url>
+			<telephoneNumber>+302106875445</telephoneNumber>
+			<faxNumber>+302106854270</faxNumber>
+		</communicationInfo>
+		<position>Senior Research Fellow</position>
+		<affiliation>
+			<organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+			<organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+			<communicationInfo>
+				<email>www@ilsp.athena-innovation.gr</email>
+				<url>http://www.ilsp.gr/</url>
+				<address>Artemidos 6 &amp; Epidavrou</address>
+				<zipCode>GR-15125</zipCode>
+				<city>Maroussi</city>
+				<country>Greece</country>
+				<countryId>GR</countryId>
+				<telephoneNumber>+302106875300</telephoneNumber>
+				<faxNumber>+302106854270</faxNumber>
+				<faxNumber>+302106856794</faxNumber>
+			</communicationInfo>
+		</affiliation>
+	</contactPerson>
+	<metadataInfo>
+		<metadataCreationDate>2012-09-14</metadataCreationDate>
+		<metadataCreator>
+			<surname lang="en">Labropoulou</surname>
+			<givenName lang="en">Penny</givenName>
+			<sex>female</sex>
+			<communicationInfo>
+				<email>penny@ilsp.athena-innovation.gr</email>
+				<url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=37&amp;Itemid=171</url>
+				<telephoneNumber>+302106875445</telephoneNumber>
+				<faxNumber>+302106854270</faxNumber>
+			</communicationInfo>
+			<position>Senior Research Fellow</position>
+			<affiliation>
+				<organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
+				<organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
+				<communicationInfo>
+					<email>www@ilsp.athena-innovation.gr</email>
+					<url>http://www.ilsp.gr/</url>
+					<address>Artemidos 6 &amp; Epidavrou</address>
+					<zipCode>GR-15125</zipCode>
+					<city>Maroussi</city>
+					<country>Greece</country>
+					<countryId>GR</countryId>
+					<telephoneNumber>+302106875300</telephoneNumber>
+					<faxNumber>+302106854270</faxNumber>
+					<faxNumber>+302106856794</faxNumber>
+				</communicationInfo>
+			</affiliation>
+		</metadataCreator>
+		<metadataLanguageName>Old English (ca. 450-1100)</metadataLanguageName>
+		<metadataLanguageId>ang</metadataLanguageId>
+		<metadataLastDateUpdated>2012-09-14</metadataLastDateUpdated>
+	</metadataInfo>
+	<resourceComponentType>
+		<languageDescriptionInfo>
+			<resourceType>languageDescription</resourceType>
+			<languageDescriptionType>grammar</languageDescriptionType>
+			<languageDescriptionEncodingInfo>
+				<encodingLevel>morphology</encodingLevel>
+				<encodingLevel>phonetics</encodingLevel>
+				<task>anaphoraResolution</task>
+				<grammaticalPhenomenaCoverage>clauseStructure</grammaticalPhenomenaCoverage>
+				<grammaticalPhenomenaCoverage>coordination</grammaticalPhenomenaCoverage>
+			</languageDescriptionEncodingInfo>
+			<languageDescriptionOperationInfo>
+				<runningEnvironmentInfo>
+					<requiredHardware>ocrSystem</requiredHardware>
+				</runningEnvironmentInfo>
+				<relatedLexiconInfo>
+					<relatedLexiconType>attached</relatedLexiconType>
+					<compatibleLexiconType>morphologicalLexicon</compatibleLexiconType>
+				</relatedLexiconInfo>
+			</languageDescriptionOperationInfo>
+			<creationInfo>
+				<creationTool>
+					<targetResourceNameURI>test corpus</targetResourceNameURI>
+				</creationTool>
+			</creationInfo>
+			<languageDescriptionMediaType>
+				<languageDescriptionTextInfo>
+					<mediaType>text</mediaType>
+					<lingualityInfo>
+						<lingualityType>monolingual</lingualityType>
+					</lingualityInfo>
+					<languageInfo>
+						<languageId>el</languageId>
+						<languageName>Modern Greek (1453-)</languageName>
+					</languageInfo>
+					<modalityInfo>
+						<modalityType>facialExpression</modalityType>
+						<modalityType>writtenLanguage</modalityType>
+					</modalityInfo>
+				</languageDescriptionTextInfo>
+				<languageDescriptionVideoInfo>
+					<mediaType>video</mediaType>
+					<linkToOtherMediaInfo>
+						<otherMedia>text</otherMedia>
+						<synchronizedWithText>true</synchronizedWithText>
+						<synchronizedWithTextNumerical>true</synchronizedWithTextNumerical>
+					</linkToOtherMediaInfo>
+				</languageDescriptionVideoInfo>
+				<languageDescriptionImageInfo>
+					<mediaType>image</mediaType>
+					<linkToOtherMediaInfo>
+						<otherMedia>text</otherMedia>
+						<mediaTypeDetails>ga</mediaTypeDetails>
+						<synchronizedWithImage>true</synchronizedWithImage>
+					</linkToOtherMediaInfo>
+				</languageDescriptionImageInfo>
+			</languageDescriptionMediaType>
+		</languageDescriptionInfo>
+	</resourceComponentType>
+</resourceInfo>

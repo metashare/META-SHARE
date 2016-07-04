@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">British English Source Lexicon (BESL) version 2.2</resourceName>
+      <resourceName lang="fr">Lexique source de l’anglais britannique (British English Source Lexicon - BESL) version 2.2</resourceName>
+      <description lang="en">BESL is a complete database of the English lexicon. It consists of over 230,000 lemmas, over 350,000 word forms, 60,000 proper nouns, 3,000 abbreviations, and 58,000 multi-word compound nouns. Each headword is provided with a full listing of all inflected forms and other morphological variation. Every word form is marked for part of speech (using Penn TreeBank notation). Most single-word forms include a representation of IPA pronunciation. BESL covers both British and American English, and other spelling variants, with cross-references between corresponding forms. Each lemma is graded on a scale between 1 and 9 to indicate frequency, based on corpus evidence. Lemmas are also classified by domain, where appropriate (e.g. Computing, Religion). Obscene or offensive lemmas are marked using a 2-grade system. Proper name lemmas in BESL include personal names, surnames, place names, and brand names. BESL is provided in XML.</description>
+      <description lang="fr">BESL est une base de données lexicale de l'anglais très complète et comprend plus de 230 000 lemmes, plus de 350 000 formes, 60 000 noms propres, 3 000 abréviations, et 58 000 mots composés. Chaque entrée est fournie avec une liste complète de toutes les formes fléchies, ainsi que d’autres variantes morphologiques. Chaque forme de mot est marquée sur la partie du discours (au moyen du système de notation du Penn TreeBank). La plupart des formes de mots simples incluent une représentation de leur prononciation en IPA. Le BESL couvre à la fois l’anglais britannique et l’anglais américain, ainsi que d’autres variantes de prononciation, et les références croisées entre les formes correspondantes. Chaque lemme est noté sur une échelle de 1 à 9 pour indiquer la fréquence, en fonction de sa présence dans le corpus. Les lemmes sont également classés par domaine (Informatique, Religion, par exemple). Les lemmes à caractère « obscène » ou « injurieux » sont marqués en utilisant un système d’échelle à 2 niveaux. Les noms propres du BESL comprennent des noms de personnes, prénoms, lieux et noms de marques. Le BESL est fourni en XML.</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=834</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-L0058</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>10000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>7000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <availabilityStartDate>2006-03-13</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Valérie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <lastDateUpdated>2006-04-03</lastDateUpdated>
+   </versionInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>eng</languageId>
+                  <languageName>English</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>no size available</size>
+                  <sizeUnit>other</sizeUnit>
+               </sizeInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

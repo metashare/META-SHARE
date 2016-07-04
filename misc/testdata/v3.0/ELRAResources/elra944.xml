@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">AURORA Project database - Subset of SpeechDat-Car - Italian database - Evaluation Package</resourceName>
+      <resourceName lang="fr">Base de données du projet AURORA - sous-ensemble de la base de données SpeechDat-Car de l'italien - Package d'évaluation</resourceName>
+      <description lang="en">The Aurora project was originally set up to establish a world wide standard for the feature extraction software which forms the core of the front-end of a DSR (Distributed Speech Recognition) system. ETSI formally adopted this activity as work items 007 and 008.The two work items within ETSI are :-  ETSI DES/STQ WI007 : Distributed Speech Recognition - Front-End Feature Extraction Algorithm &amp; Compression Algorithm-  ETSI DES/STQ WI008 : Distributed Speech Recognition - Advanced Feature Extraction Algorithm.This database is a subset of the Italian SpeechDat-Car database which has been collected as part of the European Union funded SpeechDat-Car project. It contains contains 2200 Italian connected digit utterances divided into training and testing utterances in the following noise and driving conditions inside a car :   1. High speed good road   2. Low speed rough road   3. Stopped with motor running   4. Town traffic</description>
+      <description lang="fr">DESCRIPTION DISPONIBLE EN FRANCAIS PROCHAINEMENT.The Aurora project was originally set up to establish a world wide standard for the feature extraction software which forms the core of the front-end of a DSR (Distributed Speech Recognition) system. ETSI formally adopted this activity as work items 007 and 008.The two work items within ETSI are :-  ETSI DES/STQ WI007 : Distributed Speech Recognition - Front-End Feature Extraction Algorithm &amp; Compression Algorithm-  ETSI DES/STQ WI008 : Distributed Speech Recognition - Advanced Feature Extraction Algorithm.This database is a subset of the Italian SpeechDat-Car database which has been collected as part of the European Union funded SpeechDat-Car project. It contains contains 2200 Italian connected digit utterances divided into training and testing utterances in the following noise and driving conditions inside a car :   1. High speed good road   2. Low speed rough road   3. Stopped with motor running   4. Town traffic</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=692</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-AURORA-CD0003_05</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>1000.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>1000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>1000.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>1000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <availabilityStartDate>2003-04-16</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Valérie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <lastDateUpdated>2006-09-18</lastDateUpdated>
+   </versionInfo>
+   <usageInfo>
+      <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+         <useNLPSpecific>speechRecognition</useNLPSpecific>
+      </actualUseInfo>
+   </usageInfo>
+   <resourceCreationInfo>
+      <fundingProject>
+         <projectName>AURORA</projectName>
+         <fundingType>ownFunds</fundingType>
+      </fundingProject>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusAudioInfo>
+               <mediaType>audio</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>ita</languageId>
+                  <languageName>Italian</languageName>
+               </languageInfo>
+               <audioSizeInfo>
+                  <sizeInfo>
+                     <size>no size available</size>
+                     <sizeUnit>other</sizeUnit>
+                  </sizeInfo>
+               </audioSizeInfo>
+            </corpusAudioInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

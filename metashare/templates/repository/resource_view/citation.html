@@ -1,0 +1,139 @@
+{% spaceless %}
+
+{% if type == "Citation" %}
+{% else %}
+	{% if level == "simple" %}
+		<label class='indented'><strong>{{type}}:</strong></label>
+	{% else %}
+		<label class={% if level == "sub" %}'subtitle'{% else %}'title'{% endif %}>{{type}}</label>
+	{% endif %}
+{% endif %}
+
+{% if level == "sub" or level == "simple" or indent == "yes" %}<div class="indented">{% endif %}
+
+{#	{% if documentation.Document_type %}#}
+{#		<div class="dataline">#}
+{#			<label>#}
+{#				<strong>Document Type:</strong> {{ documentation.Document_type }}#}
+{#			</label>#}
+{#		</div>#}
+{#	{% endif %}#}
+		
+	<div class="dataline indented">
+		<label>
+			{% if documentation.Author %}
+				{{ documentation.Author }}, 			
+			{% endif %}
+			<strong><i>{{ documentation.Title }}</i></strong>, 
+			{% if documentation.URL_Landing_page %}
+				{% for key, value in documentation.items %}
+					{% if "URL_Landing_page" in key %}
+						{{ value|urlize }}
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+			{% if documentation.Journal %}
+				. In: {{ documentation.Journal }}
+			{% endif %}
+			{% if documentation.Volume %}
+				{{ documentation.Volume }}
+			{% endif %}
+			{% if documentation.Pages %}
+				, pp. {{ documentation.Pages }}
+			{% endif %}
+			
+			{% if documentation.Conference %}
+				, {{ documentation.Conference }}
+			{% endif %}
+			
+			{% if documentation.Year_of_publication %}
+				, {{ documentation.Year_of_publication }}
+			{% endif %}		
+			
+		</label>
+	</div>
+	
+	{% if documentation.Editor %}
+		<div class="dataline">
+			<label>
+				<strong>Editor:</strong> {{ documentation.Editor }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if documentation.Publisher %}
+		 <div class="dataline">
+			<label>
+				<strong>Publisher:</strong> {{ documentation.Publisher }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if documentation.Book_title %}
+		 <div class="dataline">
+			<label>
+				<strong>Book Title:</strong> {{ documentation.Book_title }}
+			</label>
+		</div>
+	{% endif %}		
+	
+	{% if documentation.Series %}
+		 <div class="dataline">
+			<label>
+				<strong>Series:</strong> {{ documentation.Series }}
+			</label>
+		</div>
+	{% endif %}		
+	
+	{% if documentation.Edition %}
+		 <div class="dataline">
+			<label>
+				<strong>Edition:</strong> {{ documentation.Edition }}
+			</label>
+		</div>
+	{% endif %}	
+
+	
+	{% if documentation.DOI %}
+		 <div class="dataline">
+			<label>
+				<strong>Digital Object Identifier - DOI:</strong> {{ documentation.DOI|urlizetrunc:23 }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if documentation.ISSN %}
+		 <div class="dataline">
+			<label>
+				<strong>ISSN:</strong> {{ documentation.ISSN }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if documentation.ISBN %}
+		 <div class="dataline">
+			<label>
+				<strong>ISBN:</strong> {{ documentation.ISBN }}
+			</label>
+		</div>
+	{% endif %}
+	
+	{% if documentation.Keywords %}
+		 <div class="dataline">
+			<label>
+				<strong>Keywords:</strong> {{ documentation.Keywords }}
+			</label>
+		</div>
+	{% endif %}
+{#	{% if documentation.Document_language %}#}
+{#		 <div class="dataline">#}
+{#			<label {% if documentation.Document_language_identifier %}#}
+{#                title="{{documentation.Document_language_identifier}}"{% endif %}>#}
+{#				<strong>Document Language:</strong>#}
+{#				{{ documentation.Document_language }}#}
+{#			</label>#}
+{#		</div>#}
+{#	{% endif %}#}
+{% if level == "sub" or level == "simple" or indent == "yes" %}</div>{% endif %}
+
+{% endspaceless %}

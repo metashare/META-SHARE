@@ -1,0 +1,21 @@
+{% spaceless %}
+
+<label class='title'>Domains</label>
+<div class="dataline">
+{% for key, value in domains.items %}
+	{% for key1, value1 in value.items %}
+		<div>			
+			{% if "Domain" in key1 %}
+				<label class='subtitle'>{{ value1 }} {% if "Size_per_domain" in value %}{% include "repository/resource_view/size.html" with size=value.Size_per_domain type="sub" %}{% endif %}</label>
+				<label class="dataline indented">
+				{% if "Conformance_to_classification_scheme" in value %}
+					Conforms to {{ value.Conformance_to_classification_scheme }}
+				{% endif %}
+				</label>
+			{% endif %}
+		</div>
+	{% endfor %}
+{% endfor %}
+</div>
+
+{% endspaceless %}

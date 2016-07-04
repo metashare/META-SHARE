@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Resource xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema C:/users/xaris/meta-share/backup/PSP/META-SHARE-Corpus-XMLSchema.xsd" xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<IdentificationInfo>
+		<resourceName>REVEAL-THIS Corpus</resourceName>
+		<resourceShortName>REVEAL-THIS Corpus</resourceShortName>
+	</IdentificationInfo>
+	<PersonInfo>
+		<surname>Piperidis</surname>
+		<givenName>Stelios</givenName>
+		<CommunicationInfo>
+			<email>spip@ilsp.gr</email>
+		</CommunicationInfo>
+	</PersonInfo>
+	<DistributionInfo>
+		<availability>available-restrictedUse</availability>
+		<IPRHolder>
+			<OrganizationInfo>
+				<organizationName>Institute for Language and Speech Processing</organizationName>
+				<organizationShortName>ILSP / Athena R.C.</organizationShortName>
+				<CommunicationInfo>
+					<email>www@ilsp.athena-innovation.gr</email>
+				</CommunicationInfo>
+			</OrganizationInfo>
+		</IPRHolder>
+		<LicenseInfo>
+			<license>proprietary</license>
+			<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+		</LicenseInfo>
+	</DistributionInfo>
+	<UsageInfo>
+		<ForeseenUseInfo>
+			<foreseenUse>nlpApplications</foreseenUse>
+		</ForeseenUseInfo>
+		<ActualUseInfo>
+			<actualUse>nlpApplications</actualUse>
+			<useNLPSpecific>informationRetrieval</useNLPSpecific>
+		</ActualUseInfo>
+	</UsageInfo>
+	<MetadataInfo/>
+	<ContentInfo>
+		<description>Multimodal (video recordings), multilingual, parallel, European Parliament Plenary Sessions and Press Conferences – recorded between Feb2005-May2005; 75h:28min:24sec</description>
+		<resourceType>corpus</resourceType>
+		<mediaType>text</mediaType>
+		<mediaType>video</mediaType>
+		<mediaType>audio</mediaType>
+	</ContentInfo>
+	<TextInfo>
+		<LingualityInfo>
+			<lingualityType>multilingual</lingualityType>
+			<multilingualityType>parallel</multilingualityType>
+		</LingualityInfo>
+		<LanguageInfo>
+			<languageCoding>ISO-639-3</languageCoding>
+			<languageId>ell</languageId>
+			<languageName>Modern Greek (1453-)</languageName>
+		</LanguageInfo>
+		<LanguageInfo>
+			<languageCoding>ISO-639-3</languageCoding>
+			<languageId>eng</languageId>
+			<languageName>English</languageName>
+		</LanguageInfo>
+		<LanguageInfo>
+			<languageCoding>ISO-639-3</languageCoding>
+			<languageId>fra</languageId>
+			<languageName>French</languageName>
+		</LanguageInfo>
+		<SizeInfo>
+			<size>325000</size>
+			<sizeUnitMultiplier>unit</sizeUnitMultiplier>
+			<sizeUnit>words</sizeUnit>
+		</SizeInfo>
+		<AnnotationInfo>
+			<annotationType>lemmatization</annotationType>
+		</AnnotationInfo>
+		<AnnotationInfo>
+			<annotationType>morphosyntacticAnnotation-posTagging</annotationType>
+		</AnnotationInfo>
+		<AnnotationInfo>
+			<annotationType>morphosyntacticAnnotation-bPosTagging</annotationType>
+		</AnnotationInfo>
+		<AnnotationInfo>
+			<annotationType>syntacticAnnotation-shallowParsing</annotationType>
+		</AnnotationInfo>
+		<AnnotationInfo>
+			<annotationType>semanticAnnotation-namedEntities</annotationType>
+		</AnnotationInfo>
+		<AnnotationInfo>
+			<annotationType>orthographicTranscription</annotationType>
+		</AnnotationInfo>
+	</TextInfo>
+</Resource>

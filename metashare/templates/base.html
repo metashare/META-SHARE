@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+{% load analytical %}
+{% spaceless %}
+<html lang="en">
+  <head>
+    {% analytical_head_top %}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>{% spaceless %}{% block title %}META-SHARE{% endblock %}{% endspaceless %}</title>
+    <meta name="description" content="{% spaceless %}{% block description %}META-SHARE: a sustainable network of repositories of language resources documented with high-quality metadata, allowing for uniform search and access to resources.{% endblock %}{% endspaceless %}" />
+    <meta name="keywords" content="{% spaceless %}{% block keywords %}META-SHARE, language resources, language tools, META-NET{% endblock %}{% endspaceless %}" />
+    <link rel="shortcut icon" href="{{ MEDIA_URL }}metashare/images/favicon.ico" />
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/blueprint/screen.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/blueprint/print.css" type="text/css" media="print">
+    <!--[if lt IE 8]><link rel="stylesheet" href="{{ MEDIA_URL }}css/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/sexybuttons/sexybuttons.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/screen.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/typo.css" type="text/css" media="screen">
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/metashare.js"></script>
+    {% block links %}{% endblock %}{% analytical_head_bottom %}
+    <script type="text/javascript">
+    var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-36199711-1']); _gaq.push(['_gat._anonymizeIp']);
+    _gaq.push(['_setDomainName', 'none']); _gaq.push(['_setAllowLinker', true]); _gaq.push(['_trackPageview']);
+    (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })();
+  	</script>
+  </head>
+  <body>
+    {% analytical_body_top %}
+    {% block header %}
+    {% include "header.html" with page="frontpage" %}
+    {% endblock %}
+   <div class="container">
+    <div id="content">
+      <div id="messages">
+        {% block messages %}{% endblock %}
+        {% if messages %}
+        {% for message in messages %}
+        <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|safe }}</p>
+        {% endfor %}
+        {% endif %}
+      </div>
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+  {% include "footer.html" %}
+  <script type="text/javascript">addFormHelper()</script>
+  {% analytical_body_bottom %}
+  </body>
+</html>
+{% endspaceless %}

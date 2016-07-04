@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">Offensive Word Filter 1</resourceName>
+      <resourceName lang="fr">Liste de mots « injurieux» 1</resourceName>
+      <description lang="en">Oxford University Press has developed two lists of offensive words and expressions, specifically developed for filter applications in the contexts of web pages and email. Each list features a grading system describing vocabulary type and offensive strength for each term, plus collocational information to help identify the terms in context.Coverage: 4500 words and expressions; 10-category classification system; UK and US usage covered, plus other world EnglishFeatures: graded by class (offensive/vulgar), and type (racist, sexist etc); rated by strength (high/moderate/mild);  part of speech included; morphological status marked (standalone/fixed collocation etc); collocational information included;  practical screening recommendationFormat: tab-delimited ASCIIFile Size: 262kB</description>
+      <description lang="fr">Oxford University Press a développé deux listes de mots et expressions à caractère « injurieux », développés spécialement pour des applications de filtrage dans le contexte de pages web et de méls.  Chaque liste présente un système de graduation décrivant le type de vocabulaire et l’intensité d’offense pour chaque terme, ainsi que des informations sur les collocations afin d’aider à identifier les termes en contexte.Couverture : 4500 mots et expressions; système de classification en 10 catégories ; couverture de l’anglais britannique et anglais américain, ainsi que plusieurs autres types d’anglaisType d’information : graduation par classe (injurieux/vulgaire), et par type (raciste, sexiste, etc); notation par intensité (élevé/modéré/faible);  comprend la partie du discours ; notation du statuts morphologique (collocation indépendante/fixe, etc) ; information sur les collocations ; recommandation de dépistage pratiqueFormat : ASCII délimité par des tabulationsTaille du fichier : 262 ko</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=835</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-L0059</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>5000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>4000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <availabilityStartDate>2006-03-13</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Valérie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <lastDateUpdated>2006-04-03</lastDateUpdated>
+   </versionInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>eng</languageId>
+                  <languageName>English</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>no size available</size>
+                  <sizeUnit>other</sizeUnit>
+               </sizeInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

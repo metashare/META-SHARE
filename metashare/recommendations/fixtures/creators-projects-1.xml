@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.meta-share.org/META-SHARE_XMLSchema http://www.meta-share.org/META-SHARE_XMLSchema/v3.1/META-SHARE-Resource.xsd">
+	<identificationInfo>
+		<resourceName lang="en">Thai Speecon database</resourceName>
+		<resourceName lang="fr">Base de données Speecon thaï
+    </resourceName>
+		<description lang="en">The Thai Speecon database is divided
+      into 2 sets.
+    </description>
+		<description lang="fr">La base de données Speecon thaï est
+      répartie en deux sous-ensembles.
+    </description>
+		<resourceShortName/>
+		<url>http://catalog.elra.info/product_info.php?products_id=1076</url>
+		<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+		<identifier>ELRA-S0288</identifier>
+	</identificationInfo>
+	<distributionInfo>
+		<availability>available</availability>
+		<licenceInfo>
+			<licence>AGPL</licence>
+			<version>4.0</version>
+		</licenceInfo>
+	</distributionInfo>
+	<contactPerson>
+		<surname>Test</surname>
+		<communicationInfo>
+			<email>test@example.org</email>
+		</communicationInfo>
+	</contactPerson>
+	<metadataInfo>
+		<metadataCreationDate>2005-05-12</metadataCreationDate>
+		<metadataCreator>
+			<surname lang="en-us">Valérie</surname>
+			<givenName lang="en-us">Mapelli</givenName>
+			<communicationInfo>
+				<email>mapelli@elda.org</email>
+				<url>http://www.elda.org</url>
+				<address>55-57 rue Brillat-Savarin</address>
+				<zipCode>75013</zipCode>
+				<city>Paris</city>
+				<country>France</country>
+				<countryId>FR</countryId>
+				<telephoneNumber>+1 43 13 33 33</telephoneNumber>
+				<faxNumber>+1 43 14 33 30</faxNumber>
+			</communicationInfo>
+		</metadataCreator>
+	</metadataInfo>
+	<versionInfo>
+		<version>1.0</version>
+		<lastDateUpdated>2008-10-07</lastDateUpdated>
+	</versionInfo>
+	<usageInfo>
+		<actualUseInfo>
+			<actualUse>nlpApplications</actualUse>
+			<useNLPSpecific>speechRecognition</useNLPSpecific>
+		</actualUseInfo>
+	</usageInfo>
+	<resourceCreationInfo>
+		<resourceCreator>
+			<personInfo>
+				<surname lang="en">test-creator-person</surname>
+				<communicationInfo>
+					<email>test.creator.pers@test.com</email>
+				</communicationInfo>
+			</personInfo>
+		</resourceCreator>
+		<resourceCreator>
+			<organizationInfo>
+				<organizationName lang="en">test-creator-organization
+        </organizationName>
+				<communicationInfo>
+					<email>test.creator.org@test.com</email>
+				</communicationInfo>
+			</organizationInfo>
+		</resourceCreator>
+	</resourceCreationInfo>
+	<resourceComponentType>
+		<corpusInfo>
+			<resourceType>corpus</resourceType>
+			<corpusMediaType>
+				<corpusAudioInfo>
+					<mediaType>audio</mediaType>
+					<lingualityInfo>
+						<lingualityType>monolingual</lingualityType>
+					</lingualityInfo>
+					<languageInfo>
+						<languageId>tha</languageId>
+						<languageName>Thai</languageName>
+					</languageInfo>
+					<audioSizeInfo>
+						<sizeInfo>
+							<size>123456</size>
+							<sizeUnit>entries</sizeUnit>
+						</sizeInfo>
+					</audioSizeInfo>
+				</corpusAudioInfo>
+			</corpusMediaType>
+		</corpusInfo>
+	</resourceComponentType>
+</resourceInfo>

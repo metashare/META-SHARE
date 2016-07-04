@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited by ILSP/Athena R.C. -->
+<xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0" xml:lang="en">
+	<xs:include schemaLocation="./META-SHARE-SimpleTypes.xsd"/>
+	<xs:include schemaLocation="./META-SHARE-BaseTypes.xsd"/>
+	<xs:include schemaLocation="./META-SHARE-ResourceInfoTypes.xsd"/>
+	<xs:complexType name="resourceInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together all information required for the description of language resources</xs:documentation>
+			<xs:appinfo>
+				<render-short>{identificationInfo/resourceName}</render-short>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="ms:identificationInfo">
+				<xs:annotation>
+					<xs:documentation>Groups together information needed to identify the resource</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:distributionInfo">
+				<xs:annotation>
+					<xs:documentation>Groups information on the distribution of the resource</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contactPerson" type="ms:personInfoType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information on the person(s) that is/are responsible for providing further information regarding the resource</xs:documentation>
+					<xs:appinfo>
+						<relation>many-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:metadataInfo">
+				<xs:annotation>
+					<xs:documentation>Groups information on the metadata record itself</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:versionInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Groups information on a specific version or release of the resource</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:validationInfo" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information on validation of a resource; it can be repeated to allow for different validations (e.g. formal validation of the whole resource; content validation of one part of the resource etc.). </xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:usageInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Groups information on usage of the resource (both intended and actual use)</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:resourceDocumentationInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Groups together information on any document describing the resource</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:resourceCreationInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Groups information on the creation procedure of a resource</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:relationInfo" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information on the relations of the resource being described with other resources</xs:documentation>
+					<xs:appinfo>
+						<recommended>true</recommended>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="resourceComponentType">
+				<xs:annotation>
+					<xs:documentation>Used for distinguishing between resource types</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:choice>
+						<xs:element ref="ms:corpusInfo"/>
+						<xs:element ref="ms:toolServiceInfo"/>
+						<xs:element ref="ms:languageDescriptionInfo"/>
+						<xs:element ref="ms:lexicalConceptualResourceInfo"/>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="resourceInfo" type="ms:resourceInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together all information required for the description of language resources</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

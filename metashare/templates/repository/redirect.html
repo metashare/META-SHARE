@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Redirecting to Download Node&nbsp;&hellip; &ndash; META-SHARE
+{% endblock %}
+
+{% block content %}
+{% spaceless %}
+<script type="text/javascript">
+  setTimeout('window.location.replace("{{ redirection_url }}")', 6000);
+</script>
+
+<h2>Redirecting to Download Node&nbsp;&hellip;</h2>
+<div class="content_box">
+  <p>
+    You cannot download the selected resource on the current META-SHARE node as
+    it has originally been provided
+    {% if resource.storage_object.source %}
+      by {{ resource.storage_object.source }}.
+    {% else %}
+      at {{ resource.storage_object.source_url }}.
+    {% endif %}
+    You will now be redirected to the META-SHARE Node where the resource data is
+    available.
+  </p>
+  <p>
+    <a href="{{ redirection_url }}">Click here</a> to immediately go to the
+    other node.
+  </p>
+</div>
+{% endspaceless %}
+{% endblock %}

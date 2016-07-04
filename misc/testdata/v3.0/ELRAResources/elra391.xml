@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">NODE+DIMAP</resourceName>
+      <resourceName lang="fr">NODE+DIMAP</resourceName>
+      <description lang="en">The DIMAP version of NODE (first edition) is a machine-tractable version of the machine-readable dictionary files in the DIMAP dictionary maintenance programs, adding syntactic and semantic information in the conversion. In addition, DIMAP provides several mechanisms that will allow research into representational formalisms and explorations of the use of these representations in extending the lexical database and in processing text for information extraction, text summarization, discourse analysis and other LE applications. Using functionality to parse the dictionary definitions, DIMAP has further enhanced NODE through the addition of many semantic links, including hypernyms, synonyms, and other semantic relations, thus making NODE+DIMAP a semantic network of the English language. For more details on the contents of NODE+DIMAP, please see: http://www.clres.com/node-dimap-contents.html.</description>
+      <description lang="fr">La première édition DIMAP de NODE (cf L0045) est une version exploitable et modifiable des fichiers de dictionnaire provenant des programmes de maintenance de dictionnaire DIMAP, comprenant après conversion des informations syntaxiques et morphologiques. En outre, DIMAP fournit plusieurs mécanismes qui permettront d'une part la recherche de formalismes de représentation, d'autre part des études pour l'usage de ces représentations pour les bases de données lexicales et pour le traitement du texte dans les systèmes d'extraction de l'information, dans les systèmes de résumé automatique, pour l'analyse de discours, etc. En plus des fonctionnalités pour l'analyse des définitions, DIMAP permet de compléter NODE de nombreuses indications de liens sémantiques, tels que hyperonymes, synonymes, etc. NODE + DIMAP constitue ainsi une représentation du réseau sémantique de la langue anglaise.Pour plus d'informations sur NODE + DIMAP, vous pouvez consulter le site Internet suivant : http://www.clres.com/node-dimap-contents.html.</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=680</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-L0046</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>10000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>7000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <availabilityStartDate>2002-10-25</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Valérie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <lastDateUpdated>2005-06-13</lastDateUpdated>
+   </versionInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>eng</languageId>
+                  <languageName>English</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>no size available</size>
+                  <sizeUnit>other</sizeUnit>
+               </sizeInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

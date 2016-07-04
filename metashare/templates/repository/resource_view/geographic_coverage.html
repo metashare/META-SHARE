@@ -1,0 +1,9 @@
+{% spaceless %}
+
+	 <div class="dataline indented">
+		<label>
+			{{ geographic_coverage.Geographic_coverage }} {% if geographic_coverage.Size_per_geographic_coverage %}{% include "repository/resource_view/size.html" with size=geographic_coverage.Size_per_geographic_coverage type="sub" %}{% endif %}
+		</label>
+	</div>
+
+{% endspaceless %}

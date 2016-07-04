@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">Modern French Corpus including Anaphors Tagging</resourceName>
+      <resourceName lang="fr">Collection de corpus du français contemporain - Corpus avec étiquetage des anaphores</resourceName>
+      <description lang="en">The corpus that includes the tagging of the anaphors was created by the CRISTAL-GRESEC (Stendhal-Grenoble 3 University, France) team and XRCE (Xerox Research Centre Europe, France) in the framework of the call launched by the DGLF-LF (national institution for the French language and the languages spoken in France), for the creation of modern French corpora).Over 1 million words have been annotated. The corpora have been selected so that they represent a wide sampling of the French language (scientific and human science articles, extracts from newspapers and magazines, legal texts, etc.) and according to the points of interest of the teams working on the project. The processed corpora supplied by ELRA are listed below:- Two books edited by the CNRS: La protection des oeuvres scientifiques en droit d'auteur français, Xavier Strubel. Paris, CNRS Editions, 1997 (77 591 words) and Cinquante ans de traction à la SNCF. Enjeux politiques, économiques et réponses techniques, Clive Lamming. Paris, CNRS Editions, 1997 (124 990 words).- 204 articles extracted from CNRS Info, a magazine which contains short popular scientific articles from the CNRS laboratories (201 280 words).- 14 articles dealing with Hermès Human Sciences (111 886 words).- 136 articles extracted from "Le Monde", dealing with economics (roughly 180 760 words).- 13 booklets of the Official Journal of the European Communities (roughly 337 000 words).Below the tagged anaphoric elements:- Person pronouns: 3rd person pronoun, anaphoric.- Possessive determiners: 3rd person possessive determiner.- Demonstrative pronouns: anaphoric pronouns (celui, celle, ceux, celles-ci, celles-là)- Indefinite pronouns: Aucun(e), chacun(e), certain(e)s, l'un(e), les un(e)s, tout(es), etc, when they are anaphoric.- "Proverbs": "le" + "faire".- Anaphoric and cataphoric adverbs: Dessus, dedans, dessous , when they have an anaphoric function.- Ellipsis of head nouns: Nominal adjectives or quantifiers determiners ellipsis.- Textual headers like "ce dernier": Ce dernier, le premier , etc.The annotation scheme was defined in XML format. The texts were divided into sections, paragraphs and sentences. The sentence segmentation was carried out with NLP tools developed by XRCE, the annotation part was done manually by two qualified linguists. A large subset of anaphoric phrases was automatically pre-annotated. The antecedents and the tagging of the anaphoric relations were manually processed, but editing tools (emacs, macros from Author/Editor software) were used to make it easier. 5% of the corpora were checked to measure the annotation reliability.</description>
+      <description lang="fr">Le Corpus avec étiquetage des anaphores a été réalisé par l'équipe CRISTAL-GRESEC (Université Stendhal-Grenoble 3, France) et XRCE (Xerox Research Centre Europe, France) dans le cadre de l'appel d'offres "Contribution à la réalisation de corpus du français contemporain" de la DGLF (Délégation générale à la language française).Dans le cadre de ce projet, plus d'un million de mots ont été annotés. Les corpus ont été sélectionnés de façon à représenter un échantillon varié de la langue (corpus d'articles scientifiques et de sciences humaines, corpus journalistiques, corpus de type juridique, etc.) et selon les intérêts de chaque équipe. Les corpus traités, fournis par ELRA, sont les suivants :- Deux ouvrages des éditions du CNRS : La protection des oeuvres scientifiques en droit d'auteur français, Xavier Strubel. Paris, CNRS Editions, 1997. (77591 mots) et Cinquante ans de traction à la SNCF. Enjeux politiques, économiques et réponses techniques, Clive Lamming. Paris, CNRS Editions, 1997 (124 990 mots).- 204 Articles de CNRS Info (revue contenant de courts articles de vulgarisation scientifique des laboratoires du CNRS). (201 280 mots).- 14 Articles de sciences humaines Hermès (11 886 mots).- 136 Articles du Monde (rubrique économie) (environ 180 760 mots).- 13 Fascicules du Journal Officiel des Communautés Européennes (environ 337 000 mots).Ci-dessous sont présentés les phénomènes anaphoriques retenus :- Pronoms personnels : p.p. de 3e personne, anaphoriques.- Déterminants possessifs : d.p. de 3e personne.- Pronoms démonstratifs : pronoms celui, celle, ceux, celles-ci, celles-là anaphoriques.- Pronoms indéfinis : Aucun(e), chacun(e), certain(e)s, l'un(e), les un(e)s, tout(es), etc. quand ils sont anaphoriques.- "Proverbes" : le + faire. - Adverbes anaphoriques et cataphoriques : Dessus, dedans, dessous quand ils ont un fonctionnement anaphorique. - Ellipses de têtes nominales : Ellipses à adjectif "substantivé" ou à déterminant quantifieur. - Pointeurs textuels de type ce dernier : Ce dernier, le premier, etc.Le schéma d'annotation est défini en XML. Les textes sont divisés en sections, paragraphes et phrases. La segmentation des textes en phrases a été réalisée à l'aide d'outils de TAL mis au point par le XRCE. L'annotation a été réalisée manuellement par deux linguistes qualifiées. Un important sous-ensemble d'expressions anaphoriques a été pré-annoté automatiquement. Les antécédents et le typage de la relation anaphorique ont été traités manuellement, mais des outils d'édition (emacs, macros sur le logiciel Author/Editor) ont été utilisés pour alléger la tâche. 5% du corpus ont été vérifiés pour mesurer la fiabilité de l'annotation.</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=634</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-W0032</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>1000.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>1000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>250.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>250.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <availabilityStartDate>2002-01-31</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Valérie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <lastDateUpdated>2009-12-08</lastDateUpdated>
+   </versionInfo>
+   <resourceCreationInfo>
+      <fundingProject>
+         <projectName>Contribution à la réalisation de corpus du français contemporain</projectName>
+         <fundingType>nationalFunds</fundingType>
+      </fundingProject>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>fre/fra</languageId>
+                  <languageName>French</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>no size available</size>
+                  <sizeUnit>other</sizeUnit>
+               </sizeInfo>
+               <textFormatInfo>
+                  <mimeType>Plain text</mimeType>
+               </textFormatInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

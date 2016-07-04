@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://www.ilsp.gr/META-XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">PAROLE Greek Lexicon</resourceName>
+      <resourceName lang="fr">Lexique grec PAROLE</resourceName>
+      <description lang="en">The PAROLE Greek lexicon has two layers, morphological and syntactic. It includes the most frequent words found in a 9 million word corpus, coded according to the PAROLE specifications.The Morphological layer contains a total of 20149 Morphological units, of which 12042 are nouns (common and proper), 3014 verbs, 3405 adjectives, 106 numerals, 45 pronouns, 2 articles, 1396 adverbs, 48 adpositions, 51 conjunctions, 21 interjections, 19 "unique" categories.The Syntactic layer contains 25092 Syntactic units, of which 14548 are nouns, 5397 verbs, 3558 adjectives, 1410 adverbs, 73 adpositions and 106 numerals.This lexicon was constructed based on the following resources:a. the ILSP Morphological Lexiconb. the ILSP CorpusMore info on the Parole project: http://www.elda.org/catalogue/en/text/doc/parole.html</description>
+      <description lang="fr">Le lexique grec PAROLE comprend deux niveaux, un niveau morphologique et un niveau syntaxique. Il est composé des mots les plus fréquents provenant d'un corpus de 9 millions de mots, codés selon les spécifications PAROLE.La partie morphologique comprend un total de 20 149 unités morphologiques, dont 12 042 noms, (noms communs et noms propres), 3 014 verbes, 3 405 adjectifs, 106 nombre numéraux, 45 pronoms, 2 articles, 1 396 adverbes, 48 pré-/post- positions, 51 conjonctions, 21 interjections, 19 catégories dites "unique".La partie syntaxique comprend 25 092 unités syntaxiques, dont 14 548 noms, 5 397 verbes, 3 558 adjectifs, 1 410 adverbes, 73 pré-/post- positions et 106 nombre numéraux.Le lexique a été construit à partir des ressources suivantes :a. le lexique morphologique de l'ILSPb. le corpus de l'ILSPPlus d'informations sur le projet Parole : http://www.elda.org/catalogue/en/text/doc/parole.html</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=710</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-L0032</identifier>
+   </identificationInfo>
+   <distributionInfo>
+      <availability>available-restrictedUse</availability>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>5100.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>5100.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>3400.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+         <fee>3400.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </licenceInfo>
+      <availabilityStartDate>2000-03-09</availabilityStartDate>
+   </distributionInfo>
+   <contactPerson>
+      <surname>Valérie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <lastDateUpdated>2005-05-30</lastDateUpdated>
+   </versionInfo>
+   <resourceCreationInfo>
+      <fundingProject>
+         <projectName>LE-PAROLE project (MLAP/LE2-4017)</projectName>
+         <fundingType>euFunds</fundingType>
+      </fundingProject>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>gre/ell</languageId>
+                  <languageName>Greek</languageName>
+                  <languageVarietyInfo>
+                     <languageVarietyType>dialect</languageVarietyType>
+                     <languageVarietyName>Modern (1453-)</languageVarietyName>
+                     <sizePerLanguageVariety>
+                        <size>2</size>
+                        <sizeUnit>gb</sizeUnit>
+                     </sizePerLanguageVariety>
+                  </languageVarietyInfo>
+               </languageInfo>
+               <sizeInfo>
+                  <size>no size available</size>
+                  <sizeUnit>other</sizeUnit>
+               </sizeInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

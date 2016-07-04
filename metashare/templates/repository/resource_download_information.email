@@ -1,0 +1,13 @@
+Dear {{ resourceContactName|join:", " }},
+
+the META-SHARE user {{ user.username }} ({{ user.first_name }} {{ user.last_name }}, {{ user_email }}) requests information on the language resource “{{ resource }}” ([1]). You can find the request below; please reply as soon as possible.
+
+Best regards,
+META-SHARE node at [2]
+
+[1] {{ node_url }}/{{ resource.get_relative_url }}
+[2] {{ node_url }}
+
+======================================================================
+
+{{ message }}
