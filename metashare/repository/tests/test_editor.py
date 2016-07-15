@@ -2035,9 +2035,12 @@ class BreadcrumbTests(TestCase):
             {"action": "add_user_to_editor_group",
              admin.ACTION_CHECKBOX_NAME: self.test_editor_group.id})
         self.assertContains(response,
-            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
-    <a href=\"../\">Accounts</a> &rsaquo;\n    <a href=\"./\">Editor group</a> &rsaquo;\n\
-    Add user\n  </div>", msg_prefix=
+            "<div class=\"breadcrumbs\">\r\n    "
+            "<a href=\"../../\">Home</a> &rsaquo;\r\n    "
+            "<a href=\"../\">Accounts</a> &rsaquo;\r\n    "
+            "<a href=\"./\">Editor group</a> &rsaquo;\r\n    "
+            "Add user\r\n  "
+            "</div>", msg_prefix=
                 "expected to display a correct breadcrumb.")
 
     def test_breadcrumb_in_remove_users_from_editor_group(self):
@@ -2051,9 +2054,12 @@ class BreadcrumbTests(TestCase):
             {"action": "remove_user_from_editor_group",
              admin.ACTION_CHECKBOX_NAME: self.test_editor_group.id})
         self.assertContains(response,
-            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
-    <a href=\"../\">Accounts</a> &rsaquo;\n    <a href=\"./\">Editor group</a> &rsaquo;\n\
-    Remove user\n  </div>", msg_prefix=
+            "<div class=\"breadcrumbs\">\r\n    "
+            "<a href=\"../../\">Home</a> &rsaquo;\r\n    "
+            "<a href=\"../\">Accounts</a> &rsaquo;\r\n    "
+            "<a href=\"./\">Editor group</a> &rsaquo;\r\n    "
+            "Remove user\r\n  "
+            "</div>", msg_prefix=
                 "expected to display a correct breadcrumb.")
 
     def test_breadcrumb_in_add_users_to_editor_group_managers(self):
@@ -2067,9 +2073,12 @@ class BreadcrumbTests(TestCase):
             {"action": "add_user_to_editor_group_managers",
              admin.ACTION_CHECKBOX_NAME: self.test_editor_group_managers.id})
         self.assertContains(response,
-            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
-    <a href=\"../\">Accounts</a> &rsaquo;\n    <a href=\"./\">Editor group managers group</a> &rsaquo;\n\
-    Add user\n  </div>", msg_prefix=
+            "<div class=\"breadcrumbs\">\r\n    "
+            "<a href=\"../../\">Home</a> &rsaquo;\r\n    "
+            "<a href=\"../\">Accounts</a> &rsaquo;\r\n    "
+            "<a href=\"./\">Editor group managers group</a> &rsaquo;\r\n    "
+            "Add user\r\n  "
+            "</div>", msg_prefix=
                 "expected to display a correct breadcrumb.")
 
     def test_breadcrumb_in_remove_users_from_editor_group_managers(self):
@@ -2083,9 +2092,12 @@ class BreadcrumbTests(TestCase):
             {"action": "remove_user_from_editor_group_managers",
              admin.ACTION_CHECKBOX_NAME: self.test_editor_group_managers.id})
         self.assertContains(response,
-            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
-    <a href=\"../\">Accounts</a> &rsaquo;\n    <a href=\"./\">Editor group managers group</a> &rsaquo;\n\
-    Remove user\n  </div>", msg_prefix=
+            "<div class=\"breadcrumbs\">\r\n    "
+            "<a href=\"../../\">Home</a> &rsaquo;\r\n    "
+            "<a href=\"../\">Accounts</a> &rsaquo;\r\n    "
+            "<a href=\"./\">Editor group managers group</a> &rsaquo;\r\n    "
+            "Remove user\r\n  "
+            "</div>", msg_prefix=
                 "expected to display a correct breadcrumb.")
 
     def test_breadcrumb_in_add_users_to_organization(self):
@@ -2099,9 +2111,12 @@ class BreadcrumbTests(TestCase):
             {"action": "add_user_to_organization",
              admin.ACTION_CHECKBOX_NAME: self.test_organization.id})
         self.assertContains(response,
-            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
-    <a href=\"../\">Accounts</a> &rsaquo;\n    <a href=\"./\">Organization</a> &rsaquo;\n\
-    Add user\n  </div>", msg_prefix=
+            "<div class=\"breadcrumbs\">\r\n    "
+            "<a href=\"../../\">Home</a> &rsaquo;\r\n    "
+            "<a href=\"../\">Accounts</a> &rsaquo;\r\n    "
+            "<a href=\"./\">Organization</a> &rsaquo;\r\n    "
+            "Add user\r\n  "
+            "</div>", msg_prefix=
                 "expected to display a correct breadcrumb.")
 
     def test_breadcrumb_in_remove_users_from_organization(self):
@@ -2115,9 +2130,12 @@ class BreadcrumbTests(TestCase):
             {"action": "remove_user_from_organization",
              admin.ACTION_CHECKBOX_NAME: self.test_organization.id})
         self.assertContains(response,
-            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
-    <a href=\"../\">Accounts</a> &rsaquo;\n    <a href=\"./\">Organization</a> &rsaquo;\n\
-    Remove user\n  </div>", msg_prefix=
+            "<div class=\"breadcrumbs\">\r\n    "
+            "<a href=\"../../\">Home</a> &rsaquo;\r\n    "
+            "<a href=\"../\">Accounts</a> &rsaquo;\r\n    "
+            "<a href=\"./\">Organization</a> &rsaquo;\r\n    "
+            "Remove user\r\n  "
+            "</div>", msg_prefix=
                 "expected to display a correct breadcrumb.")
 
     def test_breadcrumb_in_add_users_to_organization_managers(self):
@@ -2131,9 +2149,12 @@ class BreadcrumbTests(TestCase):
             {"action": "add_user_to_organization_managers",
              admin.ACTION_CHECKBOX_NAME: self.test_organization_managers.id})
         self.assertContains(response,
-            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
-    <a href=\"../\">Accounts</a> &rsaquo;\n    <a href=\"./\">Organization managers group</a> &rsaquo;\n\
-    Add user\n  </div>", msg_prefix=
+            "<div class=\"breadcrumbs\">\r\n    "
+            "<a href=\"../../\">Home</a> &rsaquo;\r\n    "
+            "<a href=\"../\">Accounts</a> &rsaquo;\r\n    "
+            "<a href=\"./\">Organization managers group</a> &rsaquo;\r\n    "
+            "Add user\r\n  "
+            "</div>", msg_prefix=
                 "expected to display a correct breadcrumb.")
 
     def test_breadcrumb_in_remove_users_from_organization_managers(self):
@@ -2147,9 +2168,12 @@ class BreadcrumbTests(TestCase):
             {"action": "remove_user_from_organization_managers",
              admin.ACTION_CHECKBOX_NAME: self.test_organization_managers.id})
         self.assertContains(response,
-            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
-    <a href=\"../\">Accounts</a> &rsaquo;\n    <a href=\"./\">Organization managers group</a> &rsaquo;\n\
-    Remove user\n  </div>", msg_prefix=
+            "<div class=\"breadcrumbs\">\r\n    "
+            "<a href=\"../../\">Home</a> &rsaquo;\r\n    "
+            "<a href=\"../\">Accounts</a> &rsaquo;\r\n    "
+            "<a href=\"./\">Organization managers group</a> &rsaquo;\r\n    "
+            "Remove user\r\n  "
+            "</div>", msg_prefix=
                 "expected to display a correct breadcrumb.")
 
     def test_breadcrumb_in_add_editor_groups_to_resource(self):
@@ -2163,9 +2187,12 @@ class BreadcrumbTests(TestCase):
             {"action": "add_group",
              admin.ACTION_CHECKBOX_NAME: self.testfixture.id})
         self.assertContains(response,
-            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
-    <a href=\"../\">Repository</a> &rsaquo;\n    <a href=\"./\">Resource</a> &rsaquo;\n\
-    Add editor group\n  </div>", msg_prefix=
+            "<div class=\"breadcrumbs\">\r\n    "
+            "<a href=\"../../\">Home</a> &rsaquo;\r\n    "
+            "<a href=\"../\">Repository</a> &rsaquo;\r\n    "
+            "<a href=\"./\">Resource</a> &rsaquo;\r\n    "
+            "Add editor group\r\n  "
+            "</div>", msg_prefix=
                 "expected to display a correct breadcrumb.")
 
     def test_breadcrumb_in_remove_editor_groups_from_resource(self):
@@ -2179,9 +2206,12 @@ class BreadcrumbTests(TestCase):
             {"action": "remove_group",
              admin.ACTION_CHECKBOX_NAME: self.testfixture.id})
         self.assertContains(response,
-            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
-    <a href=\"../\">Repository</a> &rsaquo;\n    <a href=\"./\">Resource</a> &rsaquo;\n\
-    Remove editor group\n  </div>", msg_prefix=
+            "<div class=\"breadcrumbs\">\r\n    "
+            "<a href=\"../../\">Home</a> &rsaquo;\r\n    "
+            "<a href=\"../\">Repository</a> &rsaquo;\r\n    "
+            "<a href=\"./\">Resource</a> &rsaquo;\r\n    "
+            "Remove editor group\r\n  "
+            "</div>", msg_prefix=
                 "expected to display a correct breadcrumb.")
 
     def test_breadcrumb_in_add_owners_to_resource(self):
@@ -2195,9 +2225,12 @@ class BreadcrumbTests(TestCase):
             {"action": "add_owner",
              admin.ACTION_CHECKBOX_NAME: self.testfixture.id})
         self.assertContains(response,
-            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
-    <a href=\"../\">Repository</a> &rsaquo;\n    <a href=\"./\">Resource</a> &rsaquo;\n\
-    Add owner\n  </div>", msg_prefix=
+            "<div class=\"breadcrumbs\">\r\n    "
+            "<a href=\"../../\">Home</a> &rsaquo;\r\n    "
+            "<a href=\"../\">Repository</a> &rsaquo;\r\n    "
+            "<a href=\"./\">Resource</a> &rsaquo;\r\n    "
+            "Add owner\r\n  "
+            "</div>", msg_prefix=
                 "expected to display a correct breadcrumb.")
 
     def test_breadcrumb_in_remove_owners_from_resource(self):
@@ -2211,9 +2244,12 @@ class BreadcrumbTests(TestCase):
             {"action": "remove_owner",
              admin.ACTION_CHECKBOX_NAME: self.testfixture.id})
         self.assertContains(response,
-            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
-    <a href=\"../\">Repository</a> &rsaquo;\n    <a href=\"./\">Resource</a> &rsaquo;\n\
-    Remove owner\n  </div>", msg_prefix=
+            "<div class=\"breadcrumbs\">\r\n    "
+            "<a href=\"../../\">Home</a> &rsaquo;\r\n    "
+            "<a href=\"../\">Repository</a> &rsaquo;\r\n    "
+            "<a href=\"./\">Resource</a> &rsaquo;\r\n    "
+            "Remove owner\r\n  "
+            "</div>", msg_prefix=
                 "expected to display a correct breadcrumb.")
 
     def test_breadcrumb_in_mark_resource_as_deleted(self):
@@ -2227,8 +2263,11 @@ class BreadcrumbTests(TestCase):
             {"action": "delete",
              admin.ACTION_CHECKBOX_NAME: self.testfixture.id})
         self.assertContains(response,
-            "<div class=\"breadcrumbs\">\n    <a href=\"../../\">Home</a> &rsaquo;\n\
-    <a href=\"../\">Repository</a> &rsaquo;\n    <a href=\"./\">Resource</a> &rsaquo;\n\
-    Delete resource\n  </div>", msg_prefix=
+            "<div class=\"breadcrumbs\">\r\n    "
+            "<a href=\"../../\">Home</a> &rsaquo;\r\n    "
+            "<a href=\"../\">Repository</a> &rsaquo;\r\n    "
+            "<a href=\"./\">Resource</a> &rsaquo;\r\n    "
+            "Delete resource\r\n  "
+            "</div>", msg_prefix=
                 "expected to display a correct breadcrumb.")
 
