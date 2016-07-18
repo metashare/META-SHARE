@@ -68,7 +68,6 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
           self.get_inline_classes(model, status=OPTIONAL))
         # Show m2m fields as horizontal filter widget unless they have a custom widget:
         self.filter_horizontal = self.list_m2m_fields_without_custom_widget(model)
-        admin_site.site_url = "/"
         super(SchemaModelAdmin, self).__init__(model, admin_site)
         # Reverse inline code:
         self.no_inlines = []
@@ -357,7 +356,6 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
             errors=helpers.AdminErrorList(form, formsets),
             preserved_filters=self.get_preserved_filters(request),
             kb_link=settings.KNOWLEDGE_BASE_URL,
-            root_path=self.admin_site.site_url,
             app_label=opts.app_label,
             show_delete=False,
         )

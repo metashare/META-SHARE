@@ -51,7 +51,6 @@ csrf_protect_m = method_decorator(csrf_protect)
 class MetashareBackendSite(AdminSite):
     index_template = 'repository/editor/index.html'
     logout_template = 'repository/editor/logged_out.html'
-    site_url = "/"
     
     def get_urls(self):
         from django.conf.urls import patterns, url
@@ -114,7 +113,6 @@ class MetashareBackendSite(AdminSite):
           'title': _('Upload new resource description(s)'),
           'form': form,
           'form_url': request.path,
-          'root_path': self.site_url,
         }
         context.update(extra_context or {})
         context_instance = template.RequestContext(request, current_app=self.name)

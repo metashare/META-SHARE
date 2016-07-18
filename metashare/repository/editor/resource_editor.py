@@ -820,7 +820,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
             'existing_download': existing_download,
             'object_id': object_id,
             'original': obj,
-            'root_path': self.admin_site.site_url,
             'app_label': opts.app_label,
         }
         context.update(extra_context or {})
@@ -938,7 +937,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
         context = {
             'title': 'Add %s' % force_unicode(opts.verbose_name),
             'show_delete': False,
-            'root_path': self.admin_site.site_url,
             'app_label': opts.app_label,
             'media': mark_safe(media),
             'add': True,

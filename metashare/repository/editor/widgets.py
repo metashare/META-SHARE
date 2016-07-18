@@ -264,7 +264,6 @@ class SubclassableRelatedFieldWidgetWrapper(RelatedFieldWidgetWrapper):
         return _subclass_select, _subclasses
 
     def render(self, name, value, *args, **kwargs):
-        # We are not using self.admin_site.root_path as this seems broken...
         proto_url = '/{}admin/{}'.format(settings.DJANGO_BASE,
           self.rel.to._meta.app_label)
         self.widget.choices = self.choices
