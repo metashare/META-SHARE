@@ -266,7 +266,7 @@ def portalstats(request):
     # data to gather from all partners including managing nodes
     data['users'] = User.objects.all().count()
     data['number of downloads'] = LRStats.objects.filter(action='d').count()
-    return HttpResponse(JSONEncoder().encode(data), mimetype="application/json")
+    return HttpResponse(JSONEncoder().encode(data), content_type="application/json")
 
 def topstats (request):
     """ viewing statistics about the top LR and latest queries. """    
