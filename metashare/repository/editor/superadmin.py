@@ -153,8 +153,6 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
         if self.is_x_to_many_relation(db_field):
             return self.formfield_for_relation(db_field, **kwargs)
         self.use_hidden_widget_for_one2one(db_field, kwargs)
-        lang_widget = self.add_lang_widget(db_field)
-        kwargs.update(lang_widget)
         formfield = super(SchemaModelAdmin, self).formfield_for_dbfield(db_field, **kwargs)
         self.use_related_widget_where_appropriate(db_field, kwargs, formfield)
         return formfield
@@ -410,7 +408,7 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
             inline_admin_formset = helpers.InlineAdminFormSet(inline, formset,
                 fieldsets, prepopulated, readonly, model_admin=self)
             #### begin modification ####
-            self.add_lang_templ_params(inline_admin_formset)
+            # self.add_lang_templ_params(inline_admin_formset)
             #### end modification ####
             inline_admin_formsets.append(inline_admin_formset)
             media = media + inline_admin_formset.media
