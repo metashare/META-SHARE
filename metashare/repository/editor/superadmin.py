@@ -28,9 +28,9 @@ from metashare.repository.editor.editorutils import is_inline, decode_inline, \
 from metashare.repository.editor.inlines import ReverseInlineModelAdmin
 from metashare.repository.editor.related_mixin import RelatedAdminMixin
 from metashare.repository.editor.schemamodel_mixin import SchemaModelLookup
-from metashare.storage.models import MASTER
 from metashare.repository.model_utils import get_root_resources
 from metashare.repository.supermodel import REQUIRED, RECOMMENDED, OPTIONAL
+from metashare.storage.models import MASTER
 
 
 IS_POPUP_VAR = '_popup'
@@ -434,20 +434,6 @@ class OrderedAdminForm(helpers.AdminForm):
                 model_admin=self.model_admin, inlines=self.inlines,
                 **options
             )
-
-    def first_field(self):
-        try:
-            fieldset_name, fieldset_options = self.fieldsets[0]
-            field_name = fieldset_options['fields'][0]
-            if not isinstance(field_name, basestring):
-                field_name = field_name[0]
-            return self.form[field_name]
-        except (KeyError, IndexError):
-            pass
-        try:
-            return iter(self.form).next()
-        except StopIteration:
-            return None
 
 class OrderedFieldset(helpers.Fieldset):
     def __init__(self, form, name=None, readonly_fields=(), fields=(), classes=(),
