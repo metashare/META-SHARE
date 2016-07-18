@@ -8,33 +8,30 @@ from django import template
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.admin import helpers
-from django.contrib.admin.utils import unquote, get_deleted_objects
+from django.contrib.admin.exceptions import DisallowedModelAdminToField
+from django.contrib.admin.utils import unquote
 from django.core.exceptions import PermissionDenied
+from django.core.urlresolvers import reverse
 from django.db import transaction, models, router
 from django.forms.formsets import all_valid
-from django.http import HttpResponseRedirect, HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.utils.decorators import method_decorator
-from django.utils.encoding import force_unicode
+from django.utils.encoding import force_unicode, force_text
 from django.utils.html import escape, escapejs
-from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 from django.views.decorators.csrf import csrf_protect
 
 from metashare.repository import model_utils
-from metashare.repository.editor.editorutils import is_inline, decode_inline
+from metashare.repository.editor.editorutils import is_inline, decode_inline, \
+    MetaShareSearchModelAdmin
 from metashare.repository.editor.inlines import ReverseInlineModelAdmin
 from metashare.repository.editor.related_mixin import RelatedAdminMixin
 from metashare.repository.editor.schemamodel_mixin import SchemaModelLookup
 from metashare.storage.models import MASTER
 from metashare.repository.model_utils import get_root_resources
-from metashare.repository.editor.editorutils import MetaShareSearchModelAdmin
 from metashare.repository.supermodel import REQUIRED, RECOMMENDED, OPTIONAL
 
-from django.contrib.admin.exceptions import DisallowedModelAdminToField
-from django.utils.encoding import force_text
-from django.core.urlresolvers import reverse
-from django.contrib.contenttypes.models import ContentType
 
 IS_POPUP_VAR = '_popup'
 TO_FIELD_VAR = '_to_field'
@@ -73,15 +70,12 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
         self.filter_horizontal = self.list_m2m_fields_without_custom_widget(model)
         admin_site.site_url = "/"
         super(SchemaModelAdmin, self).__init__(model, admin_site)
-        self.inline_instances = []
-        for inline_class in self.inlines:
-            inline_instance = inline_class(self.model, self.admin_site)
-            self.inline_instances.append(inline_instance)
         # Reverse inline code:
         self.no_inlines = []
         self.exclude = self.exclude or []
         if not isinstance(self.exclude, list):
             self.exclude = list(self.exclude)
+        self.tmp_inline_instances = []
         # Prepare inlines for the required one2one fields:
         for field in model._meta.fields:
             if isinstance(field, models.OneToOneField):
@@ -108,9 +102,11 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
                                            parent,
                                            admin_site,
                                            self.inline_type)
-                    self.inline_instances.append(inline)
+                    self.tmp_inline_instances.append(inline)
                     self.exclude.append(name)
 
+    def get_inline_instances(self, request, obj=None):
+        return self.tmp_inline_instances + super(SchemaModelAdmin, self).get_inline_instances(request)
 
     def get_actions(self, request):
         """
@@ -126,15 +122,12 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
             del result['delete_selected']
         return result
 
-
     def contains_inlines(self, model_class):
         ''' Determine whether or not the editor for the given model_class will contain inlines '''
         return any(f for f in model_class.get_fields_flat() if f.endswith('_set'))
 
-
     def get_fieldsets(self, request, obj=None):
         return SchemaModelLookup.get_fieldsets(self, request, obj)
-
 
     def formfield_for_dbfield(self, db_field, **kwargs):
         """
@@ -156,7 +149,6 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
         formfield = super(SchemaModelAdmin, self).formfield_for_dbfield(db_field, **kwargs)
         self.use_related_widget_where_appropriate(db_field, kwargs, formfield)
         return formfield
-
 
     def has_change_permission(self, request, obj=None):
         result = super(SchemaModelAdmin, self) \
@@ -184,9 +176,8 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
             return False
         return result
 
-
-    def response_add(self, request, obj, post_url_continue='../%s/'):
-        if '_popup' in request.REQUEST:
+    def response_add(self, request, obj, post_url_continue=None):
+        if IS_POPUP_VAR in request.REQUEST:
             if '_subclass' in request.REQUEST:
                 pk_value = obj._get_pk_val()
                 class_name = obj.__class__.__name__.lower()
@@ -206,24 +197,20 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
             if '_caller' in request.REQUEST:
                 caller = request.REQUEST['_caller']
             return self.edit_response_close_popup_magic_o2m(obj, caller)
-        elif '_popup' in request.REQUEST:
+        elif IS_POPUP_VAR in request.REQUEST:
             if request.POST.has_key("_continue"):
                 return self.save_and_continue_in_popup(obj, request)
             return self.edit_response_close_popup_magic(obj)
         else:
             return super(SchemaModelAdmin, self).response_change(request, obj)
 
-
-    def response_delete(self, request):
+    def response_delete(self, request, obj_display):
         '''
         Response sent after a successful deletion.
         '''
-        if '_popup' in request.REQUEST:
+        if IS_POPUP_VAR in request.REQUEST:
             return HttpResponse('<script type="text/javascript">opener.dismissDeleteRelatedPopup(window);</script>')
-        if not self.has_change_permission(request, None):
-            return HttpResponseRedirect("../../../../")
-        return HttpResponseRedirect("../../")
-
+        return self.response_delete(request, obj_display)
 
     def set_required_formset(self, formset):
         req_forms = formset.forms
@@ -231,10 +218,6 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
             if not 'DELETE' in req_form.changed_data:
                 req_form.empty_permitted = False
                 break
-            
-    def get_formsets(self, request, obj=None):
-        for inline in self.inline_instances:
-            yield inline.get_formset(request, obj)
             
     @csrf_protect_m
     @transaction.atomic
@@ -262,19 +245,23 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
     
             if not self.has_change_permission(request, obj):
                 raise PermissionDenied
+
             if obj is None:
-                return HttpResponseNotFound(_('%(name)s object with primary key %(key)r does not exist.') % {
+                raise Http404(_('%(name)s object with primary key %(key)r does not exist.') % {
                     'name': force_text(opts.verbose_name), 'key': escape(object_id)})
-            
+
             if request.method == 'POST' and "_saveasnew" in request.POST:
                 return self.add_view(request, form_url=reverse('admin:%s_%s_add' % (
                     opts.app_label, opts.model_name),
                     current_app=self.admin_site.name))
         
+        #### begin modification ####
+        # make sure that the user has a full session length time for the current
+        # edit activity
         request.session.set_expiry(settings.SESSION_COOKIE_AGE)
-        
+        #### end modification ####
+
         ModelForm = self.get_form(request, obj)
-        formsets = []
         if request.method == 'POST':
             form = ModelForm(request.POST, request.FILES, instance=obj)
             if form.is_valid():
@@ -283,28 +270,7 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
             else:
                 form_validated = False
                 new_object = form.instance
-                
-            prefixes = {}
-            
-            for FormSet, inline in zip(self.get_formsets(request, new_object), self.inline_instances):
-                #### begin modification ####
-                if getattr(FormSet, 'parent_fk_name', None) in self.no_inlines:
-                    continue
-                #### end modification ####
-                prefix = FormSet.get_default_prefix()
-                prefixes[prefix] = prefixes.get(prefix, 0) + 1
-                if prefixes[prefix] != 1 or not prefix:
-                    prefix = "%s-%s" % (prefix, prefixes[prefix])
-                formset = FormSet(data=request.POST, files=request.FILES,
-                                  instance=new_object,
-                                  save_as_new="_saveasnew" in request.POST,
-                                  prefix=prefix, queryset=inline.queryset(request))
-                #### begin modification ####
-                if prefix in self.model.get_fields()['required']:
-                    self.set_required_formset(formset)
-                #### end modification ####
-                formsets.append(formset)
-            
+            formsets, inline_instances = self._create_formsets(request, new_object, change=not add)
             if all_valid(formsets) and form_validated:
                 #### begin modification ####
                 unsaved_formsets = []
@@ -346,6 +312,7 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
                 if self.model.__schema_name__ == "resourceInfo":
                     new_object.storage_object.update_storage()
                 #### end modification ####
+
                 if add:
                     self.log_addition(request, new_object)
                     return self.response_add(request, new_object)
@@ -355,69 +322,28 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
                     return self.response_change(request, new_object)
         else:
             if add:
-                # Prepare the dict of initial data from the request.
-                # We have to special-case M2Ms as a list of comma-separated PKs.
-                initial = dict(request.GET.items())
-                for k in initial:
-                    try:
-                        f = opts.get_field(k)
-                    except models.FieldDoesNotExist:
-                        continue
-                    if isinstance(f, models.ManyToManyField):
-                        initial[k] = initial[k].split(",")
+                initial = self.get_changeform_initial_data(request)
                 form = ModelForm(initial=initial)
-                prefixes = {}
-                for FormSet, inline in zip(self.get_formsets(request),
-                                           self.inline_instances):
-                    #### begin modification ####
-                    if getattr(FormSet, 'parent_fk_name', None) in self.no_inlines:
-                        continue
-                    #### end modification ####
-                    prefix = FormSet.get_default_prefix()
-                    prefixes[prefix] = prefixes.get(prefix, 0) + 1
-                    if prefixes[prefix] != 1:
-                        prefix = "%s-%s" % (prefix, prefixes[prefix])
-                    formset = FormSet(instance=self.model(), prefix=prefix,
-                                      queryset=inline.queryset(request))
-                    formsets.append(formset)
+                formsets, inline_instances = self._create_formsets(request, self.model(), change=False)
             else:
                 form = ModelForm(instance=obj)
-                prefixes = {}
-                for FormSet, inline in zip(self.get_formsets(request, obj), self.inline_instances):
-                    #### begin modification ####
-                    if getattr(FormSet, 'parent_fk_name', None) in self.no_inlines:
-                        continue
-                    #### end modification ####
-                    prefix = FormSet.get_default_prefix()
-                    prefixes[prefix] = prefixes.get(prefix, 0) + 1
-                    if prefixes[prefix] != 1:
-                        prefix = "%s-%s" % (prefix, prefixes[prefix])
-                    formset = FormSet(instance=obj, prefix=prefix,
-                                      queryset=inline.queryset(request))
-                    formsets.append(formset)
-                
+                formsets, inline_instances = self._create_formsets(request, obj, change=True)
+
         #### begin modification ####
         media = self.media or []
         #### end modification ####
-        inline_admin_formsets = []
-        prepopulated = {}
-        for inline, formset in zip(self.inline_instances, formsets):
-            fieldsets = list(inline.get_fieldsets(request))
-            readonly = list(inline.get_readonly_fields(request))
-            prepopulated.update(dict(inline.get_prepopulated_fields(request, obj)))
-            inline_admin_formset = helpers.InlineAdminFormSet(inline, formset,
-                fieldsets, prepopulated, readonly, model_admin=self)
-            #### begin modification ####
-            # self.add_lang_templ_params(inline_admin_formset)
-            #### end modification ####
-            inline_admin_formsets.append(inline_admin_formset)
-            media = media + inline_admin_formset.media
-            
-        adminForm = OrderedAdminForm(form, list(self.get_fieldsets_with_inlines(request, obj)),
-            prepopulated, self.get_readonly_fields(request),
-            model_admin=self, inlines=inline_admin_formsets)
-        
+
+        inline_formsets = self.get_inline_formsets(request, formsets, inline_instances, obj)
+        for inline_formset in inline_formsets:
+            media = media + inline_formset.media
+
+        #### begin modification ####
+        adminForm = OrderedAdminForm(form, list(self.get_fieldsets_with_inlines(request)),
+            self.prepopulated_fields, self.get_readonly_fields(request, obj),
+            model_admin=self, inlines=inline_formsets)
         media = media + adminForm.media
+        #### end modification ####
+
         context = dict(self.admin_site.each_context(),
             title=(_('Add %s') if add else _('Change %s')) % force_text(opts.verbose_name),
             adminform=adminForm,
@@ -426,8 +352,8 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
             is_popup=(IS_POPUP_VAR in request.POST or
                       IS_POPUP_VAR in request.GET),
             to_field=to_field,
-            media=mark_safe(media),
-            inline_admin_formsets=inline_admin_formsets,
+            media=media,
+            inline_admin_formsets=inline_formsets,
             errors=helpers.AdminErrorList(form, formsets),
             preserved_filters=self.get_preserved_filters(request),
             kb_link=settings.KNOWLEDGE_BASE_URL,
@@ -437,8 +363,9 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
         )
     
         context.update(extra_context or {})
+
+        #### begin modification ####
         if not add:
-            #### begin modification ####
             # redirection for reusable entities which are no master copies:
             if hasattr(obj, 'copy_status') and obj.copy_status != MASTER:
                 context['url'] = obj.source_url
@@ -456,105 +383,45 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
                         request, current_app=self.admin_site.name)
                     return render_to_response('admin/repository/cannot_edit.html',
                         context, context_instance=context_instance)
-            #### end modification ####
+        #### end modification ####
         return self.render_change_form(request, context, add=add, change=not add, obj=obj, form_url=form_url)
-    
-    def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
-        opts = self.model._meta
-        app_label = opts.app_label
-        context.update({
-            'add': add,
-            'change': change,
-            'has_add_permission': self.has_add_permission(request),
-            'has_change_permission': self.has_change_permission(request, obj),
-            'has_delete_permission': self.has_delete_permission(request, obj),
-            'has_file_field': True, # FIXME - this should check if form or formsets have a FileField,
-            'has_absolute_url': hasattr(self.model, 'get_absolute_url'),
-            'opts': opts,
-            'content_type_id': ContentType.objects.get_for_model(self.model).id,
-            'save_as': self.save_as,
-            'save_on_top': self.save_on_top,
-            'root_path': self.admin_site.site_url,
-        })
-        if add and self.add_form_template is not None:
-            form_template = self.add_form_template
-        else:
-            form_template = self.change_form_template
-        context_instance = template.RequestContext(request, current_app=self.admin_site.name)
-        return render_to_response(form_template or [
-            "admin/%s/%s/change_form.html" % (app_label, opts.object_name.lower()),
-            "admin/%s/change_form.html" % app_label,
-            "admin/change_form.html"
-        ], context, context_instance=context_instance)
-        
-    @csrf_protect_m
-    @transaction.atomic
-    def delete_view(self, request, object_id, extra_context=None):
-        """
-        The 'delete' admin view for this model.
-        This follows closely the base implementation from Django 1.7's
-        django.contrib.admin.options.ModelAdmin,
-        with the explicitly marked modifications.
-        """
-        opts = self.model._meta
-        app_label = opts.app_label
 
-        obj = self.get_object(request, unquote(object_id))
-
-        if not self.has_delete_permission(request, obj):
-            raise PermissionDenied
-
-        if obj is None:
-            return HttpResponseNotFound(_('%(name)s object with primary key %(key)r does not exist.') % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
-
-        using = router.db_for_write(self.model)
-
-        # Populate deleted_objects, a data structure of all related objects that
-        # will also be deleted.
-        (deleted_objects, perms_needed, protected) = get_deleted_objects(
-            [obj], opts, request.user, self.admin_site, using)
-
-        if request.POST: # The user has already confirmed the deletion.
-            if perms_needed:
-                raise PermissionDenied
-            obj_display = force_unicode(obj)
-            self.log_deletion(request, obj, obj_display)
-            self.delete_model(request, obj)
-
-
-            #### Change starts here ####
-            if not '_popup' in request.REQUEST:
-                self.message_user(request, _('The %(name)s "%(obj)s" was deleted successfully.') %
-                                   {'name': force_unicode(opts.verbose_name), 'obj': force_unicode(obj_display)})
-            return self.response_delete(request)
-            #### Change ends here ####
-
-        object_name = force_unicode(opts.verbose_name)
-
-        if perms_needed or protected:
-            title = _("Cannot delete %(name)s") % {"name": object_name}
-        else:
-            title = _("Are you sure?")
-
-        context = {
-            "title": title,
-            "object_name": object_name,
-            "object": obj,
-            "deleted_objects": deleted_objects,
-            "perms_lacking": perms_needed,
-            "protected": protected,
-            "opts": opts,
-            "root_path": self.admin_site.site_url,
-            "app_label": app_label,
-        }
-        context.update(extra_context or {})
-        context_instance = template.RequestContext(request, current_app=self.admin_site.name)
-        return render_to_response(self.delete_confirmation_template or [
-            "admin/%s/%s/delete_confirmation.html" % (app_label, opts.object_name.lower()),
-            "admin/%s/delete_confirmation.html" % app_label,
-            "admin/delete_confirmation.html"
-        ], context, context_instance=context_instance)
-
+    def _create_formsets(self, request, obj, change):
+        "Helper function to generate formsets for add/change_view."
+        formsets = []
+        inline_instances = []
+        prefixes = {}
+        get_formsets_args = [request]
+        if change:
+            get_formsets_args.append(obj)
+        for FormSet, inline in self.get_formsets_with_inlines(*get_formsets_args):
+            #### begin modification ####
+            if getattr(FormSet, 'parent_fk_name', None) in self.no_inlines:
+                continue
+            #### end modification ####
+            prefix = FormSet.get_default_prefix()
+            prefixes[prefix] = prefixes.get(prefix, 0) + 1
+            if prefixes[prefix] != 1 or not prefix:
+                prefix = "%s-%s" % (prefix, prefixes[prefix])
+            formset_params = {
+                'instance': obj,
+                'prefix': prefix,
+                'queryset': inline.get_queryset(request),
+            }
+            if request.method == 'POST':
+                formset_params.update({
+                    'data': request.POST,
+                    'files': request.FILES,
+                    'save_as_new': '_saveasnew' in request.POST
+                })
+            #### begin modification ####
+            formset = FormSet(**formset_params)
+            if request.method == 'POST' and prefix in self.model.get_fields()['required']:
+                self.set_required_formset(formset)
+            formsets.append(formset)
+            #### end modification ####
+            inline_instances.append(inline)
+        return formsets, inline_instances
 
 class OrderedAdminForm(helpers.AdminForm):
     
@@ -569,6 +436,7 @@ class OrderedAdminForm(helpers.AdminForm):
                 model_admin=self.model_admin, inlines=self.inlines,
                 **options
             )
+
     def first_field(self):
         try:
             fieldset_name, fieldset_options = self.fieldsets[0]
@@ -582,7 +450,6 @@ class OrderedAdminForm(helpers.AdminForm):
             return iter(self.form).next()
         except StopIteration:
             return None
-
 
 class OrderedFieldset(helpers.Fieldset):
     def __init__(self, form, name=None, readonly_fields=(), fields=(), classes=(),
