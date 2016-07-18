@@ -1,4 +1,5 @@
 import datetime
+from functools import update_wrapper
 
 from django import forms
 from django.contrib import admin, messages
@@ -7,12 +8,11 @@ from django.contrib.admin.views.main import ChangeList
 from django.contrib.auth.decorators import permission_required
 from django.core.exceptions import ValidationError, PermissionDenied
 from django.db.models import Q
-from django.http import HttpResponseNotFound, HttpResponseRedirect
+from django.http import Http404, HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from django.utils.decorators import method_decorator
-from django.utils.encoding import force_unicode
-from functools import update_wrapper
+from django.utils.encoding import force_unicode, force_text
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _, ungettext
@@ -1068,7 +1068,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
             raise NotImplementedError, "Cannot deal with '{}' resource types just yet".format(resource_type)
         return structures
 
-    def get_hidden_structures(self, request, resource_id=None):
+    def get_hidden_structures(self, request, resource=None):
         '''
         For a resource with existing hidden structures,
         fill a dict with the hidden objects.
@@ -1079,7 +1079,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
             if media_type_field:
                 return media_type_field.pk
             return ''
-        resource_component_id = self.get_resource_component_id(request, resource_id)
+        resource_component_id = self.get_resource_component_id(request, resource)
         structures = {}
         resource_component = resourceComponentTypeType_model.objects.get(pk=resource_component_id)
         content_info = resource_component.as_subclass()
@@ -1117,12 +1117,11 @@ class ResourceModelAdmin(SchemaModelAdmin):
             raise NotImplementedError, "Cannot deal with '{}' resource types just yet".format(content_info.__class__.__name__)
         return structures
 
-    def get_resource_component_id(self, request, resource_id=None):
+    def get_resource_component_id(self, request, resource=None):
         '''
         For the given resource (if any) and request, try to get a resource component ID.
         '''
-        if resource_id is not None:
-            resource = resourceInfoType_model.objects.get(pk=resource_id)
+        if resource is not None:
             return resource.resourceComponentType.pk
         if request.method == 'POST':
             return request.POST['resourceComponentId']
@@ -1199,12 +1198,20 @@ class ResourceModelAdmin(SchemaModelAdmin):
         # update statistics
         saveLRStats(obj, DELETE_STAT, request)          
                 
-    def change_view(self, request, object_id, extra_context=None):
+    def change_view(self, request, object_id, form_url='', extra_context=None):
+        model = self.model
+        opts = model._meta
+        obj = self.get_object(request, unquote(object_id))
+
+        if obj is None:
+                raise Http404(_('%(name)s object with primary key %(key)r does not exist.') % {
+                    'name': force_text(opts.verbose_name), 'key': escape(object_id)})
+
         _extra_context = extra_context or {}
         _extra_context.update({'DJANGO_BASE':settings.DJANGO_BASE})
-        _structures = self.get_hidden_structures(request, object_id)
+        _structures = self.get_hidden_structures(request, obj)
         _extra_context.update(_structures)
-        return super(ResourceModelAdmin, self).change_view(request, object_id, '', _extra_context)
+        return super(ResourceModelAdmin, self).change_view(request, object_id, form_url, _extra_context)
 
 class LicenceForm(forms.ModelForm):
     class Meta:
@@ -1214,5 +1221,3 @@ class LicenceForm(forms.ModelForm):
 
 class LicenceModelAdmin(SchemaModelAdmin):
     form = LicenceForm
-
-    

@@ -14,7 +14,7 @@ from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.db import transaction, models, router
 from django.forms.formsets import all_valid
-from django.http import HttpResponse
+from django.http import Http404, HttpResponse
 from django.shortcuts import render_to_response
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_unicode, force_text
