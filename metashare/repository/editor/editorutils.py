@@ -283,7 +283,6 @@ class MetaShareSearchModelAdmin(ModelAdmin):
             'cl': changelist,
             'media': media,
             'has_add_permission': self.has_add_permission(request),
-            'root_path': self.admin_site.site_url,
             'app_label': self.model._meta.app_label,
             'action_form': action_form,
             'actions_on_top': self.actions_on_top,

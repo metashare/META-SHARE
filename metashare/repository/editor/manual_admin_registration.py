@@ -196,7 +196,6 @@ class DocumentUnstructuredStringModelAdmin(admin.ModelAdmin, RelatedAdminMixin):
             'media': mark_safe(media),
             'inline_admin_formsets': inline_admin_formsets,
             'errors': helpers.AdminErrorList(form, formsets),
-            'root_path': self.admin_site.site_url,
             'app_label': opts.app_label,
             'kb_link': settings.KNOWLEDGE_BASE_URL,
             'comp_name': _('%s') % force_unicode(opts.verbose_name),

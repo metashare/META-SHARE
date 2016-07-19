@@ -160,8 +160,8 @@ class EditorGroupAdmin(admin.ModelAdmin):
         return super(EditorGroupAdmin, self).add_view(request,
                                 form_url=form_url, extra_context=extra_context)
 
-    def queryset(self, request):
-        queryset = super(EditorGroupAdmin, self).queryset(request)
+    def get_queryset(self, request):
+        queryset = super(EditorGroupAdmin, self).get_queryset(request)
         if request.user.is_superuser:
             return queryset
         return queryset.filter(editorgroupmanagers__in=EditorGroupManagers.objects.filter(
@@ -320,8 +320,8 @@ class EditorGroupApplicationAdmin(admin.ModelAdmin):
         return super(EditorGroupApplicationAdmin, self) \
             .get_readonly_fields(request, obj)
 
-    def queryset(self, request):
-        result = super(EditorGroupApplicationAdmin, self).queryset(request)
+    def get_queryset(self, request):
+        result = super(EditorGroupApplicationAdmin, self).get_queryset(request)
         if request.user.is_superuser:
             return result
         # non-superusers may only see the applications that they may also handle
@@ -415,7 +415,6 @@ class EditorGroupApplicationAdmin(admin.ModelAdmin):
             "perms_lacking": perms_needed,
             "protected": protected,
             "opts": opts,
-            "root_path": self.admin_site.site_url,
             "app_label": app_label,
             'action_checkbox_name': helpers.ACTION_CHECKBOX_NAME,
         }
@@ -624,8 +623,8 @@ class OrganizationAdmin(admin.ModelAdmin):
                 self.choices = choices
                 self.fields['users'] = forms.ModelMultipleChoiceField(self.choices)
 
-    def queryset(self, request):
-        queryset = super(OrganizationAdmin, self).queryset(request)
+    def get_queryset(self, request):
+        queryset = super(OrganizationAdmin, self).get_queryset(request)
         if request.user.is_superuser:
             return queryset
         return queryset.filter(organizationmanagers__in=OrganizationManagers.objects.filter(
@@ -868,7 +867,6 @@ class OrganizationApplicationAdmin(admin.ModelAdmin):
             "perms_lacking": perms_needed,
             "protected": protected,
             "opts": opts,
-            "root_path": self.admin_site.site_url,
             "app_label": app_label,
             'action_checkbox_name': helpers.ACTION_CHECKBOX_NAME,
         }

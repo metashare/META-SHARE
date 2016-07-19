@@ -16,7 +16,6 @@ class SchemaModelLookup(object):
     def is_inline(self, name):
         return name.endswith('_set')
 
-
     def is_required_field(self, name):
         """
         Checks whether the field with the given name is a required field.
@@ -24,7 +23,6 @@ class SchemaModelLookup(object):
         # pylint: disable-msg=E1101
         _fields = self.model.get_fields()
         return name in _fields['required']
-
 
     def is_visible_as_normal_field(self, field_name, exclusion_list):
         return self.is_field(field_name) and field_name not in exclusion_list
@@ -82,8 +80,6 @@ class SchemaModelLookup(object):
         ),)
         return _fieldsets
 
-
-
     def build_fieldsets_from_schema_tabbed(self, include_inlines=False, inlines=()):
         """
         Builds fieldsets using SchemaModel.get_fields(),
@@ -136,7 +132,7 @@ class SchemaModelLookup(object):
 
     def get_fieldsets_with_inlines(self, request, obj=None):
         # pylint: disable-msg=E1101
-        inline_names = [inline.parent_fk_name for inline in self.inline_instances if hasattr(inline, 'parent_fk_name')]
+        inline_names = [inline.parent_fk_name for inline in self.get_inline_instances(request) if hasattr(inline, 'parent_fk_name')]
         return self.build_fieldsets_from_schema(include_inlines=True, inlines=inline_names)
 
     def get_inline_classes(self, model, status):

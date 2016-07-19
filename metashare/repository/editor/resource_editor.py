@@ -1,4 +1,5 @@
 import datetime
+from functools import update_wrapper
 
 from django import forms
 from django.contrib import admin, messages
@@ -7,12 +8,11 @@ from django.contrib.admin.views.main import ChangeList
 from django.contrib.auth.decorators import permission_required
 from django.core.exceptions import ValidationError, PermissionDenied
 from django.db.models import Q
-from django.http import HttpResponseNotFound, HttpResponseRedirect
+from django.http import Http404, HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from django.utils.decorators import method_decorator
-from django.utils.encoding import force_unicode
-from functools import update_wrapper
+from django.utils.encoding import force_unicode, force_text
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _, ungettext
@@ -135,7 +135,6 @@ class ResourceComponentInlineFormSet(ReverseInlineFormSet):
             setattr(parent, modelfieldname, child)
             parent.save()
 
-    
     def save_corpus(self, corpus, commit):
         self.save_media(corpus.corpusMediaType, \
              ('corpusAudioInfo', 'corpusImageInfo', 'corpusTextNumericalInfo', 'corpusTextNgramInfo'))
@@ -215,7 +214,6 @@ def change_resource_status(resource, status, precondition_status=None):
         return True
     return False
 
-
 def has_edit_permission(request, res_obj):
     """
     Returns `True` if the given request has permission to edit the metadata
@@ -225,7 +223,6 @@ def has_edit_permission(request, res_obj):
         or request.user in res_obj.owners.all() \
         or res_obj.editor_groups.filter(name__in=
             request.user.groups.values_list('name', flat=True)).count() != 0)
-
 
 def has_publish_permission(request, queryset):
     """
@@ -416,7 +413,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 self.choices = choices
                 self.fields['multifield'] = forms.ModelMultipleChoiceField(self.choices)        
 
-
     @csrf_protect_m    
     def delete(self, request, queryset):
         """
@@ -524,7 +520,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
 
     add_group.short_description = _("Add editor groups to selected resources")
 
-
     @staticmethod
     def _get_addable_editor_groups(user):
         """
@@ -544,7 +539,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
               | Q(name__in=EditorGroupManagers.objects.filter(name__in=
                     user.groups.values_list('name', flat=True)) \
                         .values_list('managed_group__name', flat=True)))
-
 
     @csrf_protect_m
     def remove_group(self, request, queryset):
@@ -589,7 +583,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
 
     remove_group.short_description = _("Remove editor groups from selected " \
                                        "resources")
-
 
     @csrf_protect_m    
     def add_owner(self, request, queryset):
@@ -641,7 +634,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
 
     add_owner.short_description = _("Add owners to selected resources")
 
-
     @csrf_protect_m    
     def remove_owner(self, request, queryset):
         """
@@ -684,7 +676,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
 
     remove_owner.short_description = _("Remove owners from selected resources")
 
-
     def get_urls(self):
         from django.conf.urls import patterns, url
         urlpatterns = super(ResourceModelAdmin, self).get_urls()
@@ -708,8 +699,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 name='%s_%s_exportxml' % info),
         ) + urlpatterns
         return urlpatterns
-    
-    
+
     @csrf_protect_m
     def changelist_view_filtered(self, request, extra_context=None):
         '''
@@ -737,7 +727,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
             return FilteredChangeList
         else:
             return AllChangeList
-
 
     @csrf_protect_m
     def uploaddata_view(self, request, object_id, extra_context=None):
@@ -820,7 +809,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
             'existing_download': existing_download,
             'object_id': object_id,
             'original': obj,
-            'root_path': self.admin_site.site_url,
             'app_label': opts.app_label,
         }
         context.update(extra_context or {})
@@ -870,7 +858,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
         except Exception:
             return HttpResponseNotFound(_('Could not export resource "%(name)s" with primary key %(key)s.') \
               % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
-
 
     def build_fieldsets_from_schema(self, include_inlines=False, inlines=()):
         """
@@ -938,7 +925,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
         context = {
             'title': 'Add %s' % force_unicode(opts.verbose_name),
             'show_delete': False,
-            'root_path': self.admin_site.site_url,
             'app_label': opts.app_label,
             'media': mark_safe(media),
             'add': True,
@@ -965,7 +951,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 out[item] = True
         return out
 
-    def queryset(self, request):
+    def get_queryset(self, request):
         """
         Returns a QuerySet of all model instances that can be edited by the
         admin site.
@@ -973,7 +959,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         This is used by changelist_view, for example, but also for determining
         whether the current user may edit a resource or not.
         """
-        result = super(ResourceModelAdmin, self).queryset(request)
+        result = super(ResourceModelAdmin, self).get_queryset(request)
         # filter results marked as deleted:
         result = result.distinct().filter(storage_object__deleted=False)
         # all users but the superusers may only see resources for which they are
@@ -983,8 +969,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     | Q(editor_groups__name__in=
                            request.user.groups.values_list('name', flat=True)))
         return result
-    
-
 
     def has_delete_permission(self, request, obj=None):
         """
@@ -1070,7 +1054,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
             raise NotImplementedError, "Cannot deal with '{}' resource types just yet".format(resource_type)
         return structures
 
-    def get_hidden_structures(self, request, resource_id=None):
+    def get_hidden_structures(self, request, resource=None):
         '''
         For a resource with existing hidden structures,
         fill a dict with the hidden objects.
@@ -1081,7 +1065,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
             if media_type_field:
                 return media_type_field.pk
             return ''
-        resource_component_id = self.get_resource_component_id(request, resource_id)
+        resource_component_id = self.get_resource_component_id(request, resource)
         structures = {}
         resource_component = resourceComponentTypeType_model.objects.get(pk=resource_component_id)
         content_info = resource_component.as_subclass()
@@ -1119,12 +1103,11 @@ class ResourceModelAdmin(SchemaModelAdmin):
             raise NotImplementedError, "Cannot deal with '{}' resource types just yet".format(content_info.__class__.__name__)
         return structures
 
-    def get_resource_component_id(self, request, resource_id=None):
+    def get_resource_component_id(self, request, resource=None):
         '''
         For the given resource (if any) and request, try to get a resource component ID.
         '''
-        if resource_id is not None:
-            resource = resourceInfoType_model.objects.get(pk=resource_id)
+        if resource is not None:
             return resource.resourceComponentType.pk
         if request.method == 'POST':
             return request.POST['resourceComponentId']
@@ -1184,14 +1167,13 @@ class ResourceModelAdmin(SchemaModelAdmin):
         self.add_user_to_resource_owners(request)
         # And in any case, we serve the usual change form if we have a post request
         return super(ResourceModelAdmin, self).add_view(request, form_url, _extra_context)
-        
 
     def save_model(self, request, obj, form, change):
         super(ResourceModelAdmin, self).save_model(request, obj, form, change)
         # update statistics
         if hasattr(obj, 'storage_object') and obj.storage_object is not None:
             saveLRStats(obj, UPDATE_STAT, request)
-    
+
     def delete_model(self, request, obj):
         obj.storage_object.deleted = True
         obj.storage_object.save()
@@ -1200,13 +1182,21 @@ class ResourceModelAdmin(SchemaModelAdmin):
         obj.storage_object.update_storage()
         # update statistics
         saveLRStats(obj, DELETE_STAT, request)          
-                
-    def change_view(self, request, object_id, extra_context=None):
+
+    def change_view(self, request, object_id, form_url='', extra_context=None):
+        model = self.model
+        opts = model._meta
+        obj = self.get_object(request, unquote(object_id))
+
+        if obj is None:
+                raise Http404(_('%(name)s object with primary key %(key)r does not exist.') % {
+                    'name': force_text(opts.verbose_name), 'key': escape(object_id)})
+
         _extra_context = extra_context or {}
         _extra_context.update({'DJANGO_BASE':settings.DJANGO_BASE})
-        _structures = self.get_hidden_structures(request, object_id)
+        _structures = self.get_hidden_structures(request, obj)
         _extra_context.update(_structures)
-        return super(ResourceModelAdmin, self).change_view(request, object_id, '', _extra_context)
+        return super(ResourceModelAdmin, self).change_view(request, object_id, form_url, _extra_context)
 
 class LicenceForm(forms.ModelForm):
     class Meta:
@@ -1216,5 +1206,3 @@ class LicenceForm(forms.ModelForm):
 
 class LicenceModelAdmin(SchemaModelAdmin):
     form = LicenceForm
-
-    
