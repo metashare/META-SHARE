@@ -204,7 +204,7 @@ class LangDictWidget(DictWidget):
         """
         # pylint: disable-msg=E1101
         return Media(js = ('js/jquery-ui.min.js',
-                           '{}js/pycountry.js'\
+                           '{}js/pybcp47.js'\
                            .format(settings.ADMIN_MEDIA_PREFIX),
                            '{}js/autocomp.js'\
                            .format(settings.ADMIN_MEDIA_PREFIX),
@@ -264,6 +264,7 @@ class SubclassableRelatedFieldWidgetWrapper(RelatedFieldWidgetWrapper):
         return _subclass_select, _subclasses
 
     def render(self, name, value, *args, **kwargs):
+
         proto_url = '/{}admin/{}'.format(settings.DJANGO_BASE,
           self.rel.to._meta.app_label)
         self.widget.choices = self.choices
@@ -698,7 +699,7 @@ class ComboWidget(AdminTextInputWidget):
                   '{}css/combo.css'.format(settings.ADMIN_MEDIA_PREFIX))
         }
         js = ('js/jquery-ui.min.js',
-              '{}js/pycountry.js'.format(settings.ADMIN_MEDIA_PREFIX),
+              '{}js/pybcp47.js'.format(settings.ADMIN_MEDIA_PREFIX),
               '{}js/autocomp.js'.format(settings.ADMIN_MEDIA_PREFIX),)
 
     def __init__(self, field_type=None, attrs=None):
@@ -734,7 +735,7 @@ class MultiComboWidget(MultiFieldWidget):
                   '{}css/combo.css'.format(settings.ADMIN_MEDIA_PREFIX))
         }
         js = ('js/jquery-ui.min.js',
-              '{}js/pycountry.js'.format(settings.ADMIN_MEDIA_PREFIX),
+              '{}js/pybcp47.js'.format(settings.ADMIN_MEDIA_PREFIX),
               '{}js/autocomp.js'.format(settings.ADMIN_MEDIA_PREFIX),)
 
     def __init__(self, field_type=None, attrs=None, widget_id=None, max_length=None, **kwargs):
@@ -774,7 +775,7 @@ class MultiComboWidget(MultiFieldWidget):
 class LangAutoCompleteWidget(widgets.Widget):
     class Media:
         js = ('js/jquery-ui.min.js',
-              '{}js/pycountry.js'.format(settings.ADMIN_MEDIA_PREFIX),
+              '{}js/pybcp47.js'.format(settings.ADMIN_MEDIA_PREFIX),
               '{}js/autocomp.js'.format(settings.ADMIN_MEDIA_PREFIX),)
         css = {}
         
