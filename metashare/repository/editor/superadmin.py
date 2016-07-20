@@ -48,12 +48,12 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
     Patched ModelAdmin class. The add_view method is overridden to
     allow the reverse inline formsets to be saved before the parent
     model.
-    '''    
+    '''
     custom_one2one_inlines = {}
     custom_one2many_inlines = {}
     inline_type = 'stacked'
     inlines = ()
-    
+
     class Media:
         js = (settings.MEDIA_URL + 'js/addCollapseToAllStackedInlines.js',
               settings.MEDIA_URL + 'js/jquery-ui.min.js',
@@ -134,7 +134,7 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
         it is decided how this field will be rendered in the form.
         We have heavily customized this; implementations are in
         RelatedAdminMixin.
-        
+
         Customizations include:
         - hiding certain fields (they are present but invisible);
         - custom widgets for subclassable items such as actorInfo;
@@ -145,6 +145,8 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
         if self.is_x_to_many_relation(db_field):
             return self.formfield_for_relation(db_field, **kwargs)
         self.use_hidden_widget_for_one2one(db_field, kwargs)
+        lang_widget = self.add_lang_widget(db_field)
+        kwargs.update(lang_widget)
         formfield = super(SchemaModelAdmin, self).formfield_for_dbfield(db_field, **kwargs)
         self.use_related_widget_where_appropriate(db_field, kwargs, formfield)
         return formfield
@@ -184,7 +186,7 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
                     # escape() calls force_unicode.
                     (escape(pk_value), escapejs(obj), escapejs(class_name)))
         return super(SchemaModelAdmin, self).response_add(request, obj, post_url_continue)
-    
+
     def response_change(self, request, obj):
         '''
         Response sent after a successful submission of a change form.
@@ -217,7 +219,22 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
             if not 'DELETE' in req_form.changed_data:
                 req_form.empty_permitted = False
                 break
-            
+
+    def get_inline_formsets(self, request, formsets, inline_instances,
+                            obj=None):
+        inline_admin_formsets = []
+        for inline, formset in zip(inline_instances, formsets):
+            fieldsets = list(inline.get_fieldsets(request, obj))
+            readonly = list(inline.get_readonly_fields(request, obj))
+            prepopulated = dict(inline.get_prepopulated_fields(request, obj))
+            inline_admin_formset = helpers.InlineAdminFormSet(inline, formset,
+                fieldsets, prepopulated, readonly, model_admin=self)
+            #### begin modification ####
+            self.add_lang_templ_params(inline_admin_formset)
+            #### end modification ####
+            inline_admin_formsets.append(inline_admin_formset)
+        return inline_admin_formsets
+
     @csrf_protect_m
     @transaction.atomic
     def changeform_view(self, request, object_id=None, form_url='', extra_context=None):
@@ -229,19 +246,19 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
         to_field = request.POST.get(TO_FIELD_VAR, request.GET.get(TO_FIELD_VAR))
         if to_field and not self.to_field_allowed(request, to_field):
             raise DisallowedModelAdminToField("The field %s cannot be referenced." % to_field)
-    
+
         model = self.model
         opts = model._meta
         add = object_id is None
-    
+
         if add:
             if not self.has_add_permission(request):
                 raise PermissionDenied
             obj = None
-    
+
         else:
             obj = self.get_object(request, unquote(object_id))
-    
+
             if not self.has_change_permission(request, obj):
                 raise PermissionDenied
 
@@ -253,7 +270,7 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
                 return self.add_view(request, form_url=reverse('admin:%s_%s_add' % (
                     opts.app_label, opts.model_name),
                     current_app=self.admin_site.name))
-        
+
         #### begin modification ####
         # make sure that the user has a full session length time for the current
         # edit activity
@@ -305,7 +322,7 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
                 self.save_related(request, form, formsets, not add)
                 for formset in unsaved_formsets:
                     self.save_formset(request, form, formset, not add)
-                
+
                 # for resource info, explicitly write its metadata XML and
                 # storage object to the storage folder
                 if self.model.__schema_name__ == "resourceInfo":
