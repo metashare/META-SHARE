@@ -34,6 +34,7 @@ from metashare.storage.models import MASTER
 
 
 IS_POPUP_VAR = '_popup'
+IS_POPUP_O2M_VAR = '_popup_o2m'
 TO_FIELD_VAR = '_to_field'
 
 # Setup logging support.
@@ -193,7 +194,7 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
         We customize this to allow closing edit popups in the same way
         as response_add deals with add popups.
         '''
-        if '_popup_o2m' in request.REQUEST:
+        if IS_POPUP_O2M_VAR in request.REQUEST:
             caller = None
             if '_caller' in request.REQUEST:
                 caller = request.REQUEST['_caller']
@@ -365,8 +366,8 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
             adminform=adminForm,
             object_id=object_id,
             original=obj,
-            is_popup=(IS_POPUP_VAR in request.POST or
-                      IS_POPUP_VAR in request.GET),
+            is_popup=(IS_POPUP_VAR in request.REQUEST or \
+                      IS_POPUP_O2M_VAR in request.REQUEST),
             to_field=to_field,
             media=media,
             inline_admin_formsets=inline_formsets,
