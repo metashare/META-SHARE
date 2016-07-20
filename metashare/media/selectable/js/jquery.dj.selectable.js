@@ -18,6 +18,7 @@
 
         options: {
             removeIcon: "ui-icon-close",
+            editIcon: "ui-icon-pencil",
             comboboxIcon: "ui-icon-triangle-1-s",
             defaultClasses: {
                 "text": "ui-widget ui-widget-content ui-corner-all",
@@ -37,11 +38,36 @@
             if (style === 'bottom' || style === 'bottom-inline') {
                 $(this.element).after(this.deck);
             } else {
-                $(this.element).before(this.deck);
+                $(this.searchIcon).before(this.deck);
             }
             $(self.hiddenMultipleSelector).each(function (i, input) {
                 self._addDeckItem(input);
             });
+        },
+
+        _handleAlignment: function() {
+            /* Handle correct alignment */
+            if(this.deck.hasClass('selectable-deck-top'))
+            {
+                var jqLab = $(this.deck.parent().children('label').get(0));
+                var jqImg = $(this.deck.parent().children('img').get(0));
+                var labBottom = jqLab.position().top + jqLab.height();
+                var deckBottom = this.deck.position().top + this.deck.height() + parseInt(this.deck.css('margin-bottom'));
+                var imgTop = jqImg.position().top;
+                if(deckBottom < labBottom)
+                {
+                    jqImg.css('margin-left', 0);
+                    jqImg.css('padding-left', 0);
+                }
+                else
+                {
+                    var mgLeft = this.deck.css('margin-left');
+                    var pdLeft = this.deck.css('padding-left');
+                    jqImg.css('margin-left', mgLeft);
+                    jqImg.css('padding-left', pdLeft);
+                }
+            }
+
         },
 
         _addDeckItem: function (input) {
@@ -58,11 +84,66 @@
                 button.click(function (e) {
                     e.preventDefault();
                     if (self._trigger("remove", e, item) !== false) {
+                        if(self.allowEditing)
+                        {
+                            var isSure = window.confirm("Are you sure you want to remove this item from the list?");
+                            if(!isSure)
+                            {
+                                return false;
+                            }
+                        }
                         $(input).remove();
                         li.remove();
                     }
                 });
                 li.append(button).appendTo(this.deck);
+            }
+            self._handleAlignment();
+
+            if(self.isSubclassable)
+            {
+                var modelClass = $(input).attr('model-class');
+                if(modelClass)
+                {
+                    var editingUrl = self.baseUrl + modelClass;
+                    $(input).attr('editing-url', editingUrl);
+                }
+            }
+            if(self.allowEditing && ((self.baseEditingUrlArray.length !== 0) || self.isSubclassable))
+            {
+                li.append(
+                        $('<div>')
+                        .addClass('selectable-deck-edit')
+                        .append(
+                            $('<a>')
+                            .attr('href', '#')
+                            .button({
+                                icons: {
+                                    primary: self.options.editIcon
+                                },
+                                text: false
+                            })
+                            .click(function() {
+                                var recId = $(input).attr('value');
+                                var link = null;
+                                if(self.isSubclassable)
+                                {
+                                    link = $(input).attr('editing-url') + "/" + recId + "/";
+                                }
+                                else
+                                {
+                                    link = self.baseEditingUrlArray[0] + "/" + recId + "/";
+                                    if (self.baseEditingUrlArray.length > 1)
+                                    {
+                                        link += self.baseEditingUrlArray[1];
+                                    }
+                                }
+                                var name = 'id_' + self.textName;
+                                showEditPopup(link, name, self);
+                                return false;
+                            })
+                        )
+                    );
             }
         },
 
@@ -99,10 +180,17 @@
                             'name': this.hiddenName,
                             'value': item.id,
                             'title': item.value,
-                            'data-selectable-type': 'hidden-multiple'
+                            'data-selectable-type': 'hidden-multiple',
+                            'model-class': item.cls
                         });
                         $input.after(newInput);
                         this._addDeckItem(newInput);
+                        /* Clear the input text again after some time since
+                         * some other event handler tries to set the selected value
+                         */
+                        setTimeout(function(){
+                            $input.val("");
+                        }, 200);
                     }
                     return false;
                 } else {
@@ -143,6 +231,19 @@
             return button;
         },
 
+        showThrobber: function() {
+            var self = this;
+            if(self.throbberImg)
+            {
+                $(self.searchIcon).attr('src', self.throbberImg);
+            }
+        },
+
+        hideThrobber: function() {
+            var self = this;
+            $(self.searchIcon).attr('src', self.searchImg);
+        },
+
         _create: function () {
             /* Initialize a new selectable widget */
             var self = this,
@@ -151,6 +252,25 @@
             options, button;
             this.url = data.selectableUrl || data['selectable-url'];
             this.allowNew = data.selectableAllowNew || data['selectable-allow-new'];
+            self.isSubclassable = data.selectableIsSubclassable || data['selectable-is-subclassable'];
+            self.allowEditing = data.selectableAllowEditing || data['selectable-allow-editing'];
+            self.baseUrl = data.selectableBaseUrl || data['selectable-base-url'];
+            self.throbberImg = data.selectableThrobberImg || data['selectable-throbber-img'];
+            self.useStateError = data.selectableUseStateError;// || data['selectable-use-state-error'];
+            if(self.useStateError === undefined) {
+                self.useStateError = true;
+            }
+            self.baseEditingUrlArray = [];
+            var jqParent = $input.parent();
+            var jqA = jqParent.find('a');
+            self.searchIcon = jqParent.children('img').get(0);
+            self.searchImg = $(self.searchIcon).attr('src');
+            var href = jqA.attr('href');
+            if(href)
+            {
+                //self.baseEditingUrl = href.replace(/\/add\//, '');
+                self.baseEditingUrlArray = href.split("/add/");
+            }
             this.allowMultiple = data.selectableMultiple || data['selectable-multiple'];
             this.textName = $input.attr('name');
             this.hiddenName = this.textName.replace(new RegExp('_0$'), '_1');
@@ -345,7 +465,7 @@
             typeof(windowname_to_id) !== "undefined" &&
             typeof(html_unescape) !== "undefined") {
             var django_dismissAddAnotherPopup = dismissAddAnotherPopup;
-            dismissAddAnotherPopup = function (win, newId, newRepr) {
+            dismissAddAnotherPopup = function (win, newId, newRepr, newClass) {
                 /* See if the popup came from a selectable field.
                    If not, pass control to Django's code.
                    If so, handle it. */
@@ -356,11 +476,20 @@
                 var singleWidget = field.data('djselectable');
                 var multiWidget = multiField.data('djselectable');
                 if (singleWidget || multiWidget) {
-                    // newId and newRepr are expected to have previously been escaped by
-                    // django.utils.html.escape.
+                // newId and newRepr are expected to have previously been escaped by
+                // django.utils.html.escape.
+                if(!newClass)
+                {
+                    /*
+                     * Default value since, for this class, the model name
+                     * will not be set on the server side.
+                     */
+                    newClass = 'documentunstructuredstring_model';
+                }
                     var item =  {
                         id: html_unescape(newId),
-                        value: html_unescape(newRepr)
+                        value: html_unescape(newRepr),
+                        cls: html_unescape(newClass)
                     };
                     if (singleWidget) {
                         field.djselectable('select', item);
@@ -388,3 +517,74 @@
         }
     });
 })(jQuery || grp.jQuery);
+
+var lastWidget = null;
+var testIframe = false;
+
+function showEditPopup(href, name, widget)
+{
+    lastWidget = widget;
+    if (href.indexOf('?') == -1) {
+        href += '?_popup_o2m=1';
+    } else {
+        href  += '&_popup_o2m=1';
+    }
+    if(!testIframe)
+    {
+        href += '&_caller=opener';
+        var win = window.open(href, name, 'height=500,width=800,resizable=yes,scrollbars=yes');
+        win.focus();
+    }
+    else
+    {
+        href += '&_caller=top';
+        openDialog(href);
+    }
+    return false;
+}
+
+function dismissEditPopup(win, objId, newRepr)
+{
+    var jqLi = lastWidget.deck.find('li[val_id=' + objId + ']');
+    var jqSpan = jqLi.find('span.title');
+    jqSpan.text(newRepr);
+    if(!testIframe)
+    {
+        win.close();
+    }
+    else
+    {
+        closeDialog();
+    }
+}
+
+
+//Test
+
+var jqDialog = null;
+var jqIframe = null;
+
+function openDialog(href)
+{
+    jqDialog = $("<div>");
+    jqDialog.addClass("dialog");
+    var dialogOpts = {"modal": true, "width": "800", "height": "500"};
+    jqIframe = $("<iframe>");
+    jqIframe.css('width', '100%').css('height', '100%');
+    jqIframe.attr("src", href);
+    jqDialog.append(jqIframe);
+    $("body").append(jqDialog);
+    jqDialog.dialog(dialogOpts);
+}
+
+function closeDialog()
+{
+    jqIframe.remove();
+    jqIframe = null;
+    if(jqDialog !== null)
+    {
+        jqDialog.remove();
+        jqDialog = null;
+    }
+}
+
