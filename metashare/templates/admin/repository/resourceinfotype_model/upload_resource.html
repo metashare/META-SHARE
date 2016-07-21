@@ -15,7 +15,7 @@
 {% block coltype %}colMS{% endblock %}
 
 {% block content %}<div id="content-main">
-<form enctype="multipart/form-data" action="{{ form_url }}" method="post" id="{{ opts.module_name }}_form">{% csrf_token %}{% block form_top %}{% endblock %}
+<form enctype="multipart/form-data" action="{{ form_url }}" method="post" id="{{ opts.model_name }}_form">{% csrf_token %}{% block form_top %}{% endblock %}
 <div>
 
 <fieldset class="module aligned">
