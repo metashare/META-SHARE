@@ -1,12 +1,13 @@
 import logging
 
 from xml.etree.ElementTree import fromstring
+from zipfile import is_zipfile
 
 from django import forms
 from django.core.exceptions import ValidationError
-from metashare.storage.models import ALLOWED_ARCHIVE_EXTENSIONS
+
 from metashare.settings import LOG_HANDLER, MAXIMUM_UPLOAD_SIZE
-from zipfile import is_zipfile
+from metashare.storage.models import ALLOWED_ARCHIVE_EXTENSIONS
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)

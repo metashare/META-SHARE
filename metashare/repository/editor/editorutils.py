@@ -5,29 +5,29 @@ place.
 To avoid circular imports, this file must not import anything from
 metashare.repository.editor. 
 '''
-from django.db import models
-from django.core.urlresolvers import reverse
-from django.contrib.admin.options import ModelAdmin, IncorrectLookupParameters
-from haystack.admin import list_max_show_all
-from django.contrib.admin.views.main import ChangeList, SEARCH_VAR
-from django.core.exceptions import PermissionDenied
-from django.core.paginator import Paginator, InvalidPage
-from django.shortcuts import render_to_response
 from django import template
+from django.contrib.admin.options import ModelAdmin, IncorrectLookupParameters
+from django.contrib.admin.views.main import ChangeList, SEARCH_VAR, ERROR_FLAG
+from django.core.exceptions import PermissionDenied,ImproperlyConfigured, \
+    SuspiciousOperation
+from django.core.paginator import Paginator, InvalidPage
+from django.core.urlresolvers import reverse
+from django.db import models
+from django.db.models import Q
+from django.http import HttpResponseRedirect
+from django.shortcuts import render_to_response
 from django.utils.encoding import force_unicode
 from django.utils.translation import ungettext
-from haystack import connections
-from haystack.query import RelatedSearchQuerySet
-from django.db.models import Q
-from django.core.exceptions import ImproperlyConfigured, SuspiciousOperation
-from django.contrib.admin.views.main import ERROR_FLAG
 from django.template.response import SimpleTemplateResponse
-from django.http import HttpResponseRedirect
+
+from haystack import connections
+from haystack.admin import list_max_show_all
+from haystack.query import RelatedSearchQuerySet
+
 try:
     from django.contrib.admin.options import csrf_protect_m
 except ImportError:
     from haystack.utils.decorators import method_decorator
-    
     # Do nothing on Django 1.1 and below.
     def csrf_protect(view):
         def wraps(request, *args, **kwargs):

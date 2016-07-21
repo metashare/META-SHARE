@@ -1,6 +1,7 @@
 import logging
 import os
 import re
+from unidecode import unidecode
 
 from haystack.indexes import CharField, IntegerField, SearchIndex
 from haystack import indexes, connections as haystack_connections, \
@@ -8,7 +9,6 @@ from haystack import indexes, connections as haystack_connections, \
 
 from django.db.models import signals
 from django.utils.translation import ugettext as _
-from unidecode import unidecode
 
 from metashare.repository import model_utils
 from metashare.repository.models import resourceInfoType_model, \
@@ -16,8 +16,8 @@ from metashare.repository.models import resourceInfoType_model, \
     toolServiceInfoType_model, lexicalConceptualResourceInfoType_model, \
     languageDescriptionInfoType_model
 from metashare.repository.search_fields import LabeledMultiValueField
-from metashare.storage.models import StorageObject, INGESTED, PUBLISHED, INTERNAL
 from metashare.settings import LOG_HANDLER
+from metashare.storage.models import StorageObject, INGESTED, PUBLISHED, INTERNAL
 from metashare.stats.model_utils import DOWNLOAD_STAT, VIEW_STAT
 
 

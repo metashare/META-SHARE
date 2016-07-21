@@ -1,10 +1,13 @@
 '''
 This file contains the lookup logic for ajax-based editor search widgets.
 '''
+import logging
+
 from django.utils.translation import ungettext
 
 from selectable.base import ModelLookup
 from selectable.registry import registry
+
 from metashare.repository.models import personInfoType_model, \
     actorInfoType_model, documentInfoType_model, documentationInfoType_model,\
     projectInfoType_model, organizationInfoType_model,\
@@ -13,10 +16,9 @@ from metashare.repository.models import personInfoType_model, \
     sizeInfoType_model, annotationInfoType_model, videoFormatInfoType_model, \
     imageFormatInfoType_model, resolutionInfoType_model, \
     audioSizeInfoType_model, licenceInfoType_model
-from metashare.storage.models import MASTER
-import logging
-from metashare.settings import LOG_HANDLER
 from metashare.repository.model_utils import get_root_resources
+from metashare.settings import LOG_HANDLER
+from metashare.storage.models import MASTER
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)

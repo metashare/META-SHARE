@@ -1,17 +1,15 @@
 '''
 The mixin code for ModelAdmin to link to the SchemaModel objects in models.py.
 '''
-from metashare.utils import verify_subclass, get_class_by_name
-from metashare.repository.supermodel import SchemaModel
-from metashare.repository.editor.editorutils import encode_as_inline
 from django.db.models.fields import FieldDoesNotExist
+
+from metashare.repository.editor.editorutils import encode_as_inline
 from metashare.repository.editor.widgets import ComboWidget, MultiComboWidget
 from metashare.repository.models import inputInfoType_model, \
     outputInfoType_model, languageInfoType_model, metadataInfoType_model, \
     documentInfoType_model, annotationInfoType_model
-import warnings
-from django.utils.deprecation import (RenameMethodsBase,
-    RemovedInDjango18Warning, RemovedInDjango19Warning)
+from metashare.repository.supermodel import SchemaModel
+from metashare.utils import verify_subclass, get_class_by_name
 
 # Fields that need the ComboWidget/MultiComboWidget with autocomplete functionality
 # to use with languageId,languageName pairs.

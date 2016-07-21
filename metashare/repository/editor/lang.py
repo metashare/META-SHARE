@@ -1,9 +1,9 @@
-
-from xml.etree.ElementTree import XML
-import os
 import logging
-from metashare.settings import LOG_HANDLER
+import os
 import pycountry
+from xml.etree.ElementTree import XML
+
+from metashare.settings import LOG_HANDLER
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)

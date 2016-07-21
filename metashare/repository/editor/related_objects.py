@@ -1,5 +1,6 @@
 
 from django.conf import settings
+
 from metashare.repository.model_utils import get_root_resources
 
 def find_related_objects(inst):

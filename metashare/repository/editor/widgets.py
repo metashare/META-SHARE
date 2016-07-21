@@ -5,15 +5,17 @@ try:
     import cPickle as pickle
 except:
     import pickle
+
 from django import forms
-from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
-from django.contrib.admin.widgets import AdminTextInputWidget
+from django.contrib.admin.widgets import RelatedFieldWidgetWrapper, \
+    AdminTextInputWidget
 from django.forms import widgets, TextInput, Textarea, Media, Select
 from django.forms.util import flatatt
 from django.template.loader import render_to_string
-from django.utils.safestring import mark_safe
-from django.utils.http import urlencode
 from django.utils.encoding import force_unicode
+from django.utils.http import urlencode
+from django.utils.safestring import mark_safe
+
 from selectable.forms.widgets import AutoCompleteWidget, AutoCompleteSelectWidget, \
     SelectableMediaMixin, SelectableMultiWidget, LookupMultipleHiddenInput 
 

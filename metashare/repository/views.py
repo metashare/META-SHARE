@@ -5,23 +5,26 @@ from datetime import datetime
 from os.path import split, getsize
 from mimetypes import guess_type
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
-from django.contrib import messages
 from django.template.loader import render_to_string
 from django.core.mail import send_mail
 from django.utils.translation import ugettext as _
 
 from haystack.views import FacetedSearchView
 
+from metashare.recommendations.recommendations import SessionResourcesTracker, \
+    get_download_recommendations, get_view_recommendations, \
+    get_more_from_same_creators_qs, get_more_from_same_projects_qs
+from metashare.repository import model_utils
 from metashare.repository.editor.resource_editor import has_edit_permission
 from metashare.repository.forms import LicenseSelectionForm, \
     LicenseAgreementForm, DownloadContactForm, MORE_FROM_SAME_CREATORS, \
     MORE_FROM_SAME_PROJECTS
-from metashare.repository import model_utils
 from metashare.repository.models import resourceInfoType_model
 from metashare.repository.search_indexes import resourceInfoType_modelIndex, \
     update_lr_index_entry
@@ -29,9 +32,6 @@ from metashare.settings import LOG_HANDLER, MEDIA_URL, DJANGO_URL
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
 from metashare.storage.models import PUBLISHED
-from metashare.recommendations.recommendations import SessionResourcesTracker, \
-    get_download_recommendations, get_view_recommendations, \
-    get_more_from_same_creators_qs, get_more_from_same_projects_qs
 
 
 MAXIMUM_READ_BLOCK_SIZE = 4096

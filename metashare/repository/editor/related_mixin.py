@@ -3,16 +3,19 @@ Derived from http://djangosnippets.org/snippets/2565/
 '''
 from django.contrib import admin
 from django.db.models.fields import related
+from django.db import models
 from django.forms.widgets import SelectMultiple, HiddenInput
 from django.http import HttpResponse
 from django.utils.html import escape, escapejs
 from django.utils.translation import ugettext as _
 
-from metashare.repository.editor.related_widget import RelatedFieldWidgetWrapper
-from metashare.repository.editor.widgets import SubclassableRelatedFieldWidgetWrapper, \
-    OneToManyWidget
 from selectable.forms.widgets import AutoCompleteSelectMultipleWidget
-from django.db import models
+
+from metashare.repository.editor.lookups import ActorLookup, \
+    OrganizationLookup, ProjectLookup, MembershipDummyLookup, \
+    PersonLookup, TargetResourceLookup, DocumentLookup, \
+    DocumentationLookup, LanguageVarietyDummyLookup, SizeDummyLookup, \
+    ResolutionDummyLookup, AudioSizeDummyLookup, LicenceInfoDummyLookup
 from metashare.repository.models import actorInfoType_model, \
     documentationInfoType_model, \
     organizationInfoType_model, projectInfoType_model,\
@@ -22,14 +25,10 @@ from metashare.repository.models import actorInfoType_model, \
     languageVarietyInfoType_model, sizeInfoType_model, \
     resolutionInfoType_model, audioSizeInfoType_model, \
     distributionInfoType_model, licenceInfoType_model
-from metashare.repository.editor.lookups import ActorLookup, \
-    OrganizationLookup, ProjectLookup, MembershipDummyLookup, \
-    PersonLookup, TargetResourceLookup, DocumentLookup, \
-    DocumentationLookup, LanguageVarietyDummyLookup, SizeDummyLookup, \
-    ResolutionDummyLookup, AudioSizeDummyLookup, LicenceInfoDummyLookup
-from metashare.repository.editor.widgets import AutoCompleteSelectMultipleSubClsWidget
-from metashare.repository.editor.widgets import AutoCompleteSelectMultipleEditWidget
-from metashare.repository.editor.widgets import AutoCompleteSelectSingleWidget
+from metashare.repository.editor.related_widget import RelatedFieldWidgetWrapper
+from metashare.repository.editor.widgets import AutoCompleteSelectMultipleSubClsWidget, \
+    AutoCompleteSelectMultipleEditWidget, AutoCompleteSelectSingleWidget, \
+    SubclassableRelatedFieldWidgetWrapper, OneToManyWidget
 
 class RelatedAdminMixin(object):
     '''

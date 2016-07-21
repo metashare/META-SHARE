@@ -1,12 +1,11 @@
 import base64
-from django.contrib.admin import widgets
-
 try:
     import cPickle as pickle
 except:
     import pickle
 
 from django import forms
+from django.contrib.admin import widgets
 from django.core import exceptions, validators
 from django.core.exceptions import ValidationError
 from django.db import models

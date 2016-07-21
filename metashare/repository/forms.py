@@ -6,12 +6,11 @@ from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 
-
-from metashare.settings import LOG_HANDLER
-from metashare.repository.models import resourceInfoType_model
-from metashare.repository.search_indexes import resourceInfoType_modelIndex
 from metashare.recommendations.recommendations import get_more_from_same_creators, \
     get_more_from_same_projects
+from metashare.repository.models import resourceInfoType_model
+from metashare.repository.search_indexes import resourceInfoType_modelIndex
+from metashare.settings import LOG_HANDLER
 
 from haystack.forms import FacetedSearchForm
 from haystack.query import SQ
