@@ -81,7 +81,7 @@
       </ul>
     </li>
     {% if user.is_active %}
-    <li title="Profile settings and actions"><a href="{% url 'edit_profile' %}">Your Profile, {% filter force_escape %}{% firstof user.first_name user.username %}{% endfilter %}</a>
+    <li title="Profile settings and actions"><a href="{% url 'edit_profile' %}">Your Profile, {% load firstof from future %}{% filter force_escape %}{% firstof user.first_name user.username %}{% endfilter %}</a>
       <ul>
         {% if user.is_staff %}<li><a href="{% url 'editor:index' %}">View your recent actions</a></li>{% endif %}
         <li><a href="{% url 'edit_profile' %}" title='View or edit your personal details'>Edit your profile</a></li>
