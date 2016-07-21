@@ -2,15 +2,15 @@
 The Inline classes used in the editor.
 '''
 
+from django.contrib.admin.options import InlineModelAdmin, IS_POPUP_VAR
+from django.contrib.admin.utils import flatten_fieldsets
 from django.forms import ModelForm
 from django.forms.models import BaseModelFormSet, modelformset_factory
-from django.utils.functional import curry
-from django.contrib.admin.utils import flatten_fieldsets
 from django.utils.encoding import force_unicode
+from django.utils.functional import curry
+
 from metashare.repository.editor.related_mixin import RelatedAdminMixin
 from metashare.repository.editor.schemamodel_mixin import SchemaModelLookup
-from django.contrib.admin.options import InlineModelAdmin
-
 
 
 class SchemaModelInline(InlineModelAdmin, RelatedAdminMixin, SchemaModelLookup):
@@ -41,12 +41,10 @@ class SchemaModelInline(InlineModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         return formfield
 
     def response_change(self, request, obj):
-        if '_popup' in request.REQUEST:
+        if IS_POPUP_VAR in request.REQUEST:
             return self.edit_response_close_popup_magic(obj)
         else:
             return super(SchemaModelInline, self).response_change(request, obj)
-
-
 
 
 class ReverseInlineFormSet(BaseModelFormSet):
@@ -101,15 +99,17 @@ class ReverseInlineFormSet(BaseModelFormSet):
 
 
 
-
 def reverse_inlineformset_factory(parent_model,
                                   model,
                                   parent_fk_name,
                                   formset,
-                                  form = ModelForm,
-                                  fields = None,
-                                  exclude = None,
-                                  formfield_callback = lambda f: f.formfield()):
+                                  form=ModelForm,
+                                  fields=None,
+                                  exclude=None,
+                                  formfield_callback=lambda f: f.formfield()):
+    # If not the fields are explicitly defined, set all fields
+    if not (fields or exclude):
+        fields = '__all__'
     kwargs = {
         'form': form,
         'formfield_callback': formfield_callback,
@@ -125,6 +125,7 @@ def reverse_inlineformset_factory(parent_model,
     form_set = modelformset_factory(model, **kwargs)
     form_set.parent_fk_name = parent_fk_name
     return form_set
+
 
 class ReverseInlineModelAdmin(SchemaModelInline):
     '''
@@ -231,6 +232,5 @@ class ReverseInlineModelAdmin(SchemaModelInline):
                                              self.parent_fk_name,
                                              self.formset,
                                              **defaults)
-
 
 

@@ -9,6 +9,7 @@ from django.conf import settings
 from django.contrib import admin
 from django.contrib.admin import helpers
 from django.contrib.admin.exceptions import DisallowedModelAdminToField
+from django.contrib.admin.options import IS_POPUP_VAR, TO_FIELD_VAR
 from django.contrib.admin.utils import unquote
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
@@ -32,10 +33,7 @@ from metashare.repository.model_utils import get_root_resources
 from metashare.repository.supermodel import REQUIRED, RECOMMENDED, OPTIONAL
 from metashare.storage.models import MASTER
 
-
-IS_POPUP_VAR = '_popup'
 IS_POPUP_O2M_VAR = '_popup_o2m'
-TO_FIELD_VAR = '_to_field'
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -123,7 +121,10 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
         return result
 
     def contains_inlines(self, model_class):
-        ''' Determine whether or not the editor for the given model_class will contain inlines '''
+        '''
+        Determine whether or not the editor for the given model_class will
+        contain inlines
+        '''
         return any(f for f in model_class.get_fields_flat() if f.endswith('_set'))
 
     def get_fieldsets(self, request, obj=None):
