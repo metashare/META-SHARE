@@ -2,13 +2,30 @@
 This file contains the manually chosen admin forms, as needed for an easy-to-use
 editor.
 '''
-from django.contrib import admin
 from django.conf import settings
+from django.contrib import admin
+from django.contrib.admin import helpers
+from django.contrib.admin.options import IS_POPUP_VAR, TO_FIELD_VAR
+from django.contrib.admin.exceptions import DisallowedModelAdminToField
+from django.contrib.admin.utils import unquote
+from django.core.exceptions import PermissionDenied
+from django.core.urlresolvers import reverse
+from django.db import transaction
+from django.forms.formsets import all_valid
+from django.http import Http404, HttpResponseNotFound
+from django.utils.decorators import method_decorator
+from django.utils.encoding import force_unicode, force_text
+from django.utils.html import escape
+from django.utils.translation import ugettext as _
+from django.views.decorators.csrf import csrf_protect
 
 from metashare.repository.editor import admin_site as editor_site
+from metashare.repository.editor.related_mixin import RelatedAdminMixin
+from metashare.repository.editor.related_objects import AdminRelatedInfo
 from metashare.repository.editor.resource_editor import ResourceModelAdmin, \
     LicenceModelAdmin
-from metashare.repository.editor.superadmin import SchemaModelAdmin
+from metashare.repository.editor.superadmin import SchemaModelAdmin, \
+    IS_POPUP_O2M_VAR
 from metashare.repository.models import resourceInfoType_model, \
     identificationInfoType_model, metadataInfoType_model, \
     communicationInfoType_model, validationInfoType_model, \
@@ -30,19 +47,6 @@ from metashare.repository.models import resourceInfoType_model, \
     licenceInfoType_model, personInfoType_model, projectInfoType_model, \
     documentInfoType_model, organizationInfoType_model, \
     documentUnstructuredString_model
-from metashare.repository.editor.related_mixin import RelatedAdminMixin
-from django.views.decorators.csrf import csrf_protect
-from django.db import transaction
-from django.utils.decorators import method_decorator
-from django.contrib.admin.utils import unquote
-from django.core.exceptions import PermissionDenied
-from django.utils.html import escape
-from django.utils.encoding import force_unicode
-from django.http import HttpResponseNotFound
-from django.utils.safestring import mark_safe
-from django.contrib.admin import helpers
-from django.utils.translation import ugettext as _
-from metashare.repository.editor.related_objects import AdminRelatedInfo
 
 csrf_protect_m = method_decorator(csrf_protect)
 
@@ -109,12 +113,12 @@ class DocumentUnstructuredStringModelAdmin(admin.ModelAdmin, RelatedAdminMixin):
         We customize this to allow closing edit popups in the same way
         as response_add deals with add popups.
         '''
-        if '_popup_o2m' in request.REQUEST:
+        if IS_POPUP_O2M_VAR in request.REQUEST:
             caller = None
             if '_caller' in request.REQUEST:
                 caller = request.REQUEST['_caller']
             return self.edit_response_close_popup_magic_o2m(obj, caller)
-        if '_popup' in request.REQUEST:
+        if IS_POPUP_VAR in request.REQUEST:
             if request.POST.has_key("_continue"):
                 return self.save_and_continue_in_popup(obj, request)
             return self.edit_response_close_popup_magic(obj)
@@ -123,21 +127,39 @@ class DocumentUnstructuredStringModelAdmin(admin.ModelAdmin, RelatedAdminMixin):
 
     @csrf_protect_m
     @transaction.atomic
-    def change_view(self, request, object_id, form_url='', extra_context=None):
+    def changeform_view(self, request, object_id=None, form_url='', extra_context=None):
         """
-        The 'change' admin view for this model.
         This follows closely the base implementation from Django 1.7's
-        django.contrib.admin.options.ModelAdmin,
-        with the explicitly marked modifications.
+        django.contrib.admin.options.ModelAdmin with the explicitly marked
+        modifications.
         """
-        # pylint: disable-msg=C0103
+        to_field = request.POST.get(TO_FIELD_VAR, request.GET.get(TO_FIELD_VAR))
+        if to_field and not self.to_field_allowed(request, to_field):
+            raise DisallowedModelAdminToField("The field %s cannot be referenced." % to_field)
+
         model = self.model
         opts = model._meta
+        add = object_id is None
 
-        obj = self.get_object(request, unquote(object_id))
+        if add:
+            if not self.has_add_permission(request):
+                raise PermissionDenied
+            obj = None
 
-        if not self.has_change_permission(request, obj):
-            raise PermissionDenied
+        else:
+            obj = self.get_object(request, unquote(object_id))
+
+            if not self.has_change_permission(request, obj):
+                raise PermissionDenied
+
+            if obj is None:
+                raise Http404(_('%(name)s object with primary key %(key)r does not exist.') % {
+                    'name': force_text(opts.verbose_name), 'key': escape(object_id)})
+
+            if request.method == 'POST' and "_saveasnew" in request.POST:
+                return self.add_view(request, form_url=reverse('admin:%s_%s_add' % (
+                    opts.app_label, opts.model_name),
+                    current_app=self.admin_site.name))
 
         #### begin modification ####
         # make sure that the user has a full session length time for the current
@@ -145,63 +167,66 @@ class DocumentUnstructuredStringModelAdmin(admin.ModelAdmin, RelatedAdminMixin):
         request.session.set_expiry(settings.SESSION_COOKIE_AGE)
         #### end modification ####
 
-        if obj is None:
-            return HttpResponseNotFound(_('%(name)s object with primary key %(key)r does not exist.') % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
-
-        if request.method == 'POST' and "_saveasnew" in request.POST:
-            return self.add_view(request, form_url='../add/')
-
         ModelForm = self.get_form(request, obj)
-        formsets = []
         if request.method == 'POST':
             form = ModelForm(request.POST, request.FILES, instance=obj)
             if form.is_valid():
                 form_validated = True
-                new_object = self.save_form(request, form, change=True)
+                new_object = self.save_form(request, form, change=not add)
             else:
                 form_validated = False
-                new_object = obj
-
-            if form_validated:
-                #### begin modification ####
-                self.save_model(request, new_object, form, change=True)
-                #### end modification ####
-
-                change_message = self.construct_change_message(request, form, formsets)
-                self.log_change(request, new_object, change_message)
-                return self.response_change(request, new_object)
-
+                new_object = form.instance
+            formsets, inline_instances = self._create_formsets(request, new_object, change=not add)
+            if all_valid(formsets) and form_validated:
+                self.save_model(request, new_object, form, not add)
+                self.save_related(request, form, formsets, not add)
+                if add:
+                    self.log_addition(request, new_object)
+                    return self.response_add(request, new_object)
+                else:
+                    change_message = self.construct_change_message(request, form, formsets)
+                    self.log_change(request, new_object, change_message)
+                    return self.response_change(request, new_object)
         else:
-            form = ModelForm(instance=obj)
+            if add:
+                initial = self.get_changeform_initial_data(request)
+                form = ModelForm(initial=initial)
+                formsets, inline_instances = self._create_formsets(request, self.model(), change=False)
+            else:
+                form = ModelForm(instance=obj)
+                formsets, inline_instances = self._create_formsets(request, obj, change=True)
 
-        #### begin modification ####
-        media = self.media or []
-        #### end modification ####
-        inline_admin_formsets = []
-
-        #### begin modification ####
-        adminForm = helpers.AdminForm(form, self.get_fieldsets(request, obj),
-            self.prepopulated_fields, self.get_readonly_fields(request, obj),
+        adminForm = helpers.AdminForm(
+            form,
+            list(self.get_fieldsets(request, obj)),
+            self.get_prepopulated_fields(request, obj),
+            self.get_readonly_fields(request, obj),
             model_admin=self)
-        media = media + adminForm.media
-        #### end modification ####
+        media = self.media + adminForm.media
 
-        context = {
-            'title': _('Change %s') % force_unicode(opts.verbose_name),
-            'adminform': adminForm,
-            'object_id': object_id,
-            'original': obj,
-            'is_popup': "_popup" in request.REQUEST or \
-                        "_popup_o2m" in request.REQUEST,
-            'media': mark_safe(media),
-            'inline_admin_formsets': inline_admin_formsets,
-            'errors': helpers.AdminErrorList(form, formsets),
-            'app_label': opts.app_label,
-            'kb_link': settings.KNOWLEDGE_BASE_URL,
-            'comp_name': _('%s') % force_unicode(opts.verbose_name),
-        }
+        inline_formsets = self.get_inline_formsets(request, formsets, inline_instances, obj)
+        for inline_formset in inline_formsets:
+            media = media + inline_formset.media
+
+        context = dict(self.admin_site.each_context(),
+            title=(_('Add %s') if add else _('Change %s')) % force_text(opts.verbose_name),
+            adminform=adminForm,
+            object_id=object_id,
+            original=obj,
+            is_popup=(IS_POPUP_VAR in request.REQUEST or \
+                      IS_POPUP_O2M_VAR in request.REQUEST),
+            to_field=to_field,
+            media=media,
+            inline_admin_formsets=inline_formsets,
+            errors=helpers.AdminErrorList(form, formsets),
+            preserved_filters=self.get_preserved_filters(request),
+            kb_link=settings.KNOWLEDGE_BASE_URL,
+            app_label=opts.app_label,
+            show_delete=False,
+        )
+
         context.update(extra_context or {})
-        return self.render_change_form(request, context, change=True, obj=obj, form_url=form_url)
+        return self.render_change_form(request, context, add=add, change=not add, obj=obj, form_url=form_url)
 
 # Models which are always rendered inline so they don't need their own admin form:
 purely_inline_models = (
