@@ -343,8 +343,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
     def export_xml_action(self, request, queryset):
         from StringIO import StringIO
         from zipfile import ZipFile
-        from metashare.xml_utils import to_xml_string
         from django import http
+        from metashare.xml_utils import to_xml_string
 
         zipfilename = "resources_export.zip"
         in_memory = StringIO()

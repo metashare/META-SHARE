@@ -296,41 +296,39 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
                     parent_fk_name = getattr(formset, 'parent_fk_name', '')
                     # for the moment ignore all formsets that are no reverse
                     # inlines
-                    if not parent_fk_name:
-                        unsaved_formsets.append(formset)
-                        continue
+                    if add:
+                        if not parent_fk_name:
+                            unsaved_formsets.append(formset)
+                            continue
+
                     # this replaces the call to self.save_formsets()
                     changes = formset.save()
-                    # if the current reverse inline is used (i.e., filled with
-                    # data), then we need to manually make sure that the inline
-                    # data is connected to the parent object:
+                    # if there are any changes in the current inline and if this
+                    # inline is a reverse inline, then we need to manually make
+                    # sure that the inline data is connected to the parent
+                    # object:
                     if changes:
-                        parent_fk_name = getattr(formset, 'parent_fk_name', '')
-                        # for the moment ignore all formsets that are no reverse
-                        # inlines
                         if parent_fk_name:
-                            # if the current reverse inline is used (i.e., filled with
-                            # data), then we need to manually make sure that the inline
-                            # data is connected to the parent object:
                             assert len(changes) == 1
                             setattr(new_object, parent_fk_name, changes[0])
-                    if not add:
-                        # If we have deleted a one-to-one inline, we must manually unset the field value.
-                        if formset.deleted_objects:
-                            parent_fk_name = getattr(formset, 'parent_fk_name', '')
-                            if parent_fk_name:
-                                setattr(new_object, parent_fk_name, None)
+
+                    # If we have deleted a one-to-one inline, we must manually
+                    # unset the field value.
+                    if formset.deleted_objects:
+                        if parent_fk_name:
+                            setattr(new_object, parent_fk_name, None)
+
                 self.save_model(request, new_object, form, not add)
-                self.save_related(request, form, formsets, not add)
+                form.save_m2m()
+
                 for formset in unsaved_formsets:
-                    self.save_formset(request, form, formset, not add)
+                    self.save_formset(request, form, formset, add)
 
                 # for resource info, explicitly write its metadata XML and
                 # storage object to the storage folder
                 if self.model.__schema_name__ == "resourceInfo":
                     new_object.storage_object.update_storage()
                 #### end modification ####
-
                 if add:
                     self.log_addition(request, new_object)
                     return self.response_add(request, new_object)
