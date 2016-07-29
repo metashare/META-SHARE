@@ -18,9 +18,9 @@ echo "Checking for a previous running SOLR server..."
 sleep 5
 
 # Update schema.xml files, just in case:
-source "${METASHAREDIR}/../Metashare_env/bin/activate"
+source "${METASHAREDIR}/../venv/bin/activate"
 
-python "$METASHARETOPDIR/metashare/manage.py" build_solr_schema --filename="$MAINSCHEMAFILE"
+python "$METASHARETOPDIR/manage.py" build_solr_schema --filename="$MAINSCHEMAFILE"
 
 deactivate
 
