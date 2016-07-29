@@ -362,9 +362,6 @@ class SchemaModel(models.Model):
             if _value is not None:
                 _root.attrib[_xsd_attr] = SchemaModel._python_to_xml(_value)
 
-        #print self.get_fields()
-        #print self.get_field_sets()
-
         # Then, we loop over all schema fields, retrieve their values and put
         # XML-ified versions of these values into the XML tree.
         for _xsd_field, _model_field, _not_used in self.__schema_fields__:
@@ -394,7 +391,7 @@ class SchemaModel(models.Model):
 
                 # For ManyToManyFields, compute all related objects.
                 if isinstance(_value, models.Manager):
-                    _value = _value.all().order_by('id')
+                    _value = _value.all().order_by('pk')
 
                 # If the value is not yet of list type, we wrap it in a list.
                 elif not isinstance(_value, list):
@@ -510,8 +507,7 @@ class SchemaModel(models.Model):
         Checks if the given _object is a redundant copy of another object.
 
         Returns a list containing all existing objects that are equal to the
-        given _object instance, sorted by primary key 'id'.
-
+        given _object instance, sorted by the primary key.
         """
         if not CHECK_FOR_DUPLICATE_INSTANCES:
             return []
@@ -524,8 +520,8 @@ class SchemaModel(models.Model):
 
         # Build list of field names for this class type.  Using introspection
         # with cls._meta.get_all_field_names() would not work as it contains
-        # additional fields such as id and related fields that would break our
-        # comparison code.
+        # additional fields such as primary field and related fields that would
+        # break our comparison code.
         _fields = [x[1] for x in cls.__schema_fields__]
         _fields.extend([x[1] for x in cls.__schema_attrs__])
         if hasattr(_object, 'copy_status'):
@@ -604,7 +600,7 @@ class SchemaModel(models.Model):
                   _value, type(_field)))
 
         # Use **magic to create a constrained QuerySet from kwargs.
-        query_set = cls.objects.filter(**kwargs).order_by('id')
+        query_set = cls.objects.filter(**kwargs).order_by('pk')
 
         _duplicates = []
         if query_set.count() > 1:
@@ -614,7 +610,8 @@ class SchemaModel(models.Model):
             # Convert the current object into its serialised XML String and
             # remove any META-SHARE related id from this String.
             cache_key = '{}_{}'.format(type(_object).__name__.lower(),
-              _object.id)
+              _object._get_pk_val())
+
             if OBJECT_XML_CACHE.has_key(cache_key):
                 _obj_value = OBJECT_XML_CACHE[cache_key]
             
@@ -623,7 +620,8 @@ class SchemaModel(models.Model):
                 _obj_value = METASHARE_ID_REGEXP.sub('', _obj_value)
                 OBJECT_XML_CACHE[cache_key] = _obj_value
 
-            # Iterate over all potential duplicates, ordered by increasing id.
+            # Iterate over all potential duplicates, ordered by increasing
+            # primary key.
             for _candidate in query_set.iterator():
                 # Skip the current candidate if it is our _object itself.
                 if _candidate == _object:
@@ -631,7 +629,8 @@ class SchemaModel(models.Model):
 
                 # Convert candidate into XML String and remove META-SHARE id.
                 cache_key = '{}_{}'.format(type(_candidate).__name__.lower(),
-                  _candidate.id)
+                  _candidate._get_pk_val())
+
                 if OBJECT_XML_CACHE.has_key(cache_key):
                     _check = OBJECT_XML_CACHE[cache_key]
 
@@ -673,11 +672,11 @@ class SchemaModel(models.Model):
                 _objects.append((obj, status))
                 continue
 
-            if obj.id:
+            if obj._get_pk_val():
                 try:
                     LOGGER.debug(u'Deleting object {0}'.format(obj))
                     cache_key = '{}_{}'.format(type(obj).__name__.lower(),
-                      obj.id)
+                      obj._get_pk_val())
 
                     if OBJECT_XML_CACHE.has_key(cache_key):
                         OBJECT_XML_CACHE.pop(cache_key)
@@ -798,7 +797,7 @@ class SchemaModel(models.Model):
             # object instance has a valid identifier to be used as parent.
             # If the object instance's id is None, we have to save it first!
             if _model_field.endswith('_set'):
-                if _object.id is None:
+                if _object._get_pk_val() is None:
                     try:
                         LOGGER.debug(u'Saving parent object for {0}'.format(
                           _model_field))
@@ -973,12 +972,13 @@ class SchemaModel(models.Model):
               type(_field).__name__, [unicode(x) for x in _values]))
 
             # If the model field is a ManyToManyField instance, we have to
-            # ensure that the current _object is instantiated in the database
-            # as otherwise it would not have an id value.  Afterwards, we loop
-            # over all values for this field and add these to the field set.
+            # ensure that the current _object is instantiated in the database as
+            # otherwise it would not have a PK value.  Afterwards, we
+            # loop over all values for this field and add these to the field set.
             if isinstance(_field, related.ManyToManyField):
-                # Save the current _object to obtain an id.  If the something
-                # bad happens during saving, catch the exception and rollback.
+                # Save the current _object to obtain a PK value.  If
+                # the something bad happens during saving, catch the exception
+                # and rollback.
                 try:
                     _object.save()
 
@@ -1242,8 +1242,6 @@ class SchemaModel(models.Model):
 
     def unicode_(self, formatstring, args):
         formatvalues = []
-        #print u'{!r}'.format(formatstring)
-        #print u'{!r}'.format(args)
         for formatarg in args:
             separator = u' '
             if isinstance(formatarg, tuple):
@@ -1255,8 +1253,8 @@ class SchemaModel(models.Model):
         return _unicode
 
     def __unicode__(self):
-        cache_key = '{}_{}'.format(self.__schema_name__, self.id)
-        #print u'cache key: >>{}<<'.format(cache_key)
+        cache_key = '{}_{}'.format(self.__schema_name__, self._get_pk_val())
+
         cached = cache.get(cache_key, None) # set to None for no caching
         if cached is None:
             try:
@@ -1266,23 +1264,17 @@ class SchemaModel(models.Model):
             except Exception, e:
                 LOGGER.error('in unicode: {}'.format(e))
                 LOGGER.error(format_exc())
-                cached = u'<{} id="{}>'.format(self.__schema_name__, self.id)
-            #print u'not cached: {} -> >>{}<<'.format(cache_key, cached)
-            #sys.stdout.write('-')
+                cached = u'<{} pk="{}>'.format(self.__schema_name__, self._get_pk_val())
+
             cache.set(cache_key, cached) # comment this for no caching
-        else:
-            #sys.stdout.write('+')
-            #print u'CACHED: {} -> >>{}<<'.format(cache_key, cached)
-            pass
         return cached
     
     def save(self, force_insert=False, force_update=False, using=None):
         '''
-            Override the superclass method to trigger cache updating.
+        Override the superclass method to trigger cache updating.
         '''
         super(SchemaModel, self).save(force_insert, force_update, using)
-        cache_key = '{}_{}'.format(self.__schema_name__, self.id)
-        #print u'deleting {}_{}'.format(self.__schema_name__, self.id)
+        cache_key = '{}_{}'.format(self.__schema_name__, self._get_pk_val())
         cache.delete(cache_key)
 
 
@@ -1352,21 +1344,7 @@ class SubclassableModel(SchemaModel):
             return subclass.__unicode__()
         else:
             return SchemaModel.__unicode__(self)
-        return '{0} {1}'.format(self.__class__.__name__, self.id)
+        return '{0} {1}'.format(self.__class__.__name__, self._get_pk_val())
+
     class Meta:
         abstract = True
-
-
-class InvisibleStringModel(SchemaModel):
-    """
-    For xs:string choices: a field whose relation name will not be rendered
-    and has special im-/export functionality
-    """
-    __schema_name__ = 'STRINGMODEL'
-
-    value = models.TextField()
-    
-    def __unicode__(self):
-        if not self.value:
-            return u''
-        return self.value

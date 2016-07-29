@@ -357,6 +357,17 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.CreateModel(
+            name='documentUnstructuredString_model',
+            fields=[
+                ('documentationinfotype_model_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='repository.documentationInfoType_model')),
+                ('value', models.TextField()),
+            ],
+            options={
+                'abstract': False,
+            },
+            bases=('repository.documentationinfotype_model',),
+        ),
+        migrations.CreateModel(
             name='domainInfoType_model',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
@@ -533,28 +544,6 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Input',
             },
             bases=(models.Model,),
-        ),
-        migrations.CreateModel(
-            name='InvisibleStringModel',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('value', models.TextField()),
-            ],
-            options={
-                'abstract': False,
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
-            name='documentUnstructuredString_model',
-            fields=[
-                ('documentationinfotype_model_ptr', models.OneToOneField(parent_link=True, auto_created=True, to='repository.documentationInfoType_model')),
-                ('invisiblestringmodel_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='repository.InvisibleStringModel')),
-            ],
-            options={
-                'abstract': False,
-            },
-            bases=('repository.invisiblestringmodel', 'repository.documentationinfotype_model'),
         ),
         migrations.CreateModel(
             name='languageDescriptionEncodingInfoType_model',

@@ -155,10 +155,9 @@ from metashare.bcp47 import iana
 
 from metashare.accounts.models import EditorGroup
 # pylint: disable-msg=W0611
-from {0}supermodel import SchemaModel, SubclassableModel, \\
-  _make_choices_from_list, InvisibleStringModel, \\
-  REQUIRED, OPTIONAL, RECOMMENDED, \\
-  _make_choices_from_int_list
+from metashare.repository.supermodel import SchemaModel, SubclassableModel, \\
+  _make_choices_from_list, _make_choices_from_int_list, \\
+  REQUIRED, OPTIONAL, RECOMMENDED
 from {0}editor.widgets import MultiFieldWidget, MultiChoiceWidget
 from {0}fields import MultiTextField, MetaBooleanField, \\
   MultiSelectField, DictField, XmlCharField, best_lang_value_retriever
@@ -196,29 +195,6 @@ HTTPURI_VALIDATOR = RegexValidator(r"^(?i)((http|ftp)s?):\\/\\/"
 SCHEMA_NAMESPACE = '{1}'
 # version of the META-SHARE metadata XML Schema
 SCHEMA_VERSION = '{2}'
-
-def _compute_documentationInfoType_key():
-    '''
-    Prevents id collisions for documentationInfoType_model sub classes.
-    
-    These are:
-    - documentInfoType_model;
-    - documentUnstructuredString_model.
-    
-    '''
-    _k1 = list(documentInfoType_model.objects.all().order_by('-id'))
-    _k2 = list(documentUnstructuredString_model.objects.all().order_by('-id'))
-    
-    LOGGER.debug('k1: {{}}, k2: {{}}'.format(_k1, _k2))
-
-    _k1_id = 0
-    if len(_k1) > 0:
-        _k1_id = _k1[0].id
-    _k2_id = 0
-    if len(_k2) > 0:
-        _k2_id = _k2[0].id
-
-    return max(_k1_id, _k2_id) + 1
 
 def languagename_optgroup_choices():
     '''
@@ -316,16 +292,18 @@ admin.site.register({0}_model)
 
 CHOICE_STRING_SUB_CLASS_TEMPLATE = '''
 # pylint: disable-msg=C0103
-class {0}_model(InvisibleStringModel, {1}):
-    def save(self, *args, **kwargs):
-        """
-        Prevents id collisions for documentationInfoType_model sub classes.
-        """
-        # pylint: disable-msg=E0203
-        if not self.id:
-            # pylint: disable-msg=W0201
-            self.id = _compute_documentationInfoType_key()
-        super({0}_model, self).save(*args, **kwargs)
+class {0}_model({1}):
+    """
+    Is a xs:string choice: a field whose relation name will not be rendered
+    and has special im-/export functionality
+    """
+    __schema_name__ = 'STRINGMODEL'
+
+    value = models.TextField()
+
+    def __unicode__(self):
+        return self.value if self.value else u''
+
 '''
 
 TOP_LEVEL_TYPE_EXTRA_CODE_TEMPLATE = '''
@@ -1266,14 +1244,11 @@ class Clazz(object):
         if self.name == 'documentInfoType':
             self.wrtmodels('''    def save(self, *args, **kwargs):
         """
-        Prevents id collisions for documentationInfoType_model sub classes.
+        Set the adequate documentLanguageId value
         """
-        # pylint: disable-msg=E0203
-        if not self.id:
-            # pylint: disable-msg=W0201
-            self.id = _compute_documentationInfoType_key()
         if self.documentLanguageName:
             self.documentLanguageId = iana.get_language_subtag(self.documentLanguageName)
+
         super(documentInfoType_model, self).save(*args, **kwargs)
 
 ''')

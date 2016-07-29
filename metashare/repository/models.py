@@ -10,9 +10,8 @@ from metashare.bcp47 import iana
 from metashare.accounts.models import EditorGroup
 # pylint: disable-msg=W0611
 from metashare.repository.supermodel import SchemaModel, SubclassableModel, \
-  _make_choices_from_list, InvisibleStringModel, \
-  REQUIRED, OPTIONAL, RECOMMENDED, \
-  _make_choices_from_int_list
+  _make_choices_from_list, _make_choices_from_int_list, \
+  REQUIRED, OPTIONAL, RECOMMENDED
 from metashare.repository.editor.widgets import MultiFieldWidget, MultiChoiceWidget
 from metashare.repository.fields import MultiTextField, MetaBooleanField, \
   MultiSelectField, DictField, XmlCharField, best_lang_value_retriever
@@ -50,29 +49,6 @@ HTTPURI_VALIDATOR = RegexValidator(r"^(?i)((http|ftp)s?):\/\/"
 SCHEMA_NAMESPACE = 'http://www.meta-share.org/META-SHARE_XMLSchema'
 # version of the META-SHARE metadata XML Schema
 SCHEMA_VERSION = '3.1'
-
-def _compute_documentationInfoType_key():
-    '''
-    Prevents id collisions for documentationInfoType_model sub classes.
-    
-    These are:
-    - documentInfoType_model;
-    - documentUnstructuredString_model.
-    
-    '''
-    _k1 = list(documentInfoType_model.objects.all().order_by('-id'))
-    _k2 = list(documentUnstructuredString_model.objects.all().order_by('-id'))
-    
-    LOGGER.debug('k1: {}, k2: {}'.format(_k1, _k2))
-
-    _k1_id = 0
-    if len(_k1) > 0:
-        _k1_id = _k1[0].id
-    _k2_id = 0
-    if len(_k2) > 0:
-        _k2_id = _k2[0].id
-
-    return max(_k1_id, _k2_id) + 1
 
 def languagename_optgroup_choices():
     '''
@@ -978,14 +954,11 @@ class documentInfoType_model(documentationInfoType_model):
 
     def save(self, *args, **kwargs):
         """
-        Prevents id collisions for documentationInfoType_model sub classes.
+        Set the adequate documentLanguageId value
         """
-        # pylint: disable-msg=E0203
-        if not self.id:
-            # pylint: disable-msg=W0201
-            self.id = _compute_documentationInfoType_key()
         if self.documentLanguageName:
             self.documentLanguageId = iana.get_language_subtag(self.documentLanguageName)
+
         super(documentInfoType_model, self).save(*args, **kwargs)
 
     def real_unicode_(self):
@@ -7953,13 +7926,14 @@ class lexicalConceptualResourceMediaTypeType_model(SchemaModel):
         return _unicode
 
 # pylint: disable-msg=C0103
-class documentUnstructuredString_model(InvisibleStringModel, documentationInfoType_model):
-    def save(self, *args, **kwargs):
-        """
-        Prevents id collisions for documentationInfoType_model sub classes.
-        """
-        # pylint: disable-msg=E0203
-        if not self.id:
-            # pylint: disable-msg=W0201
-            self.id = _compute_documentationInfoType_key()
-        super(documentUnstructuredString_model, self).save(*args, **kwargs)
+class documentUnstructuredString_model(documentationInfoType_model):
+    """
+    Is a xs:string choice: a field whose relation name will not be rendered
+    and has special im-/export functionality
+    """
+    __schema_name__ = 'STRINGMODEL'
+
+    value = models.TextField()
+
+    def __unicode__(self):
+        return self.value if self.value else u''
