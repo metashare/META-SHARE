@@ -10,8 +10,11 @@ from logging.handlers import RotatingFileHandler
 # DATABASE_* settings, ADMINS, etc.
 from local_settings import *
 
+# Allows to disable check for duplicate instances.
+CHECK_FOR_DUPLICATE_INSTANCES = True
+
 # Logging settings for this Django project.
-LOG_LEVEL = logging.WARNING
+LOG_LEVEL = logging.INFO
 LOG_FORMAT = "[%(asctime)s] %(name)s::%(levelname)s %(message)s"
 LOG_DATE = "%m/%d/%Y @ %H:%M:%S"
 LOG_FORMATTER = logging.Formatter(LOG_FORMAT, LOG_DATE)
@@ -33,11 +36,39 @@ LOG_HANDLER.setFormatter(LOG_FORMATTER)
 # init root logger
 logging.basicConfig(format=LOG_FORMAT, datefmt=LOG_DATE, level=LOG_LEVEL)
 
+LOGGING_CONFIG = None
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    }
+}
+
 # Maximum size of files uploaded as resrouce data.
 # The default is a cautious value in order to protect the server
 # against resource starvation; if you think your server can handle
 # bigger files, feel free to try and increase this value.
 MAXIMUM_UPLOAD_SIZE = 10 * 1024 * 1024
+
+# Synchronization info:
+SYNC_NEEDS_AUTHENTICATION = True
 
 # URL for the Metashare Knowledge Base
 KNOWLEDGE_BASE_URL = 'http://www.meta-share.org/knowledgebase/'
@@ -48,7 +79,6 @@ STATS_SERVER_URL = "http://metastats.fbk.eu/"
 # The URL for GeoIP database.
 GEOIP_DATA_URL = "http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz" 
 
-
 # If STORAGE_PATH does not exist, try to create it and halt if not
 # possible.
 try:
@@ -58,7 +88,6 @@ try:
         os.makedirs(LOCK_DIR)
 except:
     raise OSError, "STORAGE_PATH must exist and be writable!"
-
 
 # If XDIFF_LOCATION was not set in local_settings, set a default here:
 try:
@@ -102,15 +131,18 @@ MEDIA_ROOT = '{0}/media/'.format(ROOT_PATH)
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
 MEDIA_URL = '/{0}site_media/'.format(DJANGO_BASE)
 
+STATIC_URL = '/site_static/'
+STATIC_ROOT = '{0}/static/'.format(ROOT_PATH)
+STATICFILES_DIRS = (
+    os.path.join(ROOT_PATH, 'media'),
+)
+
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
 # ADMIN_MEDIA_PREFIX must use full URL or else our custom admin will not be used,
 # cf. http://stackoverflow.com/questions/1081596/django-serving-admin-media-files
 ADMIN_MEDIA_PREFIX = '{0}/site_media/admin/'.format(DJANGO_URL)
-
-
-#ADMIN_MEDIA_ROOT = '{0}/media/admin/'.format(ROOT_PATH)
 
 TEMPLATE_LOADERS = (
     ('django.template.loaders.cached.Loader', (
@@ -136,20 +168,17 @@ TEMPLATE_DIRS = (
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.media',
-    #'django.core.context_processors.static', not sure if it is necessary.
-    'django.contrib.messages.context_processors.messages',
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
     "django.core.context_processors.request",
 )
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
-
-AUTH_PROFILE_MODULE = 'accounts.UserProfile'
-
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-)
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -161,12 +190,14 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django.contrib.sitemaps',
     'django.contrib.staticfiles',
+
     'selectable',
     'haystack',
     'analytical',
     
     'metashare.accounts',
     'metashare.storage',
+    'metashare.sync',
     'metashare.stats',
     'metashare.recommendations',
     'metashare.repository',
@@ -174,8 +205,8 @@ INSTALLED_APPS = (
 )
 
 # add Kronos to installed apps if not running on Windows
-# if os.name != 'nt':
-#     INSTALLED_APPS += ('kronos',)
+if os.name != 'nt':
+    INSTALLED_APPS += ('kronos',)
 
 # Continuous Integration support using django_jenkins: only add application
 # if django_jenkins module can be imported properly.
@@ -192,6 +223,7 @@ PROJECT_APPS = (
     'metashare.accounts',
     'metashare.stats',
     'metashare.storage',
+    'metashare.sync',
     'metashare.recommendations',
 )
 
@@ -210,15 +242,18 @@ HAYSTACK_CONNECTIONS = {
     },
 }
 
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+# we use a custom Haystack search backend router so that we can dynamically
+# switch between the main/default search backend and the one for testing
+HAYSTACK_ROUTERS = [ 'metashare.haystack_routers.MetashareRouter' ]
+
 # a custom test runner with the added value on top of the default Django test
 # runner to automatically set up Haystack so that it uses a dedicated search
 # backend for testing
 TEST_RUNNER = 'metashare.test_runner.MetashareTestRunner'
 JENKINS_TEST_RUNNER = 'metashare.test_runner.MetashareJenkinsTestRunner'
 
-# we use a custom Haystack search backend router so that we can dynamically
-# switch between the main/default search backend and the one for testing
-HAYSTACK_ROUTERS = [ 'metashare.haystack_routers.MetashareRouter' ]
 
 JENKINS_TASKS = (
     'django_jenkins.tasks.run_pylint',
@@ -247,63 +282,19 @@ MAX_VIEW_INTERVAL = 60 * 5
 # used in recommendations
 MAX_DOWNLOAD_INTERVAL = 60 * 10
 
-LOGGING_CONFIG = None
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
-    },
-    'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
-        }
-    },
-    'loggers': {
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-    }
-}
-DEFAULT_INDEX_TABLESPACE = ''
-DEFAULT_CONTENT_TYPE = 'text/html'
-DEFAULT_TABLESPACE = ''
-ABSOLUTE_URL_OVERRIDES = {}
-USE_TZ = False
-AUTH_USER_MODEL = 'auth.User'
-STATIC_URL = '/site_static/'
-STATIC_ROOT = '{0}/static/'.format(ROOT_PATH)
-LOCALE_PATHS = ()
-SILENCED_SYSTEM_CHECKS= ["models.E005"]
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-        'OPTIONS': {
-            'min_length': 9,
-        }
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
-SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
-STATICFILES_DIRS = (
-    os.path.join(ROOT_PATH, 'media'),
+# list of synchronization protocols supported by this node
+SYNC_PROTOCOLS = (
+    '1.0',
 )
-HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
+# Full import path of a serializer class to use for serializing session data
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+
+# The Python path syntax of the setting we are using in META-SHARE
+DJANGO_SETTINGS_MODULE = 'metashare.settings'
+
+# A dictionary specifying the package where migration modules can be found
+# on a per-app basis.
 MIGRATION_MODULES = {
     'accounts': 'accounts.django_migrations',
     'repository': 'repository.django_migrations',
@@ -311,7 +302,6 @@ MIGRATION_MODULES = {
     'recommendations': 'recommendations.django_migrations',
     'storage': 'storage.django_migrations',
 }
-DJANGO_SETTINGS_MODULE = 'metashare.settings'
 
 class DisableMigrations(object):
 

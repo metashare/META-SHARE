@@ -35,6 +35,10 @@ urlpatterns += patterns('metashare.repository.views',
   (r'^{0}repository/'.format(DJANGO_BASE), include('metashare.repository.urls')),
 )
 
+urlpatterns += patterns('metashare.sync.views',
+  (r'^{0}sync/'.format(DJANGO_BASE), include('metashare.sync.urls')),
+)
+
 urlpatterns += patterns('metashare.bcp47.xhr',
   (r'^{0}bcp47/'.format(DJANGO_BASE), include('metashare.bcp47.urls')),
 )

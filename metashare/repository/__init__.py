@@ -1,6 +1,6 @@
-from haystack.query import SearchQuerySet
 from haystack import connection_router, connections
 from haystack.exceptions import NotHandled
+from haystack.query import SearchQuerySet
 
 ignored_pk_list = []
 
@@ -96,7 +96,6 @@ SearchQuerySet._determine_backend = _determine_backend
 SearchQuerySet.post_process_results = post_process_results
 SearchQuerySet.__len__ = __len__
 
-
 def verify_at_startup():
     """
     A generic verification method called for certain commands directly from our custom manage.py.
@@ -109,7 +108,6 @@ def verify_at_startup():
     
     check_solr_running()
     check_settings()
-
 
 def check_solr_running():
     try:
@@ -142,6 +140,3 @@ def check_settings():
     url_path = '/' in url_path and url_path[url_path.find('/')+1:] or ''
     if base_path != url_path:
         fail(u"Based on DJANGO_URL '{}', expected DJANGO_BASE '{}/', but was '{}'".format(DJANGO_URL, url_path, DJANGO_BASE))
-
-
-
