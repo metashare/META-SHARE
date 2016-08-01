@@ -3,6 +3,7 @@ Management utility to remove storage object for which no resourceinfotype_model
 is set.
 """
 from django.core.management.base import BaseCommand
+
 from metashare.storage.models import repair_storage_objects
 from metashare.utils import Lock
 

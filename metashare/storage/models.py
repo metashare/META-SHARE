@@ -1,23 +1,25 @@
-from django.core.exceptions import ValidationError, ObjectDoesNotExist
-from django.db import models
+import glob
+import logging
+import os.path
+import re
+import zipfile
+from datetime import datetime, timedelta
 # pylint: disable-msg=E0611
 from hashlib import md5
-from metashare.settings import LOG_HANDLER
-from metashare import settings
+from json import dumps, loads
 from os import mkdir
 from os.path import exists
-import os.path
 from uuid import uuid1, uuid4
 from xml.etree import ElementTree as etree
-from datetime import datetime, timedelta
-import logging
-import re
-from json import dumps, loads
-from django.core.serializers.json import DjangoJSONEncoder
-import zipfile
 from zipfile import ZIP_DEFLATED
+
+from django.core.exceptions import ValidationError, ObjectDoesNotExist
+from django.core.serializers.json import DjangoJSONEncoder
+from django.db import models
 from django.db.models.query_utils import Q
-import glob
+
+from metashare.settings import LOG_HANDLER
+from metashare import settings
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -325,7 +327,7 @@ class StorageObject(models.Model):
         try:
             _metadata = to_xml_string(
               # pylint: disable-msg=E1101
-              self.resourceinfotype_model_set.all()[0].export_to_elementtree(),
+              self.resourceinfotype_model_set.first().export_to_elementtree(),
               # use ASCII encoding to convert non-ASCII chars to entities
               encoding="ASCII")
         except:
@@ -582,7 +584,7 @@ def add_or_update_resource(storage_json, resource_xml_string, storage_digest,
     def remove_database_entries(storage_id):
         storage_object = StorageObject.objects.get(identifier=storage_id)
         try:
-            resource = storage_object.resourceinfotype_model_set.all()[0]
+            resource = storage_object.resourceinfotype_model_set.first()
         except:
             # pylint: disable-msg=E1101
             LOGGER.error('PROBLEMATIC: %s - count: %s', storage_object.identifier,
