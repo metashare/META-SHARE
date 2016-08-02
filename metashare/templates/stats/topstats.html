@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static from staticfiles %}
 {% block content %}
 <noscript><b>It seems JavaScript is either disabled or not supported by your browser.</b>
     JavaScript should be enabled in order to support all functionalities.
@@ -103,8 +103,8 @@ function addStatus(filter){
 }
 </script>
 
-<link rel="stylesheet" href="{{ MEDIA_URL }}/css/view_stats.css" type="text/css" media="screen" />
-<link rel="stylesheet" href="{{ MEDIA_URL }}/css/results.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="{% static "metashare/css/view_stats.css" %}" type="text/css" media="screen" />
+<link rel="stylesheet" href="{% static "metashare/css/results.css" %}" type="text/css" media="screen" />
 
 <div class='tab-container'>
  <ul class='etabs'>
@@ -121,28 +121,28 @@ function addStatus(filter){
 	    <form class="form_helper" name="topform" id="topform" action="{% url 'frontpage' %}stats/top/" method="get">
             <h4>Show the <select style="color: #000; background: #eee" name='view' onchange="topform.submit();">
             
-            <option value='topviewed' style="background-image: url({{ MEDIA_URL }}stats/img/view_icon.gif); background-repeat: no-repeat; padding-left: 20px;"
+            <option value='topviewed' style="background-image: url({% static "stats/img/view_icon.gif" %}); background-repeat: no-repeat; padding-left: 20px;"
             > Most Viewed Resources
             
-            <option value='topqueries' style="background-image: url({{ MEDIA_URL }}stats/img/retrieve_icon.gif); background-repeat: no-repeat; padding-left: 20px;"
+            <option value='topqueries' style="background-image: url({% static "stats/img/retrieve_icon.gif" %}); background-repeat: no-repeat; padding-left: 20px;"
             {% ifequal view "topqueries" %}
                     selected
             {% endifequal %}
             > Top Queries
             
-            <option value='latestqueries' style="background-image: url({{ MEDIA_URL }}stats/img/retrieve_icon.gif); background-repeat: no-repeat; padding-left: 20px;"
+            <option value='latestqueries' style="background-image: url({% static "stats/img/retrieve_icon.gif" %}); background-repeat: no-repeat; padding-left: 20px;"
             {% ifequal view "latestqueries" %} 
                 selected
             {% endifequal %}
             > Latest Queries
             
-            <option value='topdownloaded' style="background-image: url({{ MEDIA_URL }}stats/img/download_icon.gif); background-repeat: no-repeat; padding-left: 20px;"
+            <option value='topdownloaded' style="background-image: url({% static "stats/img/download_icon.gif" %}); background-repeat: no-repeat; padding-left: 20px;"
             {% ifequal view "topdownloaded" %}
                     selected
             {% endifequal %}
             > Top Downloaded Resources
             
-            <option value='latestupdated' style="background-image: url({{ MEDIA_URL }}stats/img/update_icon.gif); background-repeat: no-repeat; padding-left: 20px;"
+            <option value='latestupdated' style="background-image: url({% static "stats/img/update_icon.gif" %}); background-repeat: no-repeat; padding-left: 20px;"
             {% ifequal view "latestupdated" %}
                     selected
             {% endifequal %}
@@ -188,8 +188,8 @@ function addStatus(filter){
                         {% else %}
                             <a style="vertical-align: top" href="?view={{ view }}&country={{ geoinfo.0 }}&last={{ last }}" class="deleteFilter">
                         {% endifequal %}
-                        {{ geoinfo.2 }} 
-                        <img height=20 src="{{ MEDIA_URL }}css/international_flags/iso/32x32/flag-{{ geoinfo.0|lower }}.png"></a>
+                        {{ geoinfo.2 }}
+                        <img height=20 src="{% static "metashare/css/international_flags/iso/32x32/flag-"|add:geoinfo.0|lower|add:".png" %}"></a>
                         &nbsp;({{ geoinfo.1 }})
                                       
                 </div>
@@ -229,7 +229,6 @@ function addStatus(filter){
 {% load resource_languages %}
 {% load resource_media_types %}
 {% load resource_access_stats %}
-{% load get_media_url %}
 {% load get_icon %}
 
 {% for object in topdata %}
@@ -241,7 +240,7 @@ function addStatus(filter){
          {% endifnotequal %}           
  
          <div class="resourceName">
-         <a href="{% url 'frontpage' %}repository/search/?{{ object.4 }}"><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/zoom.png"> {{ object.0 }}</a>
+         <a href="{% url 'frontpage' %}repository/search/?{{ object.4 }}"><img src="{% static "metashare/css/sexybuttons/images/icons/silk/zoom.png" %}"> {{ object.0 }}</a>
             {% ifnotequal object.1 "" %}  
                 &nbsp;&nbsp;filter by: <div style="display: inline; font-size: 8pt; color: #000">{{ object.1 }}</div>
             {% endifnotequal %}
@@ -268,8 +267,8 @@ function addStatus(filter){
         &nbsp;{% resource_media_types object.0.resourceComponentType.as_subclass %} 
         
         <div class="accessStats">
-          <img src="{% get_media_url %}stats/img/download_icon.gif" alt="Number of downloads" title="Number of downloads" />&nbsp;{{ object.0.storage_object.identifier|get_download_count }}
-          <img src="{% get_media_url %}stats/img/view_icon.gif" alt="Number of views" title="Number of views" />&nbsp;{{ object.0.storage_object.identifier|get_view_count }}
+          <img src="{% static "stats/img/download_icon.gif" %}" alt="Number of downloads" title="Number of downloads" />&nbsp;{{ object.0.storage_object.identifier|get_download_count }}
+          <img src="{% static "stats/img/view_icon.gif" %}" alt="Number of views" title="Number of views" />&nbsp;{{ object.0.storage_object.identifier|get_view_count }}
         </div>
         <ul>
           {% resource_languages object.0.resourceComponentType.as_subclass %}  

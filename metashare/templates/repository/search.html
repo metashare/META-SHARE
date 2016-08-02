@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
+{% load static from staticfiles %}
 
 {% block title %}
 Search and Browse &ndash; META-SHARE 
 {% endblock %}
 
 {% block links %}
-<link rel="stylesheet" href="{{ MEDIA_URL }}css/results.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="{% static "metashare/css/results.css" %}" type="text/css" media="screen" />
 {% endblock %}
 
 {% block content %}
@@ -15,8 +16,8 @@ $(document).ready(function(){
   $("div.filter").each(function() {
     var allDds = $(this).children("div").not('.subresult').nextUntil("div.accordion");
     if (allDds.length > 4) {{# for 5 or less items we don't want to collapse, however, including the "more" link we would like to have at most 5 <div>s #}
-	var hideableDds = allDds.has("a.addableFacet");{# never hide selected facet items #}
-	if (hideableDds.length > 1) {{# don't replace a single item with a "more" link #}
+    var hideableDds = allDds.has("a.addableFacet");{# never hide selected facet items #}
+    if (hideableDds.length > 1) {{# don't replace a single item with a "more" link #}
         hiddenDds = hideableDds.slice(
           Math.max(0, 4 - (allDds.length - hideableDds.length))).hide();
         var moreTxt = 'more', lessTxt = 'less';
@@ -36,9 +37,9 @@ $(document).ready(function(){
   });
 
   $("div.accordion.expanded").each(function(){
- 	if( $(this).next("div.filter").find("a.removableFacet").length > 0 ){
- 		$(this).addClass("selected");
- 	}
+    if( $(this).next("div.filter").find("a.removableFacet").length > 0 ){
+        $(this).addClass("selected");
+    }
   });
 
   $("div.accordion").click(function() {
@@ -69,13 +70,13 @@ function addStatus(filter){
 <div class="searchbox">
   <form class="form_helper" id="searchbox" action="." method="get">
     {{ form.non_field_errors }}
-	<table>
-	  <tr>
-        <td><img src="{{ MEDIA_URL }}images/keyvisual-200.png" /></td>
-	  	<td>{{ form.q }}</td>
+    <table>
+      <tr>
+        <td><img src="{% static "metashare/images/keyvisual-200.png" %}" /></td>
+        <td>{{ form.q }}</td>
         <td><input id="search_button" class="button middle_button" type="submit" value="Search" /></td>
       </tr>
-	</table>
+    </table>
   </form>
 </div>  
 
@@ -91,56 +92,56 @@ function addStatus(filter){
   </div>
 
   <div class="explanation_box">
-  	<div class="explanation">
-		<h4>Resource Type:</h4>			
-		<table id="resource_type">
-			<tr>
-				<td width="120">Corpus:</td>
-				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/database_yellow.png" /></td>
-			</tr>
-			<tr>
-				<td width="120">Lexical/Conceptual:</td>
-				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/text_ab.png" /></td>
-			</tr>
-			<tr>
-				<td width="120">Tool/Service:</td>
-				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/page_white_gear.png" /></td>
-			</tr>
-			<tr>
-				<td width="120">Language Description:</td>
-				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/script.png" /></td>
-			</tr>
-			</table>
-	</div>
-	<div class="explanation first">			
-		<h4>Media Type:</h4>
-		<table id="media_type">
-			<tr>
-				<td width="120">Text:</td>
-				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/page_white_text_media_type.png" /></td>
-			</tr>
-			<tr>
-				<td width="120">Audio:</td>
-				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/sound_none.png" /></td>
-			</tr>
-			<tr>
-				<td width="120">Image:</td>
-				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/picture.png" /></td>
-			</tr>
-			<tr>
-				<td width="120">Video:</td>
-				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/film.png" /></td>
-			</tr>					
-			<tr>
-				<td width="120">Text Numerical:</td>
-				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/numerical_text.png" /></td>
-			</tr>					
-			<tr>
-				<td width="120">Text N-Gram:</td>
-				<td><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/text_align_left.png" /></td>
-			</tr>					
-		</table>	
-	</div>			
+    <div class="explanation">
+        <h4>Resource Type:</h4>
+        <table id="resource_type">
+            <tr>
+                <td width="120">Corpus:</td>
+                <td><img src="{% static "metashare/css/sexybuttons/images/icons/silk/database_yellow.png" %}" /></td>
+            </tr>
+            <tr>
+                <td width="120">Lexical/Conceptual:</td>
+                <td><img src="{% static "metashare/css/sexybuttons/images/icons/silk/text_ab.png" %}" /></td>
+            </tr>
+            <tr>
+                <td width="120">Tool/Service:</td>
+                <td><img src="{% static "metashare/css/sexybuttons/images/icons/silk/page_white_gear.png" %}" /></td>
+            </tr>
+            <tr>
+                <td width="120">Language Description:</td>
+                <td><img src="{% static "metashare/css/sexybuttons/images/icons/silk/script.png" %}" /></td>
+            </tr>
+            </table>
+    </div>
+    <div class="explanation first">
+        <h4>Media Type:</h4>
+        <table id="media_type">
+            <tr>
+                <td width="120">Text:</td>
+                <td><img src="{% static "metashare/css/sexybuttons/images/icons/silk/page_white_text_media_type.png" %}" /></td>
+            </tr>
+            <tr>
+                <td width="120">Audio:</td>
+                <td><img src="{% static "metashare/css/sexybuttons/images/icons/silk/sound_none.png" %}" /></td>
+            </tr>
+            <tr>
+                <td width="120">Image:</td>
+                <td><img src="{% static "metashare/css/sexybuttons/images/icons/silk/picture.png" %}" /></td>
+            </tr>
+            <tr>
+                <td width="120">Video:</td>
+                <td><img src="{% static "metashare/css/sexybuttons/images/icons/silk/film.png" %}" /></td>
+            </tr>
+            <tr>
+                <td width="120">Text Numerical:</td>
+                <td><img src="{% static "metashare/css/sexybuttons/images/icons/silk/numerical_text.png" %}" /></td>
+            </tr>
+            <tr>
+                <td width="120">Text N-Gram:</td>
+                <td><img src="{% static "metashare/css/sexybuttons/images/icons/silk/text_align_left.png" %}" /></td>
+            </tr>
+        </table>
+    </div>
   </div>
 </div>
 

@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% load humanize %}
-
+{% load static from staticfiles %}
 {% block content %}
 {% spaceless %}
 <div class="span-24">
   <div style="text-align:center;margin-top: 20px;margin-bottom: 20px;">
-    <p><img src="{{ MEDIA_URL }}meta-share-logo.png" style="border: 1px solid #cccccc;width: 850px;padding:10px;background-color:white;" /></p>
+    <p><img src="{% static "metashare/images/meta-share-logo.png" %}" style="border: 1px solid #cccccc;width: 850px;padding:10px;background-color:white;" /></p>
     <p>{{resources|intcomma}} language resource{{resources|pluralize}} at your disposal</p>
   </div>
   <form method="get" action="{% url 'frontpage' %}repository/search/" class="form_helper">
@@ -20,7 +20,7 @@
 <table>
   <tr>
     <td>
-      <span class="span-7 append-1" style="vertical-align: middle;"><img src="{{ MEDIA_URL }}images/teaser02.png" /></span>
+      <span class="span-7 append-1" style="vertical-align: middle;"><img src="{% static "metashare/images/teaser02.png" %}"/></span>
     </td>
     <td>
       <span class="span-15 last" style="">
@@ -36,7 +36,7 @@
 
 <div class="split span-24">
   <div class="navigation_box push-18 last">
-    <a href="#content" class="scroll"><img src="{{ MEDIA_URL }}images/gototop.png" /></a>
+    <a href="#content" class="scroll"><img src="{% static "metashare/images/gototop.png" %}" /></a>
   </div>
 </div>
 
@@ -58,7 +58,7 @@
       </span>
     </td>
     <td>
-      <span class="span-7 last" style="vertical-align: middle;"><img src="{{ MEDIA_URL }}images/teaser03.png" /></span>
+      <span class="span-7 last" style="vertical-align: middle;"><img src="{% static "metashare/images/teaser03.png" %}"/></span>
     </td>
   </tr>
 </table>
@@ -66,7 +66,7 @@
 
 <div class="split span-24">
   <div class="navigation_box push-18 last">
-    <a href="#content" class="scroll"><img src="{{ MEDIA_URL }}images/gototop.png" /></a>
+    <a href="#content" class="scroll"><img src="{% static "metashare/images/gototop.png" %}"/></a>
   </div>
 </div>
 
@@ -74,7 +74,7 @@
 <table>
   <tr>
     <td>
-      <span class="span-7 append-1" style="vertical-align: middle;"><img src="{{ MEDIA_URL }}images/teaser04.png" /></span>
+      <span class="span-7 append-1" style="vertical-align: middle;"><img src="{% static "metashare/images/teaser04.png" %}" /></span>
     </td>
     <td>
       <span class="span-15 last" style="">

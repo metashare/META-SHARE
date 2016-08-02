@@ -33,7 +33,7 @@ class MetaShareAutoCompleteWidget(AutoCompleteWidget):
         method that includes a search icon
     """
     def render(self, name, value, attrs=None):
-        icon = u'<img src="{0}img/admin/selector-search.gif" width="16" height="16" title="Type to search" />'.format(settings.ADMIN_MEDIA_PREFIX)
+        icon = u'<img src="{0}img/admin/selector-search.gif" width="16" height="16" title="Type to search" />'.format(urlparse.urljoin(settings.STATIC_URL, 'metashare/'))
         return mark_safe(icon + super(MetaShareAutoCompleteWidget, self).render(name, value, attrs))
 
 class MetaShareAutoCompleteSelectWidget(AutoCompleteSelectWidget):
@@ -64,9 +64,9 @@ class DictWidget(widgets.Widget):
     widgets may also become `Textarea` widgets.
     """
     class Media:
-        css = { 'all': ('{}css/dict_widget.css'.format(
-                            settings.ADMIN_MEDIA_PREFIX),) }
-        js = ('{}js/dict_widget.js'.format(settings.ADMIN_MEDIA_PREFIX),)
+        css = { 'all': ('{}admin/css/dict_widget.css'.format(
+                            settings.STATIC_URL),) }
+        js = ('{}admin/js/dict_widget.js'.format(settings.STATIC_URL),)
 
     # templates for the names of key/value "<input/>" fields
     _key_field_name_tpl = 'key_{}_{}'
@@ -205,15 +205,16 @@ class LangDictWidget(DictWidget):
         from the JavaScript of `DictWidget` and CSS specific to this widget.
         """
         # pylint: disable-msg=E1101
-        return Media(js = ('js/jquery-ui.min.js',
-                           '{}js/pybcp47.js'\
-                           .format(settings.ADMIN_MEDIA_PREFIX),
-                           '{}js/autocomp.js'\
-                           .format(settings.ADMIN_MEDIA_PREFIX),
-                           '{}js/lang_dict_widget.js'\
-                           .format(settings.ADMIN_MEDIA_PREFIX),)) \
-            + Media(css={'all': ('{}css/lang_dict_widget.css'.format(
-                                        settings.ADMIN_MEDIA_PREFIX),)})
+        return Media(js = ('{}metashare/js/jquery-ui.min.js'\
+                           .format(settings.STATIC_URL),
+                           '{}metashare/js/pycountry.js'\
+                           .format(settings.STATIC_URL),
+                           '{}metashare/js/autocomp.js'\
+                           .format(settings.STATIC_URL),
+                           '{}metashare/js/lang_dict_widget.js'\
+                           .format(settings.STATIC_URL),)) \
+            + Media(css={'all': ('{}metashare/css/lang_dict_widget.css'.format(
+                                        settings.STATIC_URL),)})
     media = property(_media)
 
 
@@ -226,7 +227,7 @@ class SubclassableRelatedFieldWidgetWrapper(RelatedFieldWidgetWrapper):
     """
     class Media:
         js = (
-          settings.MEDIA_URL + "js/choice-type-widget.js",
+          settings.STATIC_URL + "metashare/js/choice-type-widget.js",
         )
 
     def __init__(self, widget, rel, admin_site, *args, **kwargs):
@@ -299,9 +300,9 @@ class MultiFieldWidget(widgets.Widget):
         Media sub class to inject custom CSS and JavaScript code.
         """
         css = {
-          'all': ('css/repository.css',)
+          'all': ('metashare/css/repository.css',)
         }
-        js = ('js/multi-field-widget.js',)
+        js = ('metashare/js/multi-field-widget.js',)
     
     def __init__(self, widget_id, max_length=None, **kwargs):
         """
@@ -378,7 +379,7 @@ class MultiFieldWidget(widgets.Widget):
             # Define context for container template rendering.
             _context = {'id': _id, 'field_widget': _field_widget,
               'widget_id': self.widget_id,
-              'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX,
+              'static_prefix': settings.STATIC_URL,
               'field_name': name}
             
             # If there have been any validation errors, add the message.
@@ -396,7 +397,7 @@ class MultiFieldWidget(widgets.Widget):
             _field_widget = self._render_input_widget(name, '', _field_attrs)
             _context = {'id': _id, 'field_widget': _field_widget,
               'widget_id': self.widget_id,
-              'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX,
+              'static_prefix': settings.STATIC_URL,
               'field_name': name}
             
             _container = self._render_container(_context)
@@ -404,7 +405,7 @@ class MultiFieldWidget(widgets.Widget):
         
             _field_widget = self._render_input_widget(name, '', _field_attrs)
             _context = {'id': _id, 'field_widget': _field_widget,
-              'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX}
+              'static_prefix': settings.STATIC_URL}
         
         # The JavaScript code needs an empty "template" to create new input
         # widgets dynamically; this is pre-rendered and added to the template
@@ -413,7 +414,7 @@ class MultiFieldWidget(widgets.Widget):
         _context = {'empty_widget': _empty_widget,
           'field_widgets': mark_safe(u'\n'.join(_field_widgets)),
           'widget_id': self.widget_id,
-          'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX,
+          'static_prefix': settings.STATIC_URL,
           'field_name': name}
         
         # Render final HTML for this MultiFieldWidget instance.
@@ -472,11 +473,9 @@ class MultiChoiceWidget(widgets.Widget):
         Media sub class to inject custom CSS and JavaScript code.
         """        
         css = {
-            'all': ('{}css/repository.css' \
-                    .format(settings.ADMIN_MEDIA_PREFIX),)
+            'all': ('metashare/css/repository.css',)
         }
-        js = ('{}js/multi-field-widget.js' \
-              .format(settings.ADMIN_MEDIA_PREFIX),)
+        js = ('metashare/js/multi-field-widget.js',)
 
     def __init__(self, widget_id, max_length=None, choices=(), **kwargs):
         """
@@ -548,7 +547,7 @@ class MultiChoiceWidget(widgets.Widget):
             # Define context for container template rendering.
             _context = {'id': _id, 'field_widget': _field_widget,
                         'widget_id': self.widget_id,
-                        'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX,
+                        'static_prefix': settings.STATIC_URL,
                         'field_name': name}
 
             # If there have been any validation errors, add the message.
@@ -566,7 +565,7 @@ class MultiChoiceWidget(widgets.Widget):
             _field_widget = self._render_input_widget(name, '', _field_attrs)
             _context = {'id': _id, 'field_widget': _field_widget,
                         'widget_id': self.widget_id,
-                        'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX,
+                        'static_prefix': settings.STATIC_URL,
                         'field_name': name}
 
             _container = self._render_container(_context)
@@ -575,7 +574,7 @@ class MultiChoiceWidget(widgets.Widget):
             _field_widget = self._render_input_widget(name, '', _field_attrs)
             _context = {'id': _id,
                         'field_widget': _field_widget,
-                        'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX,}
+                        'static_prefix': settings.STATIC_URL,}
 
         # The JavaScript code needs an empty "template" to create new input
         # widgets dynamically; this is pre-rendered and added to the template
@@ -584,7 +583,7 @@ class MultiChoiceWidget(widgets.Widget):
         _context = {'empty_widget': _empty_widget,
                     'field_widgets': mark_safe(u'\n'.join(_field_widgets)),
                     'widget_id': self.widget_id,
-                    'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX,
+                    'static_prefix': settings.STATIC_URL,
                     'field_name': name}
 
         # Render final HTML for this MultiChoiceWidget instance.
@@ -696,13 +695,13 @@ class ComboWidget(AdminTextInputWidget):
         Media sub class to inject custom CSS and JavaScript code.
         """
         css = {
-          'all': ('{}css/themes/smoothness/jquery-ui.css'
-                    .format(settings.ADMIN_MEDIA_PREFIX),
-                  '{}css/combo.css'.format(settings.ADMIN_MEDIA_PREFIX))
+          'all': ('{}admin/css/themes/smoothness/jquery-ui.css'
+                    .format(settings.STATIC_URL),
+                  '{}admin/css/combo.css'.format(settings.STATIC_URL))
         }
-        js = ('js/jquery-ui.min.js',
-              '{}js/pybcp47.js'.format(settings.ADMIN_MEDIA_PREFIX),
-              '{}js/autocomp.js'.format(settings.ADMIN_MEDIA_PREFIX),)
+        js = ('{}metashare/js/jquery-ui.min.js'.format(settings.STATIC_URL),
+              '{}metashare/js/pycountry.js'.format(settings.STATIC_URL),
+              '{}metashare/js/autocomp.js'.format(settings.STATIC_URL),)
 
     def __init__(self, field_type=None, attrs=None):
         self.field_type = field_type
@@ -732,13 +731,13 @@ class MultiComboWidget(MultiFieldWidget):
         Media sub class to inject custom CSS and JavaScript code.
         """
         css = {
-          'all': ('{}css/themes/smoothness/jquery-ui.css'
-                    .format(settings.ADMIN_MEDIA_PREFIX),
-                  '{}css/combo.css'.format(settings.ADMIN_MEDIA_PREFIX))
+          'all': ('{}admin/css/themes/smoothness/jquery-ui.css'
+                    .format(settings.STATIC_URL),
+                  '{}admin/css/combo.css'.format(settings.STATIC_URL))
         }
-        js = ('js/jquery-ui.min.js',
-              '{}js/pybcp47.js'.format(settings.ADMIN_MEDIA_PREFIX),
-              '{}js/autocomp.js'.format(settings.ADMIN_MEDIA_PREFIX),)
+        js = ('{}metashare/js/jquery-ui.min.js'.format(settings.STATIC_URL),
+              '{}metashare/js/pycountry.js'.format(settings.STATIC_URL),
+              '{}metashare/js/autocomp.js'.format(settings.STATIC_URL),)
 
     def __init__(self, field_type=None, attrs=None, widget_id=None, max_length=None, **kwargs):
         self.field_type = field_type
@@ -776,9 +775,9 @@ class MultiComboWidget(MultiFieldWidget):
     
 class LangAutoCompleteWidget(widgets.Widget):
     class Media:
-        js = ('js/jquery-ui.min.js',
-              '{}js/pybcp47.js'.format(settings.ADMIN_MEDIA_PREFIX),
-              '{}js/autocomp.js'.format(settings.ADMIN_MEDIA_PREFIX),)
+        js = ('{}metashare/js/jquery-ui.min.js'.format(settings.STATIC_URL),
+              '{}metashare/js/pycountry.js'.format(settings.STATIC_URL),
+              '{}metashare/js/autocomp.js'.format(settings.STATIC_URL),)
         css = {}
         
     def __init__(self, attrs=None):
@@ -811,7 +810,7 @@ class AutoCompleteSelectMultipleEditWidget(SelectableMultiWidget, SelectableMedi
             u'data-selectable-position': position,
             u'data-selectable-allow-editing': 'true',
             u'data-selectable-base-url': proto_url,
-            u'data-selectable-throbber-img': '{0}img/admin/throbber_16.gif'.format(settings.ADMIN_MEDIA_PREFIX),
+            u'data-selectable-throbber-img': '{0}admin/img/admin/throbber_16.gif'.format(settings.STATIC_URL),
             u'data-selectable-use-state-error': 'false',
         }
         if more_attrs:
@@ -896,7 +895,7 @@ class AutoCompleteSelectSingleWidget(MetaShareAutoCompleteSelectWidget):
         self.limit = kwargs.pop('limit', None)
         query_params = kwargs.pop('query_params', {})
         attrs = {
-            u'data-selectable-throbber-img': '{0}img/admin/throbber_16.gif'.format(settings.ADMIN_MEDIA_PREFIX),
+            u'data-selectable-throbber-img': '{0}admin/img/admin/throbber_16.gif'.format(settings.STATIC_URL),
             u'data-selectable-use-state-error': 'false',
         }
         # Directly call the super-super-class __init__ method.

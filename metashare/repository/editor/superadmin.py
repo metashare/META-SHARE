@@ -54,11 +54,11 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
     inlines = ()
 
     class Media:
-        js = (settings.MEDIA_URL + 'js/addCollapseToAllStackedInlines.js',
-              settings.MEDIA_URL + 'js/jquery-ui.min.js',
-              settings.MEDIA_URL + 'js/help.js',
-              settings.ADMIN_MEDIA_PREFIX + 'js/collapse.min.js',)
-        css = {'all': (settings.ADMIN_MEDIA_PREFIX + 'css/themes/smoothness/jquery-ui.css',)}
+        js = (settings.STATIC_URL + 'metashare/js/addCollapseToAllStackedInlines.js',
+              settings.STATIC_URL + 'metashare/js/jquery-ui.min.js',
+              settings.STATIC_URL + 'metashare/js/help.js',
+              settings.STATIC_URL + 'admin/js/collapse.min.js',)
+        css = {'all': (settings.STATIC_URL + 'admin/css/themes/smoothness/jquery-ui.css',)}
 
     def __init__(self, model, admin_site):
         # Get from the model all inlines grouped by Required/Recommended/Optional status:

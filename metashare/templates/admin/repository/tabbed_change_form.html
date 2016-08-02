@@ -1,5 +1,6 @@
 {% extends "admin/base_site.html" %}
 {% load i18n admin_modify %}
+{% load static from staticfiles %}
 {% load url from future %}
 {% load submit_row_resource_popup %}
 
@@ -10,7 +11,7 @@
 {{ media }}
 {% endblock %}
 
-{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}admin/css/forms.css" />{% endblock %}
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />{% endblock %}
 
 {% block coltype %}{% if ordered_objects %}colMS{% else %}colM{% endif %}{% endblock %}
 
@@ -36,7 +37,7 @@
   		
 	});			
 </script>		
-<div id="explanation">Fields marked with <img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/asterisk_orange.png" style="height:8px;"/> are required.</div>
+<div id="explanation">Fields marked with <img src="{% static "metashare/css/sexybuttons/images/icons/silk/asterisk_orange.png" %}" style="height:8px;"/> are required.</div>
 <form {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post" id="{{ opts.model_name }}_form" novalidate>{% csrf_token %}{% block form_top %}{% endblock %}
 <div>
 {% if is_popup %}<input type="hidden" name="_popup" value="1" />{% endif %}

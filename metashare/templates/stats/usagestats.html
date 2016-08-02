@@ -1,9 +1,10 @@
 {% extends "base.html" %}
-  
+{% load static from staticfiles %}
+
 {% block content %}
 
-<link rel="stylesheet" href="{{ MEDIA_URL }}/css/view_stats.css" type="text/css" media="screen" />
-<link rel="stylesheet" href="{{ MEDIA_URL }}/css/results.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="{% static "metashare/css/view_stats.css" %}" type="text/css" media="screen" />
+<link rel="stylesheet" href="{% static "metashare/css/results.css" %}" type="text/css" media="screen" />
 
 <script>
 function showdiv (id) {
@@ -137,7 +138,7 @@ function addStatus(filter){
       <div id="subtab">
         <div id="section">
           <div id="colsubtab">
-            <h4>Filter by: <img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/help.png" class=pointer onclick="showdiv('filtershelp')"></h4>
+            <h4>Filter by: <img src="{% static "metashare/css/sexybuttons/images/icons/silk/help.png" %}" class=pointer onclick="showdiv('filtershelp')"></h4>
           </div>  
           <div id="filtershelp" class="warning" style="visibility: hidden; display: none">
                 This panel shows which metadata have been used to describe the META-SHARE linguistic resources.
@@ -182,7 +183,7 @@ function addStatus(filter){
       <h3>Found {{ fields_count }} metadata</h3>
       {% if errors != None %}
        <ul class=errorlist>
-            &nbsp; <img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/error.png"> &nbsp; {{ errors }} &nbsp;
+            &nbsp; <img src="{% static "metashare/css/sexybuttons/images/icons/silk/error.png" %}"> &nbsp; {{ errors }} &nbsp;
        </ul>
       {% endif %}
 
@@ -203,7 +204,7 @@ function addStatus(filter){
              <a name="fieldvalues"></a>
              <table cellspacing=0 cellpadding=0 border=0 valign=top>
                 <tr bgcolor=lightgray>
-                    <td width=100%><div style="display: inline; border: solid 1px #999; padding-top: 5px;"><a href="javascript:closetabvals('fieldvalues');" title="Close"><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/cross.png"></a></div> used values for <h4>{{ selected_class }}/{{ selected_field }}</h4></td>
+                    <td width=100%><div style="display: inline; border: solid 1px #999; padding-top: 5px;"><a href="javascript:closetabvals('fieldvalues');" title="Close"><img src="{% static "metashare/css/sexybuttons/images/icons/silk/cross.png" %}"></a></div> used values for <h4>{{ selected_class }}/{{ selected_field }}</h4></td>
                     <td style="text-align: right">value counter</td>
                     <td style="text-align: right">resources counter</td>                    
                 </tr>
@@ -227,7 +228,7 @@ function addStatus(filter){
             {% for field in fields %}
                 {% if field.6 == "component" %}
                     <div class="tab_content" style="width:100%">
-                    <a href="javascript:scrollToAnchor('{{ field.1.split|join:"_" }}')"><label class='component indent'><img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/bullet_arrow_right.png">
+                    <a href="javascript:scrollToAnchor('{{ field.1.split|join:"_" }}')"><label class='component indent'><img src="{% static "metashare/css/sexybuttons/images/icons/silk/bullet_arrow_right.png" %}">
                      {{ field.2 }}</label></a>
                 {% else %}
                     <div class="dataline mandatory" style="width:100%">

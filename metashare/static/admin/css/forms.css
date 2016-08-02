@@ -18,10 +18,6 @@ form .form-row p {
     font-size: 11px;
 }
 
-.hidden {
-    display: none;
-}
-
 /* FORM LABELS */
 
 form h4 {
@@ -36,9 +32,19 @@ label {
     font-size: 12px;
 }
 
-.required label, label.required {
+.required {
+    background: url(../../metashare/css/sexybuttons/images/icons/silk/asterisk_orange.png) no-repeat;
+    background-repeat:no-repeat;
+    background-position: 0 4px;
+    background-size:8px;
+    padding-left: 11px !important;
+    margin-right: -11px;
     font-weight: bold !important;
     color: #333 !important;
+}
+
+th.required {
+	background-position:left;
 }
 
 /* RADIO BUTTONS */
@@ -69,7 +75,6 @@ form ul.inline li {
     padding: 3px 10px 0 0;
     float: left;
     width: 8em;
-    word-wrap: break-word;
 }
 
 .aligned ul label {
@@ -145,7 +150,7 @@ fieldset.collapsed h2, fieldset.collapsed {
 }
 
 fieldset.collapsed h2 {
-    background-image: url(../img/nav-bg.gif);
+    background-image: url(../img/admin/nav-bg.gif);
     background-position: bottom left;
     color: #999;
 }
@@ -153,6 +158,18 @@ fieldset.collapsed h2 {
 fieldset.collapsed .collapse-toggle {
     background: transparent;
     display: inline !important;
+}
+
+fieldset.collapsed h2 span.formset_title {
+	display: inline;
+}
+
+fieldset.collapsed h2 span.helpLink {
+	display: inline;
+}
+
+fieldset.collapsed h2 span img.help_icon {
+	display: inline;
 }
 
 /* MONOSPACE TEXTAREAS */
@@ -166,14 +183,10 @@ fieldset.monospace textarea {
 .submit-row {
     padding: 5px 7px;
     text-align: right;
-    background: white url(../img/nav-bg.gif) 0 100% repeat-x;
+    background: white url(../img/admin/nav-bg.gif) 0 100% repeat-x;
     border: 1px solid #ccc;
     margin: 5px 0;
     overflow: hidden;
-}
-
-body.popup .submit-row {
-    overflow: auto;
 }
 
 .submit-row input {
@@ -189,7 +202,7 @@ body.popup .submit-row {
 }
 
 .submit-row .deletelink {
-    background: url(../img/icon_deletelink.gif) 0 50% no-repeat;
+    background: url(../img/admin/icon_deletelink.gif) 0 50% no-repeat;
     padding-left: 14px;
 }
 
@@ -205,14 +218,6 @@ body.popup .submit-row {
 
 .vDateField, .vTimeField {
     margin-right: 2px;
-}
-
-.vDateField {
-    min-width: 6.85em;
-}
-
-.vTimeField {
-    min-width: 4.7em;
 }
 
 .vURLField {
@@ -237,10 +242,6 @@ body.popup .submit-row {
 
 .vIntegerField {
     width: 5em;
-}
-
-.vBigIntegerField {
-    width: 10em;
 }
 
 .vForeignKeyRawIdAdminField {
@@ -268,7 +269,7 @@ body.popup .submit-row {
     color: #666;
     padding: 3px 5px;
     font-size: 11px;
-    background: #e1e1e1 url(../img/nav-bg.gif) top left repeat-x;
+    background: #e1e1e1 url(../img/admin/nav-bg.gif) top left repeat-x;
     border-bottom: 1px solid #ddd;
 }
 
@@ -285,7 +286,6 @@ body.popup .submit-row {
     margin: 0;
     background: #fff;
     border: none;
-    width: 100%;
 }
 
 .inline-related fieldset.module h3 {
@@ -354,7 +354,7 @@ body.popup .submit-row {
     color: #666;
     padding: 3px 5px;
     border-bottom: 1px solid #ddd;
-    background: #e1e1e1 url(../img/nav-bg.gif) top left repeat-x;
+    background: #e1e1e1 url(../img/admin/nav-bg.gif) top left repeat-x;
 }
 
 .inline-group .tabular tr.add-row td {
@@ -373,4 +373,22 @@ body.popup .submit-row {
 
 .empty-form {
     display: none;
+}
+
+.helpLink {
+	color: blue;
+}
+
+.helpLink:hover {
+	color: red;
+	cursor: pointer;
+}
+
+#explanation{
+    font-size: 11px;
+    color: #666;
+    background-color: #eee;
+    width: 200px;
+    margin: 10px 0px 10px 0px;
+    
 }

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static from staticfiles %}
 
 {% block title %}{{ title }} &ndash; META-SHARE{% endblock %}
 
@@ -12,12 +13,12 @@
 {% spaceless %}
 <h2>Create Account</h2>
 <div class="content_box">
-  <form class="form_helper" method="post" action="{% url 'create' %}">
+  <form class="form_helper" method="post" action="{% url metashare.accounts.views.create %}">
     {% csrf_token %}
     {% for field in form %}
       {{ field.errors }}
       {% if field.html_name == "accepted_tos" %}
-        {{ field }} <label for="{{ field.auto_id }}">I accept the <a target="_blank" href="{{ MEDIA_URL }}terms_of_service_reg.pdf">META-SHARE Terms of Service for registered users</a>.</label>
+        {{ field }} <label for="{{ field.auto_id }}">I accept the <a target="_blank" href="{% static "terms_of_service_reg.pdf" %}">META-SHARE Terms of Service for registered users</a>.</label>
       {% else %}
         {{ field.label_tag }} {{ field }}
       {% endif %}

@@ -1,10 +1,11 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import TemplateView
 
 from metashare.repository.editor import admin_site as editor_site
 from metashare.repository.sitemap import RepositorySitemap
-from metashare.settings import MEDIA_ROOT, DEBUG, DJANGO_BASE, SITEMAP_URL
+from metashare.settings import DJANGO_BASE, SITEMAP_URL
 
 
 admin.autodiscover()
@@ -58,17 +59,15 @@ urlpatterns += patterns('',
 class RobotView(TemplateView):
     
     def get_context_data(self, **kwargs):
+        """ This method is overloaded to pass the SITEMAP_URL into the context data"""
         context = super(RobotView, self).get_context_data(**kwargs)
         context['sitemap_url'] = SITEMAP_URL
         return context
-    
+  
 if DJANGO_BASE == "":
     urlpatterns += patterns('',
     (r'^{}robots\.txt$'.format(DJANGO_BASE), RobotView.as_view(template_name='robots.txt'))
     )
 
-if DEBUG:
-    urlpatterns += patterns('',
-      (r'^{0}site_media/(?P<path>.*)$'.format(DJANGO_BASE),
-        'django.views.static.serve', {'document_root': MEDIA_ROOT})
-    )
+
+urlpatterns += staticfiles_urlpatterns()

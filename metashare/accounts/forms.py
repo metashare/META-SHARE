@@ -1,12 +1,13 @@
 from django import forms
-from metashare.accounts.models import UserProfile, EditorGroupApplication, \
-    OrganizationApplication, Organization, OrganizationManagers, EditorGroup, \
-    EditorGroupManagers
 from django.conf import settings
 from django.contrib.admin import widgets
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext as _
+
+from metashare.accounts.models import UserProfile, EditorGroupApplication, \
+    OrganizationApplication, Organization, OrganizationManagers, EditorGroup, \
+    EditorGroupManagers
 
 
 class ModelForm(forms.ModelForm):
@@ -198,7 +199,7 @@ class UpdateDefaultEditorGroupForm(ModelForm):
     class Media:
         css = {
             # required by the FilteredSelectMultiple widget
-            'all':['{}css/widgets.css'.format(settings.ADMIN_MEDIA_PREFIX)],
+            'all':['{}admin/css/widgets.css'.format(settings.STATIC_URL)],
         }
         # required by the FilteredSelectMultiple widget
         js = ['/{}admin/jsi18n/'.format(settings.DJANGO_BASE)]

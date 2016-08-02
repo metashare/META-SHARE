@@ -1,4 +1,5 @@
 {% load i18n admin_modify %}
+{% load static from staticfiles %}
 <div class="inline-group" id="{{ inline_admin_formset.formset.prefix }}-group">
   <div class="tabular inline-related {% if forloop.last %}last-related{% endif %}">
 {{ inline_admin_formset.formset.management_form }}
@@ -27,9 +28,9 @@
           {% if inline_admin_form.original %} {{ inline_admin_form.original }}{% endif %}
           {% if inline_admin_form.show_url %}<a href="../../../r/{{ inline_admin_form.original_content_type_id }}/{{ inline_admin_form.original.id }}/">{% trans "View on site" %}</a>{% endif %}
             </p>{% endif %}
-            {% if inline_admin_form.needs_explicit_pk_field %}
-			    {{ inline_admin_form.pk_field.field }}
-			{% endif %}
+          {% if inline_admin_form.needs_explicit_pk_field %}
+            {{ inline_admin_form.pk_field.field }}
+          {% endif %}
           {{ inline_admin_form.fk_field.field }}
           {% spaceless %}
           {% for fieldset in inline_admin_form %}
@@ -88,11 +89,11 @@
             if (typeof SelectFilter != "undefined"){
                 $(".selectfilter").each(function(index, value){
                   var namearr = value.name.split('-');
-                  SelectFilter.init(value.id, namearr[namearr.length-1], false, "{{MEDIA_URL}}admin/");
+                  SelectFilter.init(value.id, namearr[namearr.length-1], false, "{% static "admin/" %}");
                 });
                 $(".selectfilterstacked").each(function(index, value){
                   var namearr = value.name.split('-');
-                  SelectFilter.init(value.id, namearr[namearr.length-1], true, "{{MEDIA_URL}}admin/");
+                  SelectFilter.init(value.id, namearr[namearr.length-1], true, "{% static "admin/" %}");
                 });
             }
         }

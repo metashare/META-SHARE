@@ -1,9 +1,10 @@
 {% load i18n %}
+{% load static from staticfiles %}
 {% load string_utils %}
 <div class="inline-group" id="{{ inline_admin_formset.formset.prefix }}-group">
   <h2 class="customtitle">
-  	<span class="formset_title">{{ inline_admin_formset.opts.verbose_name_plural|title }}</span>
-  	<span class="helpLink" kbbase="{{ kb_link }}" kbcomp="{{ inline_admin_formset.opts.verbose_name_plural }}"><img class="help_icon" src="{{ help_icon_url }}" kbbase="{{ kb_link }}" kbcomp="{{ inline_admin_formset.opts.verbose_name_plural|to_field_name }}"></img></span>
+    <span class="formset_title">{{ inline_admin_formset.opts.verbose_name_plural|title }}</span>
+    <span class="helpLink" kbbase="{{ kb_link }}" kbcomp="{{ inline_admin_formset.opts.verbose_name_plural }}"><img class="help_icon" src="{{ help_icon_url }}" kbbase="{{ kb_link }}" kbcomp="{{ inline_admin_formset.opts.verbose_name_plural|to_field_name }}"></img></span>
   </h2>
   <div style="clear: both"></div>
 {{ inline_admin_formset.formset.management_form }}
@@ -47,11 +48,11 @@
             if (typeof SelectFilter != "undefined"){
                 $(".selectfilter").each(function(index, value){
                   var namearr = value.name.split('-');
-                  SelectFilter.init(value.id, namearr[namearr.length-1], false, "{{MEDIA_URL}}admin/");
+                  SelectFilter.init(value.id, namearr[namearr.length-1], false, "{% static "admin/" %}");
                 });
                 $(".selectfilterstacked").each(function(index, value){
                   var namearr = value.name.split('-');
-                  SelectFilter.init(value.id, namearr[namearr.length-1], true, "{{MEDIA_URL}}admin/");
+                  SelectFilter.init(value.id, namearr[namearr.length-1], true, "{% static "admin/" %}");
                 });
             }
         }
@@ -70,20 +71,20 @@
             });
         }
         var customHook = function(row, idField, nameField) {
-        	var a = row;
-        	var idElemId = 'id_' + row.attr('id') + '-' + idField;
-        	var nameElemId = 'id_' + row.attr('id') + '-' + nameField;
-        	var idElem = row.find('input#' + idElemId);
-        	var nameElem = row.find('input#' + nameElemId);
-        	autocomp_single("id", idElemId, nameElemId);
-        	autocomp_single("name", nameElemId, idElemId);
+            var a = row;
+            var idElemId = 'id_' + row.attr('id') + '-' + idField;
+            var nameElemId = 'id_' + row.attr('id') + '-' + nameField;
+            var idElem = row.find('input#' + idElemId);
+            var nameElem = row.find('input#' + nameElemId);
+            autocomp_single("id", idElemId, nameElemId);
+            autocomp_single("name", nameElemId, idElemId);
         }
         var updateMultifieldWidgets = function(row) {
-        	// If Multifield widgets are present, be sure to use unique ID for them
-        	row.find('.multifield_list').each(function(index, elem) {
-	        	var wId = getNextMultifieldWidgetId();
-    			setWidgetId($(elem), wId);
-        	});
+            // If Multifield widgets are present, be sure to use unique ID for them
+            row.find('.multifield_list').each(function(index, elem) {
+                var wId = getNextMultifieldWidgetId();
+                setWidgetId($(elem), wId);
+            });
         }
         $(rows).formset({
             prefix: "{{ inline_admin_formset.formset.prefix }}",

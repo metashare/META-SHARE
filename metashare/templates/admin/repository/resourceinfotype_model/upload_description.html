@@ -1,10 +1,11 @@
 {% extends "admin/base_site.html" %}
 {% load i18n admin_modify %}
+{% load static from staticfiles %}
 
-{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{{ MEIDA_URL }}admin/css/forms.css" />
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />
 <script type="text/javascript">
   function alertUploadSlow() {
-	  alert("Starting upload; please be patient, importing can take some time.");
+    alert("Starting upload; please be patient, importing can take some time.");
   }
 </script>
 {% endblock %}

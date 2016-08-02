@@ -29,16 +29,10 @@ function removeEvent(obj, evType, fn) {
     }
 }
 
-function cancelEventPropagation(e) {
-    if (!e) e = window.event;
-    e.cancelBubble = true;
-    if (e.stopPropagation) e.stopPropagation();
-}
-
-// quickElement(tagType, parentReference [, textInChildNode, attribute, attributeValue ...]);
+// quickElement(tagType, parentReference, textInChildNode, [, attribute, attributeValue ...]);
 function quickElement() {
     var obj = document.createElement(arguments[0]);
-    if (arguments[2]) {
+    if (arguments[2] != '' && arguments[2] != null) {
         var textNode = document.createTextNode(arguments[2]);
         obj.appendChild(textNode);
     }
@@ -48,11 +42,6 @@ function quickElement() {
     }
     arguments[1].appendChild(obj);
     return obj;
-}
-
-// "a" is reference to an object
-function removeChildren(a) {
-    while (a.hasChildNodes()) a.removeChild(a.lastChild);
 }
 
 // ----------------------------------------------------------------------------
@@ -119,6 +108,12 @@ function findPosY(obj) {
 //-----------------------------------------------------------------------------
 // Date object extensions
 // ----------------------------------------------------------------------------
+Date.prototype.getCorrectYear = function() {
+    // Date.getYear() is unreliable --
+    // see http://www.quirksmode.org/js/introdate.html#year
+    var y = this.getYear() % 100;
+    return (y < 38) ? y + 2000 : y + 1900;
+}
 
 Date.prototype.getTwelveHours = function() {
     hours = this.getHours();
@@ -152,6 +147,10 @@ Date.prototype.getTwoDigitMinute = function() {
 
 Date.prototype.getTwoDigitSecond = function() {
     return (this.getSeconds() < 10) ? '0' + this.getSeconds() : this.getSeconds();
+}
+
+Date.prototype.getISODate = function() {
+    return this.getCorrectYear() + '-' + this.getTwoDigitMonth() + '-' + this.getTwoDigitDate();
 }
 
 Date.prototype.getHourMinute = function() {

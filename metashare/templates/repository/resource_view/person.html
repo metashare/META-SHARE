@@ -1,5 +1,6 @@
 {% load email_protection %}
 {% load get_icon %}
+{% load static from staticfiles %}
 {% spaceless %}
 
 <div class="dataline" style="margin-bottom:3px;">
@@ -16,7 +17,7 @@
 			{{ person_dict.Given_name }}
 			{{ person_dict.Surname }}
 			{{ person_dict.Organization_name }}	
-			<img src="{{ MEDIA_URL }}css/sexybuttons/images/icons/silk/vcard.png" />
+			<img src="{% static "metashare/css/sexybuttons/images/icons/silk/vcard.png" %}" />
 		</label>
 	</a>
 
