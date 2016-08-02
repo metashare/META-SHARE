@@ -13,7 +13,7 @@
 {% spaceless %}
 <h2>Create Account</h2>
 <div class="content_box">
-  <form class="form_helper" method="post" action="{% url metashare.accounts.views.create %}">
+  <form class="form_helper" method="post" action="{% url 'metashare.accounts.views.create' %}">
     {% csrf_token %}
     {% for field in form %}
       {{ field.errors }}
