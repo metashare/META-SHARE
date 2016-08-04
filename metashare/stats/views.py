@@ -199,8 +199,8 @@ def usagestats (request):
     fields_count = usage_filter["required"] + usage_filter["optional"] + usage_filter["recommended"]
              
     # update usage stats according with the published resources
-    lr_usage = UsageStats.objects.values('lrid').distinct('lrid').count()
-    if (len(lrset) != lr_usage):
+    lr_usage = UsageStats.objects.order_by("lrid").values('lrid').distinct().count()
+    if (lrset.count() != lr_usage):
         usagethread = updateUsageStats(lrset)
         if usagethread != None:
             errors = "Usage statistics updating is in progress... "+ str(usagethread.getProgress()) +"% completed"
