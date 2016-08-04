@@ -190,25 +190,6 @@ INSTALLED_APPS = (
 if os.name != 'nt':
     INSTALLED_APPS += ('kronos',)
 
-# Continuous Integration support using django_jenkins: only add application
-# if django_jenkins module can be imported properly.
-try:
-    import django_jenkins
-    INSTALLED_APPS += ('django_jenkins',)
-
-except ImportError:
-    pass
-
-# Apps for which to run tests in continuous integration django_jenkins:
-PROJECT_APPS = (
-    'metashare.repository',
-    'metashare.accounts',
-    'metashare.stats',
-    'metashare.storage',
-    'metashare.sync',
-    'metashare.recommendations',
-)
-
 # basic Haystack search backend configuration
 TEST_MODE_NAME = 'testing'
 HAYSTACK_CONNECTIONS = {
@@ -234,14 +215,6 @@ HAYSTACK_ROUTERS = [ 'metashare.haystack_routers.MetashareRouter' ]
 # runner to automatically set up Haystack so that it uses a dedicated search
 # backend for testing
 TEST_RUNNER = 'metashare.test_runner.MetashareTestRunner'
-JENKINS_TEST_RUNNER = 'metashare.test_runner.MetashareJenkinsTestRunner'
-
-
-JENKINS_TASKS = (
-    'django_jenkins.tasks.run_pylint',
-    'django_jenkins.tasks.with_coverage',
-    'django_jenkins.tasks.django_tests',
-)
 
 PYLINT_RCFILE = '{0}/test-config/pylint.rc'.format(ROOT_PATH)
 
@@ -294,7 +267,7 @@ class DisableMigrations(object):
         return "notmigrations"
     
 TESTS_IN_PROGRESS = False
-if 'test' in sys.argv[1:] or 'jenkins' in sys.argv[1:]:
+if 'test' in sys.argv[1:]:
     logging.disable(logging.CRITICAL)
     PASSWORD_HASHERS = (
         'django.contrib.auth.hashers.MD5PasswordHasher',
