@@ -133,8 +133,9 @@ django.jQuery(document).ready(function() {
 	});
 
 
-    $(this).find(".form-row.languageName select").each(
+    $(this).find(".form-row.languageName input").each(
         function () {
+            $(this).trigger('change');
             update_lang_variants($(this));
         }
     );
@@ -151,7 +152,7 @@ django.jQuery(document).ready(function() {
         }
     );
 
-    $(this).find(".form-row.languageName select").change(
+    $(this).find(".form-row.languageName input").change().focusout(
         function () {
             $(this).parent().parent().siblings(".languageScript").find("select").val("");
             if ($(this).parent().parent().siblings(".variant").find("select").length > 1) {
@@ -184,7 +185,7 @@ function update_lang_variants(e) {
     var root = $(e).closest(".module.aligned");
     var variants = root.find(".variant:first");
     var selected = variants.find("select option:selected").val();
-    if (e.val() != "") {
+    if (e.val() != "" | e.value != "") {
         $.ajax({
             url: "/bcp47/xhr/update_lang_variants/",
             type: 'POST',
@@ -196,8 +197,10 @@ function update_lang_variants(e) {
                 selElement.append($("<option></option>").
                     attr("value", "").text("--------"));
                 for (var r in vars) {
-                    selElement.append($("<option></option>").
-                        attr("value", vars[r]).text(vars[r]));
+                    selElement.append($('<option/>', {
+                        value: vars[r],
+                        text: vars[r]
+                    }));
                 }
                 selElement.val(selected);
             }
@@ -210,10 +213,12 @@ function update_lang_variants_with_script(e) {
     var variants = root.find(".variant:first");
     var selected = variants.find("select option:selected").val();
     if (e.val() != "") {
+        lang = e.parent().parent().prev();
+
         $.ajax({
             url: "/bcp47/xhr/update_lang_variants_with_script/",
             type: 'POST',
-            data: {'script': e.val(), 'lang': e.parent().parent().prev(".languageName").find("select option:selected").val()},
+            data: {'script': e.val(), 'lang': lang.find('input').val()},
             success: function (result) {
                 vars = result.split("//");
                 selElement = variants.find("select:first");
@@ -240,15 +245,16 @@ function update_var_variants(prevRef, element) {
             url: "/bcp47/xhr/update_var_variants/",
             type: 'POST',
             data: {'variant': unescape(dataValue)},
-            contentType: "text/html; charset=utf-8",
             success: function (result) {
                 vars = result.split("//");
                 selElement.empty();
                 selElement.append($("<option></option>").
                     attr("value", "").text("--------"));
                 for (var r in vars) {
-                    selElement.append($("<option></option>").
-                        attr("value", vars[r]).text(vars[r]));
+                    selElement.append($('<option/>', {
+                        value: vars[r],
+                        text: vars[r]
+                    }));
                 }
                 selElement.val(selected);
                 //if (result.length) {

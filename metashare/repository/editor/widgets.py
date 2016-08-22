@@ -207,7 +207,7 @@ class LangDictWidget(DictWidget):
         # pylint: disable-msg=E1101
         return Media(js = ('{}metashare/js/jquery-ui.min.js'\
                            .format(settings.STATIC_URL),
-                           '{}metashare/js/pycountry.js'\
+                           '{}metashare/js/pybcp47.js'\
                            .format(settings.STATIC_URL),
                            '{}metashare/js/autocomp.js'\
                            .format(settings.STATIC_URL),
@@ -700,7 +700,7 @@ class ComboWidget(AdminTextInputWidget):
                   '{}admin/css/combo.css'.format(settings.STATIC_URL))
         }
         js = ('{}metashare/js/jquery-ui.min.js'.format(settings.STATIC_URL),
-              '{}metashare/js/pycountry.js'.format(settings.STATIC_URL),
+              '{}metashare/js/pybcp47.js'.format(settings.STATIC_URL),
               '{}metashare/js/autocomp.js'.format(settings.STATIC_URL),)
 
     def __init__(self, field_type=None, attrs=None):
@@ -736,7 +736,7 @@ class MultiComboWidget(MultiFieldWidget):
                   '{}admin/css/combo.css'.format(settings.STATIC_URL))
         }
         js = ('{}metashare/js/jquery-ui.min.js'.format(settings.STATIC_URL),
-              '{}metashare/js/pycountry.js'.format(settings.STATIC_URL),
+              '{}metashare/js/pybcp47.js'.format(settings.STATIC_URL),
               '{}metashare/js/autocomp.js'.format(settings.STATIC_URL),)
 
     def __init__(self, field_type=None, attrs=None, widget_id=None, max_length=None, **kwargs):
@@ -776,7 +776,7 @@ class MultiComboWidget(MultiFieldWidget):
 class LangAutoCompleteWidget(widgets.Widget):
     class Media:
         js = ('{}metashare/js/jquery-ui.min.js'.format(settings.STATIC_URL),
-              '{}metashare/js/pycountry.js'.format(settings.STATIC_URL),
+              '{}metashare/js/pybcp47.js'.format(settings.STATIC_URL),
               '{}metashare/js/autocomp.js'.format(settings.STATIC_URL),)
         css = {}
         
