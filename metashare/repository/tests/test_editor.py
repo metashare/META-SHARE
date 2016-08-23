@@ -423,7 +423,7 @@ class EditorTest(TestCase):
         client = test_utils.get_client_with_user_logged_in(EditorTest.editor_login)
         response = client.get('{}repository/resourceinfotype_model/{}/' \
                               .format(ADMINROOT, EditorTest.testfixture.id))
-        self.assertContains(response, 'id="id_usageInfo" name="usageInfo" type="text"',
+        self.assertContains(response, 'id="id_usageInfo" name="usageInfo" type="hidden"',
                             msg_prefix='Recommended One-to-one field ' \
                                 '"usageInfo" should have been hidden.')
 
@@ -444,7 +444,7 @@ class EditorTest(TestCase):
     def test_one2one_sizepervalidation_is_hidden(self):
         client = test_utils.get_client_with_user_logged_in(EditorTest.editor_login)
         response = client.get('{}repository/resourceinfotype_model/{}/'.format(ADMINROOT, EditorTest.testfixture.id))
-        self.assertContains(response, 'id="id_validationinfotype_model_set-0-sizePerValidation" name="validationinfotype_model_set-0-sizePerValidation" type="text"',
+        self.assertContains(response, 'id="id_validationinfotype_model_set-0-sizePerValidation" name="validationinfotype_model_set-0-sizePerValidation" type="hidden"',
                              msg_prefix='One-to-one field "sizePerValidation" should have been hidden')
 
     def test_one2one_sizepervalidation_uses_related_widget(self):
@@ -1521,9 +1521,13 @@ class DestructiveTests(TestCase):
         self.assertContains(response, 'Change Resource')
         self.testfixture.storage_object.deleted = True
         self.testfixture.storage_object.save()
+        # Temporarily, turn on DEBUG in order to get the expected message in response
+        settings.DEBUG = True
         response = client.get(
           ADMINROOT+'repository/resourceinfotype_model/{}/'.format(self.testfixture.id), follow=True)
-        self.assertContains(response, "Resource object with primary key u'1' does not exist.", status_code=404)
+        #Turn off DEBUG
+        settings.DEBUG = False
+        self.assertContains(response, "Resource object with primary key u&#39;1&#39; does not exist.", status_code=404)
         
     def test_editor_user_cannot_export_deleted_resource(self):
         client = test_utils.get_client_with_user_logged_in(self.editor_login)
