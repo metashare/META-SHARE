@@ -1,0 +1,119 @@
+<resourceInfo xmlns="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.meta-share.org/META-SHARE_XMLSchema http://www.meta-share.org/META-SHARE_XMLSchema/v3.1/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">IBNC - An Italian Broadcast News Corpus</resourceName>
+      <resourceName lang="fr">Un corpus d'actualit&#233;s radio-diffus&#233;es italiennes (IBNC)</resourceName>
+      <description lang="en">The Italian Broadcast News Corpus (IBNC) was produced by the ITC-IRST (Italy) through a funding from ELRA in the framework of the European Commission project LRsP&amp;P (Language Resources Production &amp; Packaging - LE4-8335). RAI, the major Italian broadcast company, supplied studio quality recordings of radio news programs sampled from its internal digital archive. The collection consists of 150 programs, for a total time of about 30 hours, issued in 36 different days, between 1992 and 1999. Recordings were supplied by RAI on Digital Audio Tapes (DAT), with 44kHz sampling rate and 16 bit resolution. Each DAT was manually processed to transfer each single program issue into a single file. During this operation, the signal was down-sampled to 16kHz with a resolution of 16 bits, and encoded into the NIST Sphere PCM format. Speech recordings present variations of topic, speaker, acoustic channel, speaking mode, etc. The corpus has been segmented, labelled and transcribed manually using the tool developed by DGA (D&#233;l&#233;gation G&#233;n&#233;rale pour l'Armement, France) and LDC (Linguistic Data Consortium, USA), called "Transcriber", with conventions similar to those adopted by LDC for the DARPA HUB-4 corpora.The transcription text consists of mixed-case ASCII characters of the ISO-8859-1 extended set. A validation work was carried out by an external validator. It consisted of checking audio files, documentation and transcriptions.</description>
+      <description lang="fr">Le corpus d'actualit&#233;s radio-diffus&#233;es italiennes (IBNC) a &#233;t&#233; r&#233;alis&#233; par l'ITC-IRST (Italie) dans le cadre du projet europ&#233;en LRsP&amp;P (Language Resources Production &amp; Packaging - Production et mise au format des ressources linguistiques - LE4-8335) soutenu par la Commission Europ&#233;enne. La RAI, principale soci&#233;t&#233; de t&#233;l&#233;-radio-diffusion en Italie, a fourni des enregistrements en qualit&#233; studio de programmes d'actualit&#233;s radio-diffus&#233;es, extraits d'archives num&#233;riques internes.Cette collection est compos&#233;e de 150 programmes, d'une dur&#233;e totale d'environ 30 heures, extraites de 36 jours de diffusion diff&#233;rents entre 1992 et 1999. Les enregistrements ont &#233;t&#233; fournis par la RAI sous la forme de DAT (Digital Audio Tapes - cassettes audio num&#233;riques), &#233;chantillonn&#233;es &#224; 44 kHz, avec une r&#233;solution de 16 bits. Chaque DAT a &#233;t&#233; trait&#233;e manuellement pour transf&#233;rer chaque &#233;dition de programme vers un fichier unique. Au cours de cette op&#233;ration, le signal a &#233;t&#233; sous-&#233;chantillonn&#233; &#224; 16kHz, avec une r&#233;solution de 16 bits, et cod&#233; au format PCM Sphere NIST.Les enregistrements de parole varient en termes de th&#232;mes, de locuteurs, de canaux acoustiques, de modes de locution, etc. Le corpus a &#233;t&#233; segment&#233;, &#233;tiquet&#233; et transcrit manuellement au moyen de l'outil "Transcriber" d&#233;velopp&#233; par la DGA (D&#233;l&#233;gation G&#233;n&#233;rale pour l'Armement, France) et le LDC (Linguistic Data Consortium, Etats-Unis), en suivant des conventions similaires &#224; celles adopt&#233;es par le LDC pour les corpus HUB-4 de DARPA. Le texte de transcription utilise le jeu de caract&#232;res ASCII &#233;tendu, norme ISO-8859-1. Un travail de validation, effectu&#233; par un validateur externe, a permis de v&#233;rifier la qualit&#233; des fichiers audio, de la documentation et des transcriptions.</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=593</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-S0093</identifier>
+   </identificationInfo><distributionInfo><availability>available</availability><licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+         </licenceInfo>
+      <fee>5000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      <availabilityStartDate>2000-12-15</availabilityStartDate>
+   </distributionInfo><distributionInfo><availability>available</availability><licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+         </licenceInfo>
+      <fee>15000.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </distributionInfo><distributionInfo><availability>available</availability><licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+         </licenceInfo>
+      <fee>8000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </distributionInfo><distributionInfo><availability>available</availability><licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+         </licenceInfo>
+      <fee>25000.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </distributionInfo>
+   <contactPerson>
+      <surname>Val&#233;rie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <lastDateUpdated>2007-02-22</lastDateUpdated>
+   </versionInfo>
+   <validationInfo>
+      <validated>true</validated>
+      <validationModeDetails> A validation work was carried out by an external validator. It consisted of checking audio files, documentation and transcriptions.</validationModeDetails>
+   </validationInfo>
+   <usageInfo>
+      <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+         <useNLPSpecific>speechRecognition</useNLPSpecific>
+      </actualUseInfo>
+   </usageInfo>
+   <resourceCreationInfo>
+      <fundingProject>
+         <projectName>LRsP&amp;P (Language Resources Production &amp; Packaging - LE4-8335)</projectName>
+         <fundingType>euFunds</fundingType>
+      </fundingProject>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusAudioInfo>
+               <mediaType>audio</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>ita</languageId>
+                  <languageName>Italian</languageName>
+               </languageInfo>
+               <audioSizeInfo>
+                  <sizeInfo>
+                     <size>30</size>
+                     <sizeUnit>hours</sizeUnit>
+                  </sizeInfo>
+               </audioSizeInfo>
+               <timeCoverageInfo>
+                  <timeCoverage>Between 1992 and 1999</timeCoverage>
+               </timeCoverageInfo>
+               <creationInfo>
+                  <creationMode>manual</creationMode>
+               </creationInfo>
+            </corpusAudioInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>
