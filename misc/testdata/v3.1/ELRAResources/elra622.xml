@@ -130,7 +130,7 @@
                </languageInfo>
                <sizeInfo>
                   <size>no size available</size>
-                  <sizeUnit>other</sizeUnit>
+                  <sizeUnit>items</sizeUnit>
                </sizeInfo>
                <textFormatInfo>
                   <mimeType>text/plain</mimeType>
@@ -147,7 +147,7 @@
                </languageInfo>
                <sizeInfo>
                   <size>no size available</size>
-                  <sizeUnit>other</sizeUnit>
+                  <sizeUnit>items</sizeUnit>
                </sizeInfo>
             </lexicalConceptualResourceAudioInfo>
          </lexicalConceptualResourceMediaType>

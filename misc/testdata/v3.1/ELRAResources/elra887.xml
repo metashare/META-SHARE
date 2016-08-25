@@ -127,7 +127,7 @@
                </languageInfo>
                <sizeInfo>
                   <size>no size available</size>
-                  <sizeUnit>other</sizeUnit>
+                  <sizeUnit>items</sizeUnit>
                </sizeInfo>
             </lexicalConceptualResourceTextInfo>
             <lexicalConceptualResourceAudioInfo>
@@ -141,7 +141,7 @@
                </languageInfo>
                <sizeInfo>
                   <size>no size available</size>
-                  <sizeUnit>other</sizeUnit>
+                  <sizeUnit>items</sizeUnit>
                </sizeInfo>
             </lexicalConceptualResourceAudioInfo>
          </lexicalConceptualResourceMediaType>
