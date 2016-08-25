@@ -12,7 +12,7 @@ from metashare.repository.tests.test_view import check_resource_view
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 
-RESOURCES_ZIP_FILE = '{0}/../misc/testdata/v3.0/all.zip'.format(ROOT_PATH) 
+RESOURCES_ZIP_FILE = '{0}/../misc/testdata/v3.1/all.zip'.format(ROOT_PATH)
 
 class NightlyTest(TestCase):
     """
