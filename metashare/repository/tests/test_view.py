@@ -933,6 +933,7 @@ def check_resource_view(queryset, test_case):
 
             real_count = response.content.count(text)
             beauty_real_count = 0
+            mime_label_real_count = 0
             if real_count == 0:
                 # try with beautified string
                 beauty_real_count = response.content.count(
