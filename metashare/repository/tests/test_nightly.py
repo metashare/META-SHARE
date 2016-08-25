@@ -7,6 +7,7 @@ from metashare.settings import ROOT_PATH, LOG_HANDLER, TEST_MODE_NAME
 from metashare.repository.supermodel import OBJECT_XML_CACHE
 from metashare.repository.models import resourceInfoType_model
 from metashare.repository.tests.test_view import check_resource_view
+from haystack.management.commands import rebuild_index
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -35,8 +36,7 @@ class NightlyTest(TestCase):
         test_utils.set_index_active(True)
     
         # update index
-        from django.core.management import call_command
-        call_command('rebuild_index', interactive=False, using=TEST_MODE_NAME)
+        rebuild_index.Command().handle()
         
     def tearDown(self):
         """
@@ -53,8 +53,7 @@ class NightlyTest(TestCase):
         test_utils.set_index_active(True)
     
         # update index
-        from django.core.management import call_command
-        call_command('rebuild_index', interactive=False, using=TEST_MODE_NAME)
+        rebuild_index.Command().handle()
 
         
     def test_successful_import(self):
