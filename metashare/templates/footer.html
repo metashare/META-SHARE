@@ -12,6 +12,6 @@
  This website uses Google Analytics (<a target="_blank" href="http://www.meta-net.eu/imprint" class="">more details</a>)<br/>
   <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
   <img src="{% static "metashare/images/licence_icons/licences/CC-BY-NC-SA.png" %}" width="120px" title="CC-BY-NC-SA 4.0" alt="CC-BY-NC-SA 4.0"/></a><br />
-  <a href="{% if request.user.is_authenticated %} {% static "terms_of_service_reg.pdf" %} {% else %} {% static "terms_of_service_non_reg.pdf" %} {% endif %}">Terms of Service</a>
+  <a href="{% if request.user.is_authenticated %} {% static "metashare/terms_of_service_reg.pdf" %} {% else %} {% static "metashare/terms_of_service_non_reg.pdf" %} {% endif %}" target="_blank">Terms of Service</a>
 </div>
 {% endspaceless %}
