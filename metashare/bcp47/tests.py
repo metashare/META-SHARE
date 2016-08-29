@@ -8,7 +8,7 @@ LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 
 
-class BCP(TestCase):
+class Bcp47Tests(TestCase):
     @classmethod
     def setUpClass(cls):
         LOGGER.info("running '{}' tests...".format(cls.__name__))
