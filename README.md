@@ -7,7 +7,7 @@ Status of this Repository
 Starting from commit e86b32637d8767269c06af2dcc635019edca0e76, this repository
 contains a port to Django 1.7.11 of the META-SHARE codebase, based on the
 META-SHARE 3.1, which uses Django 1.4.19 and is available from
-https://github.com/JuliBakagianni/META-SHARE/tree/metashare-3.1.
+https://github.com/metashare/META-SHARE/tree/metashare-3.1.
 
 The commits from e86b32637d8767269c06af2dcc635019edca0e76 to
 
@@ -15,13 +15,11 @@ The commits from e86b32637d8767269c06af2dcc635019edca0e76 to
 
 - Django 1.7.11 ports and merges of the ILSP-developed updates to META-SHARE, as
   available from
-  https://github.com/JuliBakagianni/META-SHARE/tree/metashare-3.1.
+  https://github.com/metashare/META-SHARE/tree/metashare-3.1.
 
 - miscellaneous bug fixes.
 
 - Haystack and Django upgrades.
-
-Nota bene: The sync part is not included here.
 
 [![Build Status](https://travis-ci.org/metashare/META-SHARE.svg?branch=master)](https://travis-ci.org/metashare/META-SHARE)
 [![Coverage Status](https://coveralls.io/repos/metashare/META-SHARE/badge.svg?branch=master)](https://coveralls.io/r/metashare/META-SHARE?branch=master)
