@@ -4,7 +4,7 @@ META-SHARE SOFTWARE
 Status of this Repository
 -------------------------
 
-Starting from commit https://github.com/JuliBakagianni/META-SHARE/commit/e86b32637d8767269c06af2dcc635019edca0e76, this repository contains a port to Django 1.7.11 of the META-SHARE codebase, based on the
+Starting from commit https://github.com/metashare/META-SHARE/commit/e86b32637d8767269c06af2dcc635019edca0e76, this repository contains a port to Django 1.7.11 of the META-SHARE codebase, based on the
 META-SHARE 3.1, which uses Django 1.4.19 and is available from
 https://github.com/metashare/META-SHARE/tree/metashare-3.1.
 
