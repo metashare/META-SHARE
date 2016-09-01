@@ -10,13 +10,10 @@ https://github.com/metashare/META-SHARE/tree/metashare-3.1.
 
 The milestones are:
 
-- Django 1.7.11 ports and merges of the ILSP-developed updates to META-SHARE, as
-  available from
-  https://github.com/metashare/META-SHARE/tree/metashare-3.1.
-
-- miscellaneous bug fixes.
-
-- Haystack and Django upgrades.
+- code migration from Django 1.4.19 to Django 1.7.11,
+- dependency packages upgrade,
+- automatic data and database schema migration generation support,
+- selenium and unit tests fixed
 
 [![Build Status](https://travis-ci.org/metashare/META-SHARE.svg?branch=master)](https://travis-ci.org/metashare/META-SHARE)
 [![Coverage Status](https://coveralls.io/repos/metashare/META-SHARE/badge.svg?branch=master)](https://coveralls.io/r/metashare/META-SHARE?branch=master)
