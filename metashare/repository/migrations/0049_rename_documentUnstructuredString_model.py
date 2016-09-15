@@ -2,6 +2,7 @@
 from south.utils import datetime_utils as datetime
 from south.db import db
 from south.v2 import SchemaMigration
+from django.conf import settings
 from django.db import models
 
 
@@ -10,6 +11,10 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         db.rename_table('repository_documentunstructuredstring_model', 'repository_documentunstructuredstring_model_old')
 
+        # if database if mysql drop constraint to avoid Error 121
+        dbbackend = settings.DATABASES['default']['ENGINE']
+        if dbbackend == "django.db.backends.mysql":
+            db.drop_foreign_key('repository_documentunstructuredstring_model_old', 'documentationinfotype_model_ptr_id')
 
     def backwards(self, orm):
         db.rename_table('repository_documentunstructuredstring_model_old', 'repository_documentunstructuredstring_model')

@@ -327,7 +327,7 @@ class StorageObject(models.Model):
         try:
             _metadata = to_xml_string(
               # pylint: disable-msg=E1101
-              self.resourceinfotype_model_set.first().export_to_elementtree(),
+              self.resourceinfotype_model_set.all()[0].export_to_elementtree(),
               # use ASCII encoding to convert non-ASCII chars to entities
               encoding="ASCII")
         except:
