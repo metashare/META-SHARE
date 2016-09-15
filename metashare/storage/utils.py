@@ -9,7 +9,13 @@ def remove_resource(storage_object, keep_stats=False):
     Also includes deletion of statistics and recommendations; use keep_stats
     optional parameter to suppress deletion of statistics and recommendations.
     """
-    resource = storage_object.resourceinfotype_model_set.all()[0]
+    try:
+        resource = storage_object.resourceinfotype_model_set.first()
+    except:
+        # pylint: disable-msg=E1101
+        LOGGER.error('PROBLEMATIC: %s - count: %s', storage_object.identifier,
+          storage_object.resourceinfotype_model_set.count(), exc_info=True)
+        raise
 
     folder = os.path.join(settings.STORAGE_PATH, storage_object.identifier)
     shutil.rmtree(folder)

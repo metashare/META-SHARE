@@ -2,15 +2,17 @@
 Management utility to trigger synchronization.
 """
 import logging
+from optparse import make_option
 import socket
 
-from metashare import settings
-from metashare.sync.sync_utils import login, get_inventory, get_full_metadata, \
-    remove_resource
-from django.core.management.base import BaseCommand
-from optparse import make_option
-from metashare.storage.models import StorageObject, PROXY, REMOTE, add_or_update_resource
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.management.base import BaseCommand
+
+from metashare import settings
+from metashare.storage.models import StorageObject, PROXY, REMOTE, \
+    add_or_update_resource
+from metashare.storage.utils import remove_resource
+from metashare.sync.sync_utils import login, get_inventory, get_full_metadata
 from metashare.utils import Lock
 
 

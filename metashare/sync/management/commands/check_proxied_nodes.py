@@ -4,7 +4,7 @@ Management utility to handle removed proxy nodes.
 from django.core.management.base import BaseCommand
 from metashare import settings
 from metashare.storage.models import PROXY, StorageObject
-from metashare.sync.sync_utils import remove_resource
+from metashare.storage.utils import remove_resource
 import sys
 import logging
 from metashare.utils import Lock
