@@ -171,6 +171,12 @@
                                 <label>Please, acknowledge use of the resource with the following citation:</label><br/>
                                 {% if value2.Title %}
                                       {% include "repository/resource_view/citation.html" with documentation=value2 type="Citation" %}
+                                {% else %}
+                                    <div class="dataline">
+                                        <label>
+                                            {{value2|urlizetrunc:23}}
+                                        </label>
+                                    </div>
                                 {% endif %}
                             </div>
                         {% endif %}
