@@ -12,6 +12,8 @@ from django.test.client import Client
 from django.utils.encoding import smart_str
 from django.utils.formats import date_format
 
+from haystack.management.commands import update_index
+
 from metashare import test_utils, settings, xml_utils
 from metashare.accounts.models import UserProfile, EditorGroup, \
     EditorGroupManagers, Organization
@@ -20,10 +22,9 @@ from metashare.repository.models import resourceInfoType_model
 from metashare.repository.supermodel import OBJECT_XML_CACHE
 from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER, \
     TEST_MODE_NAME
+from metashare.repository.templatetags import mimetype_label
 from metashare.test_utils import create_user
 from metashare.utils import prettify_camel_case_string
-from metashare.repository.templatetags import mimetype_label
-from haystack.management.commands import update_index
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -736,17 +737,17 @@ class FullViewTest(TestCase):
     """
     Defines a number of tests for the details of the single resource view
     """
-    
+
     @classmethod
     def setUpClass(cls):
         """
         Set up the test
         """
         LOGGER.info("running '{}' tests...".format(cls.__name__))
-        
+
         # disable indexing during import
         test_utils.set_index_active(False)
-        
+
         # import resources
         test_utils.setup_test_storage()
         OBJECT_XML_CACHE.clear()
@@ -770,46 +771,43 @@ class FullViewTest(TestCase):
                 "full-corpus-textnumerical.xml".format(ROOT_PATH))
         test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
                 "full-tool-service.xml".format(ROOT_PATH))
-                
-        # enable indexing 
+
+        # enable indexing
         test_utils.set_index_active(True)
-    
+
         # update index
         update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
-        
-    
+
+
     @classmethod
     def tearDownClass(cls):
         """
         Clean up the test
         """
         LOGGER.info("finished '{}' tests".format(cls.__name__))
-        
+
         # disable indexing during import
         test_utils.set_index_active(False)
-        
+
         test_utils.clean_resources_db()
         test_utils.clean_storage()
         OBJECT_XML_CACHE.clear()
-        
-        # enable indexing 
+
+        # enable indexing
         test_utils.set_index_active(True)
-    
-        # update index
-        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
-    
+
     def testSingleResourceView(self):
         """
         Checks that each resource's single view is displayed correctly.
         """
-        
+
         # disable indexing; we don't need stat updates for this test
         test_utils.set_index_active(False)
-        
+
         queryset = resourceInfoType_model.objects.all()
         check_resource_view(queryset, self)
 
-        # enable indexing 
+        # enable indexing
         test_utils.set_index_active(True)
 
 

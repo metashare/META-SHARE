@@ -5,9 +5,10 @@ from django.core.urlresolvers import reverse
 from django.test.client import Client
 from django.test.testcases import TestCase
 
+from haystack.management.commands import update_index
 from haystack.query import SearchQuerySet
 
-from metashare import test_utils
+from metashare import test_utils, settings
 from metashare.repository import views
 from metashare.settings import DJANGO_BASE, ROOT_PATH, LOG_HANDLER
 from metashare.stats.models import LRStats
@@ -43,6 +44,7 @@ class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
         Set up the test
         """
         test_utils.setup_test_storage()
+        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
         
     def tearDown(self):
         """
@@ -146,12 +148,13 @@ class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
         resource.storage_object.publication_status = PUBLISHED
         resource.storage_object.save()
         resource.save()
+
         # make sure the import has automatically changed the search index
         self.assertEqual(SearchQuerySet().count(), 1,
           "After the import of a resource the index must automatically " \
           "have changed and contain that resource.")
         return resource
-    
+
 class SearchTest(test_utils.IndexAwareTestCase):
     """
     Test the search functionality
@@ -159,11 +162,11 @@ class SearchTest(test_utils.IndexAwareTestCase):
     @classmethod
     def setUpClass(cls):
         LOGGER.info("running '{}' tests...".format(cls.__name__))
-        
+
     @classmethod
     def tearDownClass(cls):
         LOGGER.info("finished '{}' tests".format(cls.__name__))
-        
+
     def setUp(self):
         """
         Set up the view
@@ -171,6 +174,9 @@ class SearchTest(test_utils.IndexAwareTestCase):
         test_utils.setup_test_storage()
         normaluser = create_user('normaluser', 'normal@example.com', 'secret')
         normaluser.save()
+
+        # update index
+        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
 
     def tearDown(self):
         """

@@ -1041,7 +1041,6 @@ class DataUploadTests(TestCase):
         self.assertIn(response.status_code, (403, 404), "expected that an " \
             "editor must not upload resource data to invisible resources")
 
-
 class DestructiveTests(TestCase):
     """
     Test case for tests that are in some way 'destructive' with regard to the
@@ -1060,6 +1059,7 @@ class DestructiveTests(TestCase):
     def setUpClass(cls):
         
         LOGGER.info("running '{}' tests...".format(cls.__name__))
+
         # login POST dict
         DestructiveTests.superuser_login = {
             REDIRECT_FIELD_NAME: ADMINROOT,
@@ -1079,32 +1079,41 @@ class DestructiveTests(TestCase):
             'username': 'manageruser',
             'password': 'secret',
         }
-        test_utils.setup_test_storage()
-
-        DestructiveTests.test_editor_group = EditorGroup.objects.create(
-                                                    name='test_editor_group')
-        DestructiveTests.test_editor_group_manager = \
-            EditorGroupManagers.objects.create(name='test_editor_groupmanager',
-                                        managed_group=DestructiveTests.test_editor_group)
-
-        DestructiveTests.test_editor = test_utils.create_editor_user('editoruser',
-            'editor@example.com', 'secret', (DestructiveTests.test_editor_group,))
-        DestructiveTests.test_manager = test_utils.create_manager_user(
-            'manageruser', 'manager@example.com', 'secret',
-            (DestructiveTests.test_editor_group, DestructiveTests.test_editor_group_manager))
-
-        User.objects.create_superuser('superuser', 'su@example.com', 'secret')
-
-        DestructiveTests.testfixture = _import_test_resource(DestructiveTests.test_editor_group,
-                                                 pub_status=PUBLISHED)
 
     @classmethod
     def tearDownClass(cls):
+        LOGGER.info("finished '{}' tests".format(cls.__name__))
+
+    def setUp(self):
+        """
+        Sets up test users with and without staff permissions.
+        """
+        test_utils.setup_test_storage()
+
+        self.test_editor_group = EditorGroup.objects.create(
+                                                    name='test_editor_group')
+        self.test_editor_group_manager = \
+            EditorGroupManagers.objects.create(name='test_editor_groupmanager',
+                                        managed_group=self.test_editor_group)
+
+        self.test_editor = test_utils.create_editor_user('editoruser',
+            'editor@example.com', 'secret', (self.test_editor_group,))
+        self.test_manager = test_utils.create_manager_user(
+            'manageruser', 'manager@example.com', 'secret',
+            (self.test_editor_group, self.test_editor_group_manager))
+
+        User.objects.create_superuser('superuser', 'su@example.com', 'secret')
+
+        self.testfixture = _import_test_resource(self.test_editor_group,
+                                                 pub_status=PUBLISHED)
+        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
+
+    def tearDown(self):
         test_utils.clean_resources_db()
         test_utils.clean_storage()
         test_utils.clean_user_db()
-        ContentType.objects.clear_cache()
-        LOGGER.info("finished '{}' tests".format(cls.__name__))
+
+
 
     def test_editor_user_can_add_editor_group_to_own_resources_only(self):
         """
@@ -1559,12 +1568,10 @@ class DestructiveTests(TestCase):
         self._test_user_cannot_browse_deleted_resource(client)
     
     def _test_user_cannot_browse_deleted_resource(self, client):
-        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
         response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True)
         self.assertContains(response, '1 Language Resource')
         self.testfixture.storage_object.deleted = True
         self.testfixture.storage_object.save()
-        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
         response = client.get('/{0}repository/search/'.format(DJANGO_BASE), follow=True)
         self.assertContains(response, '0 Language Resources')
         
@@ -1577,13 +1584,11 @@ class DestructiveTests(TestCase):
         self._test_user_cannot_search_deleted_resource(client)
     
     def _test_user_cannot_search_deleted_resource(self, client):
-        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
         response = client.get('/{0}repository/search/'.format(DJANGO_BASE),
           follow=True, data={'q': 'italian'})
         self.assertContains(response, '1 Language Resource')
         self.testfixture.storage_object.deleted = True
         self.testfixture.storage_object.save()
-        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
         response = client.get('/{0}repository/search/'.format(DJANGO_BASE),
           follow=True, data={'q': 'reveal'})
         self.assertContains(response, 'No results were found')
