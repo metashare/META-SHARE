@@ -7,9 +7,6 @@ from metashare.repository.editor import admin_site as editor_site
 from metashare.repository.sitemap import RepositorySitemap
 from metashare.settings import DJANGO_BASE, SITEMAP_URL
 
-
-admin.autodiscover()
-
 urlpatterns = patterns('',
   url(r'^{0}$'.format(DJANGO_BASE),
     'metashare.views.frontpage', name='frontpage'),
@@ -68,6 +65,5 @@ if DJANGO_BASE == "":
     urlpatterns += patterns('',
     (r'^{}robots\.txt$'.format(DJANGO_BASE), RobotView.as_view(template_name='robots.txt'))
     )
-
 
 urlpatterns += staticfiles_urlpatterns()
