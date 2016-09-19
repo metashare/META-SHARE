@@ -251,11 +251,11 @@ DJANGO_SETTINGS_MODULE = 'metashare.settings'
 # A dictionary specifying the package where migration modules can be found
 # on a per-app basis.
 MIGRATION_MODULES = {
-    'accounts': 'accounts.django_migrations',
-    'repository': 'repository.django_migrations',
-    'stats': 'stats.django_migrations',
-    'recommendations': 'recommendations.django_migrations',
-    'storage': 'storage.django_migrations',
+    'accounts': 'metashare.accounts.django_migrations',
+    'repository': 'metashare.repository.django_migrations',
+    'stats': 'metashare.stats.django_migrations',
+    'recommendations': 'metashare.recommendations.django_migrations',
+    'storage': 'metashare.storage.django_migrations',
 }
 
 class DisableMigrations(object):
