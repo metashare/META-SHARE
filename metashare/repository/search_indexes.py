@@ -40,48 +40,8 @@ def update_lr_index_entry(res_obj):
         .get_unified_index().get_index(resourceInfoType_model) \
         .update_object(res_obj)
 
-
-class PatchedRealTimeSearchIndex(SearchIndex):
-    """
-    A patched version of the `RealTimeSearchIndex` which works around Haystack
-    issue #548.
-    """
-    # whether the setup in _setup_save(), _setup_delete(), _teardown_save(),
-    # _teardown_delete() has been done already or not
-    _signal_setup_done = [False, False, False, False]
-
-    def _setup_save(self):
-        if PatchedRealTimeSearchIndex._signal_setup_done[0]:
-            return True
-        PatchedRealTimeSearchIndex._signal_setup_done[0] = True
-        super(PatchedRealTimeSearchIndex, self)._setup_save()
-        return False
-
-    def _setup_delete(self):
-        if PatchedRealTimeSearchIndex._signal_setup_done[1]:
-            return True
-        PatchedRealTimeSearchIndex._signal_setup_done[1] = True
-        super(PatchedRealTimeSearchIndex, self)._setup_delete()
-        return False
-
-    def _teardown_save(self):
-        if PatchedRealTimeSearchIndex._signal_setup_done[2]:
-            return True
-        PatchedRealTimeSearchIndex._signal_setup_done[2] = True
-        super(PatchedRealTimeSearchIndex, self)._teardown_save()
-        return False
-
-    def _teardown_delete(self):
-        if PatchedRealTimeSearchIndex._signal_setup_done[3]:
-            return True
-        PatchedRealTimeSearchIndex._signal_setup_done[3] = True
-        super(PatchedRealTimeSearchIndex, self)._teardown_delete()
-        return False
-
-
 # pylint: disable-msg=C0103
-class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
-                                  indexes.Indexable):
+class resourceInfoType_modelIndex(SearchIndex, indexes.Indexable):
     """
     The `SearchIndex` which indexes `resourceInfoType_model`s.
     """
@@ -307,7 +267,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         In our case this is a QuerySet containing only published resources that
         have not been deleted, yet.
         """
-        return self.get_model().objects.filter(storage_object__deleted=False)
+        return self.read_queryset()
 
     def read_queryset(self, using=None):
         """
@@ -324,7 +284,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         Only index resources that are at least ingested.
         In other words, do not index internal resources.
         '''
-        return instance.storage_object.publication_status in (INTERNAL, INGESTED, PUBLISHED)
+        return instance.storage_object.publication_status in (INGESTED, PUBLISHED)
 
     def update_object(self, instance, using=None, **kwargs):
         """
@@ -336,67 +296,37 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         """
         if os.environ.get('DISABLE_INDEXING_DURING_IMPORT', False) == 'True':
             return
-        # have we been called from a post_save signal dispatcher?
-        if "sender" in kwargs:
-            # explicitly set `using` to None in order to let our Haystack router
-            # decide which search index to use; the `using` argument which is
-            # set by Django's post_save signal dispatcher has a different
-            # meaning that we need to overwrite
-            using = None
-            if kwargs["sender"] == StorageObject:
-                LOGGER.debug("StorageObject changed for resource #{0}." \
-                             .format(instance.id))
-                related_resource_qs = instance.resourceinfotype_model_set
-                if (not related_resource_qs.count()):
-                    # no idea why this happens, but it does; there are storage
-                    # objects which are not attached to any
-                    # resourceInfoType_model
-                    return
-                related_resource = related_resource_qs.iterator().next()
-                if instance.deleted:
-                    # if the resource has been flagged for deletion, then we
-                    # don't want to keep/have it in the index
-                    LOGGER.info("Resource #{0} scheduled for deletion from " \
-                                "the index.".format(related_resource.id))
-                    self.remove_object(related_resource, using=using)
-                    return
-                instance = related_resource
-            elif not kwargs["sender"] == self.get_model():
-                assert False, "Unexpected sender: {0}".format(kwargs["sender"])
-                LOGGER.error("Unexpected sender: {0}".format(kwargs["sender"]))
+
+        if isinstance(instance, StorageObject):
+            LOGGER.debug("StorageObject changed for resource #{0}." \
+                         .format(instance.id))
+            related_resource_qs = instance.resourceinfotype_model_set
+            if (not related_resource_qs.count()):
+                # no idea why this happens, but it does; there are storage
+                # objects which are not attached to any
+                # resourceInfoType_model
                 return
-        else:
-            if instance.storage_object.deleted:
-                self.remove_object(instance, using=using)
+            related_resource = related_resource_qs.iterator().next()
+            if instance.deleted:
+                # if the resource has been flagged for deletion, then we
+                # don't want to keep/have it in the index
+                LOGGER.info("Resource #{0} scheduled for deletion from " \
+                            "the index.".format(related_resource.id))
+                self.remove_object(related_resource, using=using)
                 return
+            instance = related_resource
+        elif not isinstance(instance, self.get_model()):
+            assert False, "Unexpected sender: {0}".format(instance)
+            LOGGER.error("Unexpected sender: {0}".format(instance))
+            return
+
         # we better recreate our resource instance from the DB as otherwise it
         # has happened for some reason that the instance was not up-to-date
         instance = self.get_model().objects.get(pk=instance.id)
-        LOGGER.info("All resource #{0} scheduled for reindexing." \
+        LOGGER.info("Resource #{0} scheduled for reindexing." \
                     .format(instance.id))
         super(resourceInfoType_modelIndex, self) \
             .update_object(instance, using=using, **kwargs)
-
-    def _setup_save(self):
-        """
-        A hook for controlling what happens when the registered model is saved.
-
-        In this implementation we additionally connect to frequently changed
-        parts of the model which is returned by get_model().
-        """
-        if PatchedRealTimeSearchIndex._signal_setup_done[0]:
-            return
-        PatchedRealTimeSearchIndex._signal_setup_done[0] = True
-
-        # For efficiency, we watch the storage object for save events only.
-        # This relies on resourceInfoType_model.save() to call storage_object.save()
-        # every time!
-        signals.post_save.connect(self.update_object, sender=StorageObject)
-        # This also relies on the fact that all changes relevant to the index
-        # are concluded with the resource being saved.
-        # all other changes somewhere in a resource (such as language info
-        # changes) must be handled elsewhere, e.g., in a periodic reindexing
-        # cron job
 
     def remove_object(self, instance, using=None, **kwargs):
         """
@@ -405,13 +335,6 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         if os.environ.get('DISABLE_INDEXING_DURING_IMPORT', False) == 'True':
             return
 
-        # have we been called from a post_delete signal dispatcher?
-        if "sender" in kwargs:
-            # explicitly set `using` to None in order to let our Haystack router
-            # decide which search index to use; the `using` argument which is
-            # set by Django's post_delete signal dispatcher has a different
-            # meaning that we need to overwrite
-            using = None
         super(resourceInfoType_modelIndex, self).remove_object(instance,
                                                                using=using,
                                                                **kwargs)

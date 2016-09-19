@@ -205,7 +205,9 @@ HAYSTACK_CONNECTIONS = {
     },
 }
 
-HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+# This setting controls what haystack SignalProcessor class is used to handle
+# Django's signals and keep the search index up-to-date.
+HAYSTACK_SIGNAL_PROCESSOR = 'metashare.repository.signals.PatchedSignalProcessor'
 
 # we use a custom Haystack search backend router so that we can dynamically
 # switch between the main/default search backend and the one for testing
