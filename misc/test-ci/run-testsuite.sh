@@ -62,7 +62,7 @@ rm metashare/initial_data.json || exit 1
 # Run testsuite:
 metashare/start-solr.sh || exit 1
 sleep 10
-coverage run -a manage.py test $@ repository storage accounts sync stats || exit 1
+coverage run -a manage.py test $@ repository storage accounts sync stats bcp47 || exit 1
 deactivate || exit 1
 metashare/stop-solr.sh || exit 1
 

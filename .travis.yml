@@ -96,6 +96,9 @@ addons:
   apt:
     packages:
     - libpq-dev
+    - libxml2-dev
+    - libxslt-dev
+    - python-dev
     - python-sphinx
 
 sudo: false
