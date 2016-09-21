@@ -1,9 +1,11 @@
 from django.contrib.auth.models import User
-from metashare import test_utils
-from metashare.repository.seltests.test_utils import MetashareSeleniumTestCase
-from metashare.repository.models import resourceInfoType_model
-from metashare.settings import ROOT_PATH, DJANGO_BASE, DJANGO_URL
+
 from selenium.common.exceptions import NoSuchElementException
+
+from metashare import test_utils
+from metashare.repository.models import resourceInfoType_model
+from metashare.repository.seltests.test_utils import MetashareSeleniumTestCase
+from metashare.settings import ROOT_PATH, DJANGO_BASE, DJANGO_URL
 
 class ExampleSeleniumTest(MetashareSeleniumTestCase):
 

@@ -1,15 +1,18 @@
 """
 Utility functions for Selenium unit tests.
 """
-from metashare import settings
-from metashare.settings import ROOT_PATH, TEST_MODE_NAME
 import os
-from metashare import test_utils
 import time
-from selenium import webdriver
-from selenium.common.exceptions import TimeoutException
+
 from django_selenium import settings as dj_settings
 from django_selenium.testcases import MyDriver, SeleniumTestCase
+
+from haystack.management.commands import update_index
+from selenium import webdriver
+from selenium.common.exceptions import TimeoutException
+
+from metashare import settings,test_utils
+from metashare.settings import ROOT_PATH, TEST_MODE_NAME
 
 def login_user(driver, user_name, user_passwd):
     """
@@ -127,8 +130,7 @@ def import_dir(path):
     for _file in _files:
         test_utils.import_xml_or_zip("%s%s" % (path, _file))
     os.environ['DISABLE_INDEXING_DURING_IMPORT'] = 'False'
-    from django.core.management import call_command
-    call_command('rebuild_index', interactive=False, using=TEST_MODE_NAME)
+    update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
 
 class MetashareMyDriver(MyDriver):
     def __init__(self):

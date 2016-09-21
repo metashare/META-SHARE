@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 from django.test.client import Client
 from django.test.testcases import TestCase
 
-from haystack.management.commands import update_index
+from haystack.management.commands import clear_index
 from haystack.query import SearchQuerySet
 
 from metashare import test_utils, settings
@@ -44,7 +44,8 @@ class SearchIndexUpdateTests(test_utils.IndexAwareTestCase):
         Set up the test
         """
         test_utils.setup_test_storage()
-        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
+        clear_index.Command().handle(using=[settings.TEST_MODE_NAME,],
+                                     interactive=False)
         
     def tearDown(self):
         """
@@ -172,11 +173,10 @@ class SearchTest(test_utils.IndexAwareTestCase):
         Set up the view
         """
         test_utils.setup_test_storage()
+        clear_index.Command().handle(interactive=False,
+                                     using=[settings.TEST_MODE_NAME,])
         normaluser = create_user('normaluser', 'normal@example.com', 'secret')
         normaluser.save()
-
-        # update index
-        update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
 
     def tearDown(self):
         """

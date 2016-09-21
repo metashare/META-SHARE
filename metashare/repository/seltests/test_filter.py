@@ -1,10 +1,12 @@
+import time
+
+from haystack.management.commands import clear_index
+from selenium.webdriver.support.select import Select
+
 from metashare import settings, test_utils
 from metashare.repository.seltests.test_utils import setup_screenshots_folder, \
     import_dir, click_and_wait, MetashareSeleniumTestCase
 from metashare.settings import DJANGO_URL, DJANGO_BASE, ROOT_PATH
-import time
-from django.core.management import call_command
-from selenium.webdriver.support.select import Select
 
 
 TESTFIXTURE_XML = '{}/repository/test_fixtures/test_fixtures_for_filtering/'.format(ROOT_PATH)
@@ -13,7 +15,8 @@ class FilterTest(MetashareSeleniumTestCase):
 
     def setUp(self):
         # make sure the index does not contain any stale entries
-        call_command('rebuild_index', interactive=False, using=settings.TEST_MODE_NAME)
+        clear_index.Command().handle(using=[settings.TEST_MODE_NAME,],
+                                     interactive=False)
         # load test fixture; status will be set 'published'
         test_utils.setup_test_storage()
         import_dir(TESTFIXTURE_XML)

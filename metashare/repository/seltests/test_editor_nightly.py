@@ -1,7 +1,6 @@
 import time
 
-from django.core.management import call_command
-
+from haystack.management.commands import clear_index
 from selenium.webdriver.support.ui import Select
 
 from metashare import settings, test_utils
@@ -40,7 +39,8 @@ class NightlyEditorTests(MetashareSeleniumTestCase):
             .add(self.test_editor_group)
 
         # make sure the index does not contain any stale entries
-        call_command('rebuild_index', interactive=False, using=settings.TEST_MODE_NAME)
+        clear_index.Command().handle(using=[settings.TEST_MODE_NAME,],
+                                     interactive=False)
 
         super(NightlyEditorTests, self).setUp()
         self.base_url = 'http://{}:{}/{}' \

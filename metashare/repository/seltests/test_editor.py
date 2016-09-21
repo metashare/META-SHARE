@@ -1,7 +1,6 @@
 import time
 
-from django.core.management import call_command
-
+from haystack.management.commands import clear_index
 from selenium.webdriver.support.ui import Select
 
 from metashare import settings, test_utils
@@ -35,15 +34,15 @@ class BasicEditorTests(MetashareSeleniumTestCase):
         self.manager_user = test_utils.create_manager_user('manageruser',
             'manager@example.com', 'secret',
             (self.test_editor_group, self.test_manager_group))
-        self.manager_user.get_profile().default_editor_groups \
+        self.manager_user.userprofile.default_editor_groups \
             .add(self.test_editor_group)
 
         # create an editor user
         test_utils.create_editor_user('editoruser', 'editor@example.com',
                                       'secret', (self.test_editor_group,))
         # make sure the index does not contain any stale entries
-        call_command('rebuild_index', interactive=False,
-                     using=settings.TEST_MODE_NAME)
+        clear_index.Command().handle(using=[settings.TEST_MODE_NAME,],
+                                     interactive=False)
 
         super(BasicEditorTests, self).setUp()
         self.base_url = '{0}/{1}'.format(DJANGO_URL, DJANGO_BASE)
@@ -116,7 +115,7 @@ class BasicEditorTests(MetashareSeleniumTestCase):
     def test_LR_creation_tool(self):
         # set up the current manager user profile so that it doesn't have any
         # default editor groups
-        self.manager_user.get_profile().default_editor_groups.clear()
+        self.manager_user.userprofile.default_editor_groups.clear()
 
         driver = self.driver
         driver.implicitly_wait(60) # wait for 60 seconds
