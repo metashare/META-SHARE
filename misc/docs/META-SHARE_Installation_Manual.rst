@@ -7,7 +7,8 @@ META-SHARE Installation Manual
    
    *A Network of Excellence forging the Multilingual Europe Technology Alliance*
 
-Authors: Christian Federmann, Marc Schröder,  Christian Spurk and Sergio Oller
+Authors: Christian Federmann, Marc Schröder, Christian Spurk, Sergio Oller and
+Juli Bakagianni
 
 
 .. contents::
@@ -15,10 +16,10 @@ Authors: Christian Federmann, Marc Schröder,  Christian Spurk and Sergio Oller
 Executive Summary
 -----------------
 
-This document is a guide for installing META-SHARE V3.0.3. It is intended
+This document is a guide for installing META-SHARE V3.1.1. It is intended
 for system administrators setting up META-SHARE nodes. It also contains
 a section on how to upgrade an existing META-SHARE V3.0.x installation
-to V3.0.3.
+to V3.1.1.
 
 Backing up META-SHARE 
 ----------------------
@@ -74,7 +75,7 @@ are doing.
 
 Here are now the steps you should follow for a successful migration:
 
-1.  Make sure your META-SHARE-3.0.x instance is stopped.
+1. Make sure your META-SHARE-3.0.x instance is stopped.
 
 2. If you have not done it already, go through `Backing up META-SHARE`_.
 
@@ -87,23 +88,35 @@ Here are now the steps you should follow for a successful migration:
 4. Make sure your META-SHARE instances are stopped (no development server running).
 
 5. Copy ``/path/to/old/MetaShareNode-3.0/metashare/local_settings.py``
-   to ``/path/to/MetaShareNode-3.0.3/metashare/local_settings.py``
+   to ``/path/to/MetaShareNode-3.1.1/metashare/local_settings.py``
 
 6. Edit the ``local_settings.py``. Add a ``SECRET_KEY`` variable and a
    ``ALLOWED_HOSTS`` variable.
    See `Local Settings for META-SHARE Nodes`_ for information on how to generate it.
 
+7. If you migrate from V3.0.x to V3.1.1, then you have to upgrade your metadata
+   descriptions to the new version of the META-SHARE xsd schema, that is
+   META-SHARE xsd schema V3.1. Hence, go to  the ``/path/to/local/MetaShareNode/``
+   folder and run:
+   ::
 
-7. Adapt any customization you had on the old ``start-server.sh``,
+        ./misc/tools/migration/to_3_1/migrate_to_3_1_MS_schema.sh
+   
+8. Collect static files to the ``STATIC_ROOT`` folder by running the command:
+   ::
+
+        python manage.py collectstatic
+
+9. Adapt any customization you had on the old ``start-server.sh``,
    ``stop-server.sh`` scripts into the new script version.
 
-8. Start your new META-SHARE instance using the ``start-server.sh`` script.
+10. Start your new META-SHARE instance using the ``start-server.sh`` script.
 
 
 Installing META-SHARE
 --------------------------
 
-This section explains how to download and install META-SHARE V3.0.3 and
+This section explains how to download and install META-SHARE V3.1.1 and
 its dependencies.
 
 Start by downloading META-SHARE from the
@@ -162,7 +175,7 @@ AND python-2.7 was installed during the previous installation in
 from your ``PATH`` variable ``/path/to/old/MetaShareNode3.0/opt/bin``.
 No path modifications are required anymore.
 
-META-SHARE V3.0.3 requires Python 2.7. Most Linux/Unix distributions come
+META-SHARE V3.1.1 requires Python 2.7. Most Linux/Unix distributions come
 already with a preinstalled version of Python. You may check the installed
 python version with ``python2 --version``.
 
@@ -185,7 +198,7 @@ command to get all required build dependencies:
 Python Modules
 ^^^^^^^^^^^^^^^^^^
 
-META-SHARE V3.0.3 does not bundle anymore all the python dependencies.
+Since V3.0.3, META-SHARE does not bundle anymore all the python dependencies.
 Instead of doing that, we follow the standard way of working with
 python apps, based on `virtualenv <https://virtualenv.pypa.io>`__ and
 `pip <https://pip.pypa.io>`__. Virtualenv allows us to create
@@ -198,6 +211,10 @@ In order to build this module, header files for the PostgreSQL library
 ``libpq5`` have to be installed, as well as the python headers. On Debian, 
 Ubuntu and derivatives, this can be achieved installing the ``libpq-dev`` and 
 ``python-dev`` packages using ``apt-get install libpq-dev python-dev``.
+
+Since V3.1. we use the ``lxml`` XML toolkit. lxml requires libxml2 and libxslt 
+to be installed. To install the required development packages of these 
+dependencies on Debian, Ubuntu and derivatives use ``apt-get install libxml2-dev libxslt-dev``
 
 Once this header files are installed, the rest of the dependencies can be
 installed simply by:
@@ -250,7 +267,7 @@ first set up a development server. Proceed as follows.
        cp metashare/local_settings.sample metashare/local_settings.py    
 
    Edit at least the following constants: ``DJANGO_URL``, ``DJANGO_BASE``,
-   ``STORAGE_PATH``, ``DEBUG``, ``SECRET_KEY``, ``ADMINS``, ``DATABASES``, and ``EMAIL_BACKEND``. More
+   ``STORAGE_PATH``, ``STATIC_ROOT``, ``DEBUG``, ``SECRET_KEY``, ``ADMINS``, ``DATABASES``, and ``EMAIL_BACKEND``. More
    information is available in `Local Settings for META-SHARE
    Nodes`_
 
@@ -263,32 +280,36 @@ first set up a development server. Proceed as follows.
    ::
 
        source venv/bin/activate # enables META-SHARE virtual environment
-       python manage.py syncdb
+       python manage.py migrate
        deactivate  # disables META-SHARE virtual environment
 
-Answer “yes” when asked to create a superuser account and fill in the
-requested details.
+3. Create an admin user:
+   ::
 
-3. Start an Apache Solr server for the search index (uses Java and
+       source venv/bin/activate # enables META-SHARE virtual environment
+       python manage.py createsuperuser
+       deactivate  # disables META-SHARE virtual environment
+
+4. Start an Apache Solr server for the search index (uses Java and
    Python internally):
 
    ::
 
        metashare/start-solr.sh
 
-4. Run tests to check that Django can load and serve META-SHARE:
+5. Run tests to check that Django can load and serve META-SHARE:
 
    ::
 
        source venv/bin/activate
-       python manage.py test repository storage accounts sync stats  
+       python manage.py test repository storage accounts sync stats  bcp47
        deactivate
 
    This should return “OK”.
 
    *Note:* This step may take a few minutes.
 
-5. Run a Django development server:
+6. Run a Django development server:
 
    ::
 
@@ -301,7 +322,7 @@ requested details.
          Quit the server with CONTROL-C.
        deactivate
 
-Congratulations: you have successfully started a META-SHARE V3.0.3 node in
+Congratulations: you have successfully started a META-SHARE V3.1.1 node in
 development mode. This means that all required Python and Django
 dependencies are functioning correctly.
 
@@ -351,7 +372,7 @@ The local settings are the following:
    submits. ``FORCE_SCRIPT_NAME= ""`` fixes the issue and hence is
    required for lighttpd use.
 
--  ``ALLOWED_HOSTS = [ 'www.example.com' ]
+-  ``ALLOWED_HOSTS = [ 'www.example.com' ]``
 
    A list of strings representing the host/domain names this META-SHARE
    instance can be served at.
@@ -364,6 +385,11 @@ The local settings are the following:
    related to your language resources, so choose a suitable location
    that is accessible, safe and that has sufficient free space for all
    resource data that you would like to upload.
+
+-  ``STATIC_ROOT = '/path/to/static/path'``
+
+    The absolute path to the directory where collectstatic will collect static
+    files for deployment.
 
 -  ``DEBUG``, ``TEMPLATE_DEBUG``, ``DEBUG_JS``
 
@@ -409,7 +435,7 @@ The local settings are the following:
        DATABASES = {   
             'default': {   
                 'ENGINE': 'django.db.backends.sqlite3',    
-               'NAME': '{0}/testing.db'.format(ROOT_PATH)  
+                'NAME': '{0}/testing.db'.format(ROOT_PATH)  
             }  
        }
 
@@ -425,11 +451,7 @@ The local settings are the following:
                 'PASSWORD': 'db_password', 
                 'HOST': 'localhost',   
                 # Set to empty string for default. 
-                'PORT': '',    
-                # This is required to make import more robust. 
-                'OPTIONS': {   
-                  'autocommit': True,  
-                }  
+                'PORT': '',
             }  
        }
 
@@ -462,9 +484,19 @@ settings that can be used in the context of web analytics.
 *Note:* settings changes will only take effect when the Django server is
 restarted!
 
-Deployment Server
+Deployment
 -----------------
 
+Static files
+~~~~~~~~~~~~
+In deployment the static files should be gathered to a single directory, i.e
+the directory you set in the ``STATIC_ROOT`` setting. To collect all the static files
+run the management command:
+::
+    python manage.py collectstatic
+
+Deployment Server
+~~~~~~~~~~~~~~~~~
 For deployment, we assume that you have downloaded and installed the
 lighttpd web server (see also `I Want to use MySQL and/or Apache`_) and a
 ``PostgreSQL database``. You have to adapt ``start_server.sh`` and
@@ -641,7 +673,7 @@ with the META-SHARE Network:
    (current META-SHARE Managing Node providers); never go to more
    than one of these META-SHARE Managing Nodes. You can use the
    contact form at ``<MANAGING_NODE_URL>/accounts/contact/`` – for
-   example, http://metashare.dfki.de/accounts/contact/.
+   example, http://metashare.ilsp.gr:8080/accounts/contact/.
 
 -  The system administrator of the chosen META-SHARE Managing Node
    will set up her node as a proxy for your resource descriptions.
@@ -668,7 +700,7 @@ descriptions which are outlined in the following sections.
 
 In general, all files to import should be schema-valid according to the
 current META-SHARE XML schema file which is located in
-``misc/schema/v3.0/META-SHARE-Resource.xsd``. Please use an XML schema
+``misc/schema/v3.1/META-SHARE-Resource.xsd``. Please use an XML schema
 validator to verify that the import files are valid before trying to
 import them into META-SHARE. For example, you can use ``xmllint`` like
 so:
@@ -832,7 +864,7 @@ While in principle, Django could also serve those static files, this is
 not recommended for production use – it makes a lot more sense to have a
 dedicated, lightweight web server handle that task. Some more
 information on combining Django and lighttpd is available
-`here <https://docs.djangoproject.com/en/1.3/howto/deployment/fastcgi/#lighttpd-setup>`__
+`here <https://docs.djangoproject.com/en/1.7/howto/deployment/fastcgi/#lighttpd-setup>`__
 
 PostgreSQL Error Message
 ~~~~~~~~~~~~~~~~~~~~~~~~
