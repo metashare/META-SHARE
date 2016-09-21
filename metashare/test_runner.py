@@ -19,7 +19,8 @@ def _run_custom_test_db_setup():
     # from now on, redirect any search index access to the test index
     MetashareRouter.in_test_mode = True
     # clear the test index
-    clear_index.Command().handle(using=[settings.TEST_MODE_NAME,])
+    clear_index.Command().handle(interactive=False,
+                                 using=[settings.TEST_MODE_NAME,])
 
 class MetashareTestRunner(SeleniumTestRunner):
     """

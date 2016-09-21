@@ -6,7 +6,7 @@ ROOT_PATH = abspath(dirname(__file__))
 
 # The URL for this META-SHARE node django application.  Do not use trailing /.
 # This URL has to include DJANGO_BASE (without its trailing /)!
-DJANGO_URL = 'http://localhost:8000'
+DJANGO_URL = 'http://127.0.0.1:8000'
 
 # The base path under which django is deployed at DJANGO_URL.  Use trailing /.
 # Do not use leading / though.  Leave empty if META-SHARE is deployed directly
