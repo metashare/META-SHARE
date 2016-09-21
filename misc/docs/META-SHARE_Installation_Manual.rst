@@ -388,7 +388,7 @@ The local settings are the following:
 
 -  ``STATIC_ROOT = '/path/to/static/path'``
 
-    The absolute path to the directory where collectstatic will collect static
+    Absolute path to the directory where collectstatic will collect static
     files for deployment.
 
 -  ``DEBUG``, ``TEMPLATE_DEBUG``, ``DEBUG_JS``
@@ -654,17 +654,19 @@ Step-by-Step Instructions
 These are the steps which are required for linking your META-SHARE node
 with the META-SHARE Network:
 
--  In your ``local_settings.py`` file (see `Local Settings for META-SHARE Nodes`_), make sure to
-   have an entry in the ``SYNC_USERS`` dictionary. Remember to run the
-   following command, whenever you change the ``SYNC_USERS`` setting:
+-  In order to give permission to a META-SHARE managing node to harvest your
+   records, you have to create a sync user by running the following command:
 
        ::
 
             source venv/bin/activate
-            python ./manage.py syncdb
+            python manage.py createsyncuser
             deactivate
 
--  Give the account credentials of your ``SYNC_USERS`` entry and your
+With this credentials the Managing node is authenticated to request your node
+records, harvest them and spread them to the entire record.
+
+-  Give the account credentials of your sync user and your
    public node URL (e.g., ``http://you.example.org/metashare``) to the
    system administrator of the META-SHARE Managing Node which shall
    proxy your META-SHARE node.
