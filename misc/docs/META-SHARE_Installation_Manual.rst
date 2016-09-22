@@ -15,10 +15,10 @@ Authors: Christian Federmann, Marc Schröder,  Christian Spurk and Sergio Oller
 Executive Summary
 -----------------
 
-This document is a guide for installing META-SHARE V3.0.3. It is intended
+This document is a guide for installing META-SHARE V3.1. It is intended
 for system administrators setting up META-SHARE nodes. It also contains
 a section on how to upgrade an existing META-SHARE V3.0.x installation
-to V3.0.3.
+to V3.1.
 
 Backing up META-SHARE 
 ----------------------
@@ -87,23 +87,40 @@ Here are now the steps you should follow for a successful migration:
 4. Make sure your META-SHARE instances are stopped (no development server running).
 
 5. Copy ``/path/to/old/MetaShareNode-3.0/metashare/local_settings.py``
-   to ``/path/to/MetaShareNode-3.0.3/metashare/local_settings.py``
+   to ``/path/to/MetaShareNode-3.1/metashare/local_settings.py``
 
-6. Edit the ``local_settings.py``. Add a ``SECRET_KEY`` variable and a
-   ``ALLOWED_HOSTS`` variable.
+6. Edit the ``local_settings.py``. Add a ``SECRET_KEY``, a ``STATIC_ROOT``
+   and a ``ALLOWED_HOSTS`` variable.
    See `Local Settings for META-SHARE Nodes`_ for information on how to generate it.
 
+7. If you migrate from V3.0.x to V3.1, then you have to upgrade your metadata
+   descriptions to the new version of the META-SHARE xsd schema, that is
+   META-SHARE xsd schema V3.1. Hence, go to  the ``/path/to/local/MetaShareNode/``
+   folder and run:
+   ::
 
-7. Adapt any customization you had on the old ``start-server.sh``,
+       source venv/bin/activate # enables META-SHARE virtual environment
+       python manage.py syncdb
+       python manage.py migrate --all --fake 0001
+       python manage.py migrate repository
+       deactivate  # disables META-SHARE virtual environment
+   
+8. Collect static files to the ``STATIC_ROOT`` folder by running the command:
+   ::
+        source venv/bin/activate # enables META-SHARE virtual environment
+        python manage.py collectstatic
+        deactivate  # disables META-SHARE virtual environment
+
+8. Adapt any customization you had on the old ``start-server.sh``,
    ``stop-server.sh`` scripts into the new script version.
 
-8. Start your new META-SHARE instance using the ``start-server.sh`` script.
+9. Start your new META-SHARE instance using the ``start-server.sh`` script.
 
 
 Installing META-SHARE
 --------------------------
 
-This section explains how to download and install META-SHARE V3.0.3 and
+This section explains how to download and install META-SHARE V3.1 and
 its dependencies.
 
 Start by downloading META-SHARE from the
@@ -162,7 +179,7 @@ AND python-2.7 was installed during the previous installation in
 from your ``PATH`` variable ``/path/to/old/MetaShareNode3.0/opt/bin``.
 No path modifications are required anymore.
 
-META-SHARE V3.0.3 requires Python 2.7. Most Linux/Unix distributions come
+META-SHARE V3.1 requires Python 2.7. Most Linux/Unix distributions come
 already with a preinstalled version of Python. You may check the installed
 python version with ``python2 --version``.
 
@@ -185,7 +202,7 @@ command to get all required build dependencies:
 Python Modules
 ^^^^^^^^^^^^^^^^^^
 
-META-SHARE V3.0.3 does not bundle anymore all the python dependencies.
+Since V3.0.3, META-SHARE does not bundle anymore all the python dependencies.
 Instead of doing that, we follow the standard way of working with
 python apps, based on `virtualenv <https://virtualenv.pypa.io>`__ and
 `pip <https://pip.pypa.io>`__. Virtualenv allows us to create
@@ -198,6 +215,10 @@ In order to build this module, header files for the PostgreSQL library
 ``libpq5`` have to be installed, as well as the python headers. On Debian, 
 Ubuntu and derivatives, this can be achieved installing the ``libpq-dev`` and 
 ``python-dev`` packages using ``apt-get install libpq-dev python-dev``.
+
+The ``lxml`` XML toolkit requires libxml2 and libxslt to be installed.
+To install the required development packages of these dependencies on Debian,
+Ubuntu and derivatives use ``apt-get install libxml2-dev libxslt-dev``
 
 Once this header files are installed, the rest of the dependencies can be
 installed simply by:
@@ -250,7 +271,7 @@ first set up a development server. Proceed as follows.
        cp metashare/local_settings.sample metashare/local_settings.py    
 
    Edit at least the following constants: ``DJANGO_URL``, ``DJANGO_BASE``,
-   ``STORAGE_PATH``, ``DEBUG``, ``SECRET_KEY``, ``ADMINS``, ``DATABASES``, and ``EMAIL_BACKEND``. More
+   ``STORAGE_PATH``, ``STATIC_ROOT``, ``DEBUG``, ``SECRET_KEY``, ``ADMINS``, ``DATABASES``, and ``EMAIL_BACKEND``. More
    information is available in `Local Settings for META-SHARE
    Nodes`_
 
@@ -263,7 +284,8 @@ first set up a development server. Proceed as follows.
    ::
 
        source venv/bin/activate # enables META-SHARE virtual environment
-       python manage.py syncdb
+       python manage.py syncdb --all
+       python manage.py migrate --fake
        deactivate  # disables META-SHARE virtual environment
 
 Answer “yes” when asked to create a superuser account and fill in the
@@ -301,7 +323,7 @@ requested details.
          Quit the server with CONTROL-C.
        deactivate
 
-Congratulations: you have successfully started a META-SHARE V3.0.3 node in
+Congratulations: you have successfully started a META-SHARE V3.1 node in
 development mode. This means that all required Python and Django
 dependencies are functioning correctly.
 
@@ -351,7 +373,7 @@ The local settings are the following:
    submits. ``FORCE_SCRIPT_NAME= ""`` fixes the issue and hence is
    required for lighttpd use.
 
--  ``ALLOWED_HOSTS = [ 'www.example.com' ]
+-  ``ALLOWED_HOSTS = [ 'www.example.com' ]``
 
    A list of strings representing the host/domain names this META-SHARE
    instance can be served at.
@@ -364,6 +386,11 @@ The local settings are the following:
    related to your language resources, so choose a suitable location
    that is accessible, safe and that has sufficient free space for all
    resource data that you would like to upload.
+
+-  ``STATIC_ROOT = '/path/to/static/path'``
+
+    Absolute path to the directory where collectstatic will collect static
+    files for deployment.
 
 -  ``DEBUG``, ``TEMPLATE_DEBUG``, ``DEBUG_JS``
 
@@ -462,9 +489,21 @@ settings that can be used in the context of web analytics.
 *Note:* settings changes will only take effect when the Django server is
 restarted!
 
-Deployment Server
+Deployment
 -----------------
 
+Static files
+~~~~~~~~~~~~
+In deployment the static files should be gathered to a single directory, i.e
+the directory you set in the ``STATIC_ROOT`` setting. To collect all the static files
+run the management command:
+::
+    source venv/bin/activate # enables META-SHARE virtual environment
+    python manage.py collectstatic
+    deactivate  # disables META-SHARE virtual environment
+
+Deployment Server
+~~~~~~~~~~~~~~~~~
 For deployment, we assume that you have downloaded and installed the
 lighttpd web server (see also `I Want to use MySQL and/or Apache`_) and a
 ``PostgreSQL database``. You have to adapt ``start_server.sh`` and
@@ -622,17 +661,19 @@ Step-by-Step Instructions
 These are the steps which are required for linking your META-SHARE node
 with the META-SHARE Network:
 
--  In your ``local_settings.py`` file (see `Local Settings for META-SHARE Nodes`_), make sure to
-   have an entry in the ``SYNC_USERS`` dictionary. Remember to run the
-   following command, whenever you change the ``SYNC_USERS`` setting:
+-  In order to give permission to a META-SHARE managing node to harvest your
+   records, you have to create a sync user by running the following command:
 
        ::
 
             source venv/bin/activate
-            python ./manage.py syncdb
+            python manage.py createsyncuser
             deactivate
 
--  Give the account credentials of your ``SYNC_USERS`` entry and your
+With this credentials the Managing node is authenticated to request your node
+records, harvest them and spread them to the entire record.
+
+-  Give the account credentials of your sync user and your
    public node URL (e.g., ``http://you.example.org/metashare``) to the
    system administrator of the META-SHARE Managing Node which shall
    proxy your META-SHARE node.
@@ -720,7 +761,7 @@ Exporting from the Command Line
 
 The script ``export_xml.py`` will export all entries from the database
 into a zip archive containing one XML file per resource. The script
-requires a valid META-SHARE V3.0.3 database. It can be run as follows:
+requires a valid META-SHARE V3.1 database. It can be run as follows:
 
 ::
 
