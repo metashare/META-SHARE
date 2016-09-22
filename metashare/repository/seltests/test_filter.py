@@ -73,7 +73,7 @@ class FilterTest(MetashareSeleniumTestCase):
         click_and_wait(driver.find_element_by_link_text("Language"))
         self.assertEqual("English (15)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[2]/div[1]").text)
-        self.assertEqual("Spanish (7)", driver.find_element_by_xpath(
+        self.assertEqual("Spanish; Castilian (7)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[2]/div[2]").text)
         self.assertEqual("Modern Greek (1453-) (5)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[2]/div[3]").text)

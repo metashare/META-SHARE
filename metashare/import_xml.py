@@ -107,4 +107,4 @@ if __name__ == "__main__":
     print "Cleared OBJECT_XML_CACHE ({} bytes)".format(_cache_size)
     
     from haystack.management.commands import rebuild_index
-    rebuild_index.Command().handle()
+    rebuild_index.Command().handle(interactive=False)
