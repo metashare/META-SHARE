@@ -1,0 +1,77 @@
+<resourceInfo xmlns="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.meta-share.org/META-SHARE_XMLSchema http://www.meta-share.org/META-SHARE_XMLSchema/v3.1/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">Concise Oxford Dictionary - Audio Files</resourceName>
+      <resourceName lang="fr">Fichiers audio du dictionnaire abr&#233;g&#233; d'anglais Oxford</resourceName>
+      <description lang="en">This "acoustic dictionary" contains 60,000 soundfiles from the 9th edition of the Concise Oxford Dictionary. The recordings were made by actors in a studio. It features recordings with British-English pronunciation, with an accurate coverage of different homographs, variant forms and inflections. Full information on parts of speech and subsenses is covered, and the soundfiles are clearly linked to the related phonetic information. The format in use is 22kHz 16-bit WAV.</description>
+      <description lang="fr">Ce dictionnaire acoustique se compose de 60 000 fichiers de parole cr&#233;&#233;s &#224; partir de la 9e &#233;dition du dictionnaire abr&#233;g&#233; d'anglais, " Concise Oxford Dictionary ". Les enregistrements ont &#233;t&#233; effectu&#233;s en studio, par des acteurs. Les donn&#233;es sont enregistr&#233;es avec une prononciation en anglais britannique, une couverture pr&#233;cise des diff&#233;rents homographes, des variantes et des flexions. Des informations sur les parties du discours et les sens secondaires sont fournies. Les fichiers de parole sont associ&#233;s &#224; la phon&#233;tique correspondante.Le format de fichier est WAV, avec une fr&#233;quence d'&#233;chantillonnage est de 22kHz, avec une r&#233;solution de 16-bit.</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=678</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-S0134</identifier>
+   </identificationInfo><distributionInfo><availability>available</availability><licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+         </licenceInfo>
+      <fee>4900.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      <availabilityStartDate>2002-10-25</availabilityStartDate>
+   </distributionInfo><distributionInfo><availability>available</availability><licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+         </licenceInfo>
+      <fee>7000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </distributionInfo>
+   <contactPerson>
+      <surname>Val&#233;rie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <lastDateUpdated>2005-06-13</lastDateUpdated>
+   </versionInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusAudioInfo>
+               <mediaType>audio</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>eng</languageId>
+                  <languageName>English</languageName>
+               </languageInfo>
+               <audioSizeInfo>
+                  <sizeInfo>
+                     <size>no size available</size>
+                     <sizeUnit>items</sizeUnit>
+                  </sizeInfo>
+               </audioSizeInfo>
+            </corpusAudioInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

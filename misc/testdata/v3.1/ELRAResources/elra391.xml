@@ -1,0 +1,76 @@
+<resourceInfo xmlns="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.meta-share.org/META-SHARE_XMLSchema http://www.meta-share.org/META-SHARE_XMLSchema/v3.1/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">NODE+DIMAP</resourceName>
+      <resourceName lang="fr">NODE+DIMAP</resourceName>
+      <description lang="en">The DIMAP version of NODE (first edition) is a machine-tractable version of the machine-readable dictionary files in the DIMAP dictionary maintenance programs, adding syntactic and semantic information in the conversion. In addition, DIMAP provides several mechanisms that will allow research into representational formalisms and explorations of the use of these representations in extending the lexical database and in processing text for information extraction, text summarization, discourse analysis and other LE applications. Using functionality to parse the dictionary definitions, DIMAP has further enhanced NODE through the addition of many semantic links, including hypernyms, synonyms, and other semantic relations, thus making NODE+DIMAP a semantic network of the English language. For more details on the contents of NODE+DIMAP, please see: http://www.clres.com/node-dimap-contents.html.</description>
+      <description lang="fr">La premi&#232;re &#233;dition DIMAP de NODE (cf L0045) est une version exploitable et modifiable des fichiers de dictionnaire provenant des programmes de maintenance de dictionnaire DIMAP, comprenant apr&#232;s conversion des informations syntaxiques et morphologiques. En outre, DIMAP fournit plusieurs m&#233;canismes qui permettront d'une part la recherche de formalismes de repr&#233;sentation, d'autre part des &#233;tudes pour l'usage de ces repr&#233;sentations pour les bases de donn&#233;es lexicales et pour le traitement du texte dans les syst&#232;mes d'extraction de l'information, dans les syst&#232;mes de r&#233;sum&#233; automatique, pour l'analyse de discours, etc. En plus des fonctionnalit&#233;s pour l'analyse des d&#233;finitions, DIMAP permet de compl&#233;ter NODE de nombreuses indications de liens s&#233;mantiques, tels que hyperonymes, synonymes, etc. NODE + DIMAP constitue ainsi une repr&#233;sentation du r&#233;seau s&#233;mantique de la langue anglaise.Pour plus d'informations sur NODE + DIMAP, vous pouvez consulter le site Internet suivant : http://www.clres.com/node-dimap-contents.html.</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=680</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-L0046</identifier>
+   </identificationInfo><distributionInfo><availability>available</availability><licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+         </licenceInfo>
+      <fee>7000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      <availabilityStartDate>2002-10-25</availabilityStartDate>
+   </distributionInfo><distributionInfo><availability>available</availability><licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+         </licenceInfo>
+      <fee>10000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </distributionInfo>
+   <contactPerson>
+      <surname>Val&#233;rie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <lastDateUpdated>2005-06-13</lastDateUpdated>
+   </versionInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>eng</languageId>
+                  <languageName>English</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>no size available</size>
+                  <sizeUnit>items</sizeUnit>
+               </sizeInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

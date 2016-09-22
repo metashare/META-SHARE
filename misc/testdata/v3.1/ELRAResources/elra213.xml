@@ -1,0 +1,104 @@
+<resourceInfo xmlns="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.meta-share.org/META-SHARE_XMLSchema http://www.meta-share.org/META-SHARE_XMLSchema/v3.1/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">Modern French Corpus including Anaphors Tagging</resourceName>
+      <resourceName lang="fr">Collection de corpus du fran&#231;ais contemporain - Corpus avec &#233;tiquetage des anaphores</resourceName>
+      <description lang="en">The corpus that includes the tagging of the anaphors was created by the CRISTAL-GRESEC (Stendhal-Grenoble 3 University, France) team and XRCE (Xerox Research Centre Europe, France) in the framework of the call launched by the DGLF-LF (national institution for the French language and the languages spoken in France), for the creation of modern French corpora).Over 1 million words have been annotated. The corpora have been selected so that they represent a wide sampling of the French language (scientific and human science articles, extracts from newspapers and magazines, legal texts, etc.) and according to the points of interest of the teams working on the project. The processed corpora supplied by ELRA are listed below:- Two books edited by the CNRS: La protection des oeuvres scientifiques en droit d'auteur fran&#231;ais, Xavier Strubel. Paris, CNRS Editions, 1997 (77 591 words) and Cinquante ans de traction &#224; la SNCF. Enjeux politiques, &#233;conomiques et r&#233;ponses techniques, Clive Lamming. Paris, CNRS Editions, 1997 (124 990 words).- 204 articles extracted from CNRS Info, a magazine which contains short popular scientific articles from the CNRS laboratories (201 280 words).- 14 articles dealing with Herm&#232;s Human Sciences (111 886 words).- 136 articles extracted from "Le Monde", dealing with economics (roughly 180 760 words).- 13 booklets of the Official Journal of the European Communities (roughly 337 000 words).Below the tagged anaphoric elements:- Person pronouns: 3rd person pronoun, anaphoric.- Possessive determiners: 3rd person possessive determiner.- Demonstrative pronouns: anaphoric pronouns (celui, celle, ceux, celles-ci, celles-l&#224;)- Indefinite pronouns: Aucun(e), chacun(e), certain(e)s, l'un(e), les un(e)s, tout(es), etc, when they are anaphoric.- "Proverbs": "le" + "faire".- Anaphoric and cataphoric adverbs: Dessus, dedans, dessous , when they have an anaphoric function.- Ellipsis of head nouns: Nominal adjectives or quantifiers determiners ellipsis.- Textual headers like "ce dernier": Ce dernier, le premier , etc.The annotation scheme was defined in XML format. The texts were divided into sections, paragraphs and sentences. The sentence segmentation was carried out with NLP tools developed by XRCE, the annotation part was done manually by two qualified linguists. A large subset of anaphoric phrases was automatically pre-annotated. The antecedents and the tagging of the anaphoric relations were manually processed, but editing tools (emacs, macros from Author/Editor software) were used to make it easier. 5% of the corpora were checked to measure the annotation reliability.</description>
+      <description lang="fr">Le Corpus avec &#233;tiquetage des anaphores a &#233;t&#233; r&#233;alis&#233; par l'&#233;quipe CRISTAL-GRESEC (Universit&#233; Stendhal-Grenoble 3, France) et XRCE (Xerox Research Centre Europe, France) dans le cadre de l'appel d'offres "Contribution &#224; la r&#233;alisation de corpus du fran&#231;ais contemporain" de la DGLF (D&#233;l&#233;gation g&#233;n&#233;rale &#224; la language fran&#231;aise).Dans le cadre de ce projet, plus d'un million de mots ont &#233;t&#233; annot&#233;s. Les corpus ont &#233;t&#233; s&#233;lectionn&#233;s de fa&#231;on &#224; repr&#233;senter un &#233;chantillon vari&#233; de la langue (corpus d'articles scientifiques et de sciences humaines, corpus journalistiques, corpus de type juridique, etc.) et selon les int&#233;r&#234;ts de chaque &#233;quipe. Les corpus trait&#233;s, fournis par ELRA, sont les suivants :- Deux ouvrages des &#233;ditions du CNRS : La protection des oeuvres scientifiques en droit d'auteur fran&#231;ais, Xavier Strubel. Paris, CNRS Editions, 1997. (77591 mots) et Cinquante ans de traction &#224; la SNCF. Enjeux politiques, &#233;conomiques et r&#233;ponses techniques, Clive Lamming. Paris, CNRS Editions, 1997 (124 990 mots).- 204 Articles de CNRS Info (revue contenant de courts articles de vulgarisation scientifique des laboratoires du CNRS). (201 280 mots).- 14 Articles de sciences humaines Herm&#232;s (11 886 mots).- 136 Articles du Monde (rubrique &#233;conomie) (environ 180 760 mots).- 13 Fascicules du Journal Officiel des Communaut&#233;s Europ&#233;ennes (environ 337 000 mots).Ci-dessous sont pr&#233;sent&#233;s les ph&#233;nom&#232;nes anaphoriques retenus :- Pronoms personnels : p.p. de 3e personne, anaphoriques.- D&#233;terminants possessifs : d.p. de 3e personne.- Pronoms d&#233;monstratifs : pronoms celui, celle, ceux, celles-ci, celles-l&#224; anaphoriques.- Pronoms ind&#233;finis : Aucun(e), chacun(e), certain(e)s, l'un(e), les un(e)s, tout(es), etc. quand ils sont anaphoriques.- "Proverbes" : le + faire. - Adverbes anaphoriques et cataphoriques : Dessus, dedans, dessous quand ils ont un fonctionnement anaphorique. - Ellipses de t&#234;tes nominales : Ellipses &#224; adjectif "substantiv&#233;" ou &#224; d&#233;terminant quantifieur. - Pointeurs textuels de type ce dernier : Ce dernier, le premier, etc.Le sch&#233;ma d'annotation est d&#233;fini en XML. Les textes sont divis&#233;s en sections, paragraphes et phrases. La segmentation des textes en phrases a &#233;t&#233; r&#233;alis&#233;e &#224; l'aide d'outils de TAL mis au point par le XRCE. L'annotation a &#233;t&#233; r&#233;alis&#233;e manuellement par deux linguistes qualifi&#233;es. Un important sous-ensemble d'expressions anaphoriques a &#233;t&#233; pr&#233;-annot&#233; automatiquement. Les ant&#233;c&#233;dents et le typage de la relation anaphorique ont &#233;t&#233; trait&#233;s manuellement, mais des outils d'&#233;dition (emacs, macros sur le logiciel Author/Editor) ont &#233;t&#233; utilis&#233;s pour all&#233;ger la t&#226;che. 5% du corpus ont &#233;t&#233; v&#233;rifi&#233;s pour mesurer la fiabilit&#233; de l'annotation.</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=634</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-W0032</identifier>
+   </identificationInfo><distributionInfo><availability>available</availability><licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+         </licenceInfo>
+      <fee>250.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      <availabilityStartDate>2002-01-31</availabilityStartDate>
+   </distributionInfo><distributionInfo><availability>available</availability><licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+         </licenceInfo>
+      <fee>250.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </distributionInfo><distributionInfo><availability>available</availability><licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+         </licenceInfo>
+      <fee>1000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </distributionInfo><distributionInfo><availability>available</availability><licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+         </licenceInfo>
+      <fee>1000.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </distributionInfo>
+   <contactPerson>
+      <surname>Val&#233;rie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <lastDateUpdated>2009-12-08</lastDateUpdated>
+   </versionInfo>
+   <resourceCreationInfo>
+      <fundingProject>
+         <projectName>Contribution &#224; la r&#233;alisation de corpus du fran&#231;ais contemporain</projectName>
+         <fundingType>nationalFunds</fundingType>
+      </fundingProject>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>fre/fra</languageId>
+                  <languageName>French</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>no size available</size>
+                  <sizeUnit>items</sizeUnit>
+               </sizeInfo>
+               <textFormatInfo>
+                  <mimeType>text/plain</mimeType>
+               </textFormatInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

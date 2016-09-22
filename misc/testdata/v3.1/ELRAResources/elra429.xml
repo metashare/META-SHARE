@@ -1,0 +1,95 @@
+<resourceInfo xmlns="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.meta-share.org/META-SHARE_XMLSchema http://www.meta-share.org/META-SHARE_XMLSchema/v3.1/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">PRESS 65</resourceName>
+      <resourceName lang="fr">Corpus su&#233;dois PRESS 65</resourceName>
+      <description lang="en">Spr&#229;kdata has made available the first of its many Swedish corpora, PRESS 65. It consists of one million running words taken from Swedish newspapers from the year 1965. It has been categorised according to text type and is annotated down to the sentence level.</description>
+      <description lang="fr">Spr&#229;kdata propose aussi PRESS 65, un de ses nombreux corpus. Il consiste en pr&#232;s d'un million de mots extraits de journaux su&#233;dois des &#233;ditions de 1965. Il s'agit d'un corpus annot&#233; avec une segmentation au niveau des phrases.</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=48</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-W0010</identifier>
+   </identificationInfo><distributionInfo><availability>available</availability><licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+         </licenceInfo>
+      <fee>12000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      <availabilityStartDate>1997-01-23</availabilityStartDate>
+   </distributionInfo><distributionInfo><availability>available</availability><licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+         </licenceInfo>
+      <fee>12000.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </distributionInfo><distributionInfo><availability>available</availability><licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+         </licenceInfo>
+      <fee>20000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </distributionInfo><distributionInfo><availability>available</availability><licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+         </licenceInfo>
+      <fee>20000.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </distributionInfo>
+   <contactPerson>
+      <surname>Val&#233;rie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <lastDateUpdated>2004-05-12</lastDateUpdated>
+   </versionInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>swe</languageId>
+                  <languageName>Swedish</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>no size available</size>
+                  <sizeUnit>items</sizeUnit>
+               </sizeInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

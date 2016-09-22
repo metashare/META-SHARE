@@ -31,9 +31,9 @@ tearDown()
 	return $ret_val
 }
 
-FILE1="$METASHARE_SW_DIR/misc/testdata/v3.0/METASHAREResources/ILC-CNR/KyotoDemo.xml"
-FILE2="$METASHARE_SW_DIR/misc/testdata/v3.0/METASHAREResources/ILC-CNR/KyotoOntotagger.xml"
-FILE3="$METASHARE_SW_DIR/misc/testdata/v3.0/METASHAREResources/ILC-CNR/SimpleOWL.xml"
+FILE1="$METASHARE_SW_DIR/misc/testdata/v3.1/METASHAREResources/ILC-CNR/KyotoDemo.xml"
+FILE2="$METASHARE_SW_DIR/misc/testdata/v3.1/METASHAREResources/ILC-CNR/KyotoOntotagger.xml"
+FILE3="$METASHARE_SW_DIR/misc/testdata/v3.1/METASHAREResources/ILC-CNR/SimpleOWL.xml"
 
 test_sync_inner()
 {

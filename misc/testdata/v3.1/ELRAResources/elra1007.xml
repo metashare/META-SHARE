@@ -1,0 +1,111 @@
+<resourceInfo xmlns="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.meta-share.org/META-SHARE_XMLSchema http://www.meta-share.org/META-SHARE_XMLSchema/v3.1/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">Amaryllis Corpus - Evaluation Package</resourceName>
+      <resourceName lang="fr">Corpus Amaryllis - Package d'&#233;valuation</resourceName>
+      <description lang="en">Launched at the end of 1995, the AMARYLLIS project aimed at evaluating information retrieval software for French text corpora in order to provide a methodology for the evaluation of other similar tools. AMARYLLIS was organised by the Institut de l'Information Scientifique et Technique (INIST) with the support of the Agence francophone pour l'enseignement sup&#233;rieur et la recherche (AUPELF-UREF) and the French Minist&#232;re de l'Education Nationale, de la Recherche et de la Technologie (MERT). More specifically, the objective was to create document corpora, questions and answers, in the framework of the Action de Recherche Concert&#233;e (ARC A1, renamed as Amaryllis- Access to text information in French), in order to get similar works to the United States project TREC.All corpora are structured as SGML files with isolatin character-encoding. The available corpora were provided by: - INIST (Institut de l'Information Scientifique et Technique)- OFIL (Observatoire Fran&#231;ais et International des Industries de la Langue)- ELRA (European Language Resources Association)Each provider provided three types of corpora : text documents, seach topics and answers to these topics in the corresponding text corpora (with frames of reference for the answers). 1- Text documents in FrenchThe text documents in French comprise:- Articles (titles and texts) extracted from trhe newspaper "Le Monde"; each batch contains three months of documents, provided by OFIL (01-01-93/31-03-93, 01-04-93/30-06-93), - Titles and summaries of scientific articles covering every domain from the Pascal bibliographical databases (from 1984 to 1995) and Francis (from 1992 to 1995), provided by INIST. The tagging of the documents conforms to a simplified version of a DTD from the TEI, which includes the possibility to manage the logical structure.2- Multilingual text documentsThe multilingual text documents have been provided by ELRA, and comprise documents in 6 languages (French, English, Italian, Spanish, German and Portuguese), extracted from the parallel corpus MLCC which contains documents translated in official European languages (from 1992 to 1994). The corpus was divided in two sub-corpora: written questions (10 million words) and debates of the European Parliament (5 to 8 million de words per language). 3- Search topicsThe topics derive from questions asked by end users, and should contain every information which is necessary to understand the issue they deal with and to estimate the relevance. They comprise the following items:- A domain, to determine the field of knowledge they belong to, - A topic: which equals to a title defining the subject,- A question: which matches the question the user may ask,- Complementary information: which gives details on further documents that should be selected from the corpus,- Concepts: which are a set of descriptors used to set the limits of the search.The topics have been built by OFIL, by some documentalists working for Le Monde who used requests from journalists, and by engineers responsible for documentation at INIST (experts in their domain) who used requests from end users. These topics were to cover numerous application fields, and to get a large number of relevant results in each corpus. The topics have been tested on the corpora to control their relevance. The query may have had to be modified, or some further details may have been needed. 4- Frames of reference for the answersAnswers' files contain for each numbered topic the numbers of all relevant documents. Some frames of reference for the answers were established before the participants proceeded to the tests. The answers had been selected by the providers (OFIL and INIST) with the appropriate methodology and adequate tools (initial frames of reference): they proceeded to a pre-selection of documents as extended as possible, based not only on their titles and summaries but also on the key words and classification codes used in the Pascal and Francis databases. These key words and classification codes can not be accessed by the participants. The results (a set of documents) are sorted manually, so that the results match the best the query.The initial frames of reference were checked manually by the providers (INIST and OFIL), using the answers given by the participants. These answers were collected when the tests were finished. This allowed us to review and correct the frames of reference for the answers in order to give some even more detailed information for their content.  The illustration below shows how the review was performed.The 4 CDs contain each a corpus for the two phases of the two campaigns which took place.TrecEval is also provided</description>
+      <description lang="fr">Lanc&#233; fin 1995, le projet AMARYLLIS a eu pour objet principal d'&#233;valuer des logiciels de recherche d'information dans des corpus de texte en fran&#231;ais et d&#233;gager une m&#233;thodologie reconnue pour l'&#233;valuation de pareils outils de recherche. AMARYLLIS a &#233;t&#233; organis&#233; par l'Institut de l'Information Scientifique et Technique (INIST) avec le soutien de l'Agence francophone pour l'enseignement sup&#233;rieur et la recherche (AUPELF-UREF) et le Minist&#232;re de l'Education Nationale, de la Recherche et de la Technologie. (MERT). Dans le cadre de cette Action de Recherche Concert&#233;e (ARC A1, baptis&#233;e Amaryllis-Acc&#232;s &#224; l'information textuelle en fran&#231;ais), il s'agissait plus pr&#233;cis&#233;ment de cr&#233;er des corpus de documents, des questions et des r&#233;ponses en vue d'op&#233;rations proches de celles men&#233;es aux &#201;tats-Unis dans le cadre de TREC. Tous les corpus sont structur&#233;s en SGML avec codage des caract&#232;res en isolatin. Les corpus disponibles ont &#233;t&#233; fournis par : -	l'INIST (Institut de l'Information Scientifique et Technique)-	l'OFIL (Observatoire Fran&#231;ais et International des Industries de la Langue)-	ELRA (Association Europ&#233;enne pour les Ressources Linguistiques)Chaque fournisseur a constitu&#233; trois types de corpus : documents textuels, th&#232;mes de recherche et r&#233;ponses &#224; ces th&#232;mes dans les corpus de documents (r&#233;f&#233;rentiels de r&#233;ponses). 1- Les documents textuels en fran&#231;aisLes documents textuels en fran&#231;ais comprennent:-	des articles (titres et textes) du journal "Le Monde", trois mois par lot de documents fournis par l'OFIL (01-01-93/31-03-93, 01-04-93/30-06-93), -	des titres et r&#233;sum&#233;s d'articles scientifiques couvrant tous les domaines de connaissance extraits des bases de donn&#233;es bibliographiques Pascal (ann&#233;es 1984 &#224; 1995) et Francis (ann&#233;es 1992 &#224; 1995) fournis par l'INIST. Les documents sont structur&#233;s selon une DTD issue de TEI , simplifi&#233;e par rapport &#224; celle-ci, tout en int&#233;grant la gestion de la structure logique d'un ouvrage. 2- Les documents textuels multilinguesLes documents textuels multilingues ont &#233;t&#233; fournis par ELRA et comprennent 6 langues (fran&#231;ais, anglais, italien, espagnol, allemand et portugais) extraites du corpus parall&#232;le MLCC de documents traduits dans 9 langues europ&#233;ennes officielles (1992-1994) divis&#233; en 2 sous-corpus : questions &#233;crites (10 millions de mots) et d&#233;bats parlementaires (5 &#224; 8 millions de mots par langue). 3- Th&#232;mes de recherche Ils sont issus de questions r&#233;elles d'utilisateurs finaux et int&#232;grent en principe tous les &#233;l&#233;ments d'informations n&#233;cessaires &#224; la compr&#233;hension de la probl&#233;matique qu'ils recouvrent et au jugement de la pertinence. Ils comprennent les &#233;l&#233;ments d'informations suivants : -	leur domaine : permet de situer le champ de connaissances auquel se rattache le th&#232;me -	leur sujet : est un titre d&#233;finissant le th&#232;me -	la question : correspond &#224; la demande de l'utilisateur -	un compl&#233;ment : donne des pr&#233;cisions sur les documents &#224; retenir dans le corpus -	des concepts : contient un ensemble de descripteurs permettant de d&#233;limiter le champ de la recherche Les th&#232;mes ont &#233;t&#233; construits par l'OFIL, avec l'aide des documentalistes du journal Le Monde &#224; partir de demandes de journalistes, ainsi que par des ing&#233;nieurs documentalistes de l'INIST (sp&#233;cialistes des domaines concern&#233;s) &#224; partir des demandes d'utilisateurs finaux dont ils disposaient.  Ces th&#232;mes devaient couvrir des domaines vari&#233;s et devaient permettre d'obtenir un nombre cons&#233;quent de r&#233;ponses pertinentes dans chaque corpus de documents. Ils ont &#233;t&#233; test&#233;s sur les corpus de documents pour v&#233;rifier qu'ils comportaient des r&#233;ponses, ce qui a amen&#233; dans certains cas &#224; modifier la demande ou &#224; donner des pr&#233;cisions compl&#233;mentaires 4- R&#233;f&#233;rentiels de r&#233;ponses Les fichiers de r&#233;ponses comprennent pour chaque th&#232;me identifi&#233; par un num&#233;ro, l'ensemble des num&#233;ros des documents pertinents. Des r&#233;f&#233;rentiels de r&#233;ponses ont &#233;t&#233; &#233;tablis pr&#233;alablement aux tests des participants. Les r&#233;ponses ont &#233;t&#233; recherch&#233;es par les fournisseurs (OFIL et INIST) avec une m&#233;thode et des outils propres (r&#233;f&#233;rentiels initiaux) : une pr&#233;s&#233;lection volontairement la plus large possible de documents en exploitant les titres et les r&#233;sum&#233;s, mais aussi les mots-cl&#233;s et les codes de classement figurant dans les bases de donn&#233;es Pascal et Francis. Ces mots-cl&#233;s et les codes de classement ne sont pas fournis aux participants. L'ensemble des documents obtenus est alors tri&#233; manuellement de fa&#231;on &#224; r&#233;pondre au plus juste &#224; la question pos&#233;e. Les r&#233;f&#233;rentiels initiaux ont &#233;t&#233; r&#233;vis&#233;s manuellement par les fournisseurs (INIST et OFIL) au vu des r&#233;ponses des participants puisqu'&#224; l'issue des phases de test, nous disposions des r&#233;ponses de ceux-ci. Cela nous a permis de revoir les r&#233;f&#233;rentiels de r&#233;ponses afin d'en affiner encore le contenu.  Cette r&#233;vision s'est faite selon le principe illustr&#233; ci-dessous. Chacun des 4 CD comporte un corpus propre &#224; chaque phase des deux campagnes r&#233;alis&#233;es. Le logiciel TrecEval est &#233;galement fourni avec les donn&#233;es</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=626</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-W0029</identifier>
+   </identificationInfo><distributionInfo><availability>available</availability><licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+         </licenceInfo>
+      <fee>45.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      <availabilityStartDate>2001-11-05</availabilityStartDate>
+   </distributionInfo><distributionInfo><availability>available</availability><licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+         </licenceInfo>
+      <fee>100.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </distributionInfo><distributionInfo><availability>available</availability><licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+         </licenceInfo>
+      <fee>45.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </distributionInfo><distributionInfo><availability>available</availability><licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+         </licenceInfo>
+      <fee>100.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </distributionInfo>
+   <contactPerson>
+      <surname>Val&#233;rie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <lastDateUpdated>2008-05-13</lastDateUpdated>
+   </versionInfo>
+   <usageInfo>
+      <actualUseInfo>
+         <actualUse>nlpApplications</actualUse>
+         <useNLPSpecific>textMining</useNLPSpecific>
+      </actualUseInfo>
+   </usageInfo>
+   <resourceCreationInfo>
+      <fundingProject>
+         <projectName>Action de Recherche Concert&#233;e ARC A1, Amaryllis-Acc&#232;s &#224; l'information textuelle en fran&#231;ais</projectName>
+         <fundingType>nationalFunds</fundingType>
+      </fundingProject>
+      <creationEndDate>1995-01-01</creationEndDate>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>fre/fra</languageId>
+                  <languageName>French</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>no size available</size>
+                  <sizeUnit>items</sizeUnit>
+               </sizeInfo>
+               <textFormatInfo>
+                  <mimeType>text/plain</mimeType>
+               </textFormatInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

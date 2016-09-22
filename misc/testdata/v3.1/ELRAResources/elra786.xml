@@ -1,0 +1,120 @@
+<resourceInfo xmlns="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.meta-share.org/META-SHARE_XMLSchema http://www.meta-share.org/META-SHARE_XMLSchema/v3.1/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">Multilingual Phrasebank</resourceName>
+      <resourceName lang="fr">Banque d&#8217;expressions multilingue</resourceName>
+      <description lang="en">The Phrasebank has phrases organized under 9 different topics, many of which are further subdivided. It is presented in a compressed format, with substitutable elements bracketed, and one or several alternatives included within the entry, reducing storage space wasted due to repetition of common material. The compression is extended further by reference to "template" sets of common terms, e.g. Days of the Week, Parts of the Body, allowing a base phrase to be combined with up to 100 different terms.Coverage:- 3,000 base phrases (per language)- 5,000 expanded phrases (excluding templates); 20,000 expanded phrases (including templates)                - 9 languages covered (incl regional variants): UK English, US English, French, German, Italian, European Spanish, Latin American Spanish, European Portuguese, Brazilian PortugueseTopics: Diversions, Eating Out, Entertainment, Hotel, Money, Problems, Tourist, Transport, MiscellaneousTemplates: Body Parts, Cardinal Numbers, Clock Time, Colours, Currencies, Dates, Day of Week, Languages, Months, Nationalities, Ordinal Numbers, PlacesFeatures:- frequency rating for user level- gender information as required- compressed format reducing storage space for phrase variants- 9 topics/15 subtopics- extension of selected phrases using 12 template listsFormat: tab-delimited text for phrases; Excel spreadsheets for template lists</description>
+      <description lang="fr">Cette banque de donn&#233;es comprend des expressions class&#233;es sous 9 th&#232;mes diff&#233;rents, dont la plupart sont &#233;galement sub-divis&#233;s. Elle est pr&#233;sent&#233;e dans un format compress&#233;, avec les &#233;l&#233;ments substituables entre parenth&#232;ses, ainsi qu&#8217;une ou plusieurs alternatives pour une entr&#233;e, afin de r&#233;duire l&#8217;espace de stockage caus&#233; par la r&#233;p&#233;tition d&#8217;information commune. La compression est &#233;galement r&#233;alis&#233;e gr&#226;ce &#224; un syst&#232;me de r&#233;f&#233;rence aux ensembles de &#171; mod&#232;les &#187; des termes communs, tels que jours de la semaine, parties du corps, ce qui permet &#224; une expression de base d&#8217;&#234;tre associ&#233;e &#224; plus de 100 termes diff&#233;rents.Couverture :- 3 000 expressions de base (par langue)- 5 000 expressions &#233;tendues (sans les mod&#232;les) ; 20 000 expressions &#233;tendues  (avec les mod&#232;les)- 9 langues (variantes r&#233;gionales comprises) : anglais britannique, anglais am&#233;ricain, fran&#231;ais, allemand, italien, espagnol europ&#233;en, espagnol d&#8217;Am&#233;rique latine, portugais europ&#233;en, portugais br&#233;silienTh&#232;mes : loisirs, manger dehors, divertissement, h&#244;tel, argent, probl&#232;mes, information touristique, transport, diversMod&#232;les : parties du corps, nombres cardinaux, heure, couleurs, monnaies, dates, jours de la semaine, langues, mois, nationalit&#233;s, nombres ordinaux, lieuxType d&#8217;information :- taux de r&#233;p&#233;tition pour le niveau d&#8217;utilisateur- information sur le genre- format compress&#233; pour r&#233;duire l&#8217;espace de stockage pour les variantes d&#8217;expressions- 9 th&#232;mes/15 sous th&#232;mes- s&#233;lection d&#8217;expressions &#233;tendue aux 12 mod&#232;lesFormat : texte d&#233;limit&#233; par des tabulations pour les expressions ; feuille Excel pour les listes de mod&#232;les</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=842</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-T0369</identifier>
+   </identificationInfo><distributionInfo><availability>available</availability><licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+         </licenceInfo>
+      <fee>4000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      <availabilityStartDate>2006-03-13</availabilityStartDate>
+   </distributionInfo><distributionInfo><availability>available</availability><licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+         </licenceInfo>
+      <fee>5000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </distributionInfo>
+   <contactPerson>
+      <surname>Val&#233;rie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <lastDateUpdated>2010-09-03</lastDateUpdated>
+   </versionInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>terminologicalResource</lexicalConceptualResourceType>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>eng</languageId>
+                  <languageName>English</languageName>
+               </languageInfo>
+               <languageInfo>
+                  <languageId>eng</languageId>
+                  <languageName>English</languageName>
+               </languageInfo>
+               <languageInfo>
+                  <languageId>fre/fra</languageId>
+                  <languageName>French</languageName>
+               </languageInfo>
+               <languageInfo>
+                  <languageId>ger/deu</languageId>
+                  <languageName>German</languageName>
+               </languageInfo>
+               <languageInfo>
+                  <languageId>ita</languageId>
+                  <languageName>Italian</languageName>
+               </languageInfo>
+               <languageInfo>
+                  <languageId>spa</languageId>
+                  <languageName>Spanish; Castilian</languageName>
+                  <languageVarietyInfo>
+                     <languageVarietyType>dialect</languageVarietyType>
+                     <languageVarietyName>Castilian</languageVarietyName>
+                     <sizePerLanguageVariety>
+                        <size>2</size>
+                        <sizeUnit>gb</sizeUnit>
+                     </sizePerLanguageVariety>
+                  </languageVarietyInfo>
+                  <languageVarietyInfo>
+                     <languageVarietyType>other</languageVarietyType>
+                     <languageVarietyName>Brazil</languageVarietyName>
+                     <sizePerLanguageVariety>
+                        <size>2</size>
+                        <sizeUnit>gb</sizeUnit>
+                     </sizePerLanguageVariety>
+                  </languageVarietyInfo>
+               </languageInfo>
+               <languageInfo>
+                  <languageId>por</languageId>
+                  <languageName>Portuguese</languageName>
+               </languageInfo>
+               <languageInfo>
+                  <languageId>por</languageId>
+                  <languageName>Portuguese</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>no size available</size>
+                  <sizeUnit>items</sizeUnit>
+               </sizeInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>

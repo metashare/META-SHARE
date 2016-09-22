@@ -1,0 +1,104 @@
+<resourceInfo xmlns="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.meta-share.org/META-SHARE_XMLSchema http://www.meta-share.org/META-SHARE_XMLSchema/v3.1/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">PAROLE French Corpus</resourceName>
+      <resourceName lang="fr">Corpus Fran&#231;ais PAROLE</resourceName>
+      <description lang="en">The PAROLE French corpus contains the following data:Miscellaneous: Data provided by ELRA (CRATER, MLCC Multilingual and Parallel Corpora)	2 025 964 wordsBooks: CNRS Editions	3 267 409 wordsPeriodicals: CNRS Info, Herm&#232;s	942 963 wordsNewspapers: Le Monde, provided by ELRA	13 856 763 wordsTotal	20 093 099 words1. Newspapers: 14 million words were extracted from complete issues of years 1987, 1989, 1991, 1993 and 1995 of Le Monde newspaper. 241,484 words, from 7 issues of Le Monde of September 1987, have been extracted, and POS-tagged automatically. Each article consists of a complete item ? header ? according to the directives of the TEI (Text Encoding Initiative). Le Monde original markups were changed into classication features, so that extracting articles of different topics is possible.2. Periodicals:? HERMESIssues 15 to 22 have been used (134 articles, one Word file per article). The data have been converted from Word to RTF (Rich Text Format) and then, via a translator, from RTF to HTML. The conversion from HTML to the PAROLE format was made thanks to flex programs. The result for each article is: one "header" file which contains information on the author and the article id, and one "body" file which contains the article itself. A perl script is creating the final file from both "header" and "body".? CNRS-InfosThe data come from the CNRS-Infos Web site (http://www.cnrs.fr/Cnrspresse/cnrsinfo.html). Each file has been processed as follows: cleaning the HTML header, extracting a summary, cleaning of HTML markups, translation to the PAROLE format, creation of the "header" and the "body" files (see Herm&#232;s). . Like Herm&#232;s files, a perl script is creating the final file from both "header" and "body".3. BooksAll books were provided on CD-ROM as Xpress files, each book having its own structure. Therefore, each book has been considered separately. XPress allows conversion to a format called "Xpress markup". This format enables to spot the different structures of the book (if the Xpress file has been laid out well - which is not always the case). The structure of each book had to be worked out to create the perl script which enables the translation to the PAROLE format. Conformance to the PAROLE format was made thanks to a "nsgmls" tool. The errors found during the verification have been manually corrected.</description>
+      <description lang="fr">Le corpus fran&#231;ais PAROLE contient les donn&#233;es suivantes :Divers : Donn&#233;es provenant d'ELRA (CRATER, MLCC Multilingue, MLCC Parall&#232;le) 2 025 964 mots  Ouvrages (CNRS Editions) 3 267 409 mots  P&#233;riodiques (CNRS Info, Herm&#232;s) 942 963 mots  Presse (Le Monde, en provenance d'ELRA) 13 856 763 mots  Total 20 093 099 mots  1. Donn&#233;es de presse :14 millions de mots provenant par choix al&#233;atoire de num&#233;ros entiers parmi ceux des ann&#233;es 1987, 1989, 1991, 1993 et 1995 du Journal Le Monde constituent la partie Presse du corpus r&#233;alis&#233; dans le cadre du projet. 241 484 mots, provenant de 7 num&#233;ros du Monde de septembre 1987, ont &#233;t&#233; extraits , &#233;tiquet&#233;s automatiquement et corrig&#233;s manuellement pour la partie du discours. Chaque article constitue un composant &#224; part enti&#232;re ' en-t&#234;te ' suivant les propositions de la TEI (TextEncoding Initiative). Les champs signal&#233;tiques fournis par la documentation du Monde ont &#233;t&#233; transform&#233;s en cat&#233;gories classificatoires. Il est ainsi possible d'extraire les articles relevant de diff&#233;rentes rubriques ou de diff&#233;rents genres.2. P&#233;riodiques :HERMES Les num&#233;ros 15 &#224; 22 ont &#233;t&#233; utilis&#233;s (134 articles, un par fichier, au format Word). La conversion a &#233;t&#233; r&#233;alis&#233;e de Word vers RTF (Rich Text Format) puis, via un traducteur, vers HTML. La conversion des fichiers HTML vers le format PAROLE a &#233;t&#233; effectu&#233;e &#224; l'aide de programmes &#233;crit avec flex. Le r&#233;sultat de ce traitement est pour chaque article : un fichier "header" contenant des informations sur l'auteur et l'identifiant de l'article et un fichier "body" contenant l'article proprement dit au format PAROLE. Finalement un script perl cr&#233;e le fichier final &#224; partir des fichiers "header" et "body".CNRS-Infos Les donn&#233;es extraites du "CNRS-Infos" proviennent du serveur web h&#233;bergeant la revue (http://www.cnrs.fr/Cnrspresse/cnrsinfo.html). Pour chaque fichier, les traitements suivants ont &#233;t&#233; appliqu&#233;s : nettoyage de l'en-t&#234;te HTML, extraction du r&#233;sum&#233;, nettoyage des balises HTML, traduction vers le format PAROLE, cr&#233;ation des fichiers "header" et "body" (comme pour Herm&#232;s). Comme pour Herm&#232;s, un script perl cr&#233;e le fichier final &#224; partir des fichiers "header" et "body".3. Ouvrages Tous les livres ont &#233;t&#233; fournis sur c&#233;d&#233;rom au format Xpress, chaque ouvrage ayant sa propre structure. Le traitement s'est donc fait ouvrage par ouvrage. XPress permet la conversion vers un format "balise XPress". Ce format permet de rep&#233;rer, si le fichier Xpress a correctement &#233;t&#233; mis en page (ce qui n'est pas toujours le cas), les diff&#233;rentes structures d'un ouvrage. Pour chaque ouvrage il a fallu &#233;tudier la structure pour pouvoir r&#233;aliser le script perl permettant la traduction vers le format PAROLE. La conformit&#233; au format PAROLE a &#233;t&#233; faite &#224; l'aide de l'outil "nsgmls". Les erreurs d&#233;couvertes lors de la v&#233;rification ont &#233;t&#233; corrig&#233;es "&#224; la main" dans le fichier.</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=565</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-W0020</identifier>
+   </identificationInfo><distributionInfo><availability>available</availability><licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+         </licenceInfo>
+      <fee>1540.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      <availabilityStartDate>2000-03-06</availabilityStartDate>
+   </distributionInfo><distributionInfo><availability>available</availability><licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+         </licenceInfo>
+      <fee>1540.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </distributionInfo><distributionInfo><availability>available</availability><licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+         </licenceInfo>
+      <fee>4300.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </distributionInfo><distributionInfo><availability>available</availability><licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+         </licenceInfo>
+      <fee>4300.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </distributionInfo>
+   <contactPerson>
+      <surname>Val&#233;rie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <lastDateUpdated>2004-05-12</lastDateUpdated>
+   </versionInfo>
+   <resourceCreationInfo>
+      <fundingProject>
+         <projectName>PAROLE</projectName>
+         <fundingType>euFunds</fundingType>
+      </fundingProject>
+   </resourceCreationInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>fre/fra</languageId>
+                  <languageName>French</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>no size available</size>
+                  <sizeUnit>items</sizeUnit>
+               </sizeInfo>
+               <textFormatInfo>
+                  <mimeType>text/plain</mimeType>
+               </textFormatInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

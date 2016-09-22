@@ -1,0 +1,95 @@
+<resourceInfo xmlns="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.meta-share.org/META-SHARE_XMLSchema http://www.meta-share.org/META-SHARE_XMLSchema/v3.1/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">"Le Monde Diplomatique" Text corpus in French - archives from 1999</resourceName>
+      <resourceName lang="fr">Corpus de textes du journal "Le Monde Diplomatique" en fran&#231;ais - Archives &#224; partir de 1999.</resourceName>
+      <description lang="en">Electronic archiving of "Le Monde Diplomatique" articles in French from 1999. The corpus is available in HTML. Each HTML file contains one article.Number of articles available per year :&#8226;	1999: 820 articles (393,813 words)&#8226;	2000: 765 articles (376,027 words)&#8226;	2001: 743 articles (368,739 words)&#8226;	2002: 721 articles (357,076 words)&#8226;	2003: 704 articles (379,998 words)&#8226;	2004: 687 articles (315,197 words)&#8226;	2005: 696 articles (360,000 words)&#8226;	2006: 734 articles (360,000 words)</description>
+      <description lang="fr">Archivage des articles du journal "Le Monde Diplomatique" dans leur version fran&#231;aise &#224; partir de 1999. Le corpus est disponible en HTML. Chaque fichier HTML contient un article.Nombre d&#8217;articles disponibles par ann&#233;e :&#8226;	1999: 820 articles (393 813 mots)&#8226;	2000: 765 articles (376 027 mots)&#8226;	2001: 743 articles (368 739 mots)&#8226;	2002: 721 articles (357 076 mots)&#8226;	2003: 704 articles (379 998 mots)&#8226;	2004: 687 articles (315 197 mots)&#8226;	2005: 696 articles  (360 000 mots)&#8226;	2006: 734 articles (360 000 mots)</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=9</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-W0036_02</identifier>
+   </identificationInfo><distributionInfo><availability>available</availability><licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+         </licenceInfo>
+      <fee>46.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      <availabilityStartDate>2003-10-27</availabilityStartDate>
+   </distributionInfo><distributionInfo><availability>available</availability><licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+         </licenceInfo>
+      <fee>46.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </distributionInfo><distributionInfo><availability>available</availability><licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+         </licenceInfo>
+      <fee>69.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </distributionInfo><distributionInfo><availability>available</availability><licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+         </licenceInfo>
+      <fee>69.00</fee>
+         <userNature>commercial</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </distributionInfo>
+   <contactPerson>
+      <surname>Val&#233;rie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <lastDateUpdated>2007-08-08</lastDateUpdated>
+   </versionInfo>
+   <resourceComponentType>
+      <corpusInfo>
+         <resourceType>corpus</resourceType>
+         <corpusMediaType>
+            <corpusTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>fre/fra</languageId>
+                  <languageName>French</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>no size available</size>
+                  <sizeUnit>items</sizeUnit>
+               </sizeInfo>
+            </corpusTextInfo>
+         </corpusMediaType>
+      </corpusInfo>
+   </resourceComponentType>
+</resourceInfo>

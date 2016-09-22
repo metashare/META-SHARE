@@ -1,0 +1,76 @@
+<resourceInfo xmlns="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.meta-share.org/META-SHARE_XMLSchema http://www.meta-share.org/META-SHARE_XMLSchema/v3.1/META-SHARE-Resource.xsd">
+   <identificationInfo>
+      <resourceName lang="en">French Source Lexicon</resourceName>
+      <resourceName lang="fr">Lexique source du fran&#231;ais</resourceName>
+      <description lang="en">Oxford University Press currently holds extensive databases of morphological and phonetic data for Spanish, French, and Italian. Each headword lemma is provided with a full listing of its possible syntactic forms and spelling variants, along with information on their relationship to the headword form. In addition, a representation of the IPA pronunciation is given for every form. There is also information on domains in which the headwords are used, e.g. Computing, Engineering, Zoology. The lexicon is provided in SGML.Coverage:	- over 90,000 headwords/lemmas- over 400,000 wordforms- over 1,000 abbreviations- over 35,000 proper nounsFeatures:- clear indication of preferred orthographic forms, with cross-references from variants- exceptional coverage of place names, both French and worldwide- high-profile French sourcesFormat: Available in SGML</description>
+      <description lang="fr">Oxford University Press dispose de bases &#233;tendues de donn&#233;es morphologiques et phon&#233;tiques pour l&#8217;espagnol, le fran&#231;ais et l&#8217;italien. Chaque entr&#233;e de lemme est fournie avec une liste compl&#232;te des ses formes syntaxiques possibles et variantes d&#8217;&#233;pellation, ainsi que l&#8217;information en relation avec la forme en entr&#233;e. De plus, une repr&#233;sentation phon&#233;tique en IPA est donn&#233;e pour chaque forme. Une information sur les domaines d&#8217;usage est &#233;galement donn&#233;e (par exemple, Informatique, Ing&#233;nierie, Zoologie, etc). Ce lexique est fourni en SGML.Couverture :	- plus de 90 000 entr&#233;es/lemmes- plus de 400 000 formes- plus de 1 000 abr&#233;viations- plus de 35 000 noms propresType d&#8217;information :- indication claire des formes orthographiques de pr&#233;dilection, avec r&#233;f&#233;rences crois&#233;es entre les variantes- couverture exceptionnelle des noms de lieux, &#224; la fois en France et dans le monde- sources fran&#231;aises hautement reconnuesFormat : disponible en SGML</description>
+      <resourceShortName/>
+      <url>http://catalog.elra.info/product_info.php?products_id=838</url>
+      <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
+      <identifier>ELRA-L0062</identifier>
+   </identificationInfo><distributionInfo><availability>available</availability><licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+         </licenceInfo>
+      <fee>7000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>true</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      <availabilityStartDate>2006-03-13</availabilityStartDate>
+   </distributionInfo><distributionInfo><availability>available</availability><licenceInfo>
+         <licence>ELRA_END_USER</licence>
+         <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+         </licenceInfo>
+      <fee>10000.00</fee>
+         <userNature>academic</userNature>
+         <membershipInfo>
+            <member>false</member>
+            <membershipInstitution>ELRA</membershipInstitution>
+         </membershipInfo>
+      </distributionInfo>
+   <contactPerson>
+      <surname>Val&#233;rie</surname>
+      <givenName>Mapelli</givenName>
+      <communicationInfo>
+         <email>mapelli@elda.org</email>
+         <url>http://www.elda.org</url>
+         <address>55-57 rue Brillat-Savarin</address>
+         <zipCode>75013</zipCode>
+         <city>Paris</city>
+         <country>France</country>
+         <telephoneNumber>+1 43 13 33 33</telephoneNumber>
+         <faxNumber>+1 43 14 33 30</faxNumber>
+      </communicationInfo>
+   </contactPerson>
+   <metadataInfo>
+      <metadataCreationDate>2005-05-12</metadataCreationDate>
+   </metadataInfo>
+   <versionInfo>
+      <version>1.0</version>
+      <lastDateUpdated>2006-04-03</lastDateUpdated>
+   </versionInfo>
+   <resourceComponentType>
+      <lexicalConceptualResourceInfo>
+         <resourceType>lexicalConceptualResource</resourceType>
+         <lexicalConceptualResourceType>lexicon</lexicalConceptualResourceType>
+         <lexicalConceptualResourceMediaType>
+            <lexicalConceptualResourceTextInfo>
+               <mediaType>text</mediaType>
+               <lingualityInfo>
+                  <lingualityType>monolingual</lingualityType>
+               </lingualityInfo>
+               <languageInfo>
+                  <languageId>fre/fra</languageId>
+                  <languageName>French</languageName>
+               </languageInfo>
+               <sizeInfo>
+                  <size>no size available</size>
+                  <sizeUnit>items</sizeUnit>
+               </sizeInfo>
+            </lexicalConceptualResourceTextInfo>
+         </lexicalConceptualResourceMediaType>
+      </lexicalConceptualResourceInfo>
+   </resourceComponentType>
+</resourceInfo>
