@@ -104,8 +104,9 @@ Here are now the steps you should follow for a successful migration:
    
 8. Collect static files to the ``STATIC_ROOT`` folder by running the command:
    ::
-
+        source venv/bin/activate
         python manage.py collectstatic
+        deactivate
 
 9. Adapt any customization you had on the old ``start-server.sh``,
    ``stop-server.sh`` scripts into the new script version.
@@ -286,9 +287,9 @@ first set up a development server. Proceed as follows.
 3. Create an admin user:
    ::
 
-       source venv/bin/activate # enables META-SHARE virtual environment
+       source venv/bin/activate
        python manage.py createsuperuser
-       deactivate  # disables META-SHARE virtual environment
+       deactivate
 
 4. Start an Apache Solr server for the search index (uses Java and
    Python internally):
@@ -493,7 +494,9 @@ In deployment the static files should be gathered to a single directory, i.e
 the directory you set in the ``STATIC_ROOT`` setting. To collect all the static files
 run the management command:
 ::
+    source venv/bin/activate # enables META-SHARE virtual environment
     python manage.py collectstatic
+    deactivate  # disables META-SHARE virtual environment
 
 Deployment Server
 ~~~~~~~~~~~~~~~~~
@@ -754,7 +757,7 @@ Exporting from the Command Line
 
 The script ``export_xml.py`` will export all entries from the database
 into a zip archive containing one XML file per resource. The script
-requires a valid META-SHARE V3.0.3 database. It can be run as follows:
+requires a valid META-SHARE V3.1.1 database. It can be run as follows:
 
 ::
 
