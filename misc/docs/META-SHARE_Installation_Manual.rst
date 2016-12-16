@@ -926,7 +926,8 @@ http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz
 Funding
 -------
 
-This document is part of the Network of Excellence “Multilingual Europe
-Technology Alliance (META-NET)”, co-funded by the 7th Framework
-Programme of the European Commission through the T4ME grant agreement
-no.: 249119.
+This work has been co-funded by the European Union's Horizon 2020
+program for ICT through grant agreement no.: 645357 (Coordination and
+Support Action CRACKER). The initial versions of the META-SHARE software
+have been co-funded by the  7th Framework Programme of the European
+Commission through the T4ME grant agreement no.: 249119.
