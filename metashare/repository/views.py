@@ -86,59 +86,59 @@ MEMBER_TYPES = type('MemberEnum', (), dict(GOD=100, FULL=3, ASSOCIATE=2, NON=1))
 # is required at a minimum to be able to download the associated resource
 # straight away; otherwise the licence requires a hard-copy signature
 LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
-  'AGPL': (STATIC_URL + 'licences/GNU_agpl-3.0.htm', MEMBER_TYPES.NON),
-  'LGPL': (STATIC_URL + 'licences/GNU_lgpl-3.0.htm', MEMBER_TYPES.NON),
-  'CC-ZERO': (STATIC_URL + 'licences/CC0v1.0.htm', MEMBER_TYPES.NON),
-  'CC-BY-NC-ND': (STATIC_URL + 'licences/CC-BYNCNDv3.0.htm', MEMBER_TYPES.NON),
-  'CC-BY-NC-SA': (STATIC_URL + 'licences/CC-BYNCSAv3.0.htm', MEMBER_TYPES.NON),
-  'CC-BY-NC': (STATIC_URL + 'licences/CC-BYNCv3.0.htm', MEMBER_TYPES.NON),
-  'CC-BY-ND': (STATIC_URL + 'licences/CC-BYNDv3.0.htm', MEMBER_TYPES.NON),
-  'CC-BY-SA': (STATIC_URL + 'licences/CC-BYSAv3.0.htm', MEMBER_TYPES.NON),
-  'CC-BY': (STATIC_URL + 'licences/CC-BYv3.0.htm', MEMBER_TYPES.NON),
-  'MSCommons-BY': (STATIC_URL + 'licences/META-SHARE_COMMONS_BY_v1.0.htm',
+  'AGPL': (STATIC_URL + 'metashare/licences/GNU_agpl-3.0.htm', MEMBER_TYPES.NON),
+  'LGPL': (STATIC_URL + 'metashare/licences/GNU_lgpl-3.0.htm', MEMBER_TYPES.NON),
+  'CC-ZERO': (STATIC_URL + 'metashare/licences/CC0v1.0.htm', MEMBER_TYPES.NON),
+  'CC-BY-NC-ND': (STATIC_URL + 'metashare/licences/CC-BYNCNDv3.0.htm', MEMBER_TYPES.NON),
+  'CC-BY-NC-SA': (STATIC_URL + 'metashare/licences/CC-BYNCSAv3.0.htm', MEMBER_TYPES.NON),
+  'CC-BY-NC': (STATIC_URL + 'metashare/licences/CC-BYNCv3.0.htm', MEMBER_TYPES.NON),
+  'CC-BY-ND': (STATIC_URL + 'metashare/licences/CC-BYNDv3.0.htm', MEMBER_TYPES.NON),
+  'CC-BY-SA': (STATIC_URL + 'metashare/licences/CC-BYSAv3.0.htm', MEMBER_TYPES.NON),
+  'CC-BY': (STATIC_URL + 'metashare/licences/CC-BYv3.0.htm', MEMBER_TYPES.NON),
+  'MSCommons-BY': (STATIC_URL + 'metashare/licences/META-SHARE_COMMONS_BY_v1.0.htm',
                    MEMBER_TYPES.FULL),
-  'MSCommons-BY-NC': (STATIC_URL + 'licences/META-SHARE_COMMONS_BYNC_v1.0.htm',
+  'MSCommons-BY-NC': (STATIC_URL + 'metashare/licences/META-SHARE_COMMONS_BYNC_v1.0.htm',
                       MEMBER_TYPES.FULL),
-  'MSCommons-BY-NC-ND': (STATIC_URL + 'licences/META-SHARE_COMMONS_BYNCND_' \
+  'MSCommons-BY-NC-ND': (STATIC_URL + 'metashare/licences/META-SHARE_COMMONS_BYNCND_' \
                          'v1.0.htm', MEMBER_TYPES.FULL),
-  'MSCommons-BY-NC-SA': (STATIC_URL + 'licences/META-SHARE_COMMONS_BYNCSA' \
+  'MSCommons-BY-NC-SA': (STATIC_URL + 'metashare/licences/META-SHARE_COMMONS_BYNCSA' \
                          '_v1.0.htm', MEMBER_TYPES.FULL),
-  'MSCommons-BY-ND': (STATIC_URL + 'licences/META-SHARE_COMMONS_BYND_v1.0.htm',
+  'MSCommons-BY-ND': (STATIC_URL + 'metashare/licences/META-SHARE_COMMONS_BYND_v1.0.htm',
                       MEMBER_TYPES.FULL),
-  'MSCommons-BY-SA': (STATIC_URL + 'licences/META-SHARE_COMMONS_BYSA_v1.0.htm',
+  'MSCommons-BY-SA': (STATIC_URL + 'metashare/licences/META-SHARE_COMMONS_BYSA_v1.0.htm',
                       MEMBER_TYPES.FULL),
-  'MS-C-NoReD-FF': (STATIC_URL + 'licences/META-SHARE_Commercial_' \
+  'MS-C-NoReD-FF': (STATIC_URL + 'metashare/licences/META-SHARE_Commercial_' \
         'NoRedistribution_For-a-Fee_v1.0.htm', MEMBER_TYPES.GOD),
-  'MS-C-NoReD': (STATIC_URL + 'licences/META-SHARE_Commercial_' \
+  'MS-C-NoReD': (STATIC_URL + 'metashare/licences/META-SHARE_Commercial_' \
         'NoRedistribution_v1.0.htm', MEMBER_TYPES.GOD),
-  'MS-C-NoReD-ND-FF': (STATIC_URL + 'licences/META-SHARE_Commercial_' \
+  'MS-C-NoReD-ND-FF': (STATIC_URL + 'metashare/licences/META-SHARE_Commercial_' \
         'NoRedistribution_NoDerivatives_For-a-fee-v1.0.htm', MEMBER_TYPES.GOD),
-  'MS-C-NoReD-ND': (STATIC_URL + 'licences/META-SHARE_Commercial_' \
+  'MS-C-NoReD-ND': (STATIC_URL + 'metashare/licences/META-SHARE_Commercial_' \
         'NoRedistribution_NoDerivatives-v1.0.htm', MEMBER_TYPES.GOD),
-  'MS-NC-NoReD-ND-FF': (STATIC_URL + 'licences/META-SHARE_NonCommercial' \
+  'MS-NC-NoReD-ND-FF': (STATIC_URL + 'metashare/licences/META-SHARE_NonCommercial' \
         '_NoRedistribution_NoDerivatives_For-a-fee-v1.0.htm', MEMBER_TYPES.GOD),
-  'MS-NC-NoReD-ND': (STATIC_URL + 'licences/META-SHARE_NonCommercial_' \
+  'MS-NC-NoReD-ND': (STATIC_URL + 'metashare/licences/META-SHARE_NonCommercial_' \
         'NoRedistribution_NoDerivatives-v1.0.htm', MEMBER_TYPES.GOD),
-  'MS-NC-NoReD-FF': (STATIC_URL + 'licences/META-SHARE_NonCommercial' \
+  'MS-NC-NoReD-FF': (STATIC_URL + 'metashare/licences/META-SHARE_NonCommercial' \
         '_NoRedistribution_For-a-Fee-v1.0.htm', MEMBER_TYPES.GOD),
-  'MS-NC-NoReD': (STATIC_URL + 'licences/META-SHARE_NonCommercial_' \
+  'MS-NC-NoReD': (STATIC_URL + 'metashare/licences/META-SHARE_NonCommercial_' \
         'NoRedistribution-v1.0.htm', MEMBER_TYPES.GOD),
-  'ELRA_EVALUATION': (STATIC_URL + 'licences/EVALUATION.htm', MEMBER_TYPES.GOD),
-  'ELRA_VAR': (STATIC_URL + 'licences/VAR-v3_2007.htm', MEMBER_TYPES.GOD),
-  'ELRA_END_USER': (STATIC_URL + 'licences/ENDUSER-v3_2007.htm',
+  'ELRA_EVALUATION': (STATIC_URL + 'metashare/licences/EVALUATION.htm', MEMBER_TYPES.GOD),
+  'ELRA_VAR': (STATIC_URL + 'metashare/licences/VAR-v3_2007.htm', MEMBER_TYPES.GOD),
+  'ELRA_END_USER': (STATIC_URL + 'metashare/licences/ENDUSER-v3_2007.htm',
                     MEMBER_TYPES.GOD),
   'proprietary': ('', MEMBER_TYPES.GOD),
-  'CLARIN_PUB': (STATIC_URL + 'licences/CLARIN_PUB.html', MEMBER_TYPES.GOD),
-  'CLARIN_ACA-NC': (STATIC_URL + 'licences/CLARIN_ACA.html', MEMBER_TYPES.GOD),
-  'CLARIN_ACA': (STATIC_URL + 'licences/CLARIN_ACA.html', MEMBER_TYPES.GOD),
-  'CLARIN_RES': (STATIC_URL + 'licences/CLARIN_RES.html', MEMBER_TYPES.GOD),
-  'Princeton_Wordnet': (STATIC_URL + 'licences/WordNet-3.0.txt',
+  'CLARIN_PUB': (STATIC_URL + 'metashare/licences/CLARIN_PUB.html', MEMBER_TYPES.GOD),
+  'CLARIN_ACA-NC': (STATIC_URL + 'metashare/licences/CLARIN_ACA.html', MEMBER_TYPES.GOD),
+  'CLARIN_ACA': (STATIC_URL + 'metashare/licences/CLARIN_ACA.html', MEMBER_TYPES.GOD),
+  'CLARIN_RES': (STATIC_URL + 'metashare/licences/CLARIN_RES.html', MEMBER_TYPES.GOD),
+  'Princeton_Wordnet': (STATIC_URL + 'metashare/licences/WordNet-3.0.txt',
                         MEMBER_TYPES.NON),
-  'GPL': (STATIC_URL + 'licences/GNU_gpl-3.0.htm', MEMBER_TYPES.NON),
-  'GFDL': (STATIC_URL + 'licences/GNU_fdl-1.3.htm', MEMBER_TYPES.NON),
-  'ApacheLicence_2.0': (STATIC_URL + 'licences/Apache-2.0.htm',
+  'GPL': (STATIC_URL + 'metashare/licences/GNU_gpl-3.0.htm', MEMBER_TYPES.NON),
+  'GFDL': (STATIC_URL + 'metashare/licences/GNU_fdl-1.3.htm', MEMBER_TYPES.NON),
+  'ApacheLicence_2.0': (STATIC_URL + 'metashare/licences/Apache-2.0.htm',
                         MEMBER_TYPES.NON),
-  'BSD': (STATIC_URL + 'licences/BSD_licence.htm', MEMBER_TYPES.NON),
+  'BSD': (STATIC_URL + 'metashare/licences/BSD_licence.htm', MEMBER_TYPES.NON),
   'BSD-style': ('', MEMBER_TYPES.NON),
   'underNegotiation': ('', MEMBER_TYPES.GOD),
   'other': ('', MEMBER_TYPES.GOD)

@@ -18,7 +18,7 @@
     {% for field in form %}
       {{ field.errors }}
       {% if field.html_name == "accepted_tos" %}
-        {{ field }} <label for="{{ field.auto_id }}">I accept the <a target="_blank" href="{% static "terms_of_service_reg.pdf" %}">META-SHARE Terms of Service for registered users</a>.</label>
+        {{ field }} <label for="{{ field.auto_id }}">I accept the <a target="_blank" href="{% static "metashare/terms_of_service_reg.pdf" %}">META-SHARE Terms of Service for registered users</a>.</label>
       {% else %}
         {{ field.label_tag }} {{ field }}
       {% endif %}

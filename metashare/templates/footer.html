@@ -4,6 +4,6 @@
 <div id="footer">
   <div class="split"></div>    
   Co-funded by the 7th Framework Programme and the ICT Policy Support Programme of the European Commission through the contracts T4ME (grant agreement no.: 249119), CESAR (grant agreement no.: 271022), METANET4U (grant agreement no.: 270893) and META-NORD (grant agreement no.: 270899).<br/>
-  <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a> &ndash; <a href="{% if request.user.is_authenticated %}{% static "terms_of_service_reg.pdf" %}{% else %}{% static "terms_of_service_non_reg.pdf" %}{% endif %}">Terms of Service</a>
+  <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a> &ndash; <a href="{% if request.user.is_authenticated %}{% static "metashare/terms_of_service_reg.pdf" %}{% else %}{% static "metashare/terms_of_service_non_reg.pdf" %}{% endif %}">Terms of Service</a>
 </div>
 {% endspaceless %}
