@@ -28,8 +28,12 @@ def frontpage(request):
 
 def login(request, template_name):
     """Renders login view by connecting to django.contrib.auth.views."""
-    LOGGER.info('Rendering login view for user "{0}".'.format(
-      request.user.username or "Anonymous"))
+    try:
+        LOGGER.info('Rendering login view for user "{0}".'.format(
+          request.user.username or "Anonymous"))
+    except UnicodeEncodeError:
+        LOGGER.info('Rendering login view for user "{0}".'.format(
+          request.user.id or "Anonymous"))
     
     return LOGIN(request, template_name)
 
