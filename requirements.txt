@@ -9,8 +9,8 @@ future==0.15.2
 git+git://github.com/metashare/django-kronos.git@f22f638120920b722edd7619d6a037289edc678e
 git+git://github.com/metashare/django-selectable.git@a440fa280bb4b17851a78f6268821553d3e579a5
 httplib2==0.9.1
-lxml==3.4.2
-psycopg2==2.5.4
+lxml==4.3.1
+psycopg2==2.6.1
 pycountry==1.12
 pygeoip==0.3.2
 pyparsing==1.5.7
@@ -20,4 +20,4 @@ requests==2.7.0
 selenium==2.52.0
 six==1.9.0
 wsgiref==0.1.2
-
+flup==1.0.3
