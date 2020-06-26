@@ -64,7 +64,7 @@ do
   cp "$SAMPLE_CONF_BASE_DIR/solrconfig.xml" "$SOLR_MAIN_DIR/$core/conf"
   cp "$SAMPLE_CONF_BASE_DIR/stopwords.txt" "$SOLR_MAIN_DIR/$core/conf"
   cp "$SAMPLE_CONF_BASE_DIR/synonyms.txt" "$SOLR_MAIN_DIR/$core/conf"
-  python "$SAMPLE_CONF_BASE_DIR/../../metashare/manage.py" \
+  python "$SAMPLE_CONF_BASE_DIR/../../manage.py" \
     build_solr_schema --filename="$SOLR_MAIN_DIR/$core/conf/schema.xml"
 done
 cp "$SAMPLE_CONF_BASE_DIR/solr.xml" "$SOLR_MAIN_DIR"
