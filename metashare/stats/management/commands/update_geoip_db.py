@@ -21,7 +21,9 @@ class Command(BaseCommand):
         geogzfile = ROOT_PATH+'/stats/resources/GeoIP.dat.gz'
         geodatfile = ROOT_PATH+'/stats/resources/GeoIP.dat'
         try:
-            urldoc = urllib2.urlopen(GEOIP_DATA_URL)
+            # Make dowload more robust
+            req=urllib2.Request(GEOIP_DATA_URL, headers={'User-Agent': 'Mozilla/5.0'})
+            urldoc = urllib2.urlopen(req)
             with open(geogzfile, 'wb') as out_file_handle:
                 out_file_handle.write(urldoc.read())
 
