@@ -61,7 +61,7 @@ KNOWLEDGE_BASE_URL = 'http://www.meta-share.org/portal/knowledgebase/'
 STATS_SERVER_URL = "http://metastats.fbk.eu/"
 
 # The URL for GeoIP database.
-GEOIP_DATA_URL = "http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz" 
+GEOIP_DATA_URL = "https://dl.miyuru.lk/geoip/maxmind/country/maxmind.dat.gz" 
 
 
 # If STORAGE_PATH or LOCK_DIR does not exist, try to create it and halt if not
