@@ -170,8 +170,9 @@
 			{% endif %}
 				
 			{% if url %}
-			 	{% for address in url %}
-					<h3 style="font-size:14px;">
+				{% for address in url %}
+				      <div style="clear:both"></div>
+                                      <h4 style="float:left; font-size:14px;">Access location:
 						<label>
 							{{ address|urlize }}{% if not forloop.last %},{% endif %}
 						</label>
