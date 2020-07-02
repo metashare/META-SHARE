@@ -160,7 +160,15 @@
 				<h3 class="shortnames"><i>{% for name in res_short_names %}{{ name }}<img src="{% static "metashare/images/trenner.png" %}" class="trenner" />{% endfor %}</i></h3> 
 				<div style="clear:both"></div>
 			{% endif %}
-			
+
+			{% if not 'NOT_DEFINED' in metaShareId %}<h4 class="identifier">{{ metaShareId }}</h4>{% endif %}
+			{% if identifier %}
+				<h4 style="float:left; padding:3px;">Persistent Identifier of this resource: </h4>    
+                                {% for id in identifier %}
+				      <h3 class="identifier">{{ id|urlize }}</h3>
+				{% endfor %} 
+			{% endif %}
+				
 			{% if url %}
 			 	{% for address in url %}
 					<h3 style="font-size:14px;">
@@ -171,16 +179,6 @@
 				{% endfor %}
 			{% endif %}
 			
-			{% if not 'NOT_DEFINED' in metaShareId %}<h4 class="identifier">{{ metaShareId }}</h4>{% endif %}
-			{% if identifier %}
-				<div style="display:block;">
-				<h4 style="float:left; padding:3px;">ID: </h4>
-				{% for id in identifier %}
-					<h4 class="identifier">{{ id }}</h4>
-		 		{% endfor %}
-		 		</div>
-	 		{% endif %}
-	 		
 		<h4 style="text-align:justify" class="readmore desc">{{ description|linebreaksbr }}</h4>
 		
 		{% ifnotequal other_descriptions|length 0 %}
@@ -193,7 +191,7 @@
 		<div style="clear: both;">
 			<a href="javascript:history.back();"><button class="span-12 button middle_button">&laquo; Back</button></a>
 		    <a href="{% url metashare.repository.views.download resource.storage_object.identifier %}">
-		       	<button class="span-4 button middle_button">Download</button>
+		       	<!-- <button class="span-4 button middle_button">Download</button> -->
 		    </a>
 		  	<a {% if LR_EDIT %} href="{{ LR_EDIT }}" {% else %} href="#" class="tip" {% endif %}>
 				<span class="edit">You don&rsquo;t have the permission to edit this resource.</span>

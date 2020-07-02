@@ -16,7 +16,7 @@
       {% if user.username %}
         <a href="{% url metashare.views.logout %}?next={{ request.path }}" style="float:right; margin-right:20px;"><div class="topright">Logout</div></a>
       {% else %}
-        <a href="{% url metashare.accounts.views.create %}"><div class="topright">Register</div></a>
+        <!-- <a href="{% url metashare.accounts.views.create %}"><div class="topright">Register</div></a> -->
         <a href="{% url metashare.views.login %}?next={{ request.path }}"><div class="topright">Login</div></a>
       {% endif %}
     </div>
