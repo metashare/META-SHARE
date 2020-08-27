@@ -60,18 +60,7 @@
     <li title="Mailing lists, wiki, and more"><a target="_blank" href="http://metashare.ilsp.gr/forum">Community</a></li>
     <li title="View various statistics for this META-SHARE Node"><a href="{% url metashare.views.frontpage %}stats/top/">Statistics</a></li>
     <li><a href="{% static "metashare/documentation.pdf" %}" title="Download the META-SHARE user&rsquo;s manual">Help</a></li>
-    <li><a href="{% url info %}">About</a>
-      <ul>        
-        <li><a href="{% url info %}#META-SHARE_Members">META-SHARE Members</a></li>
-        <li><a href="{% url info %}#META-SHARE_Repositories">META-SHARE Repositories</a></li>
-        <li><a href="{% url info %}#META-SHARE_Managing_Nodes">META-SHARE Managing Nodes</a></li>
-        <li><a href="{% url info %}#LR_Sharing_within_the_META-SHARE_Network">LR Sharing</a></li>
-        <li><a href="{% url info %}#Licensing_LRs_through_META-SHARE">Licensing LRs</a></li>
-        <li><a href="{% url info %}#Notice_and_Take_Down_Policy">Notice and Takedown Policy</a></li>
-        <li><a href="{% url info %}#Privacy">Privacy</a></li>
-        <li><a href="{% url info %}#Data_Protection">Data Protection</a></li>
-        <li><a href="{% url info %}#Data_Protection_Statement">Data Protection Statement</a></li>
-      </ul>
+    <li title="More information about the Language Banks' META-SHARE node"><a target="_blank" href="https://www.kielipankki.fi/tools/metashare/">About</a></li>
     </li>
     {% if user.is_active %}
     <li title="Profile settings and actions"><a href="{% url metashare.accounts.views.edit_profile %}">Your Profile, {% filter force_escape %}{% firstof user.first_name user.username %}{% endfilter %}</a>
