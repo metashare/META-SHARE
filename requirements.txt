@@ -7,7 +7,7 @@ git+git://github.com/metashare/django-kronos.git@f22f638120920b722edd7619d6a0372
 git+git://github.com/metashare/django-selectable.git@d8381086e8307257259a6cedf01d7fb2cbd34452
 django-selenium==0.9.7
 flup==1.0.2
-httplib2==0.9.1
+httplib2==0.19.0
 psycopg2==2.6.1
 pycountry==1.12
 pygeoip==0.3.2
