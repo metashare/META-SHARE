@@ -25,3 +25,5 @@ lighttpd/
 opt/
 ._*
 venv
+.venv?
+*.sw?

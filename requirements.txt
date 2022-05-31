@@ -1,15 +1,15 @@
-git+git://github.com/metashare/django.git@233117ea8786c711ba9ad34115e61077f4be65d6
+git+https://github.com/metashare/django.git@233117ea8786c711ba9ad34115e61077f4be65d6
 Unidecode==0.04.18
 django-analytical==0.22.0
-git+git://github.com/metashare/django-haystack.git@ea5dbd570f847ceb39ff741d9a27c77df09c9e3d
+git+https://github.com/metashare/django-haystack.git@ea5dbd570f847ceb39ff741d9a27c77df09c9e3d
 # not needed in production
-#git+git://github.com/metashare/django-jenkins.git@e84f76ee7c940f35f761ced65ed7c97aa00b4acb
-git+git://github.com/metashare/django-kronos.git@f22f638120920b722edd7619d6a037289edc678e
-git+git://github.com/metashare/django-selectable.git@d8381086e8307257259a6cedf01d7fb2cbd34452
+#git+https://github.com/metashare/django-jenkins.git@e84f76ee7c940f35f761ced65ed7c97aa00b4acb
+git+https://github.com/metashare/django-kronos.git@f22f638120920b722edd7619d6a037289edc678e
+git+https://github.com/metashare/django-selectable.git@d8381086e8307257259a6cedf01d7fb2cbd34452
 django-selenium==0.9.7
 flup==1.0.3
 httplib2==0.9.1
-psycopg2==2.6.1
+psycopg2==2.7
 pycountry==1.12
 pygeoip==0.3.2
 pysolr==2.1.0-beta
