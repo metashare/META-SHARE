@@ -9,7 +9,7 @@ git+https://github.com/metashare/django-selectable.git@d8381086e8307257259a6cedf
 django-selenium==0.9.7
 flup==1.0.3
 httplib2==0.9.1
-psycopg2==2.7
+psycopg2==2.7.1
 pycountry==1.12
 pygeoip==0.3.2
 pysolr==2.1.0-beta
